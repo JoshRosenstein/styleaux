@@ -1,0 +1,15 @@
+{
+  "name": "@styleaux/plugin-tomq",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Joshua Rosenstein",
+  "license": "MIT",
+  "dependencies": {
+    "@styleaux/helper-plugin-utils": "1.0.0",
+    "@roseys/futils": "^0.0.22",
+    "typed-is": "^1.0.4"
+  },
+  "scripts": {
+    "tsc": "tsc"
+  }
+}

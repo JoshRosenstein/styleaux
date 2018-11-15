@@ -1,0 +1,70 @@
+{
+  "name": "styleaux",
+  "private": true,
+  "author": "Joshua Rosenstein",
+  "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^8.2.2",
+    "babel-jest": "^22.4.3",
+    "bundlesize": "^0.17.0",
+    "codecov": "^3.0.0",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.7.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-config-react-tools": "^1.1.6",
+    "eslint-import-resolver-babel-module": "5.0.0-beta.1",
+    "eslint-plugin-babel": "^5.2.1",
+    "eslint-plugin-flowtype": "^3.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsdoc": "^3.8.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-prettier": "^3.0.0",
+    "flow-bin": "^0.83.0",
+    "flow-copy-source": "^2.0.2",
+    "flow-typed": "^2.5.1",
+    "jest": "^22.4.3",
+    "jest-cli": "^22.4.3",
+    "lerna": "^3.4.3",
+    "prettier": "^1.14.3",
+    "prettylint": "^1.0.0",
+    "rimraf": "^2.6.1",
+    "typescript": "^3.1.6"
+  },
+  "scripts": {
+    "lerna": "lerna",
+    "tsc": "yarn run lerna run tsc",
+    "add": "lerna add",
+    "boot": "lerna bootstrap",
+    "clean": "lerna clean",
+    "ls": "yarn run lerna ls",
+    "link": "yarn run lerna link",
+    "cleanup": "yarn run clean && rm -rf node_modules/ && npm install && npm run boot",
+    "lint": "eslint . --ignore-path .eslintignore --cache",
+    "test": "jest"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --no-semi --single-quote --write",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "bracketSpacing": false,
+    "proseWrap": "never",
+    "singleQuote": true,
+    "trailingComma": "all",
+    "semi": false
+  }
+}

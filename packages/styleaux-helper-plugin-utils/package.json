@@ -1,0 +1,17 @@
+{
+  "name": "@styleaux/helper-plugin-utils",
+  "version": "1.0.0",
+  "description": "shared utils",
+  "module": "src/index.js",
+  "main": "index.js",
+  "author": "Joshua Rosenstein",
+  "license": "MIT",
+  "scripts": {
+    "tsc": "tsc"
+  },
+  "dependencies": {
+    "@roseys/futils": "^0.0.22",
+    "typed-is": "^1.0.4",
+    "warning": "^4.0.2"
+  }
+}

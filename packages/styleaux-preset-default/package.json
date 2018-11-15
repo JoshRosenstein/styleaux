@@ -1,0 +1,17 @@
+{
+  "name": "@styleaux/preset-default",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Joshua Rosenstein",
+  "license": "MIT",
+  "dependencies": {
+    "@styleaux/helper-plugin-utils": "1.0.0",
+    "@styleaux/plugin-pxto": "1.0.0",
+    "@styleaux/plugin-tomq": "1.0.0",
+    "warning": "^4.0.2",
+    "typed-is": "^1.0.4"
+  },
+  "scripts": {
+    "tsc": "tsc"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "changelog": {
+    "labels": {
+      "Tag: Spec Compliancy :eyeglasses:": ":eyeglasses: Spec Compliancy",
+      "Tag: Breaking Change": ":boom: Breaking Change",
+      "Tag: Enhancement": ":rocket: Enhancement",
+      "Tag: Bug Fix": ":bug: Bug Fix",
+      "Tag: Docs": ":memo: Documentation",
+      "Tag: Internal": ":house: Internal"
+    }},
+    "command": {
+      "create": {
+        "homepage": "https://github.com/joshrosenstein/styleaux",
+        "license": "MIT"
+      },
+      "publish": {
+        "allowBranch": "master",
+        "conventionalCommits": true,
+        "gitRemote": "upstream",
+        "message": "chore(release): publish %s"
+      }
+    },
+    "ignoreChanges": [
+      "**/__fixtures__/**",
+      "**/__tests__/**",
+      "**/*.md"
+    ],
+  "version": "independent",
+  "npmClient": "npm",
+  "packages": [
+    "packages/*"
+  ]
+}
