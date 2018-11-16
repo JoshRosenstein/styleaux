@@ -1,8 +1,5 @@
-//import {pxToT} from './types'
-import {IDKEY, ISSTANDALONEKEY} from '@styleaux/helper-plugin-utils/constants'
-import {ASSISTANTID} from './constants'
 import pxTo from './pxTo'
-import {pxToT} from './types'
+
 const BASEFONTSIZE = 'baseFontSize'
 
 type $Keys<T extends object> = keyof T
@@ -32,17 +29,17 @@ type KnownStat =
   | 'cost'
   | 'owner'
 
-type Stats = U2<KnownStat, number>
-type Stats2 = U2<KnownStat, ((a: number) => number) | number>
+// type Stats = U2<KnownStat, number>
+// type Stats2 = U2<KnownStat, ((a: number) => number) | number>
 type MapKeys<T> = {[K in keyof T]: T[K]}
 type Merge<A, B> = MapKeys<(A) & (B)>
 
-export type Options = {
+export type Options = Partial<{
   [index: string]: any
   baseFontSize?: number
-}
+}>
 export const defaultOptions = {
-  [BASEFONTSIZE]: 16,
+  baseFontSize: 16,
 }
 
 export const optionKeys = Object.keys(defaultOptions)
@@ -55,10 +52,11 @@ export type OptionsKeys = keyof Options
 //     [ISSTANDALONEKEY]: true
 //   })
 
-const createPxTo = (options: Partial<Options> = defaultOptions) => {
+export const createPxTo = (options?: Options) => {
   return pxTo(options[BASEFONTSIZE] | 16)
 }
 
+export type CreatePxTo = ReturnType<typeof createPxTo>
 // const createPxTo = ({baseFontSize}) => pxTo(baseFontSize)
 // createPxTo[IDKEY] = ASSISTANTID
 // createPxTo[ISSTANDALONEKEY] = true
