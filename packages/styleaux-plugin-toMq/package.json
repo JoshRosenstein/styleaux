@@ -1,7 +1,15 @@
 {
   "name": "@styleaux/plugin-tomq",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
   "author": "Joshua Rosenstein",
   "license": "MIT",
   "dependencies": {
