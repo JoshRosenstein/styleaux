@@ -16,7 +16,9 @@
     "@styleaux/helper-plugin-utils": "1.0.0",
     "@styleaux/preset-pxto": "1.0.0",
     "@styleaux/plugin-tomq": "1.0.0",
-    "@styleaux/preset-plugin-gettheme": "1.0.0",
+    "@styleaux/plugin-responsive": "1.0.0",
+    "@styleaux/plugin-gettheme": "1.0.0",
+    "@styleaux/plugin-switchprop": "1.0.0",
     "warning": "^4.0.2",
     "typed-is": "^1.0.4"
   },
