@@ -9,5 +9,5 @@ module.exports = {
   // roots: ['<rootDir>/packages'],
   //testRunner: 'jest-circus/runner',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.ts?$',
+  testRegex: '((\\.|/)(test|spec))\\.ts?$',
 }

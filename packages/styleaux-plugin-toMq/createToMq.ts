@@ -38,7 +38,8 @@ const objParserCreator = (valueConverter: UnitConverter) => (
   obj: toMqInputAsObj | string,
 ) => {
   const fn = ([feature, value]) => {
-    feature = nameLookups[feature] | feature
+    //feature = isString(feature) ? feature : ''
+    feature = nameLookups[feature] || feature
     feature = toKebabCase(feature)
     return flow(
       value,

@@ -13,7 +13,8 @@
   "author": "Joshua Rosenstein",
   "license": "MIT",
   "dependencies": {
-    "@styleaux/helper-plugin-utils": "1.0.0"
+    "@styleaux/helper-plugin-utils": "1.0.0",
+    "@roseys/futils": "^0.0.22"
   },
   "scripts": {
     "tsc": "tsc"
