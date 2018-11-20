@@ -1,22 +1,21 @@
 import {path} from '@roseys/futils'
 import {isString} from 'typed-is'
+import {Dict, Maybe} from '@styleaux/helper-plugin-utils'
 
-export type Options = Partial<{
-  themeKey: string
-  defaultTheme: Object
-}>
+export type Options = {
+  [x: string]: any
+  themeKey?: string
+  defaultTheme?: Dict<any>
+}
 
 export const defaultOptions = {
   themeKey: 'theme',
   defaultTheme: {},
 }
 type MaybeT<T> = T | null | undefined
-export const createGetTheme = ({themeKey = 'theme', defaultTheme}: Options) => <
-  ReturnT = any,
-  T = {[index: string]: any}
->(
+export const createGetTheme = ({themeKey = 'theme', defaultTheme}: Options) => (
   themePropKey: string | Array<number | string>,
-) => (props: Record<typeof themeKey, T>) => {
+) => (props: Maybe<Dict<any>>) => {
   // return path(themePropKey, defaultTheme)
   const pth = isString(themePropKey)
     ? `${themeKey}.${themePropKey}`
@@ -24,7 +23,7 @@ export const createGetTheme = ({themeKey = 'theme', defaultTheme}: Options) => <
 
   const res = path(pth, props) || path(themePropKey, defaultTheme)
   //as ReturnT : MaybeT<ReturnT>
-  return res as MaybeT<ReturnT>
+  return res //as MaybeT<ReturnT>
 }
 
 export type GetTheme = ReturnType<typeof createGetTheme>

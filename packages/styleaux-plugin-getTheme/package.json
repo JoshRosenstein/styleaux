@@ -1,5 +1,5 @@
 {
-  "name": "@styleaux/preset-plugin-gettheme",
+  "name": "@styleaux/plugin-gettheme",
   "version": "1.0.0",
   "main": "src/index",
   "module": "dist/index.esm.js",
