@@ -28,6 +28,7 @@ import {
   isFalse,
   isPlainObject as isObject,
 } from 'typed-is'
+import {Primitive, Maybe, Dict} from './types'
 
 export {default as getAndCheckMethod} from './getAndCheckMethod'
 
@@ -49,11 +50,24 @@ export const cleanAndSort = unordered => {
 }
 
 export const firstNonNil = reduceWhile(isNil, (a, v) => v, null)
-export const isResponsiveType = x => isObject(x) || isArray(x)
-export const safeMapValues = curryN(
-  2,
-  <T, U>(func: ((value: T) => U), item: any) =>
-    pipe(ifElse(either(isArray, isObject), mapValues(func), func))(item),
+export const isResponsiveType = (x: any): x is {[index: string]: any} | any[] =>
+  isObject(x) || isArray(x)
+
+type SafeMapValues = {
+  <T, U>(func: ((value: T) => U), item: U[]): U[]
+  <T, K extends string, U>(func: ((value: T) => U), item: Record<K, T>): Record<
+    K,
+    U
+  >
+  <T extends Primitive, U>(func: ((value: T) => U), item: T): U
+
+  <T extends Primitive, U>(func: ((value: T) => U), item: T | T[] | Dict<T>):
+    | U
+    | U[]
+    | Dict<U>
+}
+export const safeMapValues: SafeMapValues = curryN(2, (func, item) =>
+  pipe(ifElse(either(isArray, isObject), mapValues(func), func))(item),
 )
 
 export const isTemplate = test(/{!([^}]+)}/g)
@@ -90,14 +104,11 @@ export const appendUnit = unit =>
 // export const isNilOrEmpty = either(isNil, isEmpty)
 // export const isNotNilOrEmpty = complement(isNilOrEmpty)
 
-const isUndefinedOrFalse = either(isNil, isFalse)
+const isUndefinedOrFalse = (x: any): x is null | undefined | boolean =>
+  isNil(x) || isFalse(x) //either(isNil, isFalse)
 
-export const falseToNull = <T extends boolean | number | string>(
-  value: T,
-): T | null => {
-  if (value === false) return null
-  return value
-}
+export const falseToNull = <T>(value: T): T | null =>
+  isFalse(value) ? null : value
 type ReduceObj<TResult> = <F, K extends keyof F>(
   acc: TResult,
   value: F,
