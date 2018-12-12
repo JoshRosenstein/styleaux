@@ -9,7 +9,7 @@ import {
   filter,
   path,
   pathOr,
-  prop,
+  isEmpty,
 } from '@roseys/futils'
 
 import {
@@ -20,7 +20,7 @@ import {
   isResponsiveType,
   pipeIfDefined,
 } from '@styleaux/helper-plugin-utils'
-import {isTruthy, isEmpty, isDefined, isString, isNil} from 'typed-is'
+import {isTruthy, isDefined, isString, isNil} from 'typed-is'
 
 export const createSwitchProp = (
   responsiveProp,
@@ -45,6 +45,7 @@ export const createSwitchProp = (
       responsiveBool: localResponsiveBool,
       ...localTransformOpt
     }: {
+      [index: string]: any
       valueOnly?: boolean
       cssProp: string
       transform?: boolean
@@ -119,6 +120,7 @@ export const createSwitchProp = (
         hasBeenTransformed = true
       }
       // / NEW BUGGG NOT REMOVING FALSE PROPS
+
       if (!isEmpty(intersectedMatchers)) {
         computedValue = flow(
           intersectedMatchers,
@@ -145,7 +147,8 @@ export const createSwitchProp = (
         isResponsiveType(path(matchedPropName, props))
       ) {
         if (responsiveBool) {
-          //  console.log('responsiveBooooll', {computedValue, matchedPropName})
+          // console.log({computedValue})
+          // console.log('responsiveBooooll', {computedValue, matchedPropName})
           return responsiveBoolProp({
             value: computedValue,
             cssProp,

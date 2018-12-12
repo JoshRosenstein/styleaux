@@ -33,13 +33,3 @@ export const createPxToPresents = (options: Options = defaultOptions) => {
   })
 }
 export type PxToPresents = ReturnType<typeof createPxToPresents>
-
-// const {
-//   pxTo,
-//   pxToEm,
-//   pxToRem,
-//   pxToRel,
-//   normalize,
-//   normalizeEm,
-//   normalizeRem,
-// } = createPxToPresents()

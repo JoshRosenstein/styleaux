@@ -85,10 +85,7 @@ describe('SwitchProp Without Transformer', () => {
       basicFunc: [1, 2],
     })
 
-    const r = {
-      '@media screen and (min-width:1BP_Test)': {margin: '0.125rem'},
-      margin: '0.063rem',
-    }
+    const r = {'@media screen and (min-width:1BP_Test)': {margin: 2}, margin: 1}
 
     expect(e).toEqual(r)
   })

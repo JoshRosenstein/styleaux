@@ -1,9 +1,4 @@
-import {
-  createPxTo,
-  ASSISTANTID as PXTO,
-  pxToStrT,
-  pxToT,
-} from '@styleaux/plugin-pxto'
+import {createPxTo} from '@styleaux/plugin-pxto'
 
 export type Options = Partial<{
   [index: string]: any
@@ -40,15 +35,3 @@ export const createPxToPresents = (options: Options = defaultOptions) => {
   })
 }
 export type PxToPresents = ReturnType<typeof createPxToPresents>
-
-const {
-  pxTo,
-  pxToEm,
-  pxToRem,
-  pxToRel,
-  normalize,
-  normalizeEm,
-  normalizeRem,
-} = createPxToPresents()
-
-const b = normalizeEm('1px', 39)

@@ -24,7 +24,7 @@ import {
   defaultOptions as pxToDefaults,
 } from '@styleaux/preset-pxto'
 import {createSwitchProp} from '@styleaux/plugin-switchProp'
-
+import {createParse} from '@styleaux/plugin-parse'
 import {path} from '@roseys/futils'
 
 export type Options = pxToOptions
@@ -34,25 +34,6 @@ import {MapKeys} from '@styleaux/helper-plugin-utils'
 export const defaultOptions = {
   ...pxToDefaults,
   ...getThemeDefaults,
-  // [TRANSFORMOPTIONKEYS.defaultLookup]: false,
-  //  [TRANSFORMOPTIONKEYS.defaultTransform]: false,
-  // [TRANSFORMOPTIONKEYS.keys]: {color: 'colors'},
-  // [TRANSFORMOPTIONKEYS.getter]: {margin: 'pxToRem'},
-  //defaultTheme: {breakpoints: {}},
-  // baseFontSize: 16,
-  // themeKey: 'theme',
-  // breakpointsKey: 'breakpoints',
-  //  alwaysTransform: false,
-  // transformOptions: {
-  //   defaultLookup: false,
-  //   defaultTransform: false,
-  //   keys: {},
-  //   getter: {},
-  //   functions: {},
-  // },
-  // responsivePOptions: {},
-  // switchPOptions: {},
-  // parserOptions: {},
 }
 
 type O = MapKeys<pxToOptions & transformStyleOptions & getThemeOptions>
@@ -72,15 +53,16 @@ export const CreateAssistant = (options: O = defaultOptions) => {
 
   const toMq = createToMq(pxToEm)
   const gettheme = createGetTheme(options)
-
+  const transformerFuncs = {
+    pxToEm,
+    pxToRel,
+    pxToRem,
+    self: x => x,
+    ...options[TRANSFORMOPTIONKEYS.functions],
+  }
   const transformStyle = createTransformStyle(getDefaultTheme, {
     ...options,
-    [TRANSFORMOPTIONKEYS.functions]: {
-      pxToEm,
-      pxToRel,
-      pxToRem,
-      ...options[TRANSFORMOPTIONKEYS.functions],
-    },
+    [TRANSFORMOPTIONKEYS.functions]: transformerFuncs,
   })
   const transformStyleP = createTransformStyleP(transformStyle, gettheme)
   const responsive = createResponsive(
@@ -88,10 +70,11 @@ export const CreateAssistant = (options: O = defaultOptions) => {
     options.defaultTheme.breakpoints,
     transformStyle,
   )
-
+  const breakpointsP = (key?: string) =>
+    gettheme(['breakpoints', key].filter(Boolean))
   const responsiveProp = createResponsiveP(
     responsive,
-    gettheme('breakpoints'),
+    breakpointsP(),
     transformStyleP,
     {},
   )
@@ -101,7 +84,7 @@ export const CreateAssistant = (options: O = defaultOptions) => {
   )
   const responsiveBoolP = createResponsiveBoolP(
     responsiveBool,
-    gettheme('breakpoints'),
+    breakpointsP(),
     transformStyleP,
     {},
   )
@@ -110,9 +93,17 @@ export const CreateAssistant = (options: O = defaultOptions) => {
     responsiveProp,
     responsiveBoolP,
     transformStyleP,
-    {},
-    {},
+    transformerFuncs,
+    {transform: false},
   )
+  const parse = createParse(
+    switchProp,
+    toMq,
+    breakpointsP,
+    responsiveProp,
+    options,
+  )
+ 
   return Object.freeze({
     getDefaultTheme,
     pxTo,
@@ -129,6 +120,7 @@ export const CreateAssistant = (options: O = defaultOptions) => {
     responsiveProp,
     gettheme,
     switchProp,
+    parse
   })
 }
 export type CreateAssistantT = ReturnType<typeof CreateAssistant>

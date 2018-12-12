@@ -1,10 +1,20 @@
 import {CreateAssistant, defaultOptions} from '../..'
 import {OPTIONSKEYS as TRANSFORMOPTIONKEYS} from '@styleaux/plugin-transformstyle'
 import defaultTheme from './baseTheme'
-
+const identity = x => x
 export const config = {
   ...defaultOptions,
   defaultTheme,
+  responsivePOptions: {
+    transform: false,
+  },
+  switchPOptions: {
+    transform: false,
+  },
+  parserOptions: {
+    transform: false,
+  },
+
   [TRANSFORMOPTIONKEYS.defaultLookup]: true,
   [TRANSFORMOPTIONKEYS.defaultTransform]: true,
   [TRANSFORMOPTIONKEYS.keys]: {
@@ -47,5 +57,11 @@ export const config = {
     paddingLeft: 'pxToRem',
     paddingRight: 'pxToRem',
     fontSize: 'px',
+  },
+  [TRANSFORMOPTIONKEYS.functions]: {
+    returnAsIs: identity,
+    identity,
+    propValue: identity,
+    self: identity,
   },
 }

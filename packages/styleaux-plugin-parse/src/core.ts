@@ -22,7 +22,6 @@ import {
   isAtRule,
   isTemplate,
   extractTemplateValue,
-  containsSpecial,
 } from '@styleaux/helper-plugin-utils'
 
 import {
@@ -34,7 +33,12 @@ import {
   isArray,
 } from 'typed-is'
 
-import {isNestableAtRule, hasReference, isNestable} from './utils'
+import {
+  isNestableAtRule,
+  hasReference,
+  isNestable,
+  containsSpecial,
+} from './utils'
 const PSUEDO_WITHOUT_SELECTOR = /(^|\s)(:{1,2})(\w)/g
 const REFERENCE_SELECTOR = /&/g
 
@@ -95,8 +99,8 @@ const isInlinePattern = (value, selector, location) =>
   !isEmpty(value) &&
   !containsSpecial(selector) &&
   !isEmpty(selector) &&
-  !isNestable(last(location) || []) &&
-  !isPatternBlock(selector)
+  !isNestable(last(location) || []) //&&
+//  !isPatternBlock(selector)
 
 export const parseRulesC = (
   parseInlinePattern,
@@ -107,6 +111,14 @@ export const parseRulesC = (
   selector = initSelectorTransform(selector, props)
   let next = selector
   const breakPointKeys = keys(breakpointsP()(props))
+  /// console.log('parseRulesC', {selector, value, parents, location})
+  /// console.log('isInline Test Start')
+  /// console.log('isObject', isObject(value))
+  /// console.log('!isEmpty', !isEmpty(value))
+  /// console.log('!containsSpecial', !containsSpecial(selector))
+  /// console.log('!isEmpty', !containsSpecial(selector))
+  /// console.log('!isNestable', !isNestable(last(parents) || []))
+  // /console.log('!isPatternBlock', !isPatternBlock(selector))
 
   // / If theres a parent selector- prep next selector
   if (parents.length) {
@@ -122,17 +134,20 @@ export const parseRulesC = (
     falseToNull,
     when(isTemplate, template => objOf(extractTemplateValue(template), 'self')),
   )
-
+  ///console.log('parseRulesC2', {selector, value, parents, location})
   if (selector === '@font-face') {
     return {location: [], selector: '', property: selector, value}
   }
 
   if (isPatternBlock(selector)) {
+    ////console.log('IsPatternBlock')
     return parseNested(matchBlock(value)(props), parents, location)
   }
 
   if (isObject(value) || isArray(value)) {
+    // console.log('Object OR Array')
     if (isDefined(breakPointKeys) && isResponsive(value, breakPointKeys)) {
+      // console.log('---isResponsive---')
       value = responsiveP({
         value,
         cssProp: selector,
@@ -140,21 +155,25 @@ export const parseRulesC = (
       })(props)
       // return parseNested(value, parents, location);
       if (isObject(value)) {
+        //console.log('isObject')
         return parseNested(value, parents, location)
       }
     } else if (isInlinePattern(value, selector, parents)) {
+      // console.log('---Inline Pattern---')
+      //console.log('switchPropb4', {value, options})
       value = parseInlinePattern(value, {
         cssProp: selector,
         valueOnly: true,
         ...options,
       })(props)
+      // console.log('switchPropAfter', {value})
       // return parseNested(value, parents, location);
       if (isObject(value)) {
         return parseNested(value, parents, location)
       }
     }
   }
-
+  ////console.log('---NOT Inline Pattern---')
   if (isObject(value)) {
     if (isNestable(selector)) {
       location = location.concat(selector)
@@ -170,10 +189,10 @@ export const parseRulesC = (
     } else {
       parents = parents.concat(next)
     }
-
+    // console.log('---Loop---')
     return parseNested(value, parents, location)
   }
-
+  //console.log('---NOT Object---')
   return {
     location,
     selector: parents.join(' '),

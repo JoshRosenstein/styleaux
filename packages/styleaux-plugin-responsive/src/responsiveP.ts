@@ -31,6 +31,18 @@ export const defaultOptions = {
   defaultBreakPoints: {},
 }
 
+export type responsivePProps<B, P> = Partial<
+  {
+    [K in keyof P]: Maybe<
+      | Partial<Record<keyof B | 'default', number | string>>
+      | (number | string)[]
+      | string
+      | number
+    >
+  }
+> &
+  Dict<any>
+
 export const createResponsiveP = <R extends Function, B extends Breakpoints>(
   responsive: R,
   getBreakpoints: ((props: any) => B),
