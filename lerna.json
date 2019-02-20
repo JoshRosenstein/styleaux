@@ -7,27 +7,22 @@
       "Tag: Bug Fix": ":bug: Bug Fix",
       "Tag: Docs": ":memo: Documentation",
       "Tag: Internal": ":house: Internal"
-    }},
-    "command": {
-      "create": {
-        "homepage": "https://github.com/joshrosenstein/styleaux",
-        "license": "MIT"
-      },
-      "publish": {
-        "allowBranch": "master",
-        "conventionalCommits": true,
-        "gitRemote": "upstream",
-        "message": "chore(release): publish %s"
-      }
+    }
+  },
+  "command": {
+    "create": {
+      "homepage": "https://github.com/joshrosenstein/styleaux",
+      "license": "MIT"
     },
-    "ignoreChanges": [
-      "**/__fixtures__/**",
-      "**/__tests__/**",
-      "**/*.md"
-    ],
+    "publish": {
+      "allowBranch": "master",
+      "conventionalCommits": true,
+      "gitRemote": "upstream",
+      "message": "chore(release): publish %s"
+    }
+  },
+  "ignoreChanges": ["**/__fixtures__/**", "**/__tests__/**", "**/*.md"],
   "version": "independent",
   "npmClient": "npm",
-  "packages": [
-    "packages/*"
-  ]
+  "packages": ["packages/*"]
 }

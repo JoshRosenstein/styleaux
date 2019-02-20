@@ -4,7 +4,7 @@ module.exports = {
   },
   watchPlugins: ['jest-watch-lerna-packages'],
   testEnvironment: 'node',
-  collectCoverageFrom: ['{packages}/**/*.js'],
+  collectCoverageFrom: ['{src}/**/*.js'],
   //  modulePathIgnorePatterns: ['/__fixtures__/'],
   // roots: ['<rootDir>/packages'],
   //testRunner: 'jest-circus/runner',

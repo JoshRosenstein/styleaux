@@ -1,9 +1,0 @@
-{
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "outDir": "./lib",
-    "esModuleInterop": true,
-    "strict": true
-  },
-  "exclude": ["node_modules", "lib"]
-}
