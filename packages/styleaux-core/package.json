@@ -12,13 +12,23 @@
   "author": "Joshua Rosenstein",
   "license": "MIT",
   "dependencies": {
+    "@roseys/futils": "^0.0.22",
     "typed-is": "^1.0.4",
     "warning": "^4.0.2"
   },
   "scripts": {
-    "tsc": "tsc"
+    "build": "yarn build:node && yarn build:browser",
+    "build:browser": "echo 'Webpack needs to be configured with babel loader'",
+    "build:node": "tsc",
+    "clean": "rimraf dist && rimraf .tmp",
+    "dist": "yarn clean && yarn build"
   },
   "devDependencies": {
-    "tsargs": "^1.3.1"
+    "cross-env": "^5.2.0",
+    "rimraf": "^2.6.3",
+    "tsargs": "^1.3.1",
+    "uglifyjs-webpack-plugin": "^2.1.1",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
   }
 }
