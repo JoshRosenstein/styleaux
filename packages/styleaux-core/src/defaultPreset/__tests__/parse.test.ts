@@ -1,4 +1,4 @@
-import {CreateAssistant, defaultOptions} from '../'
+import {CreateAssistant} from '../'
 import {config} from './__fixtures__'
 
 const {

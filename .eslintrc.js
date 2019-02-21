@@ -1,18 +1,10 @@
 module.exports = {
-  extends: [
-    'plugin:import/errors',
-    'prettier',
-    'prettier/flowtype',
-    'plugin:flowtype/recommended',
-  ],
-  plugins: ['import', 'prettier', 'flowtype', 'babel'],
+  extends: ['plugin:import/errors', 'prettier'],
+  plugins: ['import', 'prettier', 'babel'],
   parser: 'babel-eslint',
 
   rules: {
     'arrow-body-style': 2,
-    'flowtype/boolean-style': 2,
-    'flowtype/no-primitive-constructor-types': 2,
-    'flowtype/require-valid-file-annotation': 2,
     'import/no-duplicates': 2,
     'import/order': 0,
     'no-console': 1,

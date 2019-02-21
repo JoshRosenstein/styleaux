@@ -1,16 +1,9 @@
-import {always, prop, any} from '@roseys/futils'
-import {
-  isResponsiveType,
-  whenFunctionCallWith,
-  safeMapValues,
-  falseToNull,
-} from '../utils'
-import {isTruthy, isPlainObject, isArray, isNil} from 'typed-is'
-import {MaybeInputNumberOrString, IBreakpoints} from './types'
-import {Dict, MapKeys, Maybe} from '../types'
-import {responsiveReducer} from './responsiveHelpers'
+import {whenFunctionCallWith, safeMapValues, falseToNull} from '../utils'
+
+import {IBreakpoints} from './types'
+import {Dict, Maybe, IDictionary} from '../types'
+
 import {createResponsive} from './responsive'
-import {isObjectOrArray} from './utils'
 
 /**
  * @requires toMq
@@ -43,11 +36,11 @@ export type responsivePProps<B, P> = Partial<
 
 export const createResponsiveP = (
   responsive: Function,
-  getBreakpoints: Function,
+  getBreakpoints: (...args: any[]) => any,
   transformStyle: Function,
   globalOptions: any,
 ) => {
-  return function responsiveProp<P extends Dict<any>>({
+  return function responsiveProp<P extends IDictionary>({
     defaultValue,
     value,
     cssProp,
@@ -58,11 +51,11 @@ export const createResponsiveP = (
     defaultValue?: any
     value?: any
     transform?: boolean
-    cssProp: keyof P
-    prop?: keyof P
+    cssProp: keyof P | string
+    prop?: keyof P | string
   }) {
     let transformOptions = {...globalOptions, ...localoptions}
-    return function responsiveP(props) {
+    return function responsiveP(props: Partial<P> & IDictionary) {
       const css = cssProp || targetPropName
       targetPropName = targetPropName || cssProp
 
@@ -71,7 +64,7 @@ export const createResponsiveP = (
         value = props[targetPropName]
       }
 
-      let transformer = v => v
+      let transformer = (v: any) => v
       if (transform !== false && (transform || transformOptions)) {
         transformer = v =>
           transformStyle({

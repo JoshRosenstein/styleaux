@@ -1,4 +1,5 @@
 import {
+  flow,
   pipe,
   flip,
   toString,
@@ -28,10 +29,10 @@ import {
   isFalse,
   isPlainObject as isObject,
 } from 'typed-is'
-import {Primitive, Dict} from '../types'
+import {Primitive, IDictionary} from '../types'
 
-export const cleanAndSort = unordered => {
-  const ordered = {}
+export const cleanAndSort = <T extends IDictionary>(unordered: T) => {
+  const ordered = {} as T
   Object.keys(unordered)
     .sort()
     .forEach(key => {
@@ -64,22 +65,32 @@ type SafeMapValues = {
     item: T | T[] | Record<string, T>,
   ): U | U[] | Record<string, U>
 }
-export const safeMapValues: SafeMapValues = curryN(2, (func, item) =>
-  pipe(ifElse(either(isArray, isObject), mapValues(func), func))(item),
+export const safeMapValues: SafeMapValues = curryN(
+  2,
+  <T extends IDictionary | any[]>(func: (arg: T) => any, item: T) =>
+    flow(
+      item,
+      ifElse(either(isArray, isObject), mapValues(func), func),
+    ),
 )
 
 export const isTemplate = test(/{!([^}]+)}/g)
 // @ts-ignore
 export const pipeIfDefined = (...fns) => when(isDefined, pipe(...fns))
 
-export function extractTemplateValue(template) {
+export function extractTemplateValue(template: string) {
   const rx = new RegExp('{!(.*?)}')
   const values = rx.exec(template) // or: data.match(rx);
   return values && values[1].trim()
 }
 
-export const arrToObj = arr =>
-  reduce((accumulated, value, key) => attach(key, value, accumulated), {}, arr)
+export const arrToObj = (arr: any[]): IDictionary =>
+  reduce(
+    (accumulated: IDictionary, value: any, key: number) =>
+      attach(key, value, accumulated),
+    {},
+    arr,
+  )
 
 export const isNonZeroNumber = (value: any): value is number =>
   isNumber(value) && value !== 0
@@ -91,7 +102,7 @@ const whenisNonZeroNumber = curry(
     when(isNonZeroNumber, defaultTo(identity, fn))(input),
 )
 
-export const appendUnit = unit =>
+export const appendUnit = (unit: string) =>
   whenisNonZeroNumber(
     pipe(
       toString,
@@ -107,23 +118,11 @@ const isUndefinedOrFalse = (x: any): x is null | undefined | boolean =>
 
 export const falseToNull = <T>(value: T): T | null =>
   isFalse(value) ? null : value
-type ReduceObj<TResult> = <F, K extends keyof F>(
-  acc: TResult,
-  value: F,
-  key?: K,
-) => TResult
-
-type R = <T, K extends keyof T, U>(
-  pred: (accumulator: U, value?: T, key?: K) => boolean,
-  fn: (accumulator: U, value: T, key?: K) => U,
-  initial: U,
-  values: Record<K, T>,
-) => U
 
 export const iterateUntilResult = <T extends Object, K extends string, U>(
   computeFn: (accumulator: U, value: T, key?: K) => U,
 ) => (obj: Record<K, T>) =>
-  reduceWhile(isUndefinedOrFalse, computeFn, false, obj)
+  reduceWhile(isUndefinedOrFalse, computeFn, false as any, obj)
 
 export const whenFunctionCallWith = <T, U>(...argsToGive: T[]) =>
   when(isFunction, (fnItem: (...args: T[]) => U) => fnItem(...argsToGive))

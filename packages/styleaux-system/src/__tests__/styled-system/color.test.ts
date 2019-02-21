@@ -1,5 +1,5 @@
 import {createAsResponsive, color} from '../../'
-import {CreateAssistant} from '@styleaux/core'
+import {CreateAssistant} from '../../../../styleaux-core/src'
 import baseDefaultTheme from './__fixtures__/baseDefaultTheme'
 
 const colors = {

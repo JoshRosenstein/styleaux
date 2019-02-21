@@ -52,9 +52,9 @@ const defaultTheme = {
     nuetral: '#97a4a4',
   },
 }
-type defaultThemeT = typeof defaultTheme
-const getTheme = createGetTheme({defaultTheme, themeKey: 'theme'})
-type MaybeT<T> = T | null | undefined
+//type defaultThemeT = typeof defaultTheme
+const getTheme = createGetTheme(defaultTheme)
+//type MaybeT<T> = T | null | undefined
 
 describe('With baseFontSize 16', () => {
   it('fallsback to Defaulttheme ', () => {

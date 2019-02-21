@@ -1,14 +1,14 @@
-import {createPxToPresents} from '../'
+import {createPxToPreset} from '../'
 
 const {
-  pxTo,
+  //pxTo,
   pxToEm,
   pxToRem,
   pxToRel,
   normalize,
   normalizeEm,
   normalizeRem,
-} = createPxToPresents()
+} = createPxToPreset()
 
 it('Works ', () => {
   expect(pxToEm(16)).toEqual('1em')

@@ -1,15 +1,15 @@
-import {CreateAssistant, defaultOptions} from '../'
+import {CreateAssistant} from '../'
 import {config} from './__fixtures__'
 
 const {
-  toMq,
-  pxTo,
-  pxToEm,
-  pxToRel,
-  pxToRem,
-  transformStyle,
-  transformStyleP,
-  responsive,
+  // toMq,
+  // pxTo,
+  // pxToEm,
+  // pxToRel,
+  // pxToRem,
+  // transformStyle,
+  // transformStyleP,
+  // responsive,
   responsiveProp,
 } = CreateAssistant(config)
 

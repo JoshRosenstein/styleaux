@@ -1,9 +1,10 @@
-// @flow
+import {IDictionary} from '../types'
+
 export type OptionsT<M extends PropertyKey> = {
   toMq?: {valueConverter?: Function | M}
 }
 
-export type toMqInputAsObj = {
+export interface toMqInputAsObj extends IDictionary {
   min?: string | number
   max?: string | number
   minW?: string | number
@@ -25,19 +26,9 @@ export type toMqInputAsObj = {
   orientation?: 'landscape' | 'portrait'
 }
 
-type UnionKeyToValue<U extends string, T> = {[K in U]: T}
-type KnownKeys<T> = {
-  [K in keyof T]: string extends K ? never : number extends K ? never : K
-} extends {[_ in keyof T]: infer U}
-  ? U
-  : never
-
-type MapString<T> = {
-  [key: string]: T
-}
-type MapNumber<T> = {
-  [key: string]: T
-}
-type U2<K extends string, T> = Merge<UnionKeyToValue<K, T>, MapString<T>>
-type Merge<A, B> = MapKeys<(A) & (B)>
-type MapKeys<T> = {[K in keyof T]: T[K]}
+// type UnionKeyToValue<U extends string, T> = {[K in U]: T}
+// type KnownKeys<T> = {
+//   [K in keyof T]: string extends K ? never : number extends K ? never : K
+// } extends {[_ in keyof T]: infer U}
+//   ? U
+//   : never

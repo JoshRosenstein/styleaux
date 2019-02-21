@@ -33,12 +33,7 @@ import {
   isArray,
 } from 'typed-is'
 
-import {
-  isNestableAtRule,
-  hasReference,
-  isNestable,
-  containsSpecial,
-} from './utils'
+import {hasReference, isNestable, containsSpecial} from './utils'
 const PSUEDO_WITHOUT_SELECTOR = /(^|\s)(:{1,2})(\w)/g
 const REFERENCE_SELECTOR = /&/g
 
@@ -132,7 +127,9 @@ export const parseRulesC = (
     value,
     whenFunctionCallWith(props),
     falseToNull,
-    when(isTemplate, template => objOf(extractTemplateValue(template), 'self')),
+    when(isTemplate, (template: string) =>
+      objOf(extractTemplateValue(template), 'self'),
+    ),
   )
   ///console.log('parseRulesC2', {selector, value, parents, location})
   if (selector === '@font-face') {

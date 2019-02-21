@@ -1,6 +1,5 @@
 import {createResponsiveBoolP} from '../'
 import {createResponsiveBool} from '../'
-import {IBreakpoints} from '../types'
 
 const toMq = x => `@media ${x}`
 
@@ -46,7 +45,7 @@ describe('Default Breakpoints as Array', () => {
 })
 
 describe('Default IBreakpoints as Object', () => {
-  const responsive = createResponsiveBool(toMq, {sm: 1, md: 2, lg: 4})
+  // const responsive = createResponsiveBool(toMq, {sm: 1, md: 2, lg: 4})
   const breakpoints = {sm: 1, md: 2, lg: 4}
   const getBreakpoints = props =>
     (props && props.theme && props.theme['breakpoints']) || breakpoints

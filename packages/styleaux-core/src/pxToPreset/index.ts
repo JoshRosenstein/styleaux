@@ -14,7 +14,7 @@ export const createNormalize = pxToRel => (unit = '') => (
     parseFloat(pxToRel(pxBase) as string) +
   unit
 
-export const createPxToPresents = (options: Options = defaultOptions) => {
+export const createPxToPreset = (options: Options = defaultOptions) => {
   const pxTo = createPxTo(options)
   const pxToEm = pxTo('em')
   const pxToRem = pxTo('rem')
@@ -32,4 +32,4 @@ export const createPxToPresents = (options: Options = defaultOptions) => {
     normalizeRem,
   })
 }
-export type PxToPresents = ReturnType<typeof createPxToPresents>
+export type PxToPreset = ReturnType<typeof createPxToPreset>

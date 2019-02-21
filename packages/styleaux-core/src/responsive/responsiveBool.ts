@@ -2,23 +2,23 @@ import {isObjectOrArray} from './utils'
 import {responsiveReducer} from './responsiveHelpers'
 import {isTrue, isFalse, isBoolean, isNil} from 'typed-is'
 
-export const createResponsiveBool = (toMq, defaultBreakPoints) => {
+export const createResponsiveBool = (toMq: any, defaultBreakPoints: any) => {
   return function responsiveBool({
     value,
     T: trueValue,
     F: falseValue,
     defaultValue,
     cssProp,
-    transformer = v => v,
+    transformer = (v: any) => v,
     breakpoints = defaultBreakPoints,
   }: {
-    value
+    value: any
     T: string | number
     F?: string | number
-    defaultValue?
+    defaultValue?: any
     cssProp: string
     transformer?: Function
-    breakpoints?
+    breakpoints?: any
   }) {
     if (isNil(value)) {
       value = defaultValue
@@ -38,7 +38,7 @@ export const createResponsiveBool = (toMq, defaultBreakPoints) => {
       return {}
     }
 
-    const computedValFn = currentVal =>
+    const computedValFn = (currentVal: any) =>
       isTrue(currentVal)
         ? transformer(trueValue)
         : isFalse(currentVal)

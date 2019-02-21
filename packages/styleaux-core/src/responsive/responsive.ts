@@ -1,5 +1,3 @@
-// @flow
-import {always, prop} from '@roseys/futils'
 import {isResponsiveType} from '../utils'
 import {isTruthy} from 'typed-is'
 import {responsiveReducer} from './responsiveHelpers'
@@ -18,8 +16,8 @@ export const defaultOptions = {
 
 export const createResponsive = (
   toMq: ToMq,
-  defaultBreakPoints,
-  transformStyle = x => x,
+  defaultBreakPoints: any,
+  transformStyle = (x: any) => x,
 ) => {
   return ({
     value,

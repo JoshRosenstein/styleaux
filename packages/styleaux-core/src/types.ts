@@ -1,6 +1,10 @@
 export type Nothing = null | undefined
 export type Maybe<T> = Nothing | T
 
+export interface IDictionary<T = any> {
+  [key: string]: T
+}
+
 export type Primitive = string | number | boolean | undefined | null
 export type Dict<T, K extends string | number = string> = {[key in K]: T}
 

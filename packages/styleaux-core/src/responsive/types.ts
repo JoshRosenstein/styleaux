@@ -27,6 +27,6 @@ export type InputMaybe<B> = Maybe<
   BreakPointKeysOfNumberOrString<B> | string | number
 >
 
-type ValueTypes<T> = T extends Dict<number | string>
-  ? Partial<Record<keyof T | 'default', number | string>> | (number | string)[]
-  : never
+// type ValueTypes<T> = T extends Dict<number | string>
+//   ? Partial<Record<keyof T | 'default', number | string>> | (number | string)[]
+//   : never

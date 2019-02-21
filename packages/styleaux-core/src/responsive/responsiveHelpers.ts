@@ -1,5 +1,4 @@
 import {
-  values,
   prop,
   objOf,
   mergeDeepRight,
@@ -7,10 +6,10 @@ import {
   when,
   noop,
 } from '@roseys/futils'
-import {arrToObj, isResponsiveType} from '../utils'
-import {isBoolean, isNil, isArray, isPlainObject, isNumber} from 'typed-is'
+import {arrToObj} from '../utils'
+import {isBoolean, isNil, isArray, isPlainObject} from 'typed-is'
 //import * as invariant from 'invariant'
-import {Dict, EmptyDict, Maybe, AnyDict} from '../types'
+import {Dict, EmptyDict, IDictionary} from '../types'
 import {IBreakpoints} from './types'
 export const nonBoolsToNil = mapValues(when(x => !isBoolean(x), noop))
 export const boolsToNil = mapValues(when(isBoolean, noop))
@@ -23,8 +22,8 @@ const getBreakPoints = <T>(
 ): IBreakpoints => {
   const Dummy = 0
 
-  const switchValue =
-    (isArray(breakPointsFromTheme) ? 1 : -1) + (isArray(breakpoints) ? 10 : -10)
+  // const switchValue =
+  //   (isArray(breakPointsFromTheme) ? 1 : -1) + (isArray(breakpoints) ? 10 : -10)
 
   if (isArray(breakPointsFromTheme)) {
     if (isArray(breakpoints)) {
@@ -36,7 +35,7 @@ const getBreakPoints = <T>(
   } else {
     if (isPlainObject(breakPointsFromTheme)) {
       if (isPlainObject(breakpoints)) {
-        const b = {default: Dummy, ...breakPointsFromTheme}
+        //  const b = {default: Dummy, ...breakPointsFromTheme}
         return {default: Dummy, ...breakPointsFromTheme}
       }
       return arrToObj([Dummy, ...Object.values(breakPointsFromTheme)])
@@ -68,19 +67,22 @@ const getBreakPoints = <T>(
 //   return breakPointsFromTheme
 // }
 
-const sort = <V>(value, getBp) =>
+const sort = <V extends IDictionary>(value: V, getBp: any) =>
   Object.keys(value)
     .sort((a, b) => parseFloat(getBp(a)) - parseFloat(getBp(b)))
-    .reduce((acc, key) => {
-      acc[key] = value[key]
-      return acc
-    }, {})
+    .reduce(
+      (acc, key) => {
+        acc[key] = value[key]
+        return acc
+      },
+      {} as V,
+    )
 
 export const responsiveReducer = (
-  value,
-  breakPointsFromTheme,
+  value: any,
+  breakPointsFromTheme: any,
   css: string,
-  tranformer,
+  tranformer: (x: any) => any,
   toMq: (x: any) => string,
   init = {},
 ) => {
@@ -91,8 +93,8 @@ export const responsiveReducer = (
   const transFormedBps = getBreakPoints(value, breakPointsFromTheme)
 
   const createParent = css
-    ? (isDefault: boolean, bpVal) => (isDefault ? css : [toMq(bpVal), css])
-    : (isDefault: boolean, bpVal) => (isDefault ? [] : toMq(bpVal))
+    ? (isDefault: boolean, bpVal: any) => (isDefault ? css : [toMq(bpVal), css])
+    : (isDefault: boolean, bpVal: any) => (isDefault ? [] : toMq(bpVal))
 
   // /sort IBreakpoints
   const getBp = (x: string) => prop(x, transFormedBps)

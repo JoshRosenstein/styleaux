@@ -1,20 +1,12 @@
-import {ITransformStyle, ITransformFns} from './transformStyle'
-import {MaybeAnyDict, Maybe} from '../types'
+import {ITransformStyle} from './transformStyle'
+import {MaybeAnyDict, IDictionary} from '../types'
 
 export type GetThemeP = (
   themeProp: string | Array<string | number>,
 ) => (props?: MaybeAnyDict) => any
 
-type transformFuncs = {
-  (value: string, props?: MaybeAnyDict): Maybe<string>
-  (value: number, props?: MaybeAnyDict): Maybe<number>
-  (value: string | number, props?: MaybeAnyDict): Maybe<string | number>
-}
-
-type StringDic = {[index: string]: any}
-
 export type transformStylePConfig = {
-  value: Maybe<string | number>
+  value: string | number
   cssProp?: string
   valueOnly?: boolean
   //key?: string /// OLD
@@ -36,11 +28,11 @@ export const createTransformStyleP = (
     path,
     ...rest
   }: transformStylePConfig) {
-    return function transformStyleP<T extends {}>(props: T) {
+    return function transformStyleP<T extends IDictionary>(props: T) {
       return transformStyle({
         path,
         postFn,
-        lookUpfn: props ? (v, props) => getThemeP(v)(props) : undefined,
+        getterFn: props ? (v: any, props: T) => getThemeP(v)(props) : undefined,
         props,
         ...rest,
       })

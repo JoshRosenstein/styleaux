@@ -1,13 +1,5 @@
-import {path} from '@roseys/futils'
-import {
-  isString,
-  isNumber,
-  isDefined,
-  isFunction,
-  isTruthy,
-  isNil,
-} from 'typed-is'
-import {MaybeAnyDict, Maybe} from '../types'
+import {isString, isDefined, isFunction, isNil} from 'typed-is'
+import {MaybeAnyDict} from '../types'
 import {isNeg, stripNeg, toNeg} from './utils'
 
 //  "javascript.validate.enable": false,
@@ -28,13 +20,6 @@ export const defaultOptions = {
   [OPTIONSKEYS.defaultLookup]: false,
   [OPTIONSKEYS.defaultTransform]: false,
 }
-//string | Array<string | number>
-type getThemeT<T> = (
-  themeProp: T,
-  props?: MaybeAnyDict,
-) => Maybe<string | number>
-
-type inputType = Maybe<string | number>
 
 export interface ITransformFns {
   (value: string, props?: MaybeAnyDict): any
@@ -43,7 +28,7 @@ export interface ITransformFns {
 }
 
 export interface ILocalOptions<P> {
-  lookUpfn?: Function
+  getterFn?: Function
   path?: string
   postFn?: any
   preFn?: any
@@ -89,13 +74,13 @@ export const createTransformStyle = <T>(
       value,
       cssProp,
       valueOnly,
-      lookUpfn = themeGetter,
+      getterFn = themeGetter,
       path,
       postFn,
       preFn,
       props,
       ...localOptions
-    }: IInput<P>, // }: { //   value: string | number //   cssProp?: string //   valueOnly?: boolean //   lookUpfn?: getThemeT<any> //   path?: string //   postFn?: ITransformFns | keyof typeof functions //   preFn?: ITransformFns | keyof typeof functions //   props?: {} //   defaultTransform?: boolean //   defaultLookup?: boolean //   [index: string]: any // })
+    }: IInput<P>, // }: { //   value: string | number //   cssProp?: string //   valueOnly?: boolean //   getterFn?: getThemeT<any> //   path?: string //   postFn?: ITransformFns | keyof typeof functions //   preFn?: ITransformFns | keyof typeof functions //   props?: {} //   defaultTransform?: boolean //   defaultLookup?: boolean //   [index: string]: any // })
   ) {
     const options = {...globalOptions, ...localOptions}
     let {
@@ -128,11 +113,9 @@ export const createTransformStyle = <T>(
     const themeKey = path || defaultLookup
     let getter = postFn || defaultGetter
 
-    const getThemeOr = v => lookUpfn([themeKey, v], props) || v
+    const getThemeOr = (v: any) =>
+      getterFn([themeKey, v].filter(Boolean).join('.'), props) || v
 
-    const hasGetter = isTruthy(getter)
-
-    let ret = value
     if (isFunction(preFn)) value = preFn(value, props)
 
     if (isDefined(value) && isDefined(themeKey)) {

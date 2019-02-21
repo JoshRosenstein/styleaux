@@ -1,6 +1,6 @@
 import {when, ifElse, either, lt, prop} from '@roseys/futils'
 
-import {isNumber, isFunction, isPlainObject as isObject} from 'typed-is'
+import {isNumber} from 'typed-is'
 
 const isNotNumber = (x: any) => !isNumber(x)
 

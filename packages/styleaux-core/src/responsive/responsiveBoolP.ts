@@ -1,10 +1,8 @@
-// @flow
-
 import {prop} from '@roseys/futils'
 import {whenFunctionCallWith} from '../utils'
-import {BreakPointKeysOFT, IBreakpoints, TransformStyle} from './types'
-import {Dict, Maybe} from '../types'
+import {IBreakpoints} from './types'
 import {createResponsive} from './responsive'
+import {IDictionary} from '../types'
 
 export enum OPTIONSKEYS {
   breakpointsKey = 'responsive.breakpointsKeyInTheme',
@@ -36,23 +34,23 @@ export const createResponsiveBoolP = (
     transform,
     ...localoptions
   }: {
-    value?
+    value?: any
     T: string | number
     F?: string | number
-    defaultValue?
+    defaultValue?: any
     transform?: boolean
-    cssProp
-    prop?
+    cssProp: any
+    prop?: any
   }) {
     // console.log('responsiveBool', {value, prop})
     let transformOptions = {...globalOptions, ...localoptions}
-    return function responsiveP(props) {
+    return function responsiveP(props: IDictionary) {
       const css = cssProp || targetPropName
       targetPropName = targetPropName || cssProp
 
       // If no Value is Supplied, then do prop lookup
 
-      let transformer = v => v
+      let transformer = (v: any) => v
       if (transform) {
         transformer = v =>
           transformStyle({

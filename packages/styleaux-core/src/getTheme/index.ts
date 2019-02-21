@@ -1,11 +1,11 @@
 import {path} from '@roseys/futils'
-import {isString} from 'typed-is'
-import {Dict, Maybe} from '../types'
+import {isString, isArray} from 'typed-is'
+import {IDictionary} from '../types'
 
 export type Options = {
   [x: string]: any
   themeKey?: string
-  defaultTheme?: Dict<any>
+  defaultTheme?: IDictionary
 }
 
 export const defaultOptions = {
@@ -21,17 +21,23 @@ export const defaultOptions = {
   },
 }
 
-export const createGetTheme = ({themeKey = 'theme', defaultTheme}: Options) => (
-  themePropKey: string | Array<number | string>,
-) => (props: Maybe<Dict<any>>) => {
-  // return path(themePropKey, defaultTheme)
-  const pth = isString(themePropKey)
-    ? `${themeKey}.${themePropKey}`
-    : [themeKey, ...themePropKey]
+/**
+ * Creates a theme lookup function that fallsback to an optional default theme so a theme does not need to have a theme passed to it
+ */
+export const createGetTheme = <T extends IDictionary, T2 extends IDictionary>(
+  defaultTheme = {} as T,
+  themeKey = 'theme',
+) => (
+  themePropKey: keyof T | keyof T2 | string | Array<number | string>,
+) => (props: {theme?: T2}) => {
+  let pth
+  if (isArray(themePropKey)) {
+    pth = [themeKey, ...themePropKey]
+  } else if (isString(themePropKey)) {
+    pth = `${themeKey}.${themePropKey}`
+  }
 
-  const res = path(pth, props) || path(themePropKey, defaultTheme)
-  //as ReturnT : MaybeT<ReturnT>
-  return res //as MaybeT<ReturnT>
+  return path(pth, props) || path(themePropKey as any, defaultTheme)
 }
 
 export type GetTheme = ReturnType<typeof createGetTheme>

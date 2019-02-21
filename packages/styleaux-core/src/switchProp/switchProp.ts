@@ -21,38 +21,38 @@ import {
   pipeIfDefined,
 } from '../utils'
 import {isTruthy, isDefined, isString, isNil} from 'typed-is'
-import {Dictionary} from '@roseys/futils/lib/_types/ts/$types'
-const identity = x => x
+import {IDictionary} from '../types'
+//const identity = (x: any) => x
 
-type IOptions<T extends {[key: string]: any}> = {
-  transform: boolean
-  responsive: boolean
-  responsiveBool: boolean
-  transformConfig: T
-}
+// type IOptions<T extends {[key: string]: any}> = {
+//   transform: boolean
+//   responsive: boolean
+//   responsiveBool: boolean
+//   transformConfig: T
+// }
 
 type IMaybeFunc = Function | undefined | null
-type IDictionary<T> = {[key: string]: T}
-type IValue = {
-  [key: string]:
-    | string
-    | number
-    | ((...args: any[]) => string | number | undefined)
-    | Dictionary<any>
-  options?: {
-    transform?: boolean
-    responsive?: boolean
-    responsiveBool?: boolean
-  } & IDictionary<any>
-  default?: any
-}
+
+// type IValue = {
+//   [key: string]:
+//     | string
+//     | number
+//     | ((...args: any[]) => string | number | undefined)
+//     | IDictionary
+//   options?: {
+//     transform?: boolean
+//     responsive?: boolean
+//     responsiveBool?: boolean
+//   } & IDictionary
+//   default?: any
+// }
 export const createSwitchProp = <
-  RP extends Function,
+  RP extends IMaybeFunc,
   RBP extends Function,
   TS extends Function,
   MF extends {[key: string]: Function}
 >(
-  responsiveProp: RP = undefined,
+  responsiveProp?: Function,
   responsiveBoolProp?: IMaybeFunc,
   transformStyle?: IMaybeFunc,
   mappedFunctions?: MF,
@@ -62,7 +62,7 @@ export const createSwitchProp = <
   globalResponsiveBool: boolean = false,
 ) => {
   return function switchProp(
-    value: IValue,
+    value: any,
     {
       valueOnly,
       cssProp,
@@ -84,7 +84,7 @@ export const createSwitchProp = <
       responsiveBool?: boolean
     }, /// can overide global options with factory Options
   ) {
-    return function switch_(props) {
+    return function switch_(props: IDictionary) {
       /// can overide localOption with optionsKey
       const {default: defaultValue, options: opt = {}, ...matchers} = value
       const {
@@ -119,7 +119,7 @@ export const createSwitchProp = <
       ])
 
       /// Transform
-      let transformer = v => v
+      let transformer = (v: any) => v
       let hasBeenTransformed = false
       if (
         transform !== false &&
@@ -171,7 +171,7 @@ export const createSwitchProp = <
               when(isString, x => pathOr(x, x, mappedFunctions)),
               whenFunctionCallWith(props[propName], props),
               whenFunctionCallWith(props),
-            )(path(propName, matchers))
+            )(path(propName, matchers) as any)
           }),
           falseToNull,
           defaultTo(whenFunctionCallWith(props)(defaultValue)),
@@ -184,7 +184,7 @@ export const createSwitchProp = <
 
       if (
         isResponsiveType(computedValue) ||
-        isResponsiveType(path(matchedPropName, props))
+        (matchedPropName && isResponsiveType(path(matchedPropName, props)))
       ) {
         if (responsiveBool && responsiveBoolProp) {
           // console.log({computedValue})

@@ -1,4 +1,4 @@
-import {CreateAssistant, defaultOptions} from '../..'
+import {defaultOptions} from '../..'
 import {OPTIONSKEYS as TRANSFORMOPTIONKEYS} from '../../../transformStyle'
 import defaultTheme from './baseTheme'
 const identity = x => x

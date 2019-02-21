@@ -1,14 +1,9 @@
-import {createToMq} from '../Tomq'
-import {
-  createGetTheme,
-  defaultOptions as getThemeDefaults,
-  Options as getThemeOptions,
-} from '../getTheme'
+import {createToMq} from '../toMq'
+import {createGetTheme, defaultOptions as getThemeDefaults} from '../getTheme'
 
 import {
   createTransformStyleP,
   createTransformStyle,
-  transformStyleOptions,
   OPTIONSKEYS as TRANSFORMOPTIONKEYS,
 } from '../transformStyle'
 import {
@@ -18,13 +13,13 @@ import {
   createResponsiveBoolP,
 } from '../responsive'
 
-import {IBreakpoints} from '../responsive/types'
+//import {IBreakpoints} from '../responsive/types'
 
 import {
-  createPxToPresents,
+  createPxToPreset,
   Options as pxToOptions,
   defaultOptions as pxToDefaults,
-} from '../pxToPresent'
+} from '../pxToPreset'
 
 import {createSwitchProp} from '../switchProp'
 import {createParse} from '../parse'
@@ -32,7 +27,7 @@ import {path} from '@roseys/futils'
 
 export type Options = pxToOptions
 
-import {MapKeys} from '../types'
+//import {MapKeys} from '../types'
 
 export const defaultOptions = {
   ...pxToDefaults,
@@ -54,12 +49,12 @@ export const CreateAssistant = (options: any) => {
     normalize,
     normalizeEm,
     normalizeRem,
-  } = createPxToPresents(options)
+  } = createPxToPreset(options)
   const getDefaultTheme = (v: string | (string | number)[]) =>
     path(v, options.defaultTheme)
 
   const toMq = createToMq(pxToEm)
-  const gettheme = createGetTheme(options)
+  const gettheme = createGetTheme(options.defaultTheme)
   const transformerFuncs = {
     pxToEm,
     pxToRel,

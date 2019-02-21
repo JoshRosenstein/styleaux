@@ -1,11 +1,11 @@
-export {CreateAssistant} from './defaultPresent'
+export {CreateAssistant} from './defaultPreset'
 
 export {createGetTheme} from './getTheme'
-export {matchBlock, matchBlockArr} from './matchBlock'
+export {matchBlock, matchBlockArr} from './matchblock'
 export {createParse} from './parse'
 export {createPxTo} from './pxTo'
 
-export {createPxToPresents} from './pxToPresent'
+export {createPxToPreset} from './pxToPreset'
 
 export {
   createResponsive,
@@ -15,6 +15,5 @@ export {
 } from './responsive'
 
 export {createSwitchProp} from './switchProp'
-
-export {createToMq} from './toMq'
 export {createTransformStyle, createTransformStyleP} from './transformStyle'
+export {createToMq} from './toMq'

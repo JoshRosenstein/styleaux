@@ -1,10 +1,8 @@
 import {createAsResponsive, space as spaceDef} from '../../'
-import {CreateAssistant} from '@styleaux/core'
+import {CreateAssistant} from '../../../../styleaux-core/src'
 import baseDefaultTheme from './__fixtures__/baseDefaultTheme'
-import breakpoints from './__fixtures__/breakpoints'
-import {OPTIONSKEYS as TRANSFORMOPTIONKEYS} from '@styleaux/core/dist/transformStyle'
 
-const breakpointsKeys = Object.keys(breakpoints)
+import {OPTIONSKEYS as TRANSFORMOPTIONKEYS} from '@styleaux/core/dist/transformStyle'
 
 const space = {
   none: 0,

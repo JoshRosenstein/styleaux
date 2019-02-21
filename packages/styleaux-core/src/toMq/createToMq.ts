@@ -1,34 +1,22 @@
 import {
   map,
-  mapKeys,
   test,
   always,
   both,
   equals,
   toPairs,
-  identity,
   join,
   pipe,
   flow,
   T,
   when,
   cond,
-  either,
-  propOr,
   toKebabCase,
-  path,
 } from '@roseys/futils'
 import {isAtRule} from '../utils'
 
 import {nameLookups} from './constants'
-import {
-  isFunction,
-  isNil,
-  isString,
-  isNumber,
-  isArray,
-  isObject,
-} from 'typed-is'
+import {isNil, isString, isNumber, isArray} from 'typed-is'
 import {toMqInputAsObj} from './types'
 const isDimension = test(/[height|width]$/)
 
@@ -37,9 +25,9 @@ const prefixMedia = (value: string | number) => `@media ${value}`
 const objParserCreator = (valueConverter: UnitConverter) => (
   obj: toMqInputAsObj | string,
 ) => {
-  const fn = ([feature, value]) => {
+  const fn = ([feature, value]: any[]) => {
     //feature = isString(feature) ? feature : ''
-    feature = nameLookups[feature] || feature
+    feature = (nameLookups[feature] as string) || (feature as string)
     feature = toKebabCase(feature)
     return flow(
       value,
@@ -47,7 +35,7 @@ const objParserCreator = (valueConverter: UnitConverter) => (
       cond([
         [equals(true), always(feature)],
         [equals(false), always(`not ${feature}`)],
-        [T, temp => `(${feature}:${temp})`],
+        [T, (temp: any) => `(${feature}:${temp})`],
       ]),
     )
   }
@@ -56,7 +44,7 @@ const objParserCreator = (valueConverter: UnitConverter) => (
     toPairs,
     map(fn),
     join(' and '),
-  )(obj)
+  )(obj as any)
 }
 type UnitConverter = (unit: string | number) => string
 export const createToMq = (
