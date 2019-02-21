@@ -1,5 +1,5 @@
 import {whenFunctionCallWith, safeMapValues, falseToNull} from '../utils'
-
+import {isBoolean} from 'typed-is'
 import {IBreakpoints} from './types'
 import {Dict, Maybe, IDictionary} from '../types'
 
@@ -51,19 +51,24 @@ export const createResponsiveP = (
     defaultValue?: any
     value?: any
     transform?: boolean
-    cssProp: keyof P | string
+    cssProp?: keyof P | string | boolean
     prop?: keyof P | string
+    [index: string]: any
   }) {
     let transformOptions = {...globalOptions, ...localoptions}
     return function responsiveP(props: Partial<P> & IDictionary) {
-      const css = cssProp || targetPropName
-      targetPropName = targetPropName || cssProp
+      let css
+      ///CssProp can be false- if theme attribute returns a style object
+      if (!isBoolean(cssProp)) {
+        css = cssProp || targetPropName
+        targetPropName = targetPropName || cssProp
+      }
 
       // If no Value is Supplied, then do prop lookup
       if (!value) {
         value = props[targetPropName]
       }
-
+      // console.log({css, targetPropName})
       let transformer = (v: any) => v
       if (transform !== false && (transform || transformOptions)) {
         transformer = v =>

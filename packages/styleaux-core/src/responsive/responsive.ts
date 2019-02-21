@@ -27,11 +27,19 @@ export const createResponsive = (
     breakpoints = defaultBreakPoints,
   }) => {
     // / run default Value thru transformer ??
-    const defaultResult = defaultValue ? {[cssProp]: defaultValue} : {}
+    const defaultResult = defaultValue
+      ? cssProp
+        ? {[cssProp]: defaultValue}
+        : defaultValue
+      : {}
 
     // / if its not responsive value type, return
     if (!isResponsiveType(value)) {
-      return !isTruthy(value) ? defaultResult : {[cssProp]: transformer(value)}
+      return !isTruthy(value)
+        ? defaultResult
+        : cssProp
+        ? {[cssProp]: transformer(value)}
+        : transformer(value)
     }
 
     return responsiveReducer(
