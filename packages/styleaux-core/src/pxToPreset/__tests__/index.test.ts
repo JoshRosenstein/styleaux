@@ -8,7 +8,7 @@ const {
   normalize,
   normalizeEm,
   normalizeRem,
-} = createPxToPreset()
+} = createPxToPreset({baseFontSize: 16})
 
 it('Works ', () => {
   expect(pxToEm(16)).toEqual('1em')

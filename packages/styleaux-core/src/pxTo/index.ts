@@ -1,4 +1,9 @@
-export {createPxTo, Options, defaultOptions} from './createPxTo'
+export {
+  createPxTo,
+  Options,
+  defaultOptions,
+  createPxToOptions,
+} from './createPxTo'
 
 export {default as pxTo} from './pxTo'
 

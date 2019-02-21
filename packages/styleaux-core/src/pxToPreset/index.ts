@@ -2,6 +2,7 @@ import {
   createPxTo,
   Options as pxToOptions,
   defaultOptions as pxToDefaults,
+  createPxToOptions,
 } from '../pxTo'
 
 export type Options = pxToOptions
@@ -14,8 +15,10 @@ export const createNormalize = pxToRel => (unit = '') => (
     parseFloat(pxToRel(pxBase) as string) +
   unit
 
-export const createPxToPreset = (options: Options = defaultOptions) => {
-  const pxTo = createPxTo(options)
+export const createPxToPreset = (
+  options: ReturnType<typeof createPxToOptions>,
+) => {
+  const pxTo = createPxTo(createPxToOptions(options).baseFontSize)
   const pxToEm = pxTo('em')
   const pxToRem = pxTo('rem')
   const pxToRel = pxTo()

@@ -1,5 +1,5 @@
 import {isString, isDefined, isFunction, isNil} from 'typed-is'
-import {MaybeAnyDict} from '../types'
+import {MaybeAnyDict, IDictionary} from '../types'
 import {isNeg, stripNeg, toNeg} from './utils'
 
 //  "javascript.validate.enable": false,
@@ -20,6 +20,35 @@ export const defaultOptions = {
   [OPTIONSKEYS.defaultLookup]: false,
   [OPTIONSKEYS.defaultTransform]: false,
 }
+// root = 'transformOptions',
+// keys = 'transformStyle.cssPropToThemeKeyMap',
+// getter = 'transformStyle.cssPropToFunctionLookUp',
+// functions = 'transformStyle.functions',
+// defaultLookup = 'transformStyle.alwaysLookupTheme', /// if enabled any value passed to a cssProp listing in cssPropToThemeKeyMap, will lookup
+// defaultTransform = 'transformStyle.alwaysLookupFunction',
+
+export interface ITransformStyleOptions {
+  cssPropToThemeKeyMap?: IDictionary<string>
+  cssPropToFunctionMap?: IDictionary<string>
+  transformers?: IDictionary<(...args: any[]) => any>
+  autoLookupTheme?: boolean
+  autoLookupTransformer?: boolean
+  [index: string]: any
+}
+
+export const createTransformStyleOptions = ({
+  cssPropToThemeKeyMap = undefined,
+  cssPropToFunctionMap = undefined,
+  transformers = undefined,
+  autoLookupTheme = false,
+  autoLookupTransformer = false,
+}: ITransformStyleOptions) => ({
+  cssPropToThemeKeyMap,
+  cssPropToFunctionMap,
+  transformers,
+  autoLookupTheme,
+  autoLookupTransformer,
+})
 
 export interface ITransformFns {
   (value: string, props?: MaybeAnyDict): any

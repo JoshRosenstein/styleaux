@@ -9,7 +9,7 @@ import {
   append,
 } from '@roseys/futils'
 //import {pxToT} from './types'
-
+import {DEFAULT_BASE} from './constants'
 /// Todo: Flow not working when not importing directly
 import isString from 'typed-is/lib/isString'
 import isNumber from 'typed-is/lib/isNumber'
@@ -38,7 +38,6 @@ const getCssValueStringPair = (value: string | number) => {
   return [value, 0]
 }
 
-const defaultDivisor: number = 16
 //pxToT
 
 export function pxTo(
@@ -75,7 +74,7 @@ export function pxTo(divisor?: number) {
           : x
 
       return pipe(
-        divideBy(defaultTo(defaultDivisor, divisor)),
+        divideBy(defaultTo(DEFAULT_BASE, divisor)),
         round(3),
         possiblyAppendNewUnit,
       )(maybeUnitlessValue)

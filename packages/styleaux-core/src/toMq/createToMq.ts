@@ -47,6 +47,7 @@ const objParserCreator = (valueConverter: UnitConverter) => (
   )(obj as any)
 }
 type UnitConverter = (unit: string | number) => string
+
 export const createToMq = (
   unitConverter: UnitConverter = value => `${value}`,
 ) => {

@@ -24,7 +24,7 @@ import {createPxTo} from '../'
 // test.each(data)('isArray(%o) === %o', (value, expected) => {
 //   expect(isArray(value)).toBe(expected)
 // })
-const pxTo = createPxTo({baseFontSize: 16})
+const pxTo = createPxTo(16)
 const pxToEm = pxTo('em')
 const pxToRem = pxTo('rem')
 const pxToPct = pxValue => pxTo('%')(pxValue * 100)
@@ -41,7 +41,7 @@ describe('With baseFontSize 16', () => {
 })
 
 describe('With baseFontSize 18', () => {
-  const pxTo = createPxTo({baseFontSize: 18})
+  const pxTo = createPxTo(18)
   const pxToEm = pxTo('em')
   const pxToRem = pxTo('rem')
   const pxToPct = pxValue => pxTo('%')(pxValue * 100)

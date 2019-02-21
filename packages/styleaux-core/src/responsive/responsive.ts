@@ -2,12 +2,19 @@ import {isResponsiveType} from '../utils'
 import {isTruthy} from 'typed-is'
 import {responsiveReducer} from './responsiveHelpers'
 import {ToMq} from './types'
+import {IDictionary} from '../types'
 /**
  * @requires toMq
  */
 export enum OPTIONSKEYS {
   breakpointsKey = 'responsive.breakpointsKeyInTheme',
 }
+
+export const creatResponsiveOptions = ({
+  defaultBreakPoints = {} as IDictionary,
+}) => ({
+  defaultBreakPoints,
+})
 
 export const defaultOptions = {
   defaultTheme: {},

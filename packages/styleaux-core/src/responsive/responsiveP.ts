@@ -34,6 +34,21 @@ export type responsivePProps<B, P> = Partial<
 > &
   Dict<any>
 
+export interface IResponsiveProp<P extends IDictionary> {
+  (
+    args: {
+      defaultValue?: any
+      value?: any
+      transform?: boolean
+      cssProp?: keyof P | string | boolean
+      prop?: keyof P | string
+      preFn?: (...args: any[]) => any | string
+      postFn?: (...args: any[]) => any | string
+      path?: string
+    },
+  ): (props: P) => IDictionary
+}
+
 export const createResponsiveP = (
   responsive: Function,
   getBreakpoints: (...args: any[]) => any,

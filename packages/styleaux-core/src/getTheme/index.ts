@@ -8,6 +8,32 @@ export type Options = {
   defaultTheme?: IDictionary
 }
 
+const THEMEKEY = 'theme'
+
+export interface IDictionaryB<
+  T = IDictionary<string | number> | Array<string | number>
+> {
+  breakpoints?: T
+}
+
+export interface ICreateGetThemeOptionsInput<T extends IDictionary> {
+  themeKey?: string
+  defaultTheme: T
+}
+
+export interface IGetThemeOptions {
+  themeKey?: string
+  defaultTheme?: IDictionary
+}
+
+export const createGetThemeOptions = ({
+  themeKey = THEMEKEY,
+  defaultTheme = {},
+}): IGetThemeOptions => ({
+  themeKey,
+  defaultTheme,
+})
+
 export const defaultOptions = {
   themeKey: 'theme',
   defaultTheme: {

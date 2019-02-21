@@ -17,3 +17,5 @@ export {
 export {createSwitchProp} from './switchProp'
 export {createTransformStyle, createTransformStyleP} from './transformStyle'
 export {createToMq} from './toMq'
+
+export {createStylePreset} from './stylePreset'
