@@ -1,66 +1,66 @@
-export const paddingLeft = [
+export const paddingLeftConfig = [
   {cssProp: 'paddingLeft', prop: 'pl'},
   {cssProp: 'paddingLeft', prop: 'px'},
   {cssProp: 'paddingLeft', prop: 'p'},
-  {cssProp: 'paddingLeft', prop: 'padding'},
+  // {cssProp: 'paddingLeft', prop: 'padding'},
 ]
 
-export const paddingRight = [
+export const paddingRightConfig = [
   {cssProp: 'paddingRight', prop: 'pr'},
   {cssProp: 'paddingRight', prop: 'px'},
   {cssProp: 'paddingRight', prop: 'p'},
-  {cssProp: 'paddingRight', prop: 'padding'},
+  //{cssProp: 'paddingRight', prop: 'padding'},
 ]
 
-export const paddingTop = [
+export const paddingTopConfig = [
   {cssProp: 'paddingTop', prop: 'pt'},
   {cssProp: 'paddingTop', prop: 'py'},
   {cssProp: 'paddingTop', prop: 'p'},
-  {cssProp: 'paddingTop', prop: 'padding'},
+  //{cssProp: 'paddingTop', prop: 'padding'},
 ]
 
-export const paddingBottom = [
+export const paddingBottomConfig = [
   {cssProp: 'paddingBottom', prop: 'pb'},
   {cssProp: 'paddingBottom', prop: 'py'},
   {cssProp: 'paddingBottom', prop: 'p'},
-  {cssProp: 'paddingBottom', prop: 'padding'},
+  // {cssProp: 'paddingBottom', prop: 'padding'},
 ]
 
-export const marginTop = [
+export const marginTopConfig = [
   {cssProp: 'marginTop', prop: 'mt'},
   {cssProp: 'marginTop', prop: 'my'},
   {cssProp: 'marginTop', prop: 'm'},
-  {cssProp: 'marginTop', prop: 'margin'},
+  // {cssProp: 'marginTop', prop: 'margin'},
 ]
 
-export const marginBottom = [
+export const marginBottomConfig = [
   {cssProp: 'marginBottom', prop: 'mb'},
   {cssProp: 'marginBottom', prop: 'my'},
   {cssProp: 'marginBottom', prop: 'm'},
-  {cssProp: 'marginBottom', prop: 'margin'},
+  // {cssProp: 'marginBottom', prop: 'margin'},
 ]
 
-export const marginLeft = [
+export const marginLeftConfig = [
   {cssProp: 'marginLeft', prop: 'ml'},
   {cssProp: 'marginLeft', prop: 'mx'},
   {cssProp: 'marginLeft', prop: 'm'},
-  {cssProp: 'marginLeft', prop: 'margin'},
+  // {cssProp: 'marginLeft', prop: 'margin'},
 ]
 
-export const marginRight = [
+export const marginRightConfig = [
   {cssProp: 'marginRight', prop: 'mr'},
   {cssProp: 'marginRight', prop: 'mx'},
   {cssProp: 'marginRight', prop: 'm'},
-  {cssProp: 'marginRight', prop: 'margin'},
+  //{cssProp: 'marginRight', prop: 'margin'},
 ]
 
-export const spacing = [
-  paddingLeft,
-  paddingRight,
-  paddingTop,
-  paddingBottom,
-  marginTop,
-  marginBottom,
-  marginLeft,
-  marginRight,
+export const spacingConfig = [
+  ...paddingLeftConfig,
+  ...paddingRightConfig,
+  ...paddingTopConfig,
+  ...paddingBottomConfig,
+  ...marginTopConfig,
+  ...marginBottomConfig,
+  ...marginLeftConfig,
+  ...marginRightConfig,
 ]

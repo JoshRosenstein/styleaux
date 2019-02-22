@@ -36,7 +36,15 @@ const theme = {
   },
 }
 
-const {style} = createStylePreset({
+const {
+  style,
+  pxTo,
+  pxToEm,
+  pxToRel,
+  pxToRem,
+  getDefaultTheme,
+  gettheme,
+} = createStylePreset({
   defaultTheme: theme,
   autoLookupTheme: true,
   cssPropToThemeKeyMap: {
