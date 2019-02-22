@@ -73,6 +73,7 @@ export const createResponsiveP = (
     let transformOptions = {...globalOptions, ...localoptions}
     return function responsiveP(props: Partial<P> & IDictionary) {
       let css
+      let curentValue = value
       ///CssProp can be false- if theme attribute returns a style object
       if (!isBoolean(cssProp)) {
         css = cssProp || targetPropName
@@ -81,9 +82,13 @@ export const createResponsiveP = (
 
       // If no Value is Supplied, then do prop lookup
       if (!value) {
-        value = props[targetPropName]
+        curentValue = props[targetPropName]
+        /// Short Exit
+        if (!curentValue && !defaultValue) {
+          return {}
+        }
       }
-      // console.log({css, targetPropName})
+
       let transformer = (v: any) => v
       if (transform !== false && (transform || transformOptions)) {
         transformer = v =>
@@ -96,7 +101,7 @@ export const createResponsiveP = (
       }
 
       return responsive({
-        value: safeMapValues(falseToNull, value),
+        value: safeMapValues(falseToNull, curentValue),
         defaultValue,
         cssProp: css,
         transformer,

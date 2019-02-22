@@ -126,15 +126,18 @@ describe(' Basic responsiveProp', () => {
         },
       },
     }
-
-    const t = responsiveProp({
+    const variant = responsiveProp({
       prop: 'variant',
       path: 'typography',
       cssProp: false,
-    })({variant: 'h1', theme: theme})
+    })
 
+    const t = variant({variant: 'h2', theme: theme})
+
+    const t2 = variant({variant: 'h1', theme: theme})
     //const e = {paddingTop: 'targetPropValue'}
 
-    expect(t).toEqual(theme.typography.h1)
+    expect(t).toEqual(theme.typography.h2)
+    expect(t2).toEqual(theme.typography.h1)
   })
 })

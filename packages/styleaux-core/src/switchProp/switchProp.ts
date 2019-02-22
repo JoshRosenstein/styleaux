@@ -188,7 +188,7 @@ export const createSwitchProp = <
       ) {
         if (responsiveBool && responsiveBoolProp) {
           // console.log({computedValue})
-          // console.log('responsiveBooooll', {computedValue, matchedPropName})
+
           return responsiveBoolProp({
             value: computedValue,
             cssProp,
@@ -198,7 +198,6 @@ export const createSwitchProp = <
           })(props)
         }
         if (responsive && responsiveProp) {
-          //console.log('responsive', {computedValue, matchedPropName})
           return responsiveProp({
             value: computedValue,
             cssProp,
