@@ -1,5 +1,7 @@
 import {createStylePreset} from '../'
 
+import {MarginTopProperty} from '@johanneslumpe/css-types'
+
 const theme = {
   breakpoints: {xs: 0, sm: 600, md: 960, lg: 1280, xl: 1920},
   space: {
@@ -37,13 +39,14 @@ const theme = {
 }
 
 const {
-  style,
-  pxTo,
-  pxToEm,
-  pxToRel,
-  pxToRem,
-  getDefaultTheme,
-  gettheme,
+  // style,
+  responsiveProp,
+  // pxTo,
+  // pxToEm,
+  // pxToRel,
+  // pxToRem,
+  // getDefaultTheme,
+  // gettheme,
 } = createStylePreset({
   defaultTheme: theme,
   autoLookupTheme: true,
@@ -62,13 +65,24 @@ const {
   },
 })
 
+const mt = responsiveProp<{mt: MarginTopProperty | number}, typeof theme>({
+  cssProp: 'marginTop',
+  prop: 'mt',
+})
+
 it('Works ', () => {
-  const test1 = style({cssProp: 'marginTop'})({marginTop: 16})
-  const test2 = style({cssProp: 'marginTop', prop: 'mt'})({mt: 16})
-  const test3 = style({cssProp: 'marginTop', prop: 'mt', postFn: 'pxToRem'})({
+  const test1 = responsiveProp<any>({cssProp: 'marginTop', prop: 'marginTop'})({
+    marginTop: 16,
+  })
+  const test2 = mt({mt: 16})
+  const test3 = responsiveProp<{mt: MarginTopProperty | number}, typeof theme>({
+    cssProp: 'marginTop',
+    prop: 'mt',
+    postFn: 'pxToRem',
+  })({
     mt: 16,
   })
-  const test4 = style({
+  const test4 = responsiveProp<{mt: MarginTopProperty | number}, typeof theme>({
     cssProp: 'marginTop',
     prop: 'mt',
     postFn: (v: number) => v + 2,

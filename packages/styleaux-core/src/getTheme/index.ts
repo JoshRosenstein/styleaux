@@ -1,5 +1,5 @@
 import {path} from '@roseys/futils'
-import {isString, isArray} from 'typed-is'
+import {isString, isNumber, isArray, isNil} from 'typed-is'
 import {IDictionary} from '../types'
 
 export type Options = {
@@ -59,11 +59,14 @@ export const createGetTheme = <T extends IDictionary, T2 extends IDictionary>(
   let pth
   if (isArray(themePropKey)) {
     pth = [themeKey, ...themePropKey]
-  } else if (isString(themePropKey)) {
+  } else if (isString(themePropKey) || isNumber(themePropKey)) {
     pth = `${themeKey}.${themePropKey}`
   }
 
-  return path(pth, props) || path(themePropKey as any, defaultTheme)
+  /// Use to have || statement but need to check undefined due to 0 values in theme
+  // return path(pth, props) || path(themePropKey as any, defaultTheme)
+  const res = path(pth, props)
+  return !isNil(res) ? res : path(themePropKey as any, defaultTheme)
 }
 
 export type GetTheme = ReturnType<typeof createGetTheme>

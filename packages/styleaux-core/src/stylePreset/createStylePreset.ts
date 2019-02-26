@@ -11,7 +11,7 @@ import {
   createResponsiveP,
   creatResponsiveOptions,
 } from '../responsive'
-import {createAsResponsive} from './createAsResponsive'
+import {createCompose} from '../compose'
 import {createPxTo, createPxToOptions} from '../pxTo'
 
 export type ICreateStylePresetOptions = Partial<
@@ -84,14 +84,12 @@ export const createStylePreset = (options: ICreateStylePresetOptions) => {
     transformStyle,
   )
 
-  const responsiveProp = createResponsiveP(
-    responsive,
-    gettheme('breakpoints'),
-    transformStyleP,
-    {},
-  )
+  const responsiveProp = createResponsiveP<
+    typeof options.defaultTheme,
+    typeof defaultTheme.breakpoints
+  >(responsive, gettheme('breakpoints'), transformStyleP, {})
 
-  const style = createAsResponsive(responsiveProp)
+  const style = createCompose(responsiveProp)
 
   return Object.freeze({
     style,

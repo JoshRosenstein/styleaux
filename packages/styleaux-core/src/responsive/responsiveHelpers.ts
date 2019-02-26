@@ -114,7 +114,11 @@ export const responsiveReducer = (
 
       const currentVal = value[bpKey]
       const isDefault =
-        bpKey === '0' || bpKey === 'default' || bpVal === 0 || bpVal === '0'
+        bpKey === '0' ||
+        bpKey === 'default' ||
+        bpKey === 'base' ||
+        bpVal === 0 ||
+        bpVal === '0'
       const computedVal = tranformer(currentVal)
 
       const res = isNil(computedVal)

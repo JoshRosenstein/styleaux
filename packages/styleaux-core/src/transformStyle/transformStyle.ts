@@ -1,7 +1,7 @@
 import {isString, isDefined, isFunction, isNil} from 'typed-is'
 import {MaybeAnyDict, IDictionary} from '../types'
 import {isNeg, stripNeg, toNeg} from './utils'
-
+import {transformStyleOptions} from './types'
 //  "javascript.validate.enable": false,
 import {OPTIONSKEYS} from './constants'
 
@@ -109,7 +109,7 @@ export const createTransformStyle = <T>(
       preFn,
       props,
       ...localOptions
-    }: IInput<P>, // }: { //   value: string | number //   cssProp?: string //   valueOnly?: boolean //   getterFn?: getThemeT<any> //   path?: string //   postFn?: ITransformFns | keyof typeof functions //   preFn?: ITransformFns | keyof typeof functions //   props?: {} //   defaultTransform?: boolean //   defaultLookup?: boolean //   [index: string]: any // })
+    }: transformStyleOptions<P>, // }: { //   value: string | number //   cssProp?: string //   valueOnly?: boolean //   getterFn?: getThemeT<any> //   path?: string //   postFn?: ITransformFns | keyof typeof functions //   preFn?: ITransformFns | keyof typeof functions //   props?: {} //   defaultTransform?: boolean //   defaultLookup?: boolean //   [index: string]: any // })
   ) {
     const options = {...globalOptions, ...localOptions}
     let {

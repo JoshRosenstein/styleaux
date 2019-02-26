@@ -1,6 +1,7 @@
 import {createAsResponsive, space as spaceDef} from '../../'
 import {CreateAssistant} from '../../../../styleaux-core/src'
 import baseDefaultTheme from './__fixtures__/baseDefaultTheme'
+import {CreateAssistant, createCompose} from '../../../../styleaux-core/src'
 
 import {OPTIONSKEYS as TRANSFORMOPTIONKEYS} from '@styleaux/core/dist/transformStyle'
 

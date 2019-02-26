@@ -19,3 +19,5 @@ export {createTransformStyle, createTransformStyleP} from './transformStyle'
 export {createToMq} from './toMq'
 
 export {createStylePreset} from './stylePreset'
+
+export {createCompose} from './compose'

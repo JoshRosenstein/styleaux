@@ -17,7 +17,7 @@
     "typed-is": "^1.0.4"
   },
   "devDependencies": {
-    "@styleaux/core": "^1.0.1",
+    "@styleaux/core": "^1.0.9",
     "tsargs": "^1.3.1"
   },
   "scripts": {

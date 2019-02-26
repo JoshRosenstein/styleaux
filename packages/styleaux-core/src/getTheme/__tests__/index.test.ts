@@ -9,7 +9,7 @@ const defaultTheme = {
     test_convertPXStringToEm: '100px',
     test_convertPXNumberToEm: 100,
   },
-
+  num: [1, 2, 3],
   space: {
     none: 0,
     xxs: 2,
@@ -71,5 +71,9 @@ describe('With baseFontSize 16', () => {
 
   it('Returns undefined if not present in props or defaultTheme', () => {
     expect(getTheme('unkown')({})).toEqual(undefined)
+  })
+
+  it('Returns value of 0', () => {
+    expect(getTheme('space.none')({})).toEqual(0)
   })
 })

@@ -1,4 +1,4 @@
-import {prop} from '@roseys/futils'
+import {prop, isNil} from '@roseys/futils'
 import {whenFunctionCallWith} from '../utils'
 import {IBreakpoints} from './types'
 import {createResponsive} from './responsive'
@@ -41,10 +41,11 @@ export const createResponsiveBoolP = (
     transform?: boolean
     cssProp: any
     prop?: any
+    [tranformOptions: string]: any
   }) {
     // console.log('responsiveBool', {value, prop})
     let transformOptions = {...globalOptions, ...localoptions}
-    return function responsiveP(props: IDictionary) {
+    return function responsiveBoolP(props: IDictionary) {
       const css = cssProp || targetPropName
       targetPropName = targetPropName || cssProp
 
@@ -60,9 +61,9 @@ export const createResponsiveBoolP = (
             ...transformOptions,
           })(props)
       }
-
+      const res = prop(targetPropName, props)
       return responsiveBool({
-        value: prop(targetPropName, props) || defaultValue,
+        value: !isNil(res) ? res : defaultValue,
         T: value || trueValue,
         F: falseValue,
         cssProp: css,

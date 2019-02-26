@@ -1,5 +1,6 @@
 import {CreateAssistant} from '../'
 import {config} from './__fixtures__'
+import {IDictionary} from '../../types'
 
 const {
   // toMq,
@@ -11,11 +12,18 @@ const {
   // transformStyleP,
   // responsive,
   responsiveProp,
-} = CreateAssistant(config)
+} = CreateAssistant<
+  typeof config.defaultTheme,
+  typeof config.defaultTheme.breakpoints,
+  typeof config & IDictionary
+>(config)
 
 describe(' Basic responsiveProp', () => {
   it('Returns Target Value', () => {
-    const t = responsiveProp({
+    const t = responsiveProp<
+      {Target: any},
+      typeof config.defaultTheme.breakpoints
+    >({
       cssProp: 'paddingTop',
       defaultValue: '16px',
       prop: 'Target',
@@ -28,7 +36,7 @@ describe(' Basic responsiveProp', () => {
   })
 
   it('[ArrayProp] Returns Target Value ', () => {
-    const t = responsiveProp({
+    const t = responsiveProp<{Target: any}>({
       cssProp: 'paddingTop',
       defaultValue: '16px',
       prop: 'Target',
@@ -41,7 +49,7 @@ describe(' Basic responsiveProp', () => {
   })
 
   it('[ObjectProp] Returns Target Value ', () => {
-    const t = responsiveProp({
+    const t = responsiveProp<{Target: any}>({
       cssProp: 'paddingTop',
       defaultValue: '16px',
       prop: 'Target',
@@ -79,7 +87,7 @@ describe(' Basic responsiveProp', () => {
   // })
 
   it('[ObjectProp] Returns Target Value ', () => {
-    const t = responsiveProp({
+    const t = responsiveProp<{Target: any}>({
       cssProp: 'paddingTop',
       defaultValue: '16px',
       prop: 'Target',
@@ -91,7 +99,7 @@ describe(' Basic responsiveProp', () => {
   })
 
   it('Returns defaultValue if undefined', () => {
-    const t = responsiveProp({
+    const t = responsiveProp<{Target: any}>({
       cssProp: 'paddingTop',
       defaultValue: '16px',
       prop: 'Target',
@@ -103,7 +111,8 @@ describe(' Basic responsiveProp', () => {
   })
 
   it('Returns Target Value', () => {
-    const t = responsiveProp({
+    const t = responsiveProp<{fontSize: any}>({
+      prop: 'fontSize',
       cssProp: 'fontSize',
       transform: true,
     })({fontSize: 'targetPropValue'})
@@ -126,7 +135,7 @@ describe(' Basic responsiveProp', () => {
         },
       },
     }
-    const variant = responsiveProp({
+    const variant = responsiveProp<any, any>({
       prop: 'variant',
       path: 'typography',
       cssProp: false,

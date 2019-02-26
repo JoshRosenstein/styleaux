@@ -24,6 +24,7 @@ import {
 import {createSwitchProp} from '../switchProp'
 import {createParse} from '../parse'
 import {path} from '@roseys/futils'
+import {IDictionary} from '../types'
 
 export type Options = pxToOptions
 
@@ -38,8 +39,18 @@ export const defaultOptions = {
 }
 
 //type O = MapKeys<pxToOptions & transformStyleOptions & getThemeOptions>
-
-export const CreateAssistant = (options: any) => {
+type ICreateAssistantConfig<DF, BP> = {
+  baseFontSize: number
+  defaultTheme: DF & {breakpoints?: BP}
+  [index: string]: any
+}
+export const CreateAssistant = <
+  DT extends IDictionary,
+  BP,
+  T extends ICreateAssistantConfig<DT, BP>
+>(
+  options: T,
+) => {
   options = Object.assign(defaultOptions, options)
   const {
     pxTo,
@@ -63,7 +74,7 @@ export const CreateAssistant = (options: any) => {
     ...options[TRANSFORMOPTIONKEYS.functions],
   }
   const transformStyle = createTransformStyle(getDefaultTheme, {
-    ...options,
+    ...(options as any),
     [TRANSFORMOPTIONKEYS.functions]: transformerFuncs,
   })
   const transformStyleP = createTransformStyleP(transformStyle, gettheme)
@@ -75,7 +86,7 @@ export const CreateAssistant = (options: any) => {
   const breakpointsP = (key?: string): any =>
     gettheme(['breakpoints', key].filter(Boolean))
 
-  const responsiveProp = createResponsiveP(
+  const responsiveProp = createResponsiveP<DT, BP>(
     responsive,
     breakpointsP(),
     transformStyleP,

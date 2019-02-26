@@ -1,7 +1,7 @@
 import {whenFunctionCallWith, safeMapValues, falseToNull} from '../utils'
 import {isBoolean} from 'typed-is'
 import {IBreakpoints} from './types'
-import {Dict, Maybe, IDictionary} from '../types'
+import {Dict, Maybe, IDictionary, WithTheme, IStyles} from '../types'
 
 import {createResponsive} from './responsive'
 
@@ -49,43 +49,124 @@ export interface IResponsiveProp<P extends IDictionary> {
   ): (props: P) => IDictionary
 }
 
-export const createResponsiveP = (
+type TransformPropsOptions = {
+  value?: any
+  //cssProp?: string
+  valueOnly?: boolean
+  /**
+   * The property within the theme to map the `prop` value to
+   */
+  path?: string
+  //getter?: transformFuncs /// OLD
+
+  /**
+   * Function to be performed prior to themekey lookup
+   */
+  preFn?: (...args: any[]) => any | string
+
+  /**
+   * Function to be performed after themekey lookup
+   */
+  postFn?: (...args: any[]) => any | string
+
+  [index: string]: any
+}
+export interface IResponsivePOptions<
+  P,
+  T,
+  DT,
+  K extends Extract<keyof T, string> = Extract<keyof T, string>,
+  DK extends Extract<keyof DT, string> = Extract<keyof DT, string>
+> extends TransformPropsOptions {
+  /**
+   * The css property this function should map to
+   */
+  cssProp: string | boolean
+
+  /**
+   * The property of the component's props to read from
+   */
+  prop?: string //P extends IDictionary ? Extract<keyof P, string> : IDictionary
+
+  /**
+   * The property within the theme to map the `prop` value to
+   */
+  // path?: K | DK | string | string[]
+
+  /**
+   * The resolver to be used for array values
+   */
+  //arrayResolver?: (value: Array<string | number>, themeValue?: T[K]) => string
+
+  /**
+   * The fallback value if component's props doesnt exist
+   */
+  defaultValue?: any
+
+  /**
+   * Value for functions that already perform prop lookup
+   */
+  value?: any
+
+  /**
+   * Should pass to global transform function
+   */
+  transform?: boolean
+  /**
+   * Function to be performed prior to themekey lookup
+   */
+  // preFn?: (...args: any[]) => any | string
+
+  /**
+   * Function to be performed after themekey lookup
+   */
+  // postFn?: (...args: any[]) => any | string
+  [tranformOptions: string]: any
+}
+
+export const createResponsiveP = <
+  DT extends {} = never,
+  B extends {} = never,
+  TransformPOptions extends TransformPropsOptions = TransformPropsOptions
+>(
   responsive: Function,
-  getBreakpoints: (...args: any[]) => any,
-  transformStyle: Function,
+  getBreakpoints: (...args: any[]) => B,
+  transformStyle: (transformConfig: TransformPOptions) => any,
   globalOptions: any,
 ) => {
-  return function responsiveProp<P extends IDictionary>({
-    defaultValue,
-    value,
-    cssProp,
-    prop: targetPropName,
-    transform,
-    ...localoptions
-  }: {
-    defaultValue?: any
-    value?: any
-    transform?: boolean
-    cssProp?: keyof P | string | boolean
-    prop?: keyof P | string
-    [index: string]: any
-  }) {
+  return function responsiveProp<
+    P,
+    //  DT extends {} = never,
+    T extends {} = DT
+  >(
+    {
+      defaultValue,
+      value,
+      cssProp,
+      prop,
+      transform,
+      ...localoptions
+    }: IResponsivePOptions<P, T, DT>, // IResponsivePOptions<P, T, DT> & TransformPOptions, //IDictionary, //IResponsivePOptions<P, T, DT>,
+  ) {
     let transformOptions = {...globalOptions, ...localoptions}
-    return function responsiveP(props: Partial<P> & IDictionary) {
+    return function responsiveP(
+      props: WithTheme<P, T, B>,
+    ): IStyles | undefined {
       let css
       let curentValue = value
+      let TProp = prop as string
       ///CssProp can be false- if theme attribute returns a style object
       if (!isBoolean(cssProp)) {
-        css = cssProp || targetPropName
-        targetPropName = targetPropName || cssProp
+        css = cssProp || prop
+        TProp = TProp || cssProp
       }
 
       // If no Value is Supplied, then do prop lookup
       if (!value) {
-        curentValue = props[targetPropName]
+        curentValue = props[TProp]
         /// Short Exit
         if (!curentValue && !defaultValue) {
-          return {}
+          return undefined
         }
       }
 

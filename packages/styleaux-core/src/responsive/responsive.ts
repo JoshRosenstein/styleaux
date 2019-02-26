@@ -1,17 +1,14 @@
 import {isResponsiveType} from '../utils'
-import {isTruthy} from 'typed-is'
+import {isTruthy, isString} from 'typed-is'
 import {responsiveReducer} from './responsiveHelpers'
 import {ToMq} from './types'
-import {IDictionary} from '../types'
-/**
- * @requires toMq
- */
-export enum OPTIONSKEYS {
-  breakpointsKey = 'responsive.breakpointsKeyInTheme',
-}
+import {IDictionary, CssProp} from '../types'
+
+const BASE_EMPTY_OBJECT = {}
+const BASE_EMPTY_INDEXED_OBJECT: IDictionary<any> = BASE_EMPTY_OBJECT
 
 export const creatResponsiveOptions = ({
-  defaultBreakPoints = {} as IDictionary,
+  defaultBreakPoints = BASE_EMPTY_INDEXED_OBJECT,
 }) => ({
   defaultBreakPoints,
 })
@@ -21,22 +18,40 @@ export const defaultOptions = {
   defaultBreakPoints: {},
 }
 
-export const createResponsive = (
+export interface ICreateResponsive<DB extends {} = never> {
+  toMq: ToMq
+  defaultBreakPoints: DB
+  transformStyle: (x: any) => any
+}
+
+export interface IResponsiveOptions<
+  B extends {} = never,
+  DB extends {} = never
+> {
+  value?: any
+  defaultValue?: any
+  cssProp: CssProp
+  transformer?: (x: any) => any
+  breakpoints?: B | DB
+}
+export const createResponsive = <DB>(
   toMq: ToMq,
-  defaultBreakPoints: any,
+  defaultBreakPoints: DB,
   transformStyle = (x: any) => x,
 ) => {
-  return ({
+  return function responsiveProp<B extends {} = never>({
     value,
     defaultValue,
     cssProp,
     transformer = transformStyle,
     breakpoints = defaultBreakPoints,
-  }) => {
+  }: IResponsiveOptions<B, DB>) {
     // / run default Value thru transformer ??
+    const CssPropAsString = isString(cssProp) && cssProp
+
     const defaultResult = defaultValue
-      ? cssProp
-        ? {[cssProp]: defaultValue}
+      ? CssPropAsString
+        ? {[CssPropAsString]: defaultValue}
         : defaultValue
       : {}
 
@@ -44,15 +59,15 @@ export const createResponsive = (
     if (!isResponsiveType(value)) {
       return !isTruthy(value)
         ? defaultResult
-        : cssProp
-        ? {[cssProp]: transformer(value)}
+        : CssPropAsString
+        ? {[CssPropAsString]: transformer(value)}
         : transformer(value)
     }
 
     return responsiveReducer(
       value,
       breakpoints,
-      cssProp,
+      CssPropAsString,
       transformer,
       toMq,
       defaultResult,
