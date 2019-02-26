@@ -1,6 +1,6 @@
 import {createResponsiveP} from '../'
-import {createResponsive} from '../'
-
+import {createResponsive, IResponsivePOptions} from '../'
+import {BackgroundImageProperty} from '@johanneslumpe/css-types'
 import * as CSS from 'csstype'
 
 const toMq = x => `@media ${x}`
@@ -60,7 +60,29 @@ describe('Default Breakpoints as Object', () => {
     ({value}) => p => value,
     {},
   )
+  // export interface IBackgroundImageProps<T> {
+  //   /**
+  //    * The **`background-image`** CSS property sets one or more background images on an element.
+  //    *
+  //    * @see https://developer.mozilla.org/docs/Web/CSS/background-image
+  //    */
+  //   backgroundImage: T
+  // }
 
+  // const backgroundImage = <
+  //   T = BackgroundImageProperty,
+  //   Theme = typeof theme,
+  //   Breakpoints = typeof breakpoints
+  // >({
+  //   path,
+  // }: Partial<IResponsivePOptions<IBackgroundImageProps<T>, Theme>> = {}) =>
+  //   responsiveP<IBackgroundImageProps<T>, Theme, Breakpoints>({
+  //     cssProp: 'backgroundImage',
+  //     prop: 'backgroundImage',
+  //     path,
+  //   })
+
+  // const t = backgroundImage({path: 'a'})({backgroundImage: {sm: '1'}})
   describe('Values can be in Array', () => {
     it('Works ', () => {
       const a = responsiveP<any>({

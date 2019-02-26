@@ -17,3 +17,13 @@
 .vscode
 !.eslintrc.js
 packages/*/lib
+./repo-coooker.js
+**/*.min.js
+**/bundle.js
+**/coverage/
+**/vendor/
+*.d.ts
+packages/*/**/node_modules/
+packages/*/**/lib/
+packages/*/**/es/
+packages/*/**/dist/

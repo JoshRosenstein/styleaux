@@ -2,6 +2,36 @@ import {isObjectOrArray} from './utils'
 import {responsiveReducer} from './responsiveHelpers'
 import {isTrue, isFalse, isBoolean, isNil} from 'typed-is'
 
+export type responsiveBoolOptions = {
+  /**
+   *  BOOLEAN OR RESPONSIVETYPE BOOL
+   */
+  value: any
+  /**
+   * STYLE WHEN TRUE
+   */
+  T: string | number
+  /**
+   * STYLE WHEN FALSE
+   */
+  F?: string | number
+  /**
+   * BOOLEAN OR RESPONSIVETYPE BOOL WHEN VALUE IS UNDEFINED
+   */
+  defaultValue?: any
+  /**
+   * CSS SELECTOR
+   */
+  cssProp: string
+  /**
+   * Optional function to perform on T or F styles
+   */
+  transformer?: Function
+  /**
+   * BREAKPOINGS
+   */
+  breakpoints?: any
+}
 export const createResponsiveBool = (toMq: any, defaultBreakPoints: any) => {
   return function responsiveBool({
     value,
@@ -11,15 +41,7 @@ export const createResponsiveBool = (toMq: any, defaultBreakPoints: any) => {
     cssProp,
     transformer = (v: any) => v,
     breakpoints = defaultBreakPoints,
-  }: {
-    value: any
-    T: string | number
-    F?: string | number
-    defaultValue?: any
-    cssProp: string
-    transformer?: Function
-    breakpoints?: any
-  }) {
+  }: responsiveBoolOptions) {
     if (isNil(value)) {
       value = defaultValue
     }

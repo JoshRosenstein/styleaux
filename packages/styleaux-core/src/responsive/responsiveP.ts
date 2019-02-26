@@ -62,21 +62,19 @@ type TransformPropsOptions = {
   /**
    * Function to be performed prior to themekey lookup
    */
-  preFn?: (...args: any[]) => any | string
+  preFn?: ((...args: any[]) => any) | string
 
   /**
    * Function to be performed after themekey lookup
    */
-  postFn?: (...args: any[]) => any | string
+  postFn?: ((...args: any[]) => any) | string
 
   [index: string]: any
 }
 export interface IResponsivePOptions<
   P,
   T,
-  DT,
-  K extends Extract<keyof T, string> = Extract<keyof T, string>,
-  DK extends Extract<keyof DT, string> = Extract<keyof DT, string>
+  K extends Extract<keyof T, string> = Extract<keyof T, string>
 > extends TransformPropsOptions {
   /**
    * The css property this function should map to
@@ -130,14 +128,15 @@ export const createResponsiveP = <
   TransformPOptions extends TransformPropsOptions = TransformPropsOptions
 >(
   responsive: Function,
-  getBreakpoints: (...args: any[]) => B,
+  getBreakpoints: (...args: any[]) => B | B,
   transformStyle: (transformConfig: TransformPOptions) => any,
   globalOptions: any,
 ) => {
   return function responsiveProp<
     P,
     //  DT extends {} = never,
-    T extends {} = DT
+    T extends {} = DT,
+    BP extends {} = B
   >(
     {
       defaultValue,
@@ -146,11 +145,11 @@ export const createResponsiveP = <
       prop,
       transform,
       ...localoptions
-    }: IResponsivePOptions<P, T, DT>, // IResponsivePOptions<P, T, DT> & TransformPOptions, //IDictionary, //IResponsivePOptions<P, T, DT>,
+    }: IResponsivePOptions<P, T>, // IResponsivePOptions<P, T, DT> & TransformPOptions, //IDictionary, //IResponsivePOptions<P, T, DT>,
   ) {
     let transformOptions = {...globalOptions, ...localoptions}
     return function responsiveP(
-      props: WithTheme<P, T, B>,
+      props: WithTheme<P, T, BP>,
     ): IStyles | undefined {
       let css
       let curentValue = value

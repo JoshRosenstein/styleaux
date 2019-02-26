@@ -40,9 +40,15 @@
     "rimraf": "^2.6.1",
     "ts-jest": "^23.10.4",
     "tsargs": "^1.3.1",
-    "typescript": "^3.1.6"
+    "typescript": "^3.1.6",
+    "commitizen": "^2.10.1",
+    "concurrently": "3.6.1",
+    "cz-customizable": "^5.2.0",
+    "cz-customizable-ghooks": "^1.5.0",
+    "repo-cooker": "^6.3.0"
   },
   "scripts": {
+    "canary": "lerna publish --canary",
     "lerna": "lerna",
     "tsc": "yarn run lerna run tsc",
     "add": "lerna add",
@@ -52,7 +58,9 @@
     "link": "yarn run lerna link",
     "cleanup": "yarn run clean && rm -rf node_modules/ && npm install && npm run boot",
     "lint": "eslint . --ignore-path .eslintignore --cache",
-    "test": "jest"
+    "test": "jest",
+    "commit": "git-cz",
+    "commitmsg": "cz-customizable-ghooks"
   },
   "workspaces": {
     "packages": [
@@ -71,5 +79,13 @@
     "singleQuote": true,
     "trailingComma": "all",
     "semi": false
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": ".cz-config.js"
+    }
   }
 }
