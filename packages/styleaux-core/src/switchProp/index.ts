@@ -1,1 +1,0 @@
-export {createSwitchProp} from './switchProp'
