@@ -1,8 +1,8 @@
 import {isResponsiveType} from '../utils'
 import {isTruthy, isString} from 'typed-is'
 import {responsiveReducer} from './responsiveHelpers'
-import {ToMq, IResponsiveOptions, IStyles} from './types'
-import {IDictionary} from '../types'
+import {IResponsiveOptions, IStyles} from './types'
+import {IDictionary, AnyFunction} from '../types'
 
 const BASE_EMPTY_OBJECT = {}
 const BASE_EMPTY_INDEXED_OBJECT: IDictionary<any> = BASE_EMPTY_OBJECT
@@ -19,7 +19,7 @@ export const defaultOptions = {
 }
 
 export interface ICreateResponsive<DB extends {} = never> {
-  toMq: ToMq
+  toMq: AnyFunction
   defaultBreakPoints: DB
   transformStyle: (x: any) => any
 }
@@ -36,7 +36,7 @@ export interface ICreateResponsive<DB extends {} = never> {
 // }
 
 export const createResponsive = <DB extends {} = never>(
-  toMq: ToMq,
+  toMq: AnyFunction,
   defaultBreakPoints: DB,
   transformStyle = (x: any) => x,
 ) => {

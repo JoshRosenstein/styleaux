@@ -1,6 +1,6 @@
 export type Nothing = null | undefined
 export type Maybe<T> = Nothing | T
-
+export type AnyFunction = (...args: any[]) => any
 export interface IDictionary<T = any> {
   [key: string]: T
 }
