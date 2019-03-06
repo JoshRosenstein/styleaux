@@ -58,14 +58,14 @@ const getTheme = createGetTheme(defaultTheme)
 
 describe('With baseFontSize 16', () => {
   it('fallsback to Defaulttheme ', () => {
-    expect(getTheme('colors.red')({theme: {colors: 1}})).toEqual(
+    expect(getTheme<any>('colors.red')({theme: {colors: 1}})).toEqual(
       defaultTheme.colors.red,
     )
   })
 
   it('Gets from Props', () => {
     expect(
-      getTheme('colors.red')({theme: {colors: {red: 'redColor'}}}),
+      getTheme<any>('colors.red')({theme: {colors: {red: 'redColor'}}}),
     ).toEqual('redColor')
   })
 

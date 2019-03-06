@@ -10,7 +10,7 @@ import {arrToObj} from '../utils'
 import {isBoolean, isNil, isArray, isPlainObject} from 'typed-is'
 //import * as invariant from 'invariant'
 import {Dict, IDictionary} from '../types'
-import {IBreakpoints} from './types'
+
 export const nonBoolsToNil = mapValues(when(x => !isBoolean(x), noop))
 export const boolsToNil = mapValues(when(isBoolean, noop))
 
@@ -18,8 +18,8 @@ declare function parseFloat(numberOrString: number | string): number
 
 const getBreakPoints = <T>(
   breakpoints: Dict<T> | Array<T>,
-  breakPointsFromTheme: IBreakpoints,
-): IBreakpoints => {
+  breakPointsFromTheme: any,
+): any => {
   const Dummy = 0
 
   // const switchValue =

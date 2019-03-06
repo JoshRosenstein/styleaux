@@ -2,7 +2,7 @@ import createToMq from '../createToMq'
 
 describe('Basics', () => {
   const toMq = createToMq()
-
+//@ts-ignorets-ignore
   const toMqEm = createToMq((x: number) => x / 16 + 'em')
   test('Object with String', () => {
     expect(toMq({min: '1px'})).toEqual('@media (min-width:1px)')

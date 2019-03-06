@@ -1,6 +1,6 @@
 export {createResponsive, creatResponsiveOptions} from './responsive'
-export {createResponsiveP, IResponsiveProp} from './responsiveP'
+export {createResponsiveP, IResponsivePOptions} from './responsiveP'
 
-export {IResponsiveOptions, IResponsivePOptions} from './types'
+export {IResponsiveOptions} from './types'
 export {createResponsiveBool} from './responsiveBool'
 export {createResponsiveBoolP} from './responsiveBoolP'

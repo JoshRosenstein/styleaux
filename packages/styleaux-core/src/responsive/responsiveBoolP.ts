@@ -1,6 +1,6 @@
 import {prop, isNil} from '@roseys/futils'
 import {whenFunctionCallWith} from '../utils'
-import {IBreakpoints} from './types'
+
 import {createResponsive} from './responsive'
 import {IDictionary} from '../types'
 
@@ -10,7 +10,7 @@ export enum OPTIONSKEYS {
 
 export type Options = {
   [index: string]: any
-  defaultBreakPoints: IBreakpoints
+  defaultBreakPoints: any
 }
 
 export const defaultOptions = {
