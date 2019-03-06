@@ -25,6 +25,7 @@ interface IMyTheme {
   breakpoints: IBreakpoints
 }
 
+
 // const myTheme: IMyTheme = {
 //   colors: {
 //     red: '#f00',

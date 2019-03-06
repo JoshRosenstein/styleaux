@@ -1,4 +1,4 @@
-import {IStyles} from '../../../../responsive/types'
+import {IStyles} from '../../../../types'
 import {merge} from '@roseys/futils'
 
 type InferP<T> = T extends (props: infer R) => any
