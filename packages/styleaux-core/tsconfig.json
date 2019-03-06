@@ -1,4 +1,5 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",
@@ -12,5 +13,9 @@
     "**/*.spec.ts",
     "**/*.test.ts"
   ],
-  "extends": "../../tsconfig.json"
-}
+
+  "paths": {
+    "@styleaux/core/*": [
+        "./src"
+    ]
+}}

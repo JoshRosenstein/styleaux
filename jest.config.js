@@ -5,7 +5,7 @@ module.exports = {
   watchPlugins: ['jest-watch-lerna-packages'],
   testEnvironment: 'node',
   collectCoverageFrom: ['{src}/**/*.js'],
-  //  modulePathIgnorePatterns: ['/__fixtures__/'],
+   modulePathIgnorePatterns: ['/next/'],
   // roots: ['<rootDir>/packages'],
   //testRunner: 'jest-circus/runner',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],

@@ -20,5 +20,11 @@
     "**/*.spec.ts",
     "**/*.test.ts",
     "**/__fixtures__/*"
-  ]
+  ],
+  "paths": {
+    "@styleaux/core/*": [
+        "./packages/styleaux-core/src"
+    ],
+
+}
 }

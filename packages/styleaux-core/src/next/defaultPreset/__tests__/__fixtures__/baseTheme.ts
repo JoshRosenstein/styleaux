@@ -1,6 +1,4 @@
-import {createGetTheme} from '../'
-
-const defaultTheme = {
+export default {
   breakpoints: {
     mobile: '1BP_Test',
     tablet: '2BP_Test',
@@ -9,7 +7,7 @@ const defaultTheme = {
     test_convertPXStringToEm: '100px',
     test_convertPXNumberToEm: 100,
   },
-  num: [1, 2, 3],
+
   space: {
     none: 0,
     xxs: 2,
@@ -52,28 +50,3 @@ const defaultTheme = {
     nuetral: '#97a4a4',
   },
 }
-//type defaultThemeT = typeof defaultTheme
-const getTheme = createGetTheme(defaultTheme)
-//type MaybeT<T> = T | null | undefined
-
-describe('With baseFontSize 16', () => {
-  it('fallsback to Defaulttheme ', () => {
-    expect(getTheme<any>('colors.red')({theme: {colors: 1}})).toEqual(
-      defaultTheme.colors.red,
-    )
-  })
-
-  it('Gets from Props', () => {
-    expect(
-      getTheme<any>('colors.red')({theme: {colors: {red: 'redColor'}}}),
-    ).toEqual('redColor')
-  })
-
-  it('Returns undefined if not present in props or defaultTheme', () => {
-    expect(getTheme('unkown')({})).toEqual(undefined)
-  })
-
-  it('Returns value of 0', () => {
-    expect(getTheme('space.none')({})).toEqual(0)
-  })
-})
