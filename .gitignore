@@ -22,4 +22,3 @@ yarn-error.log*
 /.changelog
 /.docz
 /flow-typed/
-packages/styleaux-core/src/dev/__test__/__fixtures__/aux.ts
