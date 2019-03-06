@@ -1,5 +1,6 @@
 import {whenFunctionCallWith, safeMapValues, falseToNull} from '../utils'
-import {IStyles, IResponsiveOptions, WithTheme} from './types'
+import {IStyles, WithTheme} from '../types'
+import {IResponsiveOptions} from './types'
 import {isBoolean, isNil} from 'typed-is'
 import {createResponsive} from './responsive'
 

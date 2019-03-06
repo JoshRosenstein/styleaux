@@ -1,8 +1,9 @@
 import {isResponsiveType} from '../utils'
 import {isTruthy, isString} from 'typed-is'
 import {responsiveReducer} from './responsiveHelpers'
-import {IResponsiveOptions, IStyles} from './types'
-import {IDictionary, AnyFunction} from '../types'
+import { IStyles} from '../types'
+import {IResponsiveOptions} from './types'
+import {IDictionary, AnyFunction} from '../types.utils'
 
 const BASE_EMPTY_OBJECT = {}
 const BASE_EMPTY_INDEXED_OBJECT: IDictionary<any> = BASE_EMPTY_OBJECT

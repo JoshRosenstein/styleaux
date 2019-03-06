@@ -1,33 +1,49 @@
-export type Nothing = null | undefined
-export type Maybe<T> = Nothing | T
-export type AnyFunction = (...args: any[]) => any
-export interface IDictionary<T = any> {
-  [key: string]: T
-}
-
-export type Primitive = string | number | boolean | undefined | null
-export type Dict<T, K extends string | number = string> = {[key in K]: T}
-
-export type AnyDict = Dict<any>
-export type MaybeAnyDict = Maybe<AnyDict>
-
-export type EmptyDict = Dict<never>
-
-export type DictValues<T> = T extends Dict<infer U> ? U : never
-export type DeepPartial<T> = {
-  [P in keyof T]?: T[P] extends Array<infer U>
-    ? Array<DeepPartial<U>>
-    : T[P] extends ReadonlyArray<infer U>
-    ? ReadonlyArray<DeepPartial<U>>
-    : DeepPartial<T[P]>
-}
-
-export type MapKeys<T> = {[K in keyof T]: T[K]}
-
-export type CssProp = string | boolean
-export interface ICssProp {
+interface IBaseCssValue<T> {
   /**
    * The base css value, without any media queries applied
    */
-  cssProp: CssProp
+  default?: T
 }
+
+export type ResponsivePropValue<BreakPoints, ValueType> = {
+  [P in Extract<keyof BreakPoints, string>]?: ValueType
+} &
+  IBaseCssValue<ValueType>
+
+export type ResponsiveProp<ValueType, BreakPoints = never> = [
+  BreakPoints
+] extends [never]
+  ? ValueType
+  : ValueType | ResponsivePropValue<BreakPoints, ValueType>
+
+export interface IDictionary<T> {
+  [index: string]: T
+}
+
+export type ResponsiveObject<P, B> = {
+  [K in keyof P]?: P[K] extends never
+    ? ResponsiveProp<string | number, B>
+    : ResponsiveProp<P[K], B>
+}
+
+export interface ITheme<T> {
+  theme?: T & {breakpoints?: undefined}
+}
+
+export interface IBreakpointTheme<T, B> {
+  theme?: T & {breakpoints: B}
+}
+
+export type ThemeWithBreakpoints<T, B> = [B] extends [never]
+  ? [T] extends [never]
+    ? Partial<ITheme<any>>
+    : ITheme<T>
+  : IBreakpointTheme<T, B>
+
+export type WithTheme<P, T, B> = ResponsiveObject<P, B> &
+  ThemeWithBreakpoints<T, B>
+
+export interface IStyles {
+  [ruleOrSelector: string]: string | number | IStyles
+}
+

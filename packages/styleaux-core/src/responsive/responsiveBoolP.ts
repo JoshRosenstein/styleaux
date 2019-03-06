@@ -2,7 +2,7 @@ import {prop, isNil} from '@roseys/futils'
 import {whenFunctionCallWith} from '../utils'
 
 import {createResponsive} from './responsive'
-import {IDictionary} from '../types'
+import {IDictionary} from '../types.utils'
 
 export enum OPTIONSKEYS {
   breakpointsKey = 'responsive.breakpointsKeyInTheme',
