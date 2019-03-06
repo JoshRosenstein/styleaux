@@ -1,5 +1,5 @@
 import {PaddingTopProperty} from '@johanneslumpe/css-types'
-import {style} from '../aux'
+import {style} from '../main'
 import {IthemeS, IBreakPoints} from '../theme'
 import {compose} from './compose'
 
