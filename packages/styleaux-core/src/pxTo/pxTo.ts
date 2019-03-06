@@ -52,7 +52,19 @@ export function pxTo(
     (pxValue: string | number): string
     <T>(pxValue: T): T
   }
+  <T>(unit: string): {
+    (pxValue: string | number): T
+    (pxValue: T): T
+  }
 }
+// export function pxTo(
+//   divisor?: number,
+// ): {
+//   <T>(unit: string): {
+//     (pxValue: string | number): T
+//     (pxValue: T): T
+//   }
+// }
 
 export function pxTo(divisor?: number) {
   return (unit: string | undefined) => (

@@ -1,8 +1,8 @@
 import {isResponsiveType} from '../utils'
 import {isTruthy, isString} from 'typed-is'
 import {responsiveReducer} from './responsiveHelpers'
-import {ToMq} from './types'
-import {IDictionary, CssProp} from '../types'
+import {ToMq, IResponsiveOptions, IStyles} from './types'
+import {IDictionary} from '../types'
 
 const BASE_EMPTY_OBJECT = {}
 const BASE_EMPTY_INDEXED_OBJECT: IDictionary<any> = BASE_EMPTY_OBJECT
@@ -24,28 +24,29 @@ export interface ICreateResponsive<DB extends {} = never> {
   transformStyle: (x: any) => any
 }
 
-export interface IResponsiveOptions<
-  B extends {} = never,
-  DB extends {} = never
-> {
-  value?: any
-  defaultValue?: any
-  cssProp: CssProp
-  transformer?: (x: any) => any
-  breakpoints?: B | DB
-}
-export const createResponsive = <DB>(
+// export interface IResponsiveOptions<
+//   B extends {} = never,
+//   DB extends {} = never
+// > {
+//   value?: any
+//   defaultValue?: any
+//   cssProp: CssProp
+//   transformer?: (x: any) => any
+//   breakpoints?: B | DB
+// }
+
+export const createResponsive = <DB extends {} = never>(
   toMq: ToMq,
   defaultBreakPoints: DB,
   transformStyle = (x: any) => x,
 ) => {
-  return function responsiveProp<B extends {} = never>({
+  return function responsive<B extends {} = DB>({
     value,
     defaultValue,
     cssProp,
     transformer = transformStyle,
     breakpoints = defaultBreakPoints,
-  }: IResponsiveOptions<B, DB>) {
+  }: IResponsiveOptions<B | DB>): IStyles | undefined {
     // / run default Value thru transformer ??
     const CssPropAsString = isString(cssProp) && cssProp
 

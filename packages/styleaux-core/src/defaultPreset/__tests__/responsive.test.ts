@@ -35,18 +35,18 @@ describe(' Basic responsiveProp', () => {
     expect(t).toEqual(e)
   })
 
-  it('[ArrayProp] Returns Target Value ', () => {
-    const t = responsiveProp<{Target: any}>({
-      cssProp: 'paddingTop',
-      defaultValue: '16px',
-      prop: 'Target',
-      transform: false,
-    })({Target: ['targetPropValue']})
+  // it('[ArrayProp] Returns Target Value ', () => {
+  //   const t = responsiveProp<{Target: any}>({
+  //     cssProp: 'paddingTop',
+  //     defaultValue: '16px',
+  //     prop: 'Target',
+  //     transform: false,
+  //   })({Target: ['targetPropValue']})
 
-    const e = {paddingTop: 'targetPropValue'}
+  //   const e = {paddingTop: 'targetPropValue'}
 
-    expect(t).toEqual(e)
-  })
+  //   expect(t).toEqual(e)
+  // })
 
   it('[ObjectProp] Returns Target Value ', () => {
     const t = responsiveProp<{Target: any}>({
@@ -122,31 +122,31 @@ describe(' Basic responsiveProp', () => {
     expect(t).toEqual(e)
   })
 
-  it('Returns Variant- CssProp Optional', () => {
-    const theme = {
-      typography: {
-        h1: {
-          fontSize: 30,
-          lineHeight: 1.5,
-        },
-        h2: {
-          fontSize: 25,
-          lineHeight: 1.5,
-        },
-      },
-    }
-    const variant = responsiveProp<any, any>({
-      prop: 'variant',
-      path: 'typography',
-      cssProp: false,
-    })
+  // it('Returns Variant- CssProp Optional', () => {
+  //   const theme = {
+  //     typography: {
+  //       h1: {
+  //         fontSize: 30,
+  //         lineHeight: 1.5,
+  //       },
+  //       h2: {
+  //         fontSize: 25,
+  //         lineHeight: 1.5,
+  //       },
+  //     },
+  //   }
+  //   const variant = responsiveProp<any, any>({
+  //     prop: 'variant',
+  //     path: 'typography',
+  //     cssProp: false,
+  //   })
 
-    const t = variant({variant: 'h2', theme: theme})
+  //   const t = variant({variant: 'h2', theme: theme})
 
-    const t2 = variant({variant: 'h1', theme: theme})
-    //const e = {paddingTop: 'targetPropValue'}
+  //   const t2 = variant({variant: 'h1', theme: theme})
+  //   //const e = {paddingTop: 'targetPropValue'}
 
-    expect(t).toEqual(theme.typography.h2)
-    expect(t2).toEqual(theme.typography.h1)
-  })
+  //   expect(t).toEqual(theme.typography.h2)
+  //   expect(t2).toEqual(theme.typography.h1)
+  // })
 })

@@ -46,10 +46,10 @@ const objParserCreator = (valueConverter: UnitConverter) => (
     join(' and '),
   )(obj as any)
 }
-type UnitConverter = (unit: string | number) => string
+type UnitConverter = <T extends string>(unit: string | number) => T
 
 export const createToMq = (
-  unitConverter: UnitConverter = value => `${value}`,
+  unitConverter: UnitConverter = value => `${value}` as any,
 ) => {
   const objParser = objParserCreator(unitConverter)
 

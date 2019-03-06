@@ -50,11 +50,14 @@ export const defaultOptions = {
 /**
  * Creates a theme lookup function that fallsback to an optional default theme so a theme does not need to have a theme passed to it
  */
-export const createGetTheme = <T extends IDictionary, T2 extends IDictionary>(
+export const createGetTheme = <T extends {}>(
   defaultTheme = {} as T,
   themeKey = 'theme',
-) => (
-  themePropKey: keyof T | keyof T2 | string | Array<number | string>,
+) => <
+  T2 = never,
+  K = T2 extends never ? Extract<keyof T, string> : Extract<keyof T2, string>
+>(
+  themePropKey: K,
 ) => (props: {theme?: T2}) => {
   let pth
   if (isArray(themePropKey)) {

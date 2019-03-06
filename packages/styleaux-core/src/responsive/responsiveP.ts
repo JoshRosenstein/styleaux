@@ -1,9 +1,50 @@
 import {whenFunctionCallWith, safeMapValues, falseToNull} from '../utils'
-import {isBoolean} from 'typed-is'
-import {IBreakpoints} from './types'
-import {Dict, Maybe, IDictionary, WithTheme, IStyles} from '../types'
-
+import {IStyles, IResponsiveOptions, WithTheme} from './types'
+import {isBoolean, isNil} from 'typed-is'
 import {createResponsive} from './responsive'
+
+export interface IResponsivePOptions<
+  P,
+  T,
+  K extends Extract<keyof T, string> = Extract<keyof T, string>
+> {
+  /**
+   * The css property this function should map to
+   */
+  cssProp: string
+  /**
+   * Todo
+   */
+  value?: any
+  /**
+   * Todo
+   */
+  defaultValue?: any
+  /**
+   * Todo
+   */
+  transform?: boolean
+  /**
+   * Todo
+   */
+  prop: Extract<keyof P, string>
+
+  /**
+   * The property within the theme to map the `prop` value to
+   */
+  path?: K
+
+  valueOnly?: boolean
+  /**
+   * Function to be performed prior to themekey lookup
+   */
+  preFn?: ((...args: any[]) => any) | string
+
+  /**
+   * Function to be performed after themekey lookup
+   */
+  postFn?: ((...args: any[]) => any) | string
+}
 
 /**
  * @requires toMq
@@ -14,39 +55,12 @@ export enum OPTIONSKEYS {
 
 export type Options = {
   [index: string]: any
-  defaultBreakPoints: IBreakpoints
+  defaultBreakPoints: any
 }
 
 export const defaultOptions = {
   defaultTheme: {},
   defaultBreakPoints: {},
-}
-
-export type responsivePProps<B, P> = Partial<
-  {
-    [K in keyof P]: Maybe<
-      | Partial<Record<keyof B | 'default', number | string>>
-      | (number | string)[]
-      | string
-      | number
-    >
-  }
-> &
-  Dict<any>
-
-export interface IResponsiveProp<P extends IDictionary> {
-  (
-    args: {
-      defaultValue?: any
-      value?: any
-      transform?: boolean
-      cssProp?: keyof P | string | boolean
-      prop?: keyof P | string
-      preFn?: (...args: any[]) => any | string
-      postFn?: (...args: any[]) => any | string
-      path?: string
-    },
-  ): (props: P) => IDictionary
 }
 
 type TransformPropsOptions = {
@@ -71,86 +85,35 @@ type TransformPropsOptions = {
 
   [index: string]: any
 }
-export interface IResponsivePOptions<
-  P,
-  T,
-  K extends Extract<keyof T, string> = Extract<keyof T, string>
-> extends TransformPropsOptions {
-  /**
-   * The css property this function should map to
-   */
-  cssProp: string | boolean
 
-  /**
-   * The property of the component's props to read from
-   */
-  prop?: string //P extends IDictionary ? Extract<keyof P, string> : IDictionary
-
-  /**
-   * The property within the theme to map the `prop` value to
-   */
-  // path?: K | DK | string | string[]
-
-  /**
-   * The resolver to be used for array values
-   */
-  //arrayResolver?: (value: Array<string | number>, themeValue?: T[K]) => string
-
-  /**
-   * The fallback value if component's props doesnt exist
-   */
-  defaultValue?: any
-
-  /**
-   * Value for functions that already perform prop lookup
-   */
-  value?: any
-
-  /**
-   * Should pass to global transform function
-   */
-  transform?: boolean
-  /**
-   * Function to be performed prior to themekey lookup
-   */
-  // preFn?: (...args: any[]) => any | string
-
-  /**
-   * Function to be performed after themekey lookup
-   */
-  // postFn?: (...args: any[]) => any | string
-  [tranformOptions: string]: any
-}
-
-export const createResponsiveP = <
-  DT extends {} = never,
-  B extends {} = never,
-  TransformPOptions extends TransformPropsOptions = TransformPropsOptions
->(
-  responsive: Function,
-  getBreakpoints: (...args: any[]) => B | B,
-  transformStyle: (transformConfig: TransformPOptions) => any,
-  globalOptions: any,
+export const createResponsiveP = <DT extends {} = never, DB extends {} = never>(
+  responsive: <A extends {}>(
+    responsiveConfig: IResponsiveOptions<A>,
+  ) => IStyles | undefined,
+  getBreakpoints: (...args: any[]) => any,
+  transformStyle: (transformConfig: TransformPropsOptions) => any,
+  globalOptions?: TransformPropsOptions,
 ) => {
-  return function responsiveProp<
-    P,
-    //  DT extends {} = never,
-    T extends {} = DT,
-    BP extends {} = B
-  >(
-    {
-      defaultValue,
-      value,
-      cssProp,
-      prop,
-      transform,
-      ...localoptions
-    }: IResponsivePOptions<P, T>, // IResponsivePOptions<P, T, DT> & TransformPOptions, //IDictionary, //IResponsivePOptions<P, T, DT>,
-  ) {
-    let transformOptions = {...globalOptions, ...localoptions}
+  return function responsiveProp<P, T = DT, B extends {} = DB>({
+    defaultValue,
+    value,
+    cssProp,
+    prop,
+    path,
+    transform,
+    ...localoptions
+  }: IResponsivePOptions<P, T>) {
     return function responsiveP(
-      props: WithTheme<P, T, BP>,
+      props: WithTheme<P, T, B>,
     ): IStyles | undefined {
+      let transformOptions = {
+        ...globalOptions,
+        ...localoptions,
+        ...(path ? {path} : {}),
+      } as any
+
+      // If no Value is Supplied, then do prop lookup
+
       let css
       let curentValue = value
       let TProp = prop as string
@@ -160,11 +123,10 @@ export const createResponsiveP = <
         TProp = TProp || cssProp
       }
 
-      // If no Value is Supplied, then do prop lookup
-      if (!value) {
+      if (isNil(value)) {
         curentValue = props[TProp]
         /// Short Exit
-        if (!curentValue && !defaultValue) {
+        if (isNil(curentValue) && !defaultValue) {
           return undefined
         }
       }
@@ -174,14 +136,17 @@ export const createResponsiveP = <
         transformer = v =>
           transformStyle({
             value: v,
-            cssProp: css,
+            cssProp: cssProp,
             valueOnly: true,
             ...transformOptions,
           })(props)
       }
 
+      // @ts-ignore
       return responsive({
-        value: safeMapValues(falseToNull, curentValue),
+        // @ts-ignore
+        value: safeMapValues(falseToNull, curentValue), // @ts-ignore
+        // @ts-ignore
         defaultValue,
         cssProp: css,
         transformer,
@@ -192,3 +157,50 @@ export const createResponsiveP = <
 }
 
 export default createResponsive
+
+// const DUmmy = (a: any): IStyles => ({
+//   a: 1,
+// })
+
+// const DUmmy2 = (a: TransformPropsOptions): any => {}
+// interface IColors2 {
+//   red: string
+//   blue: string
+//   green: string
+// }
+
+// interface IBreakpoints2 {
+//   small: string
+//   medium: string
+//   large: string
+// }
+
+// interface IMyTheme2 {
+//   colors: IColors2
+//   breakpoints: IBreakpoints2
+// }
+
+// const myTheme: IMyTheme2 = {
+//   colors: {
+//     red: '#f00',
+//     green: '#0f0',
+//     blue: '#00f',
+//   },
+//   breakpoints: {
+//     small: '@media (min-width: 30em)',
+//     medium: '@media (min-width: 40em)',
+//     large: '@media (min-width: 50em)',
+//   },
+// }
+
+// const style = createResponsiveP<IMyTheme2, IBreakpoints2>(DUmmy, DUmmy, DUmmy2)
+
+// type colorKeys = keyof IMyTheme2['colors']
+
+// const color = style<{co: colorKeys}>({
+//   path: 'colors',
+//   cssProp: 'color',
+//   prop: 'co',
+// })
+
+// const colort = color({co: 'red'})

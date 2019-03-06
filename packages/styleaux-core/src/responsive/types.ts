@@ -1,32 +1,86 @@
-import {Dict, Maybe} from '../types'
+interface IBaseCssValue<T> {
+  /**
+   * The base css value, without any media queries applied
+   */
+  default?: T
+}
 
-export type BreakPointKeysOFT<B, T> = B extends Dict<any>
-  ? Partial<Record<keyof B | 'default', T>> | (T)[]
-  : B extends any[]
-  ? (T)[]
-  : never
+export type ResponsivePropValue<BreakPoints, ValueType> = {
+  [P in Extract<keyof BreakPoints, string>]?: ValueType
+} &
+  IBaseCssValue<ValueType>
 
-export type BreakPointKeysOfNumberOrString<B> = BreakPointKeysOFT<
-  B,
-  number | string
->
+export type ResponsiveProp<ValueType, BreakPoints = never> = [
+  BreakPoints
+] extends [never]
+  ? ValueType
+  : ValueType | ResponsivePropValue<BreakPoints, ValueType>
 
-export type MaybeInputNumberOrString<B> = Maybe<
-  BreakPointKeysOfNumberOrString<B> | string | number
->
+export interface IDictionary<T> {
+  [index: string]: T
+}
 
-export type IBreakpoints = Dict<number | string> | (number | string)[]
+export type ResponsiveObject<P, B> = {
+  [K in keyof P]?: P[K] extends never
+    ? ResponsiveProp<string | number, B>
+    : ResponsiveProp<P[K], B>
+}
 
-export type ToMq = (x: any) => string
+export interface ITheme<T> {
+  theme?: T & {breakpoints?: undefined}
+}
 
-export type TransformStyle = (
-  {value}: {[index: string]: any; value: any},
-) => (props: any) => any
+export interface IBreakpointTheme<T, B> {
+  theme?: T & {breakpoints: B}
+}
 
-export type InputMaybe<B> = Maybe<
-  BreakPointKeysOfNumberOrString<B> | string | number
->
+export type ThemeWithBreakpoints<T, B> = [B] extends [never]
+  ? [T] extends [never]
+    ? Partial<ITheme<any>>
+    : ITheme<T>
+  : IBreakpointTheme<T, B>
 
-// type ValueTypes<T> = T extends Dict<number | string>
-//   ? Partial<Record<keyof T | 'default', number | string>> | (number | string)[]
-//   : never
+export type WithTheme<P, T, B> = ResponsiveObject<P, B> &
+  ThemeWithBreakpoints<T, B>
+
+export interface IStyles {
+  [ruleOrSelector: string]: string | number | IStyles
+}
+
+export interface IResponsiveOptions<B> {
+  /**
+   * Todo
+   */
+  value: ResponsiveProp<string | number, B>
+  /**
+   * Todo
+   */
+  defaultValue?: ResponsiveProp<string | number, B>
+  /**
+   * Todo
+   */
+  transformer?: any
+  /**
+   * Todo
+   */
+  breakpoints?: B
+
+  /**
+   * The css property this function should map to
+   */
+  cssProp: string
+
+  // /**
+  //  * The property of the component's props to read from
+  //  */
+  // prop: Extract<keyof P, string>
+
+  // /**
+  //  * The property within the theme to map the `prop` value to
+  //  */
+  // themeProp?: K
+
+  // /**
+  //  * The resolver to be used for array values
+  //  */
+}

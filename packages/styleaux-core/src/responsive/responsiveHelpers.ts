@@ -9,7 +9,7 @@ import {
 import {arrToObj} from '../utils'
 import {isBoolean, isNil, isArray, isPlainObject} from 'typed-is'
 //import * as invariant from 'invariant'
-import {Dict, EmptyDict, IDictionary} from '../types'
+import {Dict, IDictionary} from '../types'
 import {IBreakpoints} from './types'
 export const nonBoolsToNil = mapValues(when(x => !isBoolean(x), noop))
 export const boolsToNil = mapValues(when(isBoolean, noop))
@@ -78,9 +78,9 @@ const sort = <V extends IDictionary>(value: V, getBp: any) =>
       {} as V,
     )
 
-export const responsiveReducer = (
-  value: any,
-  breakPointsFromTheme: any,
+export const responsiveReducer = <T extends {[index: string]: number | string}>(
+  value: {[index: string]: any},
+  breakPointsFromTheme: T,
   css: string,
   tranformer: (x: any) => any,
   toMq: (x: any) => string,
@@ -120,12 +120,12 @@ export const responsiveReducer = (
         bpVal === 0 ||
         bpVal === '0'
       const computedVal = tranformer(currentVal)
+      if (isNil(computedVal)) return acc
 
-      const res = isNil(computedVal)
-        ? ({} as EmptyDict)
-        : objOf(createParent(isDefault, bpVal), computedVal)
-
-      return mergeDeepRight(acc, res)
+      return mergeDeepRight(
+        acc,
+        objOf(createParent(isDefault, bpVal), computedVal),
+      )
     }, init)
 
   return ret
