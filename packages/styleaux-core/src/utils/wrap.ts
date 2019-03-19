@@ -1,4 +1,4 @@
-import { isNumber, isString ,isNil} from "typed-is";
+import { isNil} from "typed-is";
 
 
 /**

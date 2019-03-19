@@ -12,8 +12,8 @@ export function getTheme<P extends {theme?: any}>(props: P): P['theme']
 
 export function getTheme<P>(props: P): undefined
 
-export function getTheme(props: any): any {
-  return prop('theme', props)
+export function getTheme(props: any) {
+  return (prop as any)('theme', props)
 }
 
 export default getTheme

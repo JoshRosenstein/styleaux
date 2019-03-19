@@ -58,6 +58,7 @@
     "clean": "lerna clean",
     "ls": "yarn run lerna ls",
     "link": "yarn run lerna link",
+    "build": "yarn run lerna run build",
     "cleanup": "yarn run clean && rm -rf node_modules/ && npm install && npm run boot",
     "lint": "eslint . --ignore-path .eslintignore --cache",
     "test": "jest",
@@ -89,5 +90,8 @@
     "cz-customizable": {
       "config": ".cz-config.js"
     }
+  },
+  "dependencies": {
+    "@roseys/futils": "^2.0.2"
   }
 }

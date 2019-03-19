@@ -1,12 +1,20 @@
 {
   "compilerOptions": {
     "outDir": "dist",
+    "module": "esnext",
+    "target": "es5",
+    "skipLibCheck": true,
+    "lib": [
+      "es6",
+      "dom"
+    ],
     "rootDir": "src",
-    "types": []
+    "types": ["node"]
   },
+
   "exclude": [
     "dist",
-    "node_modules",
+    "node_modules","build",
     "__tests__",
     "**/__tests__/**",
     "**/*.spec.ts",

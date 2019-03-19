@@ -29,7 +29,7 @@ export const lookUpTransformNegative = (
           transformValue
         )
       : transformValue,
-    path(stripNeg(input), obj),
+    (path as any)(stripNeg(input), obj),
   ];
 };
 
