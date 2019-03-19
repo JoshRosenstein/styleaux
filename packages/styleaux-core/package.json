@@ -1,13 +1,12 @@
 {
   "name": "@styleaux/core",
-  "version": "1.0.9",
+  "version": "2.0.0",
   "main": "dist/index.js",
   "publishConfig": {
     "access": "public"
   },
   "sideEffects": "false",
   "files": [
-    "src",
     "dist"
   ],
   "author": "Joshua Rosenstein",
@@ -18,9 +17,11 @@
     "warning": "^4.0.2"
   },
   "scripts": {
-    "build": "yarn build:node && yarn build:browser",
+    "build": "yarn clean && yarn build:es && yarn build:cjs",
     "build:browser": "echo 'Webpack needs to be configured with babel loader'",
     "build:node": "tsc",
+    "build:es": "tsc --declaration true --declarationMap true --module esnext --outDir ./dist/es",
+    "build:cjs": "tsc --declaration true --declarationMap true --module commonjs --outDir ./dist/commonjs",
     "clean": "rimraf dist && rimraf .tmp",
     "dist": "yarn clean && yarn build",
     "test": "jest"
