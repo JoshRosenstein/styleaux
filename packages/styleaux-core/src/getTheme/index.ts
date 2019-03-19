@@ -54,8 +54,8 @@ export const createGetTheme = <T extends {}>(
   defaultTheme = {} as T,
   themeKey = 'theme',
 ) => <
-  T2 = never,
-  K = T2 extends never ? Extract<keyof T, string> : Extract<keyof T2, string>
+  T2 extends {}= never,
+  K = [T2] extends [never] ? Extract<keyof T, string> : Extract<keyof T2, string>
 >(
   themePropKey: K,
 ) => (props: {theme?: T2}) => {
@@ -73,3 +73,11 @@ export const createGetTheme = <T extends {}>(
 }
 
 export type GetTheme = ReturnType<typeof createGetTheme>
+
+const T={ breakpoints: { small: 10 }, colors:{red:'red'} }
+const getTheme = createGetTheme(T);
+
+const aa=getTheme<typeof T>('colors')
+
+const attachT = <V extends string | ConcatArray<string>>(t: V) =>
+  ["theme"].concat(t);

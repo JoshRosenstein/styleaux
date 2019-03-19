@@ -13,7 +13,7 @@
   "author": "Joshua Rosenstein",
   "license": "MIT",
   "dependencies": {
-    "@roseys/futils": "^0.0.22",
+    "@roseys/futils": "^2.0.1",
     "typed-is": "^1.0.4",
     "warning": "^4.0.2"
   },
