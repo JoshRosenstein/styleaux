@@ -70,3 +70,7 @@ export type EtractInputType<P> = RemoveStatic<{
     : {}
 }>
 
+export type ResolveStyleProps<S, B extends {} = never> = ResponsiveObject<
+  EtractInputType<S>,
+  B
+>;
