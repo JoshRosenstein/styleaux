@@ -10,6 +10,10 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
+    "@pika/pack": "^0.3.5",
+    "@pika/plugin-build-node": "^0.3.14",
+    "@pika/plugin-build-web": "^0.3.14",
+    "@pika/plugin-ts-standard-pkg": "^0.3.14",
     "@types/jest": "^24.0.11",
     "@types/node": "^11.11.3",
     "babel-core": "7.0.0-bridge.0",
@@ -21,7 +25,7 @@
     "commitizen": "^2.10.1",
     "concurrently": "3.6.1",
     "cross-env": "^5.2.0",
-    "cz-customizable": "^5.2.0",
+    "cz-customizable": "^5.5.3",
     "cz-customizable-ghooks": "^1.5.0",
     "eslint": "^5.7.0",
     "eslint-config-prettier": "^3.1.0",
@@ -50,9 +54,14 @@
     "typescript": "^3.3.3333"
   },
   "scripts": {
+    "clean:modules": "rimraf node_modules/*",
     "canary": "lerna publish --canary",
     "lerna": "lerna",
     "tsc": "yarn run lerna run tsc",
+    "commit:generators":"git add packages\\styleaux-generators && yarn commit",
+     "commit:core":"git add packages\\styleaux-core && yarn commit",
+     "commit:basestyles":"git add packages\\styleaux-styles-base && yarn commit",
+     "commit:all":"git add . && yarn commit",
     "add": "lerna add",
     "boot": "lerna bootstrap",
     "clean": "lerna clean",
@@ -62,8 +71,7 @@
     "cleanup": "yarn run clean && rm -rf node_modules/ && npm install && npm run boot",
     "lint": "eslint . --ignore-path .eslintignore --cache",
     "test": "jest",
-    "commit": "git-cz",
-    "commitmsg": "cz-customizable-ghooks"
+    "commit": "git cz"
   },
   "workspaces": {
     "packages": [
@@ -91,7 +99,6 @@
       "config": ".cz-config.js"
     }
   },
-  "dependencies": {
-    "@roseys/futils": "^2.0.2"
-  }
+  "dependencies": {},
+  "version": "0.0.0"
 }
