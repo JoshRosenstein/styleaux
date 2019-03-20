@@ -1,6 +1,6 @@
 {
   "name": "@styleaux/core",
-  "version": "2.0.0",
+  "version": "1.9.0-beta.0",
   "main": "dist/index.js",
   "publishConfig": {
     "access": "public"
@@ -12,11 +12,12 @@
   "author": "Joshua Rosenstein",
   "license": "MIT",
   "dependencies": {
-    "@roseys/futils": "2.0.2",
+    "@roseys/futils": "^2.1.0",
     "typed-is": "^1.0.4",
     "warning": "^4.0.2"
   },
   "scripts": {
+    "pika:build": "pack build",
     "build": "yarn clean && yarn build:es && yarn build:cjs",
     "build:browser": "echo 'Webpack needs to be configured with babel loader'",
     "build:node": "tsc",
@@ -28,6 +29,10 @@
   },
   "devDependencies": {
     "@johanneslumpe/css-types": "^0.3.0",
+    "@pika/pack": "^0.3.5",
+    "@pika/plugin-build-node": "^0.3.14",
+    "@pika/plugin-build-web": "^0.3.14",
+    "@pika/plugin-ts-standard-pkg": "^0.3.14",
     "@types/jest": "^24.0.11",
     "@types/node": "^11.11.3",
     "cross-env": "^5.2.0",
@@ -37,8 +42,22 @@
     "rimraf": "^2.6.3",
     "ts-jest": "^24.0.0",
     "tsargs": "^1.3.1",
+    "typescript": "^3.3.3333",
     "uglifyjs-webpack-plugin": "^2.1.1",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-ts-standard-pkg"
+      ],
+      [
+        "@pika/plugin-build-node"
+      ],
+      [
+        "@pika/plugin-build-web"
+      ]
+    ]
   }
 }
