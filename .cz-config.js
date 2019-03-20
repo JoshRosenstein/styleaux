@@ -4,7 +4,7 @@ module.exports = {
 
   types: [
 
-    { chore: '🤖chore', name: 'chore:     Build process or auxiliary tool changes' },
+    { value: '🤖chore', name: 'chore:     Build process or auxiliary tool changes' },
     { value: '🎸feat', name: 'feat:     A new feature' },
     { value: '🐛fix', name: 'fix:      A bug fix' },
     { value: '✏️docs', name: 'docs:     Documentation only changes' },
