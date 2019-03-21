@@ -1,26 +1,13 @@
 {
-  "compilerOptions": {
-    "outDir": "dist",
-    "module": "esnext",
-    "target": "es5",
-    "skipLibCheck": true,
-    "lib": [
-      "es6",
-      "dom"
-    ],
-    "rootDir": "src",
-    "types": ["node"]
-  },
-
+  "extends": "../../tsconfig.base.json",
+  "include": ["src/**/*.ts"],
   "exclude": [
-    "dist",
-    "node_modules","build",
+    "dist-*/",
+    "node_modules",
     "__tests__",
     "**/__tests__/**",
     "**/*.spec.ts",
-    "**/*.test.ts"
-  ],  "include": [
-    "src"
-  ],
-  "extends": "../../tsconfig.json"
+    "**/*.test.ts",
+  ]
 }
+

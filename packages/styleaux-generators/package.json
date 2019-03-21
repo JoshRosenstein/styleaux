@@ -1,49 +1,40 @@
 {
   "name": "@styleaux/generators",
   "version": "0.0.0-beta.0",
-  "main": "dist/index.js",
-  "publishConfig": {
-    "access": "public"
-  },
-  "sideEffects": "false",
-  "files": [
-    "dist"
-  ],
   "author": "Joshua Rosenstein",
   "license": "MIT",
+
+  "source": "dist-src/index.js",
+  "types": "dist-types/index.d.ts",
+  "main": "dist-node/index.js",
+  "module": "dist-web/index.js",
+
+  "sideEffects": "false",
+  "files":  [
+    "dist-*/",
+    "assets/",
+    "bin/"
+  ],
+
+  "scripts": {
+    "build:src": "tsc -d --declarationDir ./dist-types --outDir ./dist-src",
+    "build:bundles": "rollup -c",
+    "build": "yarn clean && yarn build:src && yarn build:bundles",
+    "clean": "rimraf dist-*/",
+    "test": "jest"
+  },
+
+
   "dependencies": {
-    "@roseys/futils": "^2.1.0",
+    "@roseys/futils": "^2.1.2",
     "@styleaux/core": "^1.9.0-beta.0",
     "chroma-js": "^2.0.3"
   },
-  "scripts": {
-    "pika:build": "pack build",
-    "build:node": "tsc",
-    "build:es": "tsc --declaration true --declarationMap true --module esnext --outDir ./dist/es",
-    "build:cjs": "tsc --declaration true --declarationMap true --module commonjs --outDir ./dist/commonjs",
-    "clean": "rimraf dist && rimraf .tmp",
-    "dist": "yarn clean && yarn build",
-    "test": "jest"
-  },
+
   "devDependencies": {
     "typescript": "^3.3.3333",
-    "@pika/pack": "^0.3.5",
-    "@pika/plugin-build-node": "^0.3.14",
-    "@pika/plugin-build-web": "^0.3.14",
-    "@pika/plugin-ts-standard-pkg": "^0.3.14",
     "@types/chroma-js": "^1.4.1"
-  },
-  "@pika/pack": {
-    "pipeline": [
-      [
-        "@pika/plugin-ts-standard-pkg"
-      ],
-      [
-        "@pika/plugin-build-node"
-      ],
-      [
-        "@pika/plugin-build-web"
-      ]
-    ]
   }
+
+
 }

@@ -5,7 +5,7 @@ import { isFunction, isPlainObject } from "typed-is";
 
 import { STYLE_PROPS_KEY,STATIC_STYLES_KEY,DEFAULT_MEDIA_KEY} from "../constants";
 
-import { getMedia, getThemeMedia,getDefaultMedia } from "../getters";
+import { getMedia, getThemeMedia,getDefaultMedia } from "../getters/index";
 
 import { createWarnOnce } from "../utils/warn-once";
 

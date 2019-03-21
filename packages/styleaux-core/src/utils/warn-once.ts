@@ -12,5 +12,5 @@ export function createWarnOnce(title) {
     };
   }
 
-  return (...args: any[]) => {};
+  return (..._args: any[]) => {};
 }

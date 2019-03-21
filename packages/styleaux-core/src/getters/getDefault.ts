@@ -1,5 +1,5 @@
 import {getThemePathOr} from './getThemePathOr'
-import {DEFAULT_KEY, THEME_KEY} from '../constants'
+import {DEFAULT_KEY, THEME_KEY,IConstants} from '../constants'
 import {NeverToUndefined} from '../types'
 
 /**
@@ -22,8 +22,8 @@ export function getDefault<K extends string, D = never>(
     [DEFAULT_KEY]: {[index: string]: any}
   }
 }
-  ? K extends keyof P[typeof THEME_KEY][typeof DEFAULT_KEY]
-    ? P[typeof THEME_KEY][typeof DEFAULT_KEY][K]
+  ? K extends keyof P[IConstants['THEME_KEY']][IConstants['DEFAULT_KEY']]
+    ? P[IConstants['THEME_KEY']][IConstants['DEFAULT_KEY'] ][K]
     : NeverToUndefined<D>
   : NeverToUndefined<D>
 

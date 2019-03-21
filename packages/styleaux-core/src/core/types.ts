@@ -1,4 +1,4 @@
-import {  DEFAULT_MEDIA_KEY,THEME_KEY,MEDIA_KEY,STATIC_STYLES_KEY} from "../constants";
+import {  DEFAULT_MEDIA_KEY,THEME_KEY,MEDIA_KEY,STATIC_STYLES_KEY,IConstants} from "../constants";
 import {Arg1} from '../types'
 
 
@@ -56,7 +56,7 @@ export type Indices<T> = Exclude<keyof T, keyof any[]>;
 export type ExtractArg1FromArray<T> = Arg1<T[Indices<T>]>;
 
 export type RemoveStatic<R> = R extends { [STATIC_STYLES_KEY]?: any }
-    ? Pick<R, Exclude<keyof R, STATIC_STYLES_KEY>>
+    ? Pick<R, Exclude<keyof R, IConstants['STATIC_STYLES_KEY']>>
     : R
 
 
