@@ -2,13 +2,13 @@ import { toArray } from "@roseys/futils";
 import { getThemeValue } from "../getters";
 import { everyMedia } from "./everyMedia";
 
-type themeStyleConfig={themeKey:string,transformValue?:(...args:any[])=>any,themeGetter?:(...args:any[])=>any}
+export type ThemeStyleConfig={themeKey:string,transformValue?:(...args:any[])=>any,themeGetter?:(...args:any[])=>any}
 
-function themeStyle<T>({
+export function themeStyle<T>({
   themeKey,
   transformValue,
   themeGetter = getThemeValue(themeKey, transformValue)
-}:themeStyleConfig) {
+}:ThemeStyleConfig) {
   return (inputs: T[] | T, props, mediaKey) =>
     toArray(inputs).reduce(
       (acc, input) => ({
@@ -18,5 +18,3 @@ function themeStyle<T>({
       {}
     );
 }
-
-export { themeStyle };
