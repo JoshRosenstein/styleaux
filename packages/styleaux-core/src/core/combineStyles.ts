@@ -1,16 +1,14 @@
-import { createStyles } from "./createStyles";
+import {createStyles} from './createStyles'
 
-import { EtractInputType, WithTheme,IStyles, ResolveStyleProps } from "./types";
+import {EtractInputType, WithTheme, IStyles, ResolveStyleProps} from './types'
 
-import { STYLES_KEY,STYLE_PROPS_KEY} from "../constants";
+import {STYLES_KEY, STYLE_PROPS_KEY} from '../constants'
 
-
-
-export type InferStyleFromFunction<T> = T extends { styles: infer S }
+export type InferStyleFromFunction<T> = T extends {styles: infer S}
   ? S
-  : T extends { styles: infer S }[]
+  : T extends {styles: infer S}[]
   ? S
-  : {};
+  : {}
 
 export type StyleTypes<
   T1 extends {},
@@ -30,19 +28,19 @@ export type StyleTypes<
   InferStyleFromFunction<T6> &
   InferStyleFromFunction<T7> &
   InferStyleFromFunction<T8> &
-  InferStyleFromFunction<T9>;
+  InferStyleFromFunction<T9>
 
 export interface CombineStyleReturnType<STYLE> {
   <T extends {} = never, B extends {} = never>(
-    props: WithTheme<EtractInputType<STYLE>, T, B>
-  ): IStyles;
-  [STYLES_KEY]: STYLE;
-  [STYLE_PROPS_KEY]: ResolveStyleProps<STYLE>;
+    props: WithTheme<EtractInputType<STYLE>, T, B>,
+  ): IStyles
+  [STYLES_KEY]: STYLE
+  [STYLE_PROPS_KEY]: ResolveStyleProps<STYLE>
 }
 
 export function combineStyles<T1>(
-  fn1: T1
-): CombineStyleReturnType<InferStyleFromFunction<T1>>;
+  fn1: T1,
+): CombineStyleReturnType<InferStyleFromFunction<T1>>
 
 // export function combineStyles<T1, T2>(
 //   fn1: T1,
@@ -53,29 +51,29 @@ export function combineStyles<T1>(
 
 export function combineStyles<T1, T2>(
   fn1: T1,
-  fn2: T2
-): CombineStyleReturnType<StyleTypes<T1, T2>>;
+  fn2: T2,
+): CombineStyleReturnType<StyleTypes<T1, T2>>
 
 export function combineStyles<T1, T2, T3>(
   fn1: T1,
   fn2: T2,
-  fn3: T3
-): CombineStyleReturnType<StyleTypes<T1, T2, T3>>;
+  fn3: T3,
+): CombineStyleReturnType<StyleTypes<T1, T2, T3>>
 
 export function combineStyles<T1, T2, T3, T4>(
   fn1: T1,
   fn2: T2,
   fn3: T3,
-  fn4: T4
-): CombineStyleReturnType<StyleTypes<T1, T2, T3, T4>>;
+  fn4: T4,
+): CombineStyleReturnType<StyleTypes<T1, T2, T3, T4>>
 
 export function combineStyles<T1, T2, T3, T4, T5>(
   fn1: T1,
   fn2: T2,
   fn3: T3,
   fn4: T4,
-  fn5: T5
-): CombineStyleReturnType<StyleTypes<T1, T2, T3, T4, T5>>;
+  fn5: T5,
+): CombineStyleReturnType<StyleTypes<T1, T2, T3, T4, T5>>
 
 export function combineStyles<T1, T2, T3, T4, T5, T6>(
   fn1: T1,
@@ -83,8 +81,8 @@ export function combineStyles<T1, T2, T3, T4, T5, T6>(
   fn3: T3,
   fn4: T4,
   fn5: T5,
-  fn6: T6
-): CombineStyleReturnType<StyleTypes<T1, T2, T3, T4, T5, T6>>;
+  fn6: T6,
+): CombineStyleReturnType<StyleTypes<T1, T2, T3, T4, T5, T6>>
 
 export function combineStyles<T1, T2, T3, T4, T5, T6, T7>(
   fn1: T1,
@@ -93,8 +91,8 @@ export function combineStyles<T1, T2, T3, T4, T5, T6, T7>(
   fn4: T4,
   fn5: T5,
   fn6: T6,
-  fn7: T7
-): CombineStyleReturnType<StyleTypes<T1, T2, T3, T4, T5, T6, T7>>;
+  fn7: T7,
+): CombineStyleReturnType<StyleTypes<T1, T2, T3, T4, T5, T6, T7>>
 
 export function combineStyles<T1, T2, T3, T4, T5, T6, T7, T8>(
   fn1: T1,
@@ -104,8 +102,8 @@ export function combineStyles<T1, T2, T3, T4, T5, T6, T7, T8>(
   fn5: T5,
   fn6: T6,
   fn7: T7,
-  fn8: T8
-): CombineStyleReturnType<StyleTypes<T1, T2, T3, T4, T5, T6, T7, T8>>;
+  fn8: T8,
+): CombineStyleReturnType<StyleTypes<T1, T2, T3, T4, T5, T6, T7, T8>>
 
 export function combineStyles<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
   fn1: T1,
@@ -116,8 +114,8 @@ export function combineStyles<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
   fn6: T6,
   fn7: T7,
   fn8: T8,
-  fn9: T9
-): CombineStyleReturnType<StyleTypes<T1, T2, T3, T4, T5, T6, T7, T8, T9>>;
+  fn9: T9,
+): CombineStyleReturnType<StyleTypes<T1, T2, T3, T4, T5, T6, T7, T8, T9>>
 
 export function combineStyles<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
   fn1: T1,
@@ -129,10 +127,10 @@ export function combineStyles<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
   fn7: T7,
   fn8: T8,
   fn9: T9,
-  fn10: T10
+  fn10: T10,
 ): CombineStyleReturnType<
   StyleTypes<T1, T2, T3, T4, T5, T6, T7, T8, T9> & StyleTypes<T10>
->;
+>
 
 export function combineStyles<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
   fn1: T1,
@@ -145,10 +143,10 @@ export function combineStyles<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
   fn8: T8,
   fn9: T9,
   fn10: T10,
-  fn11: T11
+  fn11: T11,
 ): CombineStyleReturnType<
   StyleTypes<T1, T2, T3, T4, T5, T6, T7, T8, T9> & StyleTypes<T10, T11>
->;
+>
 export function combineStyles<
   T1,
   T2,
@@ -174,10 +172,10 @@ export function combineStyles<
   fn9: T9,
   fn10: T10,
   fn11: T11,
-  fn12: T12
+  fn12: T12,
 ): CombineStyleReturnType<
   StyleTypes<T1, T2, T3, T4, T5, T6, T7, T8, T9> & StyleTypes<T10, T11, T12>
->;
+>
 
 export function combineStyles<
   T1,
@@ -206,11 +204,11 @@ export function combineStyles<
   fn10: T10,
   fn11: T11,
   fn12: T12,
-  fn13: T13
+  fn13: T13,
 ): CombineStyleReturnType<
   StyleTypes<T1, T2, T3, T4, T5, T6, T7, T8, T9> &
     StyleTypes<T10, T11, T12, T13>
->;
+>
 
 export function combineStyles<
   T1,
@@ -241,11 +239,11 @@ export function combineStyles<
   fn11: T11,
   fn12: T12,
   fn13: T13,
-  fn14: T14
+  fn14: T14,
 ): CombineStyleReturnType<
   StyleTypes<T1, T2, T3, T4, T5, T6, T7, T8, T9> &
     StyleTypes<T10, T11, T12, T13, T14>
->;
+>
 
 export function combineStyles<
   T1,
@@ -278,11 +276,11 @@ export function combineStyles<
   fn12: T12,
   fn13: T13,
   fn14: T14,
-  fn15: T15
+  fn15: T15,
 ): CombineStyleReturnType<
   StyleTypes<T1, T2, T3, T4, T5, T6, T7, T8, T9> &
     StyleTypes<T10, T11, T12, T13, T14, T15>
->;
+>
 
 export function combineStyles<
   T1,
@@ -317,27 +315,27 @@ export function combineStyles<
   fn13: T13,
   fn14: T14,
   fn15: T15,
-  fn16: T16
+  fn16: T16,
 ): CombineStyleReturnType<
   StyleTypes<T1, T2, T3, T4, T5, T6, T7, T8, T9> &
     StyleTypes<T10, T11, T12, T13, T14, T15, T16>
->;
+>
 
 export function combineStyles(
   ...fns: {
-    (props: {}): IStyles;
-    styles: {};
+    (props: {}): IStyles
+    styles: {}
   }[]
 ) {
   const styles = fns.reduce(
     (acc, fn) => ({
       ...acc,
-      ...fn.styles
+      ...fn.styles,
     }),
-    {}
-  );
+    {},
+  )
 
-  return createStyles(styles) as any;
+  return createStyles(styles) as any
 
   // as (props:P)=>any & {styles:typeof styles}
 }
@@ -410,7 +408,6 @@ export function combineStyles(
 //   color: { small: "blue" },
 //   noDisplay: { small: true, medium: true, large: true, all: true }
 // });
-
 
 // https://github.com/Microsoft/TypeScript/issues/22679
 
