@@ -52,10 +52,15 @@ test("Can use a different default Key", () => {
   });
 
 });
+
+let outputData = "";
+const storeLog = inputs => (outputData += inputs)
+
 test("Doesnt style base with wrong Key", () => {
   const SOMEWRONGKEY='someworngkey'
   const SOMEKEY='somekey'
   const theme= {media, default:{media:SOMEKEY}}
+  console["warn"] = jest.fn(storeLog);
 
   const result1 = everyMedia(
     { theme },
@@ -67,5 +72,8 @@ test("Doesnt style base with wrong Key", () => {
     "@media (min-width: 30em)": { height: "1px" }
   });
 
+  expect(outputData).toEqual('[everyMedia]:');
+
 });
 
+test.todo("Better way to test a warning was logged")

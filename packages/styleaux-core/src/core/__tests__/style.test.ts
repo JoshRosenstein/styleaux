@@ -1,4 +1,3 @@
-import { everyMedia } from "../everyMedia";
 import { createStyles } from "../createStyles";
 import { style } from "../style";
 

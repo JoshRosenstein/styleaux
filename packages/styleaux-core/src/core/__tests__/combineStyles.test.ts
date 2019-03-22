@@ -1,5 +1,6 @@
 import { createStyles } from "../createStyles";
 import { combineStyles } from "../combineStyles";
+import {Arg1} from '../../types'
 
 const media = {
   small: "@media (min-width: 30em)",
@@ -15,8 +16,8 @@ const theme = {
   },
   myValue: 100
 };
-type ITheme= typeof theme
-type IMedia=typeof media
+// type ITheme= typeof theme
+// type IMedia=typeof media
 
 const style1=createStyles({ h: { height: "100vh" },})
 const style2=createStyles({w: (input: number | string) => ({ width: input })})
@@ -31,11 +32,12 @@ const style3=createStyles( {size: [
 const styles = combineStyles(style1,style2,style3)
 
 
-
+type IStylesArg=Arg1<typeof styles>
+type TestTuple=Array<[string,IStylesArg,any]>
 const THEME= theme
 
  describe("basics", () => {
-  const basicData=[
+  const basicData:TestTuple=[
     [ 'boolean height', { h: true },[{ height: "100vh" }]],
     [ 'width px', { w: "10px" },[{ width: "10px" }]],
     [ 'w px & bool h', { w: "10px", h: true },[{ width: "10px" }, { height: "100vh" }]]
@@ -43,7 +45,7 @@ const THEME= theme
 
  test.each(basicData)(
    '%s',
-   (testName: string, props: any, expected: any, theme: any = THEME) => {
+   (_testName: string, props, expected, theme: any = THEME) => {
      //expect(theme).toEqual( THEME);
      expect(styles(({ theme, ...props }))).toEqual(expected);
    }
@@ -52,7 +54,7 @@ const THEME= theme
 
 
  describe("responsive", () => {
-  const data=[
+  const data:TestTuple=[
     [ 'boolean height ', { h: { medium: true } },[
       { "@media @media (min-width: 40em)": { height: "100vh" } }
     ]],
@@ -68,7 +70,7 @@ const THEME= theme
 
  test.each(data)(
    '%s',
-   (testName: string, props: any, expected: any, theme: any = THEME) => {
+   (_testName: string, props: any, expected: any, theme: any = THEME) => {
      //expect(theme).toEqual( THEME);
      expect(styles(({ theme, ...props }))).toEqual(expected);
    }
@@ -78,7 +80,7 @@ const THEME= theme
 
 
   describe("Misc", () => {
-    const data=[
+    const data:TestTuple=[
       [ 'Can handle Array of Functions', { size: { medium: "10px" } },[
         { "@media @media (min-width: 40em)": { width: "10px" } },
         { "@media @media (min-width: 40em)": { height: "10px" } }
@@ -87,7 +89,7 @@ const THEME= theme
 
    test.each(data)(
      '%s',
-     (testName: string, props: any, expected: any, theme: any = THEME) => {
+     (_testName: string, props: any, expected: any, theme: any = THEME) => {
 
        expect(styles(({ theme, ...props }))).toEqual(expected);
      }
