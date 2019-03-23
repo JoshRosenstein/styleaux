@@ -35,7 +35,7 @@
   "devDependencies": {
     "@johanneslumpe/css-types": "^0.3.0",
     "cross-env": "^5.2.0",
-    "csstype": "^2.6.2",
+    "@roseys/csstype": "^2.6.3",
     "typescript": "^3.3.3333",
     "@types/chroma-js": "^1.4.1",
     "@roseys/eslint-config":"^1.0.2"

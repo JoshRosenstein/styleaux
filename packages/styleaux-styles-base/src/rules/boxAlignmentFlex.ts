@@ -1,6 +1,6 @@
 import {rule} from '@styleaux/core'
 
-import {ColumnGapProperty, GapProperty, RowGapProperty} from 'csstype'
+import {ColumnGapProperty, GapProperty, RowGapProperty} from '@roseys/csstype'
 
 //https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Alignment/Box_Alignment_in_Flexbox
 

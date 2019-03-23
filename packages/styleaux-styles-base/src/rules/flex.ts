@@ -7,7 +7,7 @@ import {
   FlexProperty,
   FlexWrapProperty,
   GlobalsNumber,
-} from 'csstype'
+} from '@roseys/csstype'
 
 //https://developer.mozilla.org/en-US/docs/Glossary/Flex_Container
 

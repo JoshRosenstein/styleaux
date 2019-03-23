@@ -1,4 +1,4 @@
 import {rule} from '@styleaux/core'
-import {CursorProperty} from 'csstype'
+import {CursorProperty} from '@roseys/csstype'
 
 export const cursor = rule<CursorProperty>('cursor')

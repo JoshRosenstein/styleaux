@@ -4,7 +4,7 @@ import {
   GridColumnGapProperty,
   GridGapProperty,
   GridRowGapProperty,
-} from 'csstype'
+} from '@roseys/csstype'
 
 // Grid
 export const gridColumnGap = rule<GridColumnGapProperty<string | 0>>(
