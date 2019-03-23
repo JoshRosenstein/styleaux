@@ -1,19 +1,34 @@
 module.exports = {
   types: [
     {
+      value: '🎨format',
+      name: 'art:     Improving structure / format of the code.',
+    },
+    {
+      value: '🔥del',
+      name: 'del:     Removing code or files.',
+    },    {
+      value: '🚚move',
+      name: 'move:     Moving or renaming files.',
+    },
+    {
       value: '🤖chore',
       name: 'chore:     Build process or auxiliary tool changes',
     },
-    {value: '🎸feat', name: 'feat:     A new feature'},
+    {
+      value: '📝docs',
+      name: 'docs:     Documentation only changes',
+    },
+    {value: '✨feat', name: 'feat:     Introducing new features.'},
     {value: '🐛fix', name: 'fix:      A bug fix'},
-    {value: '✏️docs', name: 'docs:     Documentation only changes'},
+
     {
       value: '💄style',
       name:
-        'style:    Changes that do not affect the meaning of the code\n            (white-space, formatting, missing semi-colons, etc)',
+        'style:    Updating the UI and style files.',
     },
     {
-      value: '💡refactor',
+      value: '♻️refactor',
       name:
         'refactor:     A code change that neither fixes a bug nor adds a feature',
     },
@@ -21,14 +36,16 @@ module.exports = {
       value: '⚡️perf',
       name: 'perf:     A code change that improves performance',
     },
-    {value: ':neckbeard:test', name: 'test:     Adding missing tests'},
-    {
-      value: '🤖chore',
-      name:
-        'chore:    Changes to the build process or auxiliary tools\n            and libraries such as documentation generation',
-    },
+    {value: '✅tests', name: 'test:     Updating tests'},
+
     {value: '😵revert', name: 'revert:   Revert to a commit'},
-    {value: '🙏WIP', name: 'WIP:      Work in progress'},
+    {value: '🚧WIP', name: 'WIP:      Work in progress'},
+    {value: '💚CIFIX', name: 'CI:      Fixing CI Build.'},
+    {value: '⬆️updeps', name: 'updeps:      Upgrading dependencies.'},
+    {value: '➕adddeps', name: 'adddeps:      Adding a dependency.'},
+    {value: '✏️fixtypos', name: 'fixtypos:      Fixing typos.'},
+    {value: '🙈gitignore', name: 'gitignore:      Adding or updating a .gitignore file'},
+    {value: '🏷️types', name: 'types:      Adding or updating types (Flow, TypeScript)'},
   ],
 
   scopes: [
