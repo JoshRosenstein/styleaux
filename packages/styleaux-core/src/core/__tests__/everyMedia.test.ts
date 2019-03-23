@@ -53,14 +53,13 @@ test("Can use a different default Key", () => {
 
 });
 
-let outputData = "";
-const storeLog = inputs => (outputData += inputs)
 
-test("Doesnt style base with wrong Key", () => {
+
+test("Doesnt style base with wrong Key and Warns", () => {
   const SOMEWRONGKEY='someworngkey'
   const SOMEKEY='somekey'
   const theme= {media, default:{media:SOMEKEY}}
-  console["warn"] = jest.fn(storeLog);
+  const spyWarn = jest.spyOn( console, 'warn' );
 
   const result1 = everyMedia(
     { theme },
@@ -72,7 +71,10 @@ test("Doesnt style base with wrong Key", () => {
     "@media (min-width: 30em)": { height: "1px" }
   });
 
-  expect(outputData).toEqual('[everyMedia]:');
+  //@ts-ignore
+  expect(spyWarn).toHaveBeenCalledWith('[everyMedia]: Could not Find media for key %s',SOMEWRONGKEY);
+
+  //expect(outputData).toEqual('[everyMedia]:');
 
 });
 

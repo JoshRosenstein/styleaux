@@ -18,12 +18,12 @@ const theme = {
 
 const config={
   w: { width: "1px" },
-  gap: style<string>({
+  gap: style({
     getStyle: val => ({ margin: val, padding: val })
   })
 }
 
-const styler = createStyles<typeof config,typeof theme,typeof media >(config)
+const styler = createStyles<typeof config,typeof media,typeof theme >(config)
 
 //console.log("styles", t);
 
