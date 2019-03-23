@@ -29,7 +29,7 @@ export const everyMedia = (props, value, wrapper = identity) => {
             return Object.assign(acc, wrapper(value[key]));
           }
         }
-        warnOnce(`Could not Find media for key %d`, key);
+        warnOnce(`Could not Find media for key %s`, key);
         return acc;
       }, {});
 
