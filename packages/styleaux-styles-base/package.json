@@ -1,45 +1,37 @@
 {
   "name": "@styleaux/styles-base",
   "version": "0.0.0-beta.0",
-
   "author": "Joshua Rosenstein",
   "license": "MIT",
-
   "source": "dist-src/index.js",
   "types": "dist-types/index.d.ts",
   "main": "dist-node/index.js",
   "module": "dist-web/index.js",
-
   "sideEffects": "false",
-  "files":  [
+  "files": [
     "dist-*/",
     "assets/",
     "bin/"
   ],
-
   "scripts": {
     "build:src": "tsc -d --declarationDir ./dist-types --outDir ./dist-src",
     "build:bundles": "rollup -c",
     "build": "yarn clean && yarn build:src && yarn build:bundles",
     "clean": "rimraf dist-*/",
-    "test": "jest"
+    "test": "jest",
+    "typedoc": "typedoc --options typedoc.ts"
   },
-
-
   "dependencies": {
-    "@styleaux/core": "^1.9.0-beta.0",
     "@roseys/futils": "^2.1.2",
+    "@styleaux/core": "^1.9.0-beta.0",
     "typed-is": "^1.0.4"
   },
-
   "devDependencies": {
-    "@johanneslumpe/css-types": "^0.3.0",
-    "cross-env": "^5.2.0",
     "@roseys/csstype": "^2.6.3",
-    "typescript": "^3.3.3333",
+    "@roseys/eslint-config": "^1.0.2",
     "@types/chroma-js": "^1.4.1",
-    "@roseys/eslint-config":"^1.0.2"
+    "typedoc": "^0.14.2",
+    "typedoc-plugin-markdown": "^1.1.27",
+    "typescript": "^3.3.3333"
   }
-
-
 }
