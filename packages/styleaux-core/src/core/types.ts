@@ -47,6 +47,9 @@ export type WithTheme<P, T, B> = ResponsiveObject<P, B> &
 
 
 
+  export type ExtractNonResponsiveValue<T>= T extends ResponsiveProp<infer U,any>?U: T
+
+
 export interface IStyles {
   [ruleOrSelector: string]: string | number | IStyles;
 }
@@ -70,7 +73,15 @@ export type EtractInputType<P> = RemoveStatic<{
     : {}
 }>
 
+export type EtractNonResponsiveInputType<P,I=EtractInputType<P>> = {
+  [K in keyof I]?: ExtractNonResponsiveValue<I[K]>
+}
+
+
 export type ResolveStyleProps<S, B extends {} = never> = ResponsiveObject<
   EtractInputType<S>,
   B
 >;
+
+
+

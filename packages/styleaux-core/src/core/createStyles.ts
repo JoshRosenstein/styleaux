@@ -1,4 +1,4 @@
-import { WithTheme, EtractInputType, IStyles } from "./types";
+import { WithTheme, EtractNonResponsiveInputType, IStyles } from "./types";
 
 import { mapObj, toArray, reduce } from "@roseys/futils";
 import { isFunction, isPlainObject } from "typed-is";
@@ -24,25 +24,29 @@ function handleStyle(style, input, props, mediaKey) {
   return input === true ? style : null;
 }
 
+export type WithStyleProps<S>={
+  styles: S;
+  [STYLE_PROPS_KEY]: EtractNonResponsiveInputType<S>;
+}
+
 export function createStyles<
   S extends {},
-  T1 extends {} = never,
-  B1 extends {} = never
+  Media extends {} = never,
+  Theme extends {} = never,
+
 >(
   styles: S,
-  config?: { defaultTheme?: T1; queryHandler?: Function }
-): ((props: WithTheme<EtractInputType<S>, T1, B1>) => IStyles) & {
-  styles: S;
-  [STYLE_PROPS_KEY]: EtractInputType<S>;
-};
+  config?: { defaultTheme?: Theme; queryHandler?: Function }
+): ((props: WithTheme<EtractNonResponsiveInputType<S>, Theme, Media>) => IStyles) & WithStyleProps<S>
+
 export function createStyles<S extends {}>(
   styles: S,
   config?: { defaultTheme?: {}; queryHandler?: Function }
-): (<T1 extends {} = never, B1 extends {} = never>(
-  props: WithTheme<EtractInputType<S>, T1, B1>
-) => IStyles) & { styles: S; styleProps: EtractInputType<S> };
+): (< Media extends {} = never,Theme extends {} = never>(
+  props: WithTheme<EtractNonResponsiveInputType<S>, Theme, Media>
+) => IStyles) & { styles: S; styleProps: EtractNonResponsiveInputType<S> };
 
-export function createStyles(styles) {
+export function createStyles<S extends {}>(styles:S) {
   function getStyles(props) {
     const media = getThemeMedia(props);
     const defaultMediaKey = getDefaultMedia(props);

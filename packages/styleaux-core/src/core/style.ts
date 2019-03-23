@@ -3,7 +3,7 @@ import { CSSPropertyKeys } from "../types";
 import { isNumber, isBoolean, isString, isFunction } from "typed-is";
 import { everyMedia } from "./everyMedia";
 import { createWrap } from "../utils/wrap";
-
+import {ResponsiveProp} from './types'
 
 export function style<T>({
   cssProp,
@@ -38,7 +38,7 @@ export function style<T>({
       : result;
   }
 
-  return (input: T, props: {}, mediaKey?: string) => {
+  return <Media extends {}=never>(input: ResponsiveProp<T,Media>, props: {}, mediaKey?: string) => {
     return everyMedia(
       props,
       getValues(getValue, input, props, mediaKey),

@@ -1,4 +1,3 @@
-
 export const THEME_KEY = 'theme' as 'theme'
 
 export const DEFAULT_KEY = 'default' as 'theme'
