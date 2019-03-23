@@ -5,6 +5,8 @@ import { everyMedia } from "./everyMedia";
 import { createWrap } from "../utils/wrap";
 import {ResponsiveProp} from './types'
 
+export type KeysOrstrong<T extends {}=never>=T extends [never] ? string : Extract<keyof T,string>
+
 export function style<T>({
   cssProp,
   getStyle = createWrap(cssProp),
@@ -14,11 +16,11 @@ export function style<T>({
   getStyle?: (result: any, input?: any, props?: any, mediaKey?: string) => any;
   getValue?: (input: any, props?: any, mediaKey?: string) => any;
 }) {
-  function getValues(
+  function getValues<Media1 extends {}=never>(
     get: (
       input: any,
       props?: {},
-      mediaKey?: string
+      mediaKey?: KeysOrstrong<Media1>
     ) => boolean | Function | null | undefined | string | number,
     input,
     props,
@@ -38,7 +40,7 @@ export function style<T>({
       : result;
   }
 
-  return <Media extends {}=never>(input: ResponsiveProp<T,Media>, props: {}, mediaKey?: string) => {
+  return <Media extends {}=never,M extends string =KeysOrstrong<Media>>(input: ResponsiveProp<T,Media>, props: {}, mediaKey?: M) => {
     return everyMedia(
       props,
       getValues(getValue, input, props, mediaKey),

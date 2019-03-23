@@ -2,14 +2,16 @@ import {  identity } from '@roseys/futils';
 import { isPlainObject } from 'typed-is';
 import { getThemeMedia } from '../getters';
 import { createWarnOnce } from '../utils/warn-once';
-
+import { IStyles } from './types';
+import { AnyFunc } from '../types';
 
 const warnOnce = createWarnOnce('everyMedia');
 
 const has = (a: string[], b: string[]) => b.some(key => a.includes(key));
 //const identity = <T>(v: T) => v;
 
-export const everyMedia = (props, value, wrapper = identity) => {
+
+export function everyMedia(props:any, value:any, wrapper:AnyFunc=identity):IStyles  {
   const media = getThemeMedia(props);
 
   if (isPlainObject(value)) {

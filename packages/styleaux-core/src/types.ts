@@ -25,6 +25,8 @@ export type Dictionary<T = any> = {
   [index: string]: T
 }
 
+export type AnyFunc = (...args: any[]) => any
+
 
 //https://github.com/Microsoft/TypeScript/issues/15012
 
