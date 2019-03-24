@@ -9,7 +9,7 @@ import {
   borderColor,
 } from '../border'
 
-import {THEME,IMedia} from '../../__testutils__/theme'
+import {IMedia} from '../../__testutils__/theme'
 const testName = (fn: string) => `%s--${fn}(input:%p, props:%p)`
 
 const basicInputdata:Array<[string,string | 0,any,any]> = [

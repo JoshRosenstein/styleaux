@@ -1,1 +1,1 @@
-export {percentageValue, createPercentageValue} from './percentageValue'
+export {boolValue} from './boolValue'

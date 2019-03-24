@@ -1,4 +1,4 @@
-import {borders} from '../border'
+import {borders} from '../borders'
 import {THEME} from '../../__testutils__/theme'
 import {toStyles} from '../../__testutils__/toStyles'
 import {Arg1} from '@styleaux/core/dist-types/types'

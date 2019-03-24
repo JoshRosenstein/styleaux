@@ -1,4 +1,4 @@
-const createRollup=require('../../create.rollup.config.js').default
+'use strict'
+const createRollup = require('../../create.rollup.config.js').default
 
-
-exports.default=createRollup(process.cwd())
+exports.default = createRollup(process.cwd())

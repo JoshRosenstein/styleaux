@@ -1,4 +1,10 @@
 import {createStyles} from '@styleaux/core'
-import * as colorRules from '../rules/colors'
+import {color, backgroundColor}  from '../rules/colors'
 
-export const colors = createStyles(colorRules)
+
+/**
+ * Colors
+ *
+ * Rules: {@link colorRule}, {@link backgroundColorRule}.
+ */
+export const colors = createStyles({color, backgroundColor})
