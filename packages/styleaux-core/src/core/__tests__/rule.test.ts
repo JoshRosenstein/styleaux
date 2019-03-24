@@ -3,14 +3,11 @@ import { createStyles } from "../createStyles";
 import { rule } from "../rule";
 
 
-const breakpoints = {
+const media = {
   sm: "(max-width: 600px)"
 };
 const theme = {
-  media: breakpoints,
-  breakpoints: {
-    sm: "(max-width: 600px)"
-  },
+  media,
 
   space: {
     all: [0, 8, 16, 32],
@@ -38,8 +35,8 @@ test("Works", () => {
 
   const style = createStyles<
     typeof styleConfig,
-    typeof theme,
-    typeof breakpoints
+    typeof media,
+    typeof theme
   >(styleConfig);
 
   const expected = {
