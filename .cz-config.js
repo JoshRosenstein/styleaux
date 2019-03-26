@@ -2,56 +2,57 @@ module.exports = {
   types: [
     {
       value: '🎨format',
-      name: 'art:     Improving structure / format of the code.',
+      name: 'art: Improving structure / format of the code.',
     },
     {
       value: '🔥del',
-      name: 'del:     Removing code or files.',
+      name: 'del: Removing code or files.',
     },    {
       value: '🚚move',
-      name: 'move:     Moving or renaming files.',
+      name: 'move: Moving or renaming files.',
     },
     {
-      value: '🤖chore',
-      name: 'chore:     Build process or auxiliary tool changes',
+      value: '😒chore',
+      name: 'chore: Build process or auxiliary tool changes',
     },
     {
       value: '📝docs',
-      name: 'docs:     Documentation only changes',
+      name: 'docs: Documentation only changes',
     },
-    {value: '✨feat', name: 'feat:     Introducing new features.'},
-    {value: '🐛fix', name: 'fix:      A bug fix'},
+    {value: '✨feat', name: 'feat: Introducing new features.'},
+    {value: '🐛fix', name: 'fix: A bug fix'},
 
     {
       value: '💄style',
       name:
-        'style:    Updating the UI and style files.',
+        'style: Updating the UI and style files.',
     },
     {
       value: '♻️refactor',
       name:
-        'refactor:     A code change that neither fixes a bug nor adds a feature',
+        'refactor: A code change that neither fixes a bug nor adds a feature',
     },
     {
       value: '⚡️perf',
-      name: 'perf:     A code change that improves performance',
+      name: 'perf: A code change that improves performance',
     },
     {value: '✅tests', name: 'test:     Updating tests'},
-
-    {value: '😵revert', name: 'revert:   Revert to a commit'},
-    {value: '🚧WIP', name: 'WIP:      Work in progress'},
-    {value: '💚CIFIX', name: 'CI:      Fixing CI Build.'},
-    {value: '⬆️updeps', name: 'updeps:      Upgrading dependencies.'},
-    {value: '➕adddeps', name: 'adddeps:      Adding a dependency.'},
-    {value: '✏️fixtypos', name: 'fixtypos:      Fixing typos.'},
-    {value: '🙈gitignore', name: 'gitignore:      Adding or updating a .gitignore file'},
-    {value: '🏷️types', name: 'types:      Adding or updating types (Flow, TypeScript)'},
+    {value: '😵revert', name: 'revert: Revert to a commit'},
+    {value: '🚧WIP', name: 'WIP: Work in progress'},
+    {value: '💚CIFIX', name: 'CI: Fixing CI Build.'},
+    {value: '⬆️updeps', name: 'updeps: Upgrading dependencies.'},
+    {value: '➕adddeps', name: 'adddeps: Adding a dependency.'},
+    {value: '✏️fixtypos', name: 'fixtypos: Fixing typos.'},
+    {value: '🙈gitignore', name: 'gitignore: Adding or updating a .gitignore file'},
+    {value: '🏷️types', name: 'types: Adding or updating types (Flow, TypeScript)'},
+    {value: '🎉init', name: 'init: Initial commit'},
   ],
 
   scopes: [
     {name: 'mono'},
     {name: 'core'},
     {name: 'styles-base'},
+    {name: 'tools'},
     {name: 'generators'},
   ],
 
