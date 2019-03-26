@@ -41,7 +41,7 @@ describe('basics', () => {
     [
       'w px & bool h',
       {w: '10px', h: true},
-      [{width: '10px'}, {height: '100vh'}],
+      [{height: '100vh'},{width: '10px'}],
     ],
   ]
 
@@ -69,9 +69,9 @@ describe('responsive', () => {
     [
       'w px & bool h',
       {w: {medium: '10px'}, h: {medium: true}},
-      [
+      [{'@media @media (min-width: 40em)': {height: '100vh'}},
         {'@media @media (min-width: 40em)': {width: '10px'}},
-        {'@media @media (min-width: 40em)': {height: '100vh'}},
+
       ],
     ],
   ]

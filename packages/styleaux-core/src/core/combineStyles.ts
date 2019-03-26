@@ -33,7 +33,7 @@ export type StyleTypes<
 export interface CombineStyleReturnType<STYLE> {
   <T extends {} = never, B extends {} = never>(
     props: WithTheme<EtractInputType<STYLE>, T, B>,
-  ): IStyles
+  ): IStyles[]
   [STYLES_KEY]: STYLE
   [STYLE_PROPS_KEY]: ResolveStyleProps<STYLE>
 }
@@ -332,101 +332,39 @@ export function combineStyles(
       ...acc,
       ...fn.styles,
     }),
-    {},
+    {} as any,
   )
 
-  return createStyles(styles) as any
+  return createStyles(styles)
 
   // as (props:P)=>any & {styles:typeof styles}
 }
 
-// interface IColors {
-//   red: string;
-//   blue: string;
-//   green: string;
-// }
 
-// interface IMedia {
-//   small: string;
-//   medium: string;
-//   large: string;
-// }
+// TODO: determin if we need maintain order or not
+// export function combineStyles(
+//   ...fns: {
+//     (props: {}): IStyles
+//     styles: {}
+//   }[]
+// ) {
 
-// interface IMyTheme {
-//   colors: IColors;
-//   media: IMedia;
-// }
+//   let  styles:IStyles =  {}
+//   const len = fns.length;
+//   let obj;
 
-// const myTheme: IMyTheme = {
-//   colors: {
-//     red: "#f00",
-//     green: "#0f0",
-//     blue: "#00f"
-//   },
-//   media: {
-//     small: "@media (min-width: 30em)",
-//     medium: "@media (min-width: 40em)",
-//     large: "@media (min-width: 50em)"
-//   }
-// };
 
-// const styles = {
-//   noDisplay: { display: "none" },
-//   width: (input: string) => ({ width: input }),
-//   color: (input: Extract<keyof IColors, string>) => ({ color: input })
-// };
-// const styles2 = {
-//   margin: (input: string) => ({ margin: input })
-// };
-// const styles3 = {
-//   padding: (input: string) => ({ padding: input })
-// };
-
-// const stylesArrays = {
-//   px: [
-//     (input: string) => ({ paddingLeft: input }),
-//     (input: string) => ({ paddingRight: input })
-//   ]
-// };
-
-// const dummy = createStyles<typeof styles, IMyTheme, IMedia>(styles, {
-//   defaultTheme: myTheme
-// });
-
-// const dummy2 = createStyles<typeof styles2, IMyTheme, IMedia>(styles2);
-// const dummy3 = createStyles(styles2);
-// const dummy4 = createStyles(styles3);
-// const dummyArray = createStyles(stylesArrays);
-
-// const dummyArrayT = dummyArray({ px: "1" });
-
-// export const combo2 = combineStyles(dummy, dummy4);
-
-// const combo2T = combo2<IMyTheme, IMedia>({
-//   theme: myTheme,
-//   // width: "1",
-//   color: { small: "blue" },
-//   noDisplay: { small: true, medium: true, large: true, all: true }
-// });
-
-// https://github.com/Microsoft/TypeScript/issues/22679
-
-// declare function combine<
-//   T extends object[] &
-//     {
-//       [K in Indices<T>]: {
-//         [K2 in keyof T[K]]: K2 extends GetUnionKeys<T[Exclude<Indices<T>, K>]> ? never : any
-//       }
+//   for (let i = 0; i < len; i++) {
+//     obj = fns[i]
+//     for (let key in obj) {
+//     if(obj.hasOwnProperty(key)){
+//     delete styles[key]
 //     }
-// >(objectsToCombine: T): Combine<T>
-//const t=[{ foo: number }, { bar: string }]
-// const marr = [
-//   (input: string) => ({ paddingLeft: input }),
-//   (input: number) => ({ paddingRight: input })
-// ];
-// type mar = typeof marr;
+//     styles[key]= obj[key]
+//     }
+//   }
 
-// type Indices<T> = Exclude<keyof T, keyof any[]>;
-// type ExtractArg1FromArray<T> = Arg1<T[Indices<T>]>;
+//   return createStyles(styles)
 
-// type result2 = ExtractArg1FromArray<mar>;
+
+// }

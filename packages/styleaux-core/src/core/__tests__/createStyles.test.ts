@@ -1,5 +1,8 @@
-import {createStyles} from '../createStyles'
+import {createStyles} from '../createStyles_exp'
 import {Arg1,DeepSimplify} from '../../types'
+import { flatten, toArray, mergeAllDeepRight } from "@roseys/futils";
+
+const toStyles = styles => mergeAllDeepRight([{}, ...flatten(toArray(styles))]);
 
 const media = {
   small: '@media (min-width: 30em)',
@@ -24,6 +27,7 @@ type TestTuple = Array<[string, IStylesArg, any]>
 const s = {
   h: {height: '100vh'},
   w: (input: number | string) => ({width: input}),
+  width: (input: number | string) => ({width: input}),
   size: [
     (input: number | string) => ({width: input}),
     (input: number | string) => ({height: input}),
@@ -41,7 +45,7 @@ describe('basics', () => {
     [
       'w px & bool h',
       {w: '10px', h: true},
-      [{width: '10px'}, {height: '100vh'}],
+      [ {height: '100vh'},{width: '10px'}],
     ],
   ]
 
@@ -69,9 +73,9 @@ describe('responsive', () => {
     [
       'w px & bool h',
       {w: {medium: '10px'}, h: {medium: true}},
-      [
+      [ {'@media @media (min-width: 40em)': {height: '100vh'}},
         {'@media @media (min-width: 40em)': {width: '10px'}},
-        {'@media @media (min-width: 40em)': {height: '100vh'}},
+
       ],
     ],
   ]
@@ -98,3 +102,35 @@ describe('Misc', () => {
     expect(styles({theme, ...props})).toEqual(expected)
   })
 })
+
+
+test('Prop Order doesnt Matter',()=>{
+const one=toStyles(styles({theme,w:'10px',width:'11px'}))
+const two=toStyles(styles({theme,width:'11px',w:'10px'}))
+expect(one).toEqual(two)
+})
+
+test('Prop Order doesnt Matter',()=>{
+  const s = {
+    aw: {width: '100%'},
+    bw: {width: '50%'},
+  }
+  const s2 = {
+    bw: {width: '50%'},
+    aw: {width: '100%'},
+
+  }
+
+
+  const styles = createStyles(s)
+  const styles2 = createStyles(s2)
+
+  const one=toStyles(styles({aw:true,bw:true}))
+  const two=toStyles(styles({bw:true,aw:true}))
+  expect(one).toEqual(two)
+
+  const one2=toStyles(styles2({aw:true,bw:true}))
+  const two2=toStyles(styles2({bw:true,aw:true}))
+  expect(one2).toEqual(two2)
+  expect(one2).not.toEqual(one)
+  })
