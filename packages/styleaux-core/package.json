@@ -21,7 +21,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@roseys/futils": "^2.1.2",
+    "@roseys/futils": "^2.1.4",
     "typed-is": "^1.0.4",
     "warning": "^4.0.2"
   },

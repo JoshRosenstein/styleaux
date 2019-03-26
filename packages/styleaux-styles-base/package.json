@@ -22,7 +22,7 @@
     "typedoc": "typedoc --options typedoc.ts"
   },
   "dependencies": {
-    "@roseys/futils": "^2.1.2",
+    "@roseys/futils": "^2.1.4",
     "@styleaux/core": "^1.9.0-beta.0",
     "typed-is": "^1.0.4"
   },
