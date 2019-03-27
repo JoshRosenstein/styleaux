@@ -3,7 +3,8 @@
  */
 import {rule} from '@styleaux/core'
 
-import {StringHack,
+import {
+  StringHack,
   BackgroundAttachmentProperty,
   BackgroundClipProperty,
   BackgroundImageProperty,
@@ -14,11 +15,21 @@ import {StringHack,
   BackgroundProperty,
 } from '@roseys/csstype'
 
-export const background=rule<BackgroundProperty<StringHack>>('background')
-export const backgroundAttachment=rule<BackgroundAttachmentProperty>('backgroundAttachment')
-export const backgroundClip=rule<BackgroundClipProperty>('backgroundClip')
-export const backgroundImage=rule<BackgroundImageProperty>('backgroundImage')
-export const backgroundOrigin=rule<BackgroundOriginProperty>('backgroundOrigin')
-export const backgroundPosition=rule<BackgroundPositionProperty<0>>('backgroundPosition')
-export const backgroundRepeat=rule<BackgroundRepeatProperty>('backgroundRepeat')
-export const backgroundSize=rule<BackgroundSizeProperty<number>>('backgroundSize')
+export const backgroundRule = rule<BackgroundProperty<StringHack>>('background')
+export const backgroundAttachmentRule = rule<BackgroundAttachmentProperty>(
+  'backgroundAttachment',
+)
+export const backgroundClipRule = rule<BackgroundClipProperty>('backgroundClip')
+export const backgroundImageRule = rule<BackgroundImageProperty>('backgroundImage')
+export const backgroundOriginRule = rule<BackgroundOriginProperty>(
+  'backgroundOrigin',
+)
+export const backgroundPositionRule = rule<BackgroundPositionProperty<0>>(
+  'backgroundPosition',
+)
+export const backgroundRepeatRule = rule<BackgroundRepeatProperty>(
+  'backgroundRepeat',
+)
+export const backgroundSizeRule = rule<BackgroundSizeProperty<number>>(
+  'backgroundSize',
+)

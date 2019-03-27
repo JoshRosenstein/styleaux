@@ -22,20 +22,20 @@ export type SpaceKeys =
     name
   );
 
-  export const margin=spaceRule("margin")
-  export const marginLeft=spaceRule("marginLeft")
-  export const marginRight=spaceRule("marginRight")
-  export const marginTop=spaceRule("marginTop")
-  export const marginBottom= spaceRule("marginBottom")
-  export const marginX= [marginLeft,marginRight]
-  export const marginY= [marginTop, marginBottom]
+  export const marginRule=spaceRule("margin")
+  export const marginLeftRule=spaceRule("marginLeft")
+  export const marginRightRule=spaceRule("marginRight")
+  export const marginTopRule=spaceRule("marginTop")
+  export const marginBottomRule= spaceRule("marginBottom")
+  export const marginXRule= [marginLeftRule,marginRightRule]
+  export const marginYRule= [marginTopRule, marginBottomRule]
 
-  export const padding=spaceRule("padding")
-  export const paddingLeft=spaceRule("paddingLeft")
-  export const paddingRight=spaceRule("paddingRight")
-  export const paddingTop=spaceRule("paddingTop")
-  export const paddingBottom= spaceRule("paddingBottom")
-  export const paddingX= [paddingLeft,paddingRight]
-  export const paddingY= [paddingTop, paddingBottom]
+  export const paddingRule=spaceRule("padding")
+  export const paddingLeftRule=spaceRule("paddingLeft")
+  export const paddingRightRule=spaceRule("paddingRight")
+  export const paddingTopRule=spaceRule("paddingTop")
+  export const paddingBottomRule= spaceRule("paddingBottom")
+  export const paddingXRule= [paddingLeftRule,paddingRightRule]
+  export const paddingYRule= [paddingTopRule, paddingBottomRule]
 
 

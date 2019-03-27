@@ -9,4 +9,4 @@ import {DisplayProperty} from '@roseys/csstype'
  * see [[DisplayProperty]]
  */
 
-export const display=rule<DisplayProperty | boolean>("display", boolValue("initial", "none"))
+export const displayRule=rule<DisplayProperty | boolean>("display", boolValue("initial", "none"))

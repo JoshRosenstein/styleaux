@@ -3,12 +3,12 @@ import {BackgroundColorProperty, ColorProperty  } from '@roseys/csstype'
 
 
 
- const colorRule = <T>(name: 'backgroundColor' | 'color') => rule<T>(name)
+ const colorRuleHelper = <T>(name: 'backgroundColor' | 'color') => rule<T>(name)
 
 
-export const backgroundColor = colorRule<BackgroundColorProperty>(
+export const backgroundColorRule = colorRuleHelper<BackgroundColorProperty>(
   'backgroundColor',
 )
 
-export const color = colorRule<ColorProperty>('color')
+export const colorRule = colorRuleHelper<ColorProperty>('color')
 

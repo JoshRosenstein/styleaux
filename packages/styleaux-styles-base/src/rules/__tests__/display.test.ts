@@ -1,4 +1,4 @@
-import {display} from '../display'
+import {displayRule} from '../display'
 
 const cssProp='display'
 
@@ -12,7 +12,7 @@ const basicInputdata = [
 
 test.each(basicInputdata)(testName(cssProp), (_name: string, input, props: {},expected:any) =>{
 
-  expect(display(input,{props})).toEqual({[cssProp]:expected})
+  expect(displayRule(input,{props})).toEqual({[cssProp.replace('Rule','')]:expected})
 
 
 })

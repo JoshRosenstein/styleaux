@@ -17,24 +17,24 @@ import {
   StringHack,
 } from '@roseys/csstype'
 
-export const font = rule<FontProperty>('font')
-export const fontStyle = rule<FontStyleProperty>('fontStyle')
-export const fontVariant = rule<FontVariantProperty>('fontVariant')
-export const fontWeight = rule<FontWeightProperty>('fontWeight')
-export const fontSize = rule<FontSizeProperty<number>>('fontSize')
-export const lineHeight = rule<LineHeightProperty<number>>('lineHeight')
-export const fontFamily = rule<FontFamilyProperty>('fontFamily')
+export const fontRule = rule<FontProperty>('font')
+export const fontStyleRule = rule<FontStyleProperty>('fontStyle')
+export const fontVariantRule = rule<FontVariantProperty>('fontVariant')
+export const fontWeightRule = rule<FontWeightProperty>('fontWeight')
+export const fontSizeRule = rule<FontSizeProperty<number>>('fontSize')
+export const lineHeightRule = rule<LineHeightProperty<number>>('lineHeight')
+export const fontFamilyRule = rule<FontFamilyProperty>('fontFamily')
 
-export const letterSpacing = rule<LetterSpacingProperty<StringHack>>(
+export const letterSpacingRule = rule<LetterSpacingProperty<StringHack>>(
   'letterSpacing',
 )
-export const textAlign = rule<TextAlignProperty>('textAlign')
-export const whiteSpace = rule<WhiteSpaceProperty>('whiteSpace')
+export const textAlignRule = rule<TextAlignProperty>('textAlign')
+export const whiteSpaceRule = rule<WhiteSpaceProperty>('whiteSpace')
 
-export const textOverflow = rule<TextOverflowProperty>('textOverflow')
+export const textOverflowRule = rule<TextOverflowProperty>('textOverflow')
 
-export const textTransform = rule<TextTransformProperty>('textTransform')
+export const textTransformRule = rule<TextTransformProperty>('textTransform')
 
-export const wordSpacing = rule<WordSpacingProperty<number>>('wordSpacing')
+export const wordSpacingRule = rule<WordSpacingProperty<number>>('wordSpacing')
 
-export const wordBreak = rule<WordBreakProperty>('wordBreak')
+export const wordBreakRule = rule<WordBreakProperty>('wordBreak')

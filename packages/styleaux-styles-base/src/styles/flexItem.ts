@@ -1,17 +1,17 @@
 import {createStyles} from '@styleaux/core'
-import {alignSelf, justifySelf} from '../rules/boxAlignment'
+import {alignSelfRule, justifySelfRule} from '../rules/boxAlignment'
 
-import {flex, flexBasis, flexGrow, flexShrink} from '../rules/flex'
+import {flexRule, flexBasisRule, flexGrowRule, flexShrinkRule} from '../rules/flex'
 /// Container
 
 /// Items
 //https://developer.mozilla.org/en-US/docs/Glossary/Flex_Item
 
 export const flexItem = createStyles({
-  alignSelf,
-  justifySelf,
-  flex,
-  flexBasis,
-  flexGrow,
-  flexShrink,
+  alignSelf:alignSelfRule,
+  justifySelf:justifySelfRule,
+  flex:flexRule,
+  flexBasis:flexBasisRule,
+  flexGrow:flexGrowRule,
+  flexShrink:flexShrinkRule,
 })

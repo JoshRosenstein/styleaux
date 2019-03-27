@@ -10,17 +10,17 @@ export type BorderKeys =
   | "borderBottom" | "borderColor";
 
 
-  const borderRule = (name: BorderKeys) =>
+  const borderRuleHelper = (name: BorderKeys) =>
   rule<BorderProp>(
     name
   );
 
-  export const border=borderRule("border")
-  export const borderLeft=borderRule("borderLeft")
-  export const borderRight=borderRule("borderRight")
-  export const borderTop=borderRule("borderTop")
-  export const borderBottom= borderRule("borderBottom")
-  export const borderX= [borderLeft,borderRight]
-  export const borderY= [borderTop, borderBottom]
-  export const borderColor= rule<BorderColorProperty>("borderColor")
+  export const borderRule =borderRuleHelper("border")
+  export const borderLeftRule =borderRuleHelper("borderLeft")
+  export const borderRightRule =borderRuleHelper("borderRight")
+  export const borderTopRule =borderRuleHelper("borderTop")
+  export const borderBottomRule= borderRuleHelper("borderBottom")
+  export const borderXRule= [borderLeftRule,borderRightRule]
+  export const borderYRule= [borderTopRule, borderBottomRule]
+  export const borderColorRule= rule<BorderColorProperty>("borderColor")
 

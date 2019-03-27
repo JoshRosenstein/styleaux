@@ -15,30 +15,16 @@ import {
 //https://developer.mozilla.org/en-US/docs/Glossary/Flex_Container
 
 /// Container
-const flexFlow = rule<FlexFlowProperty>('flexFlow')
-const flexDirection = rule<FlexDirectionProperty>('flexDirection')
-const flexWrap = rule<FlexWrapProperty>('flexWrap')
-const gap = rule<GapProperty<number>>('gap')
-const columnGap = rule<ColumnGapProperty<number>>('columnGap')
-const rowGap = rule<RowGapProperty<number>>('rowGap')
+export const flexFlowRule= rule<FlexFlowProperty>('flexFlow')
+export const flexDirectionRule= rule<FlexDirectionProperty>('flexDirection')
+export const flexWrapRule= rule<FlexWrapProperty>('flexWrap')
+export const gapRule= rule<GapProperty<number>>('gap')
+export const columnGapRule= rule<ColumnGapProperty<number>>('columnGap')
+export const rowGapRule= rule<RowGapProperty<number>>('rowGap')
 /// Items
 //https://developer.mozilla.org/en-US/docs/Glossary/Flex_Item
-const order = rule<number>('order')
-const flex = rule<FlexProperty<number>>('flex')
-const flexBasis = rule<FlexBasisProperty<number>>('flexBasis')
-const flexGrow = rule<GlobalsNumber>('flexGrow')
-const flexShrink = rule<GlobalsNumber>('flexShrink')
-
-export {
-  flexFlow,
-  flexDirection,
-  flexWrap,
-  columnGap,
-  rowGap,
-  gap,
-  order,
-  flex,
-  flexBasis,
-  flexGrow,
-  flexShrink,
-}
+export const orderRule= rule<number>('order')
+export const flexRule= rule<FlexProperty<number>>('flex')
+export const flexBasisRule= rule<FlexBasisProperty<number>>('flexBasis')
+export const flexGrowRule= rule<GlobalsNumber>('flexGrow')
+export const flexShrinkRule= rule<GlobalsNumber>('flexShrink')

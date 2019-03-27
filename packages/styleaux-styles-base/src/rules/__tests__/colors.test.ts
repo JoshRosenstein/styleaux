@@ -1,4 +1,4 @@
-import {backgroundColor,color} from '../colors'
+import {backgroundColorRule,colorRule} from '../colors'
 // import {Arg1,DeepRequired} from '@styleaux/core/dist-src/types'
 // import {assertTrue, Equals} from 'typescript-test-utils'
 
@@ -10,21 +10,21 @@ const basicInputdata = [
 
 test.each(basicInputdata)(testName('backgroundColor'), (_name: string, input, props: {},expected:any) =>{
 
-  expect(backgroundColor(input,{props})).toEqual({['backgroundColor']:expected})
+  expect(backgroundColorRule(input,{props})).toEqual({['backgroundColor']:expected})
 
 
 })
 
 test.each(basicInputdata)(testName('color'), (_name: string, input, props: {},expected:any) =>{
 
-  expect(color(input,{props})).toEqual({['color']:expected})
+  expect(colorRule(input,{props})).toEqual({['color']:expected})
 
 
 })
 
 test('types',()=>{
   //@ts-ignore
-  const terros= color(0,{})
+  const terros= colorRule(0,{})
 
 
 })

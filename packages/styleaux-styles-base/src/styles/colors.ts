@@ -1,5 +1,5 @@
 import {createStyles} from '@styleaux/core'
-import {color, backgroundColor}  from '../rules/colors'
+import {colorRule, backgroundColorRule}  from '../rules/colors'
 
 
 /**
@@ -7,4 +7,4 @@ import {color, backgroundColor}  from '../rules/colors'
  *
  * Rules: {@link colorRule}, {@link backgroundColorRule}.
  */
-export const colors = createStyles({color, backgroundColor})
+export const colors = createStyles({color:colorRule, backgroundColor:backgroundColorRule})
