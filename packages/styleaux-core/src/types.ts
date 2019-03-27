@@ -62,6 +62,30 @@ export type DeepRequired<
   ? {
       [P in keyof T]: T[P] extends U | Function
         ? T[P]
-        : DeepPartial<T[P], U>
+        : DeepSimplify<T[P], U>
     }
   : T
+
+  export type Simplify<T extends object> = {[K in keyof T]: T[K]}
+  /**
+ * Converts a Union to Intersection
+ */
+ export  type UnionToIntersection<U> =
+ (U extends any ? (k: U)=>void : never) extends ((k: infer I)=>void) ? I : never
+ export type Extended<T extends any, K extends any = any> = T extends K ? T : never;
+
+/**
+* Creates a union from the types of an Array or tuple
+*/
+export type UnionOf<T extends any[]> = T[number];
+
+export type StringKeyOf<T extends any> = Extract<keyof T, string>;
+
+export type StringKeyInArray<a extends any[]> = StringKeyOf<UnionOf<a>>;
+
+let g: StringKeyInArray<[{
+  f: 1;
+}, {
+  g: 2;
+}]>;
+

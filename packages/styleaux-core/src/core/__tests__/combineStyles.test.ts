@@ -1,12 +1,13 @@
 import {createStyles} from '../createStyles'
 import {combineStyles} from '../combineStyles'
-import {Arg1} from '../../types'
+import {Arg1,DeepSimplify} from '../../types'
 
 const media = {
   small: '@media (min-width: 30em)',
   medium: '@media (min-width: 40em)',
   large: '@media (min-width: 50em)',
 }
+type Media = typeof media
 
 const theme = {
   media,
@@ -18,19 +19,24 @@ const theme = {
 }
 // type ITheme= typeof theme
 // type IMedia=typeof media
+const style1Config = {h: {height: '100vh'}}
+const style1 = createStyles<typeof style1Config,Media>(style1Config)
 
-const style1 = createStyles({h: {height: '100vh'}})
-const style2 = createStyles({w: (input: number | string) => ({width: input})})
-const style3 = createStyles({
+//type IStyles1Arg = DeepSimplify<Arg1<typeof style1>>
+const style2Config = {w: (input: number | string) => ({width: input})}
+
+const style2 = createStyles<typeof style2Config,Media>(style2Config)
+
+const style3Config={
   size: [
     (input: number | string) => ({width: input}),
     (input: number | string) => ({height: input}),
   ],
-})
-
+}
+const style3 = createStyles<typeof style3Config,Media>(style3Config)
 const styles = combineStyles(style1, style2, style3)
 
-type IStylesArg = Arg1<typeof styles>
+type IStylesArg = DeepSimplify<Arg1<typeof styles>>
 type TestTuple = Array<[string, IStylesArg, any]>
 const THEME = theme
 

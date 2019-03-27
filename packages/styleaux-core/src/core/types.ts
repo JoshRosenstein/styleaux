@@ -22,7 +22,7 @@ export type ResponsivePropValue<BreakPoints, ValueType> = {
 export type ResponsiveProp<ValueType, BreakPoints = never> = [
   BreakPoints
 ] extends [never]
-  ? ValueType
+  ? ValueType | IAllCssValue<ValueType>
   : ValueType | ResponsivePropValue<BreakPoints, ValueType>
 
 export type ResponsiveObject<P, B> = {
@@ -38,11 +38,12 @@ export interface IBreakpointTheme<T, B> {
   [THEME_KEY]?: T & {[MEDIA_KEY]: B}
 }
 
+
 export type ThemeWithBreakpoints<T, B> = [B] extends [never]
   ? [T] extends [never]
     ? Partial<ITheme<any>>
     : ITheme<T>
-  : IBreakpointTheme<T, B>
+  : [T] extends [never]?{}: IBreakpointTheme<T, B>
 
 export type WithTheme<P, T, B> = ResponsiveObject<P, B> &
   ThemeWithBreakpoints<T, B>
@@ -85,4 +86,15 @@ export type ResolveStyleProps<S, B extends {} = never> = ResponsiveObject<
   EtractInputType<S>,
   B
 >
+
+export type InferPropsFromStyle<P, I = EtractInputType<P>> = {
+  [K in keyof I]?: InferPropsFromFunctionArgument<I[K]>
+}
+
+export type InferPropsFromFunctionArgument<T> = T extends (
+  props: infer R,
+) => any
+  ? R extends { theme?: any } ? Pick<R, Exclude<keyof R, 'theme'>> : R
+  : {};
+
 

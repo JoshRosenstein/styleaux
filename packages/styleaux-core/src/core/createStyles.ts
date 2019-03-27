@@ -1,9 +1,11 @@
 import {WithTheme, EtractNonResponsiveInputType, IStyles} from './types'
+import {Simplify} from '../types'
 
 import {mapObj, toArray} from '@roseys/futils'
 import {isFunction, isPlainObject, isNil} from 'typed-is'
 
 import {
+  STYLES_KEY,
   STYLE_PROPS_KEY,
   STATIC_STYLES_KEY,
   DEFAULT_MEDIA_KEY,
@@ -28,9 +30,19 @@ function handleStyle(style, input, props, mediaKey) {
   return input === true ? style : null
 }
 
-export type WithStyleProps<S> = {
-  styles: S
+export type CreateStyleStatics<S> = {
+  [STYLES_KEY]: S
   [STYLE_PROPS_KEY]: EtractNonResponsiveInputType<S>
+}
+export interface CreateStyles<
+S extends {},
+Media extends {} = never,
+Theme extends {} = never,
+Props =Simplify<WithTheme<EtractNonResponsiveInputType<S>, Theme, Media>>,
+> extends CreateStyleStatics<S> {
+  (props: Props,
+  ): IStyles[]
+
 }
 
 export function createStyles<
@@ -40,17 +52,8 @@ export function createStyles<
 >(
   styles: S,
   config?: {defaultTheme?: Theme; queryHandler?: Function},
-): ((
-  props: WithTheme<EtractNonResponsiveInputType<S>, Theme, Media>,
-) => IStyles[]) &
-  WithStyleProps<S>
+): CreateStyles<S,Media,Theme>
 
-export function createStyles<S extends {}>(
-  styles: S,
-  config?: {defaultTheme?: {}; queryHandler?: Function},
-): (<Media extends {} = never, Theme extends {} = never>(
-  props: WithTheme<EtractNonResponsiveInputType<S>, Theme, Media>,
-) => IStyles[]) & {styles: S; styleProps: EtractNonResponsiveInputType<S>}
 
 export function createStyles<S extends {}>(styles: S) {
   const statics = styles[STATIC_STYLES_KEY]
