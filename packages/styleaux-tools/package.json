@@ -20,12 +20,17 @@
     "clean": "rimraf dist-*/",
     "test": "jest"
   },
-  "dependencies": {
-    "@roseys/futils": "^2.1.4",
-    "@styleaux/core": "^1.9.0-beta.0",
-    "typed-is": "^1.0.4"
+
+  "peerDependencies": {
+    "typed-is": "^1.0.4",
+    "@roseys/csstype":"^2.6.3",
+    "@roseys/futils": "^2.1.4"
   },
+
   "devDependencies": {
+    "typed-is": "^1.0.4",
+    "@roseys/futils": "^2.1.4",
+    "@roseys/csstype":"^2.6.3",
     "@roseys/eslint-config": "^1.0.2",
     "typescript": "^3.3.3333"
   }
