@@ -1,28 +1,30 @@
-import {createStyles,CreateStyles} from './createStyles'
+import {createStyles} from './createStyles'
 
-import {InferPropsFromFunctionArgument, IStyles,} from './types'
-import {UnionOf,UnionToIntersection, Dictionary} from '../types'
-import {STYLES_KEY, STYLE_PROPS_KEY} from '../constants'
+import {InferPropsFromFunctionArgument, IStyles} from './types'
+import {UnionOf,UnionToIntersection} from '../types'
+import {STYLES_KEY} from '../constants'
+import {CreateStylesInput,CreateStyleStatics} from './createStyles'
 
 export type InferStyleFromFunction<T> = T extends {[STYLES_KEY]: infer S}
   ? S
   : T extends {[STYLES_KEY]: infer S}[]
   ? S
   : {}
+  export type InferPropsFromFunctionsArgument<T extends any[]>=UnionToIntersection<InferPropsFromFunctionArgument<UnionOf<T>>>
+  export type InferStyleFromFunctions<T extends any[]>=UnionToIntersection<InferStyleFromFunction<UnionOf<T>>>
 
 
-export interface CombineStyleReturnType<FNS extends any[],Props=InferPropsFromFunctionsArgument<FNS>> {
-  (props:Props):IStyles | IStyles[]
-  [STYLES_KEY]: InferStyleFromFunctions<FNS>,
-  [STYLE_PROPS_KEY]:Props
+export interface CombineStyleReturnType<FNS extends any[],Styles=InferStyleFromFunctions<FNS>> extends CreateStyleStatics<Styles> {
+  (props:InferPropsFromFunctionsArgument<FNS>): IStyles[]
 }
 
-export type InferPropsFromFunctionsArgument<T extends any[]>=UnionToIntersection<InferPropsFromFunctionArgument<UnionOf<T>>>
-export type InferStyleFromFunctions<T extends any[]>=UnionToIntersection<InferStyleFromFunction<UnionOf<T>>>
 
 
 export type ArrayInfer<T> = T extends (infer U)[] ? U : never;
-export function combineStyles<Fns extends CreateStyles<Dictionary,Dictionary,Dictionary>[]>(
+export function combineStyles<Fns extends {
+  (props: {}): IStyles[]
+  styles: {}
+}[]>(
   ...fns: Fns
 ): CombineStyleReturnType<Fns> {
   const styles = fns.reduce(
@@ -30,7 +32,7 @@ export function combineStyles<Fns extends CreateStyles<Dictionary,Dictionary,Dic
       ...acc,
       ...fn.styles,
     }),
-    {} as IStyles,
+    {} as CreateStylesInput,
   )
 
   return createStyles(styles) as any

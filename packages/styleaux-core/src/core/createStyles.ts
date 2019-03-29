@@ -1,8 +1,7 @@
 import {WithTheme, EtractNonResponsiveInputType, IStyles} from './types'
-import {Simplify} from '../types'
 
 import {mapObj, toArray} from '@roseys/futils'
-import {isFunction, isPlainObject, isNil} from 'typed-is'
+import {isFunction, isPlainObject, isNil, isNumeric,isArray} from 'typed-is'
 
 import {
   STYLES_KEY,
@@ -15,15 +14,18 @@ import {getMedia, getThemeMedia, getDefaultMedia} from '../getters/index'
 
 import {createWarnOnce} from '../utils/warn-once'
 
+
 const warnOnce = createWarnOnce('createStyle')
 
 function handleStyle(style, input, props, mediaKey) {
+
   // selector
   if (isFunction(input)) {
     return input(props, value => handleStyle(style, value, props, mediaKey))
   }
 
   if (isFunction(style)) {
+
     return style(input, props, mediaKey)
   }
 
@@ -34,26 +36,36 @@ export type CreateStyleStatics<S> = {
   [STYLES_KEY]: S
   [STYLE_PROPS_KEY]: EtractNonResponsiveInputType<S>
 }
-export interface CreateStyles<
-S extends {},
-Media extends {} = never,
-Theme extends {} = never,
-Props =Simplify<WithTheme<EtractNonResponsiveInputType<S>, Theme, Media>>,
-> extends CreateStyleStatics<S> {
-  (props: Props,
-  ): IStyles[]
+export type IStylesFunc=((...args:any[])=>IStyles)
 
+export type Style= IStyles | IStylesFunc | IStylesFunc[]
+
+export type CreateStylesInput={
+  [propName:string]:Style
+}
+export interface CreateStyles<
+  S extends CreateStylesInput,
+  Media extends {} = never,
+  Theme extends {} = never,
+  P extends {} = never,
+  Props = WithTheme<
+    [P] extends [never] ? EtractNonResponsiveInputType<S> : P,
+    Theme,
+    Media
+  >
+> extends CreateStyleStatics<S> {
+  (props: Props): IStyles[]
 }
 
 export function createStyles<
   S extends {},
   Media extends {} = never,
-  Theme extends {} = never
+  Theme extends {} = never,
+  Props extends {} = never
 >(
   styles: S,
   config?: {defaultTheme?: Theme; queryHandler?: Function},
-): CreateStyles<S,Media,Theme>
-
+): CreateStyles<S, Media, Theme, Props>
 
 export function createStyles<S extends {}>(styles: S) {
   const statics = styles[STATIC_STYLES_KEY]
@@ -62,32 +74,47 @@ export function createStyles<S extends {}>(styles: S) {
   function getStyles(props) {
     const media = getThemeMedia(props)
     const defaultMediaKey = getDefaultMedia(props)
+    const mediaKeys = Object.keys(media)
 
-    function mapStyles(input, style, mediaKey?: string ) {
-      const hasMediaKey =
-        Boolean(mediaKey) &&
-        mediaKey !== defaultMediaKey &&
-        mediaKey !== DEFAULT_MEDIA_KEY
+    function mapStyles(input, style, mediaKey?: string) {
+      const hasMediaKey = Boolean(mediaKey) && mediaKey !== DEFAULT_MEDIA_KEY && mediaKey !== '0'
+      let mKey = mediaKey
 
-/// Only object literals can be responsive
-      if (isPlainObject(input)) {
-        return mapObj(input, (value, key) => mapStyles(value, style, key as string))
+      if (hasMediaKey) {
+        if (isNumeric(mediaKey)) {
+          mKey = mediaKeys[Number(mediaKey)]
+        }
       }
-      const query = getMedia(
-        mediaKey || defaultMediaKey ,
-        media,
-      )
+
+      /// Only object literals can be responsive
+      if (isPlainObject(input)) {
+        return mapObj(input, (value, key) =>
+          mapStyles(value, style, key as string),
+        )
+      }
+
+      /// Handling responsive Array
+      if (isArray(input)) {
+
+        return input.map((value, key)=>mapStyles(value,style,key.toString()))
+        // mapObj(input, (value, key) =>
+        //   mapStyles(value, style, key as string),
+        // )
+      }
+
+      const query = getMedia(mKey || defaultMediaKey, media)
 
       if (hasMediaKey && !query) {
+
         warnOnce('Could not find mediaKey: ' + mediaKey)
         return undefined
       }
       // general prop style
-      const sty = handleStyle(style, input, props, mediaKey)
+      const sty = handleStyle(style, input, props, mKey)
+
 
       return query ? {[`@media ${query}`]: sty} : sty
     }
-
 
     return Object.keys(styles).reduce(
       (acc, styleKey) =>
@@ -100,7 +127,6 @@ export function createStyles<S extends {}>(styles: S) {
         ),
       init,
     )
-
   }
 
   return Object.assign(getStyles, {

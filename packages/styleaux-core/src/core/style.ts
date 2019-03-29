@@ -1,50 +1,35 @@
-import { identity } from "@roseys/futils";
-import { CSSPropertyKeys } from "../types";
-import { isNumber, isBoolean, isString, isFunction } from "typed-is";
-import { everyMedia } from "./everyMedia";
-import { createWrap } from "../utils/wrap";
-import {ResponsiveProp} from './types'
+import {createStyles} from './createStyles'
+import {styler} from './styler'
+import {getThemeValue} from '../getters'
+import {CSSPropertiesKeys} from '../cssTypes'
+import {StringHack} from '@roseys/csstype'
 
-export type KeysOrstrong<T extends {}=never>=T extends [never] ? string : Extract<keyof T,string>
+type StyleOptions={
+  prop:CSSPropertiesKeys | StringHack,
+  cssProp?:CSSPropertiesKeys,
+  key?:string,
+  transformValue?:Function,
+  alias?:string
+}
 
-export function style<T>({
+export function style<P extends {},M extends {}=never,T extends {}=never>({
+  prop,
   cssProp,
-  getStyle = createWrap(cssProp),
-  getValue = identity
-}: {
-  cssProp?: CSSPropertyKeys;
-  getStyle?: (result: any, input?: any, props?: any, mediaKey?: string) => any;
-  getValue?: (input: any, props?: any, mediaKey?: string) => any;
-}) {
-  function getValues<Media1 extends {}=never>(
-    get: (
-      input: any,
-      props?: {},
-      mediaKey?: KeysOrstrong<Media1>
-    ) => boolean | Function | null | undefined | string | number,
-    input,
-    props,
-    mediaKey
-  ) {
-    const result = get(input, props, mediaKey);
+  key,
+  transformValue,
+  alias
+}:StyleOptions){
+  const property = cssProp || prop as CSSPropertiesKeys
 
-    if (isBoolean(result)) {
-      return null;
-    }
+const getValue=(input, props, mediaKey) => getThemeValue(key, transformValue)(input, input, mediaKey)(props)
 
-    if (result === undefined && (isString(input) || isNumber(input))) {
-      return input;
-    }
-    return isFunction(result)
-      ? getValues(result, input, props, mediaKey)
-      : result;
-  }
 
-  return <Media extends {}=never,M extends string =KeysOrstrong<Media>>(input: ResponsiveProp<T,Media>, props: {}, mediaKey?: M) => {
-    return everyMedia(
-      props,
-      getValues(getValue, input, props, mediaKey),
-      result => getStyle(result, input, props, mediaKey)
-    );
-  };
+const getter= styler<any>({cssProp:property,getValue})
+//[prop]:getter
+const config={[prop]:getter} as P
+if(alias){
+  config[alias]=getter
+}
+
+  return createStyles<P,M,T>(config)
 }

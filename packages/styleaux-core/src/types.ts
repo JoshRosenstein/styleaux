@@ -1,9 +1,3 @@
-import {Properties} from '@roseys/csstype'
-
-export type CSSPropertyKeys = keyof Properties
-
-export type GlobalCssValues = 'inherit' | 'initial' | 'unset'
-
 export type Omit<ObjectType, KeysType extends keyof ObjectType> = Pick<
   ObjectType,
   Exclude<keyof ObjectType, KeysType>
@@ -27,51 +21,49 @@ export type Dictionary<T = any> = {
 
 export type AnyFunc = (...args: any[]) => any
 
+//https://github.com/krzkaczor/ts-essentials/blob/master/lib/types.ts
 
 //https://github.com/Microsoft/TypeScript/issues/15012
 
 export type Required<T> = T extends object ? {[P in keyof T]-?: NonNullable<T[P]>} : T
 
 
-export type DeepRequired<
-  T,
-  U extends object | undefined = undefined
-> = T extends object
-  ? {
-      [P in keyof T]-?: NonNullable<T[P]> extends NonNullable<U | Function>
-        ? NonNullable<T[P]>
-        : DeepRequired<NonNullable<T[P]>, U>
-    }
-  : T
+export type Primitive = string | number | boolean | undefined | null;
+/** Like Required but recursive */
+export type DeepRequired<T> = T extends Primitive
+  ? NonNullable<T>
+  : T extends any[]
+  ? DeepRequiredArray<NonNullable<T[number]>>
+  : T extends {}
+  ? { [K in keyof T]-?: DeepRequired<NonNullable<T[K]>> }
+  : T;
+interface DeepRequiredArray<T> extends Array<DeepRequired<T>> {}
 
-  export type DeepPartial<
-  T,
-  U extends object | undefined = undefined
-> = T extends object
-  ? {
-      [P in keyof T]?: NonNullable<T[P]> extends NonNullable<U | Function>
-        ? NonNullable<T[P]>
-        : DeepPartial<NonNullable<T[P]>, U>
-    }
-  : T
 
-  export type DeepSimplify<
-  T,
-  U extends object | undefined = undefined
-> = T extends object
-  ? {
-      [P in keyof T]: T[P] extends U | Function
-        ? T[P]
-        : DeepSimplify<T[P], U>
-    }
-  : T
+export type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends Array<infer U>
+    ? Array<DeepPartial<U>>
+    : T[P] extends ReadonlyArray<infer U>
+    ? ReadonlyArray<DeepPartial<U>>
+    : DeepPartial<T[P]>
+};
 
-  export type Simplify<T extends object> = {[K in keyof T]: T[K]}
+  export type DeepSimplify<T> = T extends Primitive
+  ? T
+  : T extends any[]
+  ? DeepSimplfyArray<T[number]>
+  : T extends {}
+  ? { [K in keyof T]: DeepSimplify<T[K]> }
+  : T;
+
+interface DeepSimplfyArray<T> extends Array<DeepSimplify<T>> {}
+
+
+  export type Simplify<T extends  {[index: string]: any}> = {[K in keyof T]: T[K]}
   /**
  * Converts a Union to Intersection
  */
- export  type UnionToIntersection<U> =
- (U extends any ? (k: U)=>void : never) extends ((k: infer I)=>void) ? I : never
+
  export type Extended<T extends any, K extends any = any> = T extends K ? T : never;
 
 /**
@@ -79,13 +71,12 @@ export type DeepRequired<
 */
 export type UnionOf<T extends any[]> = T[number];
 
-export type StringKeyOf<T extends any> = Extract<keyof T, string>;
 
-export type StringKeyInArray<a extends any[]> = StringKeyOf<UnionOf<a>>;
+export type NonNever<T extends {}> = Pick<T, { [K in keyof T]: T[K] extends never ? never : K }[keyof T]>;
 
-let g: StringKeyInArray<[{
-  f: 1;
-}, {
-  g: 2;
-}]>;
+export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void)
+  ? I
+  : never;
+
+  export type Tuple<T = any> = [T] | T[];
 

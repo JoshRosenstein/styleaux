@@ -1,15 +1,23 @@
 import {pathObj} from '@roseys/futils'
 import {getDefaultMedia} from './getDefaultMedia'
-
+import {isArray} from 'typed-is'
 import {getTheme} from './getTheme'
 
 import {MEDIA_KEY} from '../constants'
 
 export const getThemeMedia = <T extends {theme?: any}>(props: T) => {
-  return Object.assign(
-    {[getDefaultMedia(props)]: null} as {[MEDIA_KEY]: null},
+  let media=pathObj(getTheme(props), [MEDIA_KEY])
+  const defaultKey={[getDefaultMedia(props)]: null} as {[MEDIA_KEY]: null}
+  if(isArray(media)){
+  return media.reduce((acc,v,i)=>{acc[i+1]=v
+      return acc},{"0":null})
+  }
 
-    {...pathObj(getTheme(props), [MEDIA_KEY])},
+
+  return Object.assign(
+    defaultKey,
+
+    {...media},
   )
 }
 

@@ -1,9 +1,9 @@
-import { style } from "./style";
-import { CSSPropertyKeys } from "../types";
+import {styler} from './styler'
+import {CSSProperties} from '../cssTypes'
 
-export function rule<T>(cssProp: CSSPropertyKeys, getValue?: any) {
-  return style<T>({
+export function rule<T>(cssProp: keyof CSSProperties , getValue?: any) {
+  return styler<T>({
     cssProp,
-    getValue
-  });
+    getValue,
+  })
 }

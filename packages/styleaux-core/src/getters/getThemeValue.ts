@@ -1,7 +1,7 @@
 import {isFunction, identity, mapObj} from '@roseys/futils'
 
 import {lookUpTransformNegative} from './utils'
-import {isPlainObject} from 'typed-is'
+import {isPlainObject,isNumeric} from 'typed-is'
 import {getDefault} from './getDefault'
 import {getThemePathOr} from './getThemePathOr'
 
@@ -22,7 +22,7 @@ export function getThemeValue(themeKey, transformValue?: any) {
       transformValue,
     )
 
-    if (Object(themeValue).hasOwnProperty(mediaKey)) {
+    if (!isNumeric(mediaKey) && Object(themeValue).hasOwnProperty(mediaKey)) {
       return transform(themeValue[mediaKey])
     }
 

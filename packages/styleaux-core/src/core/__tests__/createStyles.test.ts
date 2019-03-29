@@ -1,8 +1,6 @@
 import {createStyles} from '../createStyles'
 import {Arg1,DeepSimplify} from '../../types'
-import { flatten, toArray, mergeAllDeepRight } from "@roseys/futils";
-
-const toStyles = styles => mergeAllDeepRight([{}, ...flatten(toArray(styles))]);
+import {toStyles} from '../../__testutils__'
 
 const media = {
   small: '@media (min-width: 30em)',

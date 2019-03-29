@@ -1,11 +1,44 @@
-import {createStyles} from '../createStyles'
-import {combineStyles} from '../combineStyles'
-import {rule} from '../rule'
-import {Arg1,DeepSimplify,DeepRequired} from '../../types'
-import {ResponsiveProp,OmitTheme} from '../types'
+import {ResponsiveProp,OmitTheme,createStyles,combineStyles,rule,Arg1,DeepRequired} from '../'
+
+import { MarginProperty } from "@roseys/csstype"
 import {assertTrue, Equals} from 'typescript-test-utils'
 
+
+export type SpaceType = MarginProperty< number> ;
+
+export type SpaceKeys =
+  | "margin"
+  | "marginLeft"
+  | "marginRight"
+  | "marginTop"
+  | "marginBottom"
+  | "padding"
+  | "paddingLeft"
+  | "paddingRight"
+  | "paddingTop"
+  | "paddingBottom"
+
+
+   const spaceRule = (name: SpaceKeys) =>
+  rule<SpaceType>(
+    name
+  );
+
+  export const marginRule=spaceRule("margin")
+
+
 type Media = {M: string; T: string}
+
+it('marginRule', () => {
+const margin=createStyles({m:marginRule})
+type Style= typeof margin
+
+  type Result = OmitTheme<Arg1<typeof margin>>
+type StyleProp=Style['_styleProps']
+
+
+  assertTrue<Equals<Result, StyleProp>>()
+})
 
 
 it('createStyles with no theme or media', () => {
@@ -28,13 +61,13 @@ it('createStyles with media', () => {
   }
 
   const style = createStyles<typeof styleConfig, Media>(styleConfig)
-  type Resultt = DeepRequired<Arg1<typeof style>>
-  type Expected = DeepRequired<{
-    margin: InputType | {M: InputType; T: InputType; all: InputType} | Array<InputType | undefined>
+  type Result = DeepRequired<Arg1<typeof style>>
+  type Expected = {
+    margin: InputType | {M: InputType; T: InputType; all: InputType} | Array<InputType>
     theme:any
-  }>
+  }
 
-  assertTrue<Equals<Resultt, Expected>>()
+  assertTrue<Equals<Result, Expected>>()
 })
 
 it('Wrapped with combinestyles', () => {
@@ -47,18 +80,19 @@ it('Wrapped with combinestyles', () => {
   const style = createStyles<typeof styleConfig,Media>(styleConfig)
   const styleWrapped = combineStyles(style)
 
-  type Expected=DeepSimplify<{
-    'margin'?:ResponsiveProp<string,Media>
-theme?:any
+  type Expected=DeepRequired<{
+    'margin':ResponsiveProp<string,Media>
+theme:any
+
   }>
 
   type Style=typeof style
   type StyleWrapped=typeof styleWrapped
 
 
-  type StyleResult = DeepSimplify<Arg1<Style>>
+  type StyleResult = DeepRequired<Arg1<Style>>
 
-  type StyleWrappedResult = DeepSimplify<Arg1<StyleWrapped>>
+  type StyleWrappedResult = DeepRequired<Arg1<StyleWrapped>>
 
   assertTrue<Equals<StyleResult, Expected>>()
   assertTrue<Equals<StyleResult, StyleWrappedResult>>()
@@ -73,7 +107,7 @@ it('Wrapped with combinestyles as rule', () => {
   const styleWrapped = combineStyles(style)
 
   type Expected=DeepRequired<{
-    'margin':ResponsiveProp<string,Media>,
+    'margin':ResponsiveProp<string,Media>
     theme:any
   }>
 
@@ -107,8 +141,7 @@ it('Debug', () => {
   type Expected=DeepRequired<{
     position:ResponsiveProp<string>,
     margin:ResponsiveProp<string>,
-    theme?:any
-
+    theme:any
   }>
 
   type Style=typeof style
@@ -116,7 +149,7 @@ it('Debug', () => {
 
   //type StyleWrappedProps=DeepRequired<StyleWrapped['_styleProps']>
 
-  type StyleResult =DeepRequired<Arg1<Style> & Arg1<typeof style2>>
+  type StyleResult = DeepRequired<Arg1<Style> & Arg1<typeof style2>>
 
   type StyleWrappedResult = DeepRequired<Arg1<StyleWrapped>>
 
