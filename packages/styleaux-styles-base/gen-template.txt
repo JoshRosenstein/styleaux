@@ -1,0 +1,27 @@
+import { __TYPE_NAME__ } from '@roseys/csstype';
+
+import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+
+const __PROPERTY_NAME_CAP__='__PROPERTY_NAME__'
+
+export interface I__INTERFACE_PROPERTY_NAME__Props<T> {
+  __INTERFACE_PROPERTY_COMMENT__
+  __PROPERTY_NAME__: T;
+}
+
+export const __PROPERTY_NAME__ = <
+  T = __TYPE_NAME__,
+  Theme = never,
+  Breakpoints = never
+>({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
+  style<I__INTERFACE_PROPERTY_NAME__Props<T>, Theme, Breakpoints>({
+    cssProp: __PROPERTY_NAME_CAP__,
+    prop: __PROPERTY_NAME_CAP__,
+    alias,
+    key,
+    transformValue,
+  })
+
+export const __PROPERTY_NAME__Rule = <T = __TYPE_NAME__>(
+  transformer?: Getter,
+) => styler<T>({cssProp: __PROPERTY_NAME_CAP__, getValue: transformer})
