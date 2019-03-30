@@ -3,8 +3,9 @@ import {styler} from './styler'
 import {getThemeValue} from '../getters'
 import {CSSPropertiesKeys} from '../cssTypes'
 import {StringHack} from '@roseys/csstype'
+import { identity} from '@roseys/futils'
 
-type StyleOptions={
+export type StyleOptions={
   prop:CSSPropertiesKeys | StringHack,
   cssProp?:CSSPropertiesKeys,
   key?:string,
@@ -16,12 +17,12 @@ export function style<P extends {},M extends {}=never,T extends {}=never>({
   prop,
   cssProp,
   key,
-  transformValue,
+  transformValue=identity,
   alias
 }:StyleOptions){
   const property = cssProp || prop as CSSPropertiesKeys
 
-const getValue=(input, props, mediaKey) => getThemeValue(key, transformValue)(input, input, mediaKey)(props)
+const getValue=(input, props, mediaKey) => key?getThemeValue(key, transformValue)(input, input, mediaKey)(props):transformValue(input)
 
 
 const getter= styler<any>({cssProp:property,getValue})

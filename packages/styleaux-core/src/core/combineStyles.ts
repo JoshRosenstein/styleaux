@@ -3,7 +3,7 @@ import {createStyles} from './createStyles'
 import {InferPropsFromFunctionArgument, IStyles} from './types'
 import {UnionOf,UnionToIntersection} from '../types'
 import {STYLES_KEY} from '../constants'
-import {CreateStylesInput,CreateStyleStatics} from './createStyles'
+import {CreateStylesInput,CreateStyleStatics,CreateStyleReturn} from './createStyles'
 
 export type InferStyleFromFunction<T> = T extends {[STYLES_KEY]: infer S}
   ? S
@@ -18,15 +18,18 @@ export interface CombineStyleReturnType<FNS extends any[],Styles=InferStyleFromF
   (props:InferPropsFromFunctionsArgument<FNS>): IStyles[]
 }
 
+export type CombineStyleReturnType2<FNS extends any[],M extends {}=never,T extends {}=never,Styles=InferStyleFromFunctions<FNS>> =
+[M] extends [never]?CombineStyleReturnType<FNS>:CreateStyleReturn<Styles,T,M,never>
+
 
 
 export type ArrayInfer<T> = T extends (infer U)[] ? U : never;
 export function combineStyles<Fns extends {
   (props: {}): IStyles[]
   styles: {}
-}[]>(
+}[],M extends {}=never,T extends{}=never>(
   ...fns: Fns
-): CombineStyleReturnType<Fns> {
+): CombineStyleReturnType2<Fns,M,T> {
   const styles = fns.reduce(
     (acc, fn) => ({
       ...acc,

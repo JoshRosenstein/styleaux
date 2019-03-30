@@ -3,7 +3,7 @@ import {combineStyles} from '../combineStyles'
 import {rule} from '../rule'
 import {Arg1,DeepSimplify,DeepRequired} from '../../types'
 import {ResponsiveProp,OmitTheme} from '../types'
-import {assertTrue, Equals} from 'typescript-test-utils'
+import {assertTrue, Equals, assertFalse} from 'typescript-test-utils'
 
 type Media = {M: string; T: string}
 
@@ -63,6 +63,37 @@ theme?:any
   assertTrue<Equals<StyleResult, Expected>>()
   assertTrue<Equals<StyleResult, StyleWrappedResult>>()
 })
+
+it('Can Overwrite theme and media with combinestyles', () => {
+
+type OverideMedia={tablet:string}
+type Theme={color:{red:string}}
+
+  const styleConfig = {
+    'margin': (input: string) => ({margin: input}),
+  }
+  const style = createStyles<typeof styleConfig,Media>(styleConfig)
+  type Style=typeof style
+
+  const styleWrapped = combineStyles<Style[],OverideMedia,Theme>(style)
+
+  type Expected=DeepRequired<{
+    'margin':ResponsiveProp<string,{tablet:string}>
+theme:Theme & {media:OverideMedia}
+  }>
+
+
+  type StyleWrapped=typeof styleWrapped
+
+
+  type StyleResult = DeepRequired<Arg1<Style>>
+
+  type StyleWrappedResult = DeepRequired<Arg1<StyleWrapped>>
+
+  assertTrue<Equals<StyleWrappedResult, Expected>>()
+  assertFalse<Equals<StyleResult, StyleWrappedResult>>()
+})
+
 
 it('Wrapped with combinestyles as rule', () => {
 

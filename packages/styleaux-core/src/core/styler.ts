@@ -12,7 +12,7 @@ export type Getter=(
   mediaKey?: string
 ) => boolean | Function | null | undefined | string | number | {}
 
-export type StyleOptions={
+export type StylerOptions={
   cssProp?: CSSPropertiesKeys;
   getStyle?: (result: any, input?: any, props?: any, mediaKey?: string) => any;
   getValue?: Getter
@@ -23,7 +23,7 @@ export function styler<T>({
   cssProp,
   getStyle = createWrap(cssProp),
   getValue = identity
-}: StyleOptions) {
+}: StylerOptions) {
   function getValues(
     get: Getter,
     input,

@@ -32,9 +32,16 @@ function handleStyle(style, input, props, mediaKey) {
   return input === true ? style : null
 }
 
-export type CreateStyleStatics<S> = {
+export interface CreateStyleStatics<S>  {
   [STYLES_KEY]: S
   [STYLE_PROPS_KEY]: EtractNonResponsiveInputType<S>
+}
+export interface CreateStyleReturn<S,T,M,P> extends CreateStyleStatics<S>  {
+  (props: WithTheme<
+    [P] extends [never] ? EtractNonResponsiveInputType<S> : P,
+    T,
+    M
+  >): IStyles[]
 }
 export type IStylesFunc=((...args:any[])=>IStyles)
 
@@ -47,15 +54,8 @@ export interface CreateStyles<
   S extends CreateStylesInput,
   Media extends {} = never,
   Theme extends {} = never,
-  P extends {} = never,
-  Props = WithTheme<
-    [P] extends [never] ? EtractNonResponsiveInputType<S> : P,
-    Theme,
-    Media
-  >
-> extends CreateStyleStatics<S> {
-  (props: Props): IStyles[]
-}
+  P extends {} = never
+> extends CreateStyleReturn<S,Theme,Media,P> {}
 
 export function createStyles<
   S extends {},
