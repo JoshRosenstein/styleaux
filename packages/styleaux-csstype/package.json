@@ -1,0 +1,18 @@
+{
+  "name": "@styleaux/csstype",
+  "version": "0.0.0-beta.0",
+  "author": "Joshua Rosenstein",
+  "license": "MIT",
+  "main": "",
+  "types": "index.d.ts",
+  "sideEffects": "false",
+  "files": [
+    "index.d.ts"
+  ],
+"dependencies":{
+  "@roseys/csstype":"^2.6.7"
+},
+"devDependencies":{
+  "@roseys/csstype":"^2.6.7"
+}
+}
