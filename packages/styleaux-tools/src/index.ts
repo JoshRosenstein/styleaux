@@ -3,7 +3,9 @@ export * from './gradient'
 export * from './filter-props'
 export * from './units'
 export * from './selectors'
-
-
+export * from './staticStyleHelpers'
+export * from './boxShadow'
+export * from './important'
+export * from './color'
 export {default as arrayWrapper} from './arrayWrapper'
 export {toMq, toMqInputAsObj} from './toMq'

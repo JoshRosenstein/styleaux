@@ -1,4 +1,4 @@
-import {WhiteSpaceProperty,OverflowProperty,TextOverflowProperty} from "@roseys/csstype";
+import {WhiteSpaceProperty,OverflowProperty,TextOverflowProperty} from "@styleaux/csstype";
 
 export interface Ellipsis {
     whiteSpace: WhiteSpaceProperty;

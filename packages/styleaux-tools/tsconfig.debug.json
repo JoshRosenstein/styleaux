@@ -1,0 +1,25 @@
+{
+
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "strict": true,
+    "target": "es5",
+    "declaration": true,
+    "declarationDir": "dist-debug/",
+    "outDir": "dist-debug/",
+    "emitDeclarationOnly": true,
+    "skipLibCheck": true, /// Needs to be true to fix wrong alias types being used
+
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": [
+    "dist-*/",
+    "node_modules",
+    "__tests__",
+    "**/__tests__/**",
+    "**/*.spec.ts",
+    "**/*.test.ts",
+  ]
+}
+

@@ -1,5 +1,5 @@
 import {px} from '../units'
-import {OverflowProperty,Box,MaxHeightProperty,WhiteSpaceProperty} from '@roseys/csstype'
+import {OverflowProperty,Box,MaxHeightProperty,WhiteSpaceProperty} from '@styleaux/csstype'
 
 
 export interface MaxLines {

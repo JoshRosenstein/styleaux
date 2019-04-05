@@ -4,7 +4,7 @@
   "author": "Joshua Rosenstein",
   "license": "MIT",
   "source": "dist-src/index.js",
-  "types": "dist-types/index.d.ts",
+  "types": "dist-src/index.d.ts",
   "main": "dist-node/index.js",
   "module": "dist-web/index.js",
   "sideEffects": "false",
@@ -14,24 +14,20 @@
     "bin/"
   ],
   "scripts": {
-    "build:src": "tsc -d --declarationDir ./dist-types --outDir ./dist-src",
+    "build:src": "tsc -d --declarationDir ./dist-src --outDir ./dist-src",
+    "build:debug": "rimraf dist-debug && tsc -p tsconfig.debug.json",
     "build:bundles": "rollup -c",
     "build": "yarn clean && yarn build:src && yarn build:bundles",
     "clean": "rimraf dist-*/",
     "test": "jest"
   },
-
   "peerDependencies": {
-    "typed-is": "^1.0.4",
-    "@roseys/csstype":"^2.6.3",
-    "@roseys/futils": "^2.1.4"
-  },
-
-  "devDependencies": {
-    "typed-is": "^1.0.4",
+    "@styleaux/csstype": "^0.0.0-beta.0",
     "@roseys/futils": "^2.1.4",
-    "@roseys/csstype":"^2.6.3",
-    "@roseys/eslint-config": "^1.0.2",
-    "typescript": "^3.3.3333"
+    "typed-is": "^1.0.4"
+  },
+  "devDependencies":{
+    "@roseys/eslint-config": "^1.0.3",
+    "@roseys/csstype":"^2.6.9-beta.0"
   }
 }
