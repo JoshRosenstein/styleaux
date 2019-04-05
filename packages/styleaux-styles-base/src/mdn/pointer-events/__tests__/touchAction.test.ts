@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { touchAction } from '../touchAction';
+import { createTouchAction } from '../touchAction';
 
 describe('touchAction', () => {
   it('should return a function', () => {
-    const result = touchAction();
+    const result = createTouchAction();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `touchAction` as component and css prop', () => {
-    const result = touchAction()({ touchAction: 'inherit' });
+    const result = createTouchAction()({ touchAction: 'inherit' });
     expect(toStyles(result)).toEqual({ touchAction: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = touchAction<'a'>()({ touchAction: 'a' });
+    const result = createTouchAction<'a'>()({ touchAction: 'a' });
     expect(toStyles(result)).toEqual({ touchAction: 'a' });
   });
 
   it('should use an interface which marks `touchAction` as optional', () => {
-    const result = touchAction<'a'>()({});
+    const result = createTouchAction<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = touchAction<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTouchAction<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ touchAction: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('touchAction', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = touchAction<
+    const result = createTouchAction<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

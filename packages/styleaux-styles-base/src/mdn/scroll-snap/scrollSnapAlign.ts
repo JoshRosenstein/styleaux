@@ -1,4 +1,4 @@
-import { ScrollSnapAlignProperty } from '@roseys/csstype';
+import { ScrollSnapAlignProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IScrollSnapAlignProps<T> {
   scrollSnapAlign: T;
 }
 
-export const scrollSnapAlign = <
+export const createScrollSnapAlign = <
   T = ScrollSnapAlignProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const scrollSnapAlign = <
     transformValue,
   })
 
-export const scrollSnapAlignRule = <T = ScrollSnapAlignProperty>(
+export const createScrollSnapAlignRule = <T = ScrollSnapAlignProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: SCROLLSNAPALIGN, getValue: transformer})
+
+export const scrollSnapAlign =createScrollSnapAlign()
+
+export const scrollSnapAlignRule =createScrollSnapAlignRule()

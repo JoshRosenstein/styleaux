@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { animationTimingFunction } from '../animationTimingFunction';
+import { createAnimationTimingFunction } from '../animationTimingFunction';
 
 describe('animationTimingFunction', () => {
   it('should return a function', () => {
-    const result = animationTimingFunction();
+    const result = createAnimationTimingFunction();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `animationTimingFunction` as component and css prop', () => {
-    const result = animationTimingFunction()({ animationTimingFunction: 'inherit' });
+    const result = createAnimationTimingFunction()({ animationTimingFunction: 'inherit' });
     expect(toStyles(result)).toEqual({ animationTimingFunction: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = animationTimingFunction<'a'>()({ animationTimingFunction: 'a' });
+    const result = createAnimationTimingFunction<'a'>()({ animationTimingFunction: 'a' });
     expect(toStyles(result)).toEqual({ animationTimingFunction: 'a' });
   });
 
   it('should use an interface which marks `animationTimingFunction` as optional', () => {
-    const result = animationTimingFunction<'a'>()({});
+    const result = createAnimationTimingFunction<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = animationTimingFunction<'value',never,IThemeWithoutBreakpoints>({
+    const result = createAnimationTimingFunction<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ animationTimingFunction: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('animationTimingFunction', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = animationTimingFunction<
+    const result = createAnimationTimingFunction<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { visibility } from '../visibility';
+import { createVisibility } from '../visibility';
 
 describe('visibility', () => {
   it('should return a function', () => {
-    const result = visibility();
+    const result = createVisibility();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `visibility` as component and css prop', () => {
-    const result = visibility()({ visibility: 'inherit' });
+    const result = createVisibility()({ visibility: 'inherit' });
     expect(toStyles(result)).toEqual({ visibility: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = visibility<'a'>()({ visibility: 'a' });
+    const result = createVisibility<'a'>()({ visibility: 'a' });
     expect(toStyles(result)).toEqual({ visibility: 'a' });
   });
 
   it('should use an interface which marks `visibility` as optional', () => {
-    const result = visibility<'a'>()({});
+    const result = createVisibility<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = visibility<'value',never,IThemeWithoutBreakpoints>({
+    const result = createVisibility<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ visibility: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('visibility', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = visibility<
+    const result = createVisibility<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

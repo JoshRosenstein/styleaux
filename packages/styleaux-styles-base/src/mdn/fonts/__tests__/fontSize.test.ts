@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { fontSize } from '../fontSize';
+import { createFontSize } from '../fontSize';
 
 describe('fontSize', () => {
   it('should return a function', () => {
-    const result = fontSize();
+    const result = createFontSize();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `fontSize` as component and css prop', () => {
-    const result = fontSize()({ fontSize: 'inherit' });
+    const result = createFontSize()({ fontSize: 'inherit' });
     expect(toStyles(result)).toEqual({ fontSize: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = fontSize<'a'>()({ fontSize: 'a' });
+    const result = createFontSize<'a'>()({ fontSize: 'a' });
     expect(toStyles(result)).toEqual({ fontSize: 'a' });
   });
 
   it('should use an interface which marks `fontSize` as optional', () => {
-    const result = fontSize<'a'>()({});
+    const result = createFontSize<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = fontSize<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFontSize<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontSize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('fontSize', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = fontSize<
+    const result = createFontSize<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { textRendering } from '../textRendering';
+import { createTextRendering } from '../textRendering';
 
 describe('textRendering', () => {
   it('should return a function', () => {
-    const result = textRendering();
+    const result = createTextRendering();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `textRendering` as component and css prop', () => {
-    const result = textRendering()({ textRendering: 'inherit' });
+    const result = createTextRendering()({ textRendering: 'inherit' });
     expect(toStyles(result)).toEqual({ textRendering: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = textRendering<'a'>()({ textRendering: 'a' });
+    const result = createTextRendering<'a'>()({ textRendering: 'a' });
     expect(toStyles(result)).toEqual({ textRendering: 'a' });
   });
 
   it('should use an interface which marks `textRendering` as optional', () => {
-    const result = textRendering<'a'>()({});
+    const result = createTextRendering<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = textRendering<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextRendering<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textRendering: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('textRendering', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = textRendering<
+    const result = createTextRendering<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

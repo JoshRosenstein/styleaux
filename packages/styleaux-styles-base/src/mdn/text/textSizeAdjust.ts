@@ -1,4 +1,4 @@
-import { TextSizeAdjustProperty } from '@roseys/csstype';
+import { TextSizeAdjustProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITextSizeAdjustProps<T> {
   textSizeAdjust: T;
 }
 
-export const textSizeAdjust = <
+export const createTextSizeAdjust = <
   T = TextSizeAdjustProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const textSizeAdjust = <
     transformValue,
   })
 
-export const textSizeAdjustRule = <T = TextSizeAdjustProperty>(
+export const createTextSizeAdjustRule = <T = TextSizeAdjustProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TEXTSIZEADJUST, getValue: transformer})
+
+export const textSizeAdjust =createTextSizeAdjust()
+
+export const textSizeAdjustRule =createTextSizeAdjustRule()

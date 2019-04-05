@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { textDecorationStyle } from '../textDecorationStyle';
+import { createTextDecorationStyle } from '../textDecorationStyle';
 
 describe('textDecorationStyle', () => {
   it('should return a function', () => {
-    const result = textDecorationStyle();
+    const result = createTextDecorationStyle();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `textDecorationStyle` as component and css prop', () => {
-    const result = textDecorationStyle()({ textDecorationStyle: 'inherit' });
+    const result = createTextDecorationStyle()({ textDecorationStyle: 'inherit' });
     expect(toStyles(result)).toEqual({ textDecorationStyle: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = textDecorationStyle<'a'>()({ textDecorationStyle: 'a' });
+    const result = createTextDecorationStyle<'a'>()({ textDecorationStyle: 'a' });
     expect(toStyles(result)).toEqual({ textDecorationStyle: 'a' });
   });
 
   it('should use an interface which marks `textDecorationStyle` as optional', () => {
-    const result = textDecorationStyle<'a'>()({});
+    const result = createTextDecorationStyle<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = textDecorationStyle<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextDecorationStyle<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textDecorationStyle: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('textDecorationStyle', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = textDecorationStyle<
+    const result = createTextDecorationStyle<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

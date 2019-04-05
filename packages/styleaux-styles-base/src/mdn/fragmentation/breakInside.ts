@@ -1,4 +1,4 @@
-import { BreakInsideProperty } from '@roseys/csstype';
+import { BreakInsideProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBreakInsideProps<T> {
   breakInside: T;
 }
 
-export const breakInside = <
+export const createBreakInside = <
   T = BreakInsideProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const breakInside = <
     transformValue,
   })
 
-export const breakInsideRule = <T = BreakInsideProperty>(
+export const createBreakInsideRule = <T = BreakInsideProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BREAKINSIDE, getValue: transformer})
+
+export const breakInside =createBreakInside()
+
+export const breakInsideRule =createBreakInsideRule()

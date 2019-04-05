@@ -1,4 +1,4 @@
-import { BorderBlockEndProperty } from '@roseys/csstype';
+import { BorderBlockEndProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBorderBlockEndProps<T> {
   borderBlockEnd: T;
 }
 
-export const borderBlockEnd = <
+export const createBorderBlockEnd = <
   T = BorderBlockEndProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const borderBlockEnd = <
     transformValue,
   })
 
-export const borderBlockEndRule = <T = BorderBlockEndProperty>(
+export const createBorderBlockEndRule = <T = BorderBlockEndProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BORDERBLOCKEND, getValue: transformer})
+
+export const borderBlockEnd =createBorderBlockEnd()
+
+export const borderBlockEndRule =createBorderBlockEndRule()

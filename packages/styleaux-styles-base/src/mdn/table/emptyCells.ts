@@ -1,4 +1,4 @@
-import { EmptyCellsProperty } from '@roseys/csstype';
+import { EmptyCellsProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IEmptyCellsProps<T> {
   emptyCells: T;
 }
 
-export const emptyCells = <
+export const createEmptyCells = <
   T = EmptyCellsProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const emptyCells = <
     transformValue,
   })
 
-export const emptyCellsRule = <T = EmptyCellsProperty>(
+export const createEmptyCellsRule = <T = EmptyCellsProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: EMPTYCELLS, getValue: transformer})
+
+export const emptyCells =createEmptyCells()
+
+export const emptyCellsRule =createEmptyCellsRule()

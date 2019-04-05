@@ -1,4 +1,4 @@
-import { FloatProperty } from '@roseys/csstype';
+import { FloatProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IFloatProps<T> {
   float: T;
 }
 
-export const float = <
+export const createFloat = <
   T = FloatProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const float = <
     transformValue,
   })
 
-export const floatRule = <T = FloatProperty>(
+export const createFloatRule = <T = FloatProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: FLOAT, getValue: transformer})
+
+export const float =createFloat()
+
+export const floatRule =createFloatRule()

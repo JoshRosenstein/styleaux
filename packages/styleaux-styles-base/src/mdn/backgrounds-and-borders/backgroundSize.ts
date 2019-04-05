@@ -1,4 +1,4 @@
-import { BackgroundSizeProperty } from '@roseys/csstype';
+import { BackgroundSizeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBackgroundSizeProps<T> {
   backgroundSize: T;
 }
 
-export const backgroundSize = <
+export const createBackgroundSize = <
   T = BackgroundSizeProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const backgroundSize = <
     transformValue,
   })
 
-export const backgroundSizeRule = <T = BackgroundSizeProperty>(
+export const createBackgroundSizeRule = <T = BackgroundSizeProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BACKGROUNDSIZE, getValue: transformer})
+
+export const backgroundSize =createBackgroundSize()
+
+export const backgroundSizeRule =createBackgroundSizeRule()

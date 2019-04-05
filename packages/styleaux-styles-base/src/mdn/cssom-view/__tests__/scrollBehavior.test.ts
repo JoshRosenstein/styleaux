@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { scrollBehavior } from '../scrollBehavior';
+import { createScrollBehavior } from '../scrollBehavior';
 
 describe('scrollBehavior', () => {
   it('should return a function', () => {
-    const result = scrollBehavior();
+    const result = createScrollBehavior();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `scrollBehavior` as component and css prop', () => {
-    const result = scrollBehavior()({ scrollBehavior: 'inherit' });
+    const result = createScrollBehavior()({ scrollBehavior: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollBehavior: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = scrollBehavior<'a'>()({ scrollBehavior: 'a' });
+    const result = createScrollBehavior<'a'>()({ scrollBehavior: 'a' });
     expect(toStyles(result)).toEqual({ scrollBehavior: 'a' });
   });
 
   it('should use an interface which marks `scrollBehavior` as optional', () => {
-    const result = scrollBehavior<'a'>()({});
+    const result = createScrollBehavior<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = scrollBehavior<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollBehavior<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollBehavior: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('scrollBehavior', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = scrollBehavior<
+    const result = createScrollBehavior<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

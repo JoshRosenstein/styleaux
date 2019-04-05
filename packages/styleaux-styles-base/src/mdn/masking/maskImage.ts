@@ -1,4 +1,4 @@
-import { MaskImageProperty } from '@roseys/csstype';
+import { MaskImageProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMaskImageProps<T> {
   maskImage: T;
 }
 
-export const maskImage = <
+export const createMaskImage = <
   T = MaskImageProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const maskImage = <
     transformValue,
   })
 
-export const maskImageRule = <T = MaskImageProperty>(
+export const createMaskImageRule = <T = MaskImageProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MASKIMAGE, getValue: transformer})
+
+export const maskImage =createMaskImage()
+
+export const maskImageRule =createMaskImageRule()

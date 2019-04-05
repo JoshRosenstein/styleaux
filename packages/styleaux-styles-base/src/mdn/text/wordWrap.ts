@@ -1,4 +1,4 @@
-import { WordWrapProperty } from '@roseys/csstype';
+import { WordWrapProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IWordWrapProps<T> {
   wordWrap: T;
 }
 
-export const wordWrap = <
+export const createWordWrap = <
   T = WordWrapProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const wordWrap = <
     transformValue,
   })
 
-export const wordWrapRule = <T = WordWrapProperty>(
+export const createWordWrapRule = <T = WordWrapProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: WORDWRAP, getValue: transformer})
+
+export const wordWrap =createWordWrap()
+
+export const wordWrapRule =createWordWrapRule()

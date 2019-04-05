@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { borderRadius } from '../borderRadius';
+import { createBorderRadius } from '../borderRadius';
 
 describe('borderRadius', () => {
   it('should return a function', () => {
-    const result = borderRadius();
+    const result = createBorderRadius();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `borderRadius` as component and css prop', () => {
-    const result = borderRadius()({ borderRadius: 'inherit' });
+    const result = createBorderRadius()({ borderRadius: 'inherit' });
     expect(toStyles(result)).toEqual({ borderRadius: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = borderRadius<'a'>()({ borderRadius: 'a' });
+    const result = createBorderRadius<'a'>()({ borderRadius: 'a' });
     expect(toStyles(result)).toEqual({ borderRadius: 'a' });
   });
 
   it('should use an interface which marks `borderRadius` as optional', () => {
-    const result = borderRadius<'a'>()({});
+    const result = createBorderRadius<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = borderRadius<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderRadius<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderRadius: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('borderRadius', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = borderRadius<
+    const result = createBorderRadius<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

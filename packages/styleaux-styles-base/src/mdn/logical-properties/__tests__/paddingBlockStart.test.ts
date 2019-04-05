@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { paddingBlockStart } from '../paddingBlockStart';
+import { createPaddingBlockStart } from '../paddingBlockStart';
 
 describe('paddingBlockStart', () => {
   it('should return a function', () => {
-    const result = paddingBlockStart();
+    const result = createPaddingBlockStart();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `paddingBlockStart` as component and css prop', () => {
-    const result = paddingBlockStart()({ paddingBlockStart: 'inherit' });
+    const result = createPaddingBlockStart()({ paddingBlockStart: 'inherit' });
     expect(toStyles(result)).toEqual({ paddingBlockStart: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = paddingBlockStart<'a'>()({ paddingBlockStart: 'a' });
+    const result = createPaddingBlockStart<'a'>()({ paddingBlockStart: 'a' });
     expect(toStyles(result)).toEqual({ paddingBlockStart: 'a' });
   });
 
   it('should use an interface which marks `paddingBlockStart` as optional', () => {
-    const result = paddingBlockStart<'a'>()({});
+    const result = createPaddingBlockStart<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = paddingBlockStart<'value',never,IThemeWithoutBreakpoints>({
+    const result = createPaddingBlockStart<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ paddingBlockStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('paddingBlockStart', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = paddingBlockStart<
+    const result = createPaddingBlockStart<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

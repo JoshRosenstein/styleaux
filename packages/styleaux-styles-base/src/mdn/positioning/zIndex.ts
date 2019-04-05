@@ -1,4 +1,4 @@
-import { ZIndexProperty } from '@roseys/csstype';
+import { ZIndexProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IZIndexProps<T> {
   zIndex: T;
 }
 
-export const zIndex = <
+export const createZIndex = <
   T = ZIndexProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const zIndex = <
     transformValue,
   })
 
-export const zIndexRule = <T = ZIndexProperty>(
+export const createZIndexRule = <T = ZIndexProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: ZINDEX, getValue: transformer})
+
+export const zIndex =createZIndex()
+
+export const zIndexRule =createZIndexRule()

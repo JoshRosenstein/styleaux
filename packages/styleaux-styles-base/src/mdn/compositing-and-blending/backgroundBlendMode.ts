@@ -1,4 +1,4 @@
-import { BackgroundBlendModeProperty } from '@roseys/csstype';
+import { BackgroundBlendModeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBackgroundBlendModeProps<T> {
   backgroundBlendMode: T;
 }
 
-export const backgroundBlendMode = <
+export const createBackgroundBlendMode = <
   T = BackgroundBlendModeProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const backgroundBlendMode = <
     transformValue,
   })
 
-export const backgroundBlendModeRule = <T = BackgroundBlendModeProperty>(
+export const createBackgroundBlendModeRule = <T = BackgroundBlendModeProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BACKGROUNDBLENDMODE, getValue: transformer})
+
+export const backgroundBlendMode =createBackgroundBlendMode()
+
+export const backgroundBlendModeRule =createBackgroundBlendModeRule()

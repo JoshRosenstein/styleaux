@@ -1,4 +1,4 @@
-import { FontKerningProperty } from '@roseys/csstype';
+import { FontKerningProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IFontKerningProps<T> {
   fontKerning: T;
 }
 
-export const fontKerning = <
+export const createFontKerning = <
   T = FontKerningProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const fontKerning = <
     transformValue,
   })
 
-export const fontKerningRule = <T = FontKerningProperty>(
+export const createFontKerningRule = <T = FontKerningProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: FONTKERNING, getValue: transformer})
+
+export const fontKerning =createFontKerning()
+
+export const fontKerningRule =createFontKerningRule()

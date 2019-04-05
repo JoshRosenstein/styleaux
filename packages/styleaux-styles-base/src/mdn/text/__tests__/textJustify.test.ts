@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { textJustify } from '../textJustify';
+import { createTextJustify } from '../textJustify';
 
 describe('textJustify', () => {
   it('should return a function', () => {
-    const result = textJustify();
+    const result = createTextJustify();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `textJustify` as component and css prop', () => {
-    const result = textJustify()({ textJustify: 'inherit' });
+    const result = createTextJustify()({ textJustify: 'inherit' });
     expect(toStyles(result)).toEqual({ textJustify: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = textJustify<'a'>()({ textJustify: 'a' });
+    const result = createTextJustify<'a'>()({ textJustify: 'a' });
     expect(toStyles(result)).toEqual({ textJustify: 'a' });
   });
 
   it('should use an interface which marks `textJustify` as optional', () => {
-    const result = textJustify<'a'>()({});
+    const result = createTextJustify<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = textJustify<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextJustify<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textJustify: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('textJustify', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = textJustify<
+    const result = createTextJustify<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

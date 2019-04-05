@@ -1,4 +1,4 @@
-import { BorderBottomColorProperty } from '@roseys/csstype';
+import { BorderBottomColorProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBorderBottomColorProps<T> {
   borderBottomColor: T;
 }
 
-export const borderBottomColor = <
+export const createBorderBottomColor = <
   T = BorderBottomColorProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const borderBottomColor = <
     transformValue,
   })
 
-export const borderBottomColorRule = <T = BorderBottomColorProperty>(
+export const createBorderBottomColorRule = <T = BorderBottomColorProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BORDERBOTTOMCOLOR, getValue: transformer})
+
+export const borderBottomColor =createBorderBottomColor()
+
+export const borderBottomColorRule =createBorderBottomColorRule()

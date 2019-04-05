@@ -1,4 +1,4 @@
-import { ColorAdjustProperty } from '@roseys/csstype';
+import { ColorAdjustProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IColorAdjustProps<T> {
   colorAdjust: T;
 }
 
-export const colorAdjust = <
+export const createColorAdjust = <
   T = ColorAdjustProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const colorAdjust = <
     transformValue,
   })
 
-export const colorAdjustRule = <T = ColorAdjustProperty>(
+export const createColorAdjustRule = <T = ColorAdjustProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: COLORADJUST, getValue: transformer})
+
+export const colorAdjust =createColorAdjust()
+
+export const colorAdjustRule =createColorAdjustRule()

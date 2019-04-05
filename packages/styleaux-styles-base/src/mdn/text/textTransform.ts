@@ -1,4 +1,4 @@
-import { TextTransformProperty } from '@roseys/csstype';
+import { TextTransformProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITextTransformProps<T> {
   textTransform: T;
 }
 
-export const textTransform = <
+export const createTextTransform = <
   T = TextTransformProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const textTransform = <
     transformValue,
   })
 
-export const textTransformRule = <T = TextTransformProperty>(
+export const createTextTransformRule = <T = TextTransformProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TEXTTRANSFORM, getValue: transformer})
+
+export const textTransform =createTextTransform()
+
+export const textTransformRule =createTextTransformRule()

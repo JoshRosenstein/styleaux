@@ -1,4 +1,4 @@
-import { ColumnRuleWidthProperty } from '@roseys/csstype';
+import { ColumnRuleWidthProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IColumnRuleWidthProps<T> {
   columnRuleWidth: T;
 }
 
-export const columnRuleWidth = <
+export const createColumnRuleWidth = <
   T = ColumnRuleWidthProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const columnRuleWidth = <
     transformValue,
   })
 
-export const columnRuleWidthRule = <T = ColumnRuleWidthProperty>(
+export const createColumnRuleWidthRule = <T = ColumnRuleWidthProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: COLUMNRULEWIDTH, getValue: transformer})
+
+export const columnRuleWidth =createColumnRuleWidth()
+
+export const columnRuleWidthRule =createColumnRuleWidthRule()

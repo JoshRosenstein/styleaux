@@ -1,4 +1,4 @@
-import { GridRowEndProperty } from '@roseys/csstype';
+import { GridRowEndProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IGridRowEndProps<T> {
   gridRowEnd: T;
 }
 
-export const gridRowEnd = <
+export const createGridRowEnd = <
   T = GridRowEndProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const gridRowEnd = <
     transformValue,
   })
 
-export const gridRowEndRule = <T = GridRowEndProperty>(
+export const createGridRowEndRule = <T = GridRowEndProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: GRIDROWEND, getValue: transformer})
+
+export const gridRowEnd =createGridRowEnd()
+
+export const gridRowEndRule =createGridRowEndRule()

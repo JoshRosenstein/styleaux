@@ -1,4 +1,4 @@
-import { FlexWrapProperty } from '@roseys/csstype';
+import { FlexWrapProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IFlexWrapProps<T> {
   flexWrap: T;
 }
 
-export const flexWrap = <
+export const createFlexWrap = <
   T = FlexWrapProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const flexWrap = <
     transformValue,
   })
 
-export const flexWrapRule = <T = FlexWrapProperty>(
+export const createFlexWrapRule = <T = FlexWrapProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: FLEXWRAP, getValue: transformer})
+
+export const flexWrap =createFlexWrap()
+
+export const flexWrapRule =createFlexWrapRule()

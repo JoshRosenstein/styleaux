@@ -1,4 +1,4 @@
-import { MaskPositionProperty } from '@roseys/csstype';
+import { MaskPositionProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMaskPositionProps<T> {
   maskPosition: T;
 }
 
-export const maskPosition = <
+export const createMaskPosition = <
   T = MaskPositionProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const maskPosition = <
     transformValue,
   })
 
-export const maskPositionRule = <T = MaskPositionProperty>(
+export const createMaskPositionRule = <T = MaskPositionProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MASKPOSITION, getValue: transformer})
+
+export const maskPosition =createMaskPosition()
+
+export const maskPositionRule =createMaskPositionRule()

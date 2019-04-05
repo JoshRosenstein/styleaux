@@ -1,4 +1,4 @@
-import { BorderBlockEndWidthProperty } from '@roseys/csstype';
+import { BorderBlockEndWidthProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBorderBlockEndWidthProps<T> {
   borderBlockEndWidth: T;
 }
 
-export const borderBlockEndWidth = <
+export const createBorderBlockEndWidth = <
   T = BorderBlockEndWidthProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const borderBlockEndWidth = <
     transformValue,
   })
 
-export const borderBlockEndWidthRule = <T = BorderBlockEndWidthProperty>(
+export const createBorderBlockEndWidthRule = <T = BorderBlockEndWidthProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BORDERBLOCKENDWIDTH, getValue: transformer})
+
+export const borderBlockEndWidth =createBorderBlockEndWidth()
+
+export const borderBlockEndWidthRule =createBorderBlockEndWidthRule()

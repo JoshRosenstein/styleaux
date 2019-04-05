@@ -1,4 +1,4 @@
-import { PaddingLeftProperty } from '@roseys/csstype';
+import { PaddingLeftProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IPaddingLeftProps<T> {
   paddingLeft: T;
 }
 
-export const paddingLeft = <
+export const createPaddingLeft = <
   T = PaddingLeftProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const paddingLeft = <
     transformValue,
   })
 
-export const paddingLeftRule = <T = PaddingLeftProperty>(
+export const createPaddingLeftRule = <T = PaddingLeftProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: PADDINGLEFT, getValue: transformer})
+
+export const paddingLeft =createPaddingLeft()
+
+export const paddingLeftRule =createPaddingLeftRule()

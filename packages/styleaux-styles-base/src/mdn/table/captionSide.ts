@@ -1,4 +1,4 @@
-import { CaptionSideProperty } from '@roseys/csstype';
+import { CaptionSideProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ICaptionSideProps<T> {
   captionSide: T;
 }
 
-export const captionSide = <
+export const createCaptionSide = <
   T = CaptionSideProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const captionSide = <
     transformValue,
   })
 
-export const captionSideRule = <T = CaptionSideProperty>(
+export const createCaptionSideRule = <T = CaptionSideProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: CAPTIONSIDE, getValue: transformer})
+
+export const captionSide =createCaptionSide()
+
+export const captionSideRule =createCaptionSideRule()

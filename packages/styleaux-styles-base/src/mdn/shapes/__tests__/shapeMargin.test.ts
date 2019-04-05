@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { shapeMargin } from '../shapeMargin';
+import { createShapeMargin } from '../shapeMargin';
 
 describe('shapeMargin', () => {
   it('should return a function', () => {
-    const result = shapeMargin();
+    const result = createShapeMargin();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `shapeMargin` as component and css prop', () => {
-    const result = shapeMargin()({ shapeMargin: 'inherit' });
+    const result = createShapeMargin()({ shapeMargin: 'inherit' });
     expect(toStyles(result)).toEqual({ shapeMargin: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = shapeMargin<'a'>()({ shapeMargin: 'a' });
+    const result = createShapeMargin<'a'>()({ shapeMargin: 'a' });
     expect(toStyles(result)).toEqual({ shapeMargin: 'a' });
   });
 
   it('should use an interface which marks `shapeMargin` as optional', () => {
-    const result = shapeMargin<'a'>()({});
+    const result = createShapeMargin<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = shapeMargin<'value',never,IThemeWithoutBreakpoints>({
+    const result = createShapeMargin<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ shapeMargin: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('shapeMargin', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = shapeMargin<
+    const result = createShapeMargin<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

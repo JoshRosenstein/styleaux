@@ -1,4 +1,4 @@
-import { ScrollPaddingInlineEndProperty } from '@roseys/csstype';
+import { ScrollPaddingInlineEndProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IScrollPaddingInlineEndProps<T> {
   scrollPaddingInlineEnd: T;
 }
 
-export const scrollPaddingInlineEnd = <
+export const createScrollPaddingInlineEnd = <
   T = ScrollPaddingInlineEndProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const scrollPaddingInlineEnd = <
     transformValue,
   })
 
-export const scrollPaddingInlineEndRule = <T = ScrollPaddingInlineEndProperty>(
+export const createScrollPaddingInlineEndRule = <T = ScrollPaddingInlineEndProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: SCROLLPADDINGINLINEEND, getValue: transformer})
+
+export const scrollPaddingInlineEnd =createScrollPaddingInlineEnd()
+
+export const scrollPaddingInlineEndRule =createScrollPaddingInlineEndRule()

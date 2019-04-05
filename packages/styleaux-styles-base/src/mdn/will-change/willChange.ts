@@ -1,4 +1,4 @@
-import { WillChangeProperty } from '@roseys/csstype';
+import { WillChangeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IWillChangeProps<T> {
   willChange: T;
 }
 
-export const willChange = <
+export const createWillChange = <
   T = WillChangeProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const willChange = <
     transformValue,
   })
 
-export const willChangeRule = <T = WillChangeProperty>(
+export const createWillChangeRule = <T = WillChangeProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: WILLCHANGE, getValue: transformer})
+
+export const willChange =createWillChange()
+
+export const willChangeRule =createWillChangeRule()

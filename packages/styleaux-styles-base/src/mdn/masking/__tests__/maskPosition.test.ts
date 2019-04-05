@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { maskPosition } from '../maskPosition';
+import { createMaskPosition } from '../maskPosition';
 
 describe('maskPosition', () => {
   it('should return a function', () => {
-    const result = maskPosition();
+    const result = createMaskPosition();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `maskPosition` as component and css prop', () => {
-    const result = maskPosition()({ maskPosition: 'inherit' });
+    const result = createMaskPosition()({ maskPosition: 'inherit' });
     expect(toStyles(result)).toEqual({ maskPosition: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = maskPosition<'a'>()({ maskPosition: 'a' });
+    const result = createMaskPosition<'a'>()({ maskPosition: 'a' });
     expect(toStyles(result)).toEqual({ maskPosition: 'a' });
   });
 
   it('should use an interface which marks `maskPosition` as optional', () => {
-    const result = maskPosition<'a'>()({});
+    const result = createMaskPosition<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = maskPosition<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMaskPosition<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ maskPosition: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('maskPosition', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = maskPosition<
+    const result = createMaskPosition<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

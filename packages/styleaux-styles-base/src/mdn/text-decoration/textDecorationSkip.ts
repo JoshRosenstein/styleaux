@@ -1,4 +1,4 @@
-import { TextDecorationSkipProperty } from '@roseys/csstype';
+import { TextDecorationSkipProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITextDecorationSkipProps<T> {
   textDecorationSkip: T;
 }
 
-export const textDecorationSkip = <
+export const createTextDecorationSkip = <
   T = TextDecorationSkipProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const textDecorationSkip = <
     transformValue,
   })
 
-export const textDecorationSkipRule = <T = TextDecorationSkipProperty>(
+export const createTextDecorationSkipRule = <T = TextDecorationSkipProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TEXTDECORATIONSKIP, getValue: transformer})
+
+export const textDecorationSkip =createTextDecorationSkip()
+
+export const textDecorationSkipRule =createTextDecorationSkipRule()

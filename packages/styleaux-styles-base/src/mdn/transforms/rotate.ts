@@ -1,4 +1,4 @@
-import { RotateProperty } from '@roseys/csstype';
+import { RotateProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IRotateProps<T> {
   rotate: T;
 }
 
-export const rotate = <
+export const createRotate = <
   T = RotateProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const rotate = <
     transformValue,
   })
 
-export const rotateRule = <T = RotateProperty>(
+export const createRotateRule = <T = RotateProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: ROTATE, getValue: transformer})
+
+export const rotate =createRotate()
+
+export const rotateRule =createRotateRule()

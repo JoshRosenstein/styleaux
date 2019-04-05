@@ -1,4 +1,4 @@
-import { ListStylePositionProperty } from '@roseys/csstype';
+import { ListStylePositionProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IListStylePositionProps<T> {
   listStylePosition: T;
 }
 
-export const listStylePosition = <
+export const createListStylePosition = <
   T = ListStylePositionProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const listStylePosition = <
     transformValue,
   })
 
-export const listStylePositionRule = <T = ListStylePositionProperty>(
+export const createListStylePositionRule = <T = ListStylePositionProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: LISTSTYLEPOSITION, getValue: transformer})
+
+export const listStylePosition =createListStylePosition()
+
+export const listStylePositionRule =createListStylePositionRule()

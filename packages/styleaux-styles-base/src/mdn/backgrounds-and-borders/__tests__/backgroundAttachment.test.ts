@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { backgroundAttachment } from '../backgroundAttachment';
+import { createBackgroundAttachment } from '../backgroundAttachment';
 
 describe('backgroundAttachment', () => {
   it('should return a function', () => {
-    const result = backgroundAttachment();
+    const result = createBackgroundAttachment();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `backgroundAttachment` as component and css prop', () => {
-    const result = backgroundAttachment()({ backgroundAttachment: 'inherit' });
+    const result = createBackgroundAttachment()({ backgroundAttachment: 'inherit' });
     expect(toStyles(result)).toEqual({ backgroundAttachment: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = backgroundAttachment<'a'>()({ backgroundAttachment: 'a' });
+    const result = createBackgroundAttachment<'a'>()({ backgroundAttachment: 'a' });
     expect(toStyles(result)).toEqual({ backgroundAttachment: 'a' });
   });
 
   it('should use an interface which marks `backgroundAttachment` as optional', () => {
-    const result = backgroundAttachment<'a'>()({});
+    const result = createBackgroundAttachment<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = backgroundAttachment<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBackgroundAttachment<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ backgroundAttachment: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('backgroundAttachment', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = backgroundAttachment<
+    const result = createBackgroundAttachment<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

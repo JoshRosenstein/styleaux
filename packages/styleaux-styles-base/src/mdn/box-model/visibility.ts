@@ -1,4 +1,4 @@
-import { VisibilityProperty } from '@roseys/csstype';
+import { VisibilityProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IVisibilityProps<T> {
   visibility: T;
 }
 
-export const visibility = <
+export const createVisibility = <
   T = VisibilityProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const visibility = <
     transformValue,
   })
 
-export const visibilityRule = <T = VisibilityProperty>(
+export const createVisibilityRule = <T = VisibilityProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: VISIBILITY, getValue: transformer})
+
+export const visibility =createVisibility()
+
+export const visibilityRule =createVisibilityRule()

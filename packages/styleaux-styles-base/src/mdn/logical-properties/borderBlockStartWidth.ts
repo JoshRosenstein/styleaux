@@ -1,4 +1,4 @@
-import { BorderBlockStartWidthProperty } from '@roseys/csstype';
+import { BorderBlockStartWidthProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBorderBlockStartWidthProps<T> {
   borderBlockStartWidth: T;
 }
 
-export const borderBlockStartWidth = <
+export const createBorderBlockStartWidth = <
   T = BorderBlockStartWidthProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const borderBlockStartWidth = <
     transformValue,
   })
 
-export const borderBlockStartWidthRule = <T = BorderBlockStartWidthProperty>(
+export const createBorderBlockStartWidthRule = <T = BorderBlockStartWidthProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BORDERBLOCKSTARTWIDTH, getValue: transformer})
+
+export const borderBlockStartWidth =createBorderBlockStartWidth()
+
+export const borderBlockStartWidthRule =createBorderBlockStartWidthRule()

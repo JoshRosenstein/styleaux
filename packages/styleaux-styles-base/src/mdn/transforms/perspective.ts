@@ -1,4 +1,4 @@
-import { PerspectiveProperty } from '@roseys/csstype';
+import { PerspectiveProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IPerspectiveProps<T> {
   perspective: T;
 }
 
-export const perspective = <
+export const createPerspective = <
   T = PerspectiveProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const perspective = <
     transformValue,
   })
 
-export const perspectiveRule = <T = PerspectiveProperty>(
+export const createPerspectiveRule = <T = PerspectiveProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: PERSPECTIVE, getValue: transformer})
+
+export const perspective =createPerspective()
+
+export const perspectiveRule =createPerspectiveRule()

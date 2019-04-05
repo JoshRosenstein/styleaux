@@ -1,4 +1,4 @@
-import { ScrollSnapTypeProperty } from '@roseys/csstype';
+import { ScrollSnapTypeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IScrollSnapTypeProps<T> {
   scrollSnapType: T;
 }
 
-export const scrollSnapType = <
+export const createScrollSnapType = <
   T = ScrollSnapTypeProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const scrollSnapType = <
     transformValue,
   })
 
-export const scrollSnapTypeRule = <T = ScrollSnapTypeProperty>(
+export const createScrollSnapTypeRule = <T = ScrollSnapTypeProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: SCROLLSNAPTYPE, getValue: transformer})
+
+export const scrollSnapType =createScrollSnapType()
+
+export const scrollSnapTypeRule =createScrollSnapTypeRule()

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { gridAutoColumns } from '../gridAutoColumns';
+import { createGridAutoColumns } from '../gridAutoColumns';
 
 describe('gridAutoColumns', () => {
   it('should return a function', () => {
-    const result = gridAutoColumns();
+    const result = createGridAutoColumns();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `gridAutoColumns` as component and css prop', () => {
-    const result = gridAutoColumns()({ gridAutoColumns: 'inherit' });
+    const result = createGridAutoColumns()({ gridAutoColumns: 'inherit' });
     expect(toStyles(result)).toEqual({ gridAutoColumns: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = gridAutoColumns<'a'>()({ gridAutoColumns: 'a' });
+    const result = createGridAutoColumns<'a'>()({ gridAutoColumns: 'a' });
     expect(toStyles(result)).toEqual({ gridAutoColumns: 'a' });
   });
 
   it('should use an interface which marks `gridAutoColumns` as optional', () => {
-    const result = gridAutoColumns<'a'>()({});
+    const result = createGridAutoColumns<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = gridAutoColumns<'value',never,IThemeWithoutBreakpoints>({
+    const result = createGridAutoColumns<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ gridAutoColumns: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('gridAutoColumns', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = gridAutoColumns<
+    const result = createGridAutoColumns<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

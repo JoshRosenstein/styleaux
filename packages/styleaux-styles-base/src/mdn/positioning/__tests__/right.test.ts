@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { right } from '../right';
+import { createRight } from '../right';
 
 describe('right', () => {
   it('should return a function', () => {
-    const result = right();
+    const result = createRight();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `right` as component and css prop', () => {
-    const result = right()({ right: 'inherit' });
+    const result = createRight()({ right: 'inherit' });
     expect(toStyles(result)).toEqual({ right: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = right<'a'>()({ right: 'a' });
+    const result = createRight<'a'>()({ right: 'a' });
     expect(toStyles(result)).toEqual({ right: 'a' });
   });
 
   it('should use an interface which marks `right` as optional', () => {
-    const result = right<'a'>()({});
+    const result = createRight<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = right<'value',never,IThemeWithoutBreakpoints>({
+    const result = createRight<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ right: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('right', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = right<
+    const result = createRight<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

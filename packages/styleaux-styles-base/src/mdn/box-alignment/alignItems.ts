@@ -1,4 +1,4 @@
-import { AlignItemsProperty } from '@roseys/csstype';
+import { AlignItemsProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IAlignItemsProps<T> {
   alignItems: T;
 }
 
-export const alignItems = <
+export const createAlignItems = <
   T = AlignItemsProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const alignItems = <
     transformValue,
   })
 
-export const alignItemsRule = <T = AlignItemsProperty>(
+export const createAlignItemsRule = <T = AlignItemsProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: ALIGNITEMS, getValue: transformer})
+
+export const alignItems =createAlignItems()
+
+export const alignItemsRule =createAlignItemsRule()

@@ -1,4 +1,4 @@
-import { RowGapProperty } from '@roseys/csstype';
+import { RowGapProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IRowGapProps<T> {
   rowGap: T;
 }
 
-export const rowGap = <
+export const createRowGap = <
   T = RowGapProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const rowGap = <
     transformValue,
   })
 
-export const rowGapRule = <T = RowGapProperty>(
+export const createRowGapRule = <T = RowGapProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: ROWGAP, getValue: transformer})
+
+export const rowGap =createRowGap()
+
+export const rowGapRule =createRowGapRule()

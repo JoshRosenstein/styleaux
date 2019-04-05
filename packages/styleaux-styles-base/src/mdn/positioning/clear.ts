@@ -1,4 +1,4 @@
-import { ClearProperty } from '@roseys/csstype';
+import { ClearProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IClearProps<T> {
   clear: T;
 }
 
-export const clear = <
+export const createClear = <
   T = ClearProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const clear = <
     transformValue,
   })
 
-export const clearRule = <T = ClearProperty>(
+export const createClearRule = <T = ClearProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: CLEAR, getValue: transformer})
+
+export const clear =createClear()
+
+export const clearRule =createClearRule()

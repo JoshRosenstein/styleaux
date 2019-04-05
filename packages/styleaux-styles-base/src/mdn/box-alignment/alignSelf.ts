@@ -1,4 +1,4 @@
-import { AlignSelfProperty } from '@roseys/csstype';
+import { AlignSelfProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IAlignSelfProps<T> {
   alignSelf: T;
 }
 
-export const alignSelf = <
+export const createAlignSelf = <
   T = AlignSelfProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const alignSelf = <
     transformValue,
   })
 
-export const alignSelfRule = <T = AlignSelfProperty>(
+export const createAlignSelfRule = <T = AlignSelfProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: ALIGNSELF, getValue: transformer})
+
+export const alignSelf =createAlignSelf()
+
+export const alignSelfRule =createAlignSelfRule()

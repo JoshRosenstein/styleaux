@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { borderImageWidth } from '../borderImageWidth';
+import { createBorderImageWidth } from '../borderImageWidth';
 
 describe('borderImageWidth', () => {
   it('should return a function', () => {
-    const result = borderImageWidth();
+    const result = createBorderImageWidth();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `borderImageWidth` as component and css prop', () => {
-    const result = borderImageWidth()({ borderImageWidth: 'inherit' });
+    const result = createBorderImageWidth()({ borderImageWidth: 'inherit' });
     expect(toStyles(result)).toEqual({ borderImageWidth: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = borderImageWidth<'a'>()({ borderImageWidth: 'a' });
+    const result = createBorderImageWidth<'a'>()({ borderImageWidth: 'a' });
     expect(toStyles(result)).toEqual({ borderImageWidth: 'a' });
   });
 
   it('should use an interface which marks `borderImageWidth` as optional', () => {
-    const result = borderImageWidth<'a'>()({});
+    const result = createBorderImageWidth<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = borderImageWidth<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderImageWidth<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderImageWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('borderImageWidth', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = borderImageWidth<
+    const result = createBorderImageWidth<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

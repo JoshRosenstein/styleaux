@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { willChange } from '../willChange';
+import { createWillChange } from '../willChange';
 
 describe('willChange', () => {
   it('should return a function', () => {
-    const result = willChange();
+    const result = createWillChange();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `willChange` as component and css prop', () => {
-    const result = willChange()({ willChange: 'inherit' });
+    const result = createWillChange()({ willChange: 'inherit' });
     expect(toStyles(result)).toEqual({ willChange: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = willChange<'a'>()({ willChange: 'a' });
+    const result = createWillChange<'a'>()({ willChange: 'a' });
     expect(toStyles(result)).toEqual({ willChange: 'a' });
   });
 
   it('should use an interface which marks `willChange` as optional', () => {
-    const result = willChange<'a'>()({});
+    const result = createWillChange<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = willChange<'value',never,IThemeWithoutBreakpoints>({
+    const result = createWillChange<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ willChange: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('willChange', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = willChange<
+    const result = createWillChange<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

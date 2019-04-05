@@ -1,4 +1,4 @@
-import { AnimationTimingFunctionProperty } from '@roseys/csstype';
+import { AnimationTimingFunctionProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IAnimationTimingFunctionProps<T> {
   animationTimingFunction: T;
 }
 
-export const animationTimingFunction = <
+export const createAnimationTimingFunction = <
   T = AnimationTimingFunctionProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const animationTimingFunction = <
     transformValue,
   })
 
-export const animationTimingFunctionRule = <T = AnimationTimingFunctionProperty>(
+export const createAnimationTimingFunctionRule = <T = AnimationTimingFunctionProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: ANIMATIONTIMINGFUNCTION, getValue: transformer})
+
+export const animationTimingFunction =createAnimationTimingFunction()
+
+export const animationTimingFunctionRule =createAnimationTimingFunctionRule()

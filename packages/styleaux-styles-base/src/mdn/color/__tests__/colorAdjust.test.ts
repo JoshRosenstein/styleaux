@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { colorAdjust } from '../colorAdjust';
+import { createColorAdjust } from '../colorAdjust';
 
 describe('colorAdjust', () => {
   it('should return a function', () => {
-    const result = colorAdjust();
+    const result = createColorAdjust();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `colorAdjust` as component and css prop', () => {
-    const result = colorAdjust()({ colorAdjust: 'inherit' });
+    const result = createColorAdjust()({ colorAdjust: 'inherit' });
     expect(toStyles(result)).toEqual({ colorAdjust: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = colorAdjust<'a'>()({ colorAdjust: 'a' });
+    const result = createColorAdjust<'a'>()({ colorAdjust: 'a' });
     expect(toStyles(result)).toEqual({ colorAdjust: 'a' });
   });
 
   it('should use an interface which marks `colorAdjust` as optional', () => {
-    const result = colorAdjust<'a'>()({});
+    const result = createColorAdjust<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = colorAdjust<'value',never,IThemeWithoutBreakpoints>({
+    const result = createColorAdjust<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ colorAdjust: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('colorAdjust', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = colorAdjust<
+    const result = createColorAdjust<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { transformBox } from '../transformBox';
+import { createTransformBox } from '../transformBox';
 
 describe('transformBox', () => {
   it('should return a function', () => {
-    const result = transformBox();
+    const result = createTransformBox();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `transformBox` as component and css prop', () => {
-    const result = transformBox()({ transformBox: 'inherit' });
+    const result = createTransformBox()({ transformBox: 'inherit' });
     expect(toStyles(result)).toEqual({ transformBox: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = transformBox<'a'>()({ transformBox: 'a' });
+    const result = createTransformBox<'a'>()({ transformBox: 'a' });
     expect(toStyles(result)).toEqual({ transformBox: 'a' });
   });
 
   it('should use an interface which marks `transformBox` as optional', () => {
-    const result = transformBox<'a'>()({});
+    const result = createTransformBox<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = transformBox<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTransformBox<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ transformBox: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('transformBox', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = transformBox<
+    const result = createTransformBox<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

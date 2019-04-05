@@ -1,4 +1,4 @@
-import { ColumnSpanProperty } from '@roseys/csstype';
+import { ColumnSpanProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IColumnSpanProps<T> {
   columnSpan: T;
 }
 
-export const columnSpan = <
+export const createColumnSpan = <
   T = ColumnSpanProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const columnSpan = <
     transformValue,
   })
 
-export const columnSpanRule = <T = ColumnSpanProperty>(
+export const createColumnSpanRule = <T = ColumnSpanProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: COLUMNSPAN, getValue: transformer})
+
+export const columnSpan =createColumnSpan()
+
+export const columnSpanRule =createColumnSpanRule()

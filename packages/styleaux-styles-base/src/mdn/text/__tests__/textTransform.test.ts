@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { textTransform } from '../textTransform';
+import { createTextTransform } from '../textTransform';
 
 describe('textTransform', () => {
   it('should return a function', () => {
-    const result = textTransform();
+    const result = createTextTransform();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `textTransform` as component and css prop', () => {
-    const result = textTransform()({ textTransform: 'inherit' });
+    const result = createTextTransform()({ textTransform: 'inherit' });
     expect(toStyles(result)).toEqual({ textTransform: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = textTransform<'a'>()({ textTransform: 'a' });
+    const result = createTextTransform<'a'>()({ textTransform: 'a' });
     expect(toStyles(result)).toEqual({ textTransform: 'a' });
   });
 
   it('should use an interface which marks `textTransform` as optional', () => {
-    const result = textTransform<'a'>()({});
+    const result = createTextTransform<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = textTransform<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextTransform<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textTransform: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('textTransform', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = textTransform<
+    const result = createTextTransform<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

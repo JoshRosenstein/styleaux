@@ -1,4 +1,4 @@
-import { MarginRightProperty } from '@roseys/csstype';
+import { MarginRightProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMarginRightProps<T> {
   marginRight: T;
 }
 
-export const marginRight = <
+export const createMarginRight = <
   T = MarginRightProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const marginRight = <
     transformValue,
   })
 
-export const marginRightRule = <T = MarginRightProperty>(
+export const createMarginRightRule = <T = MarginRightProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MARGINRIGHT, getValue: transformer})
+
+export const marginRight =createMarginRight()
+
+export const marginRightRule =createMarginRightRule()

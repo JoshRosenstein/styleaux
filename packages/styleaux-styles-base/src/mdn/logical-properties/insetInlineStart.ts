@@ -1,4 +1,4 @@
-import { InsetInlineStartProperty } from '@roseys/csstype';
+import { InsetInlineStartProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IInsetInlineStartProps<T> {
   insetInlineStart: T;
 }
 
-export const insetInlineStart = <
+export const createInsetInlineStart = <
   T = InsetInlineStartProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const insetInlineStart = <
     transformValue,
   })
 
-export const insetInlineStartRule = <T = InsetInlineStartProperty>(
+export const createInsetInlineStartRule = <T = InsetInlineStartProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: INSETINLINESTART, getValue: transformer})
+
+export const insetInlineStart =createInsetInlineStart()
+
+export const insetInlineStartRule =createInsetInlineStartRule()

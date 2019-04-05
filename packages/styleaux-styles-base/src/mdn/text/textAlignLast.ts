@@ -1,4 +1,4 @@
-import { TextAlignLastProperty } from '@roseys/csstype';
+import { TextAlignLastProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITextAlignLastProps<T> {
   textAlignLast: T;
 }
 
-export const textAlignLast = <
+export const createTextAlignLast = <
   T = TextAlignLastProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const textAlignLast = <
     transformValue,
   })
 
-export const textAlignLastRule = <T = TextAlignLastProperty>(
+export const createTextAlignLastRule = <T = TextAlignLastProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TEXTALIGNLAST, getValue: transformer})
+
+export const textAlignLast =createTextAlignLast()
+
+export const textAlignLastRule =createTextAlignLastRule()

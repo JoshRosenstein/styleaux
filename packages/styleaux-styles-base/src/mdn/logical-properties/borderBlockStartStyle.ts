@@ -1,4 +1,4 @@
-import { BorderBlockStartStyleProperty } from '@roseys/csstype';
+import { BorderBlockStartStyleProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBorderBlockStartStyleProps<T> {
   borderBlockStartStyle: T;
 }
 
-export const borderBlockStartStyle = <
+export const createBorderBlockStartStyle = <
   T = BorderBlockStartStyleProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const borderBlockStartStyle = <
     transformValue,
   })
 
-export const borderBlockStartStyleRule = <T = BorderBlockStartStyleProperty>(
+export const createBorderBlockStartStyleRule = <T = BorderBlockStartStyleProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BORDERBLOCKSTARTSTYLE, getValue: transformer})
+
+export const borderBlockStartStyle =createBorderBlockStartStyle()
+
+export const borderBlockStartStyleRule =createBorderBlockStartStyleRule()

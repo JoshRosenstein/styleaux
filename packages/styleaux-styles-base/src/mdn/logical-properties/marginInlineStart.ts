@@ -1,4 +1,4 @@
-import { MarginInlineStartProperty } from '@roseys/csstype';
+import { MarginInlineStartProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMarginInlineStartProps<T> {
   marginInlineStart: T;
 }
 
-export const marginInlineStart = <
+export const createMarginInlineStart = <
   T = MarginInlineStartProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const marginInlineStart = <
     transformValue,
   })
 
-export const marginInlineStartRule = <T = MarginInlineStartProperty>(
+export const createMarginInlineStartRule = <T = MarginInlineStartProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MARGININLINESTART, getValue: transformer})
+
+export const marginInlineStart =createMarginInlineStart()
+
+export const marginInlineStartRule =createMarginInlineStartRule()

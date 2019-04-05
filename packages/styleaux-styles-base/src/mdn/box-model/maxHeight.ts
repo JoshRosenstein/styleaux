@@ -1,4 +1,4 @@
-import { MaxHeightProperty } from '@roseys/csstype';
+import { MaxHeightProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMaxHeightProps<T> {
   maxHeight: T;
 }
 
-export const maxHeight = <
+export const createMaxHeight = <
   T = MaxHeightProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const maxHeight = <
     transformValue,
   })
 
-export const maxHeightRule = <T = MaxHeightProperty>(
+export const createMaxHeightRule = <T = MaxHeightProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MAXHEIGHT, getValue: transformer})
+
+export const maxHeight =createMaxHeight()
+
+export const maxHeightRule =createMaxHeightRule()

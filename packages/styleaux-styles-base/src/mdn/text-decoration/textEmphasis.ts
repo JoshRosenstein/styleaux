@@ -1,4 +1,4 @@
-import { TextEmphasisProperty } from '@roseys/csstype';
+import { TextEmphasisProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITextEmphasisProps<T> {
   textEmphasis: T;
 }
 
-export const textEmphasis = <
+export const createTextEmphasis = <
   T = TextEmphasisProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const textEmphasis = <
     transformValue,
   })
 
-export const textEmphasisRule = <T = TextEmphasisProperty>(
+export const createTextEmphasisRule = <T = TextEmphasisProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TEXTEMPHASIS, getValue: transformer})
+
+export const textEmphasis =createTextEmphasis()
+
+export const textEmphasisRule =createTextEmphasisRule()

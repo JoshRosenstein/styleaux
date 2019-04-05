@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { maxInlineSize } from '../maxInlineSize';
+import { createMaxInlineSize } from '../maxInlineSize';
 
 describe('maxInlineSize', () => {
   it('should return a function', () => {
-    const result = maxInlineSize();
+    const result = createMaxInlineSize();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `maxInlineSize` as component and css prop', () => {
-    const result = maxInlineSize()({ maxInlineSize: 'inherit' });
+    const result = createMaxInlineSize()({ maxInlineSize: 'inherit' });
     expect(toStyles(result)).toEqual({ maxInlineSize: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = maxInlineSize<'a'>()({ maxInlineSize: 'a' });
+    const result = createMaxInlineSize<'a'>()({ maxInlineSize: 'a' });
     expect(toStyles(result)).toEqual({ maxInlineSize: 'a' });
   });
 
   it('should use an interface which marks `maxInlineSize` as optional', () => {
-    const result = maxInlineSize<'a'>()({});
+    const result = createMaxInlineSize<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = maxInlineSize<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMaxInlineSize<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ maxInlineSize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('maxInlineSize', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = maxInlineSize<
+    const result = createMaxInlineSize<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

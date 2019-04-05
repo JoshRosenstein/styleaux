@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { scrollSnapAlign } from '../scrollSnapAlign';
+import { createScrollSnapAlign } from '../scrollSnapAlign';
 
 describe('scrollSnapAlign', () => {
   it('should return a function', () => {
-    const result = scrollSnapAlign();
+    const result = createScrollSnapAlign();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `scrollSnapAlign` as component and css prop', () => {
-    const result = scrollSnapAlign()({ scrollSnapAlign: 'inherit' });
+    const result = createScrollSnapAlign()({ scrollSnapAlign: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollSnapAlign: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = scrollSnapAlign<'a'>()({ scrollSnapAlign: 'a' });
+    const result = createScrollSnapAlign<'a'>()({ scrollSnapAlign: 'a' });
     expect(toStyles(result)).toEqual({ scrollSnapAlign: 'a' });
   });
 
   it('should use an interface which marks `scrollSnapAlign` as optional', () => {
-    const result = scrollSnapAlign<'a'>()({});
+    const result = createScrollSnapAlign<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = scrollSnapAlign<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollSnapAlign<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollSnapAlign: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('scrollSnapAlign', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = scrollSnapAlign<
+    const result = createScrollSnapAlign<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

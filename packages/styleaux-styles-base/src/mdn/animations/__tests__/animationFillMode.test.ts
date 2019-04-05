@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { animationFillMode } from '../animationFillMode';
+import { createAnimationFillMode } from '../animationFillMode';
 
 describe('animationFillMode', () => {
   it('should return a function', () => {
-    const result = animationFillMode();
+    const result = createAnimationFillMode();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `animationFillMode` as component and css prop', () => {
-    const result = animationFillMode()({ animationFillMode: 'inherit' });
+    const result = createAnimationFillMode()({ animationFillMode: 'inherit' });
     expect(toStyles(result)).toEqual({ animationFillMode: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = animationFillMode<'a'>()({ animationFillMode: 'a' });
+    const result = createAnimationFillMode<'a'>()({ animationFillMode: 'a' });
     expect(toStyles(result)).toEqual({ animationFillMode: 'a' });
   });
 
   it('should use an interface which marks `animationFillMode` as optional', () => {
-    const result = animationFillMode<'a'>()({});
+    const result = createAnimationFillMode<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = animationFillMode<'value',never,IThemeWithoutBreakpoints>({
+    const result = createAnimationFillMode<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ animationFillMode: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('animationFillMode', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = animationFillMode<
+    const result = createAnimationFillMode<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

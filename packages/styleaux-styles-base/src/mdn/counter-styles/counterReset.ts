@@ -1,4 +1,4 @@
-import { CounterResetProperty } from '@roseys/csstype';
+import { CounterResetProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ICounterResetProps<T> {
   counterReset: T;
 }
 
-export const counterReset = <
+export const createCounterReset = <
   T = CounterResetProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const counterReset = <
     transformValue,
   })
 
-export const counterResetRule = <T = CounterResetProperty>(
+export const createCounterResetRule = <T = CounterResetProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: COUNTERRESET, getValue: transformer})
+
+export const counterReset =createCounterReset()
+
+export const counterResetRule =createCounterResetRule()

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { borderRightColor } from '../borderRightColor';
+import { createBorderRightColor } from '../borderRightColor';
 
 describe('borderRightColor', () => {
   it('should return a function', () => {
-    const result = borderRightColor();
+    const result = createBorderRightColor();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `borderRightColor` as component and css prop', () => {
-    const result = borderRightColor()({ borderRightColor: 'inherit' });
+    const result = createBorderRightColor()({ borderRightColor: 'inherit' });
     expect(toStyles(result)).toEqual({ borderRightColor: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = borderRightColor<'a'>()({ borderRightColor: 'a' });
+    const result = createBorderRightColor<'a'>()({ borderRightColor: 'a' });
     expect(toStyles(result)).toEqual({ borderRightColor: 'a' });
   });
 
   it('should use an interface which marks `borderRightColor` as optional', () => {
-    const result = borderRightColor<'a'>()({});
+    const result = createBorderRightColor<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = borderRightColor<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderRightColor<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderRightColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('borderRightColor', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = borderRightColor<
+    const result = createBorderRightColor<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

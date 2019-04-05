@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { marginBlock } from '../marginBlock';
+import { createMarginBlock } from '../marginBlock';
 
 describe('marginBlock', () => {
   it('should return a function', () => {
-    const result = marginBlock();
+    const result = createMarginBlock();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `marginBlock` as component and css prop', () => {
-    const result = marginBlock()({ marginBlock: 'inherit' });
+    const result = createMarginBlock()({ marginBlock: 'inherit' });
     expect(toStyles(result)).toEqual({ marginBlock: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = marginBlock<'a'>()({ marginBlock: 'a' });
+    const result = createMarginBlock<'a'>()({ marginBlock: 'a' });
     expect(toStyles(result)).toEqual({ marginBlock: 'a' });
   });
 
   it('should use an interface which marks `marginBlock` as optional', () => {
-    const result = marginBlock<'a'>()({});
+    const result = createMarginBlock<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = marginBlock<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMarginBlock<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ marginBlock: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('marginBlock', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = marginBlock<
+    const result = createMarginBlock<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

@@ -1,4 +1,4 @@
-import { FontVariantLigaturesProperty } from '@roseys/csstype';
+import { FontVariantLigaturesProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IFontVariantLigaturesProps<T> {
   fontVariantLigatures: T;
 }
 
-export const fontVariantLigatures = <
+export const createFontVariantLigatures = <
   T = FontVariantLigaturesProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const fontVariantLigatures = <
     transformValue,
   })
 
-export const fontVariantLigaturesRule = <T = FontVariantLigaturesProperty>(
+export const createFontVariantLigaturesRule = <T = FontVariantLigaturesProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: FONTVARIANTLIGATURES, getValue: transformer})
+
+export const fontVariantLigatures =createFontVariantLigatures()
+
+export const fontVariantLigaturesRule =createFontVariantLigaturesRule()

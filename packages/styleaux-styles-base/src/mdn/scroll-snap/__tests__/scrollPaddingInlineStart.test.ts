@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { scrollPaddingInlineStart } from '../scrollPaddingInlineStart';
+import { createScrollPaddingInlineStart } from '../scrollPaddingInlineStart';
 
 describe('scrollPaddingInlineStart', () => {
   it('should return a function', () => {
-    const result = scrollPaddingInlineStart();
+    const result = createScrollPaddingInlineStart();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `scrollPaddingInlineStart` as component and css prop', () => {
-    const result = scrollPaddingInlineStart()({ scrollPaddingInlineStart: 'inherit' });
+    const result = createScrollPaddingInlineStart()({ scrollPaddingInlineStart: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollPaddingInlineStart: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = scrollPaddingInlineStart<'a'>()({ scrollPaddingInlineStart: 'a' });
+    const result = createScrollPaddingInlineStart<'a'>()({ scrollPaddingInlineStart: 'a' });
     expect(toStyles(result)).toEqual({ scrollPaddingInlineStart: 'a' });
   });
 
   it('should use an interface which marks `scrollPaddingInlineStart` as optional', () => {
-    const result = scrollPaddingInlineStart<'a'>()({});
+    const result = createScrollPaddingInlineStart<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = scrollPaddingInlineStart<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollPaddingInlineStart<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollPaddingInlineStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('scrollPaddingInlineStart', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = scrollPaddingInlineStart<
+    const result = createScrollPaddingInlineStart<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

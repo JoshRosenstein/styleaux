@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { columnRuleStyle } from '../columnRuleStyle';
+import { createColumnRuleStyle } from '../columnRuleStyle';
 
 describe('columnRuleStyle', () => {
   it('should return a function', () => {
-    const result = columnRuleStyle();
+    const result = createColumnRuleStyle();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `columnRuleStyle` as component and css prop', () => {
-    const result = columnRuleStyle()({ columnRuleStyle: 'inherit' });
+    const result = createColumnRuleStyle()({ columnRuleStyle: 'inherit' });
     expect(toStyles(result)).toEqual({ columnRuleStyle: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = columnRuleStyle<'a'>()({ columnRuleStyle: 'a' });
+    const result = createColumnRuleStyle<'a'>()({ columnRuleStyle: 'a' });
     expect(toStyles(result)).toEqual({ columnRuleStyle: 'a' });
   });
 
   it('should use an interface which marks `columnRuleStyle` as optional', () => {
-    const result = columnRuleStyle<'a'>()({});
+    const result = createColumnRuleStyle<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = columnRuleStyle<'value',never,IThemeWithoutBreakpoints>({
+    const result = createColumnRuleStyle<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ columnRuleStyle: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('columnRuleStyle', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = columnRuleStyle<
+    const result = createColumnRuleStyle<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

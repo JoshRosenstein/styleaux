@@ -1,4 +1,4 @@
-import { MarginBlockStartProperty } from '@roseys/csstype';
+import { MarginBlockStartProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMarginBlockStartProps<T> {
   marginBlockStart: T;
 }
 
-export const marginBlockStart = <
+export const createMarginBlockStart = <
   T = MarginBlockStartProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const marginBlockStart = <
     transformValue,
   })
 
-export const marginBlockStartRule = <T = MarginBlockStartProperty>(
+export const createMarginBlockStartRule = <T = MarginBlockStartProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MARGINBLOCKSTART, getValue: transformer})
+
+export const marginBlockStart =createMarginBlockStart()
+
+export const marginBlockStartRule =createMarginBlockStartRule()

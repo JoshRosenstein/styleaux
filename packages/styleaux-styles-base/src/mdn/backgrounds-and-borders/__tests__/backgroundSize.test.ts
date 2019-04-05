@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { backgroundSize } from '../backgroundSize';
+import { createBackgroundSize } from '../backgroundSize';
 
 describe('backgroundSize', () => {
   it('should return a function', () => {
-    const result = backgroundSize();
+    const result = createBackgroundSize();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `backgroundSize` as component and css prop', () => {
-    const result = backgroundSize()({ backgroundSize: 'inherit' });
+    const result = createBackgroundSize()({ backgroundSize: 'inherit' });
     expect(toStyles(result)).toEqual({ backgroundSize: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = backgroundSize<'a'>()({ backgroundSize: 'a' });
+    const result = createBackgroundSize<'a'>()({ backgroundSize: 'a' });
     expect(toStyles(result)).toEqual({ backgroundSize: 'a' });
   });
 
   it('should use an interface which marks `backgroundSize` as optional', () => {
-    const result = backgroundSize<'a'>()({});
+    const result = createBackgroundSize<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = backgroundSize<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBackgroundSize<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ backgroundSize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('backgroundSize', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = backgroundSize<
+    const result = createBackgroundSize<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

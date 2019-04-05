@@ -1,4 +1,4 @@
-import { ColumnGapProperty } from '@roseys/csstype';
+import { ColumnGapProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IColumnGapProps<T> {
   columnGap: T;
 }
 
-export const columnGap = <
+export const createColumnGap = <
   T = ColumnGapProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const columnGap = <
     transformValue,
   })
 
-export const columnGapRule = <T = ColumnGapProperty>(
+export const createColumnGapRule = <T = ColumnGapProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: COLUMNGAP, getValue: transformer})
+
+export const columnGap =createColumnGap()
+
+export const columnGapRule =createColumnGapRule()

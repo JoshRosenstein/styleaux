@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { appearance } from '../appearance';
+import { createAppearance } from '../appearance';
 
 describe('appearance', () => {
   it('should return a function', () => {
-    const result = appearance();
+    const result = createAppearance();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `appearance` as component and css prop', () => {
-    const result = appearance()({ appearance: 'inherit' });
+    const result = createAppearance()({ appearance: 'inherit' });
     expect(toStyles(result)).toEqual({ appearance: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = appearance<'a'>()({ appearance: 'a' });
+    const result = createAppearance<'a'>()({ appearance: 'a' });
     expect(toStyles(result)).toEqual({ appearance: 'a' });
   });
 
   it('should use an interface which marks `appearance` as optional', () => {
-    const result = appearance<'a'>()({});
+    const result = createAppearance<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = appearance<'value',never,IThemeWithoutBreakpoints>({
+    const result = createAppearance<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ appearance: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('appearance', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = appearance<
+    const result = createAppearance<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

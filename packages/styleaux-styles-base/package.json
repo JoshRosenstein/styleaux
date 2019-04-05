@@ -15,21 +15,27 @@
   ],
   "scripts": {
     "build:src": "tsc -d --declarationDir ./dist-types --outDir ./dist-src",
+    "build:types": "tsc -d --emitDeclarationOnly --declarationDir ./dist-types",
     "build:bundles": "rollup -c",
-    "build": "yarn clean && yarn build:src && yarn build:bundles",
+    "build": "yarn clean && yarn build:src && yarn build:bundles ",
     "clean": "rimraf dist-*/",
     "test": "jest",
     "typedoc": "typedoc --options typedoc.ts",
-    "generate": "ts-node --project tsconfig.node.json generateMDN.ts"
+    "generate": "rimraf mdn && ts-node --project tsconfig.node.json generateMDN.ts"
   },
   "dependencies": {
-    "@roseys/futils": "^2.1.4",
+
+  },
+  "peerDependencies": {
     "@styleaux/core": "^1.9.0-beta.0",
-    "typed-is": "^1.0.4"
+    "@styleaux/csstype": "^0.0.0-beta.0"
   },
   "devDependencies": {
-    "@roseys/csstype": "^2.6.4",
-    "@roseys/eslint-config": "^1.0.2",
+    "@styleaux/core": "^1.9.0-beta.0",
+    "typed-is": "^1.0.4",
+    "@roseys/futils": "^2.1.4",
+    "@styleaux/csstype": "^0.0.0-beta.0",
+    "@roseys/eslint-config": "^1.0.4",
     "@types/cheerio": "^0.22.11",
     "@types/chroma-js": "^1.4.1",
     "@types/cli-progress": "^1.8.1",
@@ -42,7 +48,6 @@
     "ts-node": "^8.0.1",
     "turndown": "^5.0.1",
     "typedoc": "^0.14.2",
-    "typedoc-plugin-markdown": "^1.1.27",
-    "typescript": "^3.3.3333"
+    "typedoc-plugin-markdown": "^1.1.27"
   }
 }

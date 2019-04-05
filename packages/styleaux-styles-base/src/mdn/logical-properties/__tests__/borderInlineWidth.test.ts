@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { borderInlineWidth } from '../borderInlineWidth';
+import { createBorderInlineWidth } from '../borderInlineWidth';
 
 describe('borderInlineWidth', () => {
   it('should return a function', () => {
-    const result = borderInlineWidth();
+    const result = createBorderInlineWidth();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `borderInlineWidth` as component and css prop', () => {
-    const result = borderInlineWidth()({ borderInlineWidth: 'inherit' });
+    const result = createBorderInlineWidth()({ borderInlineWidth: 'inherit' });
     expect(toStyles(result)).toEqual({ borderInlineWidth: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = borderInlineWidth<'a'>()({ borderInlineWidth: 'a' });
+    const result = createBorderInlineWidth<'a'>()({ borderInlineWidth: 'a' });
     expect(toStyles(result)).toEqual({ borderInlineWidth: 'a' });
   });
 
   it('should use an interface which marks `borderInlineWidth` as optional', () => {
-    const result = borderInlineWidth<'a'>()({});
+    const result = createBorderInlineWidth<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = borderInlineWidth<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderInlineWidth<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderInlineWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('borderInlineWidth', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = borderInlineWidth<
+    const result = createBorderInlineWidth<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

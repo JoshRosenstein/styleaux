@@ -1,4 +1,4 @@
-import { BorderSpacingProperty } from '@roseys/csstype';
+import { BorderSpacingProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBorderSpacingProps<T> {
   borderSpacing: T;
 }
 
-export const borderSpacing = <
+export const createBorderSpacing = <
   T = BorderSpacingProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const borderSpacing = <
     transformValue,
   })
 
-export const borderSpacingRule = <T = BorderSpacingProperty>(
+export const createBorderSpacingRule = <T = BorderSpacingProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BORDERSPACING, getValue: transformer})
+
+export const borderSpacing =createBorderSpacing()
+
+export const borderSpacingRule =createBorderSpacingRule()

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { offsetPath } from '../offsetPath';
+import { createOffsetPath } from '../offsetPath';
 
 describe('offsetPath', () => {
   it('should return a function', () => {
-    const result = offsetPath();
+    const result = createOffsetPath();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `offsetPath` as component and css prop', () => {
-    const result = offsetPath()({ offsetPath: 'inherit' });
+    const result = createOffsetPath()({ offsetPath: 'inherit' });
     expect(toStyles(result)).toEqual({ offsetPath: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = offsetPath<'a'>()({ offsetPath: 'a' });
+    const result = createOffsetPath<'a'>()({ offsetPath: 'a' });
     expect(toStyles(result)).toEqual({ offsetPath: 'a' });
   });
 
   it('should use an interface which marks `offsetPath` as optional', () => {
-    const result = offsetPath<'a'>()({});
+    const result = createOffsetPath<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = offsetPath<'value',never,IThemeWithoutBreakpoints>({
+    const result = createOffsetPath<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ offsetPath: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('offsetPath', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = offsetPath<
+    const result = createOffsetPath<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

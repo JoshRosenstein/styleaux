@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { gap } from '../gap';
+import { createGap } from '../gap';
 
 describe('gap', () => {
   it('should return a function', () => {
-    const result = gap();
+    const result = createGap();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `gap` as component and css prop', () => {
-    const result = gap()({ gap: 'inherit' });
+    const result = createGap()({ gap: 'inherit' });
     expect(toStyles(result)).toEqual({ gap: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = gap<'a'>()({ gap: 'a' });
+    const result = createGap<'a'>()({ gap: 'a' });
     expect(toStyles(result)).toEqual({ gap: 'a' });
   });
 
   it('should use an interface which marks `gap` as optional', () => {
-    const result = gap<'a'>()({});
+    const result = createGap<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = gap<'value',never,IThemeWithoutBreakpoints>({
+    const result = createGap<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ gap: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('gap', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = gap<
+    const result = createGap<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

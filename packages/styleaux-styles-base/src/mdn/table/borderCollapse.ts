@@ -1,4 +1,4 @@
-import { BorderCollapseProperty } from '@roseys/csstype';
+import { BorderCollapseProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBorderCollapseProps<T> {
   borderCollapse: T;
 }
 
-export const borderCollapse = <
+export const createBorderCollapse = <
   T = BorderCollapseProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const borderCollapse = <
     transformValue,
   })
 
-export const borderCollapseRule = <T = BorderCollapseProperty>(
+export const createBorderCollapseRule = <T = BorderCollapseProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BORDERCOLLAPSE, getValue: transformer})
+
+export const borderCollapse =createBorderCollapse()
+
+export const borderCollapseRule =createBorderCollapseRule()

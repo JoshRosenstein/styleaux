@@ -1,4 +1,4 @@
-import { PaddingBlockStartProperty } from '@roseys/csstype';
+import { PaddingBlockStartProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IPaddingBlockStartProps<T> {
   paddingBlockStart: T;
 }
 
-export const paddingBlockStart = <
+export const createPaddingBlockStart = <
   T = PaddingBlockStartProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const paddingBlockStart = <
     transformValue,
   })
 
-export const paddingBlockStartRule = <T = PaddingBlockStartProperty>(
+export const createPaddingBlockStartRule = <T = PaddingBlockStartProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: PADDINGBLOCKSTART, getValue: transformer})
+
+export const paddingBlockStart =createPaddingBlockStart()
+
+export const paddingBlockStartRule =createPaddingBlockStartRule()

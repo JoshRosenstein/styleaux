@@ -1,4 +1,4 @@
-import { WidthProperty } from '@roseys/csstype';
+import { WidthProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IWidthProps<T> {
   width: T;
 }
 
-export const width = <
+export const createWidth = <
   T = WidthProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const width = <
     transformValue,
   })
 
-export const widthRule = <T = WidthProperty>(
+export const createWidthRule = <T = WidthProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: WIDTH, getValue: transformer})
+
+export const width =createWidth()
+
+export const widthRule =createWidthRule()

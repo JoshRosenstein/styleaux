@@ -1,4 +1,4 @@
-import { AppearanceProperty } from '@roseys/csstype';
+import { AppearanceProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IAppearanceProps<T> {
   appearance: T;
 }
 
-export const appearance = <
+export const createAppearance = <
   T = AppearanceProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const appearance = <
     transformValue,
   })
 
-export const appearanceRule = <T = AppearanceProperty>(
+export const createAppearanceRule = <T = AppearanceProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: APPEARANCE, getValue: transformer})
+
+export const appearance =createAppearance()
+
+export const appearanceRule =createAppearanceRule()

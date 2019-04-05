@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { columnCount } from '../columnCount';
+import { createColumnCount } from '../columnCount';
 
 describe('columnCount', () => {
   it('should return a function', () => {
-    const result = columnCount();
+    const result = createColumnCount();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `columnCount` as component and css prop', () => {
-    const result = columnCount()({ columnCount: 'inherit' });
+    const result = createColumnCount()({ columnCount: 'inherit' });
     expect(toStyles(result)).toEqual({ columnCount: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = columnCount<'a'>()({ columnCount: 'a' });
+    const result = createColumnCount<'a'>()({ columnCount: 'a' });
     expect(toStyles(result)).toEqual({ columnCount: 'a' });
   });
 
   it('should use an interface which marks `columnCount` as optional', () => {
-    const result = columnCount<'a'>()({});
+    const result = createColumnCount<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = columnCount<'value',never,IThemeWithoutBreakpoints>({
+    const result = createColumnCount<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ columnCount: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('columnCount', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = columnCount<
+    const result = createColumnCount<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

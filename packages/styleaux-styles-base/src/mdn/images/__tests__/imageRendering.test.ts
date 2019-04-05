@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { imageRendering } from '../imageRendering';
+import { createImageRendering } from '../imageRendering';
 
 describe('imageRendering', () => {
   it('should return a function', () => {
-    const result = imageRendering();
+    const result = createImageRendering();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `imageRendering` as component and css prop', () => {
-    const result = imageRendering()({ imageRendering: 'inherit' });
+    const result = createImageRendering()({ imageRendering: 'inherit' });
     expect(toStyles(result)).toEqual({ imageRendering: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = imageRendering<'a'>()({ imageRendering: 'a' });
+    const result = createImageRendering<'a'>()({ imageRendering: 'a' });
     expect(toStyles(result)).toEqual({ imageRendering: 'a' });
   });
 
   it('should use an interface which marks `imageRendering` as optional', () => {
-    const result = imageRendering<'a'>()({});
+    const result = createImageRendering<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = imageRendering<'value',never,IThemeWithoutBreakpoints>({
+    const result = createImageRendering<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ imageRendering: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('imageRendering', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = imageRendering<
+    const result = createImageRendering<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

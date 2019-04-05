@@ -1,4 +1,4 @@
-import { ScrollMarginBottomProperty } from '@roseys/csstype';
+import { ScrollMarginBottomProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IScrollMarginBottomProps<T> {
   scrollMarginBottom: T;
 }
 
-export const scrollMarginBottom = <
+export const createScrollMarginBottom = <
   T = ScrollMarginBottomProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const scrollMarginBottom = <
     transformValue,
   })
 
-export const scrollMarginBottomRule = <T = ScrollMarginBottomProperty>(
+export const createScrollMarginBottomRule = <T = ScrollMarginBottomProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: SCROLLMARGINBOTTOM, getValue: transformer})
+
+export const scrollMarginBottom =createScrollMarginBottom()
+
+export const scrollMarginBottomRule =createScrollMarginBottomRule()

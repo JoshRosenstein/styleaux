@@ -1,4 +1,4 @@
-import { CursorProperty } from '@roseys/csstype';
+import { CursorProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ICursorProps<T> {
   cursor: T;
 }
 
-export const cursor = <
+export const createCursor = <
   T = CursorProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const cursor = <
     transformValue,
   })
 
-export const cursorRule = <T = CursorProperty>(
+export const createCursorRule = <T = CursorProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: CURSOR, getValue: transformer})
+
+export const cursor =createCursor()
+
+export const cursorRule =createCursorRule()

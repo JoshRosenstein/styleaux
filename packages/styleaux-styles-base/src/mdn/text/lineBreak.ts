@@ -1,4 +1,4 @@
-import { LineBreakProperty } from '@roseys/csstype';
+import { LineBreakProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ILineBreakProps<T> {
   lineBreak: T;
 }
 
-export const lineBreak = <
+export const createLineBreak = <
   T = LineBreakProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const lineBreak = <
     transformValue,
   })
 
-export const lineBreakRule = <T = LineBreakProperty>(
+export const createLineBreakRule = <T = LineBreakProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: LINEBREAK, getValue: transformer})
+
+export const lineBreak =createLineBreak()
+
+export const lineBreakRule =createLineBreakRule()

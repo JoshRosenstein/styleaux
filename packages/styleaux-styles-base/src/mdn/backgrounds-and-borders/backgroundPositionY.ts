@@ -1,4 +1,4 @@
-import { BackgroundPositionYProperty } from '@roseys/csstype';
+import { BackgroundPositionYProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -6,14 +6,14 @@ const BACKGROUNDPOSITIONY='backgroundPositionY'
 
 export interface IBackgroundPositionYProps<T> {
   /**
-   * The **`background-position-y`** CSS property sets the initial vertical position, relative to the background position layer defined by `background-origin`, for each defined background image.
+   * The **`background-position-y`** CSS property sets the initial horizontal position for each background image. The position is relative to the position layer set by `background-origin`.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-y
    */
   backgroundPositionY: T;
 }
 
-export const backgroundPositionY = <
+export const createBackgroundPositionY = <
   T = BackgroundPositionYProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const backgroundPositionY = <
     transformValue,
   })
 
-export const backgroundPositionYRule = <T = BackgroundPositionYProperty>(
+export const createBackgroundPositionYRule = <T = BackgroundPositionYProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BACKGROUNDPOSITIONY, getValue: transformer})
+
+export const backgroundPositionY =createBackgroundPositionY()
+
+export const backgroundPositionYRule =createBackgroundPositionYRule()

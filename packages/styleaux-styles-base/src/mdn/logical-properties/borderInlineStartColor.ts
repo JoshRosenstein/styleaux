@@ -1,4 +1,4 @@
-import { BorderInlineStartColorProperty } from '@roseys/csstype';
+import { BorderInlineStartColorProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBorderInlineStartColorProps<T> {
   borderInlineStartColor: T;
 }
 
-export const borderInlineStartColor = <
+export const createBorderInlineStartColor = <
   T = BorderInlineStartColorProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const borderInlineStartColor = <
     transformValue,
   })
 
-export const borderInlineStartColorRule = <T = BorderInlineStartColorProperty>(
+export const createBorderInlineStartColorRule = <T = BorderInlineStartColorProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BORDERINLINESTARTCOLOR, getValue: transformer})
+
+export const borderInlineStartColor =createBorderInlineStartColor()
+
+export const borderInlineStartColorRule =createBorderInlineStartColorRule()

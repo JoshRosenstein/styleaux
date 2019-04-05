@@ -1,4 +1,4 @@
-import { ShapeMarginProperty } from '@roseys/csstype';
+import { ShapeMarginProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IShapeMarginProps<T> {
   shapeMargin: T;
 }
 
-export const shapeMargin = <
+export const createShapeMargin = <
   T = ShapeMarginProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const shapeMargin = <
     transformValue,
   })
 
-export const shapeMarginRule = <T = ShapeMarginProperty>(
+export const createShapeMarginRule = <T = ShapeMarginProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: SHAPEMARGIN, getValue: transformer})
+
+export const shapeMargin =createShapeMargin()
+
+export const shapeMarginRule =createShapeMarginRule()

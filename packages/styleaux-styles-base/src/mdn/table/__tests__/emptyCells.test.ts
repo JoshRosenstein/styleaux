@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { emptyCells } from '../emptyCells';
+import { createEmptyCells } from '../emptyCells';
 
 describe('emptyCells', () => {
   it('should return a function', () => {
-    const result = emptyCells();
+    const result = createEmptyCells();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `emptyCells` as component and css prop', () => {
-    const result = emptyCells()({ emptyCells: 'inherit' });
+    const result = createEmptyCells()({ emptyCells: 'inherit' });
     expect(toStyles(result)).toEqual({ emptyCells: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = emptyCells<'a'>()({ emptyCells: 'a' });
+    const result = createEmptyCells<'a'>()({ emptyCells: 'a' });
     expect(toStyles(result)).toEqual({ emptyCells: 'a' });
   });
 
   it('should use an interface which marks `emptyCells` as optional', () => {
-    const result = emptyCells<'a'>()({});
+    const result = createEmptyCells<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = emptyCells<'value',never,IThemeWithoutBreakpoints>({
+    const result = createEmptyCells<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ emptyCells: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('emptyCells', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = emptyCells<
+    const result = createEmptyCells<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

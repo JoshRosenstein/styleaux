@@ -1,4 +1,4 @@
-import { ResizeProperty } from '@roseys/csstype';
+import { ResizeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IResizeProps<T> {
   resize: T;
 }
 
-export const resize = <
+export const createResize = <
   T = ResizeProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const resize = <
     transformValue,
   })
 
-export const resizeRule = <T = ResizeProperty>(
+export const createResizeRule = <T = ResizeProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: RESIZE, getValue: transformer})
+
+export const resize =createResize()
+
+export const resizeRule =createResizeRule()

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { height } from '../height';
+import { createHeight } from '../height';
 
 describe('height', () => {
   it('should return a function', () => {
-    const result = height();
+    const result = createHeight();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `height` as component and css prop', () => {
-    const result = height()({ height: 'inherit' });
+    const result = createHeight()({ height: 'inherit' });
     expect(toStyles(result)).toEqual({ height: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = height<'a'>()({ height: 'a' });
+    const result = createHeight<'a'>()({ height: 'a' });
     expect(toStyles(result)).toEqual({ height: 'a' });
   });
 
   it('should use an interface which marks `height` as optional', () => {
-    const result = height<'a'>()({});
+    const result = createHeight<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = height<'value',never,IThemeWithoutBreakpoints>({
+    const result = createHeight<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ height: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('height', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = height<
+    const result = createHeight<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

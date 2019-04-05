@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { textIndent } from '../textIndent';
+import { createTextIndent } from '../textIndent';
 
 describe('textIndent', () => {
   it('should return a function', () => {
-    const result = textIndent();
+    const result = createTextIndent();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `textIndent` as component and css prop', () => {
-    const result = textIndent()({ textIndent: 'inherit' });
+    const result = createTextIndent()({ textIndent: 'inherit' });
     expect(toStyles(result)).toEqual({ textIndent: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = textIndent<'a'>()({ textIndent: 'a' });
+    const result = createTextIndent<'a'>()({ textIndent: 'a' });
     expect(toStyles(result)).toEqual({ textIndent: 'a' });
   });
 
   it('should use an interface which marks `textIndent` as optional', () => {
-    const result = textIndent<'a'>()({});
+    const result = createTextIndent<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = textIndent<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextIndent<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textIndent: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('textIndent', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = textIndent<
+    const result = createTextIndent<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

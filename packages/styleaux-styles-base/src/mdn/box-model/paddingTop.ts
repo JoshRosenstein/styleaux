@@ -1,4 +1,4 @@
-import { PaddingTopProperty } from '@roseys/csstype';
+import { PaddingTopProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IPaddingTopProps<T> {
   paddingTop: T;
 }
 
-export const paddingTop = <
+export const createPaddingTop = <
   T = PaddingTopProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const paddingTop = <
     transformValue,
   })
 
-export const paddingTopRule = <T = PaddingTopProperty>(
+export const createPaddingTopRule = <T = PaddingTopProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: PADDINGTOP, getValue: transformer})
+
+export const paddingTop =createPaddingTop()
+
+export const paddingTopRule =createPaddingTopRule()

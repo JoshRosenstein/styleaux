@@ -1,4 +1,4 @@
-import { TextOrientationProperty } from '@roseys/csstype';
+import { TextOrientationProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITextOrientationProps<T> {
   textOrientation: T;
 }
 
-export const textOrientation = <
+export const createTextOrientation = <
   T = TextOrientationProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const textOrientation = <
     transformValue,
   })
 
-export const textOrientationRule = <T = TextOrientationProperty>(
+export const createTextOrientationRule = <T = TextOrientationProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TEXTORIENTATION, getValue: transformer})
+
+export const textOrientation =createTextOrientation()
+
+export const textOrientationRule =createTextOrientationRule()

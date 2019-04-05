@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { clear } from '../clear';
+import { createClear } from '../clear';
 
 describe('clear', () => {
   it('should return a function', () => {
-    const result = clear();
+    const result = createClear();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `clear` as component and css prop', () => {
-    const result = clear()({ clear: 'inherit' });
+    const result = createClear()({ clear: 'inherit' });
     expect(toStyles(result)).toEqual({ clear: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = clear<'a'>()({ clear: 'a' });
+    const result = createClear<'a'>()({ clear: 'a' });
     expect(toStyles(result)).toEqual({ clear: 'a' });
   });
 
   it('should use an interface which marks `clear` as optional', () => {
-    const result = clear<'a'>()({});
+    const result = createClear<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = clear<'value',never,IThemeWithoutBreakpoints>({
+    const result = createClear<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ clear: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('clear', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = clear<
+    const result = createClear<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { verticalAlign } from '../verticalAlign';
+import { createVerticalAlign } from '../verticalAlign';
 
 describe('verticalAlign', () => {
   it('should return a function', () => {
-    const result = verticalAlign();
+    const result = createVerticalAlign();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `verticalAlign` as component and css prop', () => {
-    const result = verticalAlign()({ verticalAlign: 'inherit' });
+    const result = createVerticalAlign()({ verticalAlign: 'inherit' });
     expect(toStyles(result)).toEqual({ verticalAlign: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = verticalAlign<'a'>()({ verticalAlign: 'a' });
+    const result = createVerticalAlign<'a'>()({ verticalAlign: 'a' });
     expect(toStyles(result)).toEqual({ verticalAlign: 'a' });
   });
 
   it('should use an interface which marks `verticalAlign` as optional', () => {
-    const result = verticalAlign<'a'>()({});
+    const result = createVerticalAlign<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = verticalAlign<'value',never,IThemeWithoutBreakpoints>({
+    const result = createVerticalAlign<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ verticalAlign: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('verticalAlign', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = verticalAlign<
+    const result = createVerticalAlign<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { breakInside } from '../breakInside';
+import { createBreakInside } from '../breakInside';
 
 describe('breakInside', () => {
   it('should return a function', () => {
-    const result = breakInside();
+    const result = createBreakInside();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `breakInside` as component and css prop', () => {
-    const result = breakInside()({ breakInside: 'inherit' });
+    const result = createBreakInside()({ breakInside: 'inherit' });
     expect(toStyles(result)).toEqual({ breakInside: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = breakInside<'a'>()({ breakInside: 'a' });
+    const result = createBreakInside<'a'>()({ breakInside: 'a' });
     expect(toStyles(result)).toEqual({ breakInside: 'a' });
   });
 
   it('should use an interface which marks `breakInside` as optional', () => {
-    const result = breakInside<'a'>()({});
+    const result = createBreakInside<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = breakInside<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBreakInside<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ breakInside: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('breakInside', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = breakInside<
+    const result = createBreakInside<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

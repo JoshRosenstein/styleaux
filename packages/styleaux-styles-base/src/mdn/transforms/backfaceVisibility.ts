@@ -1,4 +1,4 @@
-import { BackfaceVisibilityProperty } from '@roseys/csstype';
+import { BackfaceVisibilityProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBackfaceVisibilityProps<T> {
   backfaceVisibility: T;
 }
 
-export const backfaceVisibility = <
+export const createBackfaceVisibility = <
   T = BackfaceVisibilityProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const backfaceVisibility = <
     transformValue,
   })
 
-export const backfaceVisibilityRule = <T = BackfaceVisibilityProperty>(
+export const createBackfaceVisibilityRule = <T = BackfaceVisibilityProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BACKFACEVISIBILITY, getValue: transformer})
+
+export const backfaceVisibility =createBackfaceVisibility()
+
+export const backfaceVisibilityRule =createBackfaceVisibilityRule()

@@ -1,4 +1,4 @@
-import { __TYPE_NAME__ } from '@roseys/csstype';
+import { __TYPE_NAME__ } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -9,7 +9,7 @@ export interface I__INTERFACE_PROPERTY_NAME__Props<T> {
   __PROPERTY_NAME__: T;
 }
 
-export const __PROPERTY_NAME__ = <
+export const create__PROPERTY_NAME_PASCAL__ = <
   T = __TYPE_NAME__,
   Theme = never,
   Breakpoints = never
@@ -22,6 +22,10 @@ export const __PROPERTY_NAME__ = <
     transformValue,
   })
 
-export const __PROPERTY_NAME__Rule = <T = __TYPE_NAME__>(
+export const create__PROPERTY_NAME_PASCAL__Rule = <T = __TYPE_NAME__>(
   transformer?: Getter,
 ) => styler<T>({cssProp: __PROPERTY_NAME_CAP__, getValue: transformer})
+
+export const __PROPERTY_NAME__ =create__PROPERTY_NAME_PASCAL__()
+
+export const __PROPERTY_NAME__Rule =create__PROPERTY_NAME_PASCAL__Rule()

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { font } from '../font';
+import { createFont } from '../font';
 
 describe('font', () => {
   it('should return a function', () => {
-    const result = font();
+    const result = createFont();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `font` as component and css prop', () => {
-    const result = font()({ font: 'inherit' });
+    const result = createFont()({ font: 'inherit' });
     expect(toStyles(result)).toEqual({ font: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = font<'a'>()({ font: 'a' });
+    const result = createFont<'a'>()({ font: 'a' });
     expect(toStyles(result)).toEqual({ font: 'a' });
   });
 
   it('should use an interface which marks `font` as optional', () => {
-    const result = font<'a'>()({});
+    const result = createFont<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = font<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFont<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ font: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('font', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = font<
+    const result = createFont<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { minBlockSize } from '../minBlockSize';
+import { createMinBlockSize } from '../minBlockSize';
 
 describe('minBlockSize', () => {
   it('should return a function', () => {
-    const result = minBlockSize();
+    const result = createMinBlockSize();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `minBlockSize` as component and css prop', () => {
-    const result = minBlockSize()({ minBlockSize: 'inherit' });
+    const result = createMinBlockSize()({ minBlockSize: 'inherit' });
     expect(toStyles(result)).toEqual({ minBlockSize: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = minBlockSize<'a'>()({ minBlockSize: 'a' });
+    const result = createMinBlockSize<'a'>()({ minBlockSize: 'a' });
     expect(toStyles(result)).toEqual({ minBlockSize: 'a' });
   });
 
   it('should use an interface which marks `minBlockSize` as optional', () => {
-    const result = minBlockSize<'a'>()({});
+    const result = createMinBlockSize<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = minBlockSize<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMinBlockSize<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ minBlockSize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('minBlockSize', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = minBlockSize<
+    const result = createMinBlockSize<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

@@ -1,4 +1,4 @@
-import { GridRowStartProperty } from '@roseys/csstype';
+import { GridRowStartProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IGridRowStartProps<T> {
   gridRowStart: T;
 }
 
-export const gridRowStart = <
+export const createGridRowStart = <
   T = GridRowStartProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const gridRowStart = <
     transformValue,
   })
 
-export const gridRowStartRule = <T = GridRowStartProperty>(
+export const createGridRowStartRule = <T = GridRowStartProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: GRIDROWSTART, getValue: transformer})
+
+export const gridRowStart =createGridRowStart()
+
+export const gridRowStartRule =createGridRowStartRule()

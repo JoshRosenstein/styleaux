@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { insetInlineStart } from '../insetInlineStart';
+import { createInsetInlineStart } from '../insetInlineStart';
 
 describe('insetInlineStart', () => {
   it('should return a function', () => {
-    const result = insetInlineStart();
+    const result = createInsetInlineStart();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `insetInlineStart` as component and css prop', () => {
-    const result = insetInlineStart()({ insetInlineStart: 'inherit' });
+    const result = createInsetInlineStart()({ insetInlineStart: 'inherit' });
     expect(toStyles(result)).toEqual({ insetInlineStart: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = insetInlineStart<'a'>()({ insetInlineStart: 'a' });
+    const result = createInsetInlineStart<'a'>()({ insetInlineStart: 'a' });
     expect(toStyles(result)).toEqual({ insetInlineStart: 'a' });
   });
 
   it('should use an interface which marks `insetInlineStart` as optional', () => {
-    const result = insetInlineStart<'a'>()({});
+    const result = createInsetInlineStart<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = insetInlineStart<'value',never,IThemeWithoutBreakpoints>({
+    const result = createInsetInlineStart<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ insetInlineStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('insetInlineStart', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = insetInlineStart<
+    const result = createInsetInlineStart<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

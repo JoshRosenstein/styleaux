@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { position } from '../position';
+import { createPosition } from '../position';
 
 describe('position', () => {
   it('should return a function', () => {
-    const result = position();
+    const result = createPosition();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `position` as component and css prop', () => {
-    const result = position()({ position: 'inherit' });
+    const result = createPosition()({ position: 'inherit' });
     expect(toStyles(result)).toEqual({ position: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = position<'a'>()({ position: 'a' });
+    const result = createPosition<'a'>()({ position: 'a' });
     expect(toStyles(result)).toEqual({ position: 'a' });
   });
 
   it('should use an interface which marks `position` as optional', () => {
-    const result = position<'a'>()({});
+    const result = createPosition<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = position<'value',never,IThemeWithoutBreakpoints>({
+    const result = createPosition<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ position: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('position', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = position<
+    const result = createPosition<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

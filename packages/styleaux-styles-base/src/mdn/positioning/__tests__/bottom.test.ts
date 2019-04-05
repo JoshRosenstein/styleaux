@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { bottom } from '../bottom';
+import { createBottom } from '../bottom';
 
 describe('bottom', () => {
   it('should return a function', () => {
-    const result = bottom();
+    const result = createBottom();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `bottom` as component and css prop', () => {
-    const result = bottom()({ bottom: 'inherit' });
+    const result = createBottom()({ bottom: 'inherit' });
     expect(toStyles(result)).toEqual({ bottom: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = bottom<'a'>()({ bottom: 'a' });
+    const result = createBottom<'a'>()({ bottom: 'a' });
     expect(toStyles(result)).toEqual({ bottom: 'a' });
   });
 
   it('should use an interface which marks `bottom` as optional', () => {
-    const result = bottom<'a'>()({});
+    const result = createBottom<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = bottom<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBottom<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ bottom: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('bottom', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = bottom<
+    const result = createBottom<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

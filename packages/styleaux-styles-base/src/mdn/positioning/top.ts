@@ -1,4 +1,4 @@
-import { TopProperty } from '@roseys/csstype';
+import { TopProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITopProps<T> {
   top: T;
 }
 
-export const top = <
+export const createTop = <
   T = TopProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const top = <
     transformValue,
   })
 
-export const topRule = <T = TopProperty>(
+export const createTopRule = <T = TopProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TOP, getValue: transformer})
+
+export const top =createTop()
+
+export const topRule =createTopRule()

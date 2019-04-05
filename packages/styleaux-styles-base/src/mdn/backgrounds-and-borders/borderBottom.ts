@@ -1,4 +1,4 @@
-import { BorderBottomProperty } from '@roseys/csstype';
+import { BorderBottomProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBorderBottomProps<T> {
   borderBottom: T;
 }
 
-export const borderBottom = <
+export const createBorderBottom = <
   T = BorderBottomProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const borderBottom = <
     transformValue,
   })
 
-export const borderBottomRule = <T = BorderBottomProperty>(
+export const createBorderBottomRule = <T = BorderBottomProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BORDERBOTTOM, getValue: transformer})
+
+export const borderBottom =createBorderBottom()
+
+export const borderBottomRule =createBorderBottomRule()

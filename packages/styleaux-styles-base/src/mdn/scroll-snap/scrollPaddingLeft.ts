@@ -1,4 +1,4 @@
-import { ScrollPaddingLeftProperty } from '@roseys/csstype';
+import { ScrollPaddingLeftProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IScrollPaddingLeftProps<T> {
   scrollPaddingLeft: T;
 }
 
-export const scrollPaddingLeft = <
+export const createScrollPaddingLeft = <
   T = ScrollPaddingLeftProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const scrollPaddingLeft = <
     transformValue,
   })
 
-export const scrollPaddingLeftRule = <T = ScrollPaddingLeftProperty>(
+export const createScrollPaddingLeftRule = <T = ScrollPaddingLeftProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: SCROLLPADDINGLEFT, getValue: transformer})
+
+export const scrollPaddingLeft =createScrollPaddingLeft()
+
+export const scrollPaddingLeftRule =createScrollPaddingLeftRule()

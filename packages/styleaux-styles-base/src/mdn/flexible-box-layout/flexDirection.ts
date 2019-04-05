@@ -1,4 +1,4 @@
-import { FlexDirectionProperty } from '@roseys/csstype';
+import { FlexDirectionProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IFlexDirectionProps<T> {
   flexDirection: T;
 }
 
-export const flexDirection = <
+export const createFlexDirection = <
   T = FlexDirectionProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const flexDirection = <
     transformValue,
   })
 
-export const flexDirectionRule = <T = FlexDirectionProperty>(
+export const createFlexDirectionRule = <T = FlexDirectionProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: FLEXDIRECTION, getValue: transformer})
+
+export const flexDirection =createFlexDirection()
+
+export const flexDirectionRule =createFlexDirectionRule()

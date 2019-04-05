@@ -1,4 +1,4 @@
-import { TransformOriginProperty } from '@roseys/csstype';
+import { TransformOriginProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITransformOriginProps<T> {
   transformOrigin: T;
 }
 
-export const transformOrigin = <
+export const createTransformOrigin = <
   T = TransformOriginProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const transformOrigin = <
     transformValue,
   })
 
-export const transformOriginRule = <T = TransformOriginProperty>(
+export const createTransformOriginRule = <T = TransformOriginProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TRANSFORMORIGIN, getValue: transformer})
+
+export const transformOrigin =createTransformOrigin()
+
+export const transformOriginRule =createTransformOriginRule()

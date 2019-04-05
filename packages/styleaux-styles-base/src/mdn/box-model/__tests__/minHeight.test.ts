@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { minHeight } from '../minHeight';
+import { createMinHeight } from '../minHeight';
 
 describe('minHeight', () => {
   it('should return a function', () => {
-    const result = minHeight();
+    const result = createMinHeight();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `minHeight` as component and css prop', () => {
-    const result = minHeight()({ minHeight: 'inherit' });
+    const result = createMinHeight()({ minHeight: 'inherit' });
     expect(toStyles(result)).toEqual({ minHeight: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = minHeight<'a'>()({ minHeight: 'a' });
+    const result = createMinHeight<'a'>()({ minHeight: 'a' });
     expect(toStyles(result)).toEqual({ minHeight: 'a' });
   });
 
   it('should use an interface which marks `minHeight` as optional', () => {
-    const result = minHeight<'a'>()({});
+    const result = createMinHeight<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = minHeight<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMinHeight<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ minHeight: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('minHeight', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = minHeight<
+    const result = createMinHeight<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

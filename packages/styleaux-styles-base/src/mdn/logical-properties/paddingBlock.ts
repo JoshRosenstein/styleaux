@@ -1,4 +1,4 @@
-import { PaddingBlockProperty } from '@roseys/csstype';
+import { PaddingBlockProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IPaddingBlockProps<T> {
   paddingBlock: T;
 }
 
-export const paddingBlock = <
+export const createPaddingBlock = <
   T = PaddingBlockProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const paddingBlock = <
     transformValue,
   })
 
-export const paddingBlockRule = <T = PaddingBlockProperty>(
+export const createPaddingBlockRule = <T = PaddingBlockProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: PADDINGBLOCK, getValue: transformer})
+
+export const paddingBlock =createPaddingBlock()
+
+export const paddingBlockRule =createPaddingBlockRule()

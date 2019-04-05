@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { backgroundRepeat } from '../backgroundRepeat';
+import { createBackgroundRepeat } from '../backgroundRepeat';
 
 describe('backgroundRepeat', () => {
   it('should return a function', () => {
-    const result = backgroundRepeat();
+    const result = createBackgroundRepeat();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `backgroundRepeat` as component and css prop', () => {
-    const result = backgroundRepeat()({ backgroundRepeat: 'inherit' });
+    const result = createBackgroundRepeat()({ backgroundRepeat: 'inherit' });
     expect(toStyles(result)).toEqual({ backgroundRepeat: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = backgroundRepeat<'a'>()({ backgroundRepeat: 'a' });
+    const result = createBackgroundRepeat<'a'>()({ backgroundRepeat: 'a' });
     expect(toStyles(result)).toEqual({ backgroundRepeat: 'a' });
   });
 
   it('should use an interface which marks `backgroundRepeat` as optional', () => {
-    const result = backgroundRepeat<'a'>()({});
+    const result = createBackgroundRepeat<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = backgroundRepeat<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBackgroundRepeat<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ backgroundRepeat: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('backgroundRepeat', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = backgroundRepeat<
+    const result = createBackgroundRepeat<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { content } from '../content';
+import { createContent } from '../content';
 
 describe('content', () => {
   it('should return a function', () => {
-    const result = content();
+    const result = createContent();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `content` as component and css prop', () => {
-    const result = content()({ content: 'inherit' });
+    const result = createContent()({ content: 'inherit' });
     expect(toStyles(result)).toEqual({ content: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = content<'a'>()({ content: 'a' });
+    const result = createContent<'a'>()({ content: 'a' });
     expect(toStyles(result)).toEqual({ content: 'a' });
   });
 
   it('should use an interface which marks `content` as optional', () => {
-    const result = content<'a'>()({});
+    const result = createContent<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = content<'value',never,IThemeWithoutBreakpoints>({
+    const result = createContent<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ content: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('content', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = content<
+    const result = createContent<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

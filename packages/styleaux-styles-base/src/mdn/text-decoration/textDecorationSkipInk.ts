@@ -1,4 +1,4 @@
-import { TextDecorationSkipInkProperty } from '@roseys/csstype';
+import { TextDecorationSkipInkProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITextDecorationSkipInkProps<T> {
   textDecorationSkipInk: T;
 }
 
-export const textDecorationSkipInk = <
+export const createTextDecorationSkipInk = <
   T = TextDecorationSkipInkProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const textDecorationSkipInk = <
     transformValue,
   })
 
-export const textDecorationSkipInkRule = <T = TextDecorationSkipInkProperty>(
+export const createTextDecorationSkipInkRule = <T = TextDecorationSkipInkProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TEXTDECORATIONSKIPINK, getValue: transformer})
+
+export const textDecorationSkipInk =createTextDecorationSkipInk()
+
+export const textDecorationSkipInkRule =createTextDecorationSkipInkRule()

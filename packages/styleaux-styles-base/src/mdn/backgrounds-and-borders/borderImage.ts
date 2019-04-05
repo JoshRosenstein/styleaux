@@ -1,4 +1,4 @@
-import { BorderImageProperty } from '@roseys/csstype';
+import { BorderImageProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBorderImageProps<T> {
   borderImage: T;
 }
 
-export const borderImage = <
+export const createBorderImage = <
   T = BorderImageProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const borderImage = <
     transformValue,
   })
 
-export const borderImageRule = <T = BorderImageProperty>(
+export const createBorderImageRule = <T = BorderImageProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BORDERIMAGE, getValue: transformer})
+
+export const borderImage =createBorderImage()
+
+export const borderImageRule =createBorderImageRule()

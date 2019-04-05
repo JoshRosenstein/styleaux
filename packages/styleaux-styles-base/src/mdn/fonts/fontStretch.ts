@@ -1,4 +1,4 @@
-import { FontStretchProperty } from '@roseys/csstype';
+import { FontStretchProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IFontStretchProps<T> {
   fontStretch: T;
 }
 
-export const fontStretch = <
+export const createFontStretch = <
   T = FontStretchProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const fontStretch = <
     transformValue,
   })
 
-export const fontStretchRule = <T = FontStretchProperty>(
+export const createFontStretchRule = <T = FontStretchProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: FONTSTRETCH, getValue: transformer})
+
+export const fontStretch =createFontStretch()
+
+export const fontStretchRule =createFontStretchRule()

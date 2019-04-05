@@ -1,4 +1,4 @@
-import { FontFeatureSettingsProperty } from '@roseys/csstype';
+import { FontFeatureSettingsProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IFontFeatureSettingsProps<T> {
   fontFeatureSettings: T;
 }
 
-export const fontFeatureSettings = <
+export const createFontFeatureSettings = <
   T = FontFeatureSettingsProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const fontFeatureSettings = <
     transformValue,
   })
 
-export const fontFeatureSettingsRule = <T = FontFeatureSettingsProperty>(
+export const createFontFeatureSettingsRule = <T = FontFeatureSettingsProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: FONTFEATURESETTINGS, getValue: transformer})
+
+export const fontFeatureSettings =createFontFeatureSettings()
+
+export const fontFeatureSettingsRule =createFontFeatureSettingsRule()

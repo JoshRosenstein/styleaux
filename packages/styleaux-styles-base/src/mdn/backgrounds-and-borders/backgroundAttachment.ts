@@ -1,4 +1,4 @@
-import { BackgroundAttachmentProperty } from '@roseys/csstype';
+import { BackgroundAttachmentProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBackgroundAttachmentProps<T> {
   backgroundAttachment: T;
 }
 
-export const backgroundAttachment = <
+export const createBackgroundAttachment = <
   T = BackgroundAttachmentProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const backgroundAttachment = <
     transformValue,
   })
 
-export const backgroundAttachmentRule = <T = BackgroundAttachmentProperty>(
+export const createBackgroundAttachmentRule = <T = BackgroundAttachmentProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BACKGROUNDATTACHMENT, getValue: transformer})
+
+export const backgroundAttachment =createBackgroundAttachment()
+
+export const backgroundAttachmentRule =createBackgroundAttachmentRule()

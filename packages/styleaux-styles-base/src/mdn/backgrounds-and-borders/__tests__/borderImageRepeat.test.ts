@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { borderImageRepeat } from '../borderImageRepeat';
+import { createBorderImageRepeat } from '../borderImageRepeat';
 
 describe('borderImageRepeat', () => {
   it('should return a function', () => {
-    const result = borderImageRepeat();
+    const result = createBorderImageRepeat();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `borderImageRepeat` as component and css prop', () => {
-    const result = borderImageRepeat()({ borderImageRepeat: 'inherit' });
+    const result = createBorderImageRepeat()({ borderImageRepeat: 'inherit' });
     expect(toStyles(result)).toEqual({ borderImageRepeat: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = borderImageRepeat<'a'>()({ borderImageRepeat: 'a' });
+    const result = createBorderImageRepeat<'a'>()({ borderImageRepeat: 'a' });
     expect(toStyles(result)).toEqual({ borderImageRepeat: 'a' });
   });
 
   it('should use an interface which marks `borderImageRepeat` as optional', () => {
-    const result = borderImageRepeat<'a'>()({});
+    const result = createBorderImageRepeat<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = borderImageRepeat<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderImageRepeat<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderImageRepeat: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('borderImageRepeat', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = borderImageRepeat<
+    const result = createBorderImageRepeat<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

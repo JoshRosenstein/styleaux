@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { overflowWrap } from '../overflowWrap';
+import { createOverflowWrap } from '../overflowWrap';
 
 describe('overflowWrap', () => {
   it('should return a function', () => {
-    const result = overflowWrap();
+    const result = createOverflowWrap();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `overflowWrap` as component and css prop', () => {
-    const result = overflowWrap()({ overflowWrap: 'inherit' });
+    const result = createOverflowWrap()({ overflowWrap: 'inherit' });
     expect(toStyles(result)).toEqual({ overflowWrap: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = overflowWrap<'a'>()({ overflowWrap: 'a' });
+    const result = createOverflowWrap<'a'>()({ overflowWrap: 'a' });
     expect(toStyles(result)).toEqual({ overflowWrap: 'a' });
   });
 
   it('should use an interface which marks `overflowWrap` as optional', () => {
-    const result = overflowWrap<'a'>()({});
+    const result = createOverflowWrap<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = overflowWrap<'value',never,IThemeWithoutBreakpoints>({
+    const result = createOverflowWrap<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ overflowWrap: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('overflowWrap', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = overflowWrap<
+    const result = createOverflowWrap<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

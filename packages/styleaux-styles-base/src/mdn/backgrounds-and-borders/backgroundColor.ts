@@ -1,4 +1,4 @@
-import { BackgroundColorProperty } from '@roseys/csstype';
+import { BackgroundColorProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBackgroundColorProps<T> {
   backgroundColor: T;
 }
 
-export const backgroundColor = <
+export const createBackgroundColor = <
   T = BackgroundColorProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const backgroundColor = <
     transformValue,
   })
 
-export const backgroundColorRule = <T = BackgroundColorProperty>(
+export const createBackgroundColorRule = <T = BackgroundColorProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BACKGROUNDCOLOR, getValue: transformer})
+
+export const backgroundColor =createBackgroundColor()
+
+export const backgroundColorRule =createBackgroundColorRule()

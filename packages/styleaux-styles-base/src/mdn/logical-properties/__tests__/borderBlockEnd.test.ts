@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { borderBlockEnd } from '../borderBlockEnd';
+import { createBorderBlockEnd } from '../borderBlockEnd';
 
 describe('borderBlockEnd', () => {
   it('should return a function', () => {
-    const result = borderBlockEnd();
+    const result = createBorderBlockEnd();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `borderBlockEnd` as component and css prop', () => {
-    const result = borderBlockEnd()({ borderBlockEnd: 'inherit' });
+    const result = createBorderBlockEnd()({ borderBlockEnd: 'inherit' });
     expect(toStyles(result)).toEqual({ borderBlockEnd: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = borderBlockEnd<'a'>()({ borderBlockEnd: 'a' });
+    const result = createBorderBlockEnd<'a'>()({ borderBlockEnd: 'a' });
     expect(toStyles(result)).toEqual({ borderBlockEnd: 'a' });
   });
 
   it('should use an interface which marks `borderBlockEnd` as optional', () => {
-    const result = borderBlockEnd<'a'>()({});
+    const result = createBorderBlockEnd<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = borderBlockEnd<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderBlockEnd<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderBlockEnd: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('borderBlockEnd', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = borderBlockEnd<
+    const result = createBorderBlockEnd<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

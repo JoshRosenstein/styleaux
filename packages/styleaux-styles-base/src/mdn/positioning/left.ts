@@ -1,4 +1,4 @@
-import { LeftProperty } from '@roseys/csstype';
+import { LeftProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ILeftProps<T> {
   left: T;
 }
 
-export const left = <
+export const createLeft = <
   T = LeftProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const left = <
     transformValue,
   })
 
-export const leftRule = <T = LeftProperty>(
+export const createLeftRule = <T = LeftProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: LEFT, getValue: transformer})
+
+export const left =createLeft()
+
+export const leftRule =createLeftRule()

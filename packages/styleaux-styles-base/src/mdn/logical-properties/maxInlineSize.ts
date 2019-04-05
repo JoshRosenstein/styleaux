@@ -1,4 +1,4 @@
-import { MaxInlineSizeProperty } from '@roseys/csstype';
+import { MaxInlineSizeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMaxInlineSizeProps<T> {
   maxInlineSize: T;
 }
 
-export const maxInlineSize = <
+export const createMaxInlineSize = <
   T = MaxInlineSizeProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const maxInlineSize = <
     transformValue,
   })
 
-export const maxInlineSizeRule = <T = MaxInlineSizeProperty>(
+export const createMaxInlineSizeRule = <T = MaxInlineSizeProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MAXINLINESIZE, getValue: transformer})
+
+export const maxInlineSize =createMaxInlineSize()
+
+export const maxInlineSizeRule =createMaxInlineSizeRule()

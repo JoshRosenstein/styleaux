@@ -1,4 +1,4 @@
-import { UnicodeBidiProperty } from '@roseys/csstype';
+import { UnicodeBidiProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IUnicodeBidiProps<T> {
   unicodeBidi: T;
 }
 
-export const unicodeBidi = <
+export const createUnicodeBidi = <
   T = UnicodeBidiProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const unicodeBidi = <
     transformValue,
   })
 
-export const unicodeBidiRule = <T = UnicodeBidiProperty>(
+export const createUnicodeBidiRule = <T = UnicodeBidiProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: UNICODEBIDI, getValue: transformer})
+
+export const unicodeBidi =createUnicodeBidi()
+
+export const unicodeBidiRule =createUnicodeBidiRule()

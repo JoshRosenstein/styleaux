@@ -1,4 +1,4 @@
-import { PageBreakBeforeProperty } from '@roseys/csstype';
+import { PageBreakBeforeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IPageBreakBeforeProps<T> {
   pageBreakBefore: T;
 }
 
-export const pageBreakBefore = <
+export const createPageBreakBefore = <
   T = PageBreakBeforeProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const pageBreakBefore = <
     transformValue,
   })
 
-export const pageBreakBeforeRule = <T = PageBreakBeforeProperty>(
+export const createPageBreakBeforeRule = <T = PageBreakBeforeProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: PAGEBREAKBEFORE, getValue: transformer})
+
+export const pageBreakBefore =createPageBreakBefore()
+
+export const pageBreakBeforeRule =createPageBreakBeforeRule()

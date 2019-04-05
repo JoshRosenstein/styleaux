@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { grid } from '../grid';
+import { createGrid } from '../grid';
 
 describe('grid', () => {
   it('should return a function', () => {
-    const result = grid();
+    const result = createGrid();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `grid` as component and css prop', () => {
-    const result = grid()({ grid: 'inherit' });
+    const result = createGrid()({ grid: 'inherit' });
     expect(toStyles(result)).toEqual({ grid: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = grid<'a'>()({ grid: 'a' });
+    const result = createGrid<'a'>()({ grid: 'a' });
     expect(toStyles(result)).toEqual({ grid: 'a' });
   });
 
   it('should use an interface which marks `grid` as optional', () => {
-    const result = grid<'a'>()({});
+    const result = createGrid<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = grid<'value',never,IThemeWithoutBreakpoints>({
+    const result = createGrid<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ grid: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('grid', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = grid<
+    const result = createGrid<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

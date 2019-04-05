@@ -1,4 +1,4 @@
-import { PaddingInlineEndProperty } from '@roseys/csstype';
+import { PaddingInlineEndProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IPaddingInlineEndProps<T> {
   paddingInlineEnd: T;
 }
 
-export const paddingInlineEnd = <
+export const createPaddingInlineEnd = <
   T = PaddingInlineEndProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const paddingInlineEnd = <
     transformValue,
   })
 
-export const paddingInlineEndRule = <T = PaddingInlineEndProperty>(
+export const createPaddingInlineEndRule = <T = PaddingInlineEndProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: PADDINGINLINEEND, getValue: transformer})
+
+export const paddingInlineEnd =createPaddingInlineEnd()
+
+export const paddingInlineEndRule =createPaddingInlineEndRule()

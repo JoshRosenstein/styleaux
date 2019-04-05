@@ -1,4 +1,4 @@
-import { PlaceSelfProperty } from '@roseys/csstype';
+import { PlaceSelfProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IPlaceSelfProps<T> {
   placeSelf: T;
 }
 
-export const placeSelf = <
+export const createPlaceSelf = <
   T = PlaceSelfProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const placeSelf = <
     transformValue,
   })
 
-export const placeSelfRule = <T = PlaceSelfProperty>(
+export const createPlaceSelfRule = <T = PlaceSelfProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: PLACESELF, getValue: transformer})
+
+export const placeSelf =createPlaceSelf()
+
+export const placeSelfRule =createPlaceSelfRule()

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { animationDirection } from '../animationDirection';
+import { createAnimationDirection } from '../animationDirection';
 
 describe('animationDirection', () => {
   it('should return a function', () => {
-    const result = animationDirection();
+    const result = createAnimationDirection();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `animationDirection` as component and css prop', () => {
-    const result = animationDirection()({ animationDirection: 'inherit' });
+    const result = createAnimationDirection()({ animationDirection: 'inherit' });
     expect(toStyles(result)).toEqual({ animationDirection: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = animationDirection<'a'>()({ animationDirection: 'a' });
+    const result = createAnimationDirection<'a'>()({ animationDirection: 'a' });
     expect(toStyles(result)).toEqual({ animationDirection: 'a' });
   });
 
   it('should use an interface which marks `animationDirection` as optional', () => {
-    const result = animationDirection<'a'>()({});
+    const result = createAnimationDirection<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = animationDirection<'value',never,IThemeWithoutBreakpoints>({
+    const result = createAnimationDirection<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ animationDirection: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('animationDirection', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = animationDirection<
+    const result = createAnimationDirection<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

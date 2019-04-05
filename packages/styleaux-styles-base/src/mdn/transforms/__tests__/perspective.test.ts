@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { perspective } from '../perspective';
+import { createPerspective } from '../perspective';
 
 describe('perspective', () => {
   it('should return a function', () => {
-    const result = perspective();
+    const result = createPerspective();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `perspective` as component and css prop', () => {
-    const result = perspective()({ perspective: 'inherit' });
+    const result = createPerspective()({ perspective: 'inherit' });
     expect(toStyles(result)).toEqual({ perspective: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = perspective<'a'>()({ perspective: 'a' });
+    const result = createPerspective<'a'>()({ perspective: 'a' });
     expect(toStyles(result)).toEqual({ perspective: 'a' });
   });
 
   it('should use an interface which marks `perspective` as optional', () => {
-    const result = perspective<'a'>()({});
+    const result = createPerspective<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = perspective<'value',never,IThemeWithoutBreakpoints>({
+    const result = createPerspective<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ perspective: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('perspective', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = perspective<
+    const result = createPerspective<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { paintOrder } from '../paintOrder';
+import { createPaintOrder } from '../paintOrder';
 
 describe('paintOrder', () => {
   it('should return a function', () => {
-    const result = paintOrder();
+    const result = createPaintOrder();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `paintOrder` as component and css prop', () => {
-    const result = paintOrder()({ paintOrder: 'inherit' });
+    const result = createPaintOrder()({ paintOrder: 'inherit' });
     expect(toStyles(result)).toEqual({ paintOrder: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = paintOrder<'a'>()({ paintOrder: 'a' });
+    const result = createPaintOrder<'a'>()({ paintOrder: 'a' });
     expect(toStyles(result)).toEqual({ paintOrder: 'a' });
   });
 
   it('should use an interface which marks `paintOrder` as optional', () => {
-    const result = paintOrder<'a'>()({});
+    const result = createPaintOrder<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = paintOrder<'value',never,IThemeWithoutBreakpoints>({
+    const result = createPaintOrder<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ paintOrder: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('paintOrder', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = paintOrder<
+    const result = createPaintOrder<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

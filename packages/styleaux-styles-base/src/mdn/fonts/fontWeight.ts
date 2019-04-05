@@ -1,4 +1,4 @@
-import { FontWeightProperty } from '@roseys/csstype';
+import { FontWeightProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IFontWeightProps<T> {
   fontWeight: T;
 }
 
-export const fontWeight = <
+export const createFontWeight = <
   T = FontWeightProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const fontWeight = <
     transformValue,
   })
 
-export const fontWeightRule = <T = FontWeightProperty>(
+export const createFontWeightRule = <T = FontWeightProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: FONTWEIGHT, getValue: transformer})
+
+export const fontWeight =createFontWeight()
+
+export const fontWeightRule =createFontWeightRule()

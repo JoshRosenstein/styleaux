@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { borderImageSlice } from '../borderImageSlice';
+import { createBorderImageSlice } from '../borderImageSlice';
 
 describe('borderImageSlice', () => {
   it('should return a function', () => {
-    const result = borderImageSlice();
+    const result = createBorderImageSlice();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `borderImageSlice` as component and css prop', () => {
-    const result = borderImageSlice()({ borderImageSlice: 'inherit' });
+    const result = createBorderImageSlice()({ borderImageSlice: 'inherit' });
     expect(toStyles(result)).toEqual({ borderImageSlice: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = borderImageSlice<'a'>()({ borderImageSlice: 'a' });
+    const result = createBorderImageSlice<'a'>()({ borderImageSlice: 'a' });
     expect(toStyles(result)).toEqual({ borderImageSlice: 'a' });
   });
 
   it('should use an interface which marks `borderImageSlice` as optional', () => {
-    const result = borderImageSlice<'a'>()({});
+    const result = createBorderImageSlice<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = borderImageSlice<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderImageSlice<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderImageSlice: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('borderImageSlice', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = borderImageSlice<
+    const result = createBorderImageSlice<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

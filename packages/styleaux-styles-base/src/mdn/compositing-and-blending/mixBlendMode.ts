@@ -1,4 +1,4 @@
-import { MixBlendModeProperty } from '@roseys/csstype';
+import { MixBlendModeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMixBlendModeProps<T> {
   mixBlendMode: T;
 }
 
-export const mixBlendMode = <
+export const createMixBlendMode = <
   T = MixBlendModeProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const mixBlendMode = <
     transformValue,
   })
 
-export const mixBlendModeRule = <T = MixBlendModeProperty>(
+export const createMixBlendModeRule = <T = MixBlendModeProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MIXBLENDMODE, getValue: transformer})
+
+export const mixBlendMode =createMixBlendMode()
+
+export const mixBlendModeRule =createMixBlendModeRule()

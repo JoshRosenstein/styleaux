@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { tabSize } from '../tabSize';
+import { createTabSize } from '../tabSize';
 
 describe('tabSize', () => {
   it('should return a function', () => {
-    const result = tabSize();
+    const result = createTabSize();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `tabSize` as component and css prop', () => {
-    const result = tabSize()({ tabSize: 'inherit' });
+    const result = createTabSize()({ tabSize: 'inherit' });
     expect(toStyles(result)).toEqual({ tabSize: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = tabSize<'a'>()({ tabSize: 'a' });
+    const result = createTabSize<'a'>()({ tabSize: 'a' });
     expect(toStyles(result)).toEqual({ tabSize: 'a' });
   });
 
   it('should use an interface which marks `tabSize` as optional', () => {
-    const result = tabSize<'a'>()({});
+    const result = createTabSize<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = tabSize<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTabSize<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ tabSize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('tabSize', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = tabSize<
+    const result = createTabSize<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

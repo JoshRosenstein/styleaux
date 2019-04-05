@@ -1,4 +1,4 @@
-import { ColorProperty } from '@roseys/csstype';
+import { ColorProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IColorProps<T> {
   color: T;
 }
 
-export const color = <
+export const createColor = <
   T = ColorProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const color = <
     transformValue,
   })
 
-export const colorRule = <T = ColorProperty>(
+export const createColorRule = <T = ColorProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: COLOR, getValue: transformer})
+
+export const color =createColor()
+
+export const colorRule =createColorRule()

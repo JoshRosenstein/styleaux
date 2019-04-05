@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { wordBreak } from '../wordBreak';
+import { createWordBreak } from '../wordBreak';
 
 describe('wordBreak', () => {
   it('should return a function', () => {
-    const result = wordBreak();
+    const result = createWordBreak();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `wordBreak` as component and css prop', () => {
-    const result = wordBreak()({ wordBreak: 'inherit' });
+    const result = createWordBreak()({ wordBreak: 'inherit' });
     expect(toStyles(result)).toEqual({ wordBreak: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = wordBreak<'a'>()({ wordBreak: 'a' });
+    const result = createWordBreak<'a'>()({ wordBreak: 'a' });
     expect(toStyles(result)).toEqual({ wordBreak: 'a' });
   });
 
   it('should use an interface which marks `wordBreak` as optional', () => {
-    const result = wordBreak<'a'>()({});
+    const result = createWordBreak<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = wordBreak<'value',never,IThemeWithoutBreakpoints>({
+    const result = createWordBreak<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ wordBreak: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('wordBreak', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = wordBreak<
+    const result = createWordBreak<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

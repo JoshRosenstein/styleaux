@@ -1,4 +1,4 @@
-import { GapProperty } from '@roseys/csstype';
+import { GapProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IGapProps<T> {
   gap: T;
 }
 
-export const gap = <
+export const createGap = <
   T = GapProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const gap = <
     transformValue,
   })
 
-export const gapRule = <T = GapProperty>(
+export const createGapRule = <T = GapProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: GAP, getValue: transformer})
+
+export const gap =createGap()
+
+export const gapRule =createGapRule()

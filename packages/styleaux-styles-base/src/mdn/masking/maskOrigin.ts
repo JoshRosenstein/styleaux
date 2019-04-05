@@ -1,4 +1,4 @@
-import { MaskOriginProperty } from '@roseys/csstype';
+import { MaskOriginProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMaskOriginProps<T> {
   maskOrigin: T;
 }
 
-export const maskOrigin = <
+export const createMaskOrigin = <
   T = MaskOriginProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const maskOrigin = <
     transformValue,
   })
 
-export const maskOriginRule = <T = MaskOriginProperty>(
+export const createMaskOriginRule = <T = MaskOriginProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MASKORIGIN, getValue: transformer})
+
+export const maskOrigin =createMaskOrigin()
+
+export const maskOriginRule =createMaskOriginRule()

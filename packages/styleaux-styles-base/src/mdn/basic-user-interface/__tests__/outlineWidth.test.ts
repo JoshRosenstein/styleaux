@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { outlineWidth } from '../outlineWidth';
+import { createOutlineWidth } from '../outlineWidth';
 
 describe('outlineWidth', () => {
   it('should return a function', () => {
-    const result = outlineWidth();
+    const result = createOutlineWidth();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `outlineWidth` as component and css prop', () => {
-    const result = outlineWidth()({ outlineWidth: 'inherit' });
+    const result = createOutlineWidth()({ outlineWidth: 'inherit' });
     expect(toStyles(result)).toEqual({ outlineWidth: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = outlineWidth<'a'>()({ outlineWidth: 'a' });
+    const result = createOutlineWidth<'a'>()({ outlineWidth: 'a' });
     expect(toStyles(result)).toEqual({ outlineWidth: 'a' });
   });
 
   it('should use an interface which marks `outlineWidth` as optional', () => {
-    const result = outlineWidth<'a'>()({});
+    const result = createOutlineWidth<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = outlineWidth<'value',never,IThemeWithoutBreakpoints>({
+    const result = createOutlineWidth<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ outlineWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('outlineWidth', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = outlineWidth<
+    const result = createOutlineWidth<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

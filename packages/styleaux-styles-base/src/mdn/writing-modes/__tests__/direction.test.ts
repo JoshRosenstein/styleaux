@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { direction } from '../direction';
+import { createDirection } from '../direction';
 
 describe('direction', () => {
   it('should return a function', () => {
-    const result = direction();
+    const result = createDirection();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `direction` as component and css prop', () => {
-    const result = direction()({ direction: 'inherit' });
+    const result = createDirection()({ direction: 'inherit' });
     expect(toStyles(result)).toEqual({ direction: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = direction<'a'>()({ direction: 'a' });
+    const result = createDirection<'a'>()({ direction: 'a' });
     expect(toStyles(result)).toEqual({ direction: 'a' });
   });
 
   it('should use an interface which marks `direction` as optional', () => {
-    const result = direction<'a'>()({});
+    const result = createDirection<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = direction<'value',never,IThemeWithoutBreakpoints>({
+    const result = createDirection<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ direction: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('direction', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = direction<
+    const result = createDirection<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

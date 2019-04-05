@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { gridColumnStart } from '../gridColumnStart';
+import { createGridColumnStart } from '../gridColumnStart';
 
 describe('gridColumnStart', () => {
   it('should return a function', () => {
-    const result = gridColumnStart();
+    const result = createGridColumnStart();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `gridColumnStart` as component and css prop', () => {
-    const result = gridColumnStart()({ gridColumnStart: 'inherit' });
+    const result = createGridColumnStart()({ gridColumnStart: 'inherit' });
     expect(toStyles(result)).toEqual({ gridColumnStart: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = gridColumnStart<'a'>()({ gridColumnStart: 'a' });
+    const result = createGridColumnStart<'a'>()({ gridColumnStart: 'a' });
     expect(toStyles(result)).toEqual({ gridColumnStart: 'a' });
   });
 
   it('should use an interface which marks `gridColumnStart` as optional', () => {
-    const result = gridColumnStart<'a'>()({});
+    const result = createGridColumnStart<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = gridColumnStart<'value',never,IThemeWithoutBreakpoints>({
+    const result = createGridColumnStart<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ gridColumnStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('gridColumnStart', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = gridColumnStart<
+    const result = createGridColumnStart<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

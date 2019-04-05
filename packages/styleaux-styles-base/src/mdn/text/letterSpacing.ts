@@ -1,4 +1,4 @@
-import { LetterSpacingProperty } from '@roseys/csstype';
+import { LetterSpacingProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ILetterSpacingProps<T> {
   letterSpacing: T;
 }
 
-export const letterSpacing = <
+export const createLetterSpacing = <
   T = LetterSpacingProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const letterSpacing = <
     transformValue,
   })
 
-export const letterSpacingRule = <T = LetterSpacingProperty>(
+export const createLetterSpacingRule = <T = LetterSpacingProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: LETTERSPACING, getValue: transformer})
+
+export const letterSpacing =createLetterSpacing()
+
+export const letterSpacingRule =createLetterSpacingRule()

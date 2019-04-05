@@ -1,4 +1,4 @@
-import { ImageRenderingProperty } from '@roseys/csstype';
+import { ImageRenderingProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IImageRenderingProps<T> {
   imageRendering: T;
 }
 
-export const imageRendering = <
+export const createImageRendering = <
   T = ImageRenderingProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const imageRendering = <
     transformValue,
   })
 
-export const imageRenderingRule = <T = ImageRenderingProperty>(
+export const createImageRenderingRule = <T = ImageRenderingProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: IMAGERENDERING, getValue: transformer})
+
+export const imageRendering =createImageRendering()
+
+export const imageRenderingRule =createImageRenderingRule()

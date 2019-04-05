@@ -1,4 +1,4 @@
-import { BreakBeforeProperty } from '@roseys/csstype';
+import { BreakBeforeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBreakBeforeProps<T> {
   breakBefore: T;
 }
 
-export const breakBefore = <
+export const createBreakBefore = <
   T = BreakBeforeProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const breakBefore = <
     transformValue,
   })
 
-export const breakBeforeRule = <T = BreakBeforeProperty>(
+export const createBreakBeforeRule = <T = BreakBeforeProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BREAKBEFORE, getValue: transformer})
+
+export const breakBefore =createBreakBefore()
+
+export const breakBeforeRule =createBreakBeforeRule()

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { shapeOutside } from '../shapeOutside';
+import { createShapeOutside } from '../shapeOutside';
 
 describe('shapeOutside', () => {
   it('should return a function', () => {
-    const result = shapeOutside();
+    const result = createShapeOutside();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `shapeOutside` as component and css prop', () => {
-    const result = shapeOutside()({ shapeOutside: 'inherit' });
+    const result = createShapeOutside()({ shapeOutside: 'inherit' });
     expect(toStyles(result)).toEqual({ shapeOutside: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = shapeOutside<'a'>()({ shapeOutside: 'a' });
+    const result = createShapeOutside<'a'>()({ shapeOutside: 'a' });
     expect(toStyles(result)).toEqual({ shapeOutside: 'a' });
   });
 
   it('should use an interface which marks `shapeOutside` as optional', () => {
-    const result = shapeOutside<'a'>()({});
+    const result = createShapeOutside<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = shapeOutside<'value',never,IThemeWithoutBreakpoints>({
+    const result = createShapeOutside<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ shapeOutside: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('shapeOutside', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = shapeOutside<
+    const result = createShapeOutside<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

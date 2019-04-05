@@ -1,4 +1,4 @@
-import { ScrollMarginBlockEndProperty } from '@roseys/csstype';
+import { ScrollMarginBlockEndProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IScrollMarginBlockEndProps<T> {
   scrollMarginBlockEnd: T;
 }
 
-export const scrollMarginBlockEnd = <
+export const createScrollMarginBlockEnd = <
   T = ScrollMarginBlockEndProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const scrollMarginBlockEnd = <
     transformValue,
   })
 
-export const scrollMarginBlockEndRule = <T = ScrollMarginBlockEndProperty>(
+export const createScrollMarginBlockEndRule = <T = ScrollMarginBlockEndProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: SCROLLMARGINBLOCKEND, getValue: transformer})
+
+export const scrollMarginBlockEnd =createScrollMarginBlockEnd()
+
+export const scrollMarginBlockEndRule =createScrollMarginBlockEndRule()

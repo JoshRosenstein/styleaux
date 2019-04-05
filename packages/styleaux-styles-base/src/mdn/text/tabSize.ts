@@ -1,4 +1,4 @@
-import { TabSizeProperty } from '@roseys/csstype';
+import { TabSizeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITabSizeProps<T> {
   tabSize: T;
 }
 
-export const tabSize = <
+export const createTabSize = <
   T = TabSizeProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const tabSize = <
     transformValue,
   })
 
-export const tabSizeRule = <T = TabSizeProperty>(
+export const createTabSizeRule = <T = TabSizeProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TABSIZE, getValue: transformer})
+
+export const tabSize =createTabSize()
+
+export const tabSizeRule =createTabSizeRule()

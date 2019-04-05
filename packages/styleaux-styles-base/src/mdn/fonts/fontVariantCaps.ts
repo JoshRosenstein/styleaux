@@ -1,4 +1,4 @@
-import { FontVariantCapsProperty } from '@roseys/csstype';
+import { FontVariantCapsProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IFontVariantCapsProps<T> {
   fontVariantCaps: T;
 }
 
-export const fontVariantCaps = <
+export const createFontVariantCaps = <
   T = FontVariantCapsProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const fontVariantCaps = <
     transformValue,
   })
 
-export const fontVariantCapsRule = <T = FontVariantCapsProperty>(
+export const createFontVariantCapsRule = <T = FontVariantCapsProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: FONTVARIANTCAPS, getValue: transformer})
+
+export const fontVariantCaps =createFontVariantCaps()
+
+export const fontVariantCapsRule =createFontVariantCapsRule()

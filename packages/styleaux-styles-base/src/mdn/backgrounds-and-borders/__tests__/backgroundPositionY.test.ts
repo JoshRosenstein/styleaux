@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { backgroundPositionY } from '../backgroundPositionY';
+import { createBackgroundPositionY } from '../backgroundPositionY';
 
 describe('backgroundPositionY', () => {
   it('should return a function', () => {
-    const result = backgroundPositionY();
+    const result = createBackgroundPositionY();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `backgroundPositionY` as component and css prop', () => {
-    const result = backgroundPositionY()({ backgroundPositionY: 'inherit' });
+    const result = createBackgroundPositionY()({ backgroundPositionY: 'inherit' });
     expect(toStyles(result)).toEqual({ backgroundPositionY: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = backgroundPositionY<'a'>()({ backgroundPositionY: 'a' });
+    const result = createBackgroundPositionY<'a'>()({ backgroundPositionY: 'a' });
     expect(toStyles(result)).toEqual({ backgroundPositionY: 'a' });
   });
 
   it('should use an interface which marks `backgroundPositionY` as optional', () => {
-    const result = backgroundPositionY<'a'>()({});
+    const result = createBackgroundPositionY<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = backgroundPositionY<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBackgroundPositionY<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ backgroundPositionY: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('backgroundPositionY', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = backgroundPositionY<
+    const result = createBackgroundPositionY<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { scrollPaddingInlineEnd } from '../scrollPaddingInlineEnd';
+import { createScrollPaddingInlineEnd } from '../scrollPaddingInlineEnd';
 
 describe('scrollPaddingInlineEnd', () => {
   it('should return a function', () => {
-    const result = scrollPaddingInlineEnd();
+    const result = createScrollPaddingInlineEnd();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `scrollPaddingInlineEnd` as component and css prop', () => {
-    const result = scrollPaddingInlineEnd()({ scrollPaddingInlineEnd: 'inherit' });
+    const result = createScrollPaddingInlineEnd()({ scrollPaddingInlineEnd: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollPaddingInlineEnd: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = scrollPaddingInlineEnd<'a'>()({ scrollPaddingInlineEnd: 'a' });
+    const result = createScrollPaddingInlineEnd<'a'>()({ scrollPaddingInlineEnd: 'a' });
     expect(toStyles(result)).toEqual({ scrollPaddingInlineEnd: 'a' });
   });
 
   it('should use an interface which marks `scrollPaddingInlineEnd` as optional', () => {
-    const result = scrollPaddingInlineEnd<'a'>()({});
+    const result = createScrollPaddingInlineEnd<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = scrollPaddingInlineEnd<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollPaddingInlineEnd<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollPaddingInlineEnd: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('scrollPaddingInlineEnd', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = scrollPaddingInlineEnd<
+    const result = createScrollPaddingInlineEnd<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

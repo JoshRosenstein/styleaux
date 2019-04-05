@@ -1,4 +1,4 @@
-import { PositionProperty } from '@roseys/csstype';
+import { PositionProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IPositionProps<T> {
   position: T;
 }
 
-export const position = <
+export const createPosition = <
   T = PositionProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const position = <
     transformValue,
   })
 
-export const positionRule = <T = PositionProperty>(
+export const createPositionRule = <T = PositionProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: POSITION, getValue: transformer})
+
+export const position =createPosition()
+
+export const positionRule =createPositionRule()

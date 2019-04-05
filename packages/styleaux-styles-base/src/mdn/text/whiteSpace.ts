@@ -1,4 +1,4 @@
-import { WhiteSpaceProperty } from '@roseys/csstype';
+import { WhiteSpaceProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IWhiteSpaceProps<T> {
   whiteSpace: T;
 }
 
-export const whiteSpace = <
+export const createWhiteSpace = <
   T = WhiteSpaceProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const whiteSpace = <
     transformValue,
   })
 
-export const whiteSpaceRule = <T = WhiteSpaceProperty>(
+export const createWhiteSpaceRule = <T = WhiteSpaceProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: WHITESPACE, getValue: transformer})
+
+export const whiteSpace =createWhiteSpace()
+
+export const whiteSpaceRule =createWhiteSpaceRule()

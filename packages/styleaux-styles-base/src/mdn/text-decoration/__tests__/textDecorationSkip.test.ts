@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { textDecorationSkip } from '../textDecorationSkip';
+import { createTextDecorationSkip } from '../textDecorationSkip';
 
 describe('textDecorationSkip', () => {
   it('should return a function', () => {
-    const result = textDecorationSkip();
+    const result = createTextDecorationSkip();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `textDecorationSkip` as component and css prop', () => {
-    const result = textDecorationSkip()({ textDecorationSkip: 'inherit' });
+    const result = createTextDecorationSkip()({ textDecorationSkip: 'inherit' });
     expect(toStyles(result)).toEqual({ textDecorationSkip: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = textDecorationSkip<'a'>()({ textDecorationSkip: 'a' });
+    const result = createTextDecorationSkip<'a'>()({ textDecorationSkip: 'a' });
     expect(toStyles(result)).toEqual({ textDecorationSkip: 'a' });
   });
 
   it('should use an interface which marks `textDecorationSkip` as optional', () => {
-    const result = textDecorationSkip<'a'>()({});
+    const result = createTextDecorationSkip<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = textDecorationSkip<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextDecorationSkip<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textDecorationSkip: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('textDecorationSkip', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = textDecorationSkip<
+    const result = createTextDecorationSkip<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

@@ -1,4 +1,4 @@
-import { WordBreakProperty } from '@roseys/csstype';
+import { WordBreakProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IWordBreakProps<T> {
   wordBreak: T;
 }
 
-export const wordBreak = <
+export const createWordBreak = <
   T = WordBreakProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const wordBreak = <
     transformValue,
   })
 
-export const wordBreakRule = <T = WordBreakProperty>(
+export const createWordBreakRule = <T = WordBreakProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: WORDBREAK, getValue: transformer})
+
+export const wordBreak =createWordBreak()
+
+export const wordBreakRule =createWordBreakRule()

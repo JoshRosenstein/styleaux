@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { borderTopLeftRadius } from '../borderTopLeftRadius';
+import { createBorderTopLeftRadius } from '../borderTopLeftRadius';
 
 describe('borderTopLeftRadius', () => {
   it('should return a function', () => {
-    const result = borderTopLeftRadius();
+    const result = createBorderTopLeftRadius();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `borderTopLeftRadius` as component and css prop', () => {
-    const result = borderTopLeftRadius()({ borderTopLeftRadius: 'inherit' });
+    const result = createBorderTopLeftRadius()({ borderTopLeftRadius: 'inherit' });
     expect(toStyles(result)).toEqual({ borderTopLeftRadius: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = borderTopLeftRadius<'a'>()({ borderTopLeftRadius: 'a' });
+    const result = createBorderTopLeftRadius<'a'>()({ borderTopLeftRadius: 'a' });
     expect(toStyles(result)).toEqual({ borderTopLeftRadius: 'a' });
   });
 
   it('should use an interface which marks `borderTopLeftRadius` as optional', () => {
-    const result = borderTopLeftRadius<'a'>()({});
+    const result = createBorderTopLeftRadius<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = borderTopLeftRadius<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderTopLeftRadius<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderTopLeftRadius: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('borderTopLeftRadius', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = borderTopLeftRadius<
+    const result = createBorderTopLeftRadius<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

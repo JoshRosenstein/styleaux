@@ -1,4 +1,4 @@
-import { FontVariantEastAsianProperty } from '@roseys/csstype';
+import { FontVariantEastAsianProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IFontVariantEastAsianProps<T> {
   fontVariantEastAsian: T;
 }
 
-export const fontVariantEastAsian = <
+export const createFontVariantEastAsian = <
   T = FontVariantEastAsianProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const fontVariantEastAsian = <
     transformValue,
   })
 
-export const fontVariantEastAsianRule = <T = FontVariantEastAsianProperty>(
+export const createFontVariantEastAsianRule = <T = FontVariantEastAsianProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: FONTVARIANTEASTASIAN, getValue: transformer})
+
+export const fontVariantEastAsian =createFontVariantEastAsian()
+
+export const fontVariantEastAsianRule =createFontVariantEastAsianRule()

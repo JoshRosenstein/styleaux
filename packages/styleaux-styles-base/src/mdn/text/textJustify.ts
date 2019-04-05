@@ -1,4 +1,4 @@
-import { TextJustifyProperty } from '@roseys/csstype';
+import { TextJustifyProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITextJustifyProps<T> {
   textJustify: T;
 }
 
-export const textJustify = <
+export const createTextJustify = <
   T = TextJustifyProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const textJustify = <
     transformValue,
   })
 
-export const textJustifyRule = <T = TextJustifyProperty>(
+export const createTextJustifyRule = <T = TextJustifyProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TEXTJUSTIFY, getValue: transformer})
+
+export const textJustify =createTextJustify()
+
+export const textJustifyRule =createTextJustifyRule()

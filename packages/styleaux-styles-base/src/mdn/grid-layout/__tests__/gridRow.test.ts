@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { gridRow } from '../gridRow';
+import { createGridRow } from '../gridRow';
 
 describe('gridRow', () => {
   it('should return a function', () => {
-    const result = gridRow();
+    const result = createGridRow();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `gridRow` as component and css prop', () => {
-    const result = gridRow()({ gridRow: 'inherit' });
+    const result = createGridRow()({ gridRow: 'inherit' });
     expect(toStyles(result)).toEqual({ gridRow: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = gridRow<'a'>()({ gridRow: 'a' });
+    const result = createGridRow<'a'>()({ gridRow: 'a' });
     expect(toStyles(result)).toEqual({ gridRow: 'a' });
   });
 
   it('should use an interface which marks `gridRow` as optional', () => {
-    const result = gridRow<'a'>()({});
+    const result = createGridRow<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = gridRow<'value',never,IThemeWithoutBreakpoints>({
+    const result = createGridRow<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ gridRow: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('gridRow', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = gridRow<
+    const result = createGridRow<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

@@ -1,4 +1,4 @@
-import { ListStyleImageProperty } from '@roseys/csstype';
+import { ListStyleImageProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IListStyleImageProps<T> {
   listStyleImage: T;
 }
 
-export const listStyleImage = <
+export const createListStyleImage = <
   T = ListStyleImageProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const listStyleImage = <
     transformValue,
   })
 
-export const listStyleImageRule = <T = ListStyleImageProperty>(
+export const createListStyleImageRule = <T = ListStyleImageProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: LISTSTYLEIMAGE, getValue: transformer})
+
+export const listStyleImage =createListStyleImage()
+
+export const listStyleImageRule =createListStyleImageRule()

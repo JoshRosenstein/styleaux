@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { textCombineUpright } from '../textCombineUpright';
+import { createTextCombineUpright } from '../textCombineUpright';
 
 describe('textCombineUpright', () => {
   it('should return a function', () => {
-    const result = textCombineUpright();
+    const result = createTextCombineUpright();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `textCombineUpright` as component and css prop', () => {
-    const result = textCombineUpright()({ textCombineUpright: 'inherit' });
+    const result = createTextCombineUpright()({ textCombineUpright: 'inherit' });
     expect(toStyles(result)).toEqual({ textCombineUpright: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = textCombineUpright<'a'>()({ textCombineUpright: 'a' });
+    const result = createTextCombineUpright<'a'>()({ textCombineUpright: 'a' });
     expect(toStyles(result)).toEqual({ textCombineUpright: 'a' });
   });
 
   it('should use an interface which marks `textCombineUpright` as optional', () => {
-    const result = textCombineUpright<'a'>()({});
+    const result = createTextCombineUpright<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = textCombineUpright<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextCombineUpright<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textCombineUpright: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('textCombineUpright', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = textCombineUpright<
+    const result = createTextCombineUpright<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

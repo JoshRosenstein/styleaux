@@ -1,4 +1,4 @@
-import { AnimationDirectionProperty } from '@roseys/csstype';
+import { AnimationDirectionProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IAnimationDirectionProps<T> {
   animationDirection: T;
 }
 
-export const animationDirection = <
+export const createAnimationDirection = <
   T = AnimationDirectionProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const animationDirection = <
     transformValue,
   })
 
-export const animationDirectionRule = <T = AnimationDirectionProperty>(
+export const createAnimationDirectionRule = <T = AnimationDirectionProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: ANIMATIONDIRECTION, getValue: transformer})
+
+export const animationDirection =createAnimationDirection()
+
+export const animationDirectionRule =createAnimationDirectionRule()

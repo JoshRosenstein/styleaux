@@ -1,4 +1,4 @@
-import { ScaleProperty } from '@roseys/csstype';
+import { ScaleProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IScaleProps<T> {
   scale: T;
 }
 
-export const scale = <
+export const createScale = <
   T = ScaleProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const scale = <
     transformValue,
   })
 
-export const scaleRule = <T = ScaleProperty>(
+export const createScaleRule = <T = ScaleProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: SCALE, getValue: transformer})
+
+export const scale =createScale()
+
+export const scaleRule =createScaleRule()

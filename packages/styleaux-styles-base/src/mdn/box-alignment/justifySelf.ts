@@ -1,4 +1,4 @@
-import { JustifySelfProperty } from '@roseys/csstype';
+import { JustifySelfProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IJustifySelfProps<T> {
   justifySelf: T;
 }
 
-export const justifySelf = <
+export const createJustifySelf = <
   T = JustifySelfProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const justifySelf = <
     transformValue,
   })
 
-export const justifySelfRule = <T = JustifySelfProperty>(
+export const createJustifySelfRule = <T = JustifySelfProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: JUSTIFYSELF, getValue: transformer})
+
+export const justifySelf =createJustifySelf()
+
+export const justifySelfRule =createJustifySelfRule()

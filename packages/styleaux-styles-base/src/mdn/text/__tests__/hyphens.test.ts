@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { hyphens } from '../hyphens';
+import { createHyphens } from '../hyphens';
 
 describe('hyphens', () => {
   it('should return a function', () => {
-    const result = hyphens();
+    const result = createHyphens();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `hyphens` as component and css prop', () => {
-    const result = hyphens()({ hyphens: 'inherit' });
+    const result = createHyphens()({ hyphens: 'inherit' });
     expect(toStyles(result)).toEqual({ hyphens: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = hyphens<'a'>()({ hyphens: 'a' });
+    const result = createHyphens<'a'>()({ hyphens: 'a' });
     expect(toStyles(result)).toEqual({ hyphens: 'a' });
   });
 
   it('should use an interface which marks `hyphens` as optional', () => {
-    const result = hyphens<'a'>()({});
+    const result = createHyphens<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = hyphens<'value',never,IThemeWithoutBreakpoints>({
+    const result = createHyphens<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ hyphens: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('hyphens', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = hyphens<
+    const result = createHyphens<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

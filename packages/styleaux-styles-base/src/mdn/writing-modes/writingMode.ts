@@ -1,4 +1,4 @@
-import { WritingModeProperty } from '@roseys/csstype';
+import { WritingModeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IWritingModeProps<T> {
   writingMode: T;
 }
 
-export const writingMode = <
+export const createWritingMode = <
   T = WritingModeProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const writingMode = <
     transformValue,
   })
 
-export const writingModeRule = <T = WritingModeProperty>(
+export const createWritingModeRule = <T = WritingModeProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: WRITINGMODE, getValue: transformer})
+
+export const writingMode =createWritingMode()
+
+export const writingModeRule =createWritingModeRule()

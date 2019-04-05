@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { placeContent } from '../placeContent';
+import { createPlaceContent } from '../placeContent';
 
 describe('placeContent', () => {
   it('should return a function', () => {
-    const result = placeContent();
+    const result = createPlaceContent();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `placeContent` as component and css prop', () => {
-    const result = placeContent()({ placeContent: 'inherit' });
+    const result = createPlaceContent()({ placeContent: 'inherit' });
     expect(toStyles(result)).toEqual({ placeContent: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = placeContent<'a'>()({ placeContent: 'a' });
+    const result = createPlaceContent<'a'>()({ placeContent: 'a' });
     expect(toStyles(result)).toEqual({ placeContent: 'a' });
   });
 
   it('should use an interface which marks `placeContent` as optional', () => {
-    const result = placeContent<'a'>()({});
+    const result = createPlaceContent<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = placeContent<'value',never,IThemeWithoutBreakpoints>({
+    const result = createPlaceContent<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ placeContent: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('placeContent', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = placeContent<
+    const result = createPlaceContent<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

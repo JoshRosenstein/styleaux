@@ -1,4 +1,4 @@
-import { TextAlignProperty } from '@roseys/csstype';
+import { TextAlignProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITextAlignProps<T> {
   textAlign: T;
 }
 
-export const textAlign = <
+export const createTextAlign = <
   T = TextAlignProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const textAlign = <
     transformValue,
   })
 
-export const textAlignRule = <T = TextAlignProperty>(
+export const createTextAlignRule = <T = TextAlignProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TEXTALIGN, getValue: transformer})
+
+export const textAlign =createTextAlign()
+
+export const textAlignRule =createTextAlignRule()

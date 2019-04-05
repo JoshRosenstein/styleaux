@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { breakBefore } from '../breakBefore';
+import { createBreakBefore } from '../breakBefore';
 
 describe('breakBefore', () => {
   it('should return a function', () => {
-    const result = breakBefore();
+    const result = createBreakBefore();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `breakBefore` as component and css prop', () => {
-    const result = breakBefore()({ breakBefore: 'inherit' });
+    const result = createBreakBefore()({ breakBefore: 'inherit' });
     expect(toStyles(result)).toEqual({ breakBefore: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = breakBefore<'a'>()({ breakBefore: 'a' });
+    const result = createBreakBefore<'a'>()({ breakBefore: 'a' });
     expect(toStyles(result)).toEqual({ breakBefore: 'a' });
   });
 
   it('should use an interface which marks `breakBefore` as optional', () => {
-    const result = breakBefore<'a'>()({});
+    const result = createBreakBefore<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = breakBefore<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBreakBefore<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ breakBefore: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('breakBefore', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = breakBefore<
+    const result = createBreakBefore<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

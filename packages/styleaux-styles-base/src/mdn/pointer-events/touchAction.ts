@@ -1,4 +1,4 @@
-import { TouchActionProperty } from '@roseys/csstype';
+import { TouchActionProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITouchActionProps<T> {
   touchAction: T;
 }
 
-export const touchAction = <
+export const createTouchAction = <
   T = TouchActionProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const touchAction = <
     transformValue,
   })
 
-export const touchActionRule = <T = TouchActionProperty>(
+export const createTouchActionRule = <T = TouchActionProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TOUCHACTION, getValue: transformer})
+
+export const touchAction =createTouchAction()
+
+export const touchActionRule =createTouchActionRule()

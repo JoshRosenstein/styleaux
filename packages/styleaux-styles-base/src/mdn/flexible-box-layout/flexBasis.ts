@@ -1,4 +1,4 @@
-import { FlexBasisProperty } from '@roseys/csstype';
+import { FlexBasisProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IFlexBasisProps<T> {
   flexBasis: T;
 }
 
-export const flexBasis = <
+export const createFlexBasis = <
   T = FlexBasisProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const flexBasis = <
     transformValue,
   })
 
-export const flexBasisRule = <T = FlexBasisProperty>(
+export const createFlexBasisRule = <T = FlexBasisProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: FLEXBASIS, getValue: transformer})
+
+export const flexBasis =createFlexBasis()
+
+export const flexBasisRule =createFlexBasisRule()

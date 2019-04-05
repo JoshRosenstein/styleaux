@@ -1,4 +1,4 @@
-import { OffsetDistanceProperty } from '@roseys/csstype';
+import { OffsetDistanceProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IOffsetDistanceProps<T> {
   offsetDistance: T;
 }
 
-export const offsetDistance = <
+export const createOffsetDistance = <
   T = OffsetDistanceProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const offsetDistance = <
     transformValue,
   })
 
-export const offsetDistanceRule = <T = OffsetDistanceProperty>(
+export const createOffsetDistanceRule = <T = OffsetDistanceProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: OFFSETDISTANCE, getValue: transformer})
+
+export const offsetDistance =createOffsetDistance()
+
+export const offsetDistanceRule =createOffsetDistanceRule()

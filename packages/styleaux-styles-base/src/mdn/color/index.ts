@@ -1,1 +1,1 @@
-export * from './color';export * from './colorAdjust';
+export * from './color';export * from './colorAdjust';export * from './opacity';

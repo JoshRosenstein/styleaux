@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { marginInlineStart } from '../marginInlineStart';
+import { createMarginInlineStart } from '../marginInlineStart';
 
 describe('marginInlineStart', () => {
   it('should return a function', () => {
-    const result = marginInlineStart();
+    const result = createMarginInlineStart();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `marginInlineStart` as component and css prop', () => {
-    const result = marginInlineStart()({ marginInlineStart: 'inherit' });
+    const result = createMarginInlineStart()({ marginInlineStart: 'inherit' });
     expect(toStyles(result)).toEqual({ marginInlineStart: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = marginInlineStart<'a'>()({ marginInlineStart: 'a' });
+    const result = createMarginInlineStart<'a'>()({ marginInlineStart: 'a' });
     expect(toStyles(result)).toEqual({ marginInlineStart: 'a' });
   });
 
   it('should use an interface which marks `marginInlineStart` as optional', () => {
-    const result = marginInlineStart<'a'>()({});
+    const result = createMarginInlineStart<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = marginInlineStart<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMarginInlineStart<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ marginInlineStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('marginInlineStart', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = marginInlineStart<
+    const result = createMarginInlineStart<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

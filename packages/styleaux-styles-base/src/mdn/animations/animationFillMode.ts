@@ -1,4 +1,4 @@
-import { AnimationFillModeProperty } from '@roseys/csstype';
+import { AnimationFillModeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IAnimationFillModeProps<T> {
   animationFillMode: T;
 }
 
-export const animationFillMode = <
+export const createAnimationFillMode = <
   T = AnimationFillModeProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const animationFillMode = <
     transformValue,
   })
 
-export const animationFillModeRule = <T = AnimationFillModeProperty>(
+export const createAnimationFillModeRule = <T = AnimationFillModeProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: ANIMATIONFILLMODE, getValue: transformer})
+
+export const animationFillMode =createAnimationFillMode()
+
+export const animationFillModeRule =createAnimationFillModeRule()

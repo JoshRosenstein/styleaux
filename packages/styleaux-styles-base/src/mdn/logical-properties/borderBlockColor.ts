@@ -1,4 +1,4 @@
-import { BorderBlockColorProperty } from '@roseys/csstype';
+import { BorderBlockColorProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBorderBlockColorProps<T> {
   borderBlockColor: T;
 }
 
-export const borderBlockColor = <
+export const createBorderBlockColor = <
   T = BorderBlockColorProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const borderBlockColor = <
     transformValue,
   })
 
-export const borderBlockColorRule = <T = BorderBlockColorProperty>(
+export const createBorderBlockColorRule = <T = BorderBlockColorProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BORDERBLOCKCOLOR, getValue: transformer})
+
+export const borderBlockColor =createBorderBlockColor()
+
+export const borderBlockColorRule =createBorderBlockColorRule()

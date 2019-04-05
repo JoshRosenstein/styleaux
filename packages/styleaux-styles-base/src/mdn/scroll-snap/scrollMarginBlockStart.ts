@@ -1,4 +1,4 @@
-import { ScrollMarginBlockStartProperty } from '@roseys/csstype';
+import { ScrollMarginBlockStartProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IScrollMarginBlockStartProps<T> {
   scrollMarginBlockStart: T;
 }
 
-export const scrollMarginBlockStart = <
+export const createScrollMarginBlockStart = <
   T = ScrollMarginBlockStartProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const scrollMarginBlockStart = <
     transformValue,
   })
 
-export const scrollMarginBlockStartRule = <T = ScrollMarginBlockStartProperty>(
+export const createScrollMarginBlockStartRule = <T = ScrollMarginBlockStartProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: SCROLLMARGINBLOCKSTART, getValue: transformer})
+
+export const scrollMarginBlockStart =createScrollMarginBlockStart()
+
+export const scrollMarginBlockStartRule =createScrollMarginBlockStartRule()

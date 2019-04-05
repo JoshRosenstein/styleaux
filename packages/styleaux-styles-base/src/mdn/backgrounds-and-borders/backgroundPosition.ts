@@ -1,4 +1,4 @@
-import { BackgroundPositionProperty } from '@roseys/csstype';
+import { BackgroundPositionProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBackgroundPositionProps<T> {
   backgroundPosition: T;
 }
 
-export const backgroundPosition = <
+export const createBackgroundPosition = <
   T = BackgroundPositionProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const backgroundPosition = <
     transformValue,
   })
 
-export const backgroundPositionRule = <T = BackgroundPositionProperty>(
+export const createBackgroundPositionRule = <T = BackgroundPositionProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BACKGROUNDPOSITION, getValue: transformer})
+
+export const backgroundPosition =createBackgroundPosition()
+
+export const backgroundPositionRule =createBackgroundPositionRule()

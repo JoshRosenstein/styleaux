@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { scrollPaddingTop } from '../scrollPaddingTop';
+import { createScrollPaddingTop } from '../scrollPaddingTop';
 
 describe('scrollPaddingTop', () => {
   it('should return a function', () => {
-    const result = scrollPaddingTop();
+    const result = createScrollPaddingTop();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `scrollPaddingTop` as component and css prop', () => {
-    const result = scrollPaddingTop()({ scrollPaddingTop: 'inherit' });
+    const result = createScrollPaddingTop()({ scrollPaddingTop: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollPaddingTop: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = scrollPaddingTop<'a'>()({ scrollPaddingTop: 'a' });
+    const result = createScrollPaddingTop<'a'>()({ scrollPaddingTop: 'a' });
     expect(toStyles(result)).toEqual({ scrollPaddingTop: 'a' });
   });
 
   it('should use an interface which marks `scrollPaddingTop` as optional', () => {
-    const result = scrollPaddingTop<'a'>()({});
+    const result = createScrollPaddingTop<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = scrollPaddingTop<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollPaddingTop<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollPaddingTop: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('scrollPaddingTop', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = scrollPaddingTop<
+    const result = createScrollPaddingTop<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

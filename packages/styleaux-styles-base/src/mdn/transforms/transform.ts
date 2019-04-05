@@ -1,4 +1,4 @@
-import { TransformProperty } from '@roseys/csstype';
+import { TransformProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITransformProps<T> {
   transform: T;
 }
 
-export const transform = <
+export const createTransform = <
   T = TransformProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const transform = <
     transformValue,
   })
 
-export const transformRule = <T = TransformProperty>(
+export const createTransformRule = <T = TransformProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TRANSFORM, getValue: transformer})
+
+export const transform =createTransform()
+
+export const transformRule =createTransformRule()

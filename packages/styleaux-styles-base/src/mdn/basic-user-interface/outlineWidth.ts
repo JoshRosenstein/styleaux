@@ -1,4 +1,4 @@
-import { OutlineWidthProperty } from '@roseys/csstype';
+import { OutlineWidthProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IOutlineWidthProps<T> {
   outlineWidth: T;
 }
 
-export const outlineWidth = <
+export const createOutlineWidth = <
   T = OutlineWidthProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const outlineWidth = <
     transformValue,
   })
 
-export const outlineWidthRule = <T = OutlineWidthProperty>(
+export const createOutlineWidthRule = <T = OutlineWidthProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: OUTLINEWIDTH, getValue: transformer})
+
+export const outlineWidth =createOutlineWidth()
+
+export const outlineWidthRule =createOutlineWidthRule()

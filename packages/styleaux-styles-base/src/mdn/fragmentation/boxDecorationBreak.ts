@@ -1,4 +1,4 @@
-import { BoxDecorationBreakProperty } from '@roseys/csstype';
+import { BoxDecorationBreakProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBoxDecorationBreakProps<T> {
   boxDecorationBreak: T;
 }
 
-export const boxDecorationBreak = <
+export const createBoxDecorationBreak = <
   T = BoxDecorationBreakProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const boxDecorationBreak = <
     transformValue,
   })
 
-export const boxDecorationBreakRule = <T = BoxDecorationBreakProperty>(
+export const createBoxDecorationBreakRule = <T = BoxDecorationBreakProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BOXDECORATIONBREAK, getValue: transformer})
+
+export const boxDecorationBreak =createBoxDecorationBreak()
+
+export const boxDecorationBreakRule =createBoxDecorationBreakRule()

@@ -1,4 +1,4 @@
-import { OffsetRotateProperty } from '@roseys/csstype';
+import { OffsetRotateProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IOffsetRotateProps<T> {
   offsetRotate: T;
 }
 
-export const offsetRotate = <
+export const createOffsetRotate = <
   T = OffsetRotateProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const offsetRotate = <
     transformValue,
   })
 
-export const offsetRotateRule = <T = OffsetRotateProperty>(
+export const createOffsetRotateRule = <T = OffsetRotateProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: OFFSETROTATE, getValue: transformer})
+
+export const offsetRotate =createOffsetRotate()
+
+export const offsetRotateRule =createOffsetRotateRule()

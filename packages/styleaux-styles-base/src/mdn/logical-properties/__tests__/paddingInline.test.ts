@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { paddingInline } from '../paddingInline';
+import { createPaddingInline } from '../paddingInline';
 
 describe('paddingInline', () => {
   it('should return a function', () => {
-    const result = paddingInline();
+    const result = createPaddingInline();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `paddingInline` as component and css prop', () => {
-    const result = paddingInline()({ paddingInline: 'inherit' });
+    const result = createPaddingInline()({ paddingInline: 'inherit' });
     expect(toStyles(result)).toEqual({ paddingInline: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = paddingInline<'a'>()({ paddingInline: 'a' });
+    const result = createPaddingInline<'a'>()({ paddingInline: 'a' });
     expect(toStyles(result)).toEqual({ paddingInline: 'a' });
   });
 
   it('should use an interface which marks `paddingInline` as optional', () => {
-    const result = paddingInline<'a'>()({});
+    const result = createPaddingInline<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = paddingInline<'value',never,IThemeWithoutBreakpoints>({
+    const result = createPaddingInline<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ paddingInline: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('paddingInline', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = paddingInline<
+    const result = createPaddingInline<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

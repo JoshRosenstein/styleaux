@@ -1,4 +1,4 @@
-import { OverflowAnchorProperty } from '@roseys/csstype';
+import { OverflowAnchorProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IOverflowAnchorProps<T> {
   overflowAnchor: T;
 }
 
-export const overflowAnchor = <
+export const createOverflowAnchor = <
   T = OverflowAnchorProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const overflowAnchor = <
     transformValue,
   })
 
-export const overflowAnchorRule = <T = OverflowAnchorProperty>(
+export const createOverflowAnchorRule = <T = OverflowAnchorProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: OVERFLOWANCHOR, getValue: transformer})
+
+export const overflowAnchor =createOverflowAnchor()
+
+export const overflowAnchorRule =createOverflowAnchorRule()

@@ -1,4 +1,4 @@
-import { ScrollPaddingInlineStartProperty } from '@roseys/csstype';
+import { ScrollPaddingInlineStartProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IScrollPaddingInlineStartProps<T> {
   scrollPaddingInlineStart: T;
 }
 
-export const scrollPaddingInlineStart = <
+export const createScrollPaddingInlineStart = <
   T = ScrollPaddingInlineStartProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const scrollPaddingInlineStart = <
     transformValue,
   })
 
-export const scrollPaddingInlineStartRule = <T = ScrollPaddingInlineStartProperty>(
+export const createScrollPaddingInlineStartRule = <T = ScrollPaddingInlineStartProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: SCROLLPADDINGINLINESTART, getValue: transformer})
+
+export const scrollPaddingInlineStart =createScrollPaddingInlineStart()
+
+export const scrollPaddingInlineStartRule =createScrollPaddingInlineStartRule()

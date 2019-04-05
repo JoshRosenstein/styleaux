@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { listStyleType } from '../listStyleType';
+import { createListStyleType } from '../listStyleType';
 
 describe('listStyleType', () => {
   it('should return a function', () => {
-    const result = listStyleType();
+    const result = createListStyleType();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `listStyleType` as component and css prop', () => {
-    const result = listStyleType()({ listStyleType: 'inherit' });
+    const result = createListStyleType()({ listStyleType: 'inherit' });
     expect(toStyles(result)).toEqual({ listStyleType: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = listStyleType<'a'>()({ listStyleType: 'a' });
+    const result = createListStyleType<'a'>()({ listStyleType: 'a' });
     expect(toStyles(result)).toEqual({ listStyleType: 'a' });
   });
 
   it('should use an interface which marks `listStyleType` as optional', () => {
-    const result = listStyleType<'a'>()({});
+    const result = createListStyleType<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = listStyleType<'value',never,IThemeWithoutBreakpoints>({
+    const result = createListStyleType<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ listStyleType: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('listStyleType', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = listStyleType<
+    const result = createListStyleType<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

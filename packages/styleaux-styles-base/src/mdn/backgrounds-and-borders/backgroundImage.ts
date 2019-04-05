@@ -1,4 +1,4 @@
-import { BackgroundImageProperty } from '@roseys/csstype';
+import { BackgroundImageProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBackgroundImageProps<T> {
   backgroundImage: T;
 }
 
-export const backgroundImage = <
+export const createBackgroundImage = <
   T = BackgroundImageProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const backgroundImage = <
     transformValue,
   })
 
-export const backgroundImageRule = <T = BackgroundImageProperty>(
+export const createBackgroundImageRule = <T = BackgroundImageProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BACKGROUNDIMAGE, getValue: transformer})
+
+export const backgroundImage =createBackgroundImage()
+
+export const backgroundImageRule =createBackgroundImageRule()

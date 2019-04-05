@@ -1,4 +1,4 @@
-import { BackgroundRepeatProperty } from '@roseys/csstype';
+import { BackgroundRepeatProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBackgroundRepeatProps<T> {
   backgroundRepeat: T;
 }
 
-export const backgroundRepeat = <
+export const createBackgroundRepeat = <
   T = BackgroundRepeatProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const backgroundRepeat = <
     transformValue,
   })
 
-export const backgroundRepeatRule = <T = BackgroundRepeatProperty>(
+export const createBackgroundRepeatRule = <T = BackgroundRepeatProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BACKGROUNDREPEAT, getValue: transformer})
+
+export const backgroundRepeat =createBackgroundRepeat()
+
+export const backgroundRepeatRule =createBackgroundRepeatRule()

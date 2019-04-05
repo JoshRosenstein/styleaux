@@ -1,4 +1,4 @@
-import { TextCombineUprightProperty } from '@roseys/csstype';
+import { TextCombineUprightProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITextCombineUprightProps<T> {
   textCombineUpright: T;
 }
 
-export const textCombineUpright = <
+export const createTextCombineUpright = <
   T = TextCombineUprightProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const textCombineUpright = <
     transformValue,
   })
 
-export const textCombineUprightRule = <T = TextCombineUprightProperty>(
+export const createTextCombineUprightRule = <T = TextCombineUprightProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TEXTCOMBINEUPRIGHT, getValue: transformer})
+
+export const textCombineUpright =createTextCombineUpright()
+
+export const textCombineUprightRule =createTextCombineUprightRule()

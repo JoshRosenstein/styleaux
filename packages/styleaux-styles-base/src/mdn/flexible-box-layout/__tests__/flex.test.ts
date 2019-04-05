@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { flex } from '../flex';
+import { createFlex } from '../flex';
 
 describe('flex', () => {
   it('should return a function', () => {
-    const result = flex();
+    const result = createFlex();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `flex` as component and css prop', () => {
-    const result = flex()({ flex: 'inherit' });
+    const result = createFlex()({ flex: 'inherit' });
     expect(toStyles(result)).toEqual({ flex: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = flex<'a'>()({ flex: 'a' });
+    const result = createFlex<'a'>()({ flex: 'a' });
     expect(toStyles(result)).toEqual({ flex: 'a' });
   });
 
   it('should use an interface which marks `flex` as optional', () => {
-    const result = flex<'a'>()({});
+    const result = createFlex<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = flex<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFlex<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ flex: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('flex', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = flex<
+    const result = createFlex<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

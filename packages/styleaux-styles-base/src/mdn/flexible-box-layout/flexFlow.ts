@@ -1,4 +1,4 @@
-import { FlexFlowProperty } from '@roseys/csstype';
+import { FlexFlowProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IFlexFlowProps<T> {
   flexFlow: T;
 }
 
-export const flexFlow = <
+export const createFlexFlow = <
   T = FlexFlowProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const flexFlow = <
     transformValue,
   })
 
-export const flexFlowRule = <T = FlexFlowProperty>(
+export const createFlexFlowRule = <T = FlexFlowProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: FLEXFLOW, getValue: transformer})
+
+export const flexFlow =createFlexFlow()
+
+export const flexFlowRule =createFlexFlowRule()

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { backgroundBlendMode } from '../backgroundBlendMode';
+import { createBackgroundBlendMode } from '../backgroundBlendMode';
 
 describe('backgroundBlendMode', () => {
   it('should return a function', () => {
-    const result = backgroundBlendMode();
+    const result = createBackgroundBlendMode();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `backgroundBlendMode` as component and css prop', () => {
-    const result = backgroundBlendMode()({ backgroundBlendMode: 'inherit' });
+    const result = createBackgroundBlendMode()({ backgroundBlendMode: 'inherit' });
     expect(toStyles(result)).toEqual({ backgroundBlendMode: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = backgroundBlendMode<'a'>()({ backgroundBlendMode: 'a' });
+    const result = createBackgroundBlendMode<'a'>()({ backgroundBlendMode: 'a' });
     expect(toStyles(result)).toEqual({ backgroundBlendMode: 'a' });
   });
 
   it('should use an interface which marks `backgroundBlendMode` as optional', () => {
-    const result = backgroundBlendMode<'a'>()({});
+    const result = createBackgroundBlendMode<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = backgroundBlendMode<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBackgroundBlendMode<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ backgroundBlendMode: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('backgroundBlendMode', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = backgroundBlendMode<
+    const result = createBackgroundBlendMode<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

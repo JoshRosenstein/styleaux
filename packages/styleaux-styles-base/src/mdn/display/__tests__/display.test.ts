@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { display } from '../display';
+import { createDisplay } from '../display';
 
 describe('display', () => {
   it('should return a function', () => {
-    const result = display();
+    const result = createDisplay();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `display` as component and css prop', () => {
-    const result = display()({ display: 'inherit' });
+    const result = createDisplay()({ display: 'inherit' });
     expect(toStyles(result)).toEqual({ display: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = display<'a'>()({ display: 'a' });
+    const result = createDisplay<'a'>()({ display: 'a' });
     expect(toStyles(result)).toEqual({ display: 'a' });
   });
 
   it('should use an interface which marks `display` as optional', () => {
-    const result = display<'a'>()({});
+    const result = createDisplay<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = display<'value',never,IThemeWithoutBreakpoints>({
+    const result = createDisplay<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ display: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('display', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = display<
+    const result = createDisplay<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

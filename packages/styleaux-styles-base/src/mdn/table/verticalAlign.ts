@@ -1,4 +1,4 @@
-import { VerticalAlignProperty } from '@roseys/csstype';
+import { VerticalAlignProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IVerticalAlignProps<T> {
   verticalAlign: T;
 }
 
-export const verticalAlign = <
+export const createVerticalAlign = <
   T = VerticalAlignProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const verticalAlign = <
     transformValue,
   })
 
-export const verticalAlignRule = <T = VerticalAlignProperty>(
+export const createVerticalAlignRule = <T = VerticalAlignProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: VERTICALALIGN, getValue: transformer})
+
+export const verticalAlign =createVerticalAlign()
+
+export const verticalAlignRule =createVerticalAlignRule()

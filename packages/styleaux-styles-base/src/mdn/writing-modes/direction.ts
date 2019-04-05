@@ -1,4 +1,4 @@
-import { DirectionProperty } from '@roseys/csstype';
+import { DirectionProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IDirectionProps<T> {
   direction: T;
 }
 
-export const direction = <
+export const createDirection = <
   T = DirectionProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const direction = <
     transformValue,
   })
 
-export const directionRule = <T = DirectionProperty>(
+export const createDirectionRule = <T = DirectionProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: DIRECTION, getValue: transformer})
+
+export const direction =createDirection()
+
+export const directionRule =createDirectionRule()

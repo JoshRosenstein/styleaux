@@ -1,4 +1,4 @@
-import { BackgroundOriginProperty } from '@roseys/csstype';
+import { BackgroundOriginProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBackgroundOriginProps<T> {
   backgroundOrigin: T;
 }
 
-export const backgroundOrigin = <
+export const createBackgroundOrigin = <
   T = BackgroundOriginProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const backgroundOrigin = <
     transformValue,
   })
 
-export const backgroundOriginRule = <T = BackgroundOriginProperty>(
+export const createBackgroundOriginRule = <T = BackgroundOriginProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BACKGROUNDORIGIN, getValue: transformer})
+
+export const backgroundOrigin =createBackgroundOrigin()
+
+export const backgroundOriginRule =createBackgroundOriginRule()

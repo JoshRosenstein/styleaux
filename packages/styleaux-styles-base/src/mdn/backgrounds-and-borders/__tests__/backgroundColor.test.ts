@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { backgroundColor } from '../backgroundColor';
+import { createBackgroundColor } from '../backgroundColor';
 
 describe('backgroundColor', () => {
   it('should return a function', () => {
-    const result = backgroundColor();
+    const result = createBackgroundColor();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `backgroundColor` as component and css prop', () => {
-    const result = backgroundColor()({ backgroundColor: 'inherit' });
+    const result = createBackgroundColor()({ backgroundColor: 'inherit' });
     expect(toStyles(result)).toEqual({ backgroundColor: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = backgroundColor<'a'>()({ backgroundColor: 'a' });
+    const result = createBackgroundColor<'a'>()({ backgroundColor: 'a' });
     expect(toStyles(result)).toEqual({ backgroundColor: 'a' });
   });
 
   it('should use an interface which marks `backgroundColor` as optional', () => {
-    const result = backgroundColor<'a'>()({});
+    const result = createBackgroundColor<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = backgroundColor<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBackgroundColor<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ backgroundColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('backgroundColor', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = backgroundColor<
+    const result = createBackgroundColor<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

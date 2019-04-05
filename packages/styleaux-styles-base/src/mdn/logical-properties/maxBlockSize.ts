@@ -1,4 +1,4 @@
-import { MaxBlockSizeProperty } from '@roseys/csstype';
+import { MaxBlockSizeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMaxBlockSizeProps<T> {
   maxBlockSize: T;
 }
 
-export const maxBlockSize = <
+export const createMaxBlockSize = <
   T = MaxBlockSizeProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const maxBlockSize = <
     transformValue,
   })
 
-export const maxBlockSizeRule = <T = MaxBlockSizeProperty>(
+export const createMaxBlockSizeRule = <T = MaxBlockSizeProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MAXBLOCKSIZE, getValue: transformer})
+
+export const maxBlockSize =createMaxBlockSize()
+
+export const maxBlockSizeRule =createMaxBlockSizeRule()

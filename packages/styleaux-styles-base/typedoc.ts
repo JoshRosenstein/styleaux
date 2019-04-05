@@ -8,7 +8,7 @@ module.exports = {
   theme: 'markdown',
   exclude: [
     '**/__tests__/**/*',
-    '**/__test_utils__/**/*',
+    '**/__testutils__/**/*',
     '**/*.spec.ts',
     '**/*.test.ts',
     '**/index.ts',

@@ -1,4 +1,4 @@
-import { DisplayProperty } from '@roseys/csstype';
+import { DisplayProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IDisplayProps<T> {
   display: T;
 }
 
-export const display = <
+export const createDisplay = <
   T = DisplayProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const display = <
     transformValue,
   })
 
-export const displayRule = <T = DisplayProperty>(
+export const createDisplayRule = <T = DisplayProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: DISPLAY, getValue: transformer})
+
+export const display =createDisplay()
+
+export const displayRule =createDisplayRule()

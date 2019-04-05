@@ -1,4 +1,4 @@
-import { TextIndentProperty } from '@roseys/csstype';
+import { TextIndentProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITextIndentProps<T> {
   textIndent: T;
 }
 
-export const textIndent = <
+export const createTextIndent = <
   T = TextIndentProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const textIndent = <
     transformValue,
   })
 
-export const textIndentRule = <T = TextIndentProperty>(
+export const createTextIndentRule = <T = TextIndentProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TEXTINDENT, getValue: transformer})
+
+export const textIndent =createTextIndent()
+
+export const textIndentRule =createTextIndentRule()

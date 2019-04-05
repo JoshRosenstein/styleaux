@@ -1,4 +1,4 @@
-import { GridColumnProperty } from '@roseys/csstype';
+import { GridColumnProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IGridColumnProps<T> {
   gridColumn: T;
 }
 
-export const gridColumn = <
+export const createGridColumn = <
   T = GridColumnProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const gridColumn = <
     transformValue,
   })
 
-export const gridColumnRule = <T = GridColumnProperty>(
+export const createGridColumnRule = <T = GridColumnProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: GRIDCOLUMN, getValue: transformer})
+
+export const gridColumn =createGridColumn()
+
+export const gridColumnRule =createGridColumnRule()

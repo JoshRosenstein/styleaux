@@ -1,4 +1,4 @@
-import { BackgroundClipProperty } from '@roseys/csstype';
+import { BackgroundClipProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBackgroundClipProps<T> {
   backgroundClip: T;
 }
 
-export const backgroundClip = <
+export const createBackgroundClip = <
   T = BackgroundClipProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const backgroundClip = <
     transformValue,
   })
 
-export const backgroundClipRule = <T = BackgroundClipProperty>(
+export const createBackgroundClipRule = <T = BackgroundClipProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BACKGROUNDCLIP, getValue: transformer})
+
+export const backgroundClip =createBackgroundClip()
+
+export const backgroundClipRule =createBackgroundClipRule()

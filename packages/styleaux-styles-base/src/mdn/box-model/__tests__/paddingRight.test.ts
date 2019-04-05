@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { paddingRight } from '../paddingRight';
+import { createPaddingRight } from '../paddingRight';
 
 describe('paddingRight', () => {
   it('should return a function', () => {
-    const result = paddingRight();
+    const result = createPaddingRight();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `paddingRight` as component and css prop', () => {
-    const result = paddingRight()({ paddingRight: 'inherit' });
+    const result = createPaddingRight()({ paddingRight: 'inherit' });
     expect(toStyles(result)).toEqual({ paddingRight: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = paddingRight<'a'>()({ paddingRight: 'a' });
+    const result = createPaddingRight<'a'>()({ paddingRight: 'a' });
     expect(toStyles(result)).toEqual({ paddingRight: 'a' });
   });
 
   it('should use an interface which marks `paddingRight` as optional', () => {
-    const result = paddingRight<'a'>()({});
+    const result = createPaddingRight<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = paddingRight<'value',never,IThemeWithoutBreakpoints>({
+    const result = createPaddingRight<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ paddingRight: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('paddingRight', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = paddingRight<
+    const result = createPaddingRight<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

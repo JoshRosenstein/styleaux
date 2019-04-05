@@ -1,4 +1,4 @@
-import { InsetBlockStartProperty } from '@roseys/csstype';
+import { InsetBlockStartProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IInsetBlockStartProps<T> {
   insetBlockStart: T;
 }
 
-export const insetBlockStart = <
+export const createInsetBlockStart = <
   T = InsetBlockStartProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const insetBlockStart = <
     transformValue,
   })
 
-export const insetBlockStartRule = <T = InsetBlockStartProperty>(
+export const createInsetBlockStartRule = <T = InsetBlockStartProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: INSETBLOCKSTART, getValue: transformer})
+
+export const insetBlockStart =createInsetBlockStart()
+
+export const insetBlockStartRule =createInsetBlockStartRule()

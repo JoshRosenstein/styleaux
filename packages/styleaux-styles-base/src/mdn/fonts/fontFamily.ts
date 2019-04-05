@@ -1,4 +1,4 @@
-import { FontFamilyProperty } from '@roseys/csstype';
+import { FontFamilyProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IFontFamilyProps<T> {
   fontFamily: T;
 }
 
-export const fontFamily = <
+export const createFontFamily = <
   T = FontFamilyProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const fontFamily = <
     transformValue,
   })
 
-export const fontFamilyRule = <T = FontFamilyProperty>(
+export const createFontFamilyRule = <T = FontFamilyProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: FONTFAMILY, getValue: transformer})
+
+export const fontFamily =createFontFamily()
+
+export const fontFamilyRule =createFontFamilyRule()

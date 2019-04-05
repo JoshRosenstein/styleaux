@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { gridAutoFlow } from '../gridAutoFlow';
+import { createGridAutoFlow } from '../gridAutoFlow';
 
 describe('gridAutoFlow', () => {
   it('should return a function', () => {
-    const result = gridAutoFlow();
+    const result = createGridAutoFlow();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `gridAutoFlow` as component and css prop', () => {
-    const result = gridAutoFlow()({ gridAutoFlow: 'inherit' });
+    const result = createGridAutoFlow()({ gridAutoFlow: 'inherit' });
     expect(toStyles(result)).toEqual({ gridAutoFlow: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = gridAutoFlow<'a'>()({ gridAutoFlow: 'a' });
+    const result = createGridAutoFlow<'a'>()({ gridAutoFlow: 'a' });
     expect(toStyles(result)).toEqual({ gridAutoFlow: 'a' });
   });
 
   it('should use an interface which marks `gridAutoFlow` as optional', () => {
-    const result = gridAutoFlow<'a'>()({});
+    const result = createGridAutoFlow<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = gridAutoFlow<'value',never,IThemeWithoutBreakpoints>({
+    const result = createGridAutoFlow<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ gridAutoFlow: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('gridAutoFlow', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = gridAutoFlow<
+    const result = createGridAutoFlow<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

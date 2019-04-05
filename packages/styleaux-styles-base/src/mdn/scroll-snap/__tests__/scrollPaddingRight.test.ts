@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { scrollPaddingRight } from '../scrollPaddingRight';
+import { createScrollPaddingRight } from '../scrollPaddingRight';
 
 describe('scrollPaddingRight', () => {
   it('should return a function', () => {
-    const result = scrollPaddingRight();
+    const result = createScrollPaddingRight();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `scrollPaddingRight` as component and css prop', () => {
-    const result = scrollPaddingRight()({ scrollPaddingRight: 'inherit' });
+    const result = createScrollPaddingRight()({ scrollPaddingRight: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollPaddingRight: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = scrollPaddingRight<'a'>()({ scrollPaddingRight: 'a' });
+    const result = createScrollPaddingRight<'a'>()({ scrollPaddingRight: 'a' });
     expect(toStyles(result)).toEqual({ scrollPaddingRight: 'a' });
   });
 
   it('should use an interface which marks `scrollPaddingRight` as optional', () => {
-    const result = scrollPaddingRight<'a'>()({});
+    const result = createScrollPaddingRight<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = scrollPaddingRight<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollPaddingRight<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollPaddingRight: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('scrollPaddingRight', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = scrollPaddingRight<
+    const result = createScrollPaddingRight<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

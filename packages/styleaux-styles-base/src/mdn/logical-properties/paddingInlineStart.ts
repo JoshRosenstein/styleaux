@@ -1,4 +1,4 @@
-import { PaddingInlineStartProperty } from '@roseys/csstype';
+import { PaddingInlineStartProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IPaddingInlineStartProps<T> {
   paddingInlineStart: T;
 }
 
-export const paddingInlineStart = <
+export const createPaddingInlineStart = <
   T = PaddingInlineStartProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const paddingInlineStart = <
     transformValue,
   })
 
-export const paddingInlineStartRule = <T = PaddingInlineStartProperty>(
+export const createPaddingInlineStartRule = <T = PaddingInlineStartProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: PADDINGINLINESTART, getValue: transformer})
+
+export const paddingInlineStart =createPaddingInlineStart()
+
+export const paddingInlineStartRule =createPaddingInlineStartRule()

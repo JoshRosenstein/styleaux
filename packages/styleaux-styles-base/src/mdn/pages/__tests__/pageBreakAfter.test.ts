@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { pageBreakAfter } from '../pageBreakAfter';
+import { createPageBreakAfter } from '../pageBreakAfter';
 
 describe('pageBreakAfter', () => {
   it('should return a function', () => {
-    const result = pageBreakAfter();
+    const result = createPageBreakAfter();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `pageBreakAfter` as component and css prop', () => {
-    const result = pageBreakAfter()({ pageBreakAfter: 'inherit' });
+    const result = createPageBreakAfter()({ pageBreakAfter: 'inherit' });
     expect(toStyles(result)).toEqual({ pageBreakAfter: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = pageBreakAfter<'a'>()({ pageBreakAfter: 'a' });
+    const result = createPageBreakAfter<'a'>()({ pageBreakAfter: 'a' });
     expect(toStyles(result)).toEqual({ pageBreakAfter: 'a' });
   });
 
   it('should use an interface which marks `pageBreakAfter` as optional', () => {
-    const result = pageBreakAfter<'a'>()({});
+    const result = createPageBreakAfter<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = pageBreakAfter<'value',never,IThemeWithoutBreakpoints>({
+    const result = createPageBreakAfter<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ pageBreakAfter: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('pageBreakAfter', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = pageBreakAfter<
+    const result = createPageBreakAfter<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { breakAfter } from '../breakAfter';
+import { createBreakAfter } from '../breakAfter';
 
 describe('breakAfter', () => {
   it('should return a function', () => {
-    const result = breakAfter();
+    const result = createBreakAfter();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `breakAfter` as component and css prop', () => {
-    const result = breakAfter()({ breakAfter: 'inherit' });
+    const result = createBreakAfter()({ breakAfter: 'inherit' });
     expect(toStyles(result)).toEqual({ breakAfter: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = breakAfter<'a'>()({ breakAfter: 'a' });
+    const result = createBreakAfter<'a'>()({ breakAfter: 'a' });
     expect(toStyles(result)).toEqual({ breakAfter: 'a' });
   });
 
   it('should use an interface which marks `breakAfter` as optional', () => {
-    const result = breakAfter<'a'>()({});
+    const result = createBreakAfter<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = breakAfter<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBreakAfter<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ breakAfter: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('breakAfter', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = breakAfter<
+    const result = createBreakAfter<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

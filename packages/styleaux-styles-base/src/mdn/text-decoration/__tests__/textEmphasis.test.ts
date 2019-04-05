@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { textEmphasis } from '../textEmphasis';
+import { createTextEmphasis } from '../textEmphasis';
 
 describe('textEmphasis', () => {
   it('should return a function', () => {
-    const result = textEmphasis();
+    const result = createTextEmphasis();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `textEmphasis` as component and css prop', () => {
-    const result = textEmphasis()({ textEmphasis: 'inherit' });
+    const result = createTextEmphasis()({ textEmphasis: 'inherit' });
     expect(toStyles(result)).toEqual({ textEmphasis: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = textEmphasis<'a'>()({ textEmphasis: 'a' });
+    const result = createTextEmphasis<'a'>()({ textEmphasis: 'a' });
     expect(toStyles(result)).toEqual({ textEmphasis: 'a' });
   });
 
   it('should use an interface which marks `textEmphasis` as optional', () => {
-    const result = textEmphasis<'a'>()({});
+    const result = createTextEmphasis<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = textEmphasis<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextEmphasis<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textEmphasis: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('textEmphasis', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = textEmphasis<
+    const result = createTextEmphasis<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

@@ -1,4 +1,4 @@
-import { ContentProperty } from '@roseys/csstype';
+import { ContentProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IContentProps<T> {
   content: T;
 }
 
-export const content = <
+export const createContent = <
   T = ContentProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const content = <
     transformValue,
   })
 
-export const contentRule = <T = ContentProperty>(
+export const createContentRule = <T = ContentProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: CONTENT, getValue: transformer})
+
+export const content =createContent()
+
+export const contentRule =createContentRule()

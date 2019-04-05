@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { alignSelf } from '../alignSelf';
+import { createAlignSelf } from '../alignSelf';
 
 describe('alignSelf', () => {
   it('should return a function', () => {
-    const result = alignSelf();
+    const result = createAlignSelf();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `alignSelf` as component and css prop', () => {
-    const result = alignSelf()({ alignSelf: 'inherit' });
+    const result = createAlignSelf()({ alignSelf: 'inherit' });
     expect(toStyles(result)).toEqual({ alignSelf: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = alignSelf<'a'>()({ alignSelf: 'a' });
+    const result = createAlignSelf<'a'>()({ alignSelf: 'a' });
     expect(toStyles(result)).toEqual({ alignSelf: 'a' });
   });
 
   it('should use an interface which marks `alignSelf` as optional', () => {
-    const result = alignSelf<'a'>()({});
+    const result = createAlignSelf<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = alignSelf<'value',never,IThemeWithoutBreakpoints>({
+    const result = createAlignSelf<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ alignSelf: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('alignSelf', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = alignSelf<
+    const result = createAlignSelf<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

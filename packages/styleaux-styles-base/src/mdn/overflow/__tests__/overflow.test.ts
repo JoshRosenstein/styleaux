@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { overflow } from '../overflow';
+import { createOverflow } from '../overflow';
 
 describe('overflow', () => {
   it('should return a function', () => {
-    const result = overflow();
+    const result = createOverflow();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `overflow` as component and css prop', () => {
-    const result = overflow()({ overflow: 'inherit' });
+    const result = createOverflow()({ overflow: 'inherit' });
     expect(toStyles(result)).toEqual({ overflow: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = overflow<'a'>()({ overflow: 'a' });
+    const result = createOverflow<'a'>()({ overflow: 'a' });
     expect(toStyles(result)).toEqual({ overflow: 'a' });
   });
 
   it('should use an interface which marks `overflow` as optional', () => {
-    const result = overflow<'a'>()({});
+    const result = createOverflow<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = overflow<'value',never,IThemeWithoutBreakpoints>({
+    const result = createOverflow<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ overflow: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('overflow', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = overflow<
+    const result = createOverflow<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

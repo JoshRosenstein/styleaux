@@ -1,4 +1,4 @@
-import { IsolationProperty } from '@roseys/csstype';
+import { IsolationProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IIsolationProps<T> {
   isolation: T;
 }
 
-export const isolation = <
+export const createIsolation = <
   T = IsolationProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const isolation = <
     transformValue,
   })
 
-export const isolationRule = <T = IsolationProperty>(
+export const createIsolationRule = <T = IsolationProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: ISOLATION, getValue: transformer})
+
+export const isolation =createIsolation()
+
+export const isolationRule =createIsolationRule()

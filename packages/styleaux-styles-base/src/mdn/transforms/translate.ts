@@ -1,4 +1,4 @@
-import { TranslateProperty } from '@roseys/csstype';
+import { TranslateProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITranslateProps<T> {
   translate: T;
 }
 
-export const translate = <
+export const createTranslate = <
   T = TranslateProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const translate = <
     transformValue,
   })
 
-export const translateRule = <T = TranslateProperty>(
+export const createTranslateRule = <T = TranslateProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TRANSLATE, getValue: transformer})
+
+export const translate =createTranslate()
+
+export const translateRule =createTranslateRule()

@@ -1,4 +1,4 @@
-import { FilterProperty } from '@roseys/csstype';
+import { FilterProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IFilterProps<T> {
   filter: T;
 }
 
-export const filter = <
+export const createFilter = <
   T = FilterProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const filter = <
     transformValue,
   })
 
-export const filterRule = <T = FilterProperty>(
+export const createFilterRule = <T = FilterProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: FILTER, getValue: transformer})
+
+export const filter =createFilter()
+
+export const filterRule =createFilterRule()

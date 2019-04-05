@@ -1,4 +1,4 @@
-import { ColumnsProperty } from '@roseys/csstype';
+import { ColumnsProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IColumnsProps<T> {
   columns: T;
 }
 
-export const columns = <
+export const createColumns = <
   T = ColumnsProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const columns = <
     transformValue,
   })
 
-export const columnsRule = <T = ColumnsProperty>(
+export const createColumnsRule = <T = ColumnsProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: COLUMNS, getValue: transformer})
+
+export const columns =createColumns()
+
+export const columnsRule =createColumnsRule()

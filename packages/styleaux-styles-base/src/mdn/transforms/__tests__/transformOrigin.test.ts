@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { transformOrigin } from '../transformOrigin';
+import { createTransformOrigin } from '../transformOrigin';
 
 describe('transformOrigin', () => {
   it('should return a function', () => {
-    const result = transformOrigin();
+    const result = createTransformOrigin();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `transformOrigin` as component and css prop', () => {
-    const result = transformOrigin()({ transformOrigin: 'inherit' });
+    const result = createTransformOrigin()({ transformOrigin: 'inherit' });
     expect(toStyles(result)).toEqual({ transformOrigin: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = transformOrigin<'a'>()({ transformOrigin: 'a' });
+    const result = createTransformOrigin<'a'>()({ transformOrigin: 'a' });
     expect(toStyles(result)).toEqual({ transformOrigin: 'a' });
   });
 
   it('should use an interface which marks `transformOrigin` as optional', () => {
-    const result = transformOrigin<'a'>()({});
+    const result = createTransformOrigin<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = transformOrigin<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTransformOrigin<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ transformOrigin: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('transformOrigin', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = transformOrigin<
+    const result = createTransformOrigin<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

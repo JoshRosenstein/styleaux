@@ -1,4 +1,4 @@
-import { AnimationPlayStateProperty } from '@roseys/csstype';
+import { AnimationPlayStateProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IAnimationPlayStateProps<T> {
   animationPlayState: T;
 }
 
-export const animationPlayState = <
+export const createAnimationPlayState = <
   T = AnimationPlayStateProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const animationPlayState = <
     transformValue,
   })
 
-export const animationPlayStateRule = <T = AnimationPlayStateProperty>(
+export const createAnimationPlayStateRule = <T = AnimationPlayStateProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: ANIMATIONPLAYSTATE, getValue: transformer})
+
+export const animationPlayState =createAnimationPlayState()
+
+export const animationPlayStateRule =createAnimationPlayStateRule()

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { animation } from '../animation';
+import { createAnimation } from '../animation';
 
 describe('animation', () => {
   it('should return a function', () => {
-    const result = animation();
+    const result = createAnimation();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `animation` as component and css prop', () => {
-    const result = animation()({ animation: 'inherit' });
+    const result = createAnimation()({ animation: 'inherit' });
     expect(toStyles(result)).toEqual({ animation: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = animation<'a'>()({ animation: 'a' });
+    const result = createAnimation<'a'>()({ animation: 'a' });
     expect(toStyles(result)).toEqual({ animation: 'a' });
   });
 
   it('should use an interface which marks `animation` as optional', () => {
-    const result = animation<'a'>()({});
+    const result = createAnimation<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = animation<'value',never,IThemeWithoutBreakpoints>({
+    const result = createAnimation<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ animation: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('animation', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = animation<
+    const result = createAnimation<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

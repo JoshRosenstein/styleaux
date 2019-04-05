@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { borderStyle } from '../borderStyle';
+import { createBorderStyle } from '../borderStyle';
 
 describe('borderStyle', () => {
   it('should return a function', () => {
-    const result = borderStyle();
+    const result = createBorderStyle();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `borderStyle` as component and css prop', () => {
-    const result = borderStyle()({ borderStyle: 'inherit' });
+    const result = createBorderStyle()({ borderStyle: 'inherit' });
     expect(toStyles(result)).toEqual({ borderStyle: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = borderStyle<'a'>()({ borderStyle: 'a' });
+    const result = createBorderStyle<'a'>()({ borderStyle: 'a' });
     expect(toStyles(result)).toEqual({ borderStyle: 'a' });
   });
 
   it('should use an interface which marks `borderStyle` as optional', () => {
-    const result = borderStyle<'a'>()({});
+    const result = createBorderStyle<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = borderStyle<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderStyle<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderStyle: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('borderStyle', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = borderStyle<
+    const result = createBorderStyle<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

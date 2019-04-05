@@ -1,4 +1,4 @@
-import { BorderInlineProperty } from '@roseys/csstype';
+import { BorderInlineProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBorderInlineProps<T> {
   borderInline: T;
 }
 
-export const borderInline = <
+export const createBorderInline = <
   T = BorderInlineProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const borderInline = <
     transformValue,
   })
 
-export const borderInlineRule = <T = BorderInlineProperty>(
+export const createBorderInlineRule = <T = BorderInlineProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BORDERINLINE, getValue: transformer})
+
+export const borderInline =createBorderInline()
+
+export const borderInlineRule =createBorderInlineRule()

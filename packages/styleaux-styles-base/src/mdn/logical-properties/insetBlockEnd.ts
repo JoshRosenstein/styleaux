@@ -1,4 +1,4 @@
-import { InsetBlockEndProperty } from '@roseys/csstype';
+import { InsetBlockEndProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IInsetBlockEndProps<T> {
   insetBlockEnd: T;
 }
 
-export const insetBlockEnd = <
+export const createInsetBlockEnd = <
   T = InsetBlockEndProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const insetBlockEnd = <
     transformValue,
   })
 
-export const insetBlockEndRule = <T = InsetBlockEndProperty>(
+export const createInsetBlockEndRule = <T = InsetBlockEndProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: INSETBLOCKEND, getValue: transformer})
+
+export const insetBlockEnd =createInsetBlockEnd()
+
+export const insetBlockEndRule =createInsetBlockEndRule()

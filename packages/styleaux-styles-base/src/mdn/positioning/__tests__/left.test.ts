@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { left } from '../left';
+import { createLeft } from '../left';
 
 describe('left', () => {
   it('should return a function', () => {
-    const result = left();
+    const result = createLeft();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `left` as component and css prop', () => {
-    const result = left()({ left: 'inherit' });
+    const result = createLeft()({ left: 'inherit' });
     expect(toStyles(result)).toEqual({ left: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = left<'a'>()({ left: 'a' });
+    const result = createLeft<'a'>()({ left: 'a' });
     expect(toStyles(result)).toEqual({ left: 'a' });
   });
 
   it('should use an interface which marks `left` as optional', () => {
-    const result = left<'a'>()({});
+    const result = createLeft<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = left<'value',never,IThemeWithoutBreakpoints>({
+    const result = createLeft<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ left: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('left', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = left<
+    const result = createLeft<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

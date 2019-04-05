@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { borderTopWidth } from '../borderTopWidth';
+import { createBorderTopWidth } from '../borderTopWidth';
 
 describe('borderTopWidth', () => {
   it('should return a function', () => {
-    const result = borderTopWidth();
+    const result = createBorderTopWidth();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `borderTopWidth` as component and css prop', () => {
-    const result = borderTopWidth()({ borderTopWidth: 'inherit' });
+    const result = createBorderTopWidth()({ borderTopWidth: 'inherit' });
     expect(toStyles(result)).toEqual({ borderTopWidth: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = borderTopWidth<'a'>()({ borderTopWidth: 'a' });
+    const result = createBorderTopWidth<'a'>()({ borderTopWidth: 'a' });
     expect(toStyles(result)).toEqual({ borderTopWidth: 'a' });
   });
 
   it('should use an interface which marks `borderTopWidth` as optional', () => {
-    const result = borderTopWidth<'a'>()({});
+    const result = createBorderTopWidth<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = borderTopWidth<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderTopWidth<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderTopWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('borderTopWidth', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = borderTopWidth<
+    const result = createBorderTopWidth<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

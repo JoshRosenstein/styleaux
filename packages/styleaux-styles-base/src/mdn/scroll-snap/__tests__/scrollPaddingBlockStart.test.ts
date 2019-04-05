@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { scrollPaddingBlockStart } from '../scrollPaddingBlockStart';
+import { createScrollPaddingBlockStart } from '../scrollPaddingBlockStart';
 
 describe('scrollPaddingBlockStart', () => {
   it('should return a function', () => {
-    const result = scrollPaddingBlockStart();
+    const result = createScrollPaddingBlockStart();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `scrollPaddingBlockStart` as component and css prop', () => {
-    const result = scrollPaddingBlockStart()({ scrollPaddingBlockStart: 'inherit' });
+    const result = createScrollPaddingBlockStart()({ scrollPaddingBlockStart: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollPaddingBlockStart: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = scrollPaddingBlockStart<'a'>()({ scrollPaddingBlockStart: 'a' });
+    const result = createScrollPaddingBlockStart<'a'>()({ scrollPaddingBlockStart: 'a' });
     expect(toStyles(result)).toEqual({ scrollPaddingBlockStart: 'a' });
   });
 
   it('should use an interface which marks `scrollPaddingBlockStart` as optional', () => {
-    const result = scrollPaddingBlockStart<'a'>()({});
+    const result = createScrollPaddingBlockStart<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = scrollPaddingBlockStart<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollPaddingBlockStart<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollPaddingBlockStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('scrollPaddingBlockStart', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = scrollPaddingBlockStart<
+    const result = createScrollPaddingBlockStart<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

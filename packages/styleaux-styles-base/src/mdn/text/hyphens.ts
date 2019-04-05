@@ -1,4 +1,4 @@
-import { HyphensProperty } from '@roseys/csstype';
+import { HyphensProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IHyphensProps<T> {
   hyphens: T;
 }
 
-export const hyphens = <
+export const createHyphens = <
   T = HyphensProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const hyphens = <
     transformValue,
   })
 
-export const hyphensRule = <T = HyphensProperty>(
+export const createHyphensRule = <T = HyphensProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: HYPHENS, getValue: transformer})
+
+export const hyphens =createHyphens()
+
+export const hyphensRule =createHyphensRule()

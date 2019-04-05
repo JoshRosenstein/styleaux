@@ -1,4 +1,4 @@
-import { MarginTopProperty } from '@roseys/csstype';
+import { MarginTopProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMarginTopProps<T> {
   marginTop: T;
 }
 
-export const marginTop = <
+export const createMarginTop = <
   T = MarginTopProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const marginTop = <
     transformValue,
   })
 
-export const marginTopRule = <T = MarginTopProperty>(
+export const createMarginTopRule = <T = MarginTopProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MARGINTOP, getValue: transformer})
+
+export const marginTop =createMarginTop()
+
+export const marginTopRule =createMarginTopRule()

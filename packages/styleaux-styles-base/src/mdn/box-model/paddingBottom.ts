@@ -1,4 +1,4 @@
-import { PaddingBottomProperty } from '@roseys/csstype';
+import { PaddingBottomProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IPaddingBottomProps<T> {
   paddingBottom: T;
 }
 
-export const paddingBottom = <
+export const createPaddingBottom = <
   T = PaddingBottomProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const paddingBottom = <
     transformValue,
   })
 
-export const paddingBottomRule = <T = PaddingBottomProperty>(
+export const createPaddingBottomRule = <T = PaddingBottomProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: PADDINGBOTTOM, getValue: transformer})
+
+export const paddingBottom =createPaddingBottom()
+
+export const paddingBottomRule =createPaddingBottomRule()

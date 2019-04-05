@@ -1,4 +1,4 @@
-import { TextRenderingProperty } from '@roseys/csstype';
+import { TextRenderingProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITextRenderingProps<T> {
   textRendering: T;
 }
 
-export const textRendering = <
+export const createTextRendering = <
   T = TextRenderingProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const textRendering = <
     transformValue,
   })
 
-export const textRenderingRule = <T = TextRenderingProperty>(
+export const createTextRenderingRule = <T = TextRenderingProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TEXTRENDERING, getValue: transformer})
+
+export const textRendering =createTextRendering()
+
+export const textRenderingRule =createTextRenderingRule()

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { counterIncrement } from '../counterIncrement';
+import { createCounterIncrement } from '../counterIncrement';
 
 describe('counterIncrement', () => {
   it('should return a function', () => {
-    const result = counterIncrement();
+    const result = createCounterIncrement();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `counterIncrement` as component and css prop', () => {
-    const result = counterIncrement()({ counterIncrement: 'inherit' });
+    const result = createCounterIncrement()({ counterIncrement: 'inherit' });
     expect(toStyles(result)).toEqual({ counterIncrement: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = counterIncrement<'a'>()({ counterIncrement: 'a' });
+    const result = createCounterIncrement<'a'>()({ counterIncrement: 'a' });
     expect(toStyles(result)).toEqual({ counterIncrement: 'a' });
   });
 
   it('should use an interface which marks `counterIncrement` as optional', () => {
-    const result = counterIncrement<'a'>()({});
+    const result = createCounterIncrement<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = counterIncrement<'value',never,IThemeWithoutBreakpoints>({
+    const result = createCounterIncrement<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ counterIncrement: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('counterIncrement', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = counterIncrement<
+    const result = createCounterIncrement<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

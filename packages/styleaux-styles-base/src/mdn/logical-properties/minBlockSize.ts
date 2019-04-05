@@ -1,4 +1,4 @@
-import { MinBlockSizeProperty } from '@roseys/csstype';
+import { MinBlockSizeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMinBlockSizeProps<T> {
   minBlockSize: T;
 }
 
-export const minBlockSize = <
+export const createMinBlockSize = <
   T = MinBlockSizeProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const minBlockSize = <
     transformValue,
   })
 
-export const minBlockSizeRule = <T = MinBlockSizeProperty>(
+export const createMinBlockSizeRule = <T = MinBlockSizeProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MINBLOCKSIZE, getValue: transformer})
+
+export const minBlockSize =createMinBlockSize()
+
+export const minBlockSizeRule =createMinBlockSizeRule()

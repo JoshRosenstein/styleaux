@@ -1,4 +1,4 @@
-import { PlaceItemsProperty } from '@roseys/csstype';
+import { PlaceItemsProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IPlaceItemsProps<T> {
   placeItems: T;
 }
 
-export const placeItems = <
+export const createPlaceItems = <
   T = PlaceItemsProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const placeItems = <
     transformValue,
   })
 
-export const placeItemsRule = <T = PlaceItemsProperty>(
+export const createPlaceItemsRule = <T = PlaceItemsProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: PLACEITEMS, getValue: transformer})
+
+export const placeItems =createPlaceItems()
+
+export const placeItemsRule =createPlaceItemsRule()

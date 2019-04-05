@@ -1,4 +1,4 @@
-import { OverflowProperty } from '@roseys/csstype';
+import { OverflowProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IOverflowProps<T> {
   overflow: T;
 }
 
-export const overflow = <
+export const createOverflow = <
   T = OverflowProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const overflow = <
     transformValue,
   })
 
-export const overflowRule = <T = OverflowProperty>(
+export const createOverflowRule = <T = OverflowProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: OVERFLOW, getValue: transformer})
+
+export const overflow =createOverflow()
+
+export const overflowRule =createOverflowRule()

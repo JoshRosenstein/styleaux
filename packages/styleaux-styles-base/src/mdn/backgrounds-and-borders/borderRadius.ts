@@ -1,4 +1,4 @@
-import { BorderRadiusProperty } from '@roseys/csstype';
+import { BorderRadiusProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBorderRadiusProps<T> {
   borderRadius: T;
 }
 
-export const borderRadius = <
+export const createBorderRadius = <
   T = BorderRadiusProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const borderRadius = <
     transformValue,
   })
 
-export const borderRadiusRule = <T = BorderRadiusProperty>(
+export const createBorderRadiusRule = <T = BorderRadiusProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BORDERRADIUS, getValue: transformer})
+
+export const borderRadius =createBorderRadius()
+
+export const borderRadiusRule =createBorderRadiusRule()

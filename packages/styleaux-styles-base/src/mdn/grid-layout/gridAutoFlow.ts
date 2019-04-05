@@ -1,4 +1,4 @@
-import { GridAutoFlowProperty } from '@roseys/csstype';
+import { GridAutoFlowProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IGridAutoFlowProps<T> {
   gridAutoFlow: T;
 }
 
-export const gridAutoFlow = <
+export const createGridAutoFlow = <
   T = GridAutoFlowProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const gridAutoFlow = <
     transformValue,
   })
 
-export const gridAutoFlowRule = <T = GridAutoFlowProperty>(
+export const createGridAutoFlowRule = <T = GridAutoFlowProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: GRIDAUTOFLOW, getValue: transformer})
+
+export const gridAutoFlow =createGridAutoFlow()
+
+export const gridAutoFlowRule =createGridAutoFlowRule()

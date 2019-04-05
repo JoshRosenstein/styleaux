@@ -1,4 +1,4 @@
-import { PageBreakInsideProperty } from '@roseys/csstype';
+import { PageBreakInsideProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IPageBreakInsideProps<T> {
   pageBreakInside: T;
 }
 
-export const pageBreakInside = <
+export const createPageBreakInside = <
   T = PageBreakInsideProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const pageBreakInside = <
     transformValue,
   })
 
-export const pageBreakInsideRule = <T = PageBreakInsideProperty>(
+export const createPageBreakInsideRule = <T = PageBreakInsideProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: PAGEBREAKINSIDE, getValue: transformer})
+
+export const pageBreakInside =createPageBreakInside()
+
+export const pageBreakInsideRule =createPageBreakInsideRule()

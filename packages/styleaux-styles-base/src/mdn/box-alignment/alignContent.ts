@@ -1,4 +1,4 @@
-import { AlignContentProperty } from '@roseys/csstype';
+import { AlignContentProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IAlignContentProps<T> {
   alignContent: T;
 }
 
-export const alignContent = <
+export const createAlignContent = <
   T = AlignContentProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const alignContent = <
     transformValue,
   })
 
-export const alignContentRule = <T = AlignContentProperty>(
+export const createAlignContentRule = <T = AlignContentProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: ALIGNCONTENT, getValue: transformer})
+
+export const alignContent =createAlignContent()
+
+export const alignContentRule =createAlignContentRule()

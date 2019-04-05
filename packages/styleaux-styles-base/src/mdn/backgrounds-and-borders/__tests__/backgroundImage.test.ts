@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { backgroundImage } from '../backgroundImage';
+import { createBackgroundImage } from '../backgroundImage';
 
 describe('backgroundImage', () => {
   it('should return a function', () => {
-    const result = backgroundImage();
+    const result = createBackgroundImage();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `backgroundImage` as component and css prop', () => {
-    const result = backgroundImage()({ backgroundImage: 'inherit' });
+    const result = createBackgroundImage()({ backgroundImage: 'inherit' });
     expect(toStyles(result)).toEqual({ backgroundImage: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = backgroundImage<'a'>()({ backgroundImage: 'a' });
+    const result = createBackgroundImage<'a'>()({ backgroundImage: 'a' });
     expect(toStyles(result)).toEqual({ backgroundImage: 'a' });
   });
 
   it('should use an interface which marks `backgroundImage` as optional', () => {
-    const result = backgroundImage<'a'>()({});
+    const result = createBackgroundImage<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = backgroundImage<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBackgroundImage<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ backgroundImage: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('backgroundImage', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = backgroundImage<
+    const result = createBackgroundImage<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

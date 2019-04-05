@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { boxSizing } from '../boxSizing';
+import { createBoxSizing } from '../boxSizing';
 
 describe('boxSizing', () => {
   it('should return a function', () => {
-    const result = boxSizing();
+    const result = createBoxSizing();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `boxSizing` as component and css prop', () => {
-    const result = boxSizing()({ boxSizing: 'inherit' });
+    const result = createBoxSizing()({ boxSizing: 'inherit' });
     expect(toStyles(result)).toEqual({ boxSizing: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = boxSizing<'a'>()({ boxSizing: 'a' });
+    const result = createBoxSizing<'a'>()({ boxSizing: 'a' });
     expect(toStyles(result)).toEqual({ boxSizing: 'a' });
   });
 
   it('should use an interface which marks `boxSizing` as optional', () => {
-    const result = boxSizing<'a'>()({});
+    const result = createBoxSizing<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = boxSizing<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBoxSizing<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ boxSizing: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('boxSizing', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = boxSizing<
+    const result = createBoxSizing<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

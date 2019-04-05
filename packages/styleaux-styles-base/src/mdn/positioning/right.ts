@@ -1,4 +1,4 @@
-import { RightProperty } from '@roseys/csstype';
+import { RightProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IRightProps<T> {
   right: T;
 }
 
-export const right = <
+export const createRight = <
   T = RightProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const right = <
     transformValue,
   })
 
-export const rightRule = <T = RightProperty>(
+export const createRightRule = <T = RightProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: RIGHT, getValue: transformer})
+
+export const right =createRight()
+
+export const rightRule =createRightRule()

@@ -1,4 +1,4 @@
-import { FontVariantProperty } from '@roseys/csstype';
+import { FontVariantProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IFontVariantProps<T> {
   fontVariant: T;
 }
 
-export const fontVariant = <
+export const createFontVariant = <
   T = FontVariantProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const fontVariant = <
     transformValue,
   })
 
-export const fontVariantRule = <T = FontVariantProperty>(
+export const createFontVariantRule = <T = FontVariantProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: FONTVARIANT, getValue: transformer})
+
+export const fontVariant =createFontVariant()
+
+export const fontVariantRule =createFontVariantRule()

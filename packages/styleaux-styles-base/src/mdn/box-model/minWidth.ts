@@ -1,4 +1,4 @@
-import { MinWidthProperty } from '@roseys/csstype';
+import { MinWidthProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMinWidthProps<T> {
   minWidth: T;
 }
 
-export const minWidth = <
+export const createMinWidth = <
   T = MinWidthProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const minWidth = <
     transformValue,
   })
 
-export const minWidthRule = <T = MinWidthProperty>(
+export const createMinWidthRule = <T = MinWidthProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MINWIDTH, getValue: transformer})
+
+export const minWidth =createMinWidth()
+
+export const minWidthRule =createMinWidthRule()

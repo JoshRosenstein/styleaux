@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { float } from '../float';
+import { createFloat } from '../float';
 
 describe('float', () => {
   it('should return a function', () => {
-    const result = float();
+    const result = createFloat();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `float` as component and css prop', () => {
-    const result = float()({ float: 'inherit' });
+    const result = createFloat()({ float: 'inherit' });
     expect(toStyles(result)).toEqual({ float: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = float<'a'>()({ float: 'a' });
+    const result = createFloat<'a'>()({ float: 'a' });
     expect(toStyles(result)).toEqual({ float: 'a' });
   });
 
   it('should use an interface which marks `float` as optional', () => {
-    const result = float<'a'>()({});
+    const result = createFloat<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = float<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFloat<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ float: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('float', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = float<
+    const result = createFloat<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

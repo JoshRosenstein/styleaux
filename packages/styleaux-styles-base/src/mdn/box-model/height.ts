@@ -1,4 +1,4 @@
-import { HeightProperty } from '@roseys/csstype';
+import { HeightProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IHeightProps<T> {
   height: T;
 }
 
-export const height = <
+export const createHeight = <
   T = HeightProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const height = <
     transformValue,
   })
 
-export const heightRule = <T = HeightProperty>(
+export const createHeightRule = <T = HeightProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: HEIGHT, getValue: transformer})
+
+export const height =createHeight()
+
+export const heightRule =createHeightRule()

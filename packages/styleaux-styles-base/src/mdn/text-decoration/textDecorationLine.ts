@@ -1,4 +1,4 @@
-import { TextDecorationLineProperty } from '@roseys/csstype';
+import { TextDecorationLineProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITextDecorationLineProps<T> {
   textDecorationLine: T;
 }
 
-export const textDecorationLine = <
+export const createTextDecorationLine = <
   T = TextDecorationLineProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const textDecorationLine = <
     transformValue,
   })
 
-export const textDecorationLineRule = <T = TextDecorationLineProperty>(
+export const createTextDecorationLineRule = <T = TextDecorationLineProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TEXTDECORATIONLINE, getValue: transformer})
+
+export const textDecorationLine =createTextDecorationLine()
+
+export const textDecorationLineRule =createTextDecorationLineRule()

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { borderTopColor } from '../borderTopColor';
+import { createBorderTopColor } from '../borderTopColor';
 
 describe('borderTopColor', () => {
   it('should return a function', () => {
-    const result = borderTopColor();
+    const result = createBorderTopColor();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `borderTopColor` as component and css prop', () => {
-    const result = borderTopColor()({ borderTopColor: 'inherit' });
+    const result = createBorderTopColor()({ borderTopColor: 'inherit' });
     expect(toStyles(result)).toEqual({ borderTopColor: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = borderTopColor<'a'>()({ borderTopColor: 'a' });
+    const result = createBorderTopColor<'a'>()({ borderTopColor: 'a' });
     expect(toStyles(result)).toEqual({ borderTopColor: 'a' });
   });
 
   it('should use an interface which marks `borderTopColor` as optional', () => {
-    const result = borderTopColor<'a'>()({});
+    const result = createBorderTopColor<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = borderTopColor<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderTopColor<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderTopColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('borderTopColor', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = borderTopColor<
+    const result = createBorderTopColor<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

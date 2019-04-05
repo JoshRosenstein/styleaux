@@ -1,4 +1,4 @@
-import { AnimationIterationCountProperty } from '@roseys/csstype';
+import { AnimationIterationCountProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IAnimationIterationCountProps<T> {
   animationIterationCount: T;
 }
 
-export const animationIterationCount = <
+export const createAnimationIterationCount = <
   T = AnimationIterationCountProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const animationIterationCount = <
     transformValue,
   })
 
-export const animationIterationCountRule = <T = AnimationIterationCountProperty>(
+export const createAnimationIterationCountRule = <T = AnimationIterationCountProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: ANIMATIONITERATIONCOUNT, getValue: transformer})
+
+export const animationIterationCount =createAnimationIterationCount()
+
+export const animationIterationCountRule =createAnimationIterationCountRule()

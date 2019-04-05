@@ -1,4 +1,4 @@
-import { InsetInlineEndProperty } from '@roseys/csstype';
+import { InsetInlineEndProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IInsetInlineEndProps<T> {
   insetInlineEnd: T;
 }
 
-export const insetInlineEnd = <
+export const createInsetInlineEnd = <
   T = InsetInlineEndProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const insetInlineEnd = <
     transformValue,
   })
 
-export const insetInlineEndRule = <T = InsetInlineEndProperty>(
+export const createInsetInlineEndRule = <T = InsetInlineEndProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: INSETINLINEEND, getValue: transformer})
+
+export const insetInlineEnd =createInsetInlineEnd()
+
+export const insetInlineEndRule =createInsetInlineEndRule()

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { fontVariantNumeric } from '../fontVariantNumeric';
+import { createFontVariantNumeric } from '../fontVariantNumeric';
 
 describe('fontVariantNumeric', () => {
   it('should return a function', () => {
-    const result = fontVariantNumeric();
+    const result = createFontVariantNumeric();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `fontVariantNumeric` as component and css prop', () => {
-    const result = fontVariantNumeric()({ fontVariantNumeric: 'inherit' });
+    const result = createFontVariantNumeric()({ fontVariantNumeric: 'inherit' });
     expect(toStyles(result)).toEqual({ fontVariantNumeric: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = fontVariantNumeric<'a'>()({ fontVariantNumeric: 'a' });
+    const result = createFontVariantNumeric<'a'>()({ fontVariantNumeric: 'a' });
     expect(toStyles(result)).toEqual({ fontVariantNumeric: 'a' });
   });
 
   it('should use an interface which marks `fontVariantNumeric` as optional', () => {
-    const result = fontVariantNumeric<'a'>()({});
+    const result = createFontVariantNumeric<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = fontVariantNumeric<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFontVariantNumeric<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontVariantNumeric: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('fontVariantNumeric', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = fontVariantNumeric<
+    const result = createFontVariantNumeric<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

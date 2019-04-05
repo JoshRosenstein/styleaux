@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { fontVariantEastAsian } from '../fontVariantEastAsian';
+import { createFontVariantEastAsian } from '../fontVariantEastAsian';
 
 describe('fontVariantEastAsian', () => {
   it('should return a function', () => {
-    const result = fontVariantEastAsian();
+    const result = createFontVariantEastAsian();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `fontVariantEastAsian` as component and css prop', () => {
-    const result = fontVariantEastAsian()({ fontVariantEastAsian: 'inherit' });
+    const result = createFontVariantEastAsian()({ fontVariantEastAsian: 'inherit' });
     expect(toStyles(result)).toEqual({ fontVariantEastAsian: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = fontVariantEastAsian<'a'>()({ fontVariantEastAsian: 'a' });
+    const result = createFontVariantEastAsian<'a'>()({ fontVariantEastAsian: 'a' });
     expect(toStyles(result)).toEqual({ fontVariantEastAsian: 'a' });
   });
 
   it('should use an interface which marks `fontVariantEastAsian` as optional', () => {
-    const result = fontVariantEastAsian<'a'>()({});
+    const result = createFontVariantEastAsian<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = fontVariantEastAsian<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFontVariantEastAsian<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontVariantEastAsian: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('fontVariantEastAsian', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = fontVariantEastAsian<
+    const result = createFontVariantEastAsian<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

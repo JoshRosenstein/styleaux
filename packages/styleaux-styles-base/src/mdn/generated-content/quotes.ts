@@ -1,4 +1,4 @@
-import { QuotesProperty } from '@roseys/csstype';
+import { QuotesProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IQuotesProps<T> {
   quotes: T;
 }
 
-export const quotes = <
+export const createQuotes = <
   T = QuotesProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const quotes = <
     transformValue,
   })
 
-export const quotesRule = <T = QuotesProperty>(
+export const createQuotesRule = <T = QuotesProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: QUOTES, getValue: transformer})
+
+export const quotes =createQuotes()
+
+export const quotesRule =createQuotesRule()

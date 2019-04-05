@@ -1,4 +1,4 @@
-import { BackdropFilterProperty } from '@roseys/csstype';
+import { BackdropFilterProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBackdropFilterProps<T> {
   backdropFilter: T;
 }
 
-export const backdropFilter = <
+export const createBackdropFilter = <
   T = BackdropFilterProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const backdropFilter = <
     transformValue,
   })
 
-export const backdropFilterRule = <T = BackdropFilterProperty>(
+export const createBackdropFilterRule = <T = BackdropFilterProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BACKDROPFILTER, getValue: transformer})
+
+export const backdropFilter =createBackdropFilter()
+
+export const backdropFilterRule =createBackdropFilterRule()

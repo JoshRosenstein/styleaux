@@ -1,4 +1,4 @@
-import { OutlineStyleProperty } from '@roseys/csstype';
+import { OutlineStyleProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IOutlineStyleProps<T> {
   outlineStyle: T;
 }
 
-export const outlineStyle = <
+export const createOutlineStyle = <
   T = OutlineStyleProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const outlineStyle = <
     transformValue,
   })
 
-export const outlineStyleRule = <T = OutlineStyleProperty>(
+export const createOutlineStyleRule = <T = OutlineStyleProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: OUTLINESTYLE, getValue: transformer})
+
+export const outlineStyle =createOutlineStyle()
+
+export const outlineStyleRule =createOutlineStyleRule()

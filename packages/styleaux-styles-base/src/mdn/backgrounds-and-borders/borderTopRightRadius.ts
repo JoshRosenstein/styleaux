@@ -1,4 +1,4 @@
-import { BorderTopRightRadiusProperty } from '@roseys/csstype';
+import { BorderTopRightRadiusProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBorderTopRightRadiusProps<T> {
   borderTopRightRadius: T;
 }
 
-export const borderTopRightRadius = <
+export const createBorderTopRightRadius = <
   T = BorderTopRightRadiusProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const borderTopRightRadius = <
     transformValue,
   })
 
-export const borderTopRightRadiusRule = <T = BorderTopRightRadiusProperty>(
+export const createBorderTopRightRadiusRule = <T = BorderTopRightRadiusProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BORDERTOPRIGHTRADIUS, getValue: transformer})
+
+export const borderTopRightRadius =createBorderTopRightRadius()
+
+export const borderTopRightRadiusRule =createBorderTopRightRadiusRule()

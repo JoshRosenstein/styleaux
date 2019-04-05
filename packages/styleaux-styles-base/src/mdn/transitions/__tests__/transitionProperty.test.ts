@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { transitionProperty } from '../transitionProperty';
+import { createTransitionProperty } from '../transitionProperty';
 
 describe('transitionProperty', () => {
   it('should return a function', () => {
-    const result = transitionProperty();
+    const result = createTransitionProperty();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `transitionProperty` as component and css prop', () => {
-    const result = transitionProperty()({ transitionProperty: 'inherit' });
+    const result = createTransitionProperty()({ transitionProperty: 'inherit' });
     expect(toStyles(result)).toEqual({ transitionProperty: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = transitionProperty<'a'>()({ transitionProperty: 'a' });
+    const result = createTransitionProperty<'a'>()({ transitionProperty: 'a' });
     expect(toStyles(result)).toEqual({ transitionProperty: 'a' });
   });
 
   it('should use an interface which marks `transitionProperty` as optional', () => {
-    const result = transitionProperty<'a'>()({});
+    const result = createTransitionProperty<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = transitionProperty<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTransitionProperty<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ transitionProperty: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('transitionProperty', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = transitionProperty<
+    const result = createTransitionProperty<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

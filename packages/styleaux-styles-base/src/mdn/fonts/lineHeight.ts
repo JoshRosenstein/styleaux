@@ -1,4 +1,4 @@
-import { LineHeightProperty } from '@roseys/csstype';
+import { LineHeightProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ILineHeightProps<T> {
   lineHeight: T;
 }
 
-export const lineHeight = <
+export const createLineHeight = <
   T = LineHeightProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const lineHeight = <
     transformValue,
   })
 
-export const lineHeightRule = <T = LineHeightProperty>(
+export const createLineHeightRule = <T = LineHeightProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: LINEHEIGHT, getValue: transformer})
+
+export const lineHeight =createLineHeight()
+
+export const lineHeightRule =createLineHeightRule()

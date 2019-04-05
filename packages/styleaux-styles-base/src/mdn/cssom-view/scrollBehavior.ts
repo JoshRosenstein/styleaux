@@ -1,4 +1,4 @@
-import { ScrollBehaviorProperty } from '@roseys/csstype';
+import { ScrollBehaviorProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IScrollBehaviorProps<T> {
   scrollBehavior: T;
 }
 
-export const scrollBehavior = <
+export const createScrollBehavior = <
   T = ScrollBehaviorProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const scrollBehavior = <
     transformValue,
   })
 
-export const scrollBehaviorRule = <T = ScrollBehaviorProperty>(
+export const createScrollBehaviorRule = <T = ScrollBehaviorProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: SCROLLBEHAVIOR, getValue: transformer})
+
+export const scrollBehavior =createScrollBehavior()
+
+export const scrollBehaviorRule =createScrollBehaviorRule()

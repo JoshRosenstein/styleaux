@@ -1,4 +1,4 @@
-import { CaretColorProperty } from '@roseys/csstype';
+import { CaretColorProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ICaretColorProps<T> {
   caretColor: T;
 }
 
-export const caretColor = <
+export const createCaretColor = <
   T = CaretColorProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const caretColor = <
     transformValue,
   })
 
-export const caretColorRule = <T = CaretColorProperty>(
+export const createCaretColorRule = <T = CaretColorProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: CARETCOLOR, getValue: transformer})
+
+export const caretColor =createCaretColor()
+
+export const caretColorRule =createCaretColorRule()

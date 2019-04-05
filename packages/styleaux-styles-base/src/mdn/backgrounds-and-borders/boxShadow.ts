@@ -1,4 +1,4 @@
-import { BoxShadowProperty } from '@roseys/csstype';
+import { BoxShadowProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBoxShadowProps<T> {
   boxShadow: T;
 }
 
-export const boxShadow = <
+export const createBoxShadow = <
   T = BoxShadowProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const boxShadow = <
     transformValue,
   })
 
-export const boxShadowRule = <T = BoxShadowProperty>(
+export const createBoxShadowRule = <T = BoxShadowProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BOXSHADOW, getValue: transformer})
+
+export const boxShadow =createBoxShadow()
+
+export const boxShadowRule =createBoxShadowRule()

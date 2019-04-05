@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { border } from '../border';
+import { createBorder } from '../border';
 
 describe('border', () => {
   it('should return a function', () => {
-    const result = border();
+    const result = createBorder();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `border` as component and css prop', () => {
-    const result = border()({ border: 'inherit' });
+    const result = createBorder()({ border: 'inherit' });
     expect(toStyles(result)).toEqual({ border: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = border<'a'>()({ border: 'a' });
+    const result = createBorder<'a'>()({ border: 'a' });
     expect(toStyles(result)).toEqual({ border: 'a' });
   });
 
   it('should use an interface which marks `border` as optional', () => {
-    const result = border<'a'>()({});
+    const result = createBorder<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = border<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorder<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ border: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('border', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = border<
+    const result = createBorder<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

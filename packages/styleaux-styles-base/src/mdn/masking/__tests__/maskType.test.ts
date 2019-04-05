@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { maskType } from '../maskType';
+import { createMaskType } from '../maskType';
 
 describe('maskType', () => {
   it('should return a function', () => {
-    const result = maskType();
+    const result = createMaskType();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `maskType` as component and css prop', () => {
-    const result = maskType()({ maskType: 'inherit' });
+    const result = createMaskType()({ maskType: 'inherit' });
     expect(toStyles(result)).toEqual({ maskType: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = maskType<'a'>()({ maskType: 'a' });
+    const result = createMaskType<'a'>()({ maskType: 'a' });
     expect(toStyles(result)).toEqual({ maskType: 'a' });
   });
 
   it('should use an interface which marks `maskType` as optional', () => {
-    const result = maskType<'a'>()({});
+    const result = createMaskType<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = maskType<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMaskType<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ maskType: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('maskType', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = maskType<
+    const result = createMaskType<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

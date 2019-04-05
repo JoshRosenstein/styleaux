@@ -1,4 +1,4 @@
-import { MarginBlockEndProperty } from '@roseys/csstype';
+import { MarginBlockEndProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMarginBlockEndProps<T> {
   marginBlockEnd: T;
 }
 
-export const marginBlockEnd = <
+export const createMarginBlockEnd = <
   T = MarginBlockEndProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const marginBlockEnd = <
     transformValue,
   })
 
-export const marginBlockEndRule = <T = MarginBlockEndProperty>(
+export const createMarginBlockEndRule = <T = MarginBlockEndProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MARGINBLOCKEND, getValue: transformer})
+
+export const marginBlockEnd =createMarginBlockEnd()
+
+export const marginBlockEndRule =createMarginBlockEndRule()

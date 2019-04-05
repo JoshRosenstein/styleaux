@@ -1,4 +1,4 @@
-import { ColumnCountProperty } from '@roseys/csstype';
+import { ColumnCountProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IColumnCountProps<T> {
   columnCount: T;
 }
 
-export const columnCount = <
+export const createColumnCount = <
   T = ColumnCountProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const columnCount = <
     transformValue,
   })
 
-export const columnCountRule = <T = ColumnCountProperty>(
+export const createColumnCountRule = <T = ColumnCountProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: COLUMNCOUNT, getValue: transformer})
+
+export const columnCount =createColumnCount()
+
+export const columnCountRule =createColumnCountRule()

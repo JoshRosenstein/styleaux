@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { borderCollapse } from '../borderCollapse';
+import { createBorderCollapse } from '../borderCollapse';
 
 describe('borderCollapse', () => {
   it('should return a function', () => {
-    const result = borderCollapse();
+    const result = createBorderCollapse();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `borderCollapse` as component and css prop', () => {
-    const result = borderCollapse()({ borderCollapse: 'inherit' });
+    const result = createBorderCollapse()({ borderCollapse: 'inherit' });
     expect(toStyles(result)).toEqual({ borderCollapse: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = borderCollapse<'a'>()({ borderCollapse: 'a' });
+    const result = createBorderCollapse<'a'>()({ borderCollapse: 'a' });
     expect(toStyles(result)).toEqual({ borderCollapse: 'a' });
   });
 
   it('should use an interface which marks `borderCollapse` as optional', () => {
-    const result = borderCollapse<'a'>()({});
+    const result = createBorderCollapse<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = borderCollapse<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderCollapse<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderCollapse: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('borderCollapse', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = borderCollapse<
+    const result = createBorderCollapse<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

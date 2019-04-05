@@ -1,4 +1,4 @@
-import { InlineSizeProperty } from '@roseys/csstype';
+import { InlineSizeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IInlineSizeProps<T> {
   inlineSize: T;
 }
 
-export const inlineSize = <
+export const createInlineSize = <
   T = InlineSizeProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const inlineSize = <
     transformValue,
   })
 
-export const inlineSizeRule = <T = InlineSizeProperty>(
+export const createInlineSizeRule = <T = InlineSizeProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: INLINESIZE, getValue: transformer})
+
+export const inlineSize =createInlineSize()
+
+export const inlineSizeRule =createInlineSizeRule()

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { mixBlendMode } from '../mixBlendMode';
+import { createMixBlendMode } from '../mixBlendMode';
 
 describe('mixBlendMode', () => {
   it('should return a function', () => {
-    const result = mixBlendMode();
+    const result = createMixBlendMode();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `mixBlendMode` as component and css prop', () => {
-    const result = mixBlendMode()({ mixBlendMode: 'inherit' });
+    const result = createMixBlendMode()({ mixBlendMode: 'inherit' });
     expect(toStyles(result)).toEqual({ mixBlendMode: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = mixBlendMode<'a'>()({ mixBlendMode: 'a' });
+    const result = createMixBlendMode<'a'>()({ mixBlendMode: 'a' });
     expect(toStyles(result)).toEqual({ mixBlendMode: 'a' });
   });
 
   it('should use an interface which marks `mixBlendMode` as optional', () => {
-    const result = mixBlendMode<'a'>()({});
+    const result = createMixBlendMode<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = mixBlendMode<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMixBlendMode<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ mixBlendMode: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('mixBlendMode', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = mixBlendMode<
+    const result = createMixBlendMode<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

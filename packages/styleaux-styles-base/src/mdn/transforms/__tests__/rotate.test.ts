@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { rotate } from '../rotate';
+import { createRotate } from '../rotate';
 
 describe('rotate', () => {
   it('should return a function', () => {
-    const result = rotate();
+    const result = createRotate();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `rotate` as component and css prop', () => {
-    const result = rotate()({ rotate: 'inherit' });
+    const result = createRotate()({ rotate: 'inherit' });
     expect(toStyles(result)).toEqual({ rotate: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = rotate<'a'>()({ rotate: 'a' });
+    const result = createRotate<'a'>()({ rotate: 'a' });
     expect(toStyles(result)).toEqual({ rotate: 'a' });
   });
 
   it('should use an interface which marks `rotate` as optional', () => {
-    const result = rotate<'a'>()({});
+    const result = createRotate<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = rotate<'value',never,IThemeWithoutBreakpoints>({
+    const result = createRotate<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ rotate: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('rotate', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = rotate<
+    const result = createRotate<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

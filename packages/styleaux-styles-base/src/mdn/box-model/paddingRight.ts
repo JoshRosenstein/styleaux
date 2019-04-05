@@ -1,4 +1,4 @@
-import { PaddingRightProperty } from '@roseys/csstype';
+import { PaddingRightProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IPaddingRightProps<T> {
   paddingRight: T;
 }
 
-export const paddingRight = <
+export const createPaddingRight = <
   T = PaddingRightProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const paddingRight = <
     transformValue,
   })
 
-export const paddingRightRule = <T = PaddingRightProperty>(
+export const createPaddingRightRule = <T = PaddingRightProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: PADDINGRIGHT, getValue: transformer})
+
+export const paddingRight =createPaddingRight()
+
+export const paddingRightRule =createPaddingRightRule()

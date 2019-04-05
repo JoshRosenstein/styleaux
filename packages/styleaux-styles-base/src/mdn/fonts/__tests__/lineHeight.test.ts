@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { lineHeight } from '../lineHeight';
+import { createLineHeight } from '../lineHeight';
 
 describe('lineHeight', () => {
   it('should return a function', () => {
-    const result = lineHeight();
+    const result = createLineHeight();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `lineHeight` as component and css prop', () => {
-    const result = lineHeight()({ lineHeight: 'inherit' });
+    const result = createLineHeight()({ lineHeight: 'inherit' });
     expect(toStyles(result)).toEqual({ lineHeight: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = lineHeight<'a'>()({ lineHeight: 'a' });
+    const result = createLineHeight<'a'>()({ lineHeight: 'a' });
     expect(toStyles(result)).toEqual({ lineHeight: 'a' });
   });
 
   it('should use an interface which marks `lineHeight` as optional', () => {
-    const result = lineHeight<'a'>()({});
+    const result = createLineHeight<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = lineHeight<'value',never,IThemeWithoutBreakpoints>({
+    const result = createLineHeight<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ lineHeight: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('lineHeight', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = lineHeight<
+    const result = createLineHeight<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

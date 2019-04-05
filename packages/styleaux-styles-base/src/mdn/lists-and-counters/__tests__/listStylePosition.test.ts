@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { listStylePosition } from '../listStylePosition';
+import { createListStylePosition } from '../listStylePosition';
 
 describe('listStylePosition', () => {
   it('should return a function', () => {
-    const result = listStylePosition();
+    const result = createListStylePosition();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `listStylePosition` as component and css prop', () => {
-    const result = listStylePosition()({ listStylePosition: 'inherit' });
+    const result = createListStylePosition()({ listStylePosition: 'inherit' });
     expect(toStyles(result)).toEqual({ listStylePosition: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = listStylePosition<'a'>()({ listStylePosition: 'a' });
+    const result = createListStylePosition<'a'>()({ listStylePosition: 'a' });
     expect(toStyles(result)).toEqual({ listStylePosition: 'a' });
   });
 
   it('should use an interface which marks `listStylePosition` as optional', () => {
-    const result = listStylePosition<'a'>()({});
+    const result = createListStylePosition<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = listStylePosition<'value',never,IThemeWithoutBreakpoints>({
+    const result = createListStylePosition<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ listStylePosition: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('listStylePosition', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = listStylePosition<
+    const result = createListStylePosition<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

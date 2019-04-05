@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { fontVariationSettings } from '../fontVariationSettings';
+import { createFontVariationSettings } from '../fontVariationSettings';
 
 describe('fontVariationSettings', () => {
   it('should return a function', () => {
-    const result = fontVariationSettings();
+    const result = createFontVariationSettings();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `fontVariationSettings` as component and css prop', () => {
-    const result = fontVariationSettings()({ fontVariationSettings: 'inherit' });
+    const result = createFontVariationSettings()({ fontVariationSettings: 'inherit' });
     expect(toStyles(result)).toEqual({ fontVariationSettings: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = fontVariationSettings<'a'>()({ fontVariationSettings: 'a' });
+    const result = createFontVariationSettings<'a'>()({ fontVariationSettings: 'a' });
     expect(toStyles(result)).toEqual({ fontVariationSettings: 'a' });
   });
 
   it('should use an interface which marks `fontVariationSettings` as optional', () => {
-    const result = fontVariationSettings<'a'>()({});
+    const result = createFontVariationSettings<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = fontVariationSettings<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFontVariationSettings<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontVariationSettings: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('fontVariationSettings', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = fontVariationSettings<
+    const result = createFontVariationSettings<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

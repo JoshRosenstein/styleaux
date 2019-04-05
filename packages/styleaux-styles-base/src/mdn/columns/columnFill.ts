@@ -1,4 +1,4 @@
-import { ColumnFillProperty } from '@roseys/csstype';
+import { ColumnFillProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IColumnFillProps<T> {
   columnFill: T;
 }
 
-export const columnFill = <
+export const createColumnFill = <
   T = ColumnFillProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const columnFill = <
     transformValue,
   })
 
-export const columnFillRule = <T = ColumnFillProperty>(
+export const createColumnFillRule = <T = ColumnFillProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: COLUMNFILL, getValue: transformer})
+
+export const columnFill =createColumnFill()
+
+export const columnFillRule =createColumnFillRule()

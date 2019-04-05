@@ -1,4 +1,4 @@
-import { TextUnderlinePositionProperty } from '@roseys/csstype';
+import { TextUnderlinePositionProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITextUnderlinePositionProps<T> {
   textUnderlinePosition: T;
 }
 
-export const textUnderlinePosition = <
+export const createTextUnderlinePosition = <
   T = TextUnderlinePositionProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const textUnderlinePosition = <
     transformValue,
   })
 
-export const textUnderlinePositionRule = <T = TextUnderlinePositionProperty>(
+export const createTextUnderlinePositionRule = <T = TextUnderlinePositionProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TEXTUNDERLINEPOSITION, getValue: transformer})
+
+export const textUnderlinePosition =createTextUnderlinePosition()
+
+export const textUnderlinePositionRule =createTextUnderlinePositionRule()

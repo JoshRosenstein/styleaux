@@ -1,4 +1,4 @@
-import { MaskClipProperty } from '@roseys/csstype';
+import { MaskClipProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMaskClipProps<T> {
   maskClip: T;
 }
 
-export const maskClip = <
+export const createMaskClip = <
   T = MaskClipProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const maskClip = <
     transformValue,
   })
 
-export const maskClipRule = <T = MaskClipProperty>(
+export const createMaskClipRule = <T = MaskClipProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MASKCLIP, getValue: transformer})
+
+export const maskClip =createMaskClip()
+
+export const maskClipRule =createMaskClipRule()

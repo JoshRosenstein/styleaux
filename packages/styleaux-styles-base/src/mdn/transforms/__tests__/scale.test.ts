@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { scale } from '../scale';
+import { createScale } from '../scale';
 
 describe('scale', () => {
   it('should return a function', () => {
-    const result = scale();
+    const result = createScale();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `scale` as component and css prop', () => {
-    const result = scale()({ scale: 'inherit' });
+    const result = createScale()({ scale: 'inherit' });
     expect(toStyles(result)).toEqual({ scale: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = scale<'a'>()({ scale: 'a' });
+    const result = createScale<'a'>()({ scale: 'a' });
     expect(toStyles(result)).toEqual({ scale: 'a' });
   });
 
   it('should use an interface which marks `scale` as optional', () => {
-    const result = scale<'a'>()({});
+    const result = createScale<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = scale<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScale<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scale: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('scale', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = scale<
+    const result = createScale<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

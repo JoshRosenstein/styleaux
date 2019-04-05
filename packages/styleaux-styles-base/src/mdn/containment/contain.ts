@@ -1,4 +1,4 @@
-import { ContainProperty } from '@roseys/csstype';
+import { ContainProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IContainProps<T> {
   contain: T;
 }
 
-export const contain = <
+export const createContain = <
   T = ContainProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const contain = <
     transformValue,
   })
 
-export const containRule = <T = ContainProperty>(
+export const createContainRule = <T = ContainProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: CONTAIN, getValue: transformer})
+
+export const contain =createContain()
+
+export const containRule =createContainRule()

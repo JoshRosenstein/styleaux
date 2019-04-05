@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { outlineColor } from '../outlineColor';
+import { createOutlineColor } from '../outlineColor';
 
 describe('outlineColor', () => {
   it('should return a function', () => {
-    const result = outlineColor();
+    const result = createOutlineColor();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `outlineColor` as component and css prop', () => {
-    const result = outlineColor()({ outlineColor: 'inherit' });
+    const result = createOutlineColor()({ outlineColor: 'inherit' });
     expect(toStyles(result)).toEqual({ outlineColor: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = outlineColor<'a'>()({ outlineColor: 'a' });
+    const result = createOutlineColor<'a'>()({ outlineColor: 'a' });
     expect(toStyles(result)).toEqual({ outlineColor: 'a' });
   });
 
   it('should use an interface which marks `outlineColor` as optional', () => {
-    const result = outlineColor<'a'>()({});
+    const result = createOutlineColor<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = outlineColor<'value',never,IThemeWithoutBreakpoints>({
+    const result = createOutlineColor<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ outlineColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('outlineColor', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = outlineColor<
+    const result = createOutlineColor<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

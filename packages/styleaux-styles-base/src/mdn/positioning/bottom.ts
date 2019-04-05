@@ -1,4 +1,4 @@
-import { BottomProperty } from '@roseys/csstype';
+import { BottomProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBottomProps<T> {
   bottom: T;
 }
 
-export const bottom = <
+export const createBottom = <
   T = BottomProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const bottom = <
     transformValue,
   })
 
-export const bottomRule = <T = BottomProperty>(
+export const createBottomRule = <T = BottomProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BOTTOM, getValue: transformer})
+
+export const bottom =createBottom()
+
+export const bottomRule =createBottomRule()

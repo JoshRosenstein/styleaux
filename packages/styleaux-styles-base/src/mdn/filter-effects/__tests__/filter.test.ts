@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { filter } from '../filter';
+import { createFilter } from '../filter';
 
 describe('filter', () => {
   it('should return a function', () => {
-    const result = filter();
+    const result = createFilter();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `filter` as component and css prop', () => {
-    const result = filter()({ filter: 'inherit' });
+    const result = createFilter()({ filter: 'inherit' });
     expect(toStyles(result)).toEqual({ filter: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = filter<'a'>()({ filter: 'a' });
+    const result = createFilter<'a'>()({ filter: 'a' });
     expect(toStyles(result)).toEqual({ filter: 'a' });
   });
 
   it('should use an interface which marks `filter` as optional', () => {
-    const result = filter<'a'>()({});
+    const result = createFilter<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = filter<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFilter<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ filter: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('filter', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = filter<
+    const result = createFilter<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

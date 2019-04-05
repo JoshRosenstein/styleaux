@@ -1,4 +1,4 @@
-import { TableLayoutProperty } from '@roseys/csstype';
+import { TableLayoutProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITableLayoutProps<T> {
   tableLayout: T;
 }
 
-export const tableLayout = <
+export const createTableLayout = <
   T = TableLayoutProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const tableLayout = <
     transformValue,
   })
 
-export const tableLayoutRule = <T = TableLayoutProperty>(
+export const createTableLayoutRule = <T = TableLayoutProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TABLELAYOUT, getValue: transformer})
+
+export const tableLayout =createTableLayout()
+
+export const tableLayoutRule =createTableLayoutRule()

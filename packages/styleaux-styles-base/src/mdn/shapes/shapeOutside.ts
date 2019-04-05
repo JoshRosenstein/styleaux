@@ -1,4 +1,4 @@
-import { ShapeOutsideProperty } from '@roseys/csstype';
+import { ShapeOutsideProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IShapeOutsideProps<T> {
   shapeOutside: T;
 }
 
-export const shapeOutside = <
+export const createShapeOutside = <
   T = ShapeOutsideProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const shapeOutside = <
     transformValue,
   })
 
-export const shapeOutsideRule = <T = ShapeOutsideProperty>(
+export const createShapeOutsideRule = <T = ShapeOutsideProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: SHAPEOUTSIDE, getValue: transformer})
+
+export const shapeOutside =createShapeOutside()
+
+export const shapeOutsideRule =createShapeOutsideRule()

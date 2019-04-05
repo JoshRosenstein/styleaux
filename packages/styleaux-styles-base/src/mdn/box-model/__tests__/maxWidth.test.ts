@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { maxWidth } from '../maxWidth';
+import { createMaxWidth } from '../maxWidth';
 
 describe('maxWidth', () => {
   it('should return a function', () => {
-    const result = maxWidth();
+    const result = createMaxWidth();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `maxWidth` as component and css prop', () => {
-    const result = maxWidth()({ maxWidth: 'inherit' });
+    const result = createMaxWidth()({ maxWidth: 'inherit' });
     expect(toStyles(result)).toEqual({ maxWidth: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = maxWidth<'a'>()({ maxWidth: 'a' });
+    const result = createMaxWidth<'a'>()({ maxWidth: 'a' });
     expect(toStyles(result)).toEqual({ maxWidth: 'a' });
   });
 
   it('should use an interface which marks `maxWidth` as optional', () => {
-    const result = maxWidth<'a'>()({});
+    const result = createMaxWidth<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = maxWidth<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMaxWidth<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ maxWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('maxWidth', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = maxWidth<
+    const result = createMaxWidth<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

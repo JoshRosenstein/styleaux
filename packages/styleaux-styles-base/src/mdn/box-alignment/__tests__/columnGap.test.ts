@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { columnGap } from '../columnGap';
+import { createColumnGap } from '../columnGap';
 
 describe('columnGap', () => {
   it('should return a function', () => {
-    const result = columnGap();
+    const result = createColumnGap();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `columnGap` as component and css prop', () => {
-    const result = columnGap()({ columnGap: 'inherit' });
+    const result = createColumnGap()({ columnGap: 'inherit' });
     expect(toStyles(result)).toEqual({ columnGap: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = columnGap<'a'>()({ columnGap: 'a' });
+    const result = createColumnGap<'a'>()({ columnGap: 'a' });
     expect(toStyles(result)).toEqual({ columnGap: 'a' });
   });
 
   it('should use an interface which marks `columnGap` as optional', () => {
-    const result = columnGap<'a'>()({});
+    const result = createColumnGap<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = columnGap<'value',never,IThemeWithoutBreakpoints>({
+    const result = createColumnGap<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ columnGap: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('columnGap', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = columnGap<
+    const result = createColumnGap<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

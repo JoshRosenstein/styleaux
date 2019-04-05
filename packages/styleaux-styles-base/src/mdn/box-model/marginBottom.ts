@@ -1,4 +1,4 @@
-import { MarginBottomProperty } from '@roseys/csstype';
+import { MarginBottomProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMarginBottomProps<T> {
   marginBottom: T;
 }
 
-export const marginBottom = <
+export const createMarginBottom = <
   T = MarginBottomProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const marginBottom = <
     transformValue,
   })
 
-export const marginBottomRule = <T = MarginBottomProperty>(
+export const createMarginBottomRule = <T = MarginBottomProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MARGINBOTTOM, getValue: transformer})
+
+export const marginBottom =createMarginBottom()
+
+export const marginBottomRule =createMarginBottomRule()

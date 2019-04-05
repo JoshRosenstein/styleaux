@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { wordSpacing } from '../wordSpacing';
+import { createWordSpacing } from '../wordSpacing';
 
 describe('wordSpacing', () => {
   it('should return a function', () => {
-    const result = wordSpacing();
+    const result = createWordSpacing();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `wordSpacing` as component and css prop', () => {
-    const result = wordSpacing()({ wordSpacing: 'inherit' });
+    const result = createWordSpacing()({ wordSpacing: 'inherit' });
     expect(toStyles(result)).toEqual({ wordSpacing: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = wordSpacing<'a'>()({ wordSpacing: 'a' });
+    const result = createWordSpacing<'a'>()({ wordSpacing: 'a' });
     expect(toStyles(result)).toEqual({ wordSpacing: 'a' });
   });
 
   it('should use an interface which marks `wordSpacing` as optional', () => {
-    const result = wordSpacing<'a'>()({});
+    const result = createWordSpacing<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = wordSpacing<'value',never,IThemeWithoutBreakpoints>({
+    const result = createWordSpacing<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ wordSpacing: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('wordSpacing', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = wordSpacing<
+    const result = createWordSpacing<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

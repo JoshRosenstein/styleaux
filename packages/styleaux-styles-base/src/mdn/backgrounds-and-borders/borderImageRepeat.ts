@@ -1,4 +1,4 @@
-import { BorderImageRepeatProperty } from '@roseys/csstype';
+import { BorderImageRepeatProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBorderImageRepeatProps<T> {
   borderImageRepeat: T;
 }
 
-export const borderImageRepeat = <
+export const createBorderImageRepeat = <
   T = BorderImageRepeatProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const borderImageRepeat = <
     transformValue,
   })
 
-export const borderImageRepeatRule = <T = BorderImageRepeatProperty>(
+export const createBorderImageRepeatRule = <T = BorderImageRepeatProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BORDERIMAGEREPEAT, getValue: transformer})
+
+export const borderImageRepeat =createBorderImageRepeat()
+
+export const borderImageRepeatRule =createBorderImageRepeatRule()

@@ -1,4 +1,4 @@
-import { ObjectFitProperty } from '@roseys/csstype';
+import { ObjectFitProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IObjectFitProps<T> {
   objectFit: T;
 }
 
-export const objectFit = <
+export const createObjectFit = <
   T = ObjectFitProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const objectFit = <
     transformValue,
   })
 
-export const objectFitRule = <T = ObjectFitProperty>(
+export const createObjectFitRule = <T = ObjectFitProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: OBJECTFIT, getValue: transformer})
+
+export const objectFit =createObjectFit()
+
+export const objectFitRule =createObjectFitRule()

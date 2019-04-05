@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { borderBottomStyle } from '../borderBottomStyle';
+import { createBorderBottomStyle } from '../borderBottomStyle';
 
 describe('borderBottomStyle', () => {
   it('should return a function', () => {
-    const result = borderBottomStyle();
+    const result = createBorderBottomStyle();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `borderBottomStyle` as component and css prop', () => {
-    const result = borderBottomStyle()({ borderBottomStyle: 'inherit' });
+    const result = createBorderBottomStyle()({ borderBottomStyle: 'inherit' });
     expect(toStyles(result)).toEqual({ borderBottomStyle: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = borderBottomStyle<'a'>()({ borderBottomStyle: 'a' });
+    const result = createBorderBottomStyle<'a'>()({ borderBottomStyle: 'a' });
     expect(toStyles(result)).toEqual({ borderBottomStyle: 'a' });
   });
 
   it('should use an interface which marks `borderBottomStyle` as optional', () => {
-    const result = borderBottomStyle<'a'>()({});
+    const result = createBorderBottomStyle<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = borderBottomStyle<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderBottomStyle<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderBottomStyle: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('borderBottomStyle', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = borderBottomStyle<
+    const result = createBorderBottomStyle<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

@@ -1,4 +1,4 @@
-import { ScrollPaddingInlineProperty } from '@roseys/csstype';
+import { ScrollPaddingInlineProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -15,7 +15,7 @@ The scroll-padding properties define offsets for the optimal viewing region of
   scrollPaddingInline: T;
 }
 
-export const scrollPaddingInline = <
+export const createScrollPaddingInline = <
   T = ScrollPaddingInlineProperty,
   Theme = never,
   Breakpoints = never
@@ -28,6 +28,10 @@ export const scrollPaddingInline = <
     transformValue,
   })
 
-export const scrollPaddingInlineRule = <T = ScrollPaddingInlineProperty>(
+export const createScrollPaddingInlineRule = <T = ScrollPaddingInlineProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: SCROLLPADDINGINLINE, getValue: transformer})
+
+export const scrollPaddingInline =createScrollPaddingInline()
+
+export const scrollPaddingInlineRule =createScrollPaddingInlineRule()

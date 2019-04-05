@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { isolation } from '../isolation';
+import { createIsolation } from '../isolation';
 
 describe('isolation', () => {
   it('should return a function', () => {
-    const result = isolation();
+    const result = createIsolation();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `isolation` as component and css prop', () => {
-    const result = isolation()({ isolation: 'inherit' });
+    const result = createIsolation()({ isolation: 'inherit' });
     expect(toStyles(result)).toEqual({ isolation: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = isolation<'a'>()({ isolation: 'a' });
+    const result = createIsolation<'a'>()({ isolation: 'a' });
     expect(toStyles(result)).toEqual({ isolation: 'a' });
   });
 
   it('should use an interface which marks `isolation` as optional', () => {
-    const result = isolation<'a'>()({});
+    const result = createIsolation<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = isolation<'value',never,IThemeWithoutBreakpoints>({
+    const result = createIsolation<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ isolation: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('isolation', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = isolation<
+    const result = createIsolation<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

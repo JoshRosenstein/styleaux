@@ -1,4 +1,4 @@
-import { TransitionTimingFunctionProperty } from '@roseys/csstype';
+import { TransitionTimingFunctionProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITransitionTimingFunctionProps<T> {
   transitionTimingFunction: T;
 }
 
-export const transitionTimingFunction = <
+export const createTransitionTimingFunction = <
   T = TransitionTimingFunctionProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const transitionTimingFunction = <
     transformValue,
   })
 
-export const transitionTimingFunctionRule = <T = TransitionTimingFunctionProperty>(
+export const createTransitionTimingFunctionRule = <T = TransitionTimingFunctionProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TRANSITIONTIMINGFUNCTION, getValue: transformer})
+
+export const transitionTimingFunction =createTransitionTimingFunction()
+
+export const transitionTimingFunctionRule =createTransitionTimingFunctionRule()

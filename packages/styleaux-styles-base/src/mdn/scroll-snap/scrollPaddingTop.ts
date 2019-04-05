@@ -1,4 +1,4 @@
-import { ScrollPaddingTopProperty } from '@roseys/csstype';
+import { ScrollPaddingTopProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IScrollPaddingTopProps<T> {
   scrollPaddingTop: T;
 }
 
-export const scrollPaddingTop = <
+export const createScrollPaddingTop = <
   T = ScrollPaddingTopProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const scrollPaddingTop = <
     transformValue,
   })
 
-export const scrollPaddingTopRule = <T = ScrollPaddingTopProperty>(
+export const createScrollPaddingTopRule = <T = ScrollPaddingTopProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: SCROLLPADDINGTOP, getValue: transformer})
+
+export const scrollPaddingTop =createScrollPaddingTop()
+
+export const scrollPaddingTopRule =createScrollPaddingTopRule()

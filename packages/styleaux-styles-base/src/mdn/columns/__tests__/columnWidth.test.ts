@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { columnWidth } from '../columnWidth';
+import { createColumnWidth } from '../columnWidth';
 
 describe('columnWidth', () => {
   it('should return a function', () => {
-    const result = columnWidth();
+    const result = createColumnWidth();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `columnWidth` as component and css prop', () => {
-    const result = columnWidth()({ columnWidth: 'inherit' });
+    const result = createColumnWidth()({ columnWidth: 'inherit' });
     expect(toStyles(result)).toEqual({ columnWidth: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = columnWidth<'a'>()({ columnWidth: 'a' });
+    const result = createColumnWidth<'a'>()({ columnWidth: 'a' });
     expect(toStyles(result)).toEqual({ columnWidth: 'a' });
   });
 
   it('should use an interface which marks `columnWidth` as optional', () => {
-    const result = columnWidth<'a'>()({});
+    const result = createColumnWidth<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = columnWidth<'value',never,IThemeWithoutBreakpoints>({
+    const result = createColumnWidth<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ columnWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('columnWidth', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = columnWidth<
+    const result = createColumnWidth<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { borderSpacing } from '../borderSpacing';
+import { createBorderSpacing } from '../borderSpacing';
 
 describe('borderSpacing', () => {
   it('should return a function', () => {
-    const result = borderSpacing();
+    const result = createBorderSpacing();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `borderSpacing` as component and css prop', () => {
-    const result = borderSpacing()({ borderSpacing: 'inherit' });
+    const result = createBorderSpacing()({ borderSpacing: 'inherit' });
     expect(toStyles(result)).toEqual({ borderSpacing: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = borderSpacing<'a'>()({ borderSpacing: 'a' });
+    const result = createBorderSpacing<'a'>()({ borderSpacing: 'a' });
     expect(toStyles(result)).toEqual({ borderSpacing: 'a' });
   });
 
   it('should use an interface which marks `borderSpacing` as optional', () => {
-    const result = borderSpacing<'a'>()({});
+    const result = createBorderSpacing<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = borderSpacing<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderSpacing<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderSpacing: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('borderSpacing', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = borderSpacing<
+    const result = createBorderSpacing<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

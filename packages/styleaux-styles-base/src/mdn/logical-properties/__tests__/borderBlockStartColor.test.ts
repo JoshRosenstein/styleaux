@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { borderBlockStartColor } from '../borderBlockStartColor';
+import { createBorderBlockStartColor } from '../borderBlockStartColor';
 
 describe('borderBlockStartColor', () => {
   it('should return a function', () => {
-    const result = borderBlockStartColor();
+    const result = createBorderBlockStartColor();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `borderBlockStartColor` as component and css prop', () => {
-    const result = borderBlockStartColor()({ borderBlockStartColor: 'inherit' });
+    const result = createBorderBlockStartColor()({ borderBlockStartColor: 'inherit' });
     expect(toStyles(result)).toEqual({ borderBlockStartColor: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = borderBlockStartColor<'a'>()({ borderBlockStartColor: 'a' });
+    const result = createBorderBlockStartColor<'a'>()({ borderBlockStartColor: 'a' });
     expect(toStyles(result)).toEqual({ borderBlockStartColor: 'a' });
   });
 
   it('should use an interface which marks `borderBlockStartColor` as optional', () => {
-    const result = borderBlockStartColor<'a'>()({});
+    const result = createBorderBlockStartColor<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = borderBlockStartColor<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderBlockStartColor<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderBlockStartColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('borderBlockStartColor', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = borderBlockStartColor<
+    const result = createBorderBlockStartColor<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

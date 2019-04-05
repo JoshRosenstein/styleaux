@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { overflowAnchor } from '../overflowAnchor';
+import { createOverflowAnchor } from '../overflowAnchor';
 
 describe('overflowAnchor', () => {
   it('should return a function', () => {
-    const result = overflowAnchor();
+    const result = createOverflowAnchor();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `overflowAnchor` as component and css prop', () => {
-    const result = overflowAnchor()({ overflowAnchor: 'inherit' });
+    const result = createOverflowAnchor()({ overflowAnchor: 'inherit' });
     expect(toStyles(result)).toEqual({ overflowAnchor: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = overflowAnchor<'a'>()({ overflowAnchor: 'a' });
+    const result = createOverflowAnchor<'a'>()({ overflowAnchor: 'a' });
     expect(toStyles(result)).toEqual({ overflowAnchor: 'a' });
   });
 
   it('should use an interface which marks `overflowAnchor` as optional', () => {
-    const result = overflowAnchor<'a'>()({});
+    const result = createOverflowAnchor<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = overflowAnchor<'value',never,IThemeWithoutBreakpoints>({
+    const result = createOverflowAnchor<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ overflowAnchor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('overflowAnchor', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = overflowAnchor<
+    const result = createOverflowAnchor<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

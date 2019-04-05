@@ -1,4 +1,4 @@
-import { BreakAfterProperty } from '@roseys/csstype';
+import { BreakAfterProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBreakAfterProps<T> {
   breakAfter: T;
 }
 
-export const breakAfter = <
+export const createBreakAfter = <
   T = BreakAfterProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const breakAfter = <
     transformValue,
   })
 
-export const breakAfterRule = <T = BreakAfterProperty>(
+export const createBreakAfterRule = <T = BreakAfterProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BREAKAFTER, getValue: transformer})
+
+export const breakAfter =createBreakAfter()
+
+export const breakAfterRule =createBreakAfterRule()

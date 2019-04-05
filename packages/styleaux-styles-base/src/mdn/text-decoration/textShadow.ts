@@ -1,4 +1,4 @@
-import { TextShadowProperty } from '@roseys/csstype';
+import { TextShadowProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITextShadowProps<T> {
   textShadow: T;
 }
 
-export const textShadow = <
+export const createTextShadow = <
   T = TextShadowProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const textShadow = <
     transformValue,
   })
 
-export const textShadowRule = <T = TextShadowProperty>(
+export const createTextShadowRule = <T = TextShadowProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TEXTSHADOW, getValue: transformer})
+
+export const textShadow =createTextShadow()
+
+export const textShadowRule =createTextShadowRule()

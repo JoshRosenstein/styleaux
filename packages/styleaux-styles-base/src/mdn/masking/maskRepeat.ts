@@ -1,4 +1,4 @@
-import { MaskRepeatProperty } from '@roseys/csstype';
+import { MaskRepeatProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMaskRepeatProps<T> {
   maskRepeat: T;
 }
 
-export const maskRepeat = <
+export const createMaskRepeat = <
   T = MaskRepeatProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const maskRepeat = <
     transformValue,
   })
 
-export const maskRepeatRule = <T = MaskRepeatProperty>(
+export const createMaskRepeatRule = <T = MaskRepeatProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MASKREPEAT, getValue: transformer})
+
+export const maskRepeat =createMaskRepeat()
+
+export const maskRepeatRule =createMaskRepeatRule()

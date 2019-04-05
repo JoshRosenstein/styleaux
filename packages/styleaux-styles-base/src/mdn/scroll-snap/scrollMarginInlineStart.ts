@@ -1,4 +1,4 @@
-import { ScrollMarginInlineStartProperty } from '@roseys/csstype';
+import { ScrollMarginInlineStartProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IScrollMarginInlineStartProps<T> {
   scrollMarginInlineStart: T;
 }
 
-export const scrollMarginInlineStart = <
+export const createScrollMarginInlineStart = <
   T = ScrollMarginInlineStartProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const scrollMarginInlineStart = <
     transformValue,
   })
 
-export const scrollMarginInlineStartRule = <T = ScrollMarginInlineStartProperty>(
+export const createScrollMarginInlineStartRule = <T = ScrollMarginInlineStartProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: SCROLLMARGININLINESTART, getValue: transformer})
+
+export const scrollMarginInlineStart =createScrollMarginInlineStart()
+
+export const scrollMarginInlineStartRule =createScrollMarginInlineStartRule()

@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { lineBreak } from '../lineBreak';
+import { createLineBreak } from '../lineBreak';
 
 describe('lineBreak', () => {
   it('should return a function', () => {
-    const result = lineBreak();
+    const result = createLineBreak();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `lineBreak` as component and css prop', () => {
-    const result = lineBreak()({ lineBreak: 'inherit' });
+    const result = createLineBreak()({ lineBreak: 'inherit' });
     expect(toStyles(result)).toEqual({ lineBreak: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = lineBreak<'a'>()({ lineBreak: 'a' });
+    const result = createLineBreak<'a'>()({ lineBreak: 'a' });
     expect(toStyles(result)).toEqual({ lineBreak: 'a' });
   });
 
   it('should use an interface which marks `lineBreak` as optional', () => {
-    const result = lineBreak<'a'>()({});
+    const result = createLineBreak<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = lineBreak<'value',never,IThemeWithoutBreakpoints>({
+    const result = createLineBreak<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ lineBreak: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('lineBreak', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = lineBreak<
+    const result = createLineBreak<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

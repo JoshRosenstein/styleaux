@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { quotes } from '../quotes';
+import { createQuotes } from '../quotes';
 
 describe('quotes', () => {
   it('should return a function', () => {
-    const result = quotes();
+    const result = createQuotes();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `quotes` as component and css prop', () => {
-    const result = quotes()({ quotes: 'inherit' });
+    const result = createQuotes()({ quotes: 'inherit' });
     expect(toStyles(result)).toEqual({ quotes: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = quotes<'a'>()({ quotes: 'a' });
+    const result = createQuotes<'a'>()({ quotes: 'a' });
     expect(toStyles(result)).toEqual({ quotes: 'a' });
   });
 
   it('should use an interface which marks `quotes` as optional', () => {
-    const result = quotes<'a'>()({});
+    const result = createQuotes<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = quotes<'value',never,IThemeWithoutBreakpoints>({
+    const result = createQuotes<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ quotes: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('quotes', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = quotes<
+    const result = createQuotes<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

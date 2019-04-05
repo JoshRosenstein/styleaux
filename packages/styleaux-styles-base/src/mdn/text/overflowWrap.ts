@@ -1,4 +1,4 @@
-import { OverflowWrapProperty } from '@roseys/csstype';
+import { OverflowWrapProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IOverflowWrapProps<T> {
   overflowWrap: T;
 }
 
-export const overflowWrap = <
+export const createOverflowWrap = <
   T = OverflowWrapProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const overflowWrap = <
     transformValue,
   })
 
-export const overflowWrapRule = <T = OverflowWrapProperty>(
+export const createOverflowWrapRule = <T = OverflowWrapProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: OVERFLOWWRAP, getValue: transformer})
+
+export const overflowWrap =createOverflowWrap()
+
+export const overflowWrapRule =createOverflowWrapRule()

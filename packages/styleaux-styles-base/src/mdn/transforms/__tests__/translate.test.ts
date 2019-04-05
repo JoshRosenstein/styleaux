@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { translate } from '../translate';
+import { createTranslate } from '../translate';
 
 describe('translate', () => {
   it('should return a function', () => {
-    const result = translate();
+    const result = createTranslate();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `translate` as component and css prop', () => {
-    const result = translate()({ translate: 'inherit' });
+    const result = createTranslate()({ translate: 'inherit' });
     expect(toStyles(result)).toEqual({ translate: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = translate<'a'>()({ translate: 'a' });
+    const result = createTranslate<'a'>()({ translate: 'a' });
     expect(toStyles(result)).toEqual({ translate: 'a' });
   });
 
   it('should use an interface which marks `translate` as optional', () => {
-    const result = translate<'a'>()({});
+    const result = createTranslate<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = translate<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTranslate<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ translate: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('translate', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = translate<
+    const result = createTranslate<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

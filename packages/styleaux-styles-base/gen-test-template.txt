@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { __PROPERTY_NAME__ } from '../__PROPERTY_NAME__';
+import { create__PROPERTY_NAME_PASCAL__ } from '../__PROPERTY_NAME__';
 
 describe('__PROPERTY_NAME__', () => {
   it('should return a function', () => {
-    const result = __PROPERTY_NAME__();
+    const result = create__PROPERTY_NAME_PASCAL__();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `__PROPERTY_NAME__` as component and css prop', () => {
-    const result = __PROPERTY_NAME__()({ __PROPERTY_NAME__: 'inherit' });
+    const result = create__PROPERTY_NAME_PASCAL__()({ __PROPERTY_NAME__: 'inherit' });
     expect(toStyles(result)).toEqual({ __PROPERTY_NAME__: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = __PROPERTY_NAME__<'a'>()({ __PROPERTY_NAME__: 'a' });
+    const result = create__PROPERTY_NAME_PASCAL__<'a'>()({ __PROPERTY_NAME__: 'a' });
     expect(toStyles(result)).toEqual({ __PROPERTY_NAME__: 'a' });
   });
 
   it('should use an interface which marks `__PROPERTY_NAME__` as optional', () => {
-    const result = __PROPERTY_NAME__<'a'>()({});
+    const result = create__PROPERTY_NAME_PASCAL__<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = __PROPERTY_NAME__<'value',never,IThemeWithoutBreakpoints>({
+    const result = create__PROPERTY_NAME_PASCAL__<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ __PROPERTY_NAME__: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('__PROPERTY_NAME__', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = __PROPERTY_NAME__<
+    const result = create__PROPERTY_NAME_PASCAL__<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

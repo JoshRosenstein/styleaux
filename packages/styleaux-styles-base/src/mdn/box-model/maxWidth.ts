@@ -1,4 +1,4 @@
-import { MaxWidthProperty } from '@roseys/csstype';
+import { MaxWidthProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMaxWidthProps<T> {
   maxWidth: T;
 }
 
-export const maxWidth = <
+export const createMaxWidth = <
   T = MaxWidthProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const maxWidth = <
     transformValue,
   })
 
-export const maxWidthRule = <T = MaxWidthProperty>(
+export const createMaxWidthRule = <T = MaxWidthProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MAXWIDTH, getValue: transformer})
+
+export const maxWidth =createMaxWidth()
+
+export const maxWidthRule =createMaxWidthRule()

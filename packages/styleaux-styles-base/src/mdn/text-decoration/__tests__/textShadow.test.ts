@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { textShadow } from '../textShadow';
+import { createTextShadow } from '../textShadow';
 
 describe('textShadow', () => {
   it('should return a function', () => {
-    const result = textShadow();
+    const result = createTextShadow();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `textShadow` as component and css prop', () => {
-    const result = textShadow()({ textShadow: 'inherit' });
+    const result = createTextShadow()({ textShadow: 'inherit' });
     expect(toStyles(result)).toEqual({ textShadow: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = textShadow<'a'>()({ textShadow: 'a' });
+    const result = createTextShadow<'a'>()({ textShadow: 'a' });
     expect(toStyles(result)).toEqual({ textShadow: 'a' });
   });
 
   it('should use an interface which marks `textShadow` as optional', () => {
-    const result = textShadow<'a'>()({});
+    const result = createTextShadow<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = textShadow<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextShadow<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textShadow: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('textShadow', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = textShadow<
+    const result = createTextShadow<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

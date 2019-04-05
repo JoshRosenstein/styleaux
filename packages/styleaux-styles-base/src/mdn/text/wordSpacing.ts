@@ -1,4 +1,4 @@
-import { WordSpacingProperty } from '@roseys/csstype';
+import { WordSpacingProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IWordSpacingProps<T> {
   wordSpacing: T;
 }
 
-export const wordSpacing = <
+export const createWordSpacing = <
   T = WordSpacingProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const wordSpacing = <
     transformValue,
   })
 
-export const wordSpacingRule = <T = WordSpacingProperty>(
+export const createWordSpacingRule = <T = WordSpacingProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: WORDSPACING, getValue: transformer})
+
+export const wordSpacing =createWordSpacing()
+
+export const wordSpacingRule =createWordSpacingRule()

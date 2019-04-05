@@ -1,4 +1,4 @@
-import { GridTemplateAreasProperty } from '@roseys/csstype';
+import { GridTemplateAreasProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IGridTemplateAreasProps<T> {
   gridTemplateAreas: T;
 }
 
-export const gridTemplateAreas = <
+export const createGridTemplateAreas = <
   T = GridTemplateAreasProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const gridTemplateAreas = <
     transformValue,
   })
 
-export const gridTemplateAreasRule = <T = GridTemplateAreasProperty>(
+export const createGridTemplateAreasRule = <T = GridTemplateAreasProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: GRIDTEMPLATEAREAS, getValue: transformer})
+
+export const gridTemplateAreas =createGridTemplateAreas()
+
+export const gridTemplateAreasRule =createGridTemplateAreasRule()

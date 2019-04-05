@@ -1,4 +1,4 @@
-import { BorderWidthProperty } from '@roseys/csstype';
+import { BorderWidthProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBorderWidthProps<T> {
   borderWidth: T;
 }
 
-export const borderWidth = <
+export const createBorderWidth = <
   T = BorderWidthProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const borderWidth = <
     transformValue,
   })
 
-export const borderWidthRule = <T = BorderWidthProperty>(
+export const createBorderWidthRule = <T = BorderWidthProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BORDERWIDTH, getValue: transformer})
+
+export const borderWidth =createBorderWidth()
+
+export const borderWidthRule =createBorderWidthRule()

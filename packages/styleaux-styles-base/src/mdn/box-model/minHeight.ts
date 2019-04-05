@@ -1,4 +1,4 @@
-import { MinHeightProperty } from '@roseys/csstype';
+import { MinHeightProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMinHeightProps<T> {
   minHeight: T;
 }
 
-export const minHeight = <
+export const createMinHeight = <
   T = MinHeightProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const minHeight = <
     transformValue,
   })
 
-export const minHeightRule = <T = MinHeightProperty>(
+export const createMinHeightRule = <T = MinHeightProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MINHEIGHT, getValue: transformer})
+
+export const minHeight =createMinHeight()
+
+export const minHeightRule =createMinHeightRule()

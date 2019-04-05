@@ -1,4 +1,4 @@
-import { FontSizeProperty } from '@roseys/csstype';
+import { FontSizeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IFontSizeProps<T> {
   fontSize: T;
 }
 
-export const fontSize = <
+export const createFontSize = <
   T = FontSizeProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const fontSize = <
     transformValue,
   })
 
-export const fontSizeRule = <T = FontSizeProperty>(
+export const createFontSizeRule = <T = FontSizeProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: FONTSIZE, getValue: transformer})
+
+export const fontSize =createFontSize()
+
+export const fontSizeRule =createFontSizeRule()

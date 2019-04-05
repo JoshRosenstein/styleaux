@@ -1,4 +1,4 @@
-import { GridColumnEndProperty } from '@roseys/csstype';
+import { GridColumnEndProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IGridColumnEndProps<T> {
   gridColumnEnd: T;
 }
 
-export const gridColumnEnd = <
+export const createGridColumnEnd = <
   T = GridColumnEndProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const gridColumnEnd = <
     transformValue,
   })
 
-export const gridColumnEndRule = <T = GridColumnEndProperty>(
+export const createGridColumnEndRule = <T = GridColumnEndProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: GRIDCOLUMNEND, getValue: transformer})
+
+export const gridColumnEnd =createGridColumnEnd()
+
+export const gridColumnEndRule =createGridColumnEndRule()

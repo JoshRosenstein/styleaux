@@ -1,4 +1,4 @@
-import { BoxSizingProperty } from '@roseys/csstype';
+import { BoxSizingProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBoxSizingProps<T> {
   boxSizing: T;
 }
 
-export const boxSizing = <
+export const createBoxSizing = <
   T = BoxSizingProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const boxSizing = <
     transformValue,
   })
 
-export const boxSizingRule = <T = BoxSizingProperty>(
+export const createBoxSizingRule = <T = BoxSizingProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BOXSIZING, getValue: transformer})
+
+export const boxSizing =createBoxSizing()
+
+export const boxSizingRule =createBoxSizingRule()

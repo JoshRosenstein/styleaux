@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { textEmphasisColor } from '../textEmphasisColor';
+import { createTextEmphasisColor } from '../textEmphasisColor';
 
 describe('textEmphasisColor', () => {
   it('should return a function', () => {
-    const result = textEmphasisColor();
+    const result = createTextEmphasisColor();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `textEmphasisColor` as component and css prop', () => {
-    const result = textEmphasisColor()({ textEmphasisColor: 'inherit' });
+    const result = createTextEmphasisColor()({ textEmphasisColor: 'inherit' });
     expect(toStyles(result)).toEqual({ textEmphasisColor: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = textEmphasisColor<'a'>()({ textEmphasisColor: 'a' });
+    const result = createTextEmphasisColor<'a'>()({ textEmphasisColor: 'a' });
     expect(toStyles(result)).toEqual({ textEmphasisColor: 'a' });
   });
 
   it('should use an interface which marks `textEmphasisColor` as optional', () => {
-    const result = textEmphasisColor<'a'>()({});
+    const result = createTextEmphasisColor<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = textEmphasisColor<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextEmphasisColor<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textEmphasisColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('textEmphasisColor', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = textEmphasisColor<
+    const result = createTextEmphasisColor<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

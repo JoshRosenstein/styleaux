@@ -1,4 +1,4 @@
-import { MinInlineSizeProperty } from '@roseys/csstype';
+import { MinInlineSizeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IMinInlineSizeProps<T> {
   minInlineSize: T;
 }
 
-export const minInlineSize = <
+export const createMinInlineSize = <
   T = MinInlineSizeProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const minInlineSize = <
     transformValue,
   })
 
-export const minInlineSizeRule = <T = MinInlineSizeProperty>(
+export const createMinInlineSizeRule = <T = MinInlineSizeProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: MININLINESIZE, getValue: transformer})
+
+export const minInlineSize =createMinInlineSize()
+
+export const minInlineSizeRule =createMinInlineSizeRule()

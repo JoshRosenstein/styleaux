@@ -1,4 +1,4 @@
-import { CounterIncrementProperty } from '@roseys/csstype';
+import { CounterIncrementProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ICounterIncrementProps<T> {
   counterIncrement: T;
 }
 
-export const counterIncrement = <
+export const createCounterIncrement = <
   T = CounterIncrementProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const counterIncrement = <
     transformValue,
   })
 
-export const counterIncrementRule = <T = CounterIncrementProperty>(
+export const createCounterIncrementRule = <T = CounterIncrementProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: COUNTERINCREMENT, getValue: transformer})
+
+export const counterIncrement =createCounterIncrement()
+
+export const counterIncrementRule =createCounterIncrementRule()

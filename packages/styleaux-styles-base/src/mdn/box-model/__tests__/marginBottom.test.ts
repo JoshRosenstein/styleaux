@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { marginBottom } from '../marginBottom';
+import { createMarginBottom } from '../marginBottom';
 
 describe('marginBottom', () => {
   it('should return a function', () => {
-    const result = marginBottom();
+    const result = createMarginBottom();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `marginBottom` as component and css prop', () => {
-    const result = marginBottom()({ marginBottom: 'inherit' });
+    const result = createMarginBottom()({ marginBottom: 'inherit' });
     expect(toStyles(result)).toEqual({ marginBottom: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = marginBottom<'a'>()({ marginBottom: 'a' });
+    const result = createMarginBottom<'a'>()({ marginBottom: 'a' });
     expect(toStyles(result)).toEqual({ marginBottom: 'a' });
   });
 
   it('should use an interface which marks `marginBottom` as optional', () => {
-    const result = marginBottom<'a'>()({});
+    const result = createMarginBottom<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = marginBottom<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMarginBottom<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ marginBottom: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('marginBottom', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = marginBottom<
+    const result = createMarginBottom<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

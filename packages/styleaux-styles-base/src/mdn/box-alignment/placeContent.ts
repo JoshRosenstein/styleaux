@@ -1,4 +1,4 @@
-import { PlaceContentProperty } from '@roseys/csstype';
+import { PlaceContentProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IPlaceContentProps<T> {
   placeContent: T;
 }
 
-export const placeContent = <
+export const createPlaceContent = <
   T = PlaceContentProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const placeContent = <
     transformValue,
   })
 
-export const placeContentRule = <T = PlaceContentProperty>(
+export const createPlaceContentRule = <T = PlaceContentProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: PLACECONTENT, getValue: transformer})
+
+export const placeContent =createPlaceContent()
+
+export const placeContentRule =createPlaceContentRule()

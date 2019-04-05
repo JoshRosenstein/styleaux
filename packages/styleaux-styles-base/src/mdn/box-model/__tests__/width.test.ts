@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { width } from '../width';
+import { createWidth } from '../width';
 
 describe('width', () => {
   it('should return a function', () => {
-    const result = width();
+    const result = createWidth();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `width` as component and css prop', () => {
-    const result = width()({ width: 'inherit' });
+    const result = createWidth()({ width: 'inherit' });
     expect(toStyles(result)).toEqual({ width: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = width<'a'>()({ width: 'a' });
+    const result = createWidth<'a'>()({ width: 'a' });
     expect(toStyles(result)).toEqual({ width: 'a' });
   });
 
   it('should use an interface which marks `width` as optional', () => {
-    const result = width<'a'>()({});
+    const result = createWidth<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = width<'value',never,IThemeWithoutBreakpoints>({
+    const result = createWidth<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ width: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('width', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = width<
+    const result = createWidth<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

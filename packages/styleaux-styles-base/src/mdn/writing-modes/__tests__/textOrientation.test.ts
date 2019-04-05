@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { textOrientation } from '../textOrientation';
+import { createTextOrientation } from '../textOrientation';
 
 describe('textOrientation', () => {
   it('should return a function', () => {
-    const result = textOrientation();
+    const result = createTextOrientation();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `textOrientation` as component and css prop', () => {
-    const result = textOrientation()({ textOrientation: 'inherit' });
+    const result = createTextOrientation()({ textOrientation: 'inherit' });
     expect(toStyles(result)).toEqual({ textOrientation: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = textOrientation<'a'>()({ textOrientation: 'a' });
+    const result = createTextOrientation<'a'>()({ textOrientation: 'a' });
     expect(toStyles(result)).toEqual({ textOrientation: 'a' });
   });
 
   it('should use an interface which marks `textOrientation` as optional', () => {
-    const result = textOrientation<'a'>()({});
+    const result = createTextOrientation<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = textOrientation<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextOrientation<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textOrientation: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('textOrientation', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = textOrientation<
+    const result = createTextOrientation<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

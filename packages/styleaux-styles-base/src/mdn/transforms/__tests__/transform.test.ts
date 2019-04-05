@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { transform } from '../transform';
+import { createTransform } from '../transform';
 
 describe('transform', () => {
   it('should return a function', () => {
-    const result = transform();
+    const result = createTransform();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `transform` as component and css prop', () => {
-    const result = transform()({ transform: 'inherit' });
+    const result = createTransform()({ transform: 'inherit' });
     expect(toStyles(result)).toEqual({ transform: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = transform<'a'>()({ transform: 'a' });
+    const result = createTransform<'a'>()({ transform: 'a' });
     expect(toStyles(result)).toEqual({ transform: 'a' });
   });
 
   it('should use an interface which marks `transform` as optional', () => {
-    const result = transform<'a'>()({});
+    const result = createTransform<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = transform<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTransform<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ transform: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('transform', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = transform<
+    const result = createTransform<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

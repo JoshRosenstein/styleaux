@@ -1,4 +1,4 @@
-import { GridAutoColumnsProperty } from '@roseys/csstype';
+import { GridAutoColumnsProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IGridAutoColumnsProps<T> {
   gridAutoColumns: T;
 }
 
-export const gridAutoColumns = <
+export const createGridAutoColumns = <
   T = GridAutoColumnsProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const gridAutoColumns = <
     transformValue,
   })
 
-export const gridAutoColumnsRule = <T = GridAutoColumnsProperty>(
+export const createGridAutoColumnsRule = <T = GridAutoColumnsProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: GRIDAUTOCOLUMNS, getValue: transformer})
+
+export const gridAutoColumns =createGridAutoColumns()
+
+export const gridAutoColumnsRule =createGridAutoColumnsRule()

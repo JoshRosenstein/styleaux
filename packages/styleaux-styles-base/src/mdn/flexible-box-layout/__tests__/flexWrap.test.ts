@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { flexWrap } from '../flexWrap';
+import { createFlexWrap } from '../flexWrap';
 
 describe('flexWrap', () => {
   it('should return a function', () => {
-    const result = flexWrap();
+    const result = createFlexWrap();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `flexWrap` as component and css prop', () => {
-    const result = flexWrap()({ flexWrap: 'inherit' });
+    const result = createFlexWrap()({ flexWrap: 'inherit' });
     expect(toStyles(result)).toEqual({ flexWrap: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = flexWrap<'a'>()({ flexWrap: 'a' });
+    const result = createFlexWrap<'a'>()({ flexWrap: 'a' });
     expect(toStyles(result)).toEqual({ flexWrap: 'a' });
   });
 
   it('should use an interface which marks `flexWrap` as optional', () => {
-    const result = flexWrap<'a'>()({});
+    const result = createFlexWrap<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = flexWrap<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFlexWrap<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ flexWrap: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('flexWrap', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = flexWrap<
+    const result = createFlexWrap<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

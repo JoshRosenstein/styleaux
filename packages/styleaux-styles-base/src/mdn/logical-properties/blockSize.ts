@@ -1,4 +1,4 @@
-import { BlockSizeProperty } from '@roseys/csstype';
+import { BlockSizeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBlockSizeProps<T> {
   blockSize: T;
 }
 
-export const blockSize = <
+export const createBlockSize = <
   T = BlockSizeProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const blockSize = <
     transformValue,
   })
 
-export const blockSizeRule = <T = BlockSizeProperty>(
+export const createBlockSizeRule = <T = BlockSizeProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BLOCKSIZE, getValue: transformer})
+
+export const blockSize =createBlockSize()
+
+export const blockSizeRule =createBlockSizeRule()

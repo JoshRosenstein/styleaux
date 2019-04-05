@@ -1,4 +1,4 @@
-import { BorderRightStyleProperty } from '@roseys/csstype';
+import { BorderRightStyleProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IBorderRightStyleProps<T> {
   borderRightStyle: T;
 }
 
-export const borderRightStyle = <
+export const createBorderRightStyle = <
   T = BorderRightStyleProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const borderRightStyle = <
     transformValue,
   })
 
-export const borderRightStyleRule = <T = BorderRightStyleProperty>(
+export const createBorderRightStyleRule = <T = BorderRightStyleProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: BORDERRIGHTSTYLE, getValue: transformer})
+
+export const borderRightStyle =createBorderRightStyle()
+
+export const borderRightStyleRule =createBorderRightStyleRule()

@@ -1,4 +1,4 @@
-import { AnimationNameProperty } from '@roseys/csstype';
+import { AnimationNameProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IAnimationNameProps<T> {
   animationName: T;
 }
 
-export const animationName = <
+export const createAnimationName = <
   T = AnimationNameProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const animationName = <
     transformValue,
   })
 
-export const animationNameRule = <T = AnimationNameProperty>(
+export const createAnimationNameRule = <T = AnimationNameProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: ANIMATIONNAME, getValue: transformer})
+
+export const animationName =createAnimationName()
+
+export const animationNameRule =createAnimationNameRule()

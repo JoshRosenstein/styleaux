@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { boxDecorationBreak } from '../boxDecorationBreak';
+import { createBoxDecorationBreak } from '../boxDecorationBreak';
 
 describe('boxDecorationBreak', () => {
   it('should return a function', () => {
-    const result = boxDecorationBreak();
+    const result = createBoxDecorationBreak();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `boxDecorationBreak` as component and css prop', () => {
-    const result = boxDecorationBreak()({ boxDecorationBreak: 'inherit' });
+    const result = createBoxDecorationBreak()({ boxDecorationBreak: 'inherit' });
     expect(toStyles(result)).toEqual({ boxDecorationBreak: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = boxDecorationBreak<'a'>()({ boxDecorationBreak: 'a' });
+    const result = createBoxDecorationBreak<'a'>()({ boxDecorationBreak: 'a' });
     expect(toStyles(result)).toEqual({ boxDecorationBreak: 'a' });
   });
 
   it('should use an interface which marks `boxDecorationBreak` as optional', () => {
-    const result = boxDecorationBreak<'a'>()({});
+    const result = createBoxDecorationBreak<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = boxDecorationBreak<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBoxDecorationBreak<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ boxDecorationBreak: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('boxDecorationBreak', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = boxDecorationBreak<
+    const result = createBoxDecorationBreak<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

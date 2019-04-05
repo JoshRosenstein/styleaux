@@ -10,31 +10,31 @@ import {
 toStyles
 } from '../../../__testutils__/toStyles';
 
-import { tableLayout } from '../tableLayout';
+import { createTableLayout } from '../tableLayout';
 
 describe('tableLayout', () => {
   it('should return a function', () => {
-    const result = tableLayout();
+    const result = createTableLayout();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
   it('should use `tableLayout` as component and css prop', () => {
-    const result = tableLayout()({ tableLayout: 'inherit' });
+    const result = createTableLayout()({ tableLayout: 'inherit' });
     expect(toStyles(result)).toEqual({ tableLayout: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = tableLayout<'a'>()({ tableLayout: 'a' });
+    const result = createTableLayout<'a'>()({ tableLayout: 'a' });
     expect(toStyles(result)).toEqual({ tableLayout: 'a' });
   });
 
   it('should use an interface which marks `tableLayout` as optional', () => {
-    const result = tableLayout<'a'>()({});
+    const result = createTableLayout<'a'>()({});
     expect(result).toEqual([]);
   });
 
   it('should allow using a theme', () => {
-    const result = tableLayout<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTableLayout<'value',never,IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ tableLayout: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -43,7 +43,7 @@ describe('tableLayout', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = tableLayout<
+    const result = createTableLayout<
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme

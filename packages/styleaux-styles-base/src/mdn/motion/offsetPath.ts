@@ -1,4 +1,4 @@
-import { OffsetPathProperty } from '@roseys/csstype';
+import { OffsetPathProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IOffsetPathProps<T> {
   offsetPath: T;
 }
 
-export const offsetPath = <
+export const createOffsetPath = <
   T = OffsetPathProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const offsetPath = <
     transformValue,
   })
 
-export const offsetPathRule = <T = OffsetPathProperty>(
+export const createOffsetPathRule = <T = OffsetPathProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: OFFSETPATH, getValue: transformer})
+
+export const offsetPath =createOffsetPath()
+
+export const offsetPathRule =createOffsetPathRule()

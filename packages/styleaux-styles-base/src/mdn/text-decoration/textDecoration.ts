@@ -1,4 +1,4 @@
-import { TextDecorationProperty } from '@roseys/csstype';
+import { TextDecorationProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITextDecorationProps<T> {
   textDecoration: T;
 }
 
-export const textDecoration = <
+export const createTextDecoration = <
   T = TextDecorationProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const textDecoration = <
     transformValue,
   })
 
-export const textDecorationRule = <T = TextDecorationProperty>(
+export const createTextDecorationRule = <T = TextDecorationProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TEXTDECORATION, getValue: transformer})
+
+export const textDecoration =createTextDecoration()
+
+export const textDecorationRule =createTextDecorationRule()

@@ -1,4 +1,4 @@
-import { PointerEventsProperty } from '@roseys/csstype';
+import { PointerEventsProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IPointerEventsProps<T> {
   pointerEvents: T;
 }
 
-export const pointerEvents = <
+export const createPointerEvents = <
   T = PointerEventsProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const pointerEvents = <
     transformValue,
   })
 
-export const pointerEventsRule = <T = PointerEventsProperty>(
+export const createPointerEventsRule = <T = PointerEventsProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: POINTEREVENTS, getValue: transformer})
+
+export const pointerEvents =createPointerEvents()
+
+export const pointerEventsRule =createPointerEventsRule()

@@ -1,4 +1,4 @@
-import { ClipPathProperty } from '@roseys/csstype';
+import { ClipPathProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface IClipPathProps<T> {
   clipPath: T;
 }
 
-export const clipPath = <
+export const createClipPath = <
   T = ClipPathProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const clipPath = <
     transformValue,
   })
 
-export const clipPathRule = <T = ClipPathProperty>(
+export const createClipPathRule = <T = ClipPathProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: CLIPPATH, getValue: transformer})
+
+export const clipPath =createClipPath()
+
+export const clipPathRule =createClipPathRule()

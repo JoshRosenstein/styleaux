@@ -1,4 +1,4 @@
-import { TransitionPropertyProperty } from '@roseys/csstype';
+import { TransitionPropertyProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler,Getter } from '@styleaux/core';
 
@@ -13,7 +13,7 @@ export interface ITransitionPropertyProps<T> {
   transitionProperty: T;
 }
 
-export const transitionProperty = <
+export const createTransitionProperty = <
   T = TransitionPropertyProperty,
   Theme = never,
   Breakpoints = never
@@ -26,6 +26,10 @@ export const transitionProperty = <
     transformValue,
   })
 
-export const transitionPropertyRule = <T = TransitionPropertyProperty>(
+export const createTransitionPropertyRule = <T = TransitionPropertyProperty>(
   transformer?: Getter,
 ) => styler<T>({cssProp: TRANSITIONPROPERTY, getValue: transformer})
+
+export const transitionProperty =createTransitionProperty()
+
+export const transitionPropertyRule =createTransitionPropertyRule()
