@@ -1,6 +1,5 @@
-import {space} from '../'
+import {space,defaultSpaceScale} from '../'
 import { toStyles} from "../__testUtils__";
-
 
 const MEDIA = {
   D: '(min-width: 1025px)',
@@ -14,7 +13,8 @@ const MQ= (Object.keys(MEDIA).reduce((acc,k)=>{acc[k]='@media ' + MEDIA[k]
 return acc
 },{} as Imedia))
 
-const spaceT=  { none: 0,
+const spaceT=  {
+none: 0,
 xxs: 2,
 xs: 4,
 sm: 8,
@@ -52,7 +52,7 @@ const data = [
     'Responsive',
     { m: {all:1,T:2} },
     {
-      margin: '1px', [MQ.T]:{margin:'2px'}
+      margin: defaultSpaceScale[1]+'px', [MQ.T]:{margin:defaultSpaceScale[2]+'px'}
     }
   ],
 

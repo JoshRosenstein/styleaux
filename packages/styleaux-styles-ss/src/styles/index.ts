@@ -1,5 +1,11 @@
-export {space} from './space'
-export * from './layout'
+export * from './backgrounds'
+export * from './border'
 export * from './color'
-
+export * from './flexbox'
+export * from './grid'
+export * from './layout'
+export * from './misc'
+export * from './position'
+export * from './space'
+export * from './typography'
 
