@@ -1,36 +1,51 @@
 import {createStyles} from './createStyles'
 import {styler} from './styler'
-import {getThemeValue} from '../getters'
+import {getThemePathOr, safeGet} from '../getters'
 import {CSSPropertiesKeys} from '../cssTypes'
-import {StringHack} from '@roseys/csstype'
-import { identity} from '@roseys/futils'
+import {StringHack} from '@styleaux/csstype'
+import {identity} from '@roseys/futils'
 
-export type StyleOptions={
-  prop:CSSPropertiesKeys | StringHack,
-  cssProp?:CSSPropertiesKeys,
-  key?:string,
-  transformValue?:Function,
-  alias?:string
+export interface GetStyleOptions {
+  key?: string
+  transformValue?: Function
+  scale?: number[] | string[] | string | number[]
 }
 
-export function style<P extends {},M extends {}=never,T extends {}=never>({
-  prop,
-  cssProp,
+export interface StyleOptions extends GetStyleOptions {
+  prop: CSSPropertiesKeys | StringHack
+  cssProp?: CSSPropertiesKeys
+  alias?: string
+}
+
+export function getStyle<T=any>({
   key,
-  transformValue=identity,
-  alias
-}:StyleOptions){
-  const property = cssProp || prop as CSSPropertiesKeys
-
-const getValue=(input, props, mediaKey) => key?getThemeValue(key, transformValue)(input, input, mediaKey)(props):transformValue(input)
-
-
-const getter= styler<any>({cssProp:property,getValue})
-//[prop]:getter
-const config={[prop]:getter} as P
-if(alias){
-  config[alias]=getter
+  transformValue = identity,
+  scale,
+}: GetStyleOptions) {
+  return (input:T, props) =>
+    key || scale
+      ? transformValue(safeGet(input, scale)(getThemePathOr(key, scale)(props)))
+      : transformValue(input)
 }
 
-  return createStyles<P,M,T>(config)
+export function style<
+  P extends {},
+  M extends {} = never,
+  T extends {} = never
+>({prop, cssProp, key, transformValue = identity, alias, scale}: StyleOptions) {
+  const property = cssProp || (prop as CSSPropertiesKeys)
+
+  //const getValue=(input, props, mediaKey) => key?getThemeValue(key, transformValue)(input, input, mediaKey)(props):transformValue(input)
+
+  const getter = styler<any>({
+    cssProp: property,
+    getValue: getStyle({key, transformValue, scale}),
+  })
+
+  const config = {[prop]: getter} as P
+  if (alias) {
+    config[alias] = getter
+  }
+
+  return createStyles<P, M, T>(config)
 }

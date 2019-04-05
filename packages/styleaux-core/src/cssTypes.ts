@@ -1,8 +1,8 @@
 
-import * as CSS from '@roseys/csstype'
+import * as CSS from '@styleaux/csstype'
 
 
-export interface CSSProperties<TLength = CSS.StringHack | 0> extends CSS.StandardProperties<TLength>, CSS.SvgProperties<TLength> {}
+export interface CSSProperties<TLength = CSS.StringHack | number> extends CSS.StandardProperties<TLength>, CSS.SvgProperties<TLength> {}
 
 export type CSSPropertiesKeys= keyof CSSProperties
 

@@ -4,8 +4,7 @@ import {
   MEDIA_KEY,
   IConstants,
 } from '../constants'
-import {Arg1,Omit, Dictionary,Required} from '../types'
-import {NestedCSSObject} from '../cssTypes'
+import {Arg1,Omit, Dictionary} from '../types'
 interface IAllCssValue<T> {
   /**
    * The base css value, without any media queries applied
@@ -13,21 +12,44 @@ interface IAllCssValue<T> {
   [DEFAULT_MEDIA_KEY]?: T
 }
 
-export type ResponsivePropValue<BreakPoints, ValueType> = ({
-  [P in Extract<keyof BreakPoints, string>]?: ValueType
-} &
-  IAllCssValue<ValueType>) | Array<ValueType | undefined>
 
-export type ResponsiveProp<ValueType, BreakPoints = never> = [
-  BreakPoints
-] extends [never]
-  ? ValueType
-  : ValueType | ResponsivePropValue<BreakPoints, ValueType>
 
-export type ResponsiveObject<P, B,PR=Required<P>> = {
-  [K in keyof PR]?: PR[K] extends never
-    ? ResponsiveProp<string | number, B>
-    : ResponsiveProp<PR[K], B>
+export type MediaMapFromKeys<Media extends {},V > = {
+  [key in keyof Media]?: V
+}  & IAllCssValue<V>
+
+export type ResponsivePropValue<Media extends {}, ValueType> =
+MediaMapFromKeys<Media,ValueType> | Array<ValueType | undefined>
+
+
+
+
+export type ResponsiveProp<ValueType, BreakPoints = never> =
+IfElseNever<BreakPoints, ValueType, ValueType | ResponsivePropValue<BreakPoints, ValueType>>
+
+
+export type ResponsiveObject<P, B extends {}> = {
+  [K in keyof P]?: ResponsiveProp<P[K] extends never? string | number:P[K] , B>
+}
+
+
+export type IfNever <T,Then> = [T] extends [never] ? Then: T
+
+export type IfElseNever <T,Then,Else > = [T] extends [never] ? Then: Else
+
+export type ResponsiveProps<P, B> = {
+  [K in keyof P]?: ResponsiveProp< IfNever<P[K],string | number> , B>
+}
+export interface Media<TMedia> {
+  [MEDIA_KEY]:TMedia
+}
+
+export type WithOptionalTheme<P extends {[THEME_KEY]?: T}, T> = Omit<P, typeof THEME_KEY> & {
+  [THEME_KEY]?: T
+}
+
+export type ThemeWithOptionalMedia<T extends {[MEDIA_KEY]?: M}, M> = Omit<T, typeof MEDIA_KEY> & {
+  [MEDIA_KEY]?: M
 }
 
 export interface ITheme<T> {
@@ -54,7 +76,16 @@ export type ExtractNonResponsiveValue<T> = T extends ResponsiveProp<
   ? U
   : T
 
-export type IStyles =NestedCSSObject
+  export type InferResponsivePropValue<T> = T extends ResponsiveProp<
+  infer U,
+  any
+>
+  ? U
+  : T
+
+  export interface IStyles {
+    [ruleOrSelector: string]: string | number | IStyles;
+  }
 
 export type Indices<T> = Exclude<keyof T, keyof any[]>
 export type ExtractArg1FromArray<T> = Arg1<T[Indices<T>]>
@@ -64,24 +95,26 @@ export type OmitTheme<T extends {},K=IConstants['THEME_KEY']>= K extends keyof T
 export type OmitStaticStyles<R,K= IConstants['STATIC_STYLES_KEY']> = K extends keyof R
   ? Omit<R,K>:R
 
+  export type ResolveCreateStyleType<T>=T extends IStyles
+  ? boolean
+  : T extends (...args: any[]) => any
+  ? Arg1<T>
+  : T extends ((...args: any[]) => any)[]
+  ? ExtractArg1FromArray<T>
+  : T extends Dictionary
+  ? boolean
+  // If primitive, then prop types was directly passed
+  : T extends number | string | boolean
+  ? T : {}
+
 export type EtractInputType<P> = OmitStaticStyles<
   {
-    [K in keyof P]: P[K] extends IStyles
-    ? boolean
-    : P[K] extends (...args: any[]) => any
-    ? Arg1<P[K]>
-    : P[K] extends ((...args: any[]) => any)[]
-    ? ExtractArg1FromArray<P[K]>
-    : P[K] extends Dictionary
-    ? boolean
-    // If primitive, then prop types was directly passed
-    : P[K] extends number | string
-    ? P[K] : {}
+    [K in keyof P]: ResolveCreateStyleType<P[K]>
   }
 >
 
-export type EtractNonResponsiveInputType<STYLES, I = Required<EtractInputType<STYLES>>> = {
-  [K in keyof I]?: ExtractNonResponsiveValue<I[K]>
+export type EtractNonResponsiveInputType<STYLES, I = EtractInputType<STYLES>> = {
+  [K in keyof I]?: InferResponsivePropValue<I[K]>
 }
 
 

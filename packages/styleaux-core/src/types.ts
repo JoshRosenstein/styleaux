@@ -11,9 +11,11 @@ export type Merge<FirstType, SecondType> = Omit<
 
 export type NeverToUndefined<T> = [T] extends [never] ? undefined : T
 
-export type Arg1<T> = T extends (arg1: infer U, ...args: any[]) => any
-  ? U
-  : undefined
+export type Arg1<T> =  T extends () => any
+? never // will never have a first argument type
+: T extends ((arg1: infer U, ...args: any[]) => any)
+    ? U
+    : never;
 
 export type Dictionary<T = any> = {
   [index: string]: T

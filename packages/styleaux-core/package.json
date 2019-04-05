@@ -4,6 +4,7 @@
   "author": "Joshua Rosenstein",
   "license": "MIT",
   "source": "dist-src/index.js",
+  "types": "dist-types/index.d.ts",
   "main": "dist-node/index.js",
   "module": "dist-web/index.js",
   "sideEffects": "false",
@@ -22,8 +23,11 @@
     "watch": "yarn run build:src -w --preserveWatchOutput"
   },
   "dependencies": {
+    "@styleaux/csstype": "^0.0.0-beta.0",
     "@roseys/futils": "^2.1.4",
-    "typed-is": "^1.0.4",
-    "warning": "^4.0.2"
+    "typed-is": "^1.0.4"
+  },
+  "devDependencies": {
+    "utility-types": "^3.5.0"
   }
 }

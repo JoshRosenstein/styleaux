@@ -43,6 +43,8 @@ export interface CreateStyleReturn<S,T,M,P> extends CreateStyleStatics<S>  {
     M
   >): IStyles[]
 }
+
+
 export type IStylesFunc=((...args:any[])=>IStyles)
 
 export type Style= IStyles | IStylesFunc | IStylesFunc[]
@@ -63,11 +65,12 @@ export function createStyles<
   Theme extends {} = never,
   Props extends {} = never
 >(
-  styles: S,
+  propToStyleMap: S,
+  staticOrStyleFunc?:any,
   config?: {defaultTheme?: Theme; queryHandler?: Function},
 ): CreateStyles<S, Media, Theme, Props>
 
-export function createStyles<S extends {}>(styles: S) {
+export function createStyles<S extends {}>(styles: S,  staticOrStyleFunc?:any) {
   const statics = styles[STATIC_STYLES_KEY]
   const init = statics ? [statics] : []
 
@@ -75,6 +78,7 @@ export function createStyles<S extends {}>(styles: S) {
     const media = getThemeMedia(props)
     const defaultMediaKey = getDefaultMedia(props)
     const mediaKeys = Object.keys(media)
+    const initial=staticOrStyleFunc? isFunction(staticOrStyleFunc)?[staticOrStyleFunc(props)]:[staticOrStyleFunc]:[]
 
     function mapStyles(input, style, mediaKey?: string) {
       const hasMediaKey = Boolean(mediaKey) && mediaKey !== DEFAULT_MEDIA_KEY && mediaKey !== '0'
@@ -125,7 +129,7 @@ export function createStyles<S extends {}>(styles: S) {
                 style => mapStyles(props[styleKey], style) || [],
               ),
         ),
-      init,
+      init.concat(initial),
     )
   }
 

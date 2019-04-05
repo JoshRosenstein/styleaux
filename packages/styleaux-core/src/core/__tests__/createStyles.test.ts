@@ -1,7 +1,7 @@
 import {createStyles} from '../createStyles'
 import {Arg1,DeepSimplify} from '../../types'
 import {toStyles} from '../../__testutils__'
-
+import {createStyles2, CreateStyleKeys} from '../createStyles2'
 const media = {
   small: '@media (min-width: 30em)',
   medium: '@media (min-width: 40em)',
@@ -131,4 +131,55 @@ test('Prop Order doesnt Matter',()=>{
   const two2=toStyles(styles2({bw:true,aw:true}))
   expect(one2).toEqual(two2)
   expect(one2).not.toEqual(one)
+  })
+
+  describe('General statics or functions for Rest args', () => {
+  test('Static',()=>{
+    const styles=createStyles({},{margin:1})({})
+
+    expect(styles).toEqual([{margin:1}])
+
+  })
+})
+
+  test('as Function',()=>{
+    const styles=createStyles({},(props:any)=>({margin:props.size}))(({size:1}) as any)
+
+    expect(styles).toEqual([{margin:1}])
+
+  })
+
+  test('as Function2',()=>{
+    const styles=createStyles2({},(props:{size:number})=>({margin:props.size}))(({size:1}))
+
+    expect(styles).toEqual([{margin:1}])
+
+  })
+  var functionPattern = /^[\s]*function[\s]*(?:[_$a-zA-Z][_$a-zA-Z0-9]*)*\(([^\)]*)\)/;
+  var argumentSpacePattern = /\s*,\s*/
+  export function getArguments(func: Function): Array<string> {
+
+    var functionString = func.toString();
+    var argumentString =
+        (functionPattern.exec(functionString) as any).toString()
+
+
+    if (argumentString.length === 0)
+        return [];
+
+    return argumentString
+        .split(argumentSpacePattern)
+
+}
+
+  test('Static2',()=>{
+    const styles0=createStyles2({},{margin:1})
+
+    const styles=createStyles2({},styles0)
+
+    expect((styles({}))  ).toEqual([{margin:1}])
+    expect( styles[CreateStyleKeys.arg2])
+
+
+      .toEqual(styles0)
   })

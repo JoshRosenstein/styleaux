@@ -1,6 +1,6 @@
 import {ResponsiveProp,OmitTheme,createStyles,combineStyles,rule,Arg1,DeepRequired} from '../'
 
-import { MarginProperty } from "@roseys/csstype"
+import { MarginProperty } from "@styleaux/csstype"
 import {assertTrue, Equals} from 'typescript-test-utils'
 
 

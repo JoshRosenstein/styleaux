@@ -4,7 +4,7 @@ export {getDefault} from './getDefault'
 
 export {getDefaultMedia} from './getDefaultMedia'
 export {getThemeMedia} from './getThemeMedia'
-
+export {safeGet,safeGetThemeValue} from './safeGet'
 export {getMedia} from './getMedia'
 
 export {
