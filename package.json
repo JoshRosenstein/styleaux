@@ -9,16 +9,21 @@
     "@babel/preset-env": "^7.4.1",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
-    "@roseys/eslint-config": "^1.0.3",
+    "@roseys/eslint-config": "^1.0.4",
+    "@roseys/futils": "^2.1.4",
     "@roseys/jest-preset": "^1.0.3",
     "@types/jest": "^24.0.11",
-    "@types/node": "^11.11.3",
+    "@types/node": "^11.12.0",
+    "@typescript-eslint/eslint-plugin": "^1.5.0",
+    "axios": "^0.18.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.5.0",
     "babel-plugin-dynamic-import-node-babel-7": "^2.0.7",
     "builtin-modules": "^3.0.0",
     "bundlesize": "^0.17.0",
+    "cheerio": "^1.0.0-rc.2",
+    "cli-progress": "^2.1.1",
     "codecov": "^3.0.0",
     "commitizen": "^2.10.1",
     "concurrently": "3.6.1",
@@ -29,13 +34,17 @@
     "jest-circus": "^24.5.0",
     "jest-watch-select-projects": "^0.1.1",
     "lerna": "^3.13.1",
-    "rimraf": "^2.6.1",
+    "rimraf": "^2.6.3",
     "rollup": "^1.7.0",
+    "rollup-plugin-auto-external": "^2.0.0",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^9.2.1",
     "rollup-plugin-node-resolve": "^4.0.1",
     "ts-jest": "^24.0.0",
-    "typescript": "^3.3.3333"
+    "typed-is": "^1.0.4",
+    "typedoc": "^0.14.2",
+    "typedoc-plugin-markdown": "^1.1.27",
+    "typescript-test-utils": "^1.2.1"
   },
   "scripts": {
     "clean:modules": "rimraf node_modules/*",
@@ -46,6 +55,9 @@
     "commit:core": "git add packages\\styleaux-core && yarn commit",
     "commit:coreTest": "git add packages/styleaux-core/src/core/__tests__ && yarn commit",
     "commit:basestyles": "git add packages\\styleaux-styles-base && yarn commit",
+    "commit:ssstyles": "git add packages\\styleaux-styles-ss && yarn commit",
+    "commit:csstype": "git add packages\\styleaux-csstype && yarn commit",
+    "commit:tools": "git add packages\\styleaux-tools && yarn commit",
     "commit:all": "git add . && yarn commit",
     "add": "lerna add",
     "boot": "lerna bootstrap",
@@ -59,7 +71,8 @@
     "commit": "git cz"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "dev-packages/*"
   ],
   "lint-staged": {
     "*.js": [
@@ -79,6 +92,5 @@
       "path": "./node_modules/cz-customizable"
     }
   },
-  "dependencies": {},
   "version": "0.0.0"
 }

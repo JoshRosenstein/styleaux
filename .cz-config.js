@@ -7,7 +7,8 @@ module.exports = {
     {
       value: '🔥del',
       name: 'del: Removing code or files.',
-    },    {
+    },
+    {
       value: '🚚move',
       name: 'move: Moving or renaming files.',
     },
@@ -24,8 +25,7 @@ module.exports = {
 
     {
       value: '💄style',
-      name:
-        'style: Updating the UI and style files.',
+      name: 'style: Updating the UI and style files.',
     },
     {
       value: '♻️refactor',
@@ -43,8 +43,14 @@ module.exports = {
     {value: '⬆️updeps', name: 'updeps: Upgrading dependencies.'},
     {value: '➕adddeps', name: 'adddeps: Adding a dependency.'},
     {value: '✏️fixtypos', name: 'fixtypos: Fixing typos.'},
-    {value: '🙈gitignore', name: 'gitignore: Adding or updating a .gitignore file'},
-    {value: '🏷️types', name: 'types: Adding or updating types (Flow, TypeScript)'},
+    {
+      value: '🙈gitignore',
+      name: 'gitignore: Adding or updating a .gitignore file',
+    },
+    {
+      value: '🏷️types',
+      name: 'types: Adding or updating types (Flow, TypeScript)',
+    },
     {value: '🎉init', name: 'init: Initial commit'},
   ],
 
@@ -52,6 +58,10 @@ module.exports = {
     {name: 'mono'},
     {name: 'core'},
     {name: 'styles-base'},
+    {name: 'styles-ss'},
+    {name: 'csstype'},
+    {name: 'all'},
+    {name: 'playground'},
     {name: 'tools'},
     {name: 'generators'},
   ],

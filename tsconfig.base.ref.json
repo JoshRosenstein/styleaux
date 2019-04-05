@@ -1,0 +1,23 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "packages/styleaux-core"
+    },
+    {
+      "path": "packages/styleaux-styles-base"
+    },
+    {
+      "path": "packages/styleaux-styles-ss"
+    },
+    {
+      "path": "packages/styleaux-tools"
+    },
+    {
+      "path": "packages/styleaux-csstype"
+    },
+    {
+      "path": "packages/styleaux-generators"
+    }
+  ]
+}

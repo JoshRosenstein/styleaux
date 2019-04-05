@@ -23,3 +23,5 @@ yarn-error.log*
 /.docz
 /flow-typed/
 /pkg/
+packages/playground/
+packages/type/
