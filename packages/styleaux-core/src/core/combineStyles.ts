@@ -1,6 +1,8 @@
 import {createStyles} from './createStyles'
 
 import {InferPropsFromFunctionArgument, IStyles} from './types'
+import {Media} from './overidableTypes'
+
 import {UnionOf,UnionToIntersection} from '../types'
 import {STYLES_KEY} from '../constants'
 import {CreateStylesInput,CreateStyleStatics,CreateStyleReturn} from './createStyles'
@@ -10,6 +12,8 @@ export type InferStyleFromFunction<T> = T extends {[STYLES_KEY]: infer S}
   : T extends {[STYLES_KEY]: infer S}[]
   ? S
   : {}
+
+
   export type InferPropsFromFunctionsArgument<T extends any[]>=UnionToIntersection<InferPropsFromFunctionArgument<UnionOf<T>>>
   export type InferStyleFromFunctions<T extends any[]>=UnionToIntersection<InferStyleFromFunction<UnionOf<T>>>
 
@@ -27,7 +31,7 @@ export type ArrayInfer<T> = T extends (infer U)[] ? U : never;
 export function combineStyles<Fns extends {
   (props: {}): IStyles[]
   styles: {}
-}[],M extends {}=never,T extends{}=never>(
+}[],M extends {}=Media,T extends{}=never>(
   ...fns: Fns
 ): CombineStyleReturnType2<Fns,M,T> {
   const styles = fns.reduce(

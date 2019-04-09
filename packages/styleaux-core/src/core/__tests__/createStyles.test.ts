@@ -1,4 +1,5 @@
-import {createStyles} from '../createStyles'
+
+import { GetStylePropsLazy} from '../types'
 import {Arg1,DeepSimplify} from '../../types'
 import {toStyles} from '../../__testutils__'
 import {createStyles2, CreateStyleKeys} from '../createStyles2'
@@ -16,7 +17,7 @@ const theme = {
   },
   myValue: 100,
 }
-type ITheme = typeof theme
+//type ITheme = typeof theme
 type IMedia = typeof media
 
 type IStylesArg = DeepSimplify<Arg1<typeof styles>>
@@ -32,7 +33,9 @@ const s = {
   ],
 }
 
-const styles = createStyles<typeof s, IMedia,ITheme>(s)
+type SProps=GetStylePropsLazy<typeof s,IMedia>
+
+const styles = createStyles2<SProps>(s)
 
 const THEME = theme
 
@@ -103,25 +106,23 @@ describe('Misc', () => {
 
 
 test('Prop Order doesnt Matter',()=>{
-const one=toStyles(styles({theme,w:'10px',width:'11px'}))
-const two=toStyles(styles({theme,width:'11px',w:'10px'}))
+const one=toStyles(styles({w:'10px',width:'11px'}))
+const two=toStyles(styles({width:'11px',w:'10px'}))
 expect(one).toEqual(two)
 })
 
 test('Prop Order doesnt Matter',()=>{
-  const s = {
+
+
+  const styles = createStyles2<{aw:boolean, bw:boolean}>({
     aw: {width: '100%'},
     bw: {width: '50%'},
-  }
-  const s2 = {
+  })
+  const styles2 = createStyles2<{aw:boolean, bw:boolean}>({
     bw: {width: '50%'},
     aw: {width: '100%'},
 
-  }
-
-
-  const styles = createStyles(s)
-  const styles2 = createStyles(s2)
+  })
 
   const one=toStyles(styles({aw:true,bw:true}))
   const two=toStyles(styles({bw:true,aw:true}))
@@ -135,7 +136,7 @@ test('Prop Order doesnt Matter',()=>{
 
   describe('General statics or functions for Rest args', () => {
   test('Static',()=>{
-    const styles=createStyles({},{margin:1})({})
+    const styles=createStyles2({},{margin:1})({})
 
     expect(styles).toEqual([{margin:1}])
 
@@ -143,7 +144,7 @@ test('Prop Order doesnt Matter',()=>{
 })
 
   test('as Function',()=>{
-    const styles=createStyles({},(props:any)=>({margin:props.size}))(({size:1}) as any)
+    const styles=createStyles2({},(props:any)=>({margin:props.size}))(({size:1}) as any)
 
     expect(styles).toEqual([{margin:1}])
 

@@ -3,7 +3,7 @@ import {mapObj, toArray} from '@roseys/futils'
 import {isFunction, isPlainObject, isNil, isNumeric, isArray} from 'typed-is'
 
 import {DEFAULT_MEDIA_KEY} from '../constants'
-
+//import {InferResponsivePropValue} from './types'
 import {getMedia, getThemeMedia, getDefaultMedia} from '../getters/index'
 
 import {createWarnOnce} from '../utils/warn-once'
@@ -32,37 +32,39 @@ type PartialRecord<K extends keyof any, T> = {[P in K]?: T}
 
 type PartialObj<T> = PartialRecord<string,T>
 
-type cssObj = ObjectInterpolation3<undefined>
-type StyleInputValueFunction =((...args: any[]) => cssObj)
+type CSSObj = ObjectInterpolation3<undefined>
+type StyleInputValueFunction =((...args: any[]) => CSSObj)
+
+//type StyleInputPropsFunction<P> =((props: P) => CSSObj)
 
 type StyleInputValue =
-  | cssObj
+  | CSSObj
   | StyleInputValueFunction
   | StyleInputValueFunction[]
 
   type StyleInputValueP<T,P> =
-  | cssObj
-  | ((input:T,props?:P,mediakey?:string | number,...args: any[]) => cssObj)
-  | ((input:T,props?:P,mediakey?:string | number,...args: any[]) => cssObj)[]
+  | CSSObj
+  | ((input:Extract<T,boolean | string | number > ,props?:P,mediakey?:string | number,...args: any[]) => CSSObj)
+  | ((input:Extract<T,boolean | string | number > ,props?:P,mediakey?:string | number,...args: any[]) => CSSObj)[]
 
 type StyleInput = PartialObj<StyleInputValue>
 
-
+//type StyleInputFromPropsCheck<P>= keyof P extends string? StyleInputFromProps<P>:Record<string,StyleInputValue>
 
 type StyleInputFromProps<P> = {[K in keyof P]?: StyleInputValueP<P[K],P>}
 
 //type GetPP<Style, Props, KP=keyof Props>={ [P in Extract<Style,string>]?: P extends KP? }
 
-//type InterpolationFunc=<P>(props:P)=>cssObj
+export type InterpolationFunc<P>=(props:P)=>CSSObj
 
-export type InterpolationFuncArray<P> = (props: P) => cssObj[]
+export type InterpolationFuncArray<P> = (props: P) => CSSObj[]
 
  type Values<T extends object> = T[keyof T];
 
 export interface CreateStyles2<
-PROPS extends {},
+PROPS extends {}=any,
 S extends StyleInput = StyleInputFromProps<PROPS>,
-A2=cssObj | StyleInputValueFunction | InterpolationFuncArray<any>
+A2=CSSObj | InterpolationFunc<PROPS>  | InterpolationFuncArray<PROPS>
 >{
   (
     styles: S,
@@ -73,18 +75,19 @@ A2=cssObj | StyleInputValueFunction | InterpolationFuncArray<any>
   [CreateStyleKeys.arg2]:A2,
 }
 
+
 export function createStyles2<
-  PROPS extends {},
+  PROPS extends {}=any,
   S extends StyleInput= StyleInputFromProps<PROPS>
 >(
   styles: S,
-  staticOrStyleFunc?: cssObj | StyleInputValueFunction  | InterpolationFuncArray<any>,
+  staticOrStyleFunc?: CSSObj | InterpolationFunc<PROPS>  | InterpolationFuncArray<PROPS>,
 ): InterpolationFuncArray<PROPS> {
-  function getStyles(props: PROPS): cssObj[] {
+  function getStyles(props: PROPS): CSSObj[] {
     const media = getThemeMedia(props)
     const defaultMediaKey = getDefaultMedia(props)
     const mediaKeys = Object.keys(media)
-    let initial = isNil(staticOrStyleFunc)?[]: isFunction(staticOrStyleFunc)?toArray(staticOrStyleFunc(props)):toArray(staticOrStyleFunc) as cssObj[]
+    let initial = isNil(staticOrStyleFunc)?[]: isFunction(staticOrStyleFunc)?toArray(staticOrStyleFunc(props)):toArray(staticOrStyleFunc) as CSSObj[]
 
 
 

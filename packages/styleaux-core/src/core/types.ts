@@ -4,7 +4,17 @@ import {
   MEDIA_KEY,
   IConstants,
 } from '../constants'
-import {Arg1,Omit, Dictionary} from '../types'
+import {Media} from './overidableTypes'
+import {Arg1,Omit,NonNever, Dictionary} from '../types'
+import {Interpolation3} from '../cssTypes2'
+export type MediaKey= string | number
+
+export type PropStyleFunc<P extends Record<string,any>=Record<string,any>> = (mergedProps: P) => Interpolation3
+export type PropStyleFuncArr<P extends Record<string,any>=Record<string,any>> = (mergedProps: P) => Interpolation3[]
+
+export type GetStylePropsLazy<S,M> =  ResponsiveObject<EtractInputType<S>,M>
+
+
 interface IAllCssValue<T> {
   /**
    * The base css value, without any media queries applied
@@ -13,9 +23,10 @@ interface IAllCssValue<T> {
 }
 
 
+type OmitNevers<M>=NonNever<M>
 
 export type MediaMapFromKeys<Media extends {},V > = {
-  [key in keyof Media]?: V
+  [key in keyof OmitNevers<Media>]?: V
 }  & IAllCssValue<V>
 
 export type ResponsivePropValue<Media extends {}, ValueType> =
@@ -23,25 +34,31 @@ MediaMapFromKeys<Media,ValueType> | Array<ValueType | undefined>
 
 
 
-
-export type ResponsiveProp<ValueType, BreakPoints = never> =
-IfElseNever<BreakPoints, ValueType, ValueType | ResponsivePropValue<BreakPoints, ValueType>>
+type If<Condition extends boolean, Then, Else = never> = Condition extends true ? Then : Else;
 
 
-export type ResponsiveObject<P, B extends {}> = {
-  [K in keyof P]?: ResponsiveProp<P[K] extends never? string | number:P[K] , B>
-}
+export type IsNeverOrEmptyObj <T> =
+[T] extends [never] ? true: keyof OmitNevers<T> extends never?true: false
+
+
+export type ResponsiveProp<ValueType, BreakPoints = never> =ValueType | ResponsivePropValue<BreakPoints, ValueType>
+
+export type NeverToStringOrNumber <T> =T extends never? string | number: T
+export type NeverToStringOrNumberMap <T> = {[K in keyof T]?: NeverToStringOrNumber<T[K]>}
+
+
+export type ResponsiveObject<P, B extends {}=Media> =
+If<IsNeverOrEmptyObj<B>,NeverToStringOrNumberMap<P>,{
+  [K in keyof P]?: ResponsiveProp<NeverToStringOrNumber<P[K]> , B>
+}>
 
 
 export type IfNever <T,Then> = [T] extends [never] ? Then: T
 
-export type IfElseNever <T,Then,Else > = [T] extends [never] ? Then: Else
+
 
 export type ResponsiveProps<P, B> = {
   [K in keyof P]?: ResponsiveProp< IfNever<P[K],string | number> , B>
-}
-export interface Media<TMedia> {
-  [MEDIA_KEY]:TMedia
 }
 
 export type WithOptionalTheme<P extends {[THEME_KEY]?: T}, T> = Omit<P, typeof THEME_KEY> & {
@@ -53,7 +70,7 @@ export type ThemeWithOptionalMedia<T extends {[MEDIA_KEY]?: M}, M> = Omit<T, typ
 }
 
 export interface ITheme<T> {
-  [THEME_KEY]?: T & {[MEDIA_KEY]?: undefined}
+  [THEME_KEY]?: T & {[MEDIA_KEY]?: Media}
 }
 export interface IBreakpointTheme<T, B> {
   [THEME_KEY]?: T & {[MEDIA_KEY]: B}

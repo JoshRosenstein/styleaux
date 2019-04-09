@@ -1,6 +1,6 @@
 import {style} from '../style'
 import {toStyles} from '../../__testutils__'
-
+import {WithTheme} from '../types'
 
 
 describe('style Tests', () => {
@@ -9,36 +9,43 @@ const media:Media={
   sm: 'screen and (min-width: 40em)',
   md:'screen and (min-width: 52em)'
 }
-  const width = style<{width: number | string},Media>({
+type Theme=typeof theme
+const theme = {
+  media,
+  colors: {
+    blue: '#07c',
+    black: '#111',
+  },
+}
+type ThemeArr=typeof themeArr
+const themeArr = {
+  media: ['screen and (min-width: 40em)','screen and (min-width: 52em)'],
+  colors: {
+    blue: '#07c',
+    black: '#111',
+  },
+}
+
+  const width = style<WithTheme<{width: number | string},Theme | ThemeArr,Media>>({
     prop: 'width',
   })
 
-  const color = style<{color: string},Media>({
+  const widthArr = style<WithTheme<{width: number | string}, ThemeArr,string[]>>({
+    prop: 'width',
+  })
+
+  const color = style<WithTheme<{color: string},Theme | ThemeArr,Media>>({
     prop: 'color',
     key: 'colors',
   })
 
-  const backgroundColor = style<{backgroundColor: string; bg: string},Media>({
+  const backgroundColor = style<WithTheme<{backgroundColor: string; bg: string},Theme | ThemeArr,Media>>({
     prop: 'backgroundColor',
     alias: 'bg',
     key: 'colors',
   })
 
-  const theme = {
-    media,
-    colors: {
-      blue: '#07c',
-      black: '#111',
-    },
-  }
 
-  const themeArr = {
-    media: ['screen and (min-width: 40em)','screen and (min-width: 52em)'],
-    colors: {
-      blue: '#07c',
-      black: '#111',
-    },
-  }
   test('returns values from theme', () => {
     const style = color({theme, color: 'blue'})
     expect(toStyles(style)).toEqual(
@@ -80,7 +87,7 @@ const media:Media={
   })
 
   test('returns responsive style objects from array with media as array', () => {
-    const style = width({
+    const style = widthArr({
       theme:themeArr,
       width: ['100%','50%'],
     })
@@ -120,7 +127,7 @@ const media:Media={
 
 })
 describe('Basiscs', () => {
-  const margin=style<{margin:string | number}>({
+  const margin=style<WithTheme<{margin:string | number},any, any>>({
     prop: 'margin',
     cssProp: 'margin',
     transformValue: n => n + 'px',

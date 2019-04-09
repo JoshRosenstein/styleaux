@@ -76,6 +76,10 @@ export type UnionOf<T extends any[]> = T[number];
 
 export type NonNever<T extends {}> = Pick<T, { [K in keyof T]: T[K] extends never ? never : K }[keyof T]>;
 
+export type NeverToString<T> = [T] extends [never] ? string : T
+
+export type NeversToString<T extends {}> = { [K in keyof T]: NeverToString<T[K]>}
+
 export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void)
   ? I
   : never;

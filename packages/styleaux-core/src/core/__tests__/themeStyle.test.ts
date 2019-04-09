@@ -1,6 +1,6 @@
 import { themeStyle } from "../themeStyle";
-import { createStyles } from "../createStyles";
-
+import { createStyles2 } from "../createStyles2";
+import {WithTheme} from '../types'
 import { flatten, toArray, mergeAllDeepRight } from "@roseys/futils";
 
 const toStyles = styles => mergeAllDeepRight([{}, ...flatten(toArray(styles))]);
@@ -42,11 +42,15 @@ const THEME = {
 };
 type ITheme=typeof THEME
 type IMedia=typeof media
-const config={
-    is: themeStyle<keyof ITheme['someComponentStyles'] >({ themeKey: 'someComponentStyles' })
-  }
+type ConfigProps=WithTheme<{
+  is: keyof ITheme['someComponentStyles'] | boolean
+},ITheme,IMedia>
 
-const customProps = createStyles<typeof config,ITheme,IMedia>(config)
+// const config={
+//     is: themeStyle<keyof ITheme['someComponentStyles'],ConfigProps >({ themeKey: 'someComponentStyles' })
+//   }
+
+const customProps = createStyles2<ConfigProps>({is:themeStyle({ themeKey: 'someComponentStyles' })})
 
 /// Types Work
 //const customPropsT=customProps({theme:THEME,is:'small'})

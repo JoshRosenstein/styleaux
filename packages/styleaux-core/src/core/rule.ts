@@ -1,8 +1,8 @@
 import {styler,Getter} from './styler'
-import {CSSProperties} from '../cssTypes'
+import * as CSS from '@styleaux/csstype'
 
-export function rule<T>(cssProp: keyof CSSProperties , getValue?: Getter) {
-  return styler<T>({
+export function rule<T,P =unknown>(cssProp: keyof CSS.Properties , getValue?: Getter<T,P>) {
+  return styler<T,P>({
     cssProp,
     getValue,
   })

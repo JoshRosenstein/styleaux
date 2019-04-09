@@ -1,6 +1,6 @@
 export const THEME_KEY = 'theme' as 'theme'
 
-export const DEFAULT_KEY = 'default' as 'theme'
+export const DEFAULT_KEY = 'default' as 'default'
 
 export const MEDIA_KEY = 'media' as 'media'
 

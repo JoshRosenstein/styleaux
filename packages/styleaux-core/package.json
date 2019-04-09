@@ -18,8 +18,9 @@
     "build:bundles": "rollup -c",
     "build:types": "tsc -d --emitDeclarationOnly --declarationDir ./dist-node",
     "build": "yarn clean && yarn build:src && yarn build:bundles && yarn build:types",
+    "aux": "styleauxext test",
     "clean": "rimraf dist-*/",
-    "test": "jest",
+    "test": "cd ../.. & yarn run test styleaux-core",
     "watch": "yarn run build:src -w --preserveWatchOutput"
   },
   "dependencies": {

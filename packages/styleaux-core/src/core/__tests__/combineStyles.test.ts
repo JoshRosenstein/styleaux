@@ -1,13 +1,13 @@
-import {createStyles} from '../createStyles'
-import {combineStyles} from '../combineStyles'
-import {Arg1,DeepSimplify} from '../../types'
+import {createStyles2} from '../createStyles2'
+import {combineStyles2} from '../combineStyles2'
+import {Arg1, DeepSimplify} from '../../types'
+import {StyleProps} from '../'
 
 const media = {
   small: '@media (min-width: 30em)',
   medium: '@media (min-width: 40em)',
   large: '@media (min-width: 50em)',
 }
-type Media = typeof media
 
 const theme = {
   media,
@@ -19,22 +19,25 @@ const theme = {
 }
 // type ITheme= typeof theme
 // type IMedia=typeof media
-const style1Config = {h: {height: '100vh'}}
-const style1 = createStyles<typeof style1Config,Media>(style1Config)
+
+type Style1Props={h:boolean}
+const style1 = createStyles2<Style1Props>({h: {height: '100vh'}})
 
 //type IStyles1Arg = DeepSimplify<Arg1<typeof style1>>
-const style2Config = {w: (input: number | string) => ({width: input})}
 
-const style2 = createStyles<typeof style2Config,Media>(style2Config)
+type Style2Props={w?:number | string}
+const style2 = createStyles2<Style2Props>({w: (input) => ({width: input})})
 
-const style3Config={
+
+type Style3Props={size:number | string}
+
+const style3 = createStyles2<Style3Props>({
   size: [
-    (input: number | string) => ({width: input}),
-    (input: number | string) => ({height: input}),
+    (input) => ({width: input}),
+    (input) => ({height: input}),
   ],
-}
-const style3 = createStyles<typeof style3Config,Media>(style3Config)
-const styles = combineStyles(style1, style2, style3)
+})
+const styles = combineStyles2<StyleProps<Style1Props,Style2Props,Style3Props>>(style1, style2, style3)
 
 type IStylesArg = DeepSimplify<Arg1<typeof styles>>
 type TestTuple = Array<[string, IStylesArg, any]>
@@ -47,7 +50,7 @@ describe('basics', () => {
     [
       'w px & bool h',
       {w: '10px', h: true},
-      [{height: '100vh'},{width: '10px'}],
+      [{height: '100vh'}, {width: '10px'}],
     ],
   ]
 
@@ -75,9 +78,9 @@ describe('responsive', () => {
     [
       'w px & bool h',
       {w: {medium: '10px'}, h: {medium: true}},
-      [{'@media @media (min-width: 40em)': {height: '100vh'}},
+      [
+        {'@media @media (min-width: 40em)': {height: '100vh'}},
         {'@media @media (min-width: 40em)': {width: '10px'}},
-
       ],
     ],
   ]
@@ -110,4 +113,3 @@ describe('Misc', () => {
     },
   )
 })
-
