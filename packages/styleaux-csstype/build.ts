@@ -1,10 +1,11 @@
 import * as chokidar from 'chokidar';
 import * as path from 'path';
 import * as prettier from 'prettier';
-import { FLOW_FILENAME, spawnAsync, TYPESCRIPT_FILENAME, writeFileAsync } from './utils';
+import { FLOW_FILENAME, TYPESCRIPT_FILENAME, writeFileAsync } from './utils';
+//import { FLOW_FILENAME, spawnAsync, TYPESCRIPT_FILENAME, writeFileAsync } from './utils';
 
 const ROOT_DIR = __dirname;
-const TEST_FILENAME = 'typecheck.ts';
+//const TEST_FILENAME = 'typecheck.ts';
 
 if (process.argv.includes('--start')) {
   trigger()
@@ -46,7 +47,7 @@ export default async function trigger() {
   console.info(`Writing files...`);
   await Promise.all([writeFileAsync(FLOW_FILENAME, flow), writeFileAsync(TYPESCRIPT_FILENAME, typescript)]);
   console.info('Type checking...');
-  await typecheck();
+  //await typecheck();
 }
 
 async function create() {
@@ -74,14 +75,14 @@ async function format(output: string, parser: prettier.BuiltInParserName) {
   }
 }
 
-function typecheck() {
-  return Promise.all([
-    spawnAsync(
-      path.join(ROOT_DIR, `node_modules/.bin/${process.platform === 'win32' ? 'tsc.cmd' : 'tsc'}`),
-      path.join(ROOT_DIR, TYPESCRIPT_FILENAME),
-      path.join(ROOT_DIR, TEST_FILENAME),
-      '--noEmit',
-    ),
-    spawnAsync(path.join(ROOT_DIR, `node_modules/.bin/${process.platform === 'win32' ? 'flow.cmd' : 'flow'}`), 'check'),
-  ]);
-}
+// function typecheck() {
+//   return Promise.all([
+//     spawnAsync(
+//       path.join(ROOT_DIR, `../../node_modules/.bin/${process.platform === 'win32' ? 'tsc.cmd' : 'tsc'}`),
+//       path.join(ROOT_DIR, TYPESCRIPT_FILENAME),
+//       path.join(ROOT_DIR, TEST_FILENAME),
+//       '--noEmit',
+//     ),
+//     spawnAsync(path.join(ROOT_DIR, `node_modules/.bin/${process.platform === 'win32' ? 'flow.cmd' : 'flow'}`), 'check'),
+//   ]);
+// }

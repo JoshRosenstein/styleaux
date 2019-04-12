@@ -461,7 +461,7 @@ const allPropertiesInterface: Interface = {
   extends: [
     standardPropertiesInterface,
     vendorPropertiesInterface,
-    //  obsoletePropertiesInterface,
+    obsoletePropertiesInterface,
     svgPropertiesInterface,
   ],
   fallback: false,
