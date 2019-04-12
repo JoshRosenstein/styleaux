@@ -1,34 +1,34 @@
 import { LeftProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const LEFT='left'
 
-export interface ILeftProps<T> {
+export interface LeftProps<T=LeftProperty> {
   /**
    * The **`left`** CSS property participates in specifying the horizontal position of a _positioned element_. It has no effect on non-positioned elements.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/left
    */
-  left: T;
+  [LEFT]: T;
 }
 
 export const createLeft = <
   T = LeftProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<ILeftProps<T>, Theme, Breakpoints>({
-    cssProp: LEFT,
-    prop: LEFT,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<LeftProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<LeftProps<T>,Theme,Media>({
+    cssProp:LEFT,
+    prop:LEFT,
     key,
     transformValue,
   })
 
-export const createLeftRule = <T = LeftProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: LEFT, getValue: transformer})
+export const createLeftRule = <T = LeftProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: LEFT, getValue: transformer})
 
 export const left =createLeft()
 

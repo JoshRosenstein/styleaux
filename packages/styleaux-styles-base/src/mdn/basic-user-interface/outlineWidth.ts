@@ -1,34 +1,34 @@
 import { OutlineWidthProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const OUTLINEWIDTH='outlineWidth'
 
-export interface IOutlineWidthProps<T> {
+export interface OutlineWidthProps<T=OutlineWidthProperty> {
   /**
    * The **`outline-width`** CSS property sets the thickness of an element's outline. An outline is a line that is drawn around an element, outside the `border`.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline-width
    */
-  outlineWidth: T;
+  [OUTLINEWIDTH]: T;
 }
 
 export const createOutlineWidth = <
   T = OutlineWidthProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IOutlineWidthProps<T>, Theme, Breakpoints>({
-    cssProp: OUTLINEWIDTH,
-    prop: OUTLINEWIDTH,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<OutlineWidthProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<OutlineWidthProps<T>,Theme,Media>({
+    cssProp:OUTLINEWIDTH,
+    prop:OUTLINEWIDTH,
     key,
     transformValue,
   })
 
-export const createOutlineWidthRule = <T = OutlineWidthProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: OUTLINEWIDTH, getValue: transformer})
+export const createOutlineWidthRule = <T = OutlineWidthProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: OUTLINEWIDTH, getValue: transformer})
 
 export const outlineWidth =createOutlineWidth()
 

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createGridColumnStart } from '../gridColumnStart';
 
-describe('gridColumnStart', () => {
+describe('createGridColumnStart', () => {
   it('should return a function', () => {
     const result = createGridColumnStart();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `gridColumnStart` as component and css prop', () => {
+  it('should use `createGridColumnStart` as component and css prop', () => {
     const result = createGridColumnStart()({ gridColumnStart: 'inherit' });
     expect(toStyles(result)).toEqual({ gridColumnStart: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('gridColumnStart', () => {
     expect(toStyles(result)).toEqual({ gridColumnStart: 'a' });
   });
 
-  it('should use an interface which marks `gridColumnStart` as optional', () => {
+  it('should use an interface which marks `createGridColumnStart` as optional', () => {
     const result = createGridColumnStart<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createGridColumnStart<'value',never,IThemeWithoutBreakpoints>({
+    const result = createGridColumnStart<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ gridColumnStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('gridColumnStart', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       gridColumnStart: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('gridColumnStart', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       gridColumnStart: 'a',
       [MQ.D]: {
         gridColumnStart: 'b',

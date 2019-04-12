@@ -1,34 +1,34 @@
 import { ClearProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const CLEAR='clear'
 
-export interface IClearProps<T> {
+export interface ClearProps<T=ClearProperty> {
   /**
    * The **`clear`** CSS property sets whether an element must be moved below (cleared) floating elements that precede it. The `clear` property applies to floating and non-floating elements.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/clear
    */
-  clear: T;
+  [CLEAR]: T;
 }
 
 export const createClear = <
   T = ClearProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IClearProps<T>, Theme, Breakpoints>({
-    cssProp: CLEAR,
-    prop: CLEAR,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<ClearProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<ClearProps<T>,Theme,Media>({
+    cssProp:CLEAR,
+    prop:CLEAR,
     key,
     transformValue,
   })
 
-export const createClearRule = <T = ClearProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: CLEAR, getValue: transformer})
+export const createClearRule = <T = ClearProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: CLEAR, getValue: transformer})
 
 export const clear =createClear()
 

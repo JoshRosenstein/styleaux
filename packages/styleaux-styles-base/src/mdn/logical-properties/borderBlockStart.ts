@@ -1,34 +1,34 @@
 import { BorderBlockStartProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BORDERBLOCKSTART='borderBlockStart'
 
-export interface IBorderBlockStartProps<T> {
+export interface BorderBlockStartProps<T=BorderBlockStartProperty> {
   /**
    * The **`border-block-start`** CSS property is a shorthand property for setting the individual logical block-start border property values in a single place in the style sheet.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start
    */
-  borderBlockStart: T;
+  [BORDERBLOCKSTART]: T;
 }
 
 export const createBorderBlockStart = <
   T = BorderBlockStartProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBorderBlockStartProps<T>, Theme, Breakpoints>({
-    cssProp: BORDERBLOCKSTART,
-    prop: BORDERBLOCKSTART,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BorderBlockStartProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BorderBlockStartProps<T>,Theme,Media>({
+    cssProp:BORDERBLOCKSTART,
+    prop:BORDERBLOCKSTART,
     key,
     transformValue,
   })
 
-export const createBorderBlockStartRule = <T = BorderBlockStartProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BORDERBLOCKSTART, getValue: transformer})
+export const createBorderBlockStartRule = <T = BorderBlockStartProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BORDERBLOCKSTART, getValue: transformer})
 
 export const borderBlockStart =createBorderBlockStart()
 

@@ -1,34 +1,34 @@
 import { AnimationNameProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const ANIMATIONNAME='animationName'
 
-export interface IAnimationNameProps<T> {
+export interface AnimationNameProps<T=AnimationNameProperty> {
   /**
    * The **`animation-name`** CSS property sets one or more animations to apply to an element. Each name is an `@keyframes` at-rule that sets the property values for the animation sequence.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-name
    */
-  animationName: T;
+  [ANIMATIONNAME]: T;
 }
 
 export const createAnimationName = <
   T = AnimationNameProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IAnimationNameProps<T>, Theme, Breakpoints>({
-    cssProp: ANIMATIONNAME,
-    prop: ANIMATIONNAME,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<AnimationNameProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<AnimationNameProps<T>,Theme,Media>({
+    cssProp:ANIMATIONNAME,
+    prop:ANIMATIONNAME,
     key,
     transformValue,
   })
 
-export const createAnimationNameRule = <T = AnimationNameProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: ANIMATIONNAME, getValue: transformer})
+export const createAnimationNameRule = <T = AnimationNameProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: ANIMATIONNAME, getValue: transformer})
 
 export const animationName =createAnimationName()
 

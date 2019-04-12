@@ -1,34 +1,34 @@
 import { PaddingRightProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const PADDINGRIGHT='paddingRight'
 
-export interface IPaddingRightProps<T> {
+export interface PaddingRightProps<T=PaddingRightProperty> {
   /**
    * The **`padding-right`** CSS property sets the width of the padding area on the right of an element.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-right
    */
-  paddingRight: T;
+  [PADDINGRIGHT]: T;
 }
 
 export const createPaddingRight = <
   T = PaddingRightProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IPaddingRightProps<T>, Theme, Breakpoints>({
-    cssProp: PADDINGRIGHT,
-    prop: PADDINGRIGHT,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<PaddingRightProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<PaddingRightProps<T>,Theme,Media>({
+    cssProp:PADDINGRIGHT,
+    prop:PADDINGRIGHT,
     key,
     transformValue,
   })
 
-export const createPaddingRightRule = <T = PaddingRightProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: PADDINGRIGHT, getValue: transformer})
+export const createPaddingRightRule = <T = PaddingRightProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: PADDINGRIGHT, getValue: transformer})
 
 export const paddingRight =createPaddingRight()
 

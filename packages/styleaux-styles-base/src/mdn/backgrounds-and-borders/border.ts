@@ -1,34 +1,34 @@
 import { BorderProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BORDER='border'
 
-export interface IBorderProps<T> {
+export interface BorderProps<T=BorderProperty> {
   /**
    * The **`border`** CSS property sets an element's border. It's a shorthand for `border-width`, `border-style`, and `border-color`.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border
    */
-  border: T;
+  [BORDER]: T;
 }
 
 export const createBorder = <
   T = BorderProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBorderProps<T>, Theme, Breakpoints>({
-    cssProp: BORDER,
-    prop: BORDER,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BorderProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BorderProps<T>,Theme,Media>({
+    cssProp:BORDER,
+    prop:BORDER,
     key,
     transformValue,
   })
 
-export const createBorderRule = <T = BorderProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BORDER, getValue: transformer})
+export const createBorderRule = <T = BorderProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BORDER, getValue: transformer})
 
 export const border =createBorder()
 

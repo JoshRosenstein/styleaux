@@ -1,34 +1,34 @@
 import { WillChangeProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const WILLCHANGE='willChange'
 
-export interface IWillChangeProps<T> {
+export interface WillChangeProps<T=WillChangeProperty> {
   /**
    * The **`will-change`** CSS property hints to browsers how an element is expected to change. Browsers may set up optimizations before an element is actually changed. These kinds of optimizations can increase the responsiveness of a page by doing potentially expensive work before they are actually required.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/will-change
    */
-  willChange: T;
+  [WILLCHANGE]: T;
 }
 
 export const createWillChange = <
   T = WillChangeProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IWillChangeProps<T>, Theme, Breakpoints>({
-    cssProp: WILLCHANGE,
-    prop: WILLCHANGE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<WillChangeProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<WillChangeProps<T>,Theme,Media>({
+    cssProp:WILLCHANGE,
+    prop:WILLCHANGE,
     key,
     transformValue,
   })
 
-export const createWillChangeRule = <T = WillChangeProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: WILLCHANGE, getValue: transformer})
+export const createWillChangeRule = <T = WillChangeProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: WILLCHANGE, getValue: transformer})
 
 export const willChange =createWillChange()
 

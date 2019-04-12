@@ -1,34 +1,34 @@
 import { MinHeightProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const MINHEIGHT='minHeight'
 
-export interface IMinHeightProps<T> {
+export interface MinHeightProps<T=MinHeightProperty> {
   /**
    * The **`min-height`** CSS property sets the minimum height of an element. It prevents the used value of the `height` property from becoming smaller than the value specified for `min-height`.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-height
    */
-  minHeight: T;
+  [MINHEIGHT]: T;
 }
 
 export const createMinHeight = <
   T = MinHeightProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IMinHeightProps<T>, Theme, Breakpoints>({
-    cssProp: MINHEIGHT,
-    prop: MINHEIGHT,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<MinHeightProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<MinHeightProps<T>,Theme,Media>({
+    cssProp:MINHEIGHT,
+    prop:MINHEIGHT,
     key,
     transformValue,
   })
 
-export const createMinHeightRule = <T = MinHeightProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: MINHEIGHT, getValue: transformer})
+export const createMinHeightRule = <T = MinHeightProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: MINHEIGHT, getValue: transformer})
 
 export const minHeight =createMinHeight()
 

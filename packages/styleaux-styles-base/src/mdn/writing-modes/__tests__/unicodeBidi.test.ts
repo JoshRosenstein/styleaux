@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createUnicodeBidi } from '../unicodeBidi';
 
-describe('unicodeBidi', () => {
+describe('createUnicodeBidi', () => {
   it('should return a function', () => {
     const result = createUnicodeBidi();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `unicodeBidi` as component and css prop', () => {
+  it('should use `createUnicodeBidi` as component and css prop', () => {
     const result = createUnicodeBidi()({ unicodeBidi: 'inherit' });
     expect(toStyles(result)).toEqual({ unicodeBidi: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('unicodeBidi', () => {
     expect(toStyles(result)).toEqual({ unicodeBidi: 'a' });
   });
 
-  it('should use an interface which marks `unicodeBidi` as optional', () => {
+  it('should use an interface which marks `createUnicodeBidi` as optional', () => {
     const result = createUnicodeBidi<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createUnicodeBidi<'value',never,IThemeWithoutBreakpoints>({
+    const result = createUnicodeBidi<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ unicodeBidi: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('unicodeBidi', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       unicodeBidi: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('unicodeBidi', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       unicodeBidi: 'a',
       [MQ.D]: {
         unicodeBidi: 'b',

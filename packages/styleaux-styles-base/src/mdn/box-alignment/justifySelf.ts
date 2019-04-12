@@ -1,34 +1,34 @@
 import { JustifySelfProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const JUSTIFYSELF='justifySelf'
 
-export interface IJustifySelfProps<T> {
+export interface JustifySelfProps<T=JustifySelfProperty> {
   /**
    * The CSS **`justify-self`** property set the way a box is justified inside its alignment container along the appropriate axis.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/justify-self
    */
-  justifySelf: T;
+  [JUSTIFYSELF]: T;
 }
 
 export const createJustifySelf = <
   T = JustifySelfProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IJustifySelfProps<T>, Theme, Breakpoints>({
-    cssProp: JUSTIFYSELF,
-    prop: JUSTIFYSELF,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<JustifySelfProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<JustifySelfProps<T>,Theme,Media>({
+    cssProp:JUSTIFYSELF,
+    prop:JUSTIFYSELF,
     key,
     transformValue,
   })
 
-export const createJustifySelfRule = <T = JustifySelfProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: JUSTIFYSELF, getValue: transformer})
+export const createJustifySelfRule = <T = JustifySelfProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: JUSTIFYSELF, getValue: transformer})
 
 export const justifySelf =createJustifySelf()
 

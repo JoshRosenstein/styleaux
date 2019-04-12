@@ -1,34 +1,34 @@
 import { AnimationIterationCountProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const ANIMATIONITERATIONCOUNT='animationIterationCount'
 
-export interface IAnimationIterationCountProps<T> {
+export interface AnimationIterationCountProps<T=AnimationIterationCountProperty> {
   /**
    * The **`animation-iteration-count`** CSS property sets the number of times an animation cycle should be played before stopping.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-iteration-count
    */
-  animationIterationCount: T;
+  [ANIMATIONITERATIONCOUNT]: T;
 }
 
 export const createAnimationIterationCount = <
   T = AnimationIterationCountProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IAnimationIterationCountProps<T>, Theme, Breakpoints>({
-    cssProp: ANIMATIONITERATIONCOUNT,
-    prop: ANIMATIONITERATIONCOUNT,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<AnimationIterationCountProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<AnimationIterationCountProps<T>,Theme,Media>({
+    cssProp:ANIMATIONITERATIONCOUNT,
+    prop:ANIMATIONITERATIONCOUNT,
     key,
     transformValue,
   })
 
-export const createAnimationIterationCountRule = <T = AnimationIterationCountProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: ANIMATIONITERATIONCOUNT, getValue: transformer})
+export const createAnimationIterationCountRule = <T = AnimationIterationCountProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: ANIMATIONITERATIONCOUNT, getValue: transformer})
 
 export const animationIterationCount =createAnimationIterationCount()
 

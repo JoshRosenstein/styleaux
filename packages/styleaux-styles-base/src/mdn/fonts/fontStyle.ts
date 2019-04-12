@@ -1,34 +1,34 @@
 import { FontStyleProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const FONTSTYLE='fontStyle'
 
-export interface IFontStyleProps<T> {
+export interface FontStyleProps<T=FontStyleProperty> {
   /**
    * The **`font-style`** CSS property sets whether a font should be styled with a normal, italic, or oblique face from its `font-family`.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-style
    */
-  fontStyle: T;
+  [FONTSTYLE]: T;
 }
 
 export const createFontStyle = <
   T = FontStyleProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IFontStyleProps<T>, Theme, Breakpoints>({
-    cssProp: FONTSTYLE,
-    prop: FONTSTYLE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<FontStyleProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<FontStyleProps<T>,Theme,Media>({
+    cssProp:FONTSTYLE,
+    prop:FONTSTYLE,
     key,
     transformValue,
   })
 
-export const createFontStyleRule = <T = FontStyleProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: FONTSTYLE, getValue: transformer})
+export const createFontStyleRule = <T = FontStyleProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: FONTSTYLE, getValue: transformer})
 
 export const fontStyle =createFontStyle()
 

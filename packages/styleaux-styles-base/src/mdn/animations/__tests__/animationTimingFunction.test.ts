@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createAnimationTimingFunction } from '../animationTimingFunction';
 
-describe('animationTimingFunction', () => {
+describe('createAnimationTimingFunction', () => {
   it('should return a function', () => {
     const result = createAnimationTimingFunction();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `animationTimingFunction` as component and css prop', () => {
+  it('should use `createAnimationTimingFunction` as component and css prop', () => {
     const result = createAnimationTimingFunction()({ animationTimingFunction: 'inherit' });
     expect(toStyles(result)).toEqual({ animationTimingFunction: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('animationTimingFunction', () => {
     expect(toStyles(result)).toEqual({ animationTimingFunction: 'a' });
   });
 
-  it('should use an interface which marks `animationTimingFunction` as optional', () => {
+  it('should use an interface which marks `createAnimationTimingFunction` as optional', () => {
     const result = createAnimationTimingFunction<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createAnimationTimingFunction<'value',never,IThemeWithoutBreakpoints>({
+    const result = createAnimationTimingFunction<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ animationTimingFunction: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('animationTimingFunction', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       animationTimingFunction: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('animationTimingFunction', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       animationTimingFunction: 'a',
       [MQ.D]: {
         animationTimingFunction: 'b',

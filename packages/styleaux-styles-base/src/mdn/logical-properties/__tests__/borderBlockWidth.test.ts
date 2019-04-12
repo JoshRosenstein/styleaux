@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderBlockWidth } from '../borderBlockWidth';
 
-describe('borderBlockWidth', () => {
+describe('createBorderBlockWidth', () => {
   it('should return a function', () => {
     const result = createBorderBlockWidth();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderBlockWidth` as component and css prop', () => {
+  it('should use `createBorderBlockWidth` as component and css prop', () => {
     const result = createBorderBlockWidth()({ borderBlockWidth: 'inherit' });
     expect(toStyles(result)).toEqual({ borderBlockWidth: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderBlockWidth', () => {
     expect(toStyles(result)).toEqual({ borderBlockWidth: 'a' });
   });
 
-  it('should use an interface which marks `borderBlockWidth` as optional', () => {
+  it('should use an interface which marks `createBorderBlockWidth` as optional', () => {
     const result = createBorderBlockWidth<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderBlockWidth<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderBlockWidth<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderBlockWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderBlockWidth', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderBlockWidth: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderBlockWidth', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderBlockWidth: 'a',
       [MQ.D]: {
         borderBlockWidth: 'b',

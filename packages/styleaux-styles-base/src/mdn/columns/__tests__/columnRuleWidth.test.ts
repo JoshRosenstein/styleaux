@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createColumnRuleWidth } from '../columnRuleWidth';
 
-describe('columnRuleWidth', () => {
+describe('createColumnRuleWidth', () => {
   it('should return a function', () => {
     const result = createColumnRuleWidth();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `columnRuleWidth` as component and css prop', () => {
+  it('should use `createColumnRuleWidth` as component and css prop', () => {
     const result = createColumnRuleWidth()({ columnRuleWidth: 'inherit' });
     expect(toStyles(result)).toEqual({ columnRuleWidth: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('columnRuleWidth', () => {
     expect(toStyles(result)).toEqual({ columnRuleWidth: 'a' });
   });
 
-  it('should use an interface which marks `columnRuleWidth` as optional', () => {
+  it('should use an interface which marks `createColumnRuleWidth` as optional', () => {
     const result = createColumnRuleWidth<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createColumnRuleWidth<'value',never,IThemeWithoutBreakpoints>({
+    const result = createColumnRuleWidth<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ columnRuleWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('columnRuleWidth', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       columnRuleWidth: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('columnRuleWidth', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       columnRuleWidth: 'a',
       [MQ.D]: {
         columnRuleWidth: 'b',

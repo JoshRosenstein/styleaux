@@ -1,34 +1,34 @@
 import { ColumnWidthProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const COLUMNWIDTH='columnWidth'
 
-export interface IColumnWidthProps<T> {
+export interface ColumnWidthProps<T=ColumnWidthProperty> {
   /**
    * The **`column-width`** CSS property specifies the ideal column width in a multi-column layout. The container will have as many columns as can fit without any of them having a width less than the `column-width` value. If the width of the container is narrower than the specified value, the single column's width will be smaller than the declared column width.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-width
    */
-  columnWidth: T;
+  [COLUMNWIDTH]: T;
 }
 
 export const createColumnWidth = <
   T = ColumnWidthProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IColumnWidthProps<T>, Theme, Breakpoints>({
-    cssProp: COLUMNWIDTH,
-    prop: COLUMNWIDTH,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<ColumnWidthProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<ColumnWidthProps<T>,Theme,Media>({
+    cssProp:COLUMNWIDTH,
+    prop:COLUMNWIDTH,
     key,
     transformValue,
   })
 
-export const createColumnWidthRule = <T = ColumnWidthProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: COLUMNWIDTH, getValue: transformer})
+export const createColumnWidthRule = <T = ColumnWidthProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: COLUMNWIDTH, getValue: transformer})
 
 export const columnWidth =createColumnWidth()
 

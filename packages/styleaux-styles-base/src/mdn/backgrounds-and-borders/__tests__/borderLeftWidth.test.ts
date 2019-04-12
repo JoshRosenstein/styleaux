@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderLeftWidth } from '../borderLeftWidth';
 
-describe('borderLeftWidth', () => {
+describe('createBorderLeftWidth', () => {
   it('should return a function', () => {
     const result = createBorderLeftWidth();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderLeftWidth` as component and css prop', () => {
+  it('should use `createBorderLeftWidth` as component and css prop', () => {
     const result = createBorderLeftWidth()({ borderLeftWidth: 'inherit' });
     expect(toStyles(result)).toEqual({ borderLeftWidth: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderLeftWidth', () => {
     expect(toStyles(result)).toEqual({ borderLeftWidth: 'a' });
   });
 
-  it('should use an interface which marks `borderLeftWidth` as optional', () => {
+  it('should use an interface which marks `createBorderLeftWidth` as optional', () => {
     const result = createBorderLeftWidth<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderLeftWidth<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderLeftWidth<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderLeftWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderLeftWidth', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderLeftWidth: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderLeftWidth', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderLeftWidth: 'a',
       [MQ.D]: {
         borderLeftWidth: 'b',

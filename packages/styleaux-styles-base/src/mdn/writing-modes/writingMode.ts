@@ -1,34 +1,34 @@
 import { WritingModeProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const WRITINGMODE='writingMode'
 
-export interface IWritingModeProps<T> {
+export interface WritingModeProps<T=WritingModeProperty> {
   /**
    * The **`writing-mode`** CSS property sets whether lines of text are laid out horizontally or vertically, as well as the direction in which blocks progress.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/writing-mode
    */
-  writingMode: T;
+  [WRITINGMODE]: T;
 }
 
 export const createWritingMode = <
   T = WritingModeProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IWritingModeProps<T>, Theme, Breakpoints>({
-    cssProp: WRITINGMODE,
-    prop: WRITINGMODE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<WritingModeProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<WritingModeProps<T>,Theme,Media>({
+    cssProp:WRITINGMODE,
+    prop:WRITINGMODE,
     key,
     transformValue,
   })
 
-export const createWritingModeRule = <T = WritingModeProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: WRITINGMODE, getValue: transformer})
+export const createWritingModeRule = <T = WritingModeProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: WRITINGMODE, getValue: transformer})
 
 export const writingMode =createWritingMode()
 

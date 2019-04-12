@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createRight } from '../right';
 
-describe('right', () => {
+describe('createRight', () => {
   it('should return a function', () => {
     const result = createRight();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `right` as component and css prop', () => {
+  it('should use `createRight` as component and css prop', () => {
     const result = createRight()({ right: 'inherit' });
     expect(toStyles(result)).toEqual({ right: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('right', () => {
     expect(toStyles(result)).toEqual({ right: 'a' });
   });
 
-  it('should use an interface which marks `right` as optional', () => {
+  it('should use an interface which marks `createRight` as optional', () => {
     const result = createRight<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createRight<'value',never,IThemeWithoutBreakpoints>({
+    const result = createRight<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ right: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('right', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       right: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('right', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       right: 'a',
       [MQ.D]: {
         right: 'b',

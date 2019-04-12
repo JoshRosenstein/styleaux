@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createMarginTop } from '../marginTop';
 
-describe('marginTop', () => {
+describe('createMarginTop', () => {
   it('should return a function', () => {
     const result = createMarginTop();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `marginTop` as component and css prop', () => {
+  it('should use `createMarginTop` as component and css prop', () => {
     const result = createMarginTop()({ marginTop: 'inherit' });
     expect(toStyles(result)).toEqual({ marginTop: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('marginTop', () => {
     expect(toStyles(result)).toEqual({ marginTop: 'a' });
   });
 
-  it('should use an interface which marks `marginTop` as optional', () => {
+  it('should use an interface which marks `createMarginTop` as optional', () => {
     const result = createMarginTop<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createMarginTop<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMarginTop<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ marginTop: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('marginTop', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       marginTop: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('marginTop', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       marginTop: 'a',
       [MQ.D]: {
         marginTop: 'b',

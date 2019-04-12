@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createInsetInlineStart } from '../insetInlineStart';
 
-describe('insetInlineStart', () => {
+describe('createInsetInlineStart', () => {
   it('should return a function', () => {
     const result = createInsetInlineStart();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `insetInlineStart` as component and css prop', () => {
+  it('should use `createInsetInlineStart` as component and css prop', () => {
     const result = createInsetInlineStart()({ insetInlineStart: 'inherit' });
     expect(toStyles(result)).toEqual({ insetInlineStart: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('insetInlineStart', () => {
     expect(toStyles(result)).toEqual({ insetInlineStart: 'a' });
   });
 
-  it('should use an interface which marks `insetInlineStart` as optional', () => {
+  it('should use an interface which marks `createInsetInlineStart` as optional', () => {
     const result = createInsetInlineStart<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createInsetInlineStart<'value',never,IThemeWithoutBreakpoints>({
+    const result = createInsetInlineStart<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ insetInlineStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('insetInlineStart', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       insetInlineStart: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('insetInlineStart', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       insetInlineStart: 'a',
       [MQ.D]: {
         insetInlineStart: 'b',

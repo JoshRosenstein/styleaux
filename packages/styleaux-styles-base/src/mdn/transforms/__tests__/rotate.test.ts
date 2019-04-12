@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createRotate } from '../rotate';
 
-describe('rotate', () => {
+describe('createRotate', () => {
   it('should return a function', () => {
     const result = createRotate();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `rotate` as component and css prop', () => {
+  it('should use `createRotate` as component and css prop', () => {
     const result = createRotate()({ rotate: 'inherit' });
     expect(toStyles(result)).toEqual({ rotate: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('rotate', () => {
     expect(toStyles(result)).toEqual({ rotate: 'a' });
   });
 
-  it('should use an interface which marks `rotate` as optional', () => {
+  it('should use an interface which marks `createRotate` as optional', () => {
     const result = createRotate<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createRotate<'value',never,IThemeWithoutBreakpoints>({
+    const result = createRotate<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ rotate: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('rotate', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       rotate: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('rotate', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       rotate: 'a',
       [MQ.D]: {
         rotate: 'b',

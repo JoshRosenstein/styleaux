@@ -1,34 +1,34 @@
 import { BackgroundPositionProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BACKGROUNDPOSITION='backgroundPosition'
 
-export interface IBackgroundPositionProps<T> {
+export interface BackgroundPositionProps<T=BackgroundPositionProperty> {
   /**
    * The **`background-position`** CSS property sets the initial position for each background image. The position is relative to the position layer set by `background-origin`.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position
    */
-  backgroundPosition: T;
+  [BACKGROUNDPOSITION]: T;
 }
 
 export const createBackgroundPosition = <
   T = BackgroundPositionProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBackgroundPositionProps<T>, Theme, Breakpoints>({
-    cssProp: BACKGROUNDPOSITION,
-    prop: BACKGROUNDPOSITION,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BackgroundPositionProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BackgroundPositionProps<T>,Theme,Media>({
+    cssProp:BACKGROUNDPOSITION,
+    prop:BACKGROUNDPOSITION,
     key,
     transformValue,
   })
 
-export const createBackgroundPositionRule = <T = BackgroundPositionProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BACKGROUNDPOSITION, getValue: transformer})
+export const createBackgroundPositionRule = <T = BackgroundPositionProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BACKGROUNDPOSITION, getValue: transformer})
 
 export const backgroundPosition =createBackgroundPosition()
 

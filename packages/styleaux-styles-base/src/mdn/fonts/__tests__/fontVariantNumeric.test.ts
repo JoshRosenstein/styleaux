@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createFontVariantNumeric } from '../fontVariantNumeric';
 
-describe('fontVariantNumeric', () => {
+describe('createFontVariantNumeric', () => {
   it('should return a function', () => {
     const result = createFontVariantNumeric();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `fontVariantNumeric` as component and css prop', () => {
+  it('should use `createFontVariantNumeric` as component and css prop', () => {
     const result = createFontVariantNumeric()({ fontVariantNumeric: 'inherit' });
     expect(toStyles(result)).toEqual({ fontVariantNumeric: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('fontVariantNumeric', () => {
     expect(toStyles(result)).toEqual({ fontVariantNumeric: 'a' });
   });
 
-  it('should use an interface which marks `fontVariantNumeric` as optional', () => {
+  it('should use an interface which marks `createFontVariantNumeric` as optional', () => {
     const result = createFontVariantNumeric<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createFontVariantNumeric<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFontVariantNumeric<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontVariantNumeric: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('fontVariantNumeric', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       fontVariantNumeric: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('fontVariantNumeric', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       fontVariantNumeric: 'a',
       [MQ.D]: {
         fontVariantNumeric: 'b',

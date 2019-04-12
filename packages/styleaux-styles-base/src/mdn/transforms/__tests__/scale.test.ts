@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createScale } from '../scale';
 
-describe('scale', () => {
+describe('createScale', () => {
   it('should return a function', () => {
     const result = createScale();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `scale` as component and css prop', () => {
+  it('should use `createScale` as component and css prop', () => {
     const result = createScale()({ scale: 'inherit' });
     expect(toStyles(result)).toEqual({ scale: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('scale', () => {
     expect(toStyles(result)).toEqual({ scale: 'a' });
   });
 
-  it('should use an interface which marks `scale` as optional', () => {
+  it('should use an interface which marks `createScale` as optional', () => {
     const result = createScale<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createScale<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScale<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scale: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('scale', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       scale: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('scale', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       scale: 'a',
       [MQ.D]: {
         scale: 'b',

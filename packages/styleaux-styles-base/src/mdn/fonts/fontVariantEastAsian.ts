@@ -1,34 +1,34 @@
 import { FontVariantEastAsianProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const FONTVARIANTEASTASIAN='fontVariantEastAsian'
 
-export interface IFontVariantEastAsianProps<T> {
+export interface FontVariantEastAsianProps<T=FontVariantEastAsianProperty> {
   /**
    * The **`font-variant-east-asian`** CSS property controls the use of alternate glyphs for East Asian scripts, like Japanese and Chinese.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-east-asian
    */
-  fontVariantEastAsian: T;
+  [FONTVARIANTEASTASIAN]: T;
 }
 
 export const createFontVariantEastAsian = <
   T = FontVariantEastAsianProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IFontVariantEastAsianProps<T>, Theme, Breakpoints>({
-    cssProp: FONTVARIANTEASTASIAN,
-    prop: FONTVARIANTEASTASIAN,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<FontVariantEastAsianProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<FontVariantEastAsianProps<T>,Theme,Media>({
+    cssProp:FONTVARIANTEASTASIAN,
+    prop:FONTVARIANTEASTASIAN,
     key,
     transformValue,
   })
 
-export const createFontVariantEastAsianRule = <T = FontVariantEastAsianProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: FONTVARIANTEASTASIAN, getValue: transformer})
+export const createFontVariantEastAsianRule = <T = FontVariantEastAsianProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: FONTVARIANTEASTASIAN, getValue: transformer})
 
 export const fontVariantEastAsian =createFontVariantEastAsian()
 

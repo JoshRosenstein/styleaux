@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderInlineStyle } from '../borderInlineStyle';
 
-describe('borderInlineStyle', () => {
+describe('createBorderInlineStyle', () => {
   it('should return a function', () => {
     const result = createBorderInlineStyle();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderInlineStyle` as component and css prop', () => {
+  it('should use `createBorderInlineStyle` as component and css prop', () => {
     const result = createBorderInlineStyle()({ borderInlineStyle: 'inherit' });
     expect(toStyles(result)).toEqual({ borderInlineStyle: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderInlineStyle', () => {
     expect(toStyles(result)).toEqual({ borderInlineStyle: 'a' });
   });
 
-  it('should use an interface which marks `borderInlineStyle` as optional', () => {
+  it('should use an interface which marks `createBorderInlineStyle` as optional', () => {
     const result = createBorderInlineStyle<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderInlineStyle<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderInlineStyle<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderInlineStyle: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderInlineStyle', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderInlineStyle: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderInlineStyle', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderInlineStyle: 'a',
       [MQ.D]: {
         borderInlineStyle: 'b',

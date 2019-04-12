@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createWhiteSpace } from '../whiteSpace';
 
-describe('whiteSpace', () => {
+describe('createWhiteSpace', () => {
   it('should return a function', () => {
     const result = createWhiteSpace();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `whiteSpace` as component and css prop', () => {
+  it('should use `createWhiteSpace` as component and css prop', () => {
     const result = createWhiteSpace()({ whiteSpace: 'inherit' });
     expect(toStyles(result)).toEqual({ whiteSpace: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('whiteSpace', () => {
     expect(toStyles(result)).toEqual({ whiteSpace: 'a' });
   });
 
-  it('should use an interface which marks `whiteSpace` as optional', () => {
+  it('should use an interface which marks `createWhiteSpace` as optional', () => {
     const result = createWhiteSpace<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createWhiteSpace<'value',never,IThemeWithoutBreakpoints>({
+    const result = createWhiteSpace<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ whiteSpace: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('whiteSpace', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       whiteSpace: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('whiteSpace', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       whiteSpace: 'a',
       [MQ.D]: {
         whiteSpace: 'b',

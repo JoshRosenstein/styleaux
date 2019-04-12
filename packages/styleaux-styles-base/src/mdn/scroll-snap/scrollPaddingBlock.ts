@@ -1,10 +1,10 @@
 import { ScrollPaddingBlockProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const SCROLLPADDINGBLOCK='scrollPaddingBlock'
 
-export interface IScrollPaddingBlockProps<T> {
+export interface ScrollPaddingBlockProps<T=ScrollPaddingBlockProperty> {
   /**
    * The `scroll-padding-block` property is a shorthand property which sets the scroll-padding longhands for the block dimension.  
   
@@ -12,25 +12,25 @@ The scroll-padding properties define offsets for the optimal viewing region of
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block
    */
-  scrollPaddingBlock: T;
+  [SCROLLPADDINGBLOCK]: T;
 }
 
 export const createScrollPaddingBlock = <
   T = ScrollPaddingBlockProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IScrollPaddingBlockProps<T>, Theme, Breakpoints>({
-    cssProp: SCROLLPADDINGBLOCK,
-    prop: SCROLLPADDINGBLOCK,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<ScrollPaddingBlockProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<ScrollPaddingBlockProps<T>,Theme,Media>({
+    cssProp:SCROLLPADDINGBLOCK,
+    prop:SCROLLPADDINGBLOCK,
     key,
     transformValue,
   })
 
-export const createScrollPaddingBlockRule = <T = ScrollPaddingBlockProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: SCROLLPADDINGBLOCK, getValue: transformer})
+export const createScrollPaddingBlockRule = <T = ScrollPaddingBlockProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: SCROLLPADDINGBLOCK, getValue: transformer})
 
 export const scrollPaddingBlock =createScrollPaddingBlock()
 

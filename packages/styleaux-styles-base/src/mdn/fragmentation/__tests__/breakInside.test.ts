@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBreakInside } from '../breakInside';
 
-describe('breakInside', () => {
+describe('createBreakInside', () => {
   it('should return a function', () => {
     const result = createBreakInside();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `breakInside` as component and css prop', () => {
+  it('should use `createBreakInside` as component and css prop', () => {
     const result = createBreakInside()({ breakInside: 'inherit' });
     expect(toStyles(result)).toEqual({ breakInside: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('breakInside', () => {
     expect(toStyles(result)).toEqual({ breakInside: 'a' });
   });
 
-  it('should use an interface which marks `breakInside` as optional', () => {
+  it('should use an interface which marks `createBreakInside` as optional', () => {
     const result = createBreakInside<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBreakInside<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBreakInside<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ breakInside: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('breakInside', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       breakInside: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('breakInside', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       breakInside: 'a',
       [MQ.D]: {
         breakInside: 'b',

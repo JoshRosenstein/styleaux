@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderRightWidth } from '../borderRightWidth';
 
-describe('borderRightWidth', () => {
+describe('createBorderRightWidth', () => {
   it('should return a function', () => {
     const result = createBorderRightWidth();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderRightWidth` as component and css prop', () => {
+  it('should use `createBorderRightWidth` as component and css prop', () => {
     const result = createBorderRightWidth()({ borderRightWidth: 'inherit' });
     expect(toStyles(result)).toEqual({ borderRightWidth: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderRightWidth', () => {
     expect(toStyles(result)).toEqual({ borderRightWidth: 'a' });
   });
 
-  it('should use an interface which marks `borderRightWidth` as optional', () => {
+  it('should use an interface which marks `createBorderRightWidth` as optional', () => {
     const result = createBorderRightWidth<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderRightWidth<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderRightWidth<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderRightWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderRightWidth', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderRightWidth: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderRightWidth', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderRightWidth: 'a',
       [MQ.D]: {
         borderRightWidth: 'b',

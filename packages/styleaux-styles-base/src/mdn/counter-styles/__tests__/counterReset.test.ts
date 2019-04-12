@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createCounterReset } from '../counterReset';
 
-describe('counterReset', () => {
+describe('createCounterReset', () => {
   it('should return a function', () => {
     const result = createCounterReset();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `counterReset` as component and css prop', () => {
+  it('should use `createCounterReset` as component and css prop', () => {
     const result = createCounterReset()({ counterReset: 'inherit' });
     expect(toStyles(result)).toEqual({ counterReset: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('counterReset', () => {
     expect(toStyles(result)).toEqual({ counterReset: 'a' });
   });
 
-  it('should use an interface which marks `counterReset` as optional', () => {
+  it('should use an interface which marks `createCounterReset` as optional', () => {
     const result = createCounterReset<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createCounterReset<'value',never,IThemeWithoutBreakpoints>({
+    const result = createCounterReset<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ counterReset: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('counterReset', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       counterReset: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('counterReset', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       counterReset: 'a',
       [MQ.D]: {
         counterReset: 'b',

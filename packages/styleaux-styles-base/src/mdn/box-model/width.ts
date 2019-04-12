@@ -1,34 +1,34 @@
 import { WidthProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const WIDTH='width'
 
-export interface IWidthProps<T> {
+export interface WidthProps<T=WidthProperty> {
   /**
    * The **`width`** CSS property sets an element's width. By default it sets the width of the content area, but if `box-sizing` is set to `border-box`, it sets the width of the border area.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/width
    */
-  width: T;
+  [WIDTH]: T;
 }
 
 export const createWidth = <
   T = WidthProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IWidthProps<T>, Theme, Breakpoints>({
-    cssProp: WIDTH,
-    prop: WIDTH,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<WidthProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<WidthProps<T>,Theme,Media>({
+    cssProp:WIDTH,
+    prop:WIDTH,
     key,
     transformValue,
   })
 
-export const createWidthRule = <T = WidthProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: WIDTH, getValue: transformer})
+export const createWidthRule = <T = WidthProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: WIDTH, getValue: transformer})
 
 export const width =createWidth()
 

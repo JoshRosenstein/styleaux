@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTextTransform } from '../textTransform';
 
-describe('textTransform', () => {
+describe('createTextTransform', () => {
   it('should return a function', () => {
     const result = createTextTransform();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `textTransform` as component and css prop', () => {
+  it('should use `createTextTransform` as component and css prop', () => {
     const result = createTextTransform()({ textTransform: 'inherit' });
     expect(toStyles(result)).toEqual({ textTransform: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('textTransform', () => {
     expect(toStyles(result)).toEqual({ textTransform: 'a' });
   });
 
-  it('should use an interface which marks `textTransform` as optional', () => {
+  it('should use an interface which marks `createTextTransform` as optional', () => {
     const result = createTextTransform<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTextTransform<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextTransform<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textTransform: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('textTransform', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       textTransform: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('textTransform', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       textTransform: 'a',
       [MQ.D]: {
         textTransform: 'b',

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createAppearance } from '../appearance';
 
-describe('appearance', () => {
+describe('createAppearance', () => {
   it('should return a function', () => {
     const result = createAppearance();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `appearance` as component and css prop', () => {
+  it('should use `createAppearance` as component and css prop', () => {
     const result = createAppearance()({ appearance: 'inherit' });
     expect(toStyles(result)).toEqual({ appearance: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('appearance', () => {
     expect(toStyles(result)).toEqual({ appearance: 'a' });
   });
 
-  it('should use an interface which marks `appearance` as optional', () => {
+  it('should use an interface which marks `createAppearance` as optional', () => {
     const result = createAppearance<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createAppearance<'value',never,IThemeWithoutBreakpoints>({
+    const result = createAppearance<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ appearance: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('appearance', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       appearance: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('appearance', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       appearance: 'a',
       [MQ.D]: {
         appearance: 'b',

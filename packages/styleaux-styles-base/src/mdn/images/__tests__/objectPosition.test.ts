@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createObjectPosition } from '../objectPosition';
 
-describe('objectPosition', () => {
+describe('createObjectPosition', () => {
   it('should return a function', () => {
     const result = createObjectPosition();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `objectPosition` as component and css prop', () => {
+  it('should use `createObjectPosition` as component and css prop', () => {
     const result = createObjectPosition()({ objectPosition: 'inherit' });
     expect(toStyles(result)).toEqual({ objectPosition: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('objectPosition', () => {
     expect(toStyles(result)).toEqual({ objectPosition: 'a' });
   });
 
-  it('should use an interface which marks `objectPosition` as optional', () => {
+  it('should use an interface which marks `createObjectPosition` as optional', () => {
     const result = createObjectPosition<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createObjectPosition<'value',never,IThemeWithoutBreakpoints>({
+    const result = createObjectPosition<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ objectPosition: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('objectPosition', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       objectPosition: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('objectPosition', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       objectPosition: 'a',
       [MQ.D]: {
         objectPosition: 'b',

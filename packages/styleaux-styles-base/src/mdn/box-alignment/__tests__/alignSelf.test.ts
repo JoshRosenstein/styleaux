@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createAlignSelf } from '../alignSelf';
 
-describe('alignSelf', () => {
+describe('createAlignSelf', () => {
   it('should return a function', () => {
     const result = createAlignSelf();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `alignSelf` as component and css prop', () => {
+  it('should use `createAlignSelf` as component and css prop', () => {
     const result = createAlignSelf()({ alignSelf: 'inherit' });
     expect(toStyles(result)).toEqual({ alignSelf: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('alignSelf', () => {
     expect(toStyles(result)).toEqual({ alignSelf: 'a' });
   });
 
-  it('should use an interface which marks `alignSelf` as optional', () => {
+  it('should use an interface which marks `createAlignSelf` as optional', () => {
     const result = createAlignSelf<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createAlignSelf<'value',never,IThemeWithoutBreakpoints>({
+    const result = createAlignSelf<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ alignSelf: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('alignSelf', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       alignSelf: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('alignSelf', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       alignSelf: 'a',
       [MQ.D]: {
         alignSelf: 'b',

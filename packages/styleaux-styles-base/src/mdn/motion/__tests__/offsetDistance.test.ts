@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createOffsetDistance } from '../offsetDistance';
 
-describe('offsetDistance', () => {
+describe('createOffsetDistance', () => {
   it('should return a function', () => {
     const result = createOffsetDistance();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `offsetDistance` as component and css prop', () => {
+  it('should use `createOffsetDistance` as component and css prop', () => {
     const result = createOffsetDistance()({ offsetDistance: 'inherit' });
     expect(toStyles(result)).toEqual({ offsetDistance: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('offsetDistance', () => {
     expect(toStyles(result)).toEqual({ offsetDistance: 'a' });
   });
 
-  it('should use an interface which marks `offsetDistance` as optional', () => {
+  it('should use an interface which marks `createOffsetDistance` as optional', () => {
     const result = createOffsetDistance<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createOffsetDistance<'value',never,IThemeWithoutBreakpoints>({
+    const result = createOffsetDistance<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ offsetDistance: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('offsetDistance', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       offsetDistance: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('offsetDistance', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       offsetDistance: 'a',
       [MQ.D]: {
         offsetDistance: 'b',

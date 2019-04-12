@@ -1,34 +1,34 @@
 import { OffsetProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const OFFSET='offset'
 
-export interface IOffsetProps<T> {
+export interface OffsetProps<T=OffsetProperty> {
   /**
    * The **`offset`** CSS property is a shorthand property for animating an element along a defined path.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset
    */
-  offset: T;
+  [OFFSET]: T;
 }
 
 export const createOffset = <
   T = OffsetProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IOffsetProps<T>, Theme, Breakpoints>({
-    cssProp: OFFSET,
-    prop: OFFSET,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<OffsetProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<OffsetProps<T>,Theme,Media>({
+    cssProp:OFFSET,
+    prop:OFFSET,
     key,
     transformValue,
   })
 
-export const createOffsetRule = <T = OffsetProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: OFFSET, getValue: transformer})
+export const createOffsetRule = <T = OffsetProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: OFFSET, getValue: transformer})
 
 export const offset =createOffset()
 

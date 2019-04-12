@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createColumnFill } from '../columnFill';
 
-describe('columnFill', () => {
+describe('createColumnFill', () => {
   it('should return a function', () => {
     const result = createColumnFill();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `columnFill` as component and css prop', () => {
+  it('should use `createColumnFill` as component and css prop', () => {
     const result = createColumnFill()({ columnFill: 'inherit' });
     expect(toStyles(result)).toEqual({ columnFill: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('columnFill', () => {
     expect(toStyles(result)).toEqual({ columnFill: 'a' });
   });
 
-  it('should use an interface which marks `columnFill` as optional', () => {
+  it('should use an interface which marks `createColumnFill` as optional', () => {
     const result = createColumnFill<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createColumnFill<'value',never,IThemeWithoutBreakpoints>({
+    const result = createColumnFill<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ columnFill: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('columnFill', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       columnFill: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('columnFill', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       columnFill: 'a',
       [MQ.D]: {
         columnFill: 'b',

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderInlineStart } from '../borderInlineStart';
 
-describe('borderInlineStart', () => {
+describe('createBorderInlineStart', () => {
   it('should return a function', () => {
     const result = createBorderInlineStart();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderInlineStart` as component and css prop', () => {
+  it('should use `createBorderInlineStart` as component and css prop', () => {
     const result = createBorderInlineStart()({ borderInlineStart: 'inherit' });
     expect(toStyles(result)).toEqual({ borderInlineStart: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderInlineStart', () => {
     expect(toStyles(result)).toEqual({ borderInlineStart: 'a' });
   });
 
-  it('should use an interface which marks `borderInlineStart` as optional', () => {
+  it('should use an interface which marks `createBorderInlineStart` as optional', () => {
     const result = createBorderInlineStart<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderInlineStart<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderInlineStart<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderInlineStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderInlineStart', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderInlineStart: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderInlineStart', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderInlineStart: 'a',
       [MQ.D]: {
         borderInlineStart: 'b',

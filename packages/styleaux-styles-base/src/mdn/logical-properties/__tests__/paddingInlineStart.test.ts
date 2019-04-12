@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createPaddingInlineStart } from '../paddingInlineStart';
 
-describe('paddingInlineStart', () => {
+describe('createPaddingInlineStart', () => {
   it('should return a function', () => {
     const result = createPaddingInlineStart();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `paddingInlineStart` as component and css prop', () => {
+  it('should use `createPaddingInlineStart` as component and css prop', () => {
     const result = createPaddingInlineStart()({ paddingInlineStart: 'inherit' });
     expect(toStyles(result)).toEqual({ paddingInlineStart: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('paddingInlineStart', () => {
     expect(toStyles(result)).toEqual({ paddingInlineStart: 'a' });
   });
 
-  it('should use an interface which marks `paddingInlineStart` as optional', () => {
+  it('should use an interface which marks `createPaddingInlineStart` as optional', () => {
     const result = createPaddingInlineStart<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createPaddingInlineStart<'value',never,IThemeWithoutBreakpoints>({
+    const result = createPaddingInlineStart<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ paddingInlineStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('paddingInlineStart', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       paddingInlineStart: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('paddingInlineStart', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       paddingInlineStart: 'a',
       [MQ.D]: {
         paddingInlineStart: 'b',

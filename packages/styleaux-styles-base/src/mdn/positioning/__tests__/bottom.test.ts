@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBottom } from '../bottom';
 
-describe('bottom', () => {
+describe('createBottom', () => {
   it('should return a function', () => {
     const result = createBottom();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `bottom` as component and css prop', () => {
+  it('should use `createBottom` as component and css prop', () => {
     const result = createBottom()({ bottom: 'inherit' });
     expect(toStyles(result)).toEqual({ bottom: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('bottom', () => {
     expect(toStyles(result)).toEqual({ bottom: 'a' });
   });
 
-  it('should use an interface which marks `bottom` as optional', () => {
+  it('should use an interface which marks `createBottom` as optional', () => {
     const result = createBottom<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBottom<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBottom<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ bottom: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('bottom', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       bottom: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('bottom', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       bottom: 'a',
       [MQ.D]: {
         bottom: 'b',

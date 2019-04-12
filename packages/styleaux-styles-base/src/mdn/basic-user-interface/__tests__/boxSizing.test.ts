@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBoxSizing } from '../boxSizing';
 
-describe('boxSizing', () => {
+describe('createBoxSizing', () => {
   it('should return a function', () => {
     const result = createBoxSizing();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `boxSizing` as component and css prop', () => {
+  it('should use `createBoxSizing` as component and css prop', () => {
     const result = createBoxSizing()({ boxSizing: 'inherit' });
     expect(toStyles(result)).toEqual({ boxSizing: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('boxSizing', () => {
     expect(toStyles(result)).toEqual({ boxSizing: 'a' });
   });
 
-  it('should use an interface which marks `boxSizing` as optional', () => {
+  it('should use an interface which marks `createBoxSizing` as optional', () => {
     const result = createBoxSizing<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBoxSizing<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBoxSizing<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ boxSizing: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('boxSizing', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       boxSizing: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('boxSizing', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       boxSizing: 'a',
       [MQ.D]: {
         boxSizing: 'b',

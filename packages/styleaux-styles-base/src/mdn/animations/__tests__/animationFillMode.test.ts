@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createAnimationFillMode } from '../animationFillMode';
 
-describe('animationFillMode', () => {
+describe('createAnimationFillMode', () => {
   it('should return a function', () => {
     const result = createAnimationFillMode();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `animationFillMode` as component and css prop', () => {
+  it('should use `createAnimationFillMode` as component and css prop', () => {
     const result = createAnimationFillMode()({ animationFillMode: 'inherit' });
     expect(toStyles(result)).toEqual({ animationFillMode: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('animationFillMode', () => {
     expect(toStyles(result)).toEqual({ animationFillMode: 'a' });
   });
 
-  it('should use an interface which marks `animationFillMode` as optional', () => {
+  it('should use an interface which marks `createAnimationFillMode` as optional', () => {
     const result = createAnimationFillMode<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createAnimationFillMode<'value',never,IThemeWithoutBreakpoints>({
+    const result = createAnimationFillMode<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ animationFillMode: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('animationFillMode', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       animationFillMode: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('animationFillMode', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       animationFillMode: 'a',
       [MQ.D]: {
         animationFillMode: 'b',

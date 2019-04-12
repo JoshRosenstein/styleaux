@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTextDecorationLine } from '../textDecorationLine';
 
-describe('textDecorationLine', () => {
+describe('createTextDecorationLine', () => {
   it('should return a function', () => {
     const result = createTextDecorationLine();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `textDecorationLine` as component and css prop', () => {
+  it('should use `createTextDecorationLine` as component and css prop', () => {
     const result = createTextDecorationLine()({ textDecorationLine: 'inherit' });
     expect(toStyles(result)).toEqual({ textDecorationLine: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('textDecorationLine', () => {
     expect(toStyles(result)).toEqual({ textDecorationLine: 'a' });
   });
 
-  it('should use an interface which marks `textDecorationLine` as optional', () => {
+  it('should use an interface which marks `createTextDecorationLine` as optional', () => {
     const result = createTextDecorationLine<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTextDecorationLine<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextDecorationLine<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textDecorationLine: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('textDecorationLine', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       textDecorationLine: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('textDecorationLine', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       textDecorationLine: 'a',
       [MQ.D]: {
         textDecorationLine: 'b',

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createRowGap } from '../rowGap';
 
-describe('rowGap', () => {
+describe('createRowGap', () => {
   it('should return a function', () => {
     const result = createRowGap();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `rowGap` as component and css prop', () => {
+  it('should use `createRowGap` as component and css prop', () => {
     const result = createRowGap()({ rowGap: 'inherit' });
     expect(toStyles(result)).toEqual({ rowGap: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('rowGap', () => {
     expect(toStyles(result)).toEqual({ rowGap: 'a' });
   });
 
-  it('should use an interface which marks `rowGap` as optional', () => {
+  it('should use an interface which marks `createRowGap` as optional', () => {
     const result = createRowGap<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createRowGap<'value',never,IThemeWithoutBreakpoints>({
+    const result = createRowGap<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ rowGap: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('rowGap', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       rowGap: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('rowGap', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       rowGap: 'a',
       [MQ.D]: {
         rowGap: 'b',

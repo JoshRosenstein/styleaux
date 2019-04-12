@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderBlockStartColor } from '../borderBlockStartColor';
 
-describe('borderBlockStartColor', () => {
+describe('createBorderBlockStartColor', () => {
   it('should return a function', () => {
     const result = createBorderBlockStartColor();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderBlockStartColor` as component and css prop', () => {
+  it('should use `createBorderBlockStartColor` as component and css prop', () => {
     const result = createBorderBlockStartColor()({ borderBlockStartColor: 'inherit' });
     expect(toStyles(result)).toEqual({ borderBlockStartColor: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderBlockStartColor', () => {
     expect(toStyles(result)).toEqual({ borderBlockStartColor: 'a' });
   });
 
-  it('should use an interface which marks `borderBlockStartColor` as optional', () => {
+  it('should use an interface which marks `createBorderBlockStartColor` as optional', () => {
     const result = createBorderBlockStartColor<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderBlockStartColor<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderBlockStartColor<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderBlockStartColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderBlockStartColor', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderBlockStartColor: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderBlockStartColor', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderBlockStartColor: 'a',
       [MQ.D]: {
         borderBlockStartColor: 'b',

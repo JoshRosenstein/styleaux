@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBackgroundAttachment } from '../backgroundAttachment';
 
-describe('backgroundAttachment', () => {
+describe('createBackgroundAttachment', () => {
   it('should return a function', () => {
     const result = createBackgroundAttachment();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `backgroundAttachment` as component and css prop', () => {
+  it('should use `createBackgroundAttachment` as component and css prop', () => {
     const result = createBackgroundAttachment()({ backgroundAttachment: 'inherit' });
     expect(toStyles(result)).toEqual({ backgroundAttachment: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('backgroundAttachment', () => {
     expect(toStyles(result)).toEqual({ backgroundAttachment: 'a' });
   });
 
-  it('should use an interface which marks `backgroundAttachment` as optional', () => {
+  it('should use an interface which marks `createBackgroundAttachment` as optional', () => {
     const result = createBackgroundAttachment<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBackgroundAttachment<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBackgroundAttachment<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ backgroundAttachment: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('backgroundAttachment', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       backgroundAttachment: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('backgroundAttachment', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       backgroundAttachment: 'a',
       [MQ.D]: {
         backgroundAttachment: 'b',

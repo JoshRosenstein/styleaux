@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createObjectFit } from '../objectFit';
 
-describe('objectFit', () => {
+describe('createObjectFit', () => {
   it('should return a function', () => {
     const result = createObjectFit();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `objectFit` as component and css prop', () => {
+  it('should use `createObjectFit` as component and css prop', () => {
     const result = createObjectFit()({ objectFit: 'inherit' });
     expect(toStyles(result)).toEqual({ objectFit: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('objectFit', () => {
     expect(toStyles(result)).toEqual({ objectFit: 'a' });
   });
 
-  it('should use an interface which marks `objectFit` as optional', () => {
+  it('should use an interface which marks `createObjectFit` as optional', () => {
     const result = createObjectFit<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createObjectFit<'value',never,IThemeWithoutBreakpoints>({
+    const result = createObjectFit<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ objectFit: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('objectFit', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       objectFit: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('objectFit', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       objectFit: 'a',
       [MQ.D]: {
         objectFit: 'b',

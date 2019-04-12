@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createAnimationDuration } from '../animationDuration';
 
-describe('animationDuration', () => {
+describe('createAnimationDuration', () => {
   it('should return a function', () => {
     const result = createAnimationDuration();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `animationDuration` as component and css prop', () => {
+  it('should use `createAnimationDuration` as component and css prop', () => {
     const result = createAnimationDuration()({ animationDuration: 'inherit' });
     expect(toStyles(result)).toEqual({ animationDuration: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('animationDuration', () => {
     expect(toStyles(result)).toEqual({ animationDuration: 'a' });
   });
 
-  it('should use an interface which marks `animationDuration` as optional', () => {
+  it('should use an interface which marks `createAnimationDuration` as optional', () => {
     const result = createAnimationDuration<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createAnimationDuration<'value',never,IThemeWithoutBreakpoints>({
+    const result = createAnimationDuration<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ animationDuration: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('animationDuration', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       animationDuration: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('animationDuration', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       animationDuration: 'a',
       [MQ.D]: {
         animationDuration: 'b',

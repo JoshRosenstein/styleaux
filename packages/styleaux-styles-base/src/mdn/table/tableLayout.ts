@@ -1,34 +1,34 @@
 import { TableLayoutProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const TABLELAYOUT='tableLayout'
 
-export interface ITableLayoutProps<T> {
+export interface TableLayoutProps<T=TableLayoutProperty> {
   /**
    * The **`table-layout`** CSS property sets the algorithm used to lay out `<table>` cells, rows, and columns.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/table-layout
    */
-  tableLayout: T;
+  [TABLELAYOUT]: T;
 }
 
 export const createTableLayout = <
   T = TableLayoutProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<ITableLayoutProps<T>, Theme, Breakpoints>({
-    cssProp: TABLELAYOUT,
-    prop: TABLELAYOUT,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<TableLayoutProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<TableLayoutProps<T>,Theme,Media>({
+    cssProp:TABLELAYOUT,
+    prop:TABLELAYOUT,
     key,
     transformValue,
   })
 
-export const createTableLayoutRule = <T = TableLayoutProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: TABLELAYOUT, getValue: transformer})
+export const createTableLayoutRule = <T = TableLayoutProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: TABLELAYOUT, getValue: transformer})
 
 export const tableLayout =createTableLayout()
 

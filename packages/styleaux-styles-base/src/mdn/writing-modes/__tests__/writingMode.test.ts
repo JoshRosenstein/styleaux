@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createWritingMode } from '../writingMode';
 
-describe('writingMode', () => {
+describe('createWritingMode', () => {
   it('should return a function', () => {
     const result = createWritingMode();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `writingMode` as component and css prop', () => {
+  it('should use `createWritingMode` as component and css prop', () => {
     const result = createWritingMode()({ writingMode: 'inherit' });
     expect(toStyles(result)).toEqual({ writingMode: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('writingMode', () => {
     expect(toStyles(result)).toEqual({ writingMode: 'a' });
   });
 
-  it('should use an interface which marks `writingMode` as optional', () => {
+  it('should use an interface which marks `createWritingMode` as optional', () => {
     const result = createWritingMode<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createWritingMode<'value',never,IThemeWithoutBreakpoints>({
+    const result = createWritingMode<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ writingMode: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('writingMode', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       writingMode: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('writingMode', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       writingMode: 'a',
       [MQ.D]: {
         writingMode: 'b',

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createFlexBasis } from '../flexBasis';
 
-describe('flexBasis', () => {
+describe('createFlexBasis', () => {
   it('should return a function', () => {
     const result = createFlexBasis();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `flexBasis` as component and css prop', () => {
+  it('should use `createFlexBasis` as component and css prop', () => {
     const result = createFlexBasis()({ flexBasis: 'inherit' });
     expect(toStyles(result)).toEqual({ flexBasis: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('flexBasis', () => {
     expect(toStyles(result)).toEqual({ flexBasis: 'a' });
   });
 
-  it('should use an interface which marks `flexBasis` as optional', () => {
+  it('should use an interface which marks `createFlexBasis` as optional', () => {
     const result = createFlexBasis<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createFlexBasis<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFlexBasis<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ flexBasis: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('flexBasis', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       flexBasis: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('flexBasis', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       flexBasis: 'a',
       [MQ.D]: {
         flexBasis: 'b',

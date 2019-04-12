@@ -1,34 +1,34 @@
 import { BorderTopRightRadiusProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BORDERTOPRIGHTRADIUS='borderTopRightRadius'
 
-export interface IBorderTopRightRadiusProps<T> {
+export interface BorderTopRightRadiusProps<T=BorderTopRightRadiusProperty> {
   /**
    * The **`border-top-right-radius`** CSS property rounds the top-right corner of an element.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  borderTopRightRadius: T;
+  [BORDERTOPRIGHTRADIUS]: T;
 }
 
 export const createBorderTopRightRadius = <
   T = BorderTopRightRadiusProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBorderTopRightRadiusProps<T>, Theme, Breakpoints>({
-    cssProp: BORDERTOPRIGHTRADIUS,
-    prop: BORDERTOPRIGHTRADIUS,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BorderTopRightRadiusProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BorderTopRightRadiusProps<T>,Theme,Media>({
+    cssProp:BORDERTOPRIGHTRADIUS,
+    prop:BORDERTOPRIGHTRADIUS,
     key,
     transformValue,
   })
 
-export const createBorderTopRightRadiusRule = <T = BorderTopRightRadiusProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BORDERTOPRIGHTRADIUS, getValue: transformer})
+export const createBorderTopRightRadiusRule = <T = BorderTopRightRadiusProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BORDERTOPRIGHTRADIUS, getValue: transformer})
 
 export const borderTopRightRadius =createBorderTopRightRadius()
 

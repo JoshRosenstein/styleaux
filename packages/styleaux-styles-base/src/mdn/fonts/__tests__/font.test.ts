@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createFont } from '../font';
 
-describe('font', () => {
+describe('createFont', () => {
   it('should return a function', () => {
     const result = createFont();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `font` as component and css prop', () => {
+  it('should use `createFont` as component and css prop', () => {
     const result = createFont()({ font: 'inherit' });
     expect(toStyles(result)).toEqual({ font: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('font', () => {
     expect(toStyles(result)).toEqual({ font: 'a' });
   });
 
-  it('should use an interface which marks `font` as optional', () => {
+  it('should use an interface which marks `createFont` as optional', () => {
     const result = createFont<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createFont<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFont<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ font: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('font', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       font: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('font', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       font: 'a',
       [MQ.D]: {
         font: 'b',

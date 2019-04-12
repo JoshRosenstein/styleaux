@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderTopRightRadius } from '../borderTopRightRadius';
 
-describe('borderTopRightRadius', () => {
+describe('createBorderTopRightRadius', () => {
   it('should return a function', () => {
     const result = createBorderTopRightRadius();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderTopRightRadius` as component and css prop', () => {
+  it('should use `createBorderTopRightRadius` as component and css prop', () => {
     const result = createBorderTopRightRadius()({ borderTopRightRadius: 'inherit' });
     expect(toStyles(result)).toEqual({ borderTopRightRadius: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderTopRightRadius', () => {
     expect(toStyles(result)).toEqual({ borderTopRightRadius: 'a' });
   });
 
-  it('should use an interface which marks `borderTopRightRadius` as optional', () => {
+  it('should use an interface which marks `createBorderTopRightRadius` as optional', () => {
     const result = createBorderTopRightRadius<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderTopRightRadius<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderTopRightRadius<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderTopRightRadius: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderTopRightRadius', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderTopRightRadius: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderTopRightRadius', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderTopRightRadius: 'a',
       [MQ.D]: {
         borderTopRightRadius: 'b',

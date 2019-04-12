@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderBlockColor } from '../borderBlockColor';
 
-describe('borderBlockColor', () => {
+describe('createBorderBlockColor', () => {
   it('should return a function', () => {
     const result = createBorderBlockColor();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderBlockColor` as component and css prop', () => {
+  it('should use `createBorderBlockColor` as component and css prop', () => {
     const result = createBorderBlockColor()({ borderBlockColor: 'inherit' });
     expect(toStyles(result)).toEqual({ borderBlockColor: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderBlockColor', () => {
     expect(toStyles(result)).toEqual({ borderBlockColor: 'a' });
   });
 
-  it('should use an interface which marks `borderBlockColor` as optional', () => {
+  it('should use an interface which marks `createBorderBlockColor` as optional', () => {
     const result = createBorderBlockColor<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderBlockColor<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderBlockColor<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderBlockColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderBlockColor', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderBlockColor: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderBlockColor', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderBlockColor: 'a',
       [MQ.D]: {
         borderBlockColor: 'b',

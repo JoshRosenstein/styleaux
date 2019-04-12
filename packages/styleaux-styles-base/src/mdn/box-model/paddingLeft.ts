@@ -1,34 +1,34 @@
 import { PaddingLeftProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const PADDINGLEFT='paddingLeft'
 
-export interface IPaddingLeftProps<T> {
+export interface PaddingLeftProps<T=PaddingLeftProperty> {
   /**
    * The **`padding-left`** CSS property sets the width of the padding area on the top of an element.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-left
    */
-  paddingLeft: T;
+  [PADDINGLEFT]: T;
 }
 
 export const createPaddingLeft = <
   T = PaddingLeftProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IPaddingLeftProps<T>, Theme, Breakpoints>({
-    cssProp: PADDINGLEFT,
-    prop: PADDINGLEFT,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<PaddingLeftProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<PaddingLeftProps<T>,Theme,Media>({
+    cssProp:PADDINGLEFT,
+    prop:PADDINGLEFT,
     key,
     transformValue,
   })
 
-export const createPaddingLeftRule = <T = PaddingLeftProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: PADDINGLEFT, getValue: transformer})
+export const createPaddingLeftRule = <T = PaddingLeftProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: PADDINGLEFT, getValue: transformer})
 
 export const paddingLeft =createPaddingLeft()
 

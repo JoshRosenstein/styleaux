@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createOutlineColor } from '../outlineColor';
 
-describe('outlineColor', () => {
+describe('createOutlineColor', () => {
   it('should return a function', () => {
     const result = createOutlineColor();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `outlineColor` as component and css prop', () => {
+  it('should use `createOutlineColor` as component and css prop', () => {
     const result = createOutlineColor()({ outlineColor: 'inherit' });
     expect(toStyles(result)).toEqual({ outlineColor: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('outlineColor', () => {
     expect(toStyles(result)).toEqual({ outlineColor: 'a' });
   });
 
-  it('should use an interface which marks `outlineColor` as optional', () => {
+  it('should use an interface which marks `createOutlineColor` as optional', () => {
     const result = createOutlineColor<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createOutlineColor<'value',never,IThemeWithoutBreakpoints>({
+    const result = createOutlineColor<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ outlineColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('outlineColor', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       outlineColor: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('outlineColor', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       outlineColor: 'a',
       [MQ.D]: {
         outlineColor: 'b',

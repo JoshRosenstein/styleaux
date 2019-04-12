@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBackgroundPosition } from '../backgroundPosition';
 
-describe('backgroundPosition', () => {
+describe('createBackgroundPosition', () => {
   it('should return a function', () => {
     const result = createBackgroundPosition();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `backgroundPosition` as component and css prop', () => {
+  it('should use `createBackgroundPosition` as component and css prop', () => {
     const result = createBackgroundPosition()({ backgroundPosition: 'inherit' });
     expect(toStyles(result)).toEqual({ backgroundPosition: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('backgroundPosition', () => {
     expect(toStyles(result)).toEqual({ backgroundPosition: 'a' });
   });
 
-  it('should use an interface which marks `backgroundPosition` as optional', () => {
+  it('should use an interface which marks `createBackgroundPosition` as optional', () => {
     const result = createBackgroundPosition<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBackgroundPosition<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBackgroundPosition<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ backgroundPosition: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('backgroundPosition', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       backgroundPosition: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('backgroundPosition', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       backgroundPosition: 'a',
       [MQ.D]: {
         backgroundPosition: 'b',

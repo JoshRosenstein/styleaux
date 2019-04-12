@@ -1,34 +1,34 @@
 import { GridAutoColumnsProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const GRIDAUTOCOLUMNS='gridAutoColumns'
 
-export interface IGridAutoColumnsProps<T> {
+export interface GridAutoColumnsProps<T=GridAutoColumnsProperty> {
   /**
    * The **`grid-auto-columns`** CSS property specifies the size of an implicitly-created grid column track.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-auto-columns
    */
-  gridAutoColumns: T;
+  [GRIDAUTOCOLUMNS]: T;
 }
 
 export const createGridAutoColumns = <
   T = GridAutoColumnsProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IGridAutoColumnsProps<T>, Theme, Breakpoints>({
-    cssProp: GRIDAUTOCOLUMNS,
-    prop: GRIDAUTOCOLUMNS,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<GridAutoColumnsProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<GridAutoColumnsProps<T>,Theme,Media>({
+    cssProp:GRIDAUTOCOLUMNS,
+    prop:GRIDAUTOCOLUMNS,
     key,
     transformValue,
   })
 
-export const createGridAutoColumnsRule = <T = GridAutoColumnsProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: GRIDAUTOCOLUMNS, getValue: transformer})
+export const createGridAutoColumnsRule = <T = GridAutoColumnsProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: GRIDAUTOCOLUMNS, getValue: transformer})
 
 export const gridAutoColumns =createGridAutoColumns()
 

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderTopLeftRadius } from '../borderTopLeftRadius';
 
-describe('borderTopLeftRadius', () => {
+describe('createBorderTopLeftRadius', () => {
   it('should return a function', () => {
     const result = createBorderTopLeftRadius();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderTopLeftRadius` as component and css prop', () => {
+  it('should use `createBorderTopLeftRadius` as component and css prop', () => {
     const result = createBorderTopLeftRadius()({ borderTopLeftRadius: 'inherit' });
     expect(toStyles(result)).toEqual({ borderTopLeftRadius: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderTopLeftRadius', () => {
     expect(toStyles(result)).toEqual({ borderTopLeftRadius: 'a' });
   });
 
-  it('should use an interface which marks `borderTopLeftRadius` as optional', () => {
+  it('should use an interface which marks `createBorderTopLeftRadius` as optional', () => {
     const result = createBorderTopLeftRadius<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderTopLeftRadius<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderTopLeftRadius<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderTopLeftRadius: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderTopLeftRadius', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderTopLeftRadius: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderTopLeftRadius', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderTopLeftRadius: 'a',
       [MQ.D]: {
         borderTopLeftRadius: 'b',

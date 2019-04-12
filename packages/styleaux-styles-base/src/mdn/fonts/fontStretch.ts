@@ -1,34 +1,34 @@
 import { FontStretchProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const FONTSTRETCH='fontStretch'
 
-export interface IFontStretchProps<T> {
+export interface FontStretchProps<T=FontStretchProperty> {
   /**
    * The **`font-stretch`** CSS property selects a normal, condensed, or expanded face from a font.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-stretch
    */
-  fontStretch: T;
+  [FONTSTRETCH]: T;
 }
 
 export const createFontStretch = <
   T = FontStretchProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IFontStretchProps<T>, Theme, Breakpoints>({
-    cssProp: FONTSTRETCH,
-    prop: FONTSTRETCH,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<FontStretchProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<FontStretchProps<T>,Theme,Media>({
+    cssProp:FONTSTRETCH,
+    prop:FONTSTRETCH,
     key,
     transformValue,
   })
 
-export const createFontStretchRule = <T = FontStretchProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: FONTSTRETCH, getValue: transformer})
+export const createFontStretchRule = <T = FontStretchProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: FONTSTRETCH, getValue: transformer})
 
 export const fontStretch =createFontStretch()
 

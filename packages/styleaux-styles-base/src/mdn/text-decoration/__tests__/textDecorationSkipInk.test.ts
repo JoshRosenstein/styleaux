@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTextDecorationSkipInk } from '../textDecorationSkipInk';
 
-describe('textDecorationSkipInk', () => {
+describe('createTextDecorationSkipInk', () => {
   it('should return a function', () => {
     const result = createTextDecorationSkipInk();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `textDecorationSkipInk` as component and css prop', () => {
+  it('should use `createTextDecorationSkipInk` as component and css prop', () => {
     const result = createTextDecorationSkipInk()({ textDecorationSkipInk: 'inherit' });
     expect(toStyles(result)).toEqual({ textDecorationSkipInk: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('textDecorationSkipInk', () => {
     expect(toStyles(result)).toEqual({ textDecorationSkipInk: 'a' });
   });
 
-  it('should use an interface which marks `textDecorationSkipInk` as optional', () => {
+  it('should use an interface which marks `createTextDecorationSkipInk` as optional', () => {
     const result = createTextDecorationSkipInk<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTextDecorationSkipInk<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextDecorationSkipInk<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textDecorationSkipInk: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('textDecorationSkipInk', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       textDecorationSkipInk: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('textDecorationSkipInk', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       textDecorationSkipInk: 'a',
       [MQ.D]: {
         textDecorationSkipInk: 'b',

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createDisplay } from '../display';
 
-describe('display', () => {
+describe('createDisplay', () => {
   it('should return a function', () => {
     const result = createDisplay();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `display` as component and css prop', () => {
+  it('should use `createDisplay` as component and css prop', () => {
     const result = createDisplay()({ display: 'inherit' });
     expect(toStyles(result)).toEqual({ display: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('display', () => {
     expect(toStyles(result)).toEqual({ display: 'a' });
   });
 
-  it('should use an interface which marks `display` as optional', () => {
+  it('should use an interface which marks `createDisplay` as optional', () => {
     const result = createDisplay<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createDisplay<'value',never,IThemeWithoutBreakpoints>({
+    const result = createDisplay<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ display: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('display', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       display: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('display', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       display: 'a',
       [MQ.D]: {
         display: 'b',

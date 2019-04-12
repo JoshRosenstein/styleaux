@@ -1,34 +1,34 @@
 import { ScrollMarginBlockProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const SCROLLMARGINBLOCK='scrollMarginBlock'
 
-export interface IScrollMarginBlockProps<T> {
+export interface ScrollMarginBlockProps<T=ScrollMarginBlockProperty> {
   /**
    * The `scroll-margin-block` property is a shorthand property which sets the scroll-margin longhands in the block dimension.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block
    */
-  scrollMarginBlock: T;
+  [SCROLLMARGINBLOCK]: T;
 }
 
 export const createScrollMarginBlock = <
   T = ScrollMarginBlockProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IScrollMarginBlockProps<T>, Theme, Breakpoints>({
-    cssProp: SCROLLMARGINBLOCK,
-    prop: SCROLLMARGINBLOCK,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<ScrollMarginBlockProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<ScrollMarginBlockProps<T>,Theme,Media>({
+    cssProp:SCROLLMARGINBLOCK,
+    prop:SCROLLMARGINBLOCK,
     key,
     transformValue,
   })
 
-export const createScrollMarginBlockRule = <T = ScrollMarginBlockProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: SCROLLMARGINBLOCK, getValue: transformer})
+export const createScrollMarginBlockRule = <T = ScrollMarginBlockProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: SCROLLMARGINBLOCK, getValue: transformer})
 
 export const scrollMarginBlock =createScrollMarginBlock()
 

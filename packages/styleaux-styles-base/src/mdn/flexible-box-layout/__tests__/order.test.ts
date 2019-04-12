@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createOrder } from '../order';
 
-describe('order', () => {
+describe('createOrder', () => {
   it('should return a function', () => {
     const result = createOrder();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `order` as component and css prop', () => {
+  it('should use `createOrder` as component and css prop', () => {
     const result = createOrder()({ order: 'inherit' });
     expect(toStyles(result)).toEqual({ order: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('order', () => {
     expect(toStyles(result)).toEqual({ order: 'a' });
   });
 
-  it('should use an interface which marks `order` as optional', () => {
+  it('should use an interface which marks `createOrder` as optional', () => {
     const result = createOrder<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createOrder<'value',never,IThemeWithoutBreakpoints>({
+    const result = createOrder<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ order: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('order', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       order: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('order', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       order: 'a',
       [MQ.D]: {
         order: 'b',

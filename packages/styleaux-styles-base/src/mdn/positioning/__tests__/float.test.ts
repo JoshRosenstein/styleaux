@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createFloat } from '../float';
 
-describe('float', () => {
+describe('createFloat', () => {
   it('should return a function', () => {
     const result = createFloat();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `float` as component and css prop', () => {
+  it('should use `createFloat` as component and css prop', () => {
     const result = createFloat()({ float: 'inherit' });
     expect(toStyles(result)).toEqual({ float: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('float', () => {
     expect(toStyles(result)).toEqual({ float: 'a' });
   });
 
-  it('should use an interface which marks `float` as optional', () => {
+  it('should use an interface which marks `createFloat` as optional', () => {
     const result = createFloat<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createFloat<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFloat<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ float: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('float', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       float: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('float', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       float: 'a',
       [MQ.D]: {
         float: 'b',

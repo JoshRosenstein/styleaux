@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createFontVariantLigatures } from '../fontVariantLigatures';
 
-describe('fontVariantLigatures', () => {
+describe('createFontVariantLigatures', () => {
   it('should return a function', () => {
     const result = createFontVariantLigatures();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `fontVariantLigatures` as component and css prop', () => {
+  it('should use `createFontVariantLigatures` as component and css prop', () => {
     const result = createFontVariantLigatures()({ fontVariantLigatures: 'inherit' });
     expect(toStyles(result)).toEqual({ fontVariantLigatures: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('fontVariantLigatures', () => {
     expect(toStyles(result)).toEqual({ fontVariantLigatures: 'a' });
   });
 
-  it('should use an interface which marks `fontVariantLigatures` as optional', () => {
+  it('should use an interface which marks `createFontVariantLigatures` as optional', () => {
     const result = createFontVariantLigatures<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createFontVariantLigatures<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFontVariantLigatures<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontVariantLigatures: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('fontVariantLigatures', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       fontVariantLigatures: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('fontVariantLigatures', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       fontVariantLigatures: 'a',
       [MQ.D]: {
         fontVariantLigatures: 'b',

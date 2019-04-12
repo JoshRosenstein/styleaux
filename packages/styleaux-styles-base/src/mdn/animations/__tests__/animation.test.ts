@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createAnimation } from '../animation';
 
-describe('animation', () => {
+describe('createAnimation', () => {
   it('should return a function', () => {
     const result = createAnimation();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `animation` as component and css prop', () => {
+  it('should use `createAnimation` as component and css prop', () => {
     const result = createAnimation()({ animation: 'inherit' });
     expect(toStyles(result)).toEqual({ animation: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('animation', () => {
     expect(toStyles(result)).toEqual({ animation: 'a' });
   });
 
-  it('should use an interface which marks `animation` as optional', () => {
+  it('should use an interface which marks `createAnimation` as optional', () => {
     const result = createAnimation<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createAnimation<'value',never,IThemeWithoutBreakpoints>({
+    const result = createAnimation<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ animation: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('animation', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       animation: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('animation', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       animation: 'a',
       [MQ.D]: {
         animation: 'b',

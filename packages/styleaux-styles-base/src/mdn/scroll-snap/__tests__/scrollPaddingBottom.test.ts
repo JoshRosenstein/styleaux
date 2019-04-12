@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createScrollPaddingBottom } from '../scrollPaddingBottom';
 
-describe('scrollPaddingBottom', () => {
+describe('createScrollPaddingBottom', () => {
   it('should return a function', () => {
     const result = createScrollPaddingBottom();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `scrollPaddingBottom` as component and css prop', () => {
+  it('should use `createScrollPaddingBottom` as component and css prop', () => {
     const result = createScrollPaddingBottom()({ scrollPaddingBottom: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollPaddingBottom: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('scrollPaddingBottom', () => {
     expect(toStyles(result)).toEqual({ scrollPaddingBottom: 'a' });
   });
 
-  it('should use an interface which marks `scrollPaddingBottom` as optional', () => {
+  it('should use an interface which marks `createScrollPaddingBottom` as optional', () => {
     const result = createScrollPaddingBottom<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollPaddingBottom<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollPaddingBottom<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollPaddingBottom: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('scrollPaddingBottom', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       scrollPaddingBottom: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('scrollPaddingBottom', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       scrollPaddingBottom: 'a',
       [MQ.D]: {
         scrollPaddingBottom: 'b',

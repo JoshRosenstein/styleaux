@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createScrollPadding } from '../scrollPadding';
 
-describe('scrollPadding', () => {
+describe('createScrollPadding', () => {
   it('should return a function', () => {
     const result = createScrollPadding();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `scrollPadding` as component and css prop', () => {
+  it('should use `createScrollPadding` as component and css prop', () => {
     const result = createScrollPadding()({ scrollPadding: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollPadding: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('scrollPadding', () => {
     expect(toStyles(result)).toEqual({ scrollPadding: 'a' });
   });
 
-  it('should use an interface which marks `scrollPadding` as optional', () => {
+  it('should use an interface which marks `createScrollPadding` as optional', () => {
     const result = createScrollPadding<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollPadding<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollPadding<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollPadding: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('scrollPadding', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       scrollPadding: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('scrollPadding', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       scrollPadding: 'a',
       [MQ.D]: {
         scrollPadding: 'b',

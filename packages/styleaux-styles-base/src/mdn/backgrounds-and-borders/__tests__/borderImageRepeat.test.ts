@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderImageRepeat } from '../borderImageRepeat';
 
-describe('borderImageRepeat', () => {
+describe('createBorderImageRepeat', () => {
   it('should return a function', () => {
     const result = createBorderImageRepeat();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderImageRepeat` as component and css prop', () => {
+  it('should use `createBorderImageRepeat` as component and css prop', () => {
     const result = createBorderImageRepeat()({ borderImageRepeat: 'inherit' });
     expect(toStyles(result)).toEqual({ borderImageRepeat: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderImageRepeat', () => {
     expect(toStyles(result)).toEqual({ borderImageRepeat: 'a' });
   });
 
-  it('should use an interface which marks `borderImageRepeat` as optional', () => {
+  it('should use an interface which marks `createBorderImageRepeat` as optional', () => {
     const result = createBorderImageRepeat<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderImageRepeat<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderImageRepeat<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderImageRepeat: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderImageRepeat', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderImageRepeat: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderImageRepeat', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderImageRepeat: 'a',
       [MQ.D]: {
         borderImageRepeat: 'b',

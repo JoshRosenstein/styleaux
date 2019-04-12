@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createOffsetRotate } from '../offsetRotate';
 
-describe('offsetRotate', () => {
+describe('createOffsetRotate', () => {
   it('should return a function', () => {
     const result = createOffsetRotate();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `offsetRotate` as component and css prop', () => {
+  it('should use `createOffsetRotate` as component and css prop', () => {
     const result = createOffsetRotate()({ offsetRotate: 'inherit' });
     expect(toStyles(result)).toEqual({ offsetRotate: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('offsetRotate', () => {
     expect(toStyles(result)).toEqual({ offsetRotate: 'a' });
   });
 
-  it('should use an interface which marks `offsetRotate` as optional', () => {
+  it('should use an interface which marks `createOffsetRotate` as optional', () => {
     const result = createOffsetRotate<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createOffsetRotate<'value',never,IThemeWithoutBreakpoints>({
+    const result = createOffsetRotate<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ offsetRotate: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('offsetRotate', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       offsetRotate: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('offsetRotate', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       offsetRotate: 'a',
       [MQ.D]: {
         offsetRotate: 'b',

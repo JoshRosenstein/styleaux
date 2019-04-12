@@ -1,34 +1,34 @@
 import { AnimationDelayProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const ANIMATIONDELAY='animationDelay'
 
-export interface IAnimationDelayProps<T> {
+export interface AnimationDelayProps<T=AnimationDelayProperty> {
   /**
    * The **`animation-delay`** CSS property sets when an animation starts. The animation can start later, immediately from its beginning, or immediately and partway through the animation.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-delay
    */
-  animationDelay: T;
+  [ANIMATIONDELAY]: T;
 }
 
 export const createAnimationDelay = <
   T = AnimationDelayProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IAnimationDelayProps<T>, Theme, Breakpoints>({
-    cssProp: ANIMATIONDELAY,
-    prop: ANIMATIONDELAY,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<AnimationDelayProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<AnimationDelayProps<T>,Theme,Media>({
+    cssProp:ANIMATIONDELAY,
+    prop:ANIMATIONDELAY,
     key,
     transformValue,
   })
 
-export const createAnimationDelayRule = <T = AnimationDelayProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: ANIMATIONDELAY, getValue: transformer})
+export const createAnimationDelayRule = <T = AnimationDelayProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: ANIMATIONDELAY, getValue: transformer})
 
 export const animationDelay =createAnimationDelay()
 

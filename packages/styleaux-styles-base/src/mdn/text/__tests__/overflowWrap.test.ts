@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createOverflowWrap } from '../overflowWrap';
 
-describe('overflowWrap', () => {
+describe('createOverflowWrap', () => {
   it('should return a function', () => {
     const result = createOverflowWrap();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `overflowWrap` as component and css prop', () => {
+  it('should use `createOverflowWrap` as component and css prop', () => {
     const result = createOverflowWrap()({ overflowWrap: 'inherit' });
     expect(toStyles(result)).toEqual({ overflowWrap: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('overflowWrap', () => {
     expect(toStyles(result)).toEqual({ overflowWrap: 'a' });
   });
 
-  it('should use an interface which marks `overflowWrap` as optional', () => {
+  it('should use an interface which marks `createOverflowWrap` as optional', () => {
     const result = createOverflowWrap<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createOverflowWrap<'value',never,IThemeWithoutBreakpoints>({
+    const result = createOverflowWrap<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ overflowWrap: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('overflowWrap', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       overflowWrap: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('overflowWrap', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       overflowWrap: 'a',
       [MQ.D]: {
         overflowWrap: 'b',

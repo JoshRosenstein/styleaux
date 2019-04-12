@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBlockSize } from '../blockSize';
 
-describe('blockSize', () => {
+describe('createBlockSize', () => {
   it('should return a function', () => {
     const result = createBlockSize();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `blockSize` as component and css prop', () => {
+  it('should use `createBlockSize` as component and css prop', () => {
     const result = createBlockSize()({ blockSize: 'inherit' });
     expect(toStyles(result)).toEqual({ blockSize: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('blockSize', () => {
     expect(toStyles(result)).toEqual({ blockSize: 'a' });
   });
 
-  it('should use an interface which marks `blockSize` as optional', () => {
+  it('should use an interface which marks `createBlockSize` as optional', () => {
     const result = createBlockSize<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBlockSize<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBlockSize<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ blockSize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('blockSize', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       blockSize: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('blockSize', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       blockSize: 'a',
       [MQ.D]: {
         blockSize: 'b',

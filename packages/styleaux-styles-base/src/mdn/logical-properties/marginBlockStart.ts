@@ -1,34 +1,34 @@
 import { MarginBlockStartProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const MARGINBLOCKSTART='marginBlockStart'
 
-export interface IMarginBlockStartProps<T> {
+export interface MarginBlockStartProps<T=MarginBlockStartProperty> {
   /**
    * The **`margin-block-start`** CSS property defines the logical block start margin of an element, which maps to a physical margin depending on the element's writing mode, directionality, and text orientation.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-block-start
    */
-  marginBlockStart: T;
+  [MARGINBLOCKSTART]: T;
 }
 
 export const createMarginBlockStart = <
   T = MarginBlockStartProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IMarginBlockStartProps<T>, Theme, Breakpoints>({
-    cssProp: MARGINBLOCKSTART,
-    prop: MARGINBLOCKSTART,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<MarginBlockStartProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<MarginBlockStartProps<T>,Theme,Media>({
+    cssProp:MARGINBLOCKSTART,
+    prop:MARGINBLOCKSTART,
     key,
     transformValue,
   })
 
-export const createMarginBlockStartRule = <T = MarginBlockStartProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: MARGINBLOCKSTART, getValue: transformer})
+export const createMarginBlockStartRule = <T = MarginBlockStartProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: MARGINBLOCKSTART, getValue: transformer})
 
 export const marginBlockStart =createMarginBlockStart()
 

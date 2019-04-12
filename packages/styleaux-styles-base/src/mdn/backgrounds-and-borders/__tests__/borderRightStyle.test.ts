@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderRightStyle } from '../borderRightStyle';
 
-describe('borderRightStyle', () => {
+describe('createBorderRightStyle', () => {
   it('should return a function', () => {
     const result = createBorderRightStyle();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderRightStyle` as component and css prop', () => {
+  it('should use `createBorderRightStyle` as component and css prop', () => {
     const result = createBorderRightStyle()({ borderRightStyle: 'inherit' });
     expect(toStyles(result)).toEqual({ borderRightStyle: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderRightStyle', () => {
     expect(toStyles(result)).toEqual({ borderRightStyle: 'a' });
   });
 
-  it('should use an interface which marks `borderRightStyle` as optional', () => {
+  it('should use an interface which marks `createBorderRightStyle` as optional', () => {
     const result = createBorderRightStyle<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderRightStyle<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderRightStyle<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderRightStyle: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderRightStyle', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderRightStyle: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderRightStyle', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderRightStyle: 'a',
       [MQ.D]: {
         borderRightStyle: 'b',

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createListStyleType } from '../listStyleType';
 
-describe('listStyleType', () => {
+describe('createListStyleType', () => {
   it('should return a function', () => {
     const result = createListStyleType();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `listStyleType` as component and css prop', () => {
+  it('should use `createListStyleType` as component and css prop', () => {
     const result = createListStyleType()({ listStyleType: 'inherit' });
     expect(toStyles(result)).toEqual({ listStyleType: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('listStyleType', () => {
     expect(toStyles(result)).toEqual({ listStyleType: 'a' });
   });
 
-  it('should use an interface which marks `listStyleType` as optional', () => {
+  it('should use an interface which marks `createListStyleType` as optional', () => {
     const result = createListStyleType<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createListStyleType<'value',never,IThemeWithoutBreakpoints>({
+    const result = createListStyleType<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ listStyleType: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('listStyleType', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       listStyleType: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('listStyleType', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       listStyleType: 'a',
       [MQ.D]: {
         listStyleType: 'b',

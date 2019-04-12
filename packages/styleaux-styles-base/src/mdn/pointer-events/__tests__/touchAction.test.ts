@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTouchAction } from '../touchAction';
 
-describe('touchAction', () => {
+describe('createTouchAction', () => {
   it('should return a function', () => {
     const result = createTouchAction();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `touchAction` as component and css prop', () => {
+  it('should use `createTouchAction` as component and css prop', () => {
     const result = createTouchAction()({ touchAction: 'inherit' });
     expect(toStyles(result)).toEqual({ touchAction: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('touchAction', () => {
     expect(toStyles(result)).toEqual({ touchAction: 'a' });
   });
 
-  it('should use an interface which marks `touchAction` as optional', () => {
+  it('should use an interface which marks `createTouchAction` as optional', () => {
     const result = createTouchAction<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTouchAction<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTouchAction<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ touchAction: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('touchAction', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       touchAction: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('touchAction', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       touchAction: 'a',
       [MQ.D]: {
         touchAction: 'b',

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBackgroundOrigin } from '../backgroundOrigin';
 
-describe('backgroundOrigin', () => {
+describe('createBackgroundOrigin', () => {
   it('should return a function', () => {
     const result = createBackgroundOrigin();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `backgroundOrigin` as component and css prop', () => {
+  it('should use `createBackgroundOrigin` as component and css prop', () => {
     const result = createBackgroundOrigin()({ backgroundOrigin: 'inherit' });
     expect(toStyles(result)).toEqual({ backgroundOrigin: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('backgroundOrigin', () => {
     expect(toStyles(result)).toEqual({ backgroundOrigin: 'a' });
   });
 
-  it('should use an interface which marks `backgroundOrigin` as optional', () => {
+  it('should use an interface which marks `createBackgroundOrigin` as optional', () => {
     const result = createBackgroundOrigin<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBackgroundOrigin<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBackgroundOrigin<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ backgroundOrigin: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('backgroundOrigin', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       backgroundOrigin: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('backgroundOrigin', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       backgroundOrigin: 'a',
       [MQ.D]: {
         backgroundOrigin: 'b',

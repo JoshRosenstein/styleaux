@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createPaintOrder } from '../paintOrder';
 
-describe('paintOrder', () => {
+describe('createPaintOrder', () => {
   it('should return a function', () => {
     const result = createPaintOrder();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `paintOrder` as component and css prop', () => {
+  it('should use `createPaintOrder` as component and css prop', () => {
     const result = createPaintOrder()({ paintOrder: 'inherit' });
     expect(toStyles(result)).toEqual({ paintOrder: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('paintOrder', () => {
     expect(toStyles(result)).toEqual({ paintOrder: 'a' });
   });
 
-  it('should use an interface which marks `paintOrder` as optional', () => {
+  it('should use an interface which marks `createPaintOrder` as optional', () => {
     const result = createPaintOrder<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createPaintOrder<'value',never,IThemeWithoutBreakpoints>({
+    const result = createPaintOrder<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ paintOrder: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('paintOrder', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       paintOrder: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('paintOrder', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       paintOrder: 'a',
       [MQ.D]: {
         paintOrder: 'b',

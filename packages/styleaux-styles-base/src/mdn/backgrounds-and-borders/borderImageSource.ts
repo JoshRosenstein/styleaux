@@ -1,34 +1,34 @@
 import { BorderImageSourceProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BORDERIMAGESOURCE='borderImageSource'
 
-export interface IBorderImageSourceProps<T> {
+export interface BorderImageSourceProps<T=BorderImageSourceProperty> {
   /**
    * The **`border-image-source`** CSS property sets the source image used to create an element's border image.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image-source
    */
-  borderImageSource: T;
+  [BORDERIMAGESOURCE]: T;
 }
 
 export const createBorderImageSource = <
   T = BorderImageSourceProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBorderImageSourceProps<T>, Theme, Breakpoints>({
-    cssProp: BORDERIMAGESOURCE,
-    prop: BORDERIMAGESOURCE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BorderImageSourceProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BorderImageSourceProps<T>,Theme,Media>({
+    cssProp:BORDERIMAGESOURCE,
+    prop:BORDERIMAGESOURCE,
     key,
     transformValue,
   })
 
-export const createBorderImageSourceRule = <T = BorderImageSourceProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BORDERIMAGESOURCE, getValue: transformer})
+export const createBorderImageSourceRule = <T = BorderImageSourceProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BORDERIMAGESOURCE, getValue: transformer})
 
 export const borderImageSource =createBorderImageSource()
 

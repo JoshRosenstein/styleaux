@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTextOrientation } from '../textOrientation';
 
-describe('textOrientation', () => {
+describe('createTextOrientation', () => {
   it('should return a function', () => {
     const result = createTextOrientation();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `textOrientation` as component and css prop', () => {
+  it('should use `createTextOrientation` as component and css prop', () => {
     const result = createTextOrientation()({ textOrientation: 'inherit' });
     expect(toStyles(result)).toEqual({ textOrientation: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('textOrientation', () => {
     expect(toStyles(result)).toEqual({ textOrientation: 'a' });
   });
 
-  it('should use an interface which marks `textOrientation` as optional', () => {
+  it('should use an interface which marks `createTextOrientation` as optional', () => {
     const result = createTextOrientation<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTextOrientation<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextOrientation<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textOrientation: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('textOrientation', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       textOrientation: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('textOrientation', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       textOrientation: 'a',
       [MQ.D]: {
         textOrientation: 'b',

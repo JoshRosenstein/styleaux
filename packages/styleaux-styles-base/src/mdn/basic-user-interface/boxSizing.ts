@@ -1,34 +1,34 @@
 import { BoxSizingProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BOXSIZING='boxSizing'
 
-export interface IBoxSizingProps<T> {
+export interface BoxSizingProps<T=BoxSizingProperty> {
   /**
    * The **`box-sizing`** CSS property defines how the user agent should calculate the total width and height of an element.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/box-sizing
    */
-  boxSizing: T;
+  [BOXSIZING]: T;
 }
 
 export const createBoxSizing = <
   T = BoxSizingProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBoxSizingProps<T>, Theme, Breakpoints>({
-    cssProp: BOXSIZING,
-    prop: BOXSIZING,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BoxSizingProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BoxSizingProps<T>,Theme,Media>({
+    cssProp:BOXSIZING,
+    prop:BOXSIZING,
     key,
     transformValue,
   })
 
-export const createBoxSizingRule = <T = BoxSizingProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BOXSIZING, getValue: transformer})
+export const createBoxSizingRule = <T = BoxSizingProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BOXSIZING, getValue: transformer})
 
 export const boxSizing =createBoxSizing()
 

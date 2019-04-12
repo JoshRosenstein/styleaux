@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBackfaceVisibility } from '../backfaceVisibility';
 
-describe('backfaceVisibility', () => {
+describe('createBackfaceVisibility', () => {
   it('should return a function', () => {
     const result = createBackfaceVisibility();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `backfaceVisibility` as component and css prop', () => {
+  it('should use `createBackfaceVisibility` as component and css prop', () => {
     const result = createBackfaceVisibility()({ backfaceVisibility: 'inherit' });
     expect(toStyles(result)).toEqual({ backfaceVisibility: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('backfaceVisibility', () => {
     expect(toStyles(result)).toEqual({ backfaceVisibility: 'a' });
   });
 
-  it('should use an interface which marks `backfaceVisibility` as optional', () => {
+  it('should use an interface which marks `createBackfaceVisibility` as optional', () => {
     const result = createBackfaceVisibility<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBackfaceVisibility<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBackfaceVisibility<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ backfaceVisibility: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('backfaceVisibility', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       backfaceVisibility: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('backfaceVisibility', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       backfaceVisibility: 'a',
       [MQ.D]: {
         backfaceVisibility: 'b',

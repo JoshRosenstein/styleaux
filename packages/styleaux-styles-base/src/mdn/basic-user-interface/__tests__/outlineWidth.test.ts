@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createOutlineWidth } from '../outlineWidth';
 
-describe('outlineWidth', () => {
+describe('createOutlineWidth', () => {
   it('should return a function', () => {
     const result = createOutlineWidth();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `outlineWidth` as component and css prop', () => {
+  it('should use `createOutlineWidth` as component and css prop', () => {
     const result = createOutlineWidth()({ outlineWidth: 'inherit' });
     expect(toStyles(result)).toEqual({ outlineWidth: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('outlineWidth', () => {
     expect(toStyles(result)).toEqual({ outlineWidth: 'a' });
   });
 
-  it('should use an interface which marks `outlineWidth` as optional', () => {
+  it('should use an interface which marks `createOutlineWidth` as optional', () => {
     const result = createOutlineWidth<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createOutlineWidth<'value',never,IThemeWithoutBreakpoints>({
+    const result = createOutlineWidth<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ outlineWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('outlineWidth', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       outlineWidth: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('outlineWidth', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       outlineWidth: 'a',
       [MQ.D]: {
         outlineWidth: 'b',

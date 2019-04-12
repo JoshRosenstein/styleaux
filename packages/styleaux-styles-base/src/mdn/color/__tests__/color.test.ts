@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createColor } from '../color';
 
-describe('color', () => {
+describe('createColor', () => {
   it('should return a function', () => {
     const result = createColor();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `color` as component and css prop', () => {
+  it('should use `createColor` as component and css prop', () => {
     const result = createColor()({ color: 'inherit' });
     expect(toStyles(result)).toEqual({ color: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('color', () => {
     expect(toStyles(result)).toEqual({ color: 'a' });
   });
 
-  it('should use an interface which marks `color` as optional', () => {
+  it('should use an interface which marks `createColor` as optional', () => {
     const result = createColor<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createColor<'value',never,IThemeWithoutBreakpoints>({
+    const result = createColor<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ color: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('color', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       color: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('color', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       color: 'a',
       [MQ.D]: {
         color: 'b',

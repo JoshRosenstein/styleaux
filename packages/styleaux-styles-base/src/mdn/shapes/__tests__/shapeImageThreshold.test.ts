@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createShapeImageThreshold } from '../shapeImageThreshold';
 
-describe('shapeImageThreshold', () => {
+describe('createShapeImageThreshold', () => {
   it('should return a function', () => {
     const result = createShapeImageThreshold();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `shapeImageThreshold` as component and css prop', () => {
+  it('should use `createShapeImageThreshold` as component and css prop', () => {
     const result = createShapeImageThreshold()({ shapeImageThreshold: 'inherit' });
     expect(toStyles(result)).toEqual({ shapeImageThreshold: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('shapeImageThreshold', () => {
     expect(toStyles(result)).toEqual({ shapeImageThreshold: 'a' });
   });
 
-  it('should use an interface which marks `shapeImageThreshold` as optional', () => {
+  it('should use an interface which marks `createShapeImageThreshold` as optional', () => {
     const result = createShapeImageThreshold<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createShapeImageThreshold<'value',never,IThemeWithoutBreakpoints>({
+    const result = createShapeImageThreshold<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ shapeImageThreshold: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('shapeImageThreshold', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       shapeImageThreshold: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('shapeImageThreshold', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       shapeImageThreshold: 'a',
       [MQ.D]: {
         shapeImageThreshold: 'b',

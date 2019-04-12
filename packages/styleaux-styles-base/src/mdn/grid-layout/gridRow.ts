@@ -1,34 +1,34 @@
 import { GridRowProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const GRIDROW='gridRow'
 
-export interface IGridRowProps<T> {
+export interface GridRowProps<T=GridRowProperty> {
   /**
    * The **`grid-row`** CSS property is a shorthand property for `grid-row-start` and `grid-row-end` specifying a grid item’s size and location within the grid row by contributing a line, a span, or nothing (automatic) to its grid placement, thereby specifying the inline-start and inline-end edge of its grid area.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-row
    */
-  gridRow: T;
+  [GRIDROW]: T;
 }
 
 export const createGridRow = <
   T = GridRowProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IGridRowProps<T>, Theme, Breakpoints>({
-    cssProp: GRIDROW,
-    prop: GRIDROW,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<GridRowProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<GridRowProps<T>,Theme,Media>({
+    cssProp:GRIDROW,
+    prop:GRIDROW,
     key,
     transformValue,
   })
 
-export const createGridRowRule = <T = GridRowProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: GRIDROW, getValue: transformer})
+export const createGridRowRule = <T = GridRowProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: GRIDROW, getValue: transformer})
 
 export const gridRow =createGridRow()
 

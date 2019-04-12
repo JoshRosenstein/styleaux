@@ -1,34 +1,34 @@
 import { TransitionDurationProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const TRANSITIONDURATION='transitionDuration'
 
-export interface ITransitionDurationProps<T> {
+export interface TransitionDurationProps<T=TransitionDurationProperty> {
   /**
    * The **`transition-duration`** CSS property sets the length of time a transition animation should take to complete. By default, the value is `0s`, meaning that no animation will occur.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-duration
    */
-  transitionDuration: T;
+  [TRANSITIONDURATION]: T;
 }
 
 export const createTransitionDuration = <
   T = TransitionDurationProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<ITransitionDurationProps<T>, Theme, Breakpoints>({
-    cssProp: TRANSITIONDURATION,
-    prop: TRANSITIONDURATION,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<TransitionDurationProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<TransitionDurationProps<T>,Theme,Media>({
+    cssProp:TRANSITIONDURATION,
+    prop:TRANSITIONDURATION,
     key,
     transformValue,
   })
 
-export const createTransitionDurationRule = <T = TransitionDurationProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: TRANSITIONDURATION, getValue: transformer})
+export const createTransitionDurationRule = <T = TransitionDurationProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: TRANSITIONDURATION, getValue: transformer})
 
 export const transitionDuration =createTransitionDuration()
 

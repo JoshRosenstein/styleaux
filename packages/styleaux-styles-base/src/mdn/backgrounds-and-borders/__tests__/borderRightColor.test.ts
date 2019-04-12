@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderRightColor } from '../borderRightColor';
 
-describe('borderRightColor', () => {
+describe('createBorderRightColor', () => {
   it('should return a function', () => {
     const result = createBorderRightColor();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderRightColor` as component and css prop', () => {
+  it('should use `createBorderRightColor` as component and css prop', () => {
     const result = createBorderRightColor()({ borderRightColor: 'inherit' });
     expect(toStyles(result)).toEqual({ borderRightColor: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderRightColor', () => {
     expect(toStyles(result)).toEqual({ borderRightColor: 'a' });
   });
 
-  it('should use an interface which marks `borderRightColor` as optional', () => {
+  it('should use an interface which marks `createBorderRightColor` as optional', () => {
     const result = createBorderRightColor<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderRightColor<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderRightColor<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderRightColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderRightColor', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderRightColor: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderRightColor', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderRightColor: 'a',
       [MQ.D]: {
         borderRightColor: 'b',

@@ -1,34 +1,34 @@
 import { ZIndexProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const ZINDEX='zIndex'
 
-export interface IZIndexProps<T> {
+export interface ZIndexProps<T=ZIndexProperty> {
   /**
    * The **`z-index`** CSS property sets the z-order of a positioned element and its descendants or flex items. Overlapping elements with a larger z-index cover those with a smaller one.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/z-index
    */
-  zIndex: T;
+  [ZINDEX]: T;
 }
 
 export const createZIndex = <
   T = ZIndexProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IZIndexProps<T>, Theme, Breakpoints>({
-    cssProp: ZINDEX,
-    prop: ZINDEX,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<ZIndexProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<ZIndexProps<T>,Theme,Media>({
+    cssProp:ZINDEX,
+    prop:ZINDEX,
     key,
     transformValue,
   })
 
-export const createZIndexRule = <T = ZIndexProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: ZINDEX, getValue: transformer})
+export const createZIndexRule = <T = ZIndexProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: ZINDEX, getValue: transformer})
 
 export const zIndex =createZIndex()
 

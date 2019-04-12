@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderLeft } from '../borderLeft';
 
-describe('borderLeft', () => {
+describe('createBorderLeft', () => {
   it('should return a function', () => {
     const result = createBorderLeft();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderLeft` as component and css prop', () => {
+  it('should use `createBorderLeft` as component and css prop', () => {
     const result = createBorderLeft()({ borderLeft: 'inherit' });
     expect(toStyles(result)).toEqual({ borderLeft: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderLeft', () => {
     expect(toStyles(result)).toEqual({ borderLeft: 'a' });
   });
 
-  it('should use an interface which marks `borderLeft` as optional', () => {
+  it('should use an interface which marks `createBorderLeft` as optional', () => {
     const result = createBorderLeft<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderLeft<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderLeft<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderLeft: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderLeft', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderLeft: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderLeft', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderLeft: 'a',
       [MQ.D]: {
         borderLeft: 'b',

@@ -1,34 +1,34 @@
 import { BorderBottomWidthProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BORDERBOTTOMWIDTH='borderBottomWidth'
 
-export interface IBorderBottomWidthProps<T> {
+export interface BorderBottomWidthProps<T=BorderBottomWidthProperty> {
   /**
    * The **`border-bottom-width`** CSS property sets the width of the bottom border of a box.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-width
    */
-  borderBottomWidth: T;
+  [BORDERBOTTOMWIDTH]: T;
 }
 
 export const createBorderBottomWidth = <
   T = BorderBottomWidthProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBorderBottomWidthProps<T>, Theme, Breakpoints>({
-    cssProp: BORDERBOTTOMWIDTH,
-    prop: BORDERBOTTOMWIDTH,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BorderBottomWidthProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BorderBottomWidthProps<T>,Theme,Media>({
+    cssProp:BORDERBOTTOMWIDTH,
+    prop:BORDERBOTTOMWIDTH,
     key,
     transformValue,
   })
 
-export const createBorderBottomWidthRule = <T = BorderBottomWidthProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BORDERBOTTOMWIDTH, getValue: transformer})
+export const createBorderBottomWidthRule = <T = BorderBottomWidthProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BORDERBOTTOMWIDTH, getValue: transformer})
 
 export const borderBottomWidth =createBorderBottomWidth()
 

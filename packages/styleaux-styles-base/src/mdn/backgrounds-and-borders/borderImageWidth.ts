@@ -1,34 +1,34 @@
 import { BorderImageWidthProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BORDERIMAGEWIDTH='borderImageWidth'
 
-export interface IBorderImageWidthProps<T> {
+export interface BorderImageWidthProps<T=BorderImageWidthProperty> {
   /**
    * The **`border-image-width`** CSS property sets the width of an element's border image.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image-width
    */
-  borderImageWidth: T;
+  [BORDERIMAGEWIDTH]: T;
 }
 
 export const createBorderImageWidth = <
   T = BorderImageWidthProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBorderImageWidthProps<T>, Theme, Breakpoints>({
-    cssProp: BORDERIMAGEWIDTH,
-    prop: BORDERIMAGEWIDTH,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BorderImageWidthProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BorderImageWidthProps<T>,Theme,Media>({
+    cssProp:BORDERIMAGEWIDTH,
+    prop:BORDERIMAGEWIDTH,
     key,
     transformValue,
   })
 
-export const createBorderImageWidthRule = <T = BorderImageWidthProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BORDERIMAGEWIDTH, getValue: transformer})
+export const createBorderImageWidthRule = <T = BorderImageWidthProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BORDERIMAGEWIDTH, getValue: transformer})
 
 export const borderImageWidth =createBorderImageWidth()
 

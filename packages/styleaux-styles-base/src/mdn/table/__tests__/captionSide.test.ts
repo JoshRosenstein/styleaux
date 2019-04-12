@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createCaptionSide } from '../captionSide';
 
-describe('captionSide', () => {
+describe('createCaptionSide', () => {
   it('should return a function', () => {
     const result = createCaptionSide();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `captionSide` as component and css prop', () => {
+  it('should use `createCaptionSide` as component and css prop', () => {
     const result = createCaptionSide()({ captionSide: 'inherit' });
     expect(toStyles(result)).toEqual({ captionSide: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('captionSide', () => {
     expect(toStyles(result)).toEqual({ captionSide: 'a' });
   });
 
-  it('should use an interface which marks `captionSide` as optional', () => {
+  it('should use an interface which marks `createCaptionSide` as optional', () => {
     const result = createCaptionSide<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createCaptionSide<'value',never,IThemeWithoutBreakpoints>({
+    const result = createCaptionSide<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ captionSide: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('captionSide', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       captionSide: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('captionSide', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       captionSide: 'a',
       [MQ.D]: {
         captionSide: 'b',

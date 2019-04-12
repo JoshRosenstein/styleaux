@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTransform } from '../transform';
 
-describe('transform', () => {
+describe('createTransform', () => {
   it('should return a function', () => {
     const result = createTransform();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `transform` as component and css prop', () => {
+  it('should use `createTransform` as component and css prop', () => {
     const result = createTransform()({ transform: 'inherit' });
     expect(toStyles(result)).toEqual({ transform: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('transform', () => {
     expect(toStyles(result)).toEqual({ transform: 'a' });
   });
 
-  it('should use an interface which marks `transform` as optional', () => {
+  it('should use an interface which marks `createTransform` as optional', () => {
     const result = createTransform<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTransform<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTransform<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ transform: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('transform', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       transform: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('transform', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       transform: 'a',
       [MQ.D]: {
         transform: 'b',

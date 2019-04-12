@@ -1,34 +1,34 @@
 import { PerspectiveOriginProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const PERSPECTIVEORIGIN='perspectiveOrigin'
 
-export interface IPerspectiveOriginProps<T> {
+export interface PerspectiveOriginProps<T=PerspectiveOriginProperty> {
   /**
    * The **`perspective-origin`** CSS property determines the position at which the viewer is looking. It is used as the _vanishing point_ by the `perspective` property.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/perspective-origin
    */
-  perspectiveOrigin: T;
+  [PERSPECTIVEORIGIN]: T;
 }
 
 export const createPerspectiveOrigin = <
   T = PerspectiveOriginProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IPerspectiveOriginProps<T>, Theme, Breakpoints>({
-    cssProp: PERSPECTIVEORIGIN,
-    prop: PERSPECTIVEORIGIN,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<PerspectiveOriginProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<PerspectiveOriginProps<T>,Theme,Media>({
+    cssProp:PERSPECTIVEORIGIN,
+    prop:PERSPECTIVEORIGIN,
     key,
     transformValue,
   })
 
-export const createPerspectiveOriginRule = <T = PerspectiveOriginProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: PERSPECTIVEORIGIN, getValue: transformer})
+export const createPerspectiveOriginRule = <T = PerspectiveOriginProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: PERSPECTIVEORIGIN, getValue: transformer})
 
 export const perspectiveOrigin =createPerspectiveOrigin()
 

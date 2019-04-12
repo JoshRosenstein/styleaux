@@ -1,34 +1,34 @@
 import { WordSpacingProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const WORDSPACING='wordSpacing'
 
-export interface IWordSpacingProps<T> {
+export interface WordSpacingProps<T=WordSpacingProperty> {
   /**
    * The **`word-spacing`** CSS property sets the length of space between words and between tags.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/word-spacing
    */
-  wordSpacing: T;
+  [WORDSPACING]: T;
 }
 
 export const createWordSpacing = <
   T = WordSpacingProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IWordSpacingProps<T>, Theme, Breakpoints>({
-    cssProp: WORDSPACING,
-    prop: WORDSPACING,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<WordSpacingProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<WordSpacingProps<T>,Theme,Media>({
+    cssProp:WORDSPACING,
+    prop:WORDSPACING,
     key,
     transformValue,
   })
 
-export const createWordSpacingRule = <T = WordSpacingProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: WORDSPACING, getValue: transformer})
+export const createWordSpacingRule = <T = WordSpacingProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: WORDSPACING, getValue: transformer})
 
 export const wordSpacing =createWordSpacing()
 

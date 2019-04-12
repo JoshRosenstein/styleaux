@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createFontStretch } from '../fontStretch';
 
-describe('fontStretch', () => {
+describe('createFontStretch', () => {
   it('should return a function', () => {
     const result = createFontStretch();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `fontStretch` as component and css prop', () => {
+  it('should use `createFontStretch` as component and css prop', () => {
     const result = createFontStretch()({ fontStretch: 'inherit' });
     expect(toStyles(result)).toEqual({ fontStretch: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('fontStretch', () => {
     expect(toStyles(result)).toEqual({ fontStretch: 'a' });
   });
 
-  it('should use an interface which marks `fontStretch` as optional', () => {
+  it('should use an interface which marks `createFontStretch` as optional', () => {
     const result = createFontStretch<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createFontStretch<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFontStretch<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontStretch: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('fontStretch', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       fontStretch: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('fontStretch', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       fontStretch: 'a',
       [MQ.D]: {
         fontStretch: 'b',

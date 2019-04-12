@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderBlockEndColor } from '../borderBlockEndColor';
 
-describe('borderBlockEndColor', () => {
+describe('createBorderBlockEndColor', () => {
   it('should return a function', () => {
     const result = createBorderBlockEndColor();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderBlockEndColor` as component and css prop', () => {
+  it('should use `createBorderBlockEndColor` as component and css prop', () => {
     const result = createBorderBlockEndColor()({ borderBlockEndColor: 'inherit' });
     expect(toStyles(result)).toEqual({ borderBlockEndColor: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderBlockEndColor', () => {
     expect(toStyles(result)).toEqual({ borderBlockEndColor: 'a' });
   });
 
-  it('should use an interface which marks `borderBlockEndColor` as optional', () => {
+  it('should use an interface which marks `createBorderBlockEndColor` as optional', () => {
     const result = createBorderBlockEndColor<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderBlockEndColor<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderBlockEndColor<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderBlockEndColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderBlockEndColor', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderBlockEndColor: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderBlockEndColor', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderBlockEndColor: 'a',
       [MQ.D]: {
         borderBlockEndColor: 'b',

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createGridAutoColumns } from '../gridAutoColumns';
 
-describe('gridAutoColumns', () => {
+describe('createGridAutoColumns', () => {
   it('should return a function', () => {
     const result = createGridAutoColumns();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `gridAutoColumns` as component and css prop', () => {
+  it('should use `createGridAutoColumns` as component and css prop', () => {
     const result = createGridAutoColumns()({ gridAutoColumns: 'inherit' });
     expect(toStyles(result)).toEqual({ gridAutoColumns: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('gridAutoColumns', () => {
     expect(toStyles(result)).toEqual({ gridAutoColumns: 'a' });
   });
 
-  it('should use an interface which marks `gridAutoColumns` as optional', () => {
+  it('should use an interface which marks `createGridAutoColumns` as optional', () => {
     const result = createGridAutoColumns<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createGridAutoColumns<'value',never,IThemeWithoutBreakpoints>({
+    const result = createGridAutoColumns<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ gridAutoColumns: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('gridAutoColumns', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       gridAutoColumns: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('gridAutoColumns', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       gridAutoColumns: 'a',
       [MQ.D]: {
         gridAutoColumns: 'b',

@@ -1,34 +1,34 @@
 import { CursorProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const CURSOR='cursor'
 
-export interface ICursorProps<T> {
+export interface CursorProps<T=CursorProperty> {
   /**
    * The **`cursor`** CSS property sets mouse cursor to display when the mouse pointer is over an element.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/cursor
    */
-  cursor: T;
+  [CURSOR]: T;
 }
 
 export const createCursor = <
   T = CursorProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<ICursorProps<T>, Theme, Breakpoints>({
-    cssProp: CURSOR,
-    prop: CURSOR,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<CursorProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<CursorProps<T>,Theme,Media>({
+    cssProp:CURSOR,
+    prop:CURSOR,
     key,
     transformValue,
   })
 
-export const createCursorRule = <T = CursorProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: CURSOR, getValue: transformer})
+export const createCursorRule = <T = CursorProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: CURSOR, getValue: transformer})
 
 export const cursor =createCursor()
 

@@ -1,34 +1,34 @@
 import { MarginInlineProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const MARGININLINE='marginInline'
 
-export interface IMarginInlineProps<T> {
+export interface MarginInlineProps<T=MarginInlineProperty> {
   /**
    * The **`margin-inline`** CSS property defines the logical inline start and end margins of an element, which maps to physical margins depending on the element's writing mode, directionality, and text orientation.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline
    */
-  marginInline: T;
+  [MARGININLINE]: T;
 }
 
 export const createMarginInline = <
   T = MarginInlineProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IMarginInlineProps<T>, Theme, Breakpoints>({
-    cssProp: MARGININLINE,
-    prop: MARGININLINE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<MarginInlineProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<MarginInlineProps<T>,Theme,Media>({
+    cssProp:MARGININLINE,
+    prop:MARGININLINE,
     key,
     transformValue,
   })
 
-export const createMarginInlineRule = <T = MarginInlineProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: MARGININLINE, getValue: transformer})
+export const createMarginInlineRule = <T = MarginInlineProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: MARGININLINE, getValue: transformer})
 
 export const marginInline =createMarginInline()
 

@@ -1,34 +1,34 @@
 import { ColumnSpanProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const COLUMNSPAN='columnSpan'
 
-export interface IColumnSpanProps<T> {
+export interface ColumnSpanProps<T=ColumnSpanProperty> {
   /**
    * The **`column-span`** CSS property makes it possible for an element to span across all columns when its value is set to `all`.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-span
    */
-  columnSpan: T;
+  [COLUMNSPAN]: T;
 }
 
 export const createColumnSpan = <
   T = ColumnSpanProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IColumnSpanProps<T>, Theme, Breakpoints>({
-    cssProp: COLUMNSPAN,
-    prop: COLUMNSPAN,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<ColumnSpanProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<ColumnSpanProps<T>,Theme,Media>({
+    cssProp:COLUMNSPAN,
+    prop:COLUMNSPAN,
     key,
     transformValue,
   })
 
-export const createColumnSpanRule = <T = ColumnSpanProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: COLUMNSPAN, getValue: transformer})
+export const createColumnSpanRule = <T = ColumnSpanProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: COLUMNSPAN, getValue: transformer})
 
 export const columnSpan =createColumnSpan()
 

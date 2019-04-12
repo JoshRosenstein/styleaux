@@ -1,34 +1,34 @@
 import { BackgroundOriginProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BACKGROUNDORIGIN='backgroundOrigin'
 
-export interface IBackgroundOriginProps<T> {
+export interface BackgroundOriginProps<T=BackgroundOriginProperty> {
   /**
    * The **`background-origin`** CSS property sets the _background positioning area_. In other words, it sets the origin position of an image set with the `background-image` property.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-origin
    */
-  backgroundOrigin: T;
+  [BACKGROUNDORIGIN]: T;
 }
 
 export const createBackgroundOrigin = <
   T = BackgroundOriginProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBackgroundOriginProps<T>, Theme, Breakpoints>({
-    cssProp: BACKGROUNDORIGIN,
-    prop: BACKGROUNDORIGIN,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BackgroundOriginProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BackgroundOriginProps<T>,Theme,Media>({
+    cssProp:BACKGROUNDORIGIN,
+    prop:BACKGROUNDORIGIN,
     key,
     transformValue,
   })
 
-export const createBackgroundOriginRule = <T = BackgroundOriginProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BACKGROUNDORIGIN, getValue: transformer})
+export const createBackgroundOriginRule = <T = BackgroundOriginProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BACKGROUNDORIGIN, getValue: transformer})
 
 export const backgroundOrigin =createBackgroundOrigin()
 

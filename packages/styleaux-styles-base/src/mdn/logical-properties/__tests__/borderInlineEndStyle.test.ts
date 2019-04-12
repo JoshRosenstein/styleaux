@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderInlineEndStyle } from '../borderInlineEndStyle';
 
-describe('borderInlineEndStyle', () => {
+describe('createBorderInlineEndStyle', () => {
   it('should return a function', () => {
     const result = createBorderInlineEndStyle();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderInlineEndStyle` as component and css prop', () => {
+  it('should use `createBorderInlineEndStyle` as component and css prop', () => {
     const result = createBorderInlineEndStyle()({ borderInlineEndStyle: 'inherit' });
     expect(toStyles(result)).toEqual({ borderInlineEndStyle: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderInlineEndStyle', () => {
     expect(toStyles(result)).toEqual({ borderInlineEndStyle: 'a' });
   });
 
-  it('should use an interface which marks `borderInlineEndStyle` as optional', () => {
+  it('should use an interface which marks `createBorderInlineEndStyle` as optional', () => {
     const result = createBorderInlineEndStyle<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderInlineEndStyle<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderInlineEndStyle<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderInlineEndStyle: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderInlineEndStyle', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderInlineEndStyle: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderInlineEndStyle', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderInlineEndStyle: 'a',
       [MQ.D]: {
         borderInlineEndStyle: 'b',

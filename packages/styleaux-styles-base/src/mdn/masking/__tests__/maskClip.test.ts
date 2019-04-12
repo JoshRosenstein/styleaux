@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createMaskClip } from '../maskClip';
 
-describe('maskClip', () => {
+describe('createMaskClip', () => {
   it('should return a function', () => {
     const result = createMaskClip();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `maskClip` as component and css prop', () => {
+  it('should use `createMaskClip` as component and css prop', () => {
     const result = createMaskClip()({ maskClip: 'inherit' });
     expect(toStyles(result)).toEqual({ maskClip: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('maskClip', () => {
     expect(toStyles(result)).toEqual({ maskClip: 'a' });
   });
 
-  it('should use an interface which marks `maskClip` as optional', () => {
+  it('should use an interface which marks `createMaskClip` as optional', () => {
     const result = createMaskClip<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createMaskClip<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMaskClip<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ maskClip: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('maskClip', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       maskClip: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('maskClip', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       maskClip: 'a',
       [MQ.D]: {
         maskClip: 'b',

@@ -1,34 +1,34 @@
 import { MarginBlockEndProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const MARGINBLOCKEND='marginBlockEnd'
 
-export interface IMarginBlockEndProps<T> {
+export interface MarginBlockEndProps<T=MarginBlockEndProperty> {
   /**
    * The **`margin-block-end`** CSS property defines the logical block end margin of an element, which maps to a physical margin depending on the element's writing mode, directionality, and text orientation.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-block-end
    */
-  marginBlockEnd: T;
+  [MARGINBLOCKEND]: T;
 }
 
 export const createMarginBlockEnd = <
   T = MarginBlockEndProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IMarginBlockEndProps<T>, Theme, Breakpoints>({
-    cssProp: MARGINBLOCKEND,
-    prop: MARGINBLOCKEND,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<MarginBlockEndProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<MarginBlockEndProps<T>,Theme,Media>({
+    cssProp:MARGINBLOCKEND,
+    prop:MARGINBLOCKEND,
     key,
     transformValue,
   })
 
-export const createMarginBlockEndRule = <T = MarginBlockEndProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: MARGINBLOCKEND, getValue: transformer})
+export const createMarginBlockEndRule = <T = MarginBlockEndProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: MARGINBLOCKEND, getValue: transformer})
 
 export const marginBlockEnd =createMarginBlockEnd()
 

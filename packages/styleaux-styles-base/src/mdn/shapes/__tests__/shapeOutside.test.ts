@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createShapeOutside } from '../shapeOutside';
 
-describe('shapeOutside', () => {
+describe('createShapeOutside', () => {
   it('should return a function', () => {
     const result = createShapeOutside();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `shapeOutside` as component and css prop', () => {
+  it('should use `createShapeOutside` as component and css prop', () => {
     const result = createShapeOutside()({ shapeOutside: 'inherit' });
     expect(toStyles(result)).toEqual({ shapeOutside: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('shapeOutside', () => {
     expect(toStyles(result)).toEqual({ shapeOutside: 'a' });
   });
 
-  it('should use an interface which marks `shapeOutside` as optional', () => {
+  it('should use an interface which marks `createShapeOutside` as optional', () => {
     const result = createShapeOutside<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createShapeOutside<'value',never,IThemeWithoutBreakpoints>({
+    const result = createShapeOutside<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ shapeOutside: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('shapeOutside', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       shapeOutside: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('shapeOutside', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       shapeOutside: 'a',
       [MQ.D]: {
         shapeOutside: 'b',

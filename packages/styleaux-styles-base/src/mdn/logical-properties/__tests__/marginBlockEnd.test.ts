@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createMarginBlockEnd } from '../marginBlockEnd';
 
-describe('marginBlockEnd', () => {
+describe('createMarginBlockEnd', () => {
   it('should return a function', () => {
     const result = createMarginBlockEnd();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `marginBlockEnd` as component and css prop', () => {
+  it('should use `createMarginBlockEnd` as component and css prop', () => {
     const result = createMarginBlockEnd()({ marginBlockEnd: 'inherit' });
     expect(toStyles(result)).toEqual({ marginBlockEnd: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('marginBlockEnd', () => {
     expect(toStyles(result)).toEqual({ marginBlockEnd: 'a' });
   });
 
-  it('should use an interface which marks `marginBlockEnd` as optional', () => {
+  it('should use an interface which marks `createMarginBlockEnd` as optional', () => {
     const result = createMarginBlockEnd<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createMarginBlockEnd<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMarginBlockEnd<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ marginBlockEnd: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('marginBlockEnd', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       marginBlockEnd: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('marginBlockEnd', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       marginBlockEnd: 'a',
       [MQ.D]: {
         marginBlockEnd: 'b',

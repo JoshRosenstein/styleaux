@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTextOverflow } from '../textOverflow';
 
-describe('textOverflow', () => {
+describe('createTextOverflow', () => {
   it('should return a function', () => {
     const result = createTextOverflow();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `textOverflow` as component and css prop', () => {
+  it('should use `createTextOverflow` as component and css prop', () => {
     const result = createTextOverflow()({ textOverflow: 'inherit' });
     expect(toStyles(result)).toEqual({ textOverflow: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('textOverflow', () => {
     expect(toStyles(result)).toEqual({ textOverflow: 'a' });
   });
 
-  it('should use an interface which marks `textOverflow` as optional', () => {
+  it('should use an interface which marks `createTextOverflow` as optional', () => {
     const result = createTextOverflow<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTextOverflow<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextOverflow<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textOverflow: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('textOverflow', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       textOverflow: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('textOverflow', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       textOverflow: 'a',
       [MQ.D]: {
         textOverflow: 'b',

@@ -1,1 +1,1 @@
-export * from './shapeMargin';export * from './shapeOutside';export * from './shapeImageThreshold';
+export * from './shapeImageThreshold';export * from './shapeMargin';export * from './shapeOutside';

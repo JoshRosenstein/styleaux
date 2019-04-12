@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderImageWidth } from '../borderImageWidth';
 
-describe('borderImageWidth', () => {
+describe('createBorderImageWidth', () => {
   it('should return a function', () => {
     const result = createBorderImageWidth();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderImageWidth` as component and css prop', () => {
+  it('should use `createBorderImageWidth` as component and css prop', () => {
     const result = createBorderImageWidth()({ borderImageWidth: 'inherit' });
     expect(toStyles(result)).toEqual({ borderImageWidth: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderImageWidth', () => {
     expect(toStyles(result)).toEqual({ borderImageWidth: 'a' });
   });
 
-  it('should use an interface which marks `borderImageWidth` as optional', () => {
+  it('should use an interface which marks `createBorderImageWidth` as optional', () => {
     const result = createBorderImageWidth<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderImageWidth<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderImageWidth<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderImageWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderImageWidth', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderImageWidth: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderImageWidth', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderImageWidth: 'a',
       [MQ.D]: {
         borderImageWidth: 'b',

@@ -1,34 +1,34 @@
 import { TransitionPropertyProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const TRANSITIONPROPERTY='transitionProperty'
 
-export interface ITransitionPropertyProps<T> {
+export interface TransitionPropertyProps<T=TransitionPropertyProperty> {
   /**
    * The **`transition-property`** CSS property sets the CSS properties to which a transition effect should be applied.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-property
    */
-  transitionProperty: T;
+  [TRANSITIONPROPERTY]: T;
 }
 
 export const createTransitionProperty = <
   T = TransitionPropertyProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<ITransitionPropertyProps<T>, Theme, Breakpoints>({
-    cssProp: TRANSITIONPROPERTY,
-    prop: TRANSITIONPROPERTY,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<TransitionPropertyProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<TransitionPropertyProps<T>,Theme,Media>({
+    cssProp:TRANSITIONPROPERTY,
+    prop:TRANSITIONPROPERTY,
     key,
     transformValue,
   })
 
-export const createTransitionPropertyRule = <T = TransitionPropertyProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: TRANSITIONPROPERTY, getValue: transformer})
+export const createTransitionPropertyRule = <T = TransitionPropertyProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: TRANSITIONPROPERTY, getValue: transformer})
 
 export const transitionProperty =createTransitionProperty()
 

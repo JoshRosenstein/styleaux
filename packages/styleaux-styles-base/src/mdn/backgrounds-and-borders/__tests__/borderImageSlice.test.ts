@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderImageSlice } from '../borderImageSlice';
 
-describe('borderImageSlice', () => {
+describe('createBorderImageSlice', () => {
   it('should return a function', () => {
     const result = createBorderImageSlice();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderImageSlice` as component and css prop', () => {
+  it('should use `createBorderImageSlice` as component and css prop', () => {
     const result = createBorderImageSlice()({ borderImageSlice: 'inherit' });
     expect(toStyles(result)).toEqual({ borderImageSlice: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderImageSlice', () => {
     expect(toStyles(result)).toEqual({ borderImageSlice: 'a' });
   });
 
-  it('should use an interface which marks `borderImageSlice` as optional', () => {
+  it('should use an interface which marks `createBorderImageSlice` as optional', () => {
     const result = createBorderImageSlice<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderImageSlice<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderImageSlice<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderImageSlice: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderImageSlice', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderImageSlice: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderImageSlice', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderImageSlice: 'a',
       [MQ.D]: {
         borderImageSlice: 'b',

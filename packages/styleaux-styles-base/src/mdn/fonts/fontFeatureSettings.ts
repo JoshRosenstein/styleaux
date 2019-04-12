@@ -1,34 +1,34 @@
 import { FontFeatureSettingsProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const FONTFEATURESETTINGS='fontFeatureSettings'
 
-export interface IFontFeatureSettingsProps<T> {
+export interface FontFeatureSettingsProps<T=FontFeatureSettingsProperty> {
   /**
    * The **`font-feature-settings`** CSS property controls advanced typographic features in OpenType fonts.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-feature-settings
    */
-  fontFeatureSettings: T;
+  [FONTFEATURESETTINGS]: T;
 }
 
 export const createFontFeatureSettings = <
   T = FontFeatureSettingsProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IFontFeatureSettingsProps<T>, Theme, Breakpoints>({
-    cssProp: FONTFEATURESETTINGS,
-    prop: FONTFEATURESETTINGS,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<FontFeatureSettingsProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<FontFeatureSettingsProps<T>,Theme,Media>({
+    cssProp:FONTFEATURESETTINGS,
+    prop:FONTFEATURESETTINGS,
     key,
     transformValue,
   })
 
-export const createFontFeatureSettingsRule = <T = FontFeatureSettingsProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: FONTFEATURESETTINGS, getValue: transformer})
+export const createFontFeatureSettingsRule = <T = FontFeatureSettingsProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: FONTFEATURESETTINGS, getValue: transformer})
 
 export const fontFeatureSettings =createFontFeatureSettings()
 

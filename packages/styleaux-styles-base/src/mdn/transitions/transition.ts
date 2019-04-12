@@ -1,34 +1,34 @@
 import { TransitionProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const TRANSITION='transition'
 
-export interface ITransitionProps<T> {
+export interface TransitionProps<T=TransitionProperty> {
   /**
    * The **`transition`** CSS property is a shorthand property for `transition-property`, `transition-duration`, `transition-timing-function`, and `transition-delay`.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition
    */
-  transition: T;
+  [TRANSITION]: T;
 }
 
 export const createTransition = <
   T = TransitionProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<ITransitionProps<T>, Theme, Breakpoints>({
-    cssProp: TRANSITION,
-    prop: TRANSITION,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<TransitionProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<TransitionProps<T>,Theme,Media>({
+    cssProp:TRANSITION,
+    prop:TRANSITION,
     key,
     transformValue,
   })
 
-export const createTransitionRule = <T = TransitionProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: TRANSITION, getValue: transformer})
+export const createTransitionRule = <T = TransitionProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: TRANSITION, getValue: transformer})
 
 export const transition =createTransition()
 

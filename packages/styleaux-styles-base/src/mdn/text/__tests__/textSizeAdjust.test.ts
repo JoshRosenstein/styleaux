@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTextSizeAdjust } from '../textSizeAdjust';
 
-describe('textSizeAdjust', () => {
+describe('createTextSizeAdjust', () => {
   it('should return a function', () => {
     const result = createTextSizeAdjust();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `textSizeAdjust` as component and css prop', () => {
+  it('should use `createTextSizeAdjust` as component and css prop', () => {
     const result = createTextSizeAdjust()({ textSizeAdjust: 'inherit' });
     expect(toStyles(result)).toEqual({ textSizeAdjust: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('textSizeAdjust', () => {
     expect(toStyles(result)).toEqual({ textSizeAdjust: 'a' });
   });
 
-  it('should use an interface which marks `textSizeAdjust` as optional', () => {
+  it('should use an interface which marks `createTextSizeAdjust` as optional', () => {
     const result = createTextSizeAdjust<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTextSizeAdjust<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextSizeAdjust<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textSizeAdjust: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('textSizeAdjust', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       textSizeAdjust: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('textSizeAdjust', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       textSizeAdjust: 'a',
       [MQ.D]: {
         textSizeAdjust: 'b',

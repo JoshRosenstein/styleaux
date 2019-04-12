@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createColorAdjust } from '../colorAdjust';
 
-describe('colorAdjust', () => {
+describe('createColorAdjust', () => {
   it('should return a function', () => {
     const result = createColorAdjust();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `colorAdjust` as component and css prop', () => {
+  it('should use `createColorAdjust` as component and css prop', () => {
     const result = createColorAdjust()({ colorAdjust: 'inherit' });
     expect(toStyles(result)).toEqual({ colorAdjust: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('colorAdjust', () => {
     expect(toStyles(result)).toEqual({ colorAdjust: 'a' });
   });
 
-  it('should use an interface which marks `colorAdjust` as optional', () => {
+  it('should use an interface which marks `createColorAdjust` as optional', () => {
     const result = createColorAdjust<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createColorAdjust<'value',never,IThemeWithoutBreakpoints>({
+    const result = createColorAdjust<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ colorAdjust: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('colorAdjust', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       colorAdjust: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('colorAdjust', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       colorAdjust: 'a',
       [MQ.D]: {
         colorAdjust: 'b',

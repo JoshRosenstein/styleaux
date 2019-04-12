@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createScrollMarginLeft } from '../scrollMarginLeft';
 
-describe('scrollMarginLeft', () => {
+describe('createScrollMarginLeft', () => {
   it('should return a function', () => {
     const result = createScrollMarginLeft();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `scrollMarginLeft` as component and css prop', () => {
+  it('should use `createScrollMarginLeft` as component and css prop', () => {
     const result = createScrollMarginLeft()({ scrollMarginLeft: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollMarginLeft: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('scrollMarginLeft', () => {
     expect(toStyles(result)).toEqual({ scrollMarginLeft: 'a' });
   });
 
-  it('should use an interface which marks `scrollMarginLeft` as optional', () => {
+  it('should use an interface which marks `createScrollMarginLeft` as optional', () => {
     const result = createScrollMarginLeft<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollMarginLeft<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollMarginLeft<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollMarginLeft: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('scrollMarginLeft', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       scrollMarginLeft: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('scrollMarginLeft', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       scrollMarginLeft: 'a',
       [MQ.D]: {
         scrollMarginLeft: 'b',

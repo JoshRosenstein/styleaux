@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createScrollMarginBottom } from '../scrollMarginBottom';
 
-describe('scrollMarginBottom', () => {
+describe('createScrollMarginBottom', () => {
   it('should return a function', () => {
     const result = createScrollMarginBottom();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `scrollMarginBottom` as component and css prop', () => {
+  it('should use `createScrollMarginBottom` as component and css prop', () => {
     const result = createScrollMarginBottom()({ scrollMarginBottom: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollMarginBottom: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('scrollMarginBottom', () => {
     expect(toStyles(result)).toEqual({ scrollMarginBottom: 'a' });
   });
 
-  it('should use an interface which marks `scrollMarginBottom` as optional', () => {
+  it('should use an interface which marks `createScrollMarginBottom` as optional', () => {
     const result = createScrollMarginBottom<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollMarginBottom<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollMarginBottom<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollMarginBottom: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('scrollMarginBottom', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       scrollMarginBottom: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('scrollMarginBottom', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       scrollMarginBottom: 'a',
       [MQ.D]: {
         scrollMarginBottom: 'b',

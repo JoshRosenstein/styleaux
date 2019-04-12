@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createInlineSize } from '../inlineSize';
 
-describe('inlineSize', () => {
+describe('createInlineSize', () => {
   it('should return a function', () => {
     const result = createInlineSize();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `inlineSize` as component and css prop', () => {
+  it('should use `createInlineSize` as component and css prop', () => {
     const result = createInlineSize()({ inlineSize: 'inherit' });
     expect(toStyles(result)).toEqual({ inlineSize: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('inlineSize', () => {
     expect(toStyles(result)).toEqual({ inlineSize: 'a' });
   });
 
-  it('should use an interface which marks `inlineSize` as optional', () => {
+  it('should use an interface which marks `createInlineSize` as optional', () => {
     const result = createInlineSize<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createInlineSize<'value',never,IThemeWithoutBreakpoints>({
+    const result = createInlineSize<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ inlineSize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('inlineSize', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       inlineSize: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('inlineSize', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       inlineSize: 'a',
       [MQ.D]: {
         inlineSize: 'b',

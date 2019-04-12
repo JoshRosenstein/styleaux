@@ -1,34 +1,34 @@
 import { FlexBasisProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const FLEXBASIS='flexBasis'
 
-export interface IFlexBasisProps<T> {
+export interface FlexBasisProps<T=FlexBasisProperty> {
   /**
    * The **`flex-basis`** CSS property sets the initial main size of a flex item. It sets the size of the content box unless otherwise set with `box-sizing`.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-basis
    */
-  flexBasis: T;
+  [FLEXBASIS]: T;
 }
 
 export const createFlexBasis = <
   T = FlexBasisProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IFlexBasisProps<T>, Theme, Breakpoints>({
-    cssProp: FLEXBASIS,
-    prop: FLEXBASIS,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<FlexBasisProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<FlexBasisProps<T>,Theme,Media>({
+    cssProp:FLEXBASIS,
+    prop:FLEXBASIS,
     key,
     transformValue,
   })
 
-export const createFlexBasisRule = <T = FlexBasisProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: FLEXBASIS, getValue: transformer})
+export const createFlexBasisRule = <T = FlexBasisProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: FLEXBASIS, getValue: transformer})
 
 export const flexBasis =createFlexBasis()
 

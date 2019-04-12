@@ -1,34 +1,34 @@
 import { TransformBoxProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const TRANSFORMBOX='transformBox'
 
-export interface ITransformBoxProps<T> {
+export interface TransformBoxProps<T=TransformBoxProperty> {
   /**
    * The **`transform-box`** CSS property defines the layout box to which the `transform` and `transform-origin` properties relate.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transform-box
    */
-  transformBox: T;
+  [TRANSFORMBOX]: T;
 }
 
 export const createTransformBox = <
   T = TransformBoxProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<ITransformBoxProps<T>, Theme, Breakpoints>({
-    cssProp: TRANSFORMBOX,
-    prop: TRANSFORMBOX,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<TransformBoxProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<TransformBoxProps<T>,Theme,Media>({
+    cssProp:TRANSFORMBOX,
+    prop:TRANSFORMBOX,
     key,
     transformValue,
   })
 
-export const createTransformBoxRule = <T = TransformBoxProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: TRANSFORMBOX, getValue: transformer})
+export const createTransformBoxRule = <T = TransformBoxProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: TRANSFORMBOX, getValue: transformer})
 
 export const transformBox =createTransformBox()
 

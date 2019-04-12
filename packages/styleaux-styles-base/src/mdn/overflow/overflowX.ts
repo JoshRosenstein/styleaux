@@ -1,34 +1,34 @@
 import { OverflowXProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const OVERFLOWX='overflowX'
 
-export interface IOverflowXProps<T> {
+export interface OverflowXProps<T=OverflowXProperty> {
   /**
    * The **`overflow-x`** CSS property sets what shows when content overflows a block-level element's left and right edges. This may be nothing, a scroll bar, or the overflow content.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-x
    */
-  overflowX: T;
+  [OVERFLOWX]: T;
 }
 
 export const createOverflowX = <
   T = OverflowXProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IOverflowXProps<T>, Theme, Breakpoints>({
-    cssProp: OVERFLOWX,
-    prop: OVERFLOWX,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<OverflowXProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<OverflowXProps<T>,Theme,Media>({
+    cssProp:OVERFLOWX,
+    prop:OVERFLOWX,
     key,
     transformValue,
   })
 
-export const createOverflowXRule = <T = OverflowXProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: OVERFLOWX, getValue: transformer})
+export const createOverflowXRule = <T = OverflowXProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: OVERFLOWX, getValue: transformer})
 
 export const overflowX =createOverflowX()
 

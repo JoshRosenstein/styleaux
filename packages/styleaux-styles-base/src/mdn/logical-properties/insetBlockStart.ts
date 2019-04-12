@@ -1,34 +1,34 @@
 import { InsetBlockStartProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const INSETBLOCKSTART='insetBlockStart'
 
-export interface IInsetBlockStartProps<T> {
+export interface InsetBlockStartProps<T=InsetBlockStartProperty> {
   /**
    * The **`inset-block-start`** CSS property defines the logical block start offset of an element, which maps to a physical inset depending on the element's writing mode, directionality, and text orientation. It corresponds to the `top`, `right`, `bottom`, or `left` property depending on the values defined for `writing-mode`, `direction`, and `text-orientation`.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-block-start
    */
-  insetBlockStart: T;
+  [INSETBLOCKSTART]: T;
 }
 
 export const createInsetBlockStart = <
   T = InsetBlockStartProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IInsetBlockStartProps<T>, Theme, Breakpoints>({
-    cssProp: INSETBLOCKSTART,
-    prop: INSETBLOCKSTART,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<InsetBlockStartProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<InsetBlockStartProps<T>,Theme,Media>({
+    cssProp:INSETBLOCKSTART,
+    prop:INSETBLOCKSTART,
     key,
     transformValue,
   })
 
-export const createInsetBlockStartRule = <T = InsetBlockStartProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: INSETBLOCKSTART, getValue: transformer})
+export const createInsetBlockStartRule = <T = InsetBlockStartProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: INSETBLOCKSTART, getValue: transformer})
 
 export const insetBlockStart =createInsetBlockStart()
 

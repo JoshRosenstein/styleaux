@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBoxShadow } from '../boxShadow';
 
-describe('boxShadow', () => {
+describe('createBoxShadow', () => {
   it('should return a function', () => {
     const result = createBoxShadow();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `boxShadow` as component and css prop', () => {
+  it('should use `createBoxShadow` as component and css prop', () => {
     const result = createBoxShadow()({ boxShadow: 'inherit' });
     expect(toStyles(result)).toEqual({ boxShadow: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('boxShadow', () => {
     expect(toStyles(result)).toEqual({ boxShadow: 'a' });
   });
 
-  it('should use an interface which marks `boxShadow` as optional', () => {
+  it('should use an interface which marks `createBoxShadow` as optional', () => {
     const result = createBoxShadow<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBoxShadow<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBoxShadow<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ boxShadow: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('boxShadow', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       boxShadow: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('boxShadow', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       boxShadow: 'a',
       [MQ.D]: {
         boxShadow: 'b',

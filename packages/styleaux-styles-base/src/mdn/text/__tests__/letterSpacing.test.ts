@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createLetterSpacing } from '../letterSpacing';
 
-describe('letterSpacing', () => {
+describe('createLetterSpacing', () => {
   it('should return a function', () => {
     const result = createLetterSpacing();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `letterSpacing` as component and css prop', () => {
+  it('should use `createLetterSpacing` as component and css prop', () => {
     const result = createLetterSpacing()({ letterSpacing: 'inherit' });
     expect(toStyles(result)).toEqual({ letterSpacing: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('letterSpacing', () => {
     expect(toStyles(result)).toEqual({ letterSpacing: 'a' });
   });
 
-  it('should use an interface which marks `letterSpacing` as optional', () => {
+  it('should use an interface which marks `createLetterSpacing` as optional', () => {
     const result = createLetterSpacing<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createLetterSpacing<'value',never,IThemeWithoutBreakpoints>({
+    const result = createLetterSpacing<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ letterSpacing: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('letterSpacing', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       letterSpacing: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('letterSpacing', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       letterSpacing: 'a',
       [MQ.D]: {
         letterSpacing: 'b',

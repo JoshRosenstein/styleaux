@@ -1,34 +1,34 @@
 import { WhiteSpaceProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const WHITESPACE='whiteSpace'
 
-export interface IWhiteSpaceProps<T> {
+export interface WhiteSpaceProps<T=WhiteSpaceProperty> {
   /**
    * The **`white-space`** CSS property sets how white space inside an element is handled.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/white-space
    */
-  whiteSpace: T;
+  [WHITESPACE]: T;
 }
 
 export const createWhiteSpace = <
   T = WhiteSpaceProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IWhiteSpaceProps<T>, Theme, Breakpoints>({
-    cssProp: WHITESPACE,
-    prop: WHITESPACE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<WhiteSpaceProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<WhiteSpaceProps<T>,Theme,Media>({
+    cssProp:WHITESPACE,
+    prop:WHITESPACE,
     key,
     transformValue,
   })
 
-export const createWhiteSpaceRule = <T = WhiteSpaceProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: WHITESPACE, getValue: transformer})
+export const createWhiteSpaceRule = <T = WhiteSpaceProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: WHITESPACE, getValue: transformer})
 
 export const whiteSpace =createWhiteSpace()
 

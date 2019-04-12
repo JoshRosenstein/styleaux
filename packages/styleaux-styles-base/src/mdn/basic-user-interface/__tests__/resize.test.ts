@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createResize } from '../resize';
 
-describe('resize', () => {
+describe('createResize', () => {
   it('should return a function', () => {
     const result = createResize();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `resize` as component and css prop', () => {
+  it('should use `createResize` as component and css prop', () => {
     const result = createResize()({ resize: 'inherit' });
     expect(toStyles(result)).toEqual({ resize: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('resize', () => {
     expect(toStyles(result)).toEqual({ resize: 'a' });
   });
 
-  it('should use an interface which marks `resize` as optional', () => {
+  it('should use an interface which marks `createResize` as optional', () => {
     const result = createResize<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createResize<'value',never,IThemeWithoutBreakpoints>({
+    const result = createResize<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ resize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('resize', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       resize: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('resize', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       resize: 'a',
       [MQ.D]: {
         resize: 'b',

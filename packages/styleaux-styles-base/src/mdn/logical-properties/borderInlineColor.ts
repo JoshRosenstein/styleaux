@@ -1,34 +1,34 @@
 import { BorderInlineColorProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BORDERINLINECOLOR='borderInlineColor'
 
-export interface IBorderInlineColorProps<T> {
+export interface BorderInlineColorProps<T=BorderInlineColorProperty> {
   /**
    * The **`border-inline-color`** CSS property defines the color of the logical inline borders of an element, which maps to a physical border color depending on the element's writing mode, directionality, and text orientation. It corresponds to the `border-top-color` and `border-bottom-color`, or `border-right-color` and `border-left-color` property depending on the values defined for `writing-mode`, `direction`, and `text-orientation`.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-color
    */
-  borderInlineColor: T;
+  [BORDERINLINECOLOR]: T;
 }
 
 export const createBorderInlineColor = <
   T = BorderInlineColorProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBorderInlineColorProps<T>, Theme, Breakpoints>({
-    cssProp: BORDERINLINECOLOR,
-    prop: BORDERINLINECOLOR,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BorderInlineColorProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BorderInlineColorProps<T>,Theme,Media>({
+    cssProp:BORDERINLINECOLOR,
+    prop:BORDERINLINECOLOR,
     key,
     transformValue,
   })
 
-export const createBorderInlineColorRule = <T = BorderInlineColorProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BORDERINLINECOLOR, getValue: transformer})
+export const createBorderInlineColorRule = <T = BorderInlineColorProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BORDERINLINECOLOR, getValue: transformer})
 
 export const borderInlineColor =createBorderInlineColor()
 

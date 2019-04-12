@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createContain } from '../contain';
 
-describe('contain', () => {
+describe('createContain', () => {
   it('should return a function', () => {
     const result = createContain();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `contain` as component and css prop', () => {
+  it('should use `createContain` as component and css prop', () => {
     const result = createContain()({ contain: 'inherit' });
     expect(toStyles(result)).toEqual({ contain: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('contain', () => {
     expect(toStyles(result)).toEqual({ contain: 'a' });
   });
 
-  it('should use an interface which marks `contain` as optional', () => {
+  it('should use an interface which marks `createContain` as optional', () => {
     const result = createContain<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createContain<'value',never,IThemeWithoutBreakpoints>({
+    const result = createContain<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ contain: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('contain', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       contain: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('contain', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       contain: 'a',
       [MQ.D]: {
         contain: 'b',

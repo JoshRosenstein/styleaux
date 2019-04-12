@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createFontVariantEastAsian } from '../fontVariantEastAsian';
 
-describe('fontVariantEastAsian', () => {
+describe('createFontVariantEastAsian', () => {
   it('should return a function', () => {
     const result = createFontVariantEastAsian();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `fontVariantEastAsian` as component and css prop', () => {
+  it('should use `createFontVariantEastAsian` as component and css prop', () => {
     const result = createFontVariantEastAsian()({ fontVariantEastAsian: 'inherit' });
     expect(toStyles(result)).toEqual({ fontVariantEastAsian: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('fontVariantEastAsian', () => {
     expect(toStyles(result)).toEqual({ fontVariantEastAsian: 'a' });
   });
 
-  it('should use an interface which marks `fontVariantEastAsian` as optional', () => {
+  it('should use an interface which marks `createFontVariantEastAsian` as optional', () => {
     const result = createFontVariantEastAsian<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createFontVariantEastAsian<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFontVariantEastAsian<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontVariantEastAsian: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('fontVariantEastAsian', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       fontVariantEastAsian: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('fontVariantEastAsian', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       fontVariantEastAsian: 'a',
       [MQ.D]: {
         fontVariantEastAsian: 'b',

@@ -1,34 +1,34 @@
 import { AnimationTimingFunctionProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const ANIMATIONTIMINGFUNCTION='animationTimingFunction'
 
-export interface IAnimationTimingFunctionProps<T> {
+export interface AnimationTimingFunctionProps<T=AnimationTimingFunctionProperty> {
   /**
    * The `**animation-timing-function**` CSS property sets how an animation progresses through the duration of each cycle.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-timing-function
    */
-  animationTimingFunction: T;
+  [ANIMATIONTIMINGFUNCTION]: T;
 }
 
 export const createAnimationTimingFunction = <
   T = AnimationTimingFunctionProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IAnimationTimingFunctionProps<T>, Theme, Breakpoints>({
-    cssProp: ANIMATIONTIMINGFUNCTION,
-    prop: ANIMATIONTIMINGFUNCTION,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<AnimationTimingFunctionProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<AnimationTimingFunctionProps<T>,Theme,Media>({
+    cssProp:ANIMATIONTIMINGFUNCTION,
+    prop:ANIMATIONTIMINGFUNCTION,
     key,
     transformValue,
   })
 
-export const createAnimationTimingFunctionRule = <T = AnimationTimingFunctionProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: ANIMATIONTIMINGFUNCTION, getValue: transformer})
+export const createAnimationTimingFunctionRule = <T = AnimationTimingFunctionProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: ANIMATIONTIMINGFUNCTION, getValue: transformer})
 
 export const animationTimingFunction =createAnimationTimingFunction()
 

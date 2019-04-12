@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createScrollPaddingBlockEnd } from '../scrollPaddingBlockEnd';
 
-describe('scrollPaddingBlockEnd', () => {
+describe('createScrollPaddingBlockEnd', () => {
   it('should return a function', () => {
     const result = createScrollPaddingBlockEnd();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `scrollPaddingBlockEnd` as component and css prop', () => {
+  it('should use `createScrollPaddingBlockEnd` as component and css prop', () => {
     const result = createScrollPaddingBlockEnd()({ scrollPaddingBlockEnd: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollPaddingBlockEnd: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('scrollPaddingBlockEnd', () => {
     expect(toStyles(result)).toEqual({ scrollPaddingBlockEnd: 'a' });
   });
 
-  it('should use an interface which marks `scrollPaddingBlockEnd` as optional', () => {
+  it('should use an interface which marks `createScrollPaddingBlockEnd` as optional', () => {
     const result = createScrollPaddingBlockEnd<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollPaddingBlockEnd<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollPaddingBlockEnd<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollPaddingBlockEnd: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('scrollPaddingBlockEnd', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       scrollPaddingBlockEnd: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('scrollPaddingBlockEnd', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       scrollPaddingBlockEnd: 'a',
       [MQ.D]: {
         scrollPaddingBlockEnd: 'b',

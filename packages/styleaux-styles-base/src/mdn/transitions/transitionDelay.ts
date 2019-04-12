@@ -1,34 +1,34 @@
 import { TransitionDelayProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const TRANSITIONDELAY='transitionDelay'
 
-export interface ITransitionDelayProps<T> {
+export interface TransitionDelayProps<T=TransitionDelayProperty> {
   /**
    * The **`transition-delay`** CSS property specifies the duration to wait before starting a property's transition effect when its value changes.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-delay
    */
-  transitionDelay: T;
+  [TRANSITIONDELAY]: T;
 }
 
 export const createTransitionDelay = <
   T = TransitionDelayProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<ITransitionDelayProps<T>, Theme, Breakpoints>({
-    cssProp: TRANSITIONDELAY,
-    prop: TRANSITIONDELAY,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<TransitionDelayProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<TransitionDelayProps<T>,Theme,Media>({
+    cssProp:TRANSITIONDELAY,
+    prop:TRANSITIONDELAY,
     key,
     transformValue,
   })
 
-export const createTransitionDelayRule = <T = TransitionDelayProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: TRANSITIONDELAY, getValue: transformer})
+export const createTransitionDelayRule = <T = TransitionDelayProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: TRANSITIONDELAY, getValue: transformer})
 
 export const transitionDelay =createTransitionDelay()
 

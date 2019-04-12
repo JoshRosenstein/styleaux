@@ -1,34 +1,34 @@
 import { BreakBeforeProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BREAKBEFORE='breakBefore'
 
-export interface IBreakBeforeProps<T> {
+export interface BreakBeforeProps<T=BreakBeforeProperty> {
   /**
    * The **`break-before`** CSS property sets how page, column, or region breaks should behave before a generated box. If there is no generated box, the property is ignored.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/break-before
    */
-  breakBefore: T;
+  [BREAKBEFORE]: T;
 }
 
 export const createBreakBefore = <
   T = BreakBeforeProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBreakBeforeProps<T>, Theme, Breakpoints>({
-    cssProp: BREAKBEFORE,
-    prop: BREAKBEFORE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BreakBeforeProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BreakBeforeProps<T>,Theme,Media>({
+    cssProp:BREAKBEFORE,
+    prop:BREAKBEFORE,
     key,
     transformValue,
   })
 
-export const createBreakBeforeRule = <T = BreakBeforeProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BREAKBEFORE, getValue: transformer})
+export const createBreakBeforeRule = <T = BreakBeforeProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BREAKBEFORE, getValue: transformer})
 
 export const breakBefore =createBreakBefore()
 

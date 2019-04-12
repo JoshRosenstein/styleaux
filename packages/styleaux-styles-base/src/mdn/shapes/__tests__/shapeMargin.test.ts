@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createShapeMargin } from '../shapeMargin';
 
-describe('shapeMargin', () => {
+describe('createShapeMargin', () => {
   it('should return a function', () => {
     const result = createShapeMargin();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `shapeMargin` as component and css prop', () => {
+  it('should use `createShapeMargin` as component and css prop', () => {
     const result = createShapeMargin()({ shapeMargin: 'inherit' });
     expect(toStyles(result)).toEqual({ shapeMargin: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('shapeMargin', () => {
     expect(toStyles(result)).toEqual({ shapeMargin: 'a' });
   });
 
-  it('should use an interface which marks `shapeMargin` as optional', () => {
+  it('should use an interface which marks `createShapeMargin` as optional', () => {
     const result = createShapeMargin<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createShapeMargin<'value',never,IThemeWithoutBreakpoints>({
+    const result = createShapeMargin<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ shapeMargin: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('shapeMargin', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       shapeMargin: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('shapeMargin', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       shapeMargin: 'a',
       [MQ.D]: {
         shapeMargin: 'b',

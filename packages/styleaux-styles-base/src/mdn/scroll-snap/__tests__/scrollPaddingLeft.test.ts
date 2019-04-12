@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createScrollPaddingLeft } from '../scrollPaddingLeft';
 
-describe('scrollPaddingLeft', () => {
+describe('createScrollPaddingLeft', () => {
   it('should return a function', () => {
     const result = createScrollPaddingLeft();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `scrollPaddingLeft` as component and css prop', () => {
+  it('should use `createScrollPaddingLeft` as component and css prop', () => {
     const result = createScrollPaddingLeft()({ scrollPaddingLeft: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollPaddingLeft: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('scrollPaddingLeft', () => {
     expect(toStyles(result)).toEqual({ scrollPaddingLeft: 'a' });
   });
 
-  it('should use an interface which marks `scrollPaddingLeft` as optional', () => {
+  it('should use an interface which marks `createScrollPaddingLeft` as optional', () => {
     const result = createScrollPaddingLeft<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollPaddingLeft<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollPaddingLeft<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollPaddingLeft: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('scrollPaddingLeft', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       scrollPaddingLeft: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('scrollPaddingLeft', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       scrollPaddingLeft: 'a',
       [MQ.D]: {
         scrollPaddingLeft: 'b',

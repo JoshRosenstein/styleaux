@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTextEmphasisPosition } from '../textEmphasisPosition';
 
-describe('textEmphasisPosition', () => {
+describe('createTextEmphasisPosition', () => {
   it('should return a function', () => {
     const result = createTextEmphasisPosition();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `textEmphasisPosition` as component and css prop', () => {
+  it('should use `createTextEmphasisPosition` as component and css prop', () => {
     const result = createTextEmphasisPosition()({ textEmphasisPosition: 'inherit' });
     expect(toStyles(result)).toEqual({ textEmphasisPosition: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('textEmphasisPosition', () => {
     expect(toStyles(result)).toEqual({ textEmphasisPosition: 'a' });
   });
 
-  it('should use an interface which marks `textEmphasisPosition` as optional', () => {
+  it('should use an interface which marks `createTextEmphasisPosition` as optional', () => {
     const result = createTextEmphasisPosition<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTextEmphasisPosition<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextEmphasisPosition<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textEmphasisPosition: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('textEmphasisPosition', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       textEmphasisPosition: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('textEmphasisPosition', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       textEmphasisPosition: 'a',
       [MQ.D]: {
         textEmphasisPosition: 'b',

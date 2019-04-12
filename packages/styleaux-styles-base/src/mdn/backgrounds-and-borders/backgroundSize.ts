@@ -1,34 +1,34 @@
 import { BackgroundSizeProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BACKGROUNDSIZE='backgroundSize'
 
-export interface IBackgroundSizeProps<T> {
+export interface BackgroundSizeProps<T=BackgroundSizeProperty> {
   /**
    * The **`background-size`** CSS property sets the size of the element's background image. The image can be left to its natural size, stretched, or constrained to fit the available space.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-size
    */
-  backgroundSize: T;
+  [BACKGROUNDSIZE]: T;
 }
 
 export const createBackgroundSize = <
   T = BackgroundSizeProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBackgroundSizeProps<T>, Theme, Breakpoints>({
-    cssProp: BACKGROUNDSIZE,
-    prop: BACKGROUNDSIZE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BackgroundSizeProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BackgroundSizeProps<T>,Theme,Media>({
+    cssProp:BACKGROUNDSIZE,
+    prop:BACKGROUNDSIZE,
     key,
     transformValue,
   })
 
-export const createBackgroundSizeRule = <T = BackgroundSizeProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BACKGROUNDSIZE, getValue: transformer})
+export const createBackgroundSizeRule = <T = BackgroundSizeProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BACKGROUNDSIZE, getValue: transformer})
 
 export const backgroundSize =createBackgroundSize()
 

@@ -1,34 +1,34 @@
 import { BackgroundAttachmentProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BACKGROUNDATTACHMENT='backgroundAttachment'
 
-export interface IBackgroundAttachmentProps<T> {
+export interface BackgroundAttachmentProps<T=BackgroundAttachmentProperty> {
   /**
    * The **`background-attachment`** CSS property sets whether a background image's position is fixed within the viewport, or scrolls with its containing block.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-attachment
    */
-  backgroundAttachment: T;
+  [BACKGROUNDATTACHMENT]: T;
 }
 
 export const createBackgroundAttachment = <
   T = BackgroundAttachmentProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBackgroundAttachmentProps<T>, Theme, Breakpoints>({
-    cssProp: BACKGROUNDATTACHMENT,
-    prop: BACKGROUNDATTACHMENT,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BackgroundAttachmentProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BackgroundAttachmentProps<T>,Theme,Media>({
+    cssProp:BACKGROUNDATTACHMENT,
+    prop:BACKGROUNDATTACHMENT,
     key,
     transformValue,
   })
 
-export const createBackgroundAttachmentRule = <T = BackgroundAttachmentProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BACKGROUNDATTACHMENT, getValue: transformer})
+export const createBackgroundAttachmentRule = <T = BackgroundAttachmentProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BACKGROUNDATTACHMENT, getValue: transformer})
 
 export const backgroundAttachment =createBackgroundAttachment()
 

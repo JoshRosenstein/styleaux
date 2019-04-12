@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createOrphans } from '../orphans';
 
-describe('orphans', () => {
+describe('createOrphans', () => {
   it('should return a function', () => {
     const result = createOrphans();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `orphans` as component and css prop', () => {
+  it('should use `createOrphans` as component and css prop', () => {
     const result = createOrphans()({ orphans: 'inherit' });
     expect(toStyles(result)).toEqual({ orphans: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('orphans', () => {
     expect(toStyles(result)).toEqual({ orphans: 'a' });
   });
 
-  it('should use an interface which marks `orphans` as optional', () => {
+  it('should use an interface which marks `createOrphans` as optional', () => {
     const result = createOrphans<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createOrphans<'value',never,IThemeWithoutBreakpoints>({
+    const result = createOrphans<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ orphans: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('orphans', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       orphans: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('orphans', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       orphans: 'a',
       [MQ.D]: {
         orphans: 'b',

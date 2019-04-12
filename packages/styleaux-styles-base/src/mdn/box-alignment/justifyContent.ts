@@ -1,34 +1,34 @@
 import { JustifyContentProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const JUSTIFYCONTENT='justifyContent'
 
-export interface IJustifyContentProps<T> {
+export interface JustifyContentProps<T=JustifyContentProperty> {
   /**
    * The CSS **`justify-content`** property defines how the browser distributes space between and around content items along the main-axis of a flex container, and the inline axis of a grid container.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/justify-content
    */
-  justifyContent: T;
+  [JUSTIFYCONTENT]: T;
 }
 
 export const createJustifyContent = <
   T = JustifyContentProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IJustifyContentProps<T>, Theme, Breakpoints>({
-    cssProp: JUSTIFYCONTENT,
-    prop: JUSTIFYCONTENT,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<JustifyContentProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<JustifyContentProps<T>,Theme,Media>({
+    cssProp:JUSTIFYCONTENT,
+    prop:JUSTIFYCONTENT,
     key,
     transformValue,
   })
 
-export const createJustifyContentRule = <T = JustifyContentProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: JUSTIFYCONTENT, getValue: transformer})
+export const createJustifyContentRule = <T = JustifyContentProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: JUSTIFYCONTENT, getValue: transformer})
 
 export const justifyContent =createJustifyContent()
 

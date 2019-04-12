@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderRadius } from '../borderRadius';
 
-describe('borderRadius', () => {
+describe('createBorderRadius', () => {
   it('should return a function', () => {
     const result = createBorderRadius();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderRadius` as component and css prop', () => {
+  it('should use `createBorderRadius` as component and css prop', () => {
     const result = createBorderRadius()({ borderRadius: 'inherit' });
     expect(toStyles(result)).toEqual({ borderRadius: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderRadius', () => {
     expect(toStyles(result)).toEqual({ borderRadius: 'a' });
   });
 
-  it('should use an interface which marks `borderRadius` as optional', () => {
+  it('should use an interface which marks `createBorderRadius` as optional', () => {
     const result = createBorderRadius<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderRadius<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderRadius<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderRadius: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderRadius', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderRadius: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderRadius', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderRadius: 'a',
       [MQ.D]: {
         borderRadius: 'b',

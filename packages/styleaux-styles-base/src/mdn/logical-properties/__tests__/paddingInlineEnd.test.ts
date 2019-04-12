@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createPaddingInlineEnd } from '../paddingInlineEnd';
 
-describe('paddingInlineEnd', () => {
+describe('createPaddingInlineEnd', () => {
   it('should return a function', () => {
     const result = createPaddingInlineEnd();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `paddingInlineEnd` as component and css prop', () => {
+  it('should use `createPaddingInlineEnd` as component and css prop', () => {
     const result = createPaddingInlineEnd()({ paddingInlineEnd: 'inherit' });
     expect(toStyles(result)).toEqual({ paddingInlineEnd: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('paddingInlineEnd', () => {
     expect(toStyles(result)).toEqual({ paddingInlineEnd: 'a' });
   });
 
-  it('should use an interface which marks `paddingInlineEnd` as optional', () => {
+  it('should use an interface which marks `createPaddingInlineEnd` as optional', () => {
     const result = createPaddingInlineEnd<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createPaddingInlineEnd<'value',never,IThemeWithoutBreakpoints>({
+    const result = createPaddingInlineEnd<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ paddingInlineEnd: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('paddingInlineEnd', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       paddingInlineEnd: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('paddingInlineEnd', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       paddingInlineEnd: 'a',
       [MQ.D]: {
         paddingInlineEnd: 'b',

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createInsetBlockEnd } from '../insetBlockEnd';
 
-describe('insetBlockEnd', () => {
+describe('createInsetBlockEnd', () => {
   it('should return a function', () => {
     const result = createInsetBlockEnd();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `insetBlockEnd` as component and css prop', () => {
+  it('should use `createInsetBlockEnd` as component and css prop', () => {
     const result = createInsetBlockEnd()({ insetBlockEnd: 'inherit' });
     expect(toStyles(result)).toEqual({ insetBlockEnd: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('insetBlockEnd', () => {
     expect(toStyles(result)).toEqual({ insetBlockEnd: 'a' });
   });
 
-  it('should use an interface which marks `insetBlockEnd` as optional', () => {
+  it('should use an interface which marks `createInsetBlockEnd` as optional', () => {
     const result = createInsetBlockEnd<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createInsetBlockEnd<'value',never,IThemeWithoutBreakpoints>({
+    const result = createInsetBlockEnd<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ insetBlockEnd: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('insetBlockEnd', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       insetBlockEnd: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('insetBlockEnd', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       insetBlockEnd: 'a',
       [MQ.D]: {
         insetBlockEnd: 'b',

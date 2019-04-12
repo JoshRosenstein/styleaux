@@ -1,34 +1,34 @@
 import { AnimationFillModeProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const ANIMATIONFILLMODE='animationFillMode'
 
-export interface IAnimationFillModeProps<T> {
+export interface AnimationFillModeProps<T=AnimationFillModeProperty> {
   /**
    * The **`animation-fill-mode`** CSS property sets how a CSS animation applies styles to its target before and after its execution.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-fill-mode
    */
-  animationFillMode: T;
+  [ANIMATIONFILLMODE]: T;
 }
 
 export const createAnimationFillMode = <
   T = AnimationFillModeProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IAnimationFillModeProps<T>, Theme, Breakpoints>({
-    cssProp: ANIMATIONFILLMODE,
-    prop: ANIMATIONFILLMODE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<AnimationFillModeProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<AnimationFillModeProps<T>,Theme,Media>({
+    cssProp:ANIMATIONFILLMODE,
+    prop:ANIMATIONFILLMODE,
     key,
     transformValue,
   })
 
-export const createAnimationFillModeRule = <T = AnimationFillModeProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: ANIMATIONFILLMODE, getValue: transformer})
+export const createAnimationFillModeRule = <T = AnimationFillModeProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: ANIMATIONFILLMODE, getValue: transformer})
 
 export const animationFillMode =createAnimationFillMode()
 

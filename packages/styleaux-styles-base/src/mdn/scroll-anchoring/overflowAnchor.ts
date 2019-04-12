@@ -1,34 +1,34 @@
 import { OverflowAnchorProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const OVERFLOWANCHOR='overflowAnchor'
 
-export interface IOverflowAnchorProps<T> {
+export interface OverflowAnchorProps<T=OverflowAnchorProperty> {
   /**
    * The **`overflow-anchor`** CSS property provides a way to opt out browser scroll anchoring behavior, which adjusts scroll position to minimize content shifts.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-anchor
    */
-  overflowAnchor: T;
+  [OVERFLOWANCHOR]: T;
 }
 
 export const createOverflowAnchor = <
   T = OverflowAnchorProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IOverflowAnchorProps<T>, Theme, Breakpoints>({
-    cssProp: OVERFLOWANCHOR,
-    prop: OVERFLOWANCHOR,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<OverflowAnchorProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<OverflowAnchorProps<T>,Theme,Media>({
+    cssProp:OVERFLOWANCHOR,
+    prop:OVERFLOWANCHOR,
     key,
     transformValue,
   })
 
-export const createOverflowAnchorRule = <T = OverflowAnchorProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: OVERFLOWANCHOR, getValue: transformer})
+export const createOverflowAnchorRule = <T = OverflowAnchorProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: OVERFLOWANCHOR, getValue: transformer})
 
 export const overflowAnchor =createOverflowAnchor()
 

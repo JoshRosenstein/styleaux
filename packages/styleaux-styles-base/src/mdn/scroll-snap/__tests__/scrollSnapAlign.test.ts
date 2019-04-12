@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createScrollSnapAlign } from '../scrollSnapAlign';
 
-describe('scrollSnapAlign', () => {
+describe('createScrollSnapAlign', () => {
   it('should return a function', () => {
     const result = createScrollSnapAlign();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `scrollSnapAlign` as component and css prop', () => {
+  it('should use `createScrollSnapAlign` as component and css prop', () => {
     const result = createScrollSnapAlign()({ scrollSnapAlign: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollSnapAlign: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('scrollSnapAlign', () => {
     expect(toStyles(result)).toEqual({ scrollSnapAlign: 'a' });
   });
 
-  it('should use an interface which marks `scrollSnapAlign` as optional', () => {
+  it('should use an interface which marks `createScrollSnapAlign` as optional', () => {
     const result = createScrollSnapAlign<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollSnapAlign<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollSnapAlign<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollSnapAlign: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('scrollSnapAlign', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       scrollSnapAlign: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('scrollSnapAlign', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       scrollSnapAlign: 'a',
       [MQ.D]: {
         scrollSnapAlign: 'b',

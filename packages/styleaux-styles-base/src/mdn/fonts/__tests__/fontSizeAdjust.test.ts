@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createFontSizeAdjust } from '../fontSizeAdjust';
 
-describe('fontSizeAdjust', () => {
+describe('createFontSizeAdjust', () => {
   it('should return a function', () => {
     const result = createFontSizeAdjust();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `fontSizeAdjust` as component and css prop', () => {
+  it('should use `createFontSizeAdjust` as component and css prop', () => {
     const result = createFontSizeAdjust()({ fontSizeAdjust: 'inherit' });
     expect(toStyles(result)).toEqual({ fontSizeAdjust: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('fontSizeAdjust', () => {
     expect(toStyles(result)).toEqual({ fontSizeAdjust: 'a' });
   });
 
-  it('should use an interface which marks `fontSizeAdjust` as optional', () => {
+  it('should use an interface which marks `createFontSizeAdjust` as optional', () => {
     const result = createFontSizeAdjust<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createFontSizeAdjust<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFontSizeAdjust<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontSizeAdjust: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('fontSizeAdjust', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       fontSizeAdjust: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('fontSizeAdjust', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       fontSizeAdjust: 'a',
       [MQ.D]: {
         fontSizeAdjust: 'b',

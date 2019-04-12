@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBackgroundBlendMode } from '../backgroundBlendMode';
 
-describe('backgroundBlendMode', () => {
+describe('createBackgroundBlendMode', () => {
   it('should return a function', () => {
     const result = createBackgroundBlendMode();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `backgroundBlendMode` as component and css prop', () => {
+  it('should use `createBackgroundBlendMode` as component and css prop', () => {
     const result = createBackgroundBlendMode()({ backgroundBlendMode: 'inherit' });
     expect(toStyles(result)).toEqual({ backgroundBlendMode: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('backgroundBlendMode', () => {
     expect(toStyles(result)).toEqual({ backgroundBlendMode: 'a' });
   });
 
-  it('should use an interface which marks `backgroundBlendMode` as optional', () => {
+  it('should use an interface which marks `createBackgroundBlendMode` as optional', () => {
     const result = createBackgroundBlendMode<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBackgroundBlendMode<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBackgroundBlendMode<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ backgroundBlendMode: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('backgroundBlendMode', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       backgroundBlendMode: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('backgroundBlendMode', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       backgroundBlendMode: 'a',
       [MQ.D]: {
         backgroundBlendMode: 'b',

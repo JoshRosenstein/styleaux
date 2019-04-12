@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createMarginBlockStart } from '../marginBlockStart';
 
-describe('marginBlockStart', () => {
+describe('createMarginBlockStart', () => {
   it('should return a function', () => {
     const result = createMarginBlockStart();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `marginBlockStart` as component and css prop', () => {
+  it('should use `createMarginBlockStart` as component and css prop', () => {
     const result = createMarginBlockStart()({ marginBlockStart: 'inherit' });
     expect(toStyles(result)).toEqual({ marginBlockStart: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('marginBlockStart', () => {
     expect(toStyles(result)).toEqual({ marginBlockStart: 'a' });
   });
 
-  it('should use an interface which marks `marginBlockStart` as optional', () => {
+  it('should use an interface which marks `createMarginBlockStart` as optional', () => {
     const result = createMarginBlockStart<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createMarginBlockStart<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMarginBlockStart<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ marginBlockStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('marginBlockStart', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       marginBlockStart: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('marginBlockStart', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       marginBlockStart: 'a',
       [MQ.D]: {
         marginBlockStart: 'b',

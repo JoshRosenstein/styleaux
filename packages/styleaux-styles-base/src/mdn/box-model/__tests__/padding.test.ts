@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createPadding } from '../padding';
 
-describe('padding', () => {
+describe('createPadding', () => {
   it('should return a function', () => {
     const result = createPadding();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `padding` as component and css prop', () => {
+  it('should use `createPadding` as component and css prop', () => {
     const result = createPadding()({ padding: 'inherit' });
     expect(toStyles(result)).toEqual({ padding: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('padding', () => {
     expect(toStyles(result)).toEqual({ padding: 'a' });
   });
 
-  it('should use an interface which marks `padding` as optional', () => {
+  it('should use an interface which marks `createPadding` as optional', () => {
     const result = createPadding<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createPadding<'value',never,IThemeWithoutBreakpoints>({
+    const result = createPadding<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ padding: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('padding', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       padding: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('padding', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       padding: 'a',
       [MQ.D]: {
         padding: 'b',

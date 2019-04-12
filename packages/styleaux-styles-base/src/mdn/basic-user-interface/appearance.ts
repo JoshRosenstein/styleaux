@@ -1,34 +1,34 @@
 import { AppearanceProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const APPEARANCE='appearance'
 
-export interface IAppearanceProps<T> {
+export interface AppearanceProps<T=AppearanceProperty> {
   /**
    * The **`-moz-appearance`** CSS property is used in Gecko (Firefox) to display an element using platform-native styling based on the operating system's theme.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/appearance
    */
-  appearance: T;
+  [APPEARANCE]: T;
 }
 
 export const createAppearance = <
   T = AppearanceProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IAppearanceProps<T>, Theme, Breakpoints>({
-    cssProp: APPEARANCE,
-    prop: APPEARANCE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<AppearanceProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<AppearanceProps<T>,Theme,Media>({
+    cssProp:APPEARANCE,
+    prop:APPEARANCE,
     key,
     transformValue,
   })
 
-export const createAppearanceRule = <T = AppearanceProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: APPEARANCE, getValue: transformer})
+export const createAppearanceRule = <T = AppearanceProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: APPEARANCE, getValue: transformer})
 
 export const appearance =createAppearance()
 

@@ -1,34 +1,34 @@
 import { BorderInlineStyleProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BORDERINLINESTYLE='borderInlineStyle'
 
-export interface IBorderInlineStyleProps<T> {
+export interface BorderInlineStyleProps<T=BorderInlineStyleProperty> {
   /**
    * The **`border-inline-style`** CSS property defines the style of the logical inline borders of an element, which maps to a physical border style depending on the element's writing mode, directionality, and text orientation. It corresponds to the `border-top-style` and `border-bottom-style`, or `border-left-style` and `border-right-style` properties depending on the values defined for `writing-mode`, `direction`, and `text-orientation`.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-style
    */
-  borderInlineStyle: T;
+  [BORDERINLINESTYLE]: T;
 }
 
 export const createBorderInlineStyle = <
   T = BorderInlineStyleProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBorderInlineStyleProps<T>, Theme, Breakpoints>({
-    cssProp: BORDERINLINESTYLE,
-    prop: BORDERINLINESTYLE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BorderInlineStyleProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BorderInlineStyleProps<T>,Theme,Media>({
+    cssProp:BORDERINLINESTYLE,
+    prop:BORDERINLINESTYLE,
     key,
     transformValue,
   })
 
-export const createBorderInlineStyleRule = <T = BorderInlineStyleProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BORDERINLINESTYLE, getValue: transformer})
+export const createBorderInlineStyleRule = <T = BorderInlineStyleProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BORDERINLINESTYLE, getValue: transformer})
 
 export const borderInlineStyle =createBorderInlineStyle()
 

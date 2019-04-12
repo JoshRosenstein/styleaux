@@ -1,30 +1,30 @@
 import { __TYPE_NAME__ } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const __PROPERTY_NAME_CAP__='__PROPERTY_NAME__'
 
-export interface I__INTERFACE_PROPERTY_NAME__Props<T> {
+export interface __INTERFACE_PROPERTY_NAME__Props<T=__TYPE_NAME__> {
   __INTERFACE_PROPERTY_COMMENT__
-  __PROPERTY_NAME__: T;
+  [__PROPERTY_NAME_CAP__]: T;
 }
 
 export const create__PROPERTY_NAME_PASCAL__ = <
   T = __TYPE_NAME__,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<I__INTERFACE_PROPERTY_NAME__Props<T>, Theme, Breakpoints>({
-    cssProp: __PROPERTY_NAME_CAP__,
-    prop: __PROPERTY_NAME_CAP__,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<__INTERFACE_PROPERTY_NAME__Props<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<__INTERFACE_PROPERTY_NAME__Props<T>,Theme,Media>({
+    cssProp:__PROPERTY_NAME_CAP__,
+    prop:__PROPERTY_NAME_CAP__,
     key,
     transformValue,
   })
 
-export const create__PROPERTY_NAME_PASCAL__Rule = <T = __TYPE_NAME__>(
-  transformer?: Getter,
-) => styler<T>({cssProp: __PROPERTY_NAME_CAP__, getValue: transformer})
+export const create__PROPERTY_NAME_PASCAL__Rule = <T = __TYPE_NAME__, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: __PROPERTY_NAME_CAP__, getValue: transformer})
 
 export const __PROPERTY_NAME__ =create__PROPERTY_NAME_PASCAL__()
 

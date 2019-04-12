@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { create__PROPERTY_NAME_PASCAL__ } from '../__PROPERTY_NAME__';
 
-describe('__PROPERTY_NAME__', () => {
+describe('create__PROPERTY_NAME_PASCAL__', () => {
   it('should return a function', () => {
     const result = create__PROPERTY_NAME_PASCAL__();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `__PROPERTY_NAME__` as component and css prop', () => {
+  it('should use `create__PROPERTY_NAME_PASCAL__` as component and css prop', () => {
     const result = create__PROPERTY_NAME_PASCAL__()({ __PROPERTY_NAME__: 'inherit' });
     expect(toStyles(result)).toEqual({ __PROPERTY_NAME__: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('__PROPERTY_NAME__', () => {
     expect(toStyles(result)).toEqual({ __PROPERTY_NAME__: 'a' });
   });
 
-  it('should use an interface which marks `__PROPERTY_NAME__` as optional', () => {
+  it('should use an interface which marks `create__PROPERTY_NAME_PASCAL__` as optional', () => {
     const result = create__PROPERTY_NAME_PASCAL__<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = create__PROPERTY_NAME_PASCAL__<'value',never,IThemeWithoutBreakpoints>({
+    const result = create__PROPERTY_NAME_PASCAL__<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ __PROPERTY_NAME__: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('__PROPERTY_NAME__', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       __PROPERTY_NAME__: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('__PROPERTY_NAME__', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       __PROPERTY_NAME__: 'a',
       [MQ.D]: {
         __PROPERTY_NAME__: 'b',

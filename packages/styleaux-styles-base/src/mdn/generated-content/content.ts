@@ -1,34 +1,34 @@
 import { ContentProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const CONTENT='content'
 
-export interface IContentProps<T> {
+export interface ContentProps<T=ContentProperty> {
   /**
    * The **`content`** CSS property replaces an element with a generated value. Objects inserted using the `content` property are _anonymous replaced elements._
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/content
    */
-  content: T;
+  [CONTENT]: T;
 }
 
 export const createContent = <
   T = ContentProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IContentProps<T>, Theme, Breakpoints>({
-    cssProp: CONTENT,
-    prop: CONTENT,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<ContentProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<ContentProps<T>,Theme,Media>({
+    cssProp:CONTENT,
+    prop:CONTENT,
     key,
     transformValue,
   })
 
-export const createContentRule = <T = ContentProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: CONTENT, getValue: transformer})
+export const createContentRule = <T = ContentProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: CONTENT, getValue: transformer})
 
 export const content =createContent()
 

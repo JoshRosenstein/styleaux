@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createOpacity } from '../opacity';
 
-describe('opacity', () => {
+describe('createOpacity', () => {
   it('should return a function', () => {
     const result = createOpacity();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `opacity` as component and css prop', () => {
+  it('should use `createOpacity` as component and css prop', () => {
     const result = createOpacity()({ opacity: 'inherit' });
     expect(toStyles(result)).toEqual({ opacity: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('opacity', () => {
     expect(toStyles(result)).toEqual({ opacity: 'a' });
   });
 
-  it('should use an interface which marks `opacity` as optional', () => {
+  it('should use an interface which marks `createOpacity` as optional', () => {
     const result = createOpacity<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createOpacity<'value',never,IThemeWithoutBreakpoints>({
+    const result = createOpacity<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ opacity: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('opacity', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       opacity: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('opacity', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       opacity: 'a',
       [MQ.D]: {
         opacity: 'b',

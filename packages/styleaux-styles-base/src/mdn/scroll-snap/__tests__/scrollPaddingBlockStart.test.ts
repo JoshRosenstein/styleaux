@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createScrollPaddingBlockStart } from '../scrollPaddingBlockStart';
 
-describe('scrollPaddingBlockStart', () => {
+describe('createScrollPaddingBlockStart', () => {
   it('should return a function', () => {
     const result = createScrollPaddingBlockStart();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `scrollPaddingBlockStart` as component and css prop', () => {
+  it('should use `createScrollPaddingBlockStart` as component and css prop', () => {
     const result = createScrollPaddingBlockStart()({ scrollPaddingBlockStart: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollPaddingBlockStart: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('scrollPaddingBlockStart', () => {
     expect(toStyles(result)).toEqual({ scrollPaddingBlockStart: 'a' });
   });
 
-  it('should use an interface which marks `scrollPaddingBlockStart` as optional', () => {
+  it('should use an interface which marks `createScrollPaddingBlockStart` as optional', () => {
     const result = createScrollPaddingBlockStart<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollPaddingBlockStart<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollPaddingBlockStart<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollPaddingBlockStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('scrollPaddingBlockStart', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       scrollPaddingBlockStart: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('scrollPaddingBlockStart', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       scrollPaddingBlockStart: 'a',
       [MQ.D]: {
         scrollPaddingBlockStart: 'b',

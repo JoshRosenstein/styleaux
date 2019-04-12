@@ -1,34 +1,34 @@
 import { BackgroundColorProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BACKGROUNDCOLOR='backgroundColor'
 
-export interface IBackgroundColorProps<T> {
+export interface BackgroundColorProps<T=BackgroundColorProperty> {
   /**
    * The **`background-color`** CSS property sets the background color of an element.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-color
    */
-  backgroundColor: T;
+  [BACKGROUNDCOLOR]: T;
 }
 
 export const createBackgroundColor = <
   T = BackgroundColorProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBackgroundColorProps<T>, Theme, Breakpoints>({
-    cssProp: BACKGROUNDCOLOR,
-    prop: BACKGROUNDCOLOR,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BackgroundColorProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BackgroundColorProps<T>,Theme,Media>({
+    cssProp:BACKGROUNDCOLOR,
+    prop:BACKGROUNDCOLOR,
     key,
     transformValue,
   })
 
-export const createBackgroundColorRule = <T = BackgroundColorProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BACKGROUNDCOLOR, getValue: transformer})
+export const createBackgroundColorRule = <T = BackgroundColorProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BACKGROUNDCOLOR, getValue: transformer})
 
 export const backgroundColor =createBackgroundColor()
 

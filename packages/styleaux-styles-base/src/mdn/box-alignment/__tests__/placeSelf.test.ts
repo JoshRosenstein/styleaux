@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createPlaceSelf } from '../placeSelf';
 
-describe('placeSelf', () => {
+describe('createPlaceSelf', () => {
   it('should return a function', () => {
     const result = createPlaceSelf();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `placeSelf` as component and css prop', () => {
+  it('should use `createPlaceSelf` as component and css prop', () => {
     const result = createPlaceSelf()({ placeSelf: 'inherit' });
     expect(toStyles(result)).toEqual({ placeSelf: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('placeSelf', () => {
     expect(toStyles(result)).toEqual({ placeSelf: 'a' });
   });
 
-  it('should use an interface which marks `placeSelf` as optional', () => {
+  it('should use an interface which marks `createPlaceSelf` as optional', () => {
     const result = createPlaceSelf<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createPlaceSelf<'value',never,IThemeWithoutBreakpoints>({
+    const result = createPlaceSelf<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ placeSelf: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('placeSelf', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       placeSelf: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('placeSelf', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       placeSelf: 'a',
       [MQ.D]: {
         placeSelf: 'b',

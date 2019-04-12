@@ -1,34 +1,34 @@
 import { BorderRightWidthProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BORDERRIGHTWIDTH='borderRightWidth'
 
-export interface IBorderRightWidthProps<T> {
+export interface BorderRightWidthProps<T=BorderRightWidthProperty> {
   /**
    * The **`border-right-width`** CSS property sets the width of the right border of an element.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-right-width
    */
-  borderRightWidth: T;
+  [BORDERRIGHTWIDTH]: T;
 }
 
 export const createBorderRightWidth = <
   T = BorderRightWidthProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBorderRightWidthProps<T>, Theme, Breakpoints>({
-    cssProp: BORDERRIGHTWIDTH,
-    prop: BORDERRIGHTWIDTH,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BorderRightWidthProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BorderRightWidthProps<T>,Theme,Media>({
+    cssProp:BORDERRIGHTWIDTH,
+    prop:BORDERRIGHTWIDTH,
     key,
     transformValue,
   })
 
-export const createBorderRightWidthRule = <T = BorderRightWidthProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BORDERRIGHTWIDTH, getValue: transformer})
+export const createBorderRightWidthRule = <T = BorderRightWidthProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BORDERRIGHTWIDTH, getValue: transformer})
 
 export const borderRightWidth =createBorderRightWidth()
 

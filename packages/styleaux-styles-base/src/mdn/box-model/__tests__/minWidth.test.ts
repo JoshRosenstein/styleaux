@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createMinWidth } from '../minWidth';
 
-describe('minWidth', () => {
+describe('createMinWidth', () => {
   it('should return a function', () => {
     const result = createMinWidth();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `minWidth` as component and css prop', () => {
+  it('should use `createMinWidth` as component and css prop', () => {
     const result = createMinWidth()({ minWidth: 'inherit' });
     expect(toStyles(result)).toEqual({ minWidth: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('minWidth', () => {
     expect(toStyles(result)).toEqual({ minWidth: 'a' });
   });
 
-  it('should use an interface which marks `minWidth` as optional', () => {
+  it('should use an interface which marks `createMinWidth` as optional', () => {
     const result = createMinWidth<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createMinWidth<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMinWidth<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ minWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('minWidth', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       minWidth: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('minWidth', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       minWidth: 'a',
       [MQ.D]: {
         minWidth: 'b',

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBackgroundPositionY } from '../backgroundPositionY';
 
-describe('backgroundPositionY', () => {
+describe('createBackgroundPositionY', () => {
   it('should return a function', () => {
     const result = createBackgroundPositionY();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `backgroundPositionY` as component and css prop', () => {
+  it('should use `createBackgroundPositionY` as component and css prop', () => {
     const result = createBackgroundPositionY()({ backgroundPositionY: 'inherit' });
     expect(toStyles(result)).toEqual({ backgroundPositionY: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('backgroundPositionY', () => {
     expect(toStyles(result)).toEqual({ backgroundPositionY: 'a' });
   });
 
-  it('should use an interface which marks `backgroundPositionY` as optional', () => {
+  it('should use an interface which marks `createBackgroundPositionY` as optional', () => {
     const result = createBackgroundPositionY<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBackgroundPositionY<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBackgroundPositionY<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ backgroundPositionY: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('backgroundPositionY', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       backgroundPositionY: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('backgroundPositionY', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       backgroundPositionY: 'a',
       [MQ.D]: {
         backgroundPositionY: 'b',

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createCursor } from '../cursor';
 
-describe('cursor', () => {
+describe('createCursor', () => {
   it('should return a function', () => {
     const result = createCursor();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `cursor` as component and css prop', () => {
+  it('should use `createCursor` as component and css prop', () => {
     const result = createCursor()({ cursor: 'inherit' });
     expect(toStyles(result)).toEqual({ cursor: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('cursor', () => {
     expect(toStyles(result)).toEqual({ cursor: 'a' });
   });
 
-  it('should use an interface which marks `cursor` as optional', () => {
+  it('should use an interface which marks `createCursor` as optional', () => {
     const result = createCursor<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createCursor<'value',never,IThemeWithoutBreakpoints>({
+    const result = createCursor<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ cursor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('cursor', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       cursor: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('cursor', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       cursor: 'a',
       [MQ.D]: {
         cursor: 'b',

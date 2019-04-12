@@ -1,34 +1,34 @@
 import { ColumnCountProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const COLUMNCOUNT='columnCount'
 
-export interface IColumnCountProps<T> {
+export interface ColumnCountProps<T=ColumnCountProperty> {
   /**
    * The **`column-count`** CSS property breaks an element's content into the specified number of columns.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-count
    */
-  columnCount: T;
+  [COLUMNCOUNT]: T;
 }
 
 export const createColumnCount = <
   T = ColumnCountProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IColumnCountProps<T>, Theme, Breakpoints>({
-    cssProp: COLUMNCOUNT,
-    prop: COLUMNCOUNT,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<ColumnCountProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<ColumnCountProps<T>,Theme,Media>({
+    cssProp:COLUMNCOUNT,
+    prop:COLUMNCOUNT,
     key,
     transformValue,
   })
 
-export const createColumnCountRule = <T = ColumnCountProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: COLUMNCOUNT, getValue: transformer})
+export const createColumnCountRule = <T = ColumnCountProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: COLUMNCOUNT, getValue: transformer})
 
 export const columnCount =createColumnCount()
 

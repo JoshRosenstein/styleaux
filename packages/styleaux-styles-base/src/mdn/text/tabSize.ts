@@ -1,34 +1,34 @@
 import { TabSizeProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const TABSIZE='tabSize'
 
-export interface ITabSizeProps<T> {
+export interface TabSizeProps<T=TabSizeProperty> {
   /**
    * The **`tab-size`** CSS property is used to customize the width of a tab (`U+0009`) character.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/tab-size
    */
-  tabSize: T;
+  [TABSIZE]: T;
 }
 
 export const createTabSize = <
   T = TabSizeProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<ITabSizeProps<T>, Theme, Breakpoints>({
-    cssProp: TABSIZE,
-    prop: TABSIZE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<TabSizeProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<TabSizeProps<T>,Theme,Media>({
+    cssProp:TABSIZE,
+    prop:TABSIZE,
     key,
     transformValue,
   })
 
-export const createTabSizeRule = <T = TabSizeProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: TABSIZE, getValue: transformer})
+export const createTabSizeRule = <T = TabSizeProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: TABSIZE, getValue: transformer})
 
 export const tabSize =createTabSize()
 

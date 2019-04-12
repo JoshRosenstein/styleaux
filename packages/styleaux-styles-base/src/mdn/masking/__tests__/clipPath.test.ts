@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createClipPath } from '../clipPath';
 
-describe('clipPath', () => {
+describe('createClipPath', () => {
   it('should return a function', () => {
     const result = createClipPath();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `clipPath` as component and css prop', () => {
+  it('should use `createClipPath` as component and css prop', () => {
     const result = createClipPath()({ clipPath: 'inherit' });
     expect(toStyles(result)).toEqual({ clipPath: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('clipPath', () => {
     expect(toStyles(result)).toEqual({ clipPath: 'a' });
   });
 
-  it('should use an interface which marks `clipPath` as optional', () => {
+  it('should use an interface which marks `createClipPath` as optional', () => {
     const result = createClipPath<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createClipPath<'value',never,IThemeWithoutBreakpoints>({
+    const result = createClipPath<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ clipPath: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('clipPath', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       clipPath: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('clipPath', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       clipPath: 'a',
       [MQ.D]: {
         clipPath: 'b',

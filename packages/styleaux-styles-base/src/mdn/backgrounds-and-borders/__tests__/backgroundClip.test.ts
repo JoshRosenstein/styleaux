@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBackgroundClip } from '../backgroundClip';
 
-describe('backgroundClip', () => {
+describe('createBackgroundClip', () => {
   it('should return a function', () => {
     const result = createBackgroundClip();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `backgroundClip` as component and css prop', () => {
+  it('should use `createBackgroundClip` as component and css prop', () => {
     const result = createBackgroundClip()({ backgroundClip: 'inherit' });
     expect(toStyles(result)).toEqual({ backgroundClip: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('backgroundClip', () => {
     expect(toStyles(result)).toEqual({ backgroundClip: 'a' });
   });
 
-  it('should use an interface which marks `backgroundClip` as optional', () => {
+  it('should use an interface which marks `createBackgroundClip` as optional', () => {
     const result = createBackgroundClip<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBackgroundClip<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBackgroundClip<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ backgroundClip: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('backgroundClip', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       backgroundClip: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('backgroundClip', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       backgroundClip: 'a',
       [MQ.D]: {
         backgroundClip: 'b',

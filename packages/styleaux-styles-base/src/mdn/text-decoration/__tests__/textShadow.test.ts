@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTextShadow } from '../textShadow';
 
-describe('textShadow', () => {
+describe('createTextShadow', () => {
   it('should return a function', () => {
     const result = createTextShadow();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `textShadow` as component and css prop', () => {
+  it('should use `createTextShadow` as component and css prop', () => {
     const result = createTextShadow()({ textShadow: 'inherit' });
     expect(toStyles(result)).toEqual({ textShadow: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('textShadow', () => {
     expect(toStyles(result)).toEqual({ textShadow: 'a' });
   });
 
-  it('should use an interface which marks `textShadow` as optional', () => {
+  it('should use an interface which marks `createTextShadow` as optional', () => {
     const result = createTextShadow<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTextShadow<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextShadow<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textShadow: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('textShadow', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       textShadow: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('textShadow', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       textShadow: 'a',
       [MQ.D]: {
         textShadow: 'b',

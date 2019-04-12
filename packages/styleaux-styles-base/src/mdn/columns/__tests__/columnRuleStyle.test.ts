@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createColumnRuleStyle } from '../columnRuleStyle';
 
-describe('columnRuleStyle', () => {
+describe('createColumnRuleStyle', () => {
   it('should return a function', () => {
     const result = createColumnRuleStyle();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `columnRuleStyle` as component and css prop', () => {
+  it('should use `createColumnRuleStyle` as component and css prop', () => {
     const result = createColumnRuleStyle()({ columnRuleStyle: 'inherit' });
     expect(toStyles(result)).toEqual({ columnRuleStyle: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('columnRuleStyle', () => {
     expect(toStyles(result)).toEqual({ columnRuleStyle: 'a' });
   });
 
-  it('should use an interface which marks `columnRuleStyle` as optional', () => {
+  it('should use an interface which marks `createColumnRuleStyle` as optional', () => {
     const result = createColumnRuleStyle<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createColumnRuleStyle<'value',never,IThemeWithoutBreakpoints>({
+    const result = createColumnRuleStyle<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ columnRuleStyle: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('columnRuleStyle', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       columnRuleStyle: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('columnRuleStyle', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       columnRuleStyle: 'a',
       [MQ.D]: {
         columnRuleStyle: 'b',

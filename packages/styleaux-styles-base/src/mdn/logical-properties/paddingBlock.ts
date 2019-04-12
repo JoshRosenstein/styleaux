@@ -1,34 +1,34 @@
 import { PaddingBlockProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const PADDINGBLOCK='paddingBlock'
 
-export interface IPaddingBlockProps<T> {
+export interface PaddingBlockProps<T=PaddingBlockProperty> {
   /**
    * The **`padding-block`** CSS property defines the logical block start and end padding of an element, which maps to physical padding properties depending on the element's writing mode, directionality, and text orientation.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-block
    */
-  paddingBlock: T;
+  [PADDINGBLOCK]: T;
 }
 
 export const createPaddingBlock = <
   T = PaddingBlockProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IPaddingBlockProps<T>, Theme, Breakpoints>({
-    cssProp: PADDINGBLOCK,
-    prop: PADDINGBLOCK,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<PaddingBlockProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<PaddingBlockProps<T>,Theme,Media>({
+    cssProp:PADDINGBLOCK,
+    prop:PADDINGBLOCK,
     key,
     transformValue,
   })
 
-export const createPaddingBlockRule = <T = PaddingBlockProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: PADDINGBLOCK, getValue: transformer})
+export const createPaddingBlockRule = <T = PaddingBlockProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: PADDINGBLOCK, getValue: transformer})
 
 export const paddingBlock =createPaddingBlock()
 

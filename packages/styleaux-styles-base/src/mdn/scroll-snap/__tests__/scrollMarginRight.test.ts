@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createScrollMarginRight } from '../scrollMarginRight';
 
-describe('scrollMarginRight', () => {
+describe('createScrollMarginRight', () => {
   it('should return a function', () => {
     const result = createScrollMarginRight();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `scrollMarginRight` as component and css prop', () => {
+  it('should use `createScrollMarginRight` as component and css prop', () => {
     const result = createScrollMarginRight()({ scrollMarginRight: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollMarginRight: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('scrollMarginRight', () => {
     expect(toStyles(result)).toEqual({ scrollMarginRight: 'a' });
   });
 
-  it('should use an interface which marks `scrollMarginRight` as optional', () => {
+  it('should use an interface which marks `createScrollMarginRight` as optional', () => {
     const result = createScrollMarginRight<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollMarginRight<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollMarginRight<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollMarginRight: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('scrollMarginRight', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       scrollMarginRight: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('scrollMarginRight', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       scrollMarginRight: 'a',
       [MQ.D]: {
         scrollMarginRight: 'b',

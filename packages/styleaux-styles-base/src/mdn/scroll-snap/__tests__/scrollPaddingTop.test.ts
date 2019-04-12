@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createScrollPaddingTop } from '../scrollPaddingTop';
 
-describe('scrollPaddingTop', () => {
+describe('createScrollPaddingTop', () => {
   it('should return a function', () => {
     const result = createScrollPaddingTop();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `scrollPaddingTop` as component and css prop', () => {
+  it('should use `createScrollPaddingTop` as component and css prop', () => {
     const result = createScrollPaddingTop()({ scrollPaddingTop: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollPaddingTop: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('scrollPaddingTop', () => {
     expect(toStyles(result)).toEqual({ scrollPaddingTop: 'a' });
   });
 
-  it('should use an interface which marks `scrollPaddingTop` as optional', () => {
+  it('should use an interface which marks `createScrollPaddingTop` as optional', () => {
     const result = createScrollPaddingTop<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollPaddingTop<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollPaddingTop<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollPaddingTop: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('scrollPaddingTop', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       scrollPaddingTop: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('scrollPaddingTop', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       scrollPaddingTop: 'a',
       [MQ.D]: {
         scrollPaddingTop: 'b',

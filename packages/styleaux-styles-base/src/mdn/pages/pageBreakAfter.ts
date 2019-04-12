@@ -1,34 +1,34 @@
 import { PageBreakAfterProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const PAGEBREAKAFTER='pageBreakAfter'
 
-export interface IPageBreakAfterProps<T> {
+export interface PageBreakAfterProps<T=PageBreakAfterProperty> {
   /**
    * The **`page-break-after`** CSS property adjusts page breaks _after_ the current element.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/page-break-after
    */
-  pageBreakAfter: T;
+  [PAGEBREAKAFTER]: T;
 }
 
 export const createPageBreakAfter = <
   T = PageBreakAfterProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IPageBreakAfterProps<T>, Theme, Breakpoints>({
-    cssProp: PAGEBREAKAFTER,
-    prop: PAGEBREAKAFTER,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<PageBreakAfterProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<PageBreakAfterProps<T>,Theme,Media>({
+    cssProp:PAGEBREAKAFTER,
+    prop:PAGEBREAKAFTER,
     key,
     transformValue,
   })
 
-export const createPageBreakAfterRule = <T = PageBreakAfterProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: PAGEBREAKAFTER, getValue: transformer})
+export const createPageBreakAfterRule = <T = PageBreakAfterProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: PAGEBREAKAFTER, getValue: transformer})
 
 export const pageBreakAfter =createPageBreakAfter()
 

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createMaxBlockSize } from '../maxBlockSize';
 
-describe('maxBlockSize', () => {
+describe('createMaxBlockSize', () => {
   it('should return a function', () => {
     const result = createMaxBlockSize();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `maxBlockSize` as component and css prop', () => {
+  it('should use `createMaxBlockSize` as component and css prop', () => {
     const result = createMaxBlockSize()({ maxBlockSize: 'inherit' });
     expect(toStyles(result)).toEqual({ maxBlockSize: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('maxBlockSize', () => {
     expect(toStyles(result)).toEqual({ maxBlockSize: 'a' });
   });
 
-  it('should use an interface which marks `maxBlockSize` as optional', () => {
+  it('should use an interface which marks `createMaxBlockSize` as optional', () => {
     const result = createMaxBlockSize<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createMaxBlockSize<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMaxBlockSize<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ maxBlockSize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('maxBlockSize', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       maxBlockSize: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('maxBlockSize', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       maxBlockSize: 'a',
       [MQ.D]: {
         maxBlockSize: 'b',

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderImageOutset } from '../borderImageOutset';
 
-describe('borderImageOutset', () => {
+describe('createBorderImageOutset', () => {
   it('should return a function', () => {
     const result = createBorderImageOutset();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderImageOutset` as component and css prop', () => {
+  it('should use `createBorderImageOutset` as component and css prop', () => {
     const result = createBorderImageOutset()({ borderImageOutset: 'inherit' });
     expect(toStyles(result)).toEqual({ borderImageOutset: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderImageOutset', () => {
     expect(toStyles(result)).toEqual({ borderImageOutset: 'a' });
   });
 
-  it('should use an interface which marks `borderImageOutset` as optional', () => {
+  it('should use an interface which marks `createBorderImageOutset` as optional', () => {
     const result = createBorderImageOutset<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderImageOutset<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderImageOutset<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderImageOutset: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderImageOutset', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderImageOutset: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderImageOutset', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderImageOutset: 'a',
       [MQ.D]: {
         borderImageOutset: 'b',

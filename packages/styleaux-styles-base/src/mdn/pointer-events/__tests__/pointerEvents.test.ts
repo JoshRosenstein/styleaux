@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createPointerEvents } from '../pointerEvents';
 
-describe('pointerEvents', () => {
+describe('createPointerEvents', () => {
   it('should return a function', () => {
     const result = createPointerEvents();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `pointerEvents` as component and css prop', () => {
+  it('should use `createPointerEvents` as component and css prop', () => {
     const result = createPointerEvents()({ pointerEvents: 'inherit' });
     expect(toStyles(result)).toEqual({ pointerEvents: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('pointerEvents', () => {
     expect(toStyles(result)).toEqual({ pointerEvents: 'a' });
   });
 
-  it('should use an interface which marks `pointerEvents` as optional', () => {
+  it('should use an interface which marks `createPointerEvents` as optional', () => {
     const result = createPointerEvents<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createPointerEvents<'value',never,IThemeWithoutBreakpoints>({
+    const result = createPointerEvents<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ pointerEvents: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('pointerEvents', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       pointerEvents: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('pointerEvents', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       pointerEvents: 'a',
       [MQ.D]: {
         pointerEvents: 'b',

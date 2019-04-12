@@ -1,34 +1,34 @@
 import { MaxWidthProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const MAXWIDTH='maxWidth'
 
-export interface IMaxWidthProps<T> {
+export interface MaxWidthProps<T=MaxWidthProperty> {
   /**
    * The **`max-width`** CSS property sets the maximum width of an element. It prevents the used value of the `width` property from becoming larger than the value specified by `max-width`.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-width
    */
-  maxWidth: T;
+  [MAXWIDTH]: T;
 }
 
 export const createMaxWidth = <
   T = MaxWidthProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IMaxWidthProps<T>, Theme, Breakpoints>({
-    cssProp: MAXWIDTH,
-    prop: MAXWIDTH,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<MaxWidthProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<MaxWidthProps<T>,Theme,Media>({
+    cssProp:MAXWIDTH,
+    prop:MAXWIDTH,
     key,
     transformValue,
   })
 
-export const createMaxWidthRule = <T = MaxWidthProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: MAXWIDTH, getValue: transformer})
+export const createMaxWidthRule = <T = MaxWidthProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: MAXWIDTH, getValue: transformer})
 
 export const maxWidth =createMaxWidth()
 

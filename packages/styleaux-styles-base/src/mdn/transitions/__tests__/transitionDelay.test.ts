@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTransitionDelay } from '../transitionDelay';
 
-describe('transitionDelay', () => {
+describe('createTransitionDelay', () => {
   it('should return a function', () => {
     const result = createTransitionDelay();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `transitionDelay` as component and css prop', () => {
+  it('should use `createTransitionDelay` as component and css prop', () => {
     const result = createTransitionDelay()({ transitionDelay: 'inherit' });
     expect(toStyles(result)).toEqual({ transitionDelay: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('transitionDelay', () => {
     expect(toStyles(result)).toEqual({ transitionDelay: 'a' });
   });
 
-  it('should use an interface which marks `transitionDelay` as optional', () => {
+  it('should use an interface which marks `createTransitionDelay` as optional', () => {
     const result = createTransitionDelay<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTransitionDelay<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTransitionDelay<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ transitionDelay: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('transitionDelay', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       transitionDelay: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('transitionDelay', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       transitionDelay: 'a',
       [MQ.D]: {
         transitionDelay: 'b',

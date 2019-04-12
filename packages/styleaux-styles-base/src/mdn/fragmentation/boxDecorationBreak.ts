@@ -1,34 +1,34 @@
 import { BoxDecorationBreakProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BOXDECORATIONBREAK='boxDecorationBreak'
 
-export interface IBoxDecorationBreakProps<T> {
+export interface BoxDecorationBreakProps<T=BoxDecorationBreakProperty> {
   /**
    * The **`box-decoration-break`** CSS property specifies how an element's fragments should be rendered when broken across multiple lines, columns, or pages.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/box-decoration-break
    */
-  boxDecorationBreak: T;
+  [BOXDECORATIONBREAK]: T;
 }
 
 export const createBoxDecorationBreak = <
   T = BoxDecorationBreakProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBoxDecorationBreakProps<T>, Theme, Breakpoints>({
-    cssProp: BOXDECORATIONBREAK,
-    prop: BOXDECORATIONBREAK,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BoxDecorationBreakProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BoxDecorationBreakProps<T>,Theme,Media>({
+    cssProp:BOXDECORATIONBREAK,
+    prop:BOXDECORATIONBREAK,
     key,
     transformValue,
   })
 
-export const createBoxDecorationBreakRule = <T = BoxDecorationBreakProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BOXDECORATIONBREAK, getValue: transformer})
+export const createBoxDecorationBreakRule = <T = BoxDecorationBreakProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BOXDECORATIONBREAK, getValue: transformer})
 
 export const boxDecorationBreak =createBoxDecorationBreak()
 

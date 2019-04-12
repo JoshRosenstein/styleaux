@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTransition } from '../transition';
 
-describe('transition', () => {
+describe('createTransition', () => {
   it('should return a function', () => {
     const result = createTransition();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `transition` as component and css prop', () => {
+  it('should use `createTransition` as component and css prop', () => {
     const result = createTransition()({ transition: 'inherit' });
     expect(toStyles(result)).toEqual({ transition: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('transition', () => {
     expect(toStyles(result)).toEqual({ transition: 'a' });
   });
 
-  it('should use an interface which marks `transition` as optional', () => {
+  it('should use an interface which marks `createTransition` as optional', () => {
     const result = createTransition<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTransition<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTransition<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ transition: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('transition', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       transition: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('transition', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       transition: 'a',
       [MQ.D]: {
         transition: 'b',

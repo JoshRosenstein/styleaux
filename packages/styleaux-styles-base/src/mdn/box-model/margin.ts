@@ -1,34 +1,34 @@
 import { MarginProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const MARGIN='margin'
 
-export interface IMarginProps<T> {
+export interface MarginProps<T=MarginProperty> {
   /**
    * The **`margin`** CSS property sets the margin area on all four sides of an element. It is a shorthand for `margin-top`, `margin-right`, `margin-bottom`, and `margin-left`.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin
    */
-  margin: T;
+  [MARGIN]: T;
 }
 
 export const createMargin = <
   T = MarginProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IMarginProps<T>, Theme, Breakpoints>({
-    cssProp: MARGIN,
-    prop: MARGIN,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<MarginProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<MarginProps<T>,Theme,Media>({
+    cssProp:MARGIN,
+    prop:MARGIN,
     key,
     transformValue,
   })
 
-export const createMarginRule = <T = MarginProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: MARGIN, getValue: transformer})
+export const createMarginRule = <T = MarginProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: MARGIN, getValue: transformer})
 
 export const margin =createMargin()
 

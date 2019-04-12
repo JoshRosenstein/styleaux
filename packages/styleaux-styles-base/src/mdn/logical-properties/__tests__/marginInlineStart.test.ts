@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createMarginInlineStart } from '../marginInlineStart';
 
-describe('marginInlineStart', () => {
+describe('createMarginInlineStart', () => {
   it('should return a function', () => {
     const result = createMarginInlineStart();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `marginInlineStart` as component and css prop', () => {
+  it('should use `createMarginInlineStart` as component and css prop', () => {
     const result = createMarginInlineStart()({ marginInlineStart: 'inherit' });
     expect(toStyles(result)).toEqual({ marginInlineStart: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('marginInlineStart', () => {
     expect(toStyles(result)).toEqual({ marginInlineStart: 'a' });
   });
 
-  it('should use an interface which marks `marginInlineStart` as optional', () => {
+  it('should use an interface which marks `createMarginInlineStart` as optional', () => {
     const result = createMarginInlineStart<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createMarginInlineStart<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMarginInlineStart<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ marginInlineStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('marginInlineStart', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       marginInlineStart: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('marginInlineStart', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       marginInlineStart: 'a',
       [MQ.D]: {
         marginInlineStart: 'b',

@@ -1,34 +1,34 @@
 import { MixBlendModeProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const MIXBLENDMODE='mixBlendMode'
 
-export interface IMixBlendModeProps<T> {
+export interface MixBlendModeProps<T=MixBlendModeProperty> {
   /**
    * The **`mix-blend-mode`** CSS property sets how an element's content should blend with the content of the element's parent and the element's background.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mix-blend-mode
    */
-  mixBlendMode: T;
+  [MIXBLENDMODE]: T;
 }
 
 export const createMixBlendMode = <
   T = MixBlendModeProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IMixBlendModeProps<T>, Theme, Breakpoints>({
-    cssProp: MIXBLENDMODE,
-    prop: MIXBLENDMODE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<MixBlendModeProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<MixBlendModeProps<T>,Theme,Media>({
+    cssProp:MIXBLENDMODE,
+    prop:MIXBLENDMODE,
     key,
     transformValue,
   })
 
-export const createMixBlendModeRule = <T = MixBlendModeProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: MIXBLENDMODE, getValue: transformer})
+export const createMixBlendModeRule = <T = MixBlendModeProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: MIXBLENDMODE, getValue: transformer})
 
 export const mixBlendMode =createMixBlendMode()
 

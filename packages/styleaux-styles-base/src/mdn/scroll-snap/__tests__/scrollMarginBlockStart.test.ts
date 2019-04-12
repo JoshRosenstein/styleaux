@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createScrollMarginBlockStart } from '../scrollMarginBlockStart';
 
-describe('scrollMarginBlockStart', () => {
+describe('createScrollMarginBlockStart', () => {
   it('should return a function', () => {
     const result = createScrollMarginBlockStart();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `scrollMarginBlockStart` as component and css prop', () => {
+  it('should use `createScrollMarginBlockStart` as component and css prop', () => {
     const result = createScrollMarginBlockStart()({ scrollMarginBlockStart: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollMarginBlockStart: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('scrollMarginBlockStart', () => {
     expect(toStyles(result)).toEqual({ scrollMarginBlockStart: 'a' });
   });
 
-  it('should use an interface which marks `scrollMarginBlockStart` as optional', () => {
+  it('should use an interface which marks `createScrollMarginBlockStart` as optional', () => {
     const result = createScrollMarginBlockStart<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollMarginBlockStart<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollMarginBlockStart<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollMarginBlockStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('scrollMarginBlockStart', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       scrollMarginBlockStart: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('scrollMarginBlockStart', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       scrollMarginBlockStart: 'a',
       [MQ.D]: {
         scrollMarginBlockStart: 'b',

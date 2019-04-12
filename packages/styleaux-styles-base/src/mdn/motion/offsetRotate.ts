@@ -1,34 +1,34 @@
 import { OffsetRotateProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const OFFSETROTATE='offsetRotate'
 
-export interface IOffsetRotateProps<T> {
+export interface OffsetRotateProps<T=OffsetRotateProperty> {
   /**
    * The **`offset-rotate`** CSS property defines the direction of the element while positioning along the offset path.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-rotate
    */
-  offsetRotate: T;
+  [OFFSETROTATE]: T;
 }
 
 export const createOffsetRotate = <
   T = OffsetRotateProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IOffsetRotateProps<T>, Theme, Breakpoints>({
-    cssProp: OFFSETROTATE,
-    prop: OFFSETROTATE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<OffsetRotateProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<OffsetRotateProps<T>,Theme,Media>({
+    cssProp:OFFSETROTATE,
+    prop:OFFSETROTATE,
     key,
     transformValue,
   })
 
-export const createOffsetRotateRule = <T = OffsetRotateProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: OFFSETROTATE, getValue: transformer})
+export const createOffsetRotateRule = <T = OffsetRotateProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: OFFSETROTATE, getValue: transformer})
 
 export const offsetRotate =createOffsetRotate()
 

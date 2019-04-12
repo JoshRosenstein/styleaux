@@ -1,34 +1,34 @@
 import { ColumnRuleWidthProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const COLUMNRULEWIDTH='columnRuleWidth'
 
-export interface IColumnRuleWidthProps<T> {
+export interface ColumnRuleWidthProps<T=ColumnRuleWidthProperty> {
   /**
    * The **`column-rule-width`** CSS property sets the width of the rule (line) drawn between columns in a multi-column layout.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-rule-width
    */
-  columnRuleWidth: T;
+  [COLUMNRULEWIDTH]: T;
 }
 
 export const createColumnRuleWidth = <
   T = ColumnRuleWidthProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IColumnRuleWidthProps<T>, Theme, Breakpoints>({
-    cssProp: COLUMNRULEWIDTH,
-    prop: COLUMNRULEWIDTH,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<ColumnRuleWidthProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<ColumnRuleWidthProps<T>,Theme,Media>({
+    cssProp:COLUMNRULEWIDTH,
+    prop:COLUMNRULEWIDTH,
     key,
     transformValue,
   })
 
-export const createColumnRuleWidthRule = <T = ColumnRuleWidthProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: COLUMNRULEWIDTH, getValue: transformer})
+export const createColumnRuleWidthRule = <T = ColumnRuleWidthProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: COLUMNRULEWIDTH, getValue: transformer})
 
 export const columnRuleWidth =createColumnRuleWidth()
 

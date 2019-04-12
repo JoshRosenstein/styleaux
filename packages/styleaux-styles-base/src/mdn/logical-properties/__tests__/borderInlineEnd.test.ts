@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderInlineEnd } from '../borderInlineEnd';
 
-describe('borderInlineEnd', () => {
+describe('createBorderInlineEnd', () => {
   it('should return a function', () => {
     const result = createBorderInlineEnd();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderInlineEnd` as component and css prop', () => {
+  it('should use `createBorderInlineEnd` as component and css prop', () => {
     const result = createBorderInlineEnd()({ borderInlineEnd: 'inherit' });
     expect(toStyles(result)).toEqual({ borderInlineEnd: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderInlineEnd', () => {
     expect(toStyles(result)).toEqual({ borderInlineEnd: 'a' });
   });
 
-  it('should use an interface which marks `borderInlineEnd` as optional', () => {
+  it('should use an interface which marks `createBorderInlineEnd` as optional', () => {
     const result = createBorderInlineEnd<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderInlineEnd<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderInlineEnd<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderInlineEnd: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderInlineEnd', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderInlineEnd: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderInlineEnd', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderInlineEnd: 'a',
       [MQ.D]: {
         borderInlineEnd: 'b',

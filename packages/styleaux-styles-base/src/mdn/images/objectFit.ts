@@ -1,34 +1,34 @@
 import { ObjectFitProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const OBJECTFIT='objectFit'
 
-export interface IObjectFitProps<T> {
+export interface ObjectFitProps<T=ObjectFitProperty> {
   /**
    * The **`object-fit`** CSS property sets how the content of a replaced element, such as an `<img>` or `<video>`, should be resized to fit its container.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/object-fit
    */
-  objectFit: T;
+  [OBJECTFIT]: T;
 }
 
 export const createObjectFit = <
   T = ObjectFitProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IObjectFitProps<T>, Theme, Breakpoints>({
-    cssProp: OBJECTFIT,
-    prop: OBJECTFIT,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<ObjectFitProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<ObjectFitProps<T>,Theme,Media>({
+    cssProp:OBJECTFIT,
+    prop:OBJECTFIT,
     key,
     transformValue,
   })
 
-export const createObjectFitRule = <T = ObjectFitProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: OBJECTFIT, getValue: transformer})
+export const createObjectFitRule = <T = ObjectFitProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: OBJECTFIT, getValue: transformer})
 
 export const objectFit =createObjectFit()
 

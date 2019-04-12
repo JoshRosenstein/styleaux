@@ -1,34 +1,34 @@
 import { LetterSpacingProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const LETTERSPACING='letterSpacing'
 
-export interface ILetterSpacingProps<T> {
+export interface LetterSpacingProps<T=LetterSpacingProperty> {
   /**
    * The **`letter-spacing`** CSS property sets the spacing behavior between text characters.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/letter-spacing
    */
-  letterSpacing: T;
+  [LETTERSPACING]: T;
 }
 
 export const createLetterSpacing = <
   T = LetterSpacingProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<ILetterSpacingProps<T>, Theme, Breakpoints>({
-    cssProp: LETTERSPACING,
-    prop: LETTERSPACING,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<LetterSpacingProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<LetterSpacingProps<T>,Theme,Media>({
+    cssProp:LETTERSPACING,
+    prop:LETTERSPACING,
     key,
     transformValue,
   })
 
-export const createLetterSpacingRule = <T = LetterSpacingProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: LETTERSPACING, getValue: transformer})
+export const createLetterSpacingRule = <T = LetterSpacingProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: LETTERSPACING, getValue: transformer})
 
 export const letterSpacing =createLetterSpacing()
 

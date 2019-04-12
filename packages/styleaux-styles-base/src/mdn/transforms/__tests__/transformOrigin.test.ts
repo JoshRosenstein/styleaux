@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTransformOrigin } from '../transformOrigin';
 
-describe('transformOrigin', () => {
+describe('createTransformOrigin', () => {
   it('should return a function', () => {
     const result = createTransformOrigin();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `transformOrigin` as component and css prop', () => {
+  it('should use `createTransformOrigin` as component and css prop', () => {
     const result = createTransformOrigin()({ transformOrigin: 'inherit' });
     expect(toStyles(result)).toEqual({ transformOrigin: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('transformOrigin', () => {
     expect(toStyles(result)).toEqual({ transformOrigin: 'a' });
   });
 
-  it('should use an interface which marks `transformOrigin` as optional', () => {
+  it('should use an interface which marks `createTransformOrigin` as optional', () => {
     const result = createTransformOrigin<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTransformOrigin<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTransformOrigin<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ transformOrigin: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('transformOrigin', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       transformOrigin: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('transformOrigin', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       transformOrigin: 'a',
       [MQ.D]: {
         transformOrigin: 'b',

@@ -1,34 +1,34 @@
 import { ColumnGapProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const COLUMNGAP='columnGap'
 
-export interface IColumnGapProps<T> {
+export interface ColumnGapProps<T=ColumnGapProperty> {
   /**
    * The **`column-gap`** CSS property sets the size of the gap (gutter) between an element's columns.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-gap
    */
-  columnGap: T;
+  [COLUMNGAP]: T;
 }
 
 export const createColumnGap = <
   T = ColumnGapProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IColumnGapProps<T>, Theme, Breakpoints>({
-    cssProp: COLUMNGAP,
-    prop: COLUMNGAP,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<ColumnGapProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<ColumnGapProps<T>,Theme,Media>({
+    cssProp:COLUMNGAP,
+    prop:COLUMNGAP,
     key,
     transformValue,
   })
 
-export const createColumnGapRule = <T = ColumnGapProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: COLUMNGAP, getValue: transformer})
+export const createColumnGapRule = <T = ColumnGapProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: COLUMNGAP, getValue: transformer})
 
 export const columnGap =createColumnGap()
 

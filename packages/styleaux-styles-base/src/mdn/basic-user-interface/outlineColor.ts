@@ -1,34 +1,34 @@
 import { OutlineColorProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const OUTLINECOLOR='outlineColor'
 
-export interface IOutlineColorProps<T> {
+export interface OutlineColorProps<T=OutlineColorProperty> {
   /**
    * The **`outline-color`** CSS property sets the color of an element's outline.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline-color
    */
-  outlineColor: T;
+  [OUTLINECOLOR]: T;
 }
 
 export const createOutlineColor = <
   T = OutlineColorProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IOutlineColorProps<T>, Theme, Breakpoints>({
-    cssProp: OUTLINECOLOR,
-    prop: OUTLINECOLOR,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<OutlineColorProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<OutlineColorProps<T>,Theme,Media>({
+    cssProp:OUTLINECOLOR,
+    prop:OUTLINECOLOR,
     key,
     transformValue,
   })
 
-export const createOutlineColorRule = <T = OutlineColorProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: OUTLINECOLOR, getValue: transformer})
+export const createOutlineColorRule = <T = OutlineColorProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: OUTLINECOLOR, getValue: transformer})
 
 export const outlineColor =createOutlineColor()
 

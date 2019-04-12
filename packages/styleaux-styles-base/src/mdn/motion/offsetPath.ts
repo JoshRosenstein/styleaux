@@ -1,34 +1,34 @@
 import { OffsetPathProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const OFFSETPATH='offsetPath'
 
-export interface IOffsetPathProps<T> {
+export interface OffsetPathProps<T=OffsetPathProperty> {
   /**
    * The **`offset-path`** CSS property specifies a motion path for an element to follow and defines the element's positioning within the parent container or SVG coordinate system.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-path
    */
-  offsetPath: T;
+  [OFFSETPATH]: T;
 }
 
 export const createOffsetPath = <
   T = OffsetPathProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IOffsetPathProps<T>, Theme, Breakpoints>({
-    cssProp: OFFSETPATH,
-    prop: OFFSETPATH,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<OffsetPathProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<OffsetPathProps<T>,Theme,Media>({
+    cssProp:OFFSETPATH,
+    prop:OFFSETPATH,
     key,
     transformValue,
   })
 
-export const createOffsetPathRule = <T = OffsetPathProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: OFFSETPATH, getValue: transformer})
+export const createOffsetPathRule = <T = OffsetPathProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: OFFSETPATH, getValue: transformer})
 
 export const offsetPath =createOffsetPath()
 

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createWidows } from '../widows';
 
-describe('widows', () => {
+describe('createWidows', () => {
   it('should return a function', () => {
     const result = createWidows();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `widows` as component and css prop', () => {
+  it('should use `createWidows` as component and css prop', () => {
     const result = createWidows()({ widows: 'inherit' });
     expect(toStyles(result)).toEqual({ widows: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('widows', () => {
     expect(toStyles(result)).toEqual({ widows: 'a' });
   });
 
-  it('should use an interface which marks `widows` as optional', () => {
+  it('should use an interface which marks `createWidows` as optional', () => {
     const result = createWidows<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createWidows<'value',never,IThemeWithoutBreakpoints>({
+    const result = createWidows<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ widows: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('widows', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       widows: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('widows', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       widows: 'a',
       [MQ.D]: {
         widows: 'b',

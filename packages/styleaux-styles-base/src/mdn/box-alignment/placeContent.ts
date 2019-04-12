@@ -1,34 +1,34 @@
 import { PlaceContentProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const PLACECONTENT='placeContent'
 
-export interface IPlaceContentProps<T> {
+export interface PlaceContentProps<T=PlaceContentProperty> {
   /**
    * The `**place-content**` CSS property is a shorthand for `align-content` and `justify-content`. It can be used in any layout method which utilizes both of these alignment values.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/place-content
    */
-  placeContent: T;
+  [PLACECONTENT]: T;
 }
 
 export const createPlaceContent = <
   T = PlaceContentProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IPlaceContentProps<T>, Theme, Breakpoints>({
-    cssProp: PLACECONTENT,
-    prop: PLACECONTENT,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<PlaceContentProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<PlaceContentProps<T>,Theme,Media>({
+    cssProp:PLACECONTENT,
+    prop:PLACECONTENT,
     key,
     transformValue,
   })
 
-export const createPlaceContentRule = <T = PlaceContentProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: PLACECONTENT, getValue: transformer})
+export const createPlaceContentRule = <T = PlaceContentProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: PLACECONTENT, getValue: transformer})
 
 export const placeContent =createPlaceContent()
 

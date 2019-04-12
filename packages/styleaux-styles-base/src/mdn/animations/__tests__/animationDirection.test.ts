@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createAnimationDirection } from '../animationDirection';
 
-describe('animationDirection', () => {
+describe('createAnimationDirection', () => {
   it('should return a function', () => {
     const result = createAnimationDirection();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `animationDirection` as component and css prop', () => {
+  it('should use `createAnimationDirection` as component and css prop', () => {
     const result = createAnimationDirection()({ animationDirection: 'inherit' });
     expect(toStyles(result)).toEqual({ animationDirection: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('animationDirection', () => {
     expect(toStyles(result)).toEqual({ animationDirection: 'a' });
   });
 
-  it('should use an interface which marks `animationDirection` as optional', () => {
+  it('should use an interface which marks `createAnimationDirection` as optional', () => {
     const result = createAnimationDirection<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createAnimationDirection<'value',never,IThemeWithoutBreakpoints>({
+    const result = createAnimationDirection<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ animationDirection: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('animationDirection', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       animationDirection: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('animationDirection', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       animationDirection: 'a',
       [MQ.D]: {
         animationDirection: 'b',

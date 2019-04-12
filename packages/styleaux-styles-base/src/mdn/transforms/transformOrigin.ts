@@ -1,34 +1,34 @@
 import { TransformOriginProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const TRANSFORMORIGIN='transformOrigin'
 
-export interface ITransformOriginProps<T> {
+export interface TransformOriginProps<T=TransformOriginProperty> {
   /**
    * The **`transform-origin`** CSS property sets the origin for an element's transformations.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transform-origin
    */
-  transformOrigin: T;
+  [TRANSFORMORIGIN]: T;
 }
 
 export const createTransformOrigin = <
   T = TransformOriginProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<ITransformOriginProps<T>, Theme, Breakpoints>({
-    cssProp: TRANSFORMORIGIN,
-    prop: TRANSFORMORIGIN,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<TransformOriginProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<TransformOriginProps<T>,Theme,Media>({
+    cssProp:TRANSFORMORIGIN,
+    prop:TRANSFORMORIGIN,
     key,
     transformValue,
   })
 
-export const createTransformOriginRule = <T = TransformOriginProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: TRANSFORMORIGIN, getValue: transformer})
+export const createTransformOriginRule = <T = TransformOriginProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: TRANSFORMORIGIN, getValue: transformer})
 
 export const transformOrigin =createTransformOrigin()
 

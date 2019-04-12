@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTextUnderlinePosition } from '../textUnderlinePosition';
 
-describe('textUnderlinePosition', () => {
+describe('createTextUnderlinePosition', () => {
   it('should return a function', () => {
     const result = createTextUnderlinePosition();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `textUnderlinePosition` as component and css prop', () => {
+  it('should use `createTextUnderlinePosition` as component and css prop', () => {
     const result = createTextUnderlinePosition()({ textUnderlinePosition: 'inherit' });
     expect(toStyles(result)).toEqual({ textUnderlinePosition: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('textUnderlinePosition', () => {
     expect(toStyles(result)).toEqual({ textUnderlinePosition: 'a' });
   });
 
-  it('should use an interface which marks `textUnderlinePosition` as optional', () => {
+  it('should use an interface which marks `createTextUnderlinePosition` as optional', () => {
     const result = createTextUnderlinePosition<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTextUnderlinePosition<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextUnderlinePosition<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textUnderlinePosition: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('textUnderlinePosition', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       textUnderlinePosition: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('textUnderlinePosition', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       textUnderlinePosition: 'a',
       [MQ.D]: {
         textUnderlinePosition: 'b',

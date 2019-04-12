@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createLeft } from '../left';
 
-describe('left', () => {
+describe('createLeft', () => {
   it('should return a function', () => {
     const result = createLeft();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `left` as component and css prop', () => {
+  it('should use `createLeft` as component and css prop', () => {
     const result = createLeft()({ left: 'inherit' });
     expect(toStyles(result)).toEqual({ left: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('left', () => {
     expect(toStyles(result)).toEqual({ left: 'a' });
   });
 
-  it('should use an interface which marks `left` as optional', () => {
+  it('should use an interface which marks `createLeft` as optional', () => {
     const result = createLeft<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createLeft<'value',never,IThemeWithoutBreakpoints>({
+    const result = createLeft<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ left: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('left', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       left: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('left', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       left: 'a',
       [MQ.D]: {
         left: 'b',

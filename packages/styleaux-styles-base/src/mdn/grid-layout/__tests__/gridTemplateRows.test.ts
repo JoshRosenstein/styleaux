@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createGridTemplateRows } from '../gridTemplateRows';
 
-describe('gridTemplateRows', () => {
+describe('createGridTemplateRows', () => {
   it('should return a function', () => {
     const result = createGridTemplateRows();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `gridTemplateRows` as component and css prop', () => {
+  it('should use `createGridTemplateRows` as component and css prop', () => {
     const result = createGridTemplateRows()({ gridTemplateRows: 'inherit' });
     expect(toStyles(result)).toEqual({ gridTemplateRows: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('gridTemplateRows', () => {
     expect(toStyles(result)).toEqual({ gridTemplateRows: 'a' });
   });
 
-  it('should use an interface which marks `gridTemplateRows` as optional', () => {
+  it('should use an interface which marks `createGridTemplateRows` as optional', () => {
     const result = createGridTemplateRows<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createGridTemplateRows<'value',never,IThemeWithoutBreakpoints>({
+    const result = createGridTemplateRows<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ gridTemplateRows: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('gridTemplateRows', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       gridTemplateRows: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('gridTemplateRows', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       gridTemplateRows: 'a',
       [MQ.D]: {
         gridTemplateRows: 'b',

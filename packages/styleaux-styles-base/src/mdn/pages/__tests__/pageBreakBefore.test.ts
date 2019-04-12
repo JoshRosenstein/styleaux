@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createPageBreakBefore } from '../pageBreakBefore';
 
-describe('pageBreakBefore', () => {
+describe('createPageBreakBefore', () => {
   it('should return a function', () => {
     const result = createPageBreakBefore();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `pageBreakBefore` as component and css prop', () => {
+  it('should use `createPageBreakBefore` as component and css prop', () => {
     const result = createPageBreakBefore()({ pageBreakBefore: 'inherit' });
     expect(toStyles(result)).toEqual({ pageBreakBefore: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('pageBreakBefore', () => {
     expect(toStyles(result)).toEqual({ pageBreakBefore: 'a' });
   });
 
-  it('should use an interface which marks `pageBreakBefore` as optional', () => {
+  it('should use an interface which marks `createPageBreakBefore` as optional', () => {
     const result = createPageBreakBefore<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createPageBreakBefore<'value',never,IThemeWithoutBreakpoints>({
+    const result = createPageBreakBefore<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ pageBreakBefore: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('pageBreakBefore', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       pageBreakBefore: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('pageBreakBefore', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       pageBreakBefore: 'a',
       [MQ.D]: {
         pageBreakBefore: 'b',

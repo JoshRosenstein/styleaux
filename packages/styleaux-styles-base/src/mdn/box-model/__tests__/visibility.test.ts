@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createVisibility } from '../visibility';
 
-describe('visibility', () => {
+describe('createVisibility', () => {
   it('should return a function', () => {
     const result = createVisibility();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `visibility` as component and css prop', () => {
+  it('should use `createVisibility` as component and css prop', () => {
     const result = createVisibility()({ visibility: 'inherit' });
     expect(toStyles(result)).toEqual({ visibility: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('visibility', () => {
     expect(toStyles(result)).toEqual({ visibility: 'a' });
   });
 
-  it('should use an interface which marks `visibility` as optional', () => {
+  it('should use an interface which marks `createVisibility` as optional', () => {
     const result = createVisibility<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createVisibility<'value',never,IThemeWithoutBreakpoints>({
+    const result = createVisibility<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ visibility: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('visibility', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       visibility: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('visibility', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       visibility: 'a',
       [MQ.D]: {
         visibility: 'b',

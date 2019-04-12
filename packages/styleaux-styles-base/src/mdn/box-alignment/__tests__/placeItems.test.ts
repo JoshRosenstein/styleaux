@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createPlaceItems } from '../placeItems';
 
-describe('placeItems', () => {
+describe('createPlaceItems', () => {
   it('should return a function', () => {
     const result = createPlaceItems();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `placeItems` as component and css prop', () => {
+  it('should use `createPlaceItems` as component and css prop', () => {
     const result = createPlaceItems()({ placeItems: 'inherit' });
     expect(toStyles(result)).toEqual({ placeItems: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('placeItems', () => {
     expect(toStyles(result)).toEqual({ placeItems: 'a' });
   });
 
-  it('should use an interface which marks `placeItems` as optional', () => {
+  it('should use an interface which marks `createPlaceItems` as optional', () => {
     const result = createPlaceItems<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createPlaceItems<'value',never,IThemeWithoutBreakpoints>({
+    const result = createPlaceItems<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ placeItems: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('placeItems', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       placeItems: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('placeItems', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       placeItems: 'a',
       [MQ.D]: {
         placeItems: 'b',

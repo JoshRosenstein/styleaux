@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createFontVariantCaps } from '../fontVariantCaps';
 
-describe('fontVariantCaps', () => {
+describe('createFontVariantCaps', () => {
   it('should return a function', () => {
     const result = createFontVariantCaps();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `fontVariantCaps` as component and css prop', () => {
+  it('should use `createFontVariantCaps` as component and css prop', () => {
     const result = createFontVariantCaps()({ fontVariantCaps: 'inherit' });
     expect(toStyles(result)).toEqual({ fontVariantCaps: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('fontVariantCaps', () => {
     expect(toStyles(result)).toEqual({ fontVariantCaps: 'a' });
   });
 
-  it('should use an interface which marks `fontVariantCaps` as optional', () => {
+  it('should use an interface which marks `createFontVariantCaps` as optional', () => {
     const result = createFontVariantCaps<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createFontVariantCaps<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFontVariantCaps<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontVariantCaps: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('fontVariantCaps', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       fontVariantCaps: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('fontVariantCaps', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       fontVariantCaps: 'a',
       [MQ.D]: {
         fontVariantCaps: 'b',

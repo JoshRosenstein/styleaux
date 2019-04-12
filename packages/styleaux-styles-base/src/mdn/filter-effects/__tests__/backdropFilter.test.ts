@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBackdropFilter } from '../backdropFilter';
 
-describe('backdropFilter', () => {
+describe('createBackdropFilter', () => {
   it('should return a function', () => {
     const result = createBackdropFilter();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `backdropFilter` as component and css prop', () => {
+  it('should use `createBackdropFilter` as component and css prop', () => {
     const result = createBackdropFilter()({ backdropFilter: 'inherit' });
     expect(toStyles(result)).toEqual({ backdropFilter: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('backdropFilter', () => {
     expect(toStyles(result)).toEqual({ backdropFilter: 'a' });
   });
 
-  it('should use an interface which marks `backdropFilter` as optional', () => {
+  it('should use an interface which marks `createBackdropFilter` as optional', () => {
     const result = createBackdropFilter<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBackdropFilter<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBackdropFilter<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ backdropFilter: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('backdropFilter', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       backdropFilter: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('backdropFilter', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       backdropFilter: 'a',
       [MQ.D]: {
         backdropFilter: 'b',

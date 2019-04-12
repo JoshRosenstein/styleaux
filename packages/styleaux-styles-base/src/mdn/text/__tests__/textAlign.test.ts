@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTextAlign } from '../textAlign';
 
-describe('textAlign', () => {
+describe('createTextAlign', () => {
   it('should return a function', () => {
     const result = createTextAlign();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `textAlign` as component and css prop', () => {
+  it('should use `createTextAlign` as component and css prop', () => {
     const result = createTextAlign()({ textAlign: 'inherit' });
     expect(toStyles(result)).toEqual({ textAlign: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('textAlign', () => {
     expect(toStyles(result)).toEqual({ textAlign: 'a' });
   });
 
-  it('should use an interface which marks `textAlign` as optional', () => {
+  it('should use an interface which marks `createTextAlign` as optional', () => {
     const result = createTextAlign<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTextAlign<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextAlign<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textAlign: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('textAlign', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       textAlign: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('textAlign', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       textAlign: 'a',
       [MQ.D]: {
         textAlign: 'b',

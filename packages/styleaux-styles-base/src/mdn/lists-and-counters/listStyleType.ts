@@ -1,34 +1,34 @@
 import { ListStyleTypeProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const LISTSTYLETYPE='listStyleType'
 
-export interface IListStyleTypeProps<T> {
+export interface ListStyleTypeProps<T=ListStyleTypeProperty> {
   /**
    * The **`list-style-type`** CSS property sets the marker (such as a disc, character, or custom counter style) of a list item element.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style-type
    */
-  listStyleType: T;
+  [LISTSTYLETYPE]: T;
 }
 
 export const createListStyleType = <
   T = ListStyleTypeProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IListStyleTypeProps<T>, Theme, Breakpoints>({
-    cssProp: LISTSTYLETYPE,
-    prop: LISTSTYLETYPE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<ListStyleTypeProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<ListStyleTypeProps<T>,Theme,Media>({
+    cssProp:LISTSTYLETYPE,
+    prop:LISTSTYLETYPE,
     key,
     transformValue,
   })
 
-export const createListStyleTypeRule = <T = ListStyleTypeProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: LISTSTYLETYPE, getValue: transformer})
+export const createListStyleTypeRule = <T = ListStyleTypeProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: LISTSTYLETYPE, getValue: transformer})
 
 export const listStyleType =createListStyleType()
 

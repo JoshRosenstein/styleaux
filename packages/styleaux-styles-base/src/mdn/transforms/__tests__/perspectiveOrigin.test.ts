@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createPerspectiveOrigin } from '../perspectiveOrigin';
 
-describe('perspectiveOrigin', () => {
+describe('createPerspectiveOrigin', () => {
   it('should return a function', () => {
     const result = createPerspectiveOrigin();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `perspectiveOrigin` as component and css prop', () => {
+  it('should use `createPerspectiveOrigin` as component and css prop', () => {
     const result = createPerspectiveOrigin()({ perspectiveOrigin: 'inherit' });
     expect(toStyles(result)).toEqual({ perspectiveOrigin: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('perspectiveOrigin', () => {
     expect(toStyles(result)).toEqual({ perspectiveOrigin: 'a' });
   });
 
-  it('should use an interface which marks `perspectiveOrigin` as optional', () => {
+  it('should use an interface which marks `createPerspectiveOrigin` as optional', () => {
     const result = createPerspectiveOrigin<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createPerspectiveOrigin<'value',never,IThemeWithoutBreakpoints>({
+    const result = createPerspectiveOrigin<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ perspectiveOrigin: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('perspectiveOrigin', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       perspectiveOrigin: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('perspectiveOrigin', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       perspectiveOrigin: 'a',
       [MQ.D]: {
         perspectiveOrigin: 'b',

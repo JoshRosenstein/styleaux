@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTransitionDuration } from '../transitionDuration';
 
-describe('transitionDuration', () => {
+describe('createTransitionDuration', () => {
   it('should return a function', () => {
     const result = createTransitionDuration();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `transitionDuration` as component and css prop', () => {
+  it('should use `createTransitionDuration` as component and css prop', () => {
     const result = createTransitionDuration()({ transitionDuration: 'inherit' });
     expect(toStyles(result)).toEqual({ transitionDuration: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('transitionDuration', () => {
     expect(toStyles(result)).toEqual({ transitionDuration: 'a' });
   });
 
-  it('should use an interface which marks `transitionDuration` as optional', () => {
+  it('should use an interface which marks `createTransitionDuration` as optional', () => {
     const result = createTransitionDuration<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTransitionDuration<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTransitionDuration<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ transitionDuration: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('transitionDuration', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       transitionDuration: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('transitionDuration', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       transitionDuration: 'a',
       [MQ.D]: {
         transitionDuration: 'b',

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createMaskOrigin } from '../maskOrigin';
 
-describe('maskOrigin', () => {
+describe('createMaskOrigin', () => {
   it('should return a function', () => {
     const result = createMaskOrigin();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `maskOrigin` as component and css prop', () => {
+  it('should use `createMaskOrigin` as component and css prop', () => {
     const result = createMaskOrigin()({ maskOrigin: 'inherit' });
     expect(toStyles(result)).toEqual({ maskOrigin: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('maskOrigin', () => {
     expect(toStyles(result)).toEqual({ maskOrigin: 'a' });
   });
 
-  it('should use an interface which marks `maskOrigin` as optional', () => {
+  it('should use an interface which marks `createMaskOrigin` as optional', () => {
     const result = createMaskOrigin<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createMaskOrigin<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMaskOrigin<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ maskOrigin: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('maskOrigin', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       maskOrigin: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('maskOrigin', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       maskOrigin: 'a',
       [MQ.D]: {
         maskOrigin: 'b',

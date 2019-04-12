@@ -1,34 +1,34 @@
 import { BorderImageOutsetProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BORDERIMAGEOUTSET='borderImageOutset'
 
-export interface IBorderImageOutsetProps<T> {
+export interface BorderImageOutsetProps<T=BorderImageOutsetProperty> {
   /**
    * The **`border-image-outset`** CSS property sets the distance by which an element's border image is set out from its border box.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image-outset
    */
-  borderImageOutset: T;
+  [BORDERIMAGEOUTSET]: T;
 }
 
 export const createBorderImageOutset = <
   T = BorderImageOutsetProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBorderImageOutsetProps<T>, Theme, Breakpoints>({
-    cssProp: BORDERIMAGEOUTSET,
-    prop: BORDERIMAGEOUTSET,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BorderImageOutsetProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BorderImageOutsetProps<T>,Theme,Media>({
+    cssProp:BORDERIMAGEOUTSET,
+    prop:BORDERIMAGEOUTSET,
     key,
     transformValue,
   })
 
-export const createBorderImageOutsetRule = <T = BorderImageOutsetProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BORDERIMAGEOUTSET, getValue: transformer})
+export const createBorderImageOutsetRule = <T = BorderImageOutsetProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BORDERIMAGEOUTSET, getValue: transformer})
 
 export const borderImageOutset =createBorderImageOutset()
 

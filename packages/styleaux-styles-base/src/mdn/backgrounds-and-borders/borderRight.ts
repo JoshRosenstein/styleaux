@@ -1,34 +1,34 @@
 import { BorderRightProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BORDERRIGHT='borderRight'
 
-export interface IBorderRightProps<T> {
+export interface BorderRightProps<T=BorderRightProperty> {
   /**
    * The **`border-right`** CSS property is a shorthand that sets the values of `border-right-width`, `border-right-style` and `border-right-color`. These properties set an element's right border.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-right
    */
-  borderRight: T;
+  [BORDERRIGHT]: T;
 }
 
 export const createBorderRight = <
   T = BorderRightProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBorderRightProps<T>, Theme, Breakpoints>({
-    cssProp: BORDERRIGHT,
-    prop: BORDERRIGHT,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BorderRightProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BorderRightProps<T>,Theme,Media>({
+    cssProp:BORDERRIGHT,
+    prop:BORDERRIGHT,
     key,
     transformValue,
   })
 
-export const createBorderRightRule = <T = BorderRightProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BORDERRIGHT, getValue: transformer})
+export const createBorderRightRule = <T = BorderRightProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BORDERRIGHT, getValue: transformer})
 
 export const borderRight =createBorderRight()
 

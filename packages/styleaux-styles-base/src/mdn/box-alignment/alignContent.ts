@@ -1,34 +1,34 @@
 import { AlignContentProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const ALIGNCONTENT='alignContent'
 
-export interface IAlignContentProps<T> {
+export interface AlignContentProps<T=AlignContentProperty> {
   /**
-   * The CSS **`align-content`** property sets the distribution of space around content items of a flexbox or grid container. It applies to a flexbox's cross-axis or a grid's tracks.
+   * The CSS **`align-content`** property sets the distribution of space between and around content items along a flexbox's cross-axis or a grid's block axis.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/align-content
    */
-  alignContent: T;
+  [ALIGNCONTENT]: T;
 }
 
 export const createAlignContent = <
   T = AlignContentProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IAlignContentProps<T>, Theme, Breakpoints>({
-    cssProp: ALIGNCONTENT,
-    prop: ALIGNCONTENT,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<AlignContentProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<AlignContentProps<T>,Theme,Media>({
+    cssProp:ALIGNCONTENT,
+    prop:ALIGNCONTENT,
     key,
     transformValue,
   })
 
-export const createAlignContentRule = <T = AlignContentProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: ALIGNCONTENT, getValue: transformer})
+export const createAlignContentRule = <T = AlignContentProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: ALIGNCONTENT, getValue: transformer})
 
 export const alignContent =createAlignContent()
 

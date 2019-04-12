@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderBlockStart } from '../borderBlockStart';
 
-describe('borderBlockStart', () => {
+describe('createBorderBlockStart', () => {
   it('should return a function', () => {
     const result = createBorderBlockStart();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderBlockStart` as component and css prop', () => {
+  it('should use `createBorderBlockStart` as component and css prop', () => {
     const result = createBorderBlockStart()({ borderBlockStart: 'inherit' });
     expect(toStyles(result)).toEqual({ borderBlockStart: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderBlockStart', () => {
     expect(toStyles(result)).toEqual({ borderBlockStart: 'a' });
   });
 
-  it('should use an interface which marks `borderBlockStart` as optional', () => {
+  it('should use an interface which marks `createBorderBlockStart` as optional', () => {
     const result = createBorderBlockStart<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderBlockStart<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderBlockStart<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderBlockStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderBlockStart', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderBlockStart: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderBlockStart', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderBlockStart: 'a',
       [MQ.D]: {
         borderBlockStart: 'b',

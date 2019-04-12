@@ -1,34 +1,34 @@
 import { WordBreakProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const WORDBREAK='wordBreak'
 
-export interface IWordBreakProps<T> {
+export interface WordBreakProps<T=WordBreakProperty> {
   /**
    * The **`word-break`** CSS property sets whether line breaks appear wherever the text would otherwise overflow its content box.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/word-break
    */
-  wordBreak: T;
+  [WORDBREAK]: T;
 }
 
 export const createWordBreak = <
   T = WordBreakProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IWordBreakProps<T>, Theme, Breakpoints>({
-    cssProp: WORDBREAK,
-    prop: WORDBREAK,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<WordBreakProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<WordBreakProps<T>,Theme,Media>({
+    cssProp:WORDBREAK,
+    prop:WORDBREAK,
     key,
     transformValue,
   })
 
-export const createWordBreakRule = <T = WordBreakProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: WORDBREAK, getValue: transformer})
+export const createWordBreakRule = <T = WordBreakProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: WORDBREAK, getValue: transformer})
 
 export const wordBreak =createWordBreak()
 

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTextDecorationColor } from '../textDecorationColor';
 
-describe('textDecorationColor', () => {
+describe('createTextDecorationColor', () => {
   it('should return a function', () => {
     const result = createTextDecorationColor();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `textDecorationColor` as component and css prop', () => {
+  it('should use `createTextDecorationColor` as component and css prop', () => {
     const result = createTextDecorationColor()({ textDecorationColor: 'inherit' });
     expect(toStyles(result)).toEqual({ textDecorationColor: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('textDecorationColor', () => {
     expect(toStyles(result)).toEqual({ textDecorationColor: 'a' });
   });
 
-  it('should use an interface which marks `textDecorationColor` as optional', () => {
+  it('should use an interface which marks `createTextDecorationColor` as optional', () => {
     const result = createTextDecorationColor<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTextDecorationColor<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextDecorationColor<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textDecorationColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('textDecorationColor', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       textDecorationColor: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('textDecorationColor', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       textDecorationColor: 'a',
       [MQ.D]: {
         textDecorationColor: 'b',

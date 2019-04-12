@@ -1,34 +1,34 @@
 import { GridTemplateColumnsProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const GRIDTEMPLATECOLUMNS='gridTemplateColumns'
 
-export interface IGridTemplateColumnsProps<T> {
+export interface GridTemplateColumnsProps<T=GridTemplateColumnsProperty> {
   /**
    * The **`grid-template-columns`** CSS property defines the line names and track sizing functions of the grid columns.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-template-columns
    */
-  gridTemplateColumns: T;
+  [GRIDTEMPLATECOLUMNS]: T;
 }
 
 export const createGridTemplateColumns = <
   T = GridTemplateColumnsProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IGridTemplateColumnsProps<T>, Theme, Breakpoints>({
-    cssProp: GRIDTEMPLATECOLUMNS,
-    prop: GRIDTEMPLATECOLUMNS,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<GridTemplateColumnsProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<GridTemplateColumnsProps<T>,Theme,Media>({
+    cssProp:GRIDTEMPLATECOLUMNS,
+    prop:GRIDTEMPLATECOLUMNS,
     key,
     transformValue,
   })
 
-export const createGridTemplateColumnsRule = <T = GridTemplateColumnsProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: GRIDTEMPLATECOLUMNS, getValue: transformer})
+export const createGridTemplateColumnsRule = <T = GridTemplateColumnsProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: GRIDTEMPLATECOLUMNS, getValue: transformer})
 
 export const gridTemplateColumns =createGridTemplateColumns()
 

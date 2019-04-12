@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTextEmphasisColor } from '../textEmphasisColor';
 
-describe('textEmphasisColor', () => {
+describe('createTextEmphasisColor', () => {
   it('should return a function', () => {
     const result = createTextEmphasisColor();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `textEmphasisColor` as component and css prop', () => {
+  it('should use `createTextEmphasisColor` as component and css prop', () => {
     const result = createTextEmphasisColor()({ textEmphasisColor: 'inherit' });
     expect(toStyles(result)).toEqual({ textEmphasisColor: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('textEmphasisColor', () => {
     expect(toStyles(result)).toEqual({ textEmphasisColor: 'a' });
   });
 
-  it('should use an interface which marks `textEmphasisColor` as optional', () => {
+  it('should use an interface which marks `createTextEmphasisColor` as optional', () => {
     const result = createTextEmphasisColor<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTextEmphasisColor<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextEmphasisColor<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textEmphasisColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('textEmphasisColor', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       textEmphasisColor: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('textEmphasisColor', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       textEmphasisColor: 'a',
       [MQ.D]: {
         textEmphasisColor: 'b',

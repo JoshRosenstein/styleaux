@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createGridTemplateAreas } from '../gridTemplateAreas';
 
-describe('gridTemplateAreas', () => {
+describe('createGridTemplateAreas', () => {
   it('should return a function', () => {
     const result = createGridTemplateAreas();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `gridTemplateAreas` as component and css prop', () => {
+  it('should use `createGridTemplateAreas` as component and css prop', () => {
     const result = createGridTemplateAreas()({ gridTemplateAreas: 'inherit' });
     expect(toStyles(result)).toEqual({ gridTemplateAreas: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('gridTemplateAreas', () => {
     expect(toStyles(result)).toEqual({ gridTemplateAreas: 'a' });
   });
 
-  it('should use an interface which marks `gridTemplateAreas` as optional', () => {
+  it('should use an interface which marks `createGridTemplateAreas` as optional', () => {
     const result = createGridTemplateAreas<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createGridTemplateAreas<'value',never,IThemeWithoutBreakpoints>({
+    const result = createGridTemplateAreas<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ gridTemplateAreas: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('gridTemplateAreas', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       gridTemplateAreas: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('gridTemplateAreas', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       gridTemplateAreas: 'a',
       [MQ.D]: {
         gridTemplateAreas: 'b',

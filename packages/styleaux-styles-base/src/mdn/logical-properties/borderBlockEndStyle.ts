@@ -1,34 +1,34 @@
 import { BorderBlockEndStyleProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BORDERBLOCKENDSTYLE='borderBlockEndStyle'
 
-export interface IBorderBlockEndStyleProps<T> {
+export interface BorderBlockEndStyleProps<T=BorderBlockEndStyleProperty> {
   /**
    * The **`border-block-end-style`** CSS property defines the style of the logical block end border of an element, which maps to a physical border style depending on the element's writing mode, directionality, and text orientation. It corresponds to the `border-top-style`, `border-right-style`, `border-bottom-style`, or `border-left-style` property depending on the values defined for `writing-mode`, `direction`, and `text-orientation`.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end-style
    */
-  borderBlockEndStyle: T;
+  [BORDERBLOCKENDSTYLE]: T;
 }
 
 export const createBorderBlockEndStyle = <
   T = BorderBlockEndStyleProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBorderBlockEndStyleProps<T>, Theme, Breakpoints>({
-    cssProp: BORDERBLOCKENDSTYLE,
-    prop: BORDERBLOCKENDSTYLE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BorderBlockEndStyleProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BorderBlockEndStyleProps<T>,Theme,Media>({
+    cssProp:BORDERBLOCKENDSTYLE,
+    prop:BORDERBLOCKENDSTYLE,
     key,
     transformValue,
   })
 
-export const createBorderBlockEndStyleRule = <T = BorderBlockEndStyleProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BORDERBLOCKENDSTYLE, getValue: transformer})
+export const createBorderBlockEndStyleRule = <T = BorderBlockEndStyleProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BORDERBLOCKENDSTYLE, getValue: transformer})
 
 export const borderBlockEndStyle =createBorderBlockEndStyle()
 

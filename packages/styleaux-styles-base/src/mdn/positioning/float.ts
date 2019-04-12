@@ -1,34 +1,34 @@
 import { FloatProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const FLOAT='float'
 
-export interface IFloatProps<T> {
+export interface FloatProps<T=FloatProperty> {
   /**
    * The **`float`** CSS property places an element on the left or right side of its container, allowing text and inline elements to wrap around it. The element is removed from the normal flow of the page, though still remaining a part of the flow (in contrast to absolute positioning).
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/float
    */
-  float: T;
+  [FLOAT]: T;
 }
 
 export const createFloat = <
   T = FloatProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IFloatProps<T>, Theme, Breakpoints>({
-    cssProp: FLOAT,
-    prop: FLOAT,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<FloatProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<FloatProps<T>,Theme,Media>({
+    cssProp:FLOAT,
+    prop:FLOAT,
     key,
     transformValue,
   })
 
-export const createFloatRule = <T = FloatProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: FLOAT, getValue: transformer})
+export const createFloatRule = <T = FloatProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: FLOAT, getValue: transformer})
 
 export const float =createFloat()
 

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createAnimationPlayState } from '../animationPlayState';
 
-describe('animationPlayState', () => {
+describe('createAnimationPlayState', () => {
   it('should return a function', () => {
     const result = createAnimationPlayState();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `animationPlayState` as component and css prop', () => {
+  it('should use `createAnimationPlayState` as component and css prop', () => {
     const result = createAnimationPlayState()({ animationPlayState: 'inherit' });
     expect(toStyles(result)).toEqual({ animationPlayState: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('animationPlayState', () => {
     expect(toStyles(result)).toEqual({ animationPlayState: 'a' });
   });
 
-  it('should use an interface which marks `animationPlayState` as optional', () => {
+  it('should use an interface which marks `createAnimationPlayState` as optional', () => {
     const result = createAnimationPlayState<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createAnimationPlayState<'value',never,IThemeWithoutBreakpoints>({
+    const result = createAnimationPlayState<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ animationPlayState: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('animationPlayState', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       animationPlayState: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('animationPlayState', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       animationPlayState: 'a',
       [MQ.D]: {
         animationPlayState: 'b',

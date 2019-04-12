@@ -1,34 +1,34 @@
 import { GridTemplateProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const GRIDTEMPLATE='gridTemplate'
 
-export interface IGridTemplateProps<T> {
+export interface GridTemplateProps<T=GridTemplateProperty> {
   /**
    * The **`grid-template`** CSS property is a shorthand property for defining grid columns, rows, and areas.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-template
    */
-  gridTemplate: T;
+  [GRIDTEMPLATE]: T;
 }
 
 export const createGridTemplate = <
   T = GridTemplateProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IGridTemplateProps<T>, Theme, Breakpoints>({
-    cssProp: GRIDTEMPLATE,
-    prop: GRIDTEMPLATE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<GridTemplateProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<GridTemplateProps<T>,Theme,Media>({
+    cssProp:GRIDTEMPLATE,
+    prop:GRIDTEMPLATE,
     key,
     transformValue,
   })
 
-export const createGridTemplateRule = <T = GridTemplateProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: GRIDTEMPLATE, getValue: transformer})
+export const createGridTemplateRule = <T = GridTemplateProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: GRIDTEMPLATE, getValue: transformer})
 
 export const gridTemplate =createGridTemplate()
 

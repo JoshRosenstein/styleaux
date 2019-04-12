@@ -1,34 +1,34 @@
 import { FlexProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const FLEX='flex'
 
-export interface IFlexProps<T> {
+export interface FlexProps<T=FlexProperty> {
   /**
    * The **`flex`** CSS property sets how a flex item will grow or shrink to fit the space available in its flex container. It is a shorthand for `flex-grow`, `flex-shrink`, and `flex-basis`.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex
    */
-  flex: T;
+  [FLEX]: T;
 }
 
 export const createFlex = <
   T = FlexProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IFlexProps<T>, Theme, Breakpoints>({
-    cssProp: FLEX,
-    prop: FLEX,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<FlexProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<FlexProps<T>,Theme,Media>({
+    cssProp:FLEX,
+    prop:FLEX,
     key,
     transformValue,
   })
 
-export const createFlexRule = <T = FlexProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: FLEX, getValue: transformer})
+export const createFlexRule = <T = FlexProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: FLEX, getValue: transformer})
 
 export const flex =createFlex()
 

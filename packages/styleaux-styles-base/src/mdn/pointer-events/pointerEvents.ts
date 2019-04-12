@@ -1,34 +1,34 @@
 import { PointerEventsProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const POINTEREVENTS='pointerEvents'
 
-export interface IPointerEventsProps<T> {
+export interface PointerEventsProps<T=PointerEventsProperty> {
   /**
    * The **`pointer-events`** CSS property sets under what circumstances (if any) a particular graphic element can become the target of pointer events.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/pointer-events
    */
-  pointerEvents: T;
+  [POINTEREVENTS]: T;
 }
 
 export const createPointerEvents = <
   T = PointerEventsProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IPointerEventsProps<T>, Theme, Breakpoints>({
-    cssProp: POINTEREVENTS,
-    prop: POINTEREVENTS,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<PointerEventsProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<PointerEventsProps<T>,Theme,Media>({
+    cssProp:POINTEREVENTS,
+    prop:POINTEREVENTS,
     key,
     transformValue,
   })
 
-export const createPointerEventsRule = <T = PointerEventsProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: POINTEREVENTS, getValue: transformer})
+export const createPointerEventsRule = <T = PointerEventsProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: POINTEREVENTS, getValue: transformer})
 
 export const pointerEvents =createPointerEvents()
 

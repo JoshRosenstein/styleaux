@@ -1,34 +1,34 @@
 import { BorderImageProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BORDERIMAGE='borderImage'
 
-export interface IBorderImageProps<T> {
+export interface BorderImageProps<T=BorderImageProperty> {
   /**
    * The **`border-image`** CSS property draws an image in place of an element's `border-style`.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image
    */
-  borderImage: T;
+  [BORDERIMAGE]: T;
 }
 
 export const createBorderImage = <
   T = BorderImageProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBorderImageProps<T>, Theme, Breakpoints>({
-    cssProp: BORDERIMAGE,
-    prop: BORDERIMAGE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BorderImageProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BorderImageProps<T>,Theme,Media>({
+    cssProp:BORDERIMAGE,
+    prop:BORDERIMAGE,
     key,
     transformValue,
   })
 
-export const createBorderImageRule = <T = BorderImageProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BORDERIMAGE, getValue: transformer})
+export const createBorderImageRule = <T = BorderImageProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BORDERIMAGE, getValue: transformer})
 
 export const borderImage =createBorderImage()
 

@@ -1,34 +1,34 @@
 import { ColumnRuleStyleProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const COLUMNRULESTYLE='columnRuleStyle'
 
-export interface IColumnRuleStyleProps<T> {
+export interface ColumnRuleStyleProps<T=ColumnRuleStyleProperty> {
   /**
    * The **`column-rule-style`** CSS property sets the style of the line drawn between columns in a multi-column layout.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-rule-style
    */
-  columnRuleStyle: T;
+  [COLUMNRULESTYLE]: T;
 }
 
 export const createColumnRuleStyle = <
   T = ColumnRuleStyleProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IColumnRuleStyleProps<T>, Theme, Breakpoints>({
-    cssProp: COLUMNRULESTYLE,
-    prop: COLUMNRULESTYLE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<ColumnRuleStyleProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<ColumnRuleStyleProps<T>,Theme,Media>({
+    cssProp:COLUMNRULESTYLE,
+    prop:COLUMNRULESTYLE,
     key,
     transformValue,
   })
 
-export const createColumnRuleStyleRule = <T = ColumnRuleStyleProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: COLUMNRULESTYLE, getValue: transformer})
+export const createColumnRuleStyleRule = <T = ColumnRuleStyleProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: COLUMNRULESTYLE, getValue: transformer})
 
 export const columnRuleStyle =createColumnRuleStyle()
 

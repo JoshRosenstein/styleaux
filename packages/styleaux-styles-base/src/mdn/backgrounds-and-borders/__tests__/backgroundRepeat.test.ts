@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBackgroundRepeat } from '../backgroundRepeat';
 
-describe('backgroundRepeat', () => {
+describe('createBackgroundRepeat', () => {
   it('should return a function', () => {
     const result = createBackgroundRepeat();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `backgroundRepeat` as component and css prop', () => {
+  it('should use `createBackgroundRepeat` as component and css prop', () => {
     const result = createBackgroundRepeat()({ backgroundRepeat: 'inherit' });
     expect(toStyles(result)).toEqual({ backgroundRepeat: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('backgroundRepeat', () => {
     expect(toStyles(result)).toEqual({ backgroundRepeat: 'a' });
   });
 
-  it('should use an interface which marks `backgroundRepeat` as optional', () => {
+  it('should use an interface which marks `createBackgroundRepeat` as optional', () => {
     const result = createBackgroundRepeat<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBackgroundRepeat<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBackgroundRepeat<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ backgroundRepeat: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('backgroundRepeat', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       backgroundRepeat: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('backgroundRepeat', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       backgroundRepeat: 'a',
       [MQ.D]: {
         backgroundRepeat: 'b',

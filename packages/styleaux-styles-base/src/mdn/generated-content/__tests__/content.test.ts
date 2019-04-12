@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createContent } from '../content';
 
-describe('content', () => {
+describe('createContent', () => {
   it('should return a function', () => {
     const result = createContent();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `content` as component and css prop', () => {
+  it('should use `createContent` as component and css prop', () => {
     const result = createContent()({ content: 'inherit' });
     expect(toStyles(result)).toEqual({ content: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('content', () => {
     expect(toStyles(result)).toEqual({ content: 'a' });
   });
 
-  it('should use an interface which marks `content` as optional', () => {
+  it('should use an interface which marks `createContent` as optional', () => {
     const result = createContent<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createContent<'value',never,IThemeWithoutBreakpoints>({
+    const result = createContent<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ content: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('content', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       content: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('content', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       content: 'a',
       [MQ.D]: {
         content: 'b',

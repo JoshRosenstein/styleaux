@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createFlexGrow } from '../flexGrow';
 
-describe('flexGrow', () => {
+describe('createFlexGrow', () => {
   it('should return a function', () => {
     const result = createFlexGrow();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `flexGrow` as component and css prop', () => {
+  it('should use `createFlexGrow` as component and css prop', () => {
     const result = createFlexGrow()({ flexGrow: 'inherit' });
     expect(toStyles(result)).toEqual({ flexGrow: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('flexGrow', () => {
     expect(toStyles(result)).toEqual({ flexGrow: 'a' });
   });
 
-  it('should use an interface which marks `flexGrow` as optional', () => {
+  it('should use an interface which marks `createFlexGrow` as optional', () => {
     const result = createFlexGrow<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createFlexGrow<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFlexGrow<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ flexGrow: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('flexGrow', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       flexGrow: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('flexGrow', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       flexGrow: 'a',
       [MQ.D]: {
         flexGrow: 'b',

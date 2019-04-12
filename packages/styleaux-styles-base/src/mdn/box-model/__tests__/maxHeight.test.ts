@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createMaxHeight } from '../maxHeight';
 
-describe('maxHeight', () => {
+describe('createMaxHeight', () => {
   it('should return a function', () => {
     const result = createMaxHeight();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `maxHeight` as component and css prop', () => {
+  it('should use `createMaxHeight` as component and css prop', () => {
     const result = createMaxHeight()({ maxHeight: 'inherit' });
     expect(toStyles(result)).toEqual({ maxHeight: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('maxHeight', () => {
     expect(toStyles(result)).toEqual({ maxHeight: 'a' });
   });
 
-  it('should use an interface which marks `maxHeight` as optional', () => {
+  it('should use an interface which marks `createMaxHeight` as optional', () => {
     const result = createMaxHeight<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createMaxHeight<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMaxHeight<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ maxHeight: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('maxHeight', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       maxHeight: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('maxHeight', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       maxHeight: 'a',
       [MQ.D]: {
         maxHeight: 'b',

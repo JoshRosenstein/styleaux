@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createScrollSnapType } from '../scrollSnapType';
 
-describe('scrollSnapType', () => {
+describe('createScrollSnapType', () => {
   it('should return a function', () => {
     const result = createScrollSnapType();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `scrollSnapType` as component and css prop', () => {
+  it('should use `createScrollSnapType` as component and css prop', () => {
     const result = createScrollSnapType()({ scrollSnapType: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollSnapType: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('scrollSnapType', () => {
     expect(toStyles(result)).toEqual({ scrollSnapType: 'a' });
   });
 
-  it('should use an interface which marks `scrollSnapType` as optional', () => {
+  it('should use an interface which marks `createScrollSnapType` as optional', () => {
     const result = createScrollSnapType<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollSnapType<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollSnapType<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollSnapType: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('scrollSnapType', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       scrollSnapType: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('scrollSnapType', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       scrollSnapType: 'a',
       [MQ.D]: {
         scrollSnapType: 'b',

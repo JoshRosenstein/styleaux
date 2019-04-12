@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBreakAfter } from '../breakAfter';
 
-describe('breakAfter', () => {
+describe('createBreakAfter', () => {
   it('should return a function', () => {
     const result = createBreakAfter();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `breakAfter` as component and css prop', () => {
+  it('should use `createBreakAfter` as component and css prop', () => {
     const result = createBreakAfter()({ breakAfter: 'inherit' });
     expect(toStyles(result)).toEqual({ breakAfter: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('breakAfter', () => {
     expect(toStyles(result)).toEqual({ breakAfter: 'a' });
   });
 
-  it('should use an interface which marks `breakAfter` as optional', () => {
+  it('should use an interface which marks `createBreakAfter` as optional', () => {
     const result = createBreakAfter<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBreakAfter<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBreakAfter<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ breakAfter: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('breakAfter', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       breakAfter: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('breakAfter', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       breakAfter: 'a',
       [MQ.D]: {
         breakAfter: 'b',

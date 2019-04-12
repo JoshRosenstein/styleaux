@@ -1,34 +1,34 @@
 import { BorderBottomProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BORDERBOTTOM='borderBottom'
 
-export interface IBorderBottomProps<T> {
+export interface BorderBottomProps<T=BorderBottomProperty> {
   /**
    * The **`border-bottom`** CSS property is a shorthand that sets the values of `border-bottom-width`, `border-bottom-style` and `border-bottom-color`. These properties set an element's bottom border.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom
    */
-  borderBottom: T;
+  [BORDERBOTTOM]: T;
 }
 
 export const createBorderBottom = <
   T = BorderBottomProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBorderBottomProps<T>, Theme, Breakpoints>({
-    cssProp: BORDERBOTTOM,
-    prop: BORDERBOTTOM,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BorderBottomProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BorderBottomProps<T>,Theme,Media>({
+    cssProp:BORDERBOTTOM,
+    prop:BORDERBOTTOM,
     key,
     transformValue,
   })
 
-export const createBorderBottomRule = <T = BorderBottomProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BORDERBOTTOM, getValue: transformer})
+export const createBorderBottomRule = <T = BorderBottomProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BORDERBOTTOM, getValue: transformer})
 
 export const borderBottom =createBorderBottom()
 

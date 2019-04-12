@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createScrollPaddingBlock } from '../scrollPaddingBlock';
 
-describe('scrollPaddingBlock', () => {
+describe('createScrollPaddingBlock', () => {
   it('should return a function', () => {
     const result = createScrollPaddingBlock();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `scrollPaddingBlock` as component and css prop', () => {
+  it('should use `createScrollPaddingBlock` as component and css prop', () => {
     const result = createScrollPaddingBlock()({ scrollPaddingBlock: 'inherit' });
     expect(toStyles(result)).toEqual({ scrollPaddingBlock: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('scrollPaddingBlock', () => {
     expect(toStyles(result)).toEqual({ scrollPaddingBlock: 'a' });
   });
 
-  it('should use an interface which marks `scrollPaddingBlock` as optional', () => {
+  it('should use an interface which marks `createScrollPaddingBlock` as optional', () => {
     const result = createScrollPaddingBlock<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollPaddingBlock<'value',never,IThemeWithoutBreakpoints>({
+    const result = createScrollPaddingBlock<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scrollPaddingBlock: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('scrollPaddingBlock', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       scrollPaddingBlock: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('scrollPaddingBlock', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       scrollPaddingBlock: 'a',
       [MQ.D]: {
         scrollPaddingBlock: 'b',

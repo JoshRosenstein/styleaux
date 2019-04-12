@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createMaskImage } from '../maskImage';
 
-describe('maskImage', () => {
+describe('createMaskImage', () => {
   it('should return a function', () => {
     const result = createMaskImage();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `maskImage` as component and css prop', () => {
+  it('should use `createMaskImage` as component and css prop', () => {
     const result = createMaskImage()({ maskImage: 'inherit' });
     expect(toStyles(result)).toEqual({ maskImage: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('maskImage', () => {
     expect(toStyles(result)).toEqual({ maskImage: 'a' });
   });
 
-  it('should use an interface which marks `maskImage` as optional', () => {
+  it('should use an interface which marks `createMaskImage` as optional', () => {
     const result = createMaskImage<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createMaskImage<'value',never,IThemeWithoutBreakpoints>({
+    const result = createMaskImage<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ maskImage: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('maskImage', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       maskImage: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('maskImage', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       maskImage: 'a',
       [MQ.D]: {
         maskImage: 'b',

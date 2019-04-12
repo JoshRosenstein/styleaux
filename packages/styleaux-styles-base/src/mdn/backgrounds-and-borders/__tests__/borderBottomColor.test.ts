@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderBottomColor } from '../borderBottomColor';
 
-describe('borderBottomColor', () => {
+describe('createBorderBottomColor', () => {
   it('should return a function', () => {
     const result = createBorderBottomColor();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderBottomColor` as component and css prop', () => {
+  it('should use `createBorderBottomColor` as component and css prop', () => {
     const result = createBorderBottomColor()({ borderBottomColor: 'inherit' });
     expect(toStyles(result)).toEqual({ borderBottomColor: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderBottomColor', () => {
     expect(toStyles(result)).toEqual({ borderBottomColor: 'a' });
   });
 
-  it('should use an interface which marks `borderBottomColor` as optional', () => {
+  it('should use an interface which marks `createBorderBottomColor` as optional', () => {
     const result = createBorderBottomColor<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderBottomColor<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderBottomColor<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderBottomColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderBottomColor', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderBottomColor: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderBottomColor', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderBottomColor: 'a',
       [MQ.D]: {
         borderBottomColor: 'b',

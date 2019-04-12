@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createFontVariationSettings } from '../fontVariationSettings';
 
-describe('fontVariationSettings', () => {
+describe('createFontVariationSettings', () => {
   it('should return a function', () => {
     const result = createFontVariationSettings();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `fontVariationSettings` as component and css prop', () => {
+  it('should use `createFontVariationSettings` as component and css prop', () => {
     const result = createFontVariationSettings()({ fontVariationSettings: 'inherit' });
     expect(toStyles(result)).toEqual({ fontVariationSettings: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('fontVariationSettings', () => {
     expect(toStyles(result)).toEqual({ fontVariationSettings: 'a' });
   });
 
-  it('should use an interface which marks `fontVariationSettings` as optional', () => {
+  it('should use an interface which marks `createFontVariationSettings` as optional', () => {
     const result = createFontVariationSettings<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createFontVariationSettings<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFontVariationSettings<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontVariationSettings: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('fontVariationSettings', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       fontVariationSettings: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('fontVariationSettings', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       fontVariationSettings: 'a',
       [MQ.D]: {
         fontVariationSettings: 'b',

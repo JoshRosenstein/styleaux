@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createInsetBlockStart } from '../insetBlockStart';
 
-describe('insetBlockStart', () => {
+describe('createInsetBlockStart', () => {
   it('should return a function', () => {
     const result = createInsetBlockStart();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `insetBlockStart` as component and css prop', () => {
+  it('should use `createInsetBlockStart` as component and css prop', () => {
     const result = createInsetBlockStart()({ insetBlockStart: 'inherit' });
     expect(toStyles(result)).toEqual({ insetBlockStart: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('insetBlockStart', () => {
     expect(toStyles(result)).toEqual({ insetBlockStart: 'a' });
   });
 
-  it('should use an interface which marks `insetBlockStart` as optional', () => {
+  it('should use an interface which marks `createInsetBlockStart` as optional', () => {
     const result = createInsetBlockStart<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createInsetBlockStart<'value',never,IThemeWithoutBreakpoints>({
+    const result = createInsetBlockStart<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ insetBlockStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('insetBlockStart', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       insetBlockStart: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('insetBlockStart', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       insetBlockStart: 'a',
       [MQ.D]: {
         insetBlockStart: 'b',

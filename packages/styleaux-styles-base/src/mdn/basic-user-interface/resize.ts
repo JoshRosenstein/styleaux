@@ -1,34 +1,34 @@
 import { ResizeProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const RESIZE='resize'
 
-export interface IResizeProps<T> {
+export interface ResizeProps<T=ResizeProperty> {
   /**
    * The **`resize`** CSS property sets whether an element is resizable, and if so, in which directions.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/resize
    */
-  resize: T;
+  [RESIZE]: T;
 }
 
 export const createResize = <
   T = ResizeProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IResizeProps<T>, Theme, Breakpoints>({
-    cssProp: RESIZE,
-    prop: RESIZE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<ResizeProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<ResizeProps<T>,Theme,Media>({
+    cssProp:RESIZE,
+    prop:RESIZE,
     key,
     transformValue,
   })
 
-export const createResizeRule = <T = ResizeProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: RESIZE, getValue: transformer})
+export const createResizeRule = <T = ResizeProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: RESIZE, getValue: transformer})
 
 export const resize =createResize()
 

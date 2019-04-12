@@ -1,34 +1,34 @@
 import { BackgroundPositionYProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BACKGROUNDPOSITIONY='backgroundPositionY'
 
-export interface IBackgroundPositionYProps<T> {
+export interface BackgroundPositionYProps<T=BackgroundPositionYProperty> {
   /**
    * The **`background-position-y`** CSS property sets the initial horizontal position for each background image. The position is relative to the position layer set by `background-origin`.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-y
    */
-  backgroundPositionY: T;
+  [BACKGROUNDPOSITIONY]: T;
 }
 
 export const createBackgroundPositionY = <
   T = BackgroundPositionYProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBackgroundPositionYProps<T>, Theme, Breakpoints>({
-    cssProp: BACKGROUNDPOSITIONY,
-    prop: BACKGROUNDPOSITIONY,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BackgroundPositionYProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BackgroundPositionYProps<T>,Theme,Media>({
+    cssProp:BACKGROUNDPOSITIONY,
+    prop:BACKGROUNDPOSITIONY,
     key,
     transformValue,
   })
 
-export const createBackgroundPositionYRule = <T = BackgroundPositionYProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BACKGROUNDPOSITIONY, getValue: transformer})
+export const createBackgroundPositionYRule = <T = BackgroundPositionYProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BACKGROUNDPOSITIONY, getValue: transformer})
 
 export const backgroundPositionY =createBackgroundPositionY()
 

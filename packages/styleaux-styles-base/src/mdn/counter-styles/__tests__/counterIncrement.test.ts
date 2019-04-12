@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createCounterIncrement } from '../counterIncrement';
 
-describe('counterIncrement', () => {
+describe('createCounterIncrement', () => {
   it('should return a function', () => {
     const result = createCounterIncrement();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `counterIncrement` as component and css prop', () => {
+  it('should use `createCounterIncrement` as component and css prop', () => {
     const result = createCounterIncrement()({ counterIncrement: 'inherit' });
     expect(toStyles(result)).toEqual({ counterIncrement: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('counterIncrement', () => {
     expect(toStyles(result)).toEqual({ counterIncrement: 'a' });
   });
 
-  it('should use an interface which marks `counterIncrement` as optional', () => {
+  it('should use an interface which marks `createCounterIncrement` as optional', () => {
     const result = createCounterIncrement<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createCounterIncrement<'value',never,IThemeWithoutBreakpoints>({
+    const result = createCounterIncrement<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ counterIncrement: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('counterIncrement', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       counterIncrement: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('counterIncrement', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       counterIncrement: 'a',
       [MQ.D]: {
         counterIncrement: 'b',

@@ -1,34 +1,34 @@
 import { ScrollBehaviorProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const SCROLLBEHAVIOR='scrollBehavior'
 
-export interface IScrollBehaviorProps<T> {
+export interface ScrollBehaviorProps<T=ScrollBehaviorProperty> {
   /**
    * The **`scroll-behavior`** CSS property sets the behavior for a scrolling box when scrolling is triggered by the navigation or CSSOM scrolling APIs.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-behavior
    */
-  scrollBehavior: T;
+  [SCROLLBEHAVIOR]: T;
 }
 
 export const createScrollBehavior = <
   T = ScrollBehaviorProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IScrollBehaviorProps<T>, Theme, Breakpoints>({
-    cssProp: SCROLLBEHAVIOR,
-    prop: SCROLLBEHAVIOR,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<ScrollBehaviorProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<ScrollBehaviorProps<T>,Theme,Media>({
+    cssProp:SCROLLBEHAVIOR,
+    prop:SCROLLBEHAVIOR,
     key,
     transformValue,
   })
 
-export const createScrollBehaviorRule = <T = ScrollBehaviorProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: SCROLLBEHAVIOR, getValue: transformer})
+export const createScrollBehaviorRule = <T = ScrollBehaviorProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: SCROLLBEHAVIOR, getValue: transformer})
 
 export const scrollBehavior =createScrollBehavior()
 

@@ -1,10 +1,10 @@
 import { ScrollPaddingInlineProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const SCROLLPADDINGINLINE='scrollPaddingInline'
 
-export interface IScrollPaddingInlineProps<T> {
+export interface ScrollPaddingInlineProps<T=ScrollPaddingInlineProperty> {
   /**
    * The `scroll-padding-inline` property is a shorthand property which sets the scroll-padding longhands for the inline dimension.  
   
@@ -12,25 +12,25 @@ The scroll-padding properties define offsets for the optimal viewing region of
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline
    */
-  scrollPaddingInline: T;
+  [SCROLLPADDINGINLINE]: T;
 }
 
 export const createScrollPaddingInline = <
   T = ScrollPaddingInlineProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IScrollPaddingInlineProps<T>, Theme, Breakpoints>({
-    cssProp: SCROLLPADDINGINLINE,
-    prop: SCROLLPADDINGINLINE,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<ScrollPaddingInlineProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<ScrollPaddingInlineProps<T>,Theme,Media>({
+    cssProp:SCROLLPADDINGINLINE,
+    prop:SCROLLPADDINGINLINE,
     key,
     transformValue,
   })
 
-export const createScrollPaddingInlineRule = <T = ScrollPaddingInlineProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: SCROLLPADDINGINLINE, getValue: transformer})
+export const createScrollPaddingInlineRule = <T = ScrollPaddingInlineProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: SCROLLPADDINGINLINE, getValue: transformer})
 
 export const scrollPaddingInline =createScrollPaddingInline()
 

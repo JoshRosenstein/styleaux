@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderLeftColor } from '../borderLeftColor';
 
-describe('borderLeftColor', () => {
+describe('createBorderLeftColor', () => {
   it('should return a function', () => {
     const result = createBorderLeftColor();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderLeftColor` as component and css prop', () => {
+  it('should use `createBorderLeftColor` as component and css prop', () => {
     const result = createBorderLeftColor()({ borderLeftColor: 'inherit' });
     expect(toStyles(result)).toEqual({ borderLeftColor: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderLeftColor', () => {
     expect(toStyles(result)).toEqual({ borderLeftColor: 'a' });
   });
 
-  it('should use an interface which marks `borderLeftColor` as optional', () => {
+  it('should use an interface which marks `createBorderLeftColor` as optional', () => {
     const result = createBorderLeftColor<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderLeftColor<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderLeftColor<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderLeftColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderLeftColor', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderLeftColor: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderLeftColor', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderLeftColor: 'a',
       [MQ.D]: {
         borderLeftColor: 'b',

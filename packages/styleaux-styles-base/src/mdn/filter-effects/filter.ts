@@ -1,34 +1,34 @@
 import { FilterProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const FILTER='filter'
 
-export interface IFilterProps<T> {
+export interface FilterProps<T=FilterProperty> {
   /**
    * The **`filter`** CSS property applies graphical effects like blur or color shift to an element. Filters are commonly used to adjust the rendering of images, backgrounds, and borders.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/filter
    */
-  filter: T;
+  [FILTER]: T;
 }
 
 export const createFilter = <
   T = FilterProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IFilterProps<T>, Theme, Breakpoints>({
-    cssProp: FILTER,
-    prop: FILTER,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<FilterProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<FilterProps<T>,Theme,Media>({
+    cssProp:FILTER,
+    prop:FILTER,
     key,
     transformValue,
   })
 
-export const createFilterRule = <T = FilterProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: FILTER, getValue: transformer})
+export const createFilterRule = <T = FilterProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: FILTER, getValue: transformer})
 
 export const filter =createFilter()
 

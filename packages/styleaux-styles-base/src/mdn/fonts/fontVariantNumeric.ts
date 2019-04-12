@@ -1,34 +1,34 @@
 import { FontVariantNumericProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const FONTVARIANTNUMERIC='fontVariantNumeric'
 
-export interface IFontVariantNumericProps<T> {
+export interface FontVariantNumericProps<T=FontVariantNumericProperty> {
   /**
    * The **`font-variant-numeric`** CSS property controls the usage of alternate glyphs for numbers, fractions, and ordinal markers.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-numeric
    */
-  fontVariantNumeric: T;
+  [FONTVARIANTNUMERIC]: T;
 }
 
 export const createFontVariantNumeric = <
   T = FontVariantNumericProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IFontVariantNumericProps<T>, Theme, Breakpoints>({
-    cssProp: FONTVARIANTNUMERIC,
-    prop: FONTVARIANTNUMERIC,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<FontVariantNumericProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<FontVariantNumericProps<T>,Theme,Media>({
+    cssProp:FONTVARIANTNUMERIC,
+    prop:FONTVARIANTNUMERIC,
     key,
     transformValue,
   })
 
-export const createFontVariantNumericRule = <T = FontVariantNumericProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: FONTVARIANTNUMERIC, getValue: transformer})
+export const createFontVariantNumericRule = <T = FontVariantNumericProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: FONTVARIANTNUMERIC, getValue: transformer})
 
 export const fontVariantNumeric =createFontVariantNumeric()
 

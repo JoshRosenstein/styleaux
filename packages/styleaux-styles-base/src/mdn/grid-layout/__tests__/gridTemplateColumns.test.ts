@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createGridTemplateColumns } from '../gridTemplateColumns';
 
-describe('gridTemplateColumns', () => {
+describe('createGridTemplateColumns', () => {
   it('should return a function', () => {
     const result = createGridTemplateColumns();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `gridTemplateColumns` as component and css prop', () => {
+  it('should use `createGridTemplateColumns` as component and css prop', () => {
     const result = createGridTemplateColumns()({ gridTemplateColumns: 'inherit' });
     expect(toStyles(result)).toEqual({ gridTemplateColumns: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('gridTemplateColumns', () => {
     expect(toStyles(result)).toEqual({ gridTemplateColumns: 'a' });
   });
 
-  it('should use an interface which marks `gridTemplateColumns` as optional', () => {
+  it('should use an interface which marks `createGridTemplateColumns` as optional', () => {
     const result = createGridTemplateColumns<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createGridTemplateColumns<'value',never,IThemeWithoutBreakpoints>({
+    const result = createGridTemplateColumns<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ gridTemplateColumns: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('gridTemplateColumns', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       gridTemplateColumns: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('gridTemplateColumns', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       gridTemplateColumns: 'a',
       [MQ.D]: {
         gridTemplateColumns: 'b',

@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderBlockStyle } from '../borderBlockStyle';
 
-describe('borderBlockStyle', () => {
+describe('createBorderBlockStyle', () => {
   it('should return a function', () => {
     const result = createBorderBlockStyle();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderBlockStyle` as component and css prop', () => {
+  it('should use `createBorderBlockStyle` as component and css prop', () => {
     const result = createBorderBlockStyle()({ borderBlockStyle: 'inherit' });
     expect(toStyles(result)).toEqual({ borderBlockStyle: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderBlockStyle', () => {
     expect(toStyles(result)).toEqual({ borderBlockStyle: 'a' });
   });
 
-  it('should use an interface which marks `borderBlockStyle` as optional', () => {
+  it('should use an interface which marks `createBorderBlockStyle` as optional', () => {
     const result = createBorderBlockStyle<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderBlockStyle<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderBlockStyle<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderBlockStyle: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderBlockStyle', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderBlockStyle: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderBlockStyle', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderBlockStyle: 'a',
       [MQ.D]: {
         borderBlockStyle: 'b',

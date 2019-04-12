@@ -1,34 +1,34 @@
 import { FontSizeAdjustProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const FONTSIZEADJUST='fontSizeAdjust'
 
-export interface IFontSizeAdjustProps<T> {
+export interface FontSizeAdjustProps<T=FontSizeAdjustProperty> {
   /**
    * The **`font-size-adjust`** CSS property sets how the font size should be chosen based on the height of lowercase rather than capital letters.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-size-adjust
    */
-  fontSizeAdjust: T;
+  [FONTSIZEADJUST]: T;
 }
 
 export const createFontSizeAdjust = <
   T = FontSizeAdjustProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IFontSizeAdjustProps<T>, Theme, Breakpoints>({
-    cssProp: FONTSIZEADJUST,
-    prop: FONTSIZEADJUST,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<FontSizeAdjustProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<FontSizeAdjustProps<T>,Theme,Media>({
+    cssProp:FONTSIZEADJUST,
+    prop:FONTSIZEADJUST,
     key,
     transformValue,
   })
 
-export const createFontSizeAdjustRule = <T = FontSizeAdjustProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: FONTSIZEADJUST, getValue: transformer})
+export const createFontSizeAdjustRule = <T = FontSizeAdjustProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: FONTSIZEADJUST, getValue: transformer})
 
 export const fontSizeAdjust =createFontSizeAdjust()
 

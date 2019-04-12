@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createListStylePosition } from '../listStylePosition';
 
-describe('listStylePosition', () => {
+describe('createListStylePosition', () => {
   it('should return a function', () => {
     const result = createListStylePosition();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `listStylePosition` as component and css prop', () => {
+  it('should use `createListStylePosition` as component and css prop', () => {
     const result = createListStylePosition()({ listStylePosition: 'inherit' });
     expect(toStyles(result)).toEqual({ listStylePosition: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('listStylePosition', () => {
     expect(toStyles(result)).toEqual({ listStylePosition: 'a' });
   });
 
-  it('should use an interface which marks `listStylePosition` as optional', () => {
+  it('should use an interface which marks `createListStylePosition` as optional', () => {
     const result = createListStylePosition<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createListStylePosition<'value',never,IThemeWithoutBreakpoints>({
+    const result = createListStylePosition<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ listStylePosition: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('listStylePosition', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       listStylePosition: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('listStylePosition', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       listStylePosition: 'a',
       [MQ.D]: {
         listStylePosition: 'b',

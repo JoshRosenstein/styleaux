@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createPaddingBlockStart } from '../paddingBlockStart';
 
-describe('paddingBlockStart', () => {
+describe('createPaddingBlockStart', () => {
   it('should return a function', () => {
     const result = createPaddingBlockStart();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `paddingBlockStart` as component and css prop', () => {
+  it('should use `createPaddingBlockStart` as component and css prop', () => {
     const result = createPaddingBlockStart()({ paddingBlockStart: 'inherit' });
     expect(toStyles(result)).toEqual({ paddingBlockStart: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('paddingBlockStart', () => {
     expect(toStyles(result)).toEqual({ paddingBlockStart: 'a' });
   });
 
-  it('should use an interface which marks `paddingBlockStart` as optional', () => {
+  it('should use an interface which marks `createPaddingBlockStart` as optional', () => {
     const result = createPaddingBlockStart<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createPaddingBlockStart<'value',never,IThemeWithoutBreakpoints>({
+    const result = createPaddingBlockStart<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ paddingBlockStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('paddingBlockStart', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       paddingBlockStart: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('paddingBlockStart', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       paddingBlockStart: 'a',
       [MQ.D]: {
         paddingBlockStart: 'b',

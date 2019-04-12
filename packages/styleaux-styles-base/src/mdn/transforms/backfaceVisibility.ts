@@ -1,34 +1,34 @@
 import { BackfaceVisibilityProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BACKFACEVISIBILITY='backfaceVisibility'
 
-export interface IBackfaceVisibilityProps<T> {
+export interface BackfaceVisibilityProps<T=BackfaceVisibilityProperty> {
   /**
    * The **`backface-visibility`** CSS property sets whether the back face of an element is visible when turned towards the user.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/backface-visibility
    */
-  backfaceVisibility: T;
+  [BACKFACEVISIBILITY]: T;
 }
 
 export const createBackfaceVisibility = <
   T = BackfaceVisibilityProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBackfaceVisibilityProps<T>, Theme, Breakpoints>({
-    cssProp: BACKFACEVISIBILITY,
-    prop: BACKFACEVISIBILITY,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BackfaceVisibilityProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BackfaceVisibilityProps<T>,Theme,Media>({
+    cssProp:BACKFACEVISIBILITY,
+    prop:BACKFACEVISIBILITY,
     key,
     transformValue,
   })
 
-export const createBackfaceVisibilityRule = <T = BackfaceVisibilityProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BACKFACEVISIBILITY, getValue: transformer})
+export const createBackfaceVisibilityRule = <T = BackfaceVisibilityProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BACKFACEVISIBILITY, getValue: transformer})
 
 export const backfaceVisibility =createBackfaceVisibility()
 

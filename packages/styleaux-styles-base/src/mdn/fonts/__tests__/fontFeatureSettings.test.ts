@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createFontFeatureSettings } from '../fontFeatureSettings';
 
-describe('fontFeatureSettings', () => {
+describe('createFontFeatureSettings', () => {
   it('should return a function', () => {
     const result = createFontFeatureSettings();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `fontFeatureSettings` as component and css prop', () => {
+  it('should use `createFontFeatureSettings` as component and css prop', () => {
     const result = createFontFeatureSettings()({ fontFeatureSettings: 'inherit' });
     expect(toStyles(result)).toEqual({ fontFeatureSettings: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('fontFeatureSettings', () => {
     expect(toStyles(result)).toEqual({ fontFeatureSettings: 'a' });
   });
 
-  it('should use an interface which marks `fontFeatureSettings` as optional', () => {
+  it('should use an interface which marks `createFontFeatureSettings` as optional', () => {
     const result = createFontFeatureSettings<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createFontFeatureSettings<'value',never,IThemeWithoutBreakpoints>({
+    const result = createFontFeatureSettings<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontFeatureSettings: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('fontFeatureSettings', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       fontFeatureSettings: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('fontFeatureSettings', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       fontFeatureSettings: 'a',
       [MQ.D]: {
         fontFeatureSettings: 'b',

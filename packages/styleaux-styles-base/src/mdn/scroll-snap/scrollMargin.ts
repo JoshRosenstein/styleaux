@@ -1,34 +1,34 @@
 import { ScrollMarginProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const SCROLLMARGIN='scrollMargin'
 
-export interface IScrollMarginProps<T> {
+export interface ScrollMarginProps<T=ScrollMarginProperty> {
   /**
    * The **`scroll-margin`** property is a shorthand property which sets all of the `scroll-margin` longhands, assigning values much like the `margin` property does for the `margin-*` longhands.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin
    */
-  scrollMargin: T;
+  [SCROLLMARGIN]: T;
 }
 
 export const createScrollMargin = <
   T = ScrollMarginProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IScrollMarginProps<T>, Theme, Breakpoints>({
-    cssProp: SCROLLMARGIN,
-    prop: SCROLLMARGIN,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<ScrollMarginProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<ScrollMarginProps<T>,Theme,Media>({
+    cssProp:SCROLLMARGIN,
+    prop:SCROLLMARGIN,
     key,
     transformValue,
   })
 
-export const createScrollMarginRule = <T = ScrollMarginProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: SCROLLMARGIN, getValue: transformer})
+export const createScrollMarginRule = <T = ScrollMarginProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: SCROLLMARGIN, getValue: transformer})
 
 export const scrollMargin =createScrollMargin()
 

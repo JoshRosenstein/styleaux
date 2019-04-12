@@ -1,34 +1,34 @@
 import { FlexFlowProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const FLEXFLOW='flexFlow'
 
-export interface IFlexFlowProps<T> {
+export interface FlexFlowProps<T=FlexFlowProperty> {
   /**
    * The **`flex-flow`** CSS property is a shorthand property for `flex-direction` and `flex-wrap` properties.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-flow
    */
-  flexFlow: T;
+  [FLEXFLOW]: T;
 }
 
 export const createFlexFlow = <
   T = FlexFlowProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IFlexFlowProps<T>, Theme, Breakpoints>({
-    cssProp: FLEXFLOW,
-    prop: FLEXFLOW,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<FlexFlowProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<FlexFlowProps<T>,Theme,Media>({
+    cssProp:FLEXFLOW,
+    prop:FLEXFLOW,
     key,
     transformValue,
   })
 
-export const createFlexFlowRule = <T = FlexFlowProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: FLEXFLOW, getValue: transformer})
+export const createFlexFlowRule = <T = FlexFlowProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: FLEXFLOW, getValue: transformer})
 
 export const flexFlow =createFlexFlow()
 

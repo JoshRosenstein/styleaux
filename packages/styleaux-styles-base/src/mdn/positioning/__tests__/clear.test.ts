@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createClear } from '../clear';
 
-describe('clear', () => {
+describe('createClear', () => {
   it('should return a function', () => {
     const result = createClear();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `clear` as component and css prop', () => {
+  it('should use `createClear` as component and css prop', () => {
     const result = createClear()({ clear: 'inherit' });
     expect(toStyles(result)).toEqual({ clear: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('clear', () => {
     expect(toStyles(result)).toEqual({ clear: 'a' });
   });
 
-  it('should use an interface which marks `clear` as optional', () => {
+  it('should use an interface which marks `createClear` as optional', () => {
     const result = createClear<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createClear<'value',never,IThemeWithoutBreakpoints>({
+    const result = createClear<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ clear: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('clear', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       clear: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('clear', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       clear: 'a',
       [MQ.D]: {
         clear: 'b',

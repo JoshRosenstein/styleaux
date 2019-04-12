@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTextIndent } from '../textIndent';
 
-describe('textIndent', () => {
+describe('createTextIndent', () => {
   it('should return a function', () => {
     const result = createTextIndent();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `textIndent` as component and css prop', () => {
+  it('should use `createTextIndent` as component and css prop', () => {
     const result = createTextIndent()({ textIndent: 'inherit' });
     expect(toStyles(result)).toEqual({ textIndent: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('textIndent', () => {
     expect(toStyles(result)).toEqual({ textIndent: 'a' });
   });
 
-  it('should use an interface which marks `textIndent` as optional', () => {
+  it('should use an interface which marks `createTextIndent` as optional', () => {
     const result = createTextIndent<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTextIndent<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextIndent<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textIndent: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('textIndent', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       textIndent: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('textIndent', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       textIndent: 'a',
       [MQ.D]: {
         textIndent: 'b',

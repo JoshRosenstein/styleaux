@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createBorderLeftStyle } from '../borderLeftStyle';
 
-describe('borderLeftStyle', () => {
+describe('createBorderLeftStyle', () => {
   it('should return a function', () => {
     const result = createBorderLeftStyle();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `borderLeftStyle` as component and css prop', () => {
+  it('should use `createBorderLeftStyle` as component and css prop', () => {
     const result = createBorderLeftStyle()({ borderLeftStyle: 'inherit' });
     expect(toStyles(result)).toEqual({ borderLeftStyle: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('borderLeftStyle', () => {
     expect(toStyles(result)).toEqual({ borderLeftStyle: 'a' });
   });
 
-  it('should use an interface which marks `borderLeftStyle` as optional', () => {
+  it('should use an interface which marks `createBorderLeftStyle` as optional', () => {
     const result = createBorderLeftStyle<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderLeftStyle<'value',never,IThemeWithoutBreakpoints>({
+    const result = createBorderLeftStyle<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ borderLeftStyle: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('borderLeftStyle', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       borderLeftStyle: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('borderLeftStyle', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       borderLeftStyle: 'a',
       [MQ.D]: {
         borderLeftStyle: 'b',

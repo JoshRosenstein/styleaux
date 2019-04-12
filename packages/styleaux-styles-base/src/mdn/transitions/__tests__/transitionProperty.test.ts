@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTransitionProperty } from '../transitionProperty';
 
-describe('transitionProperty', () => {
+describe('createTransitionProperty', () => {
   it('should return a function', () => {
     const result = createTransitionProperty();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `transitionProperty` as component and css prop', () => {
+  it('should use `createTransitionProperty` as component and css prop', () => {
     const result = createTransitionProperty()({ transitionProperty: 'inherit' });
     expect(toStyles(result)).toEqual({ transitionProperty: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('transitionProperty', () => {
     expect(toStyles(result)).toEqual({ transitionProperty: 'a' });
   });
 
-  it('should use an interface which marks `transitionProperty` as optional', () => {
+  it('should use an interface which marks `createTransitionProperty` as optional', () => {
     const result = createTransitionProperty<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTransitionProperty<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTransitionProperty<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ transitionProperty: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('transitionProperty', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       transitionProperty: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('transitionProperty', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       transitionProperty: 'a',
       [MQ.D]: {
         transitionProperty: 'b',

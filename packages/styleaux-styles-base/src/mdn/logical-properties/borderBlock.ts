@@ -1,34 +1,34 @@
 import { BorderBlockProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter } from '@styleaux/core';
+import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
 
 const BORDERBLOCK='borderBlock'
 
-export interface IBorderBlockProps<T> {
+export interface BorderBlockProps<T=BorderBlockProperty> {
   /**
    * The **`border-block`** CSS property is a shorthand property for setting the individual logical block border property values in a single place in the style sheet.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block
    */
-  borderBlock: T;
+  [BORDERBLOCK]: T;
 }
 
 export const createBorderBlock = <
   T = BorderBlockProperty,
-  Theme = never,
-  Breakpoints = never
->({key, transformValue, alias}: Partial<StyleOptions> = {}) =>
-  style<IBorderBlockProps<T>, Theme, Breakpoints>({
-    cssProp: BORDERBLOCK,
-    prop: BORDERBLOCK,
-    alias,
+  Media = never,
+  Theme= never,
+>({key, transformValue}: Partial<Pick<StyleOptions<BorderBlockProps<T>,Theme>,'key'| 'transformValue'>> =
+{}) =>
+  style<BorderBlockProps<T>,Theme,Media>({
+    cssProp:BORDERBLOCK,
+    prop:BORDERBLOCK,
     key,
     transformValue,
   })
 
-export const createBorderBlockRule = <T = BorderBlockProperty>(
-  transformer?: Getter,
-) => styler<T>({cssProp: BORDERBLOCK, getValue: transformer})
+export const createBorderBlockRule = <T = BorderBlockProperty, P=unknown>(
+  transformer?: Getter<T,P>,
+) => styler<T,P>({cssProp: BORDERBLOCK, getValue: transformer})
 
 export const borderBlock =createBorderBlock()
 

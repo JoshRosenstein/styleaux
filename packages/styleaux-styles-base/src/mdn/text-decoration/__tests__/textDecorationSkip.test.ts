@@ -4,21 +4,19 @@ import {
   IThemeWithoutBreakpoints,
   theme,
   themeWithoutBreakpoints,
-  MQ
-} from '../../../__testutils__/theme';
-import {
-toStyles
-} from '../../../__testutils__/toStyles';
+  MQ,
+  toStyles
+} from '../../../__testutils__';
 
 import { createTextDecorationSkip } from '../textDecorationSkip';
 
-describe('textDecorationSkip', () => {
+describe('createTextDecorationSkip', () => {
   it('should return a function', () => {
     const result = createTextDecorationSkip();
     expect(toStyles(result)).toBeInstanceOf(Function);
   });
 
-  it('should use `textDecorationSkip` as component and css prop', () => {
+  it('should use `createTextDecorationSkip` as component and css prop', () => {
     const result = createTextDecorationSkip()({ textDecorationSkip: 'inherit' });
     expect(toStyles(result)).toEqual({ textDecorationSkip: 'inherit' });
   });
@@ -28,13 +26,13 @@ describe('textDecorationSkip', () => {
     expect(toStyles(result)).toEqual({ textDecorationSkip: 'a' });
   });
 
-  it('should use an interface which marks `textDecorationSkip` as optional', () => {
+  it('should use an interface which marks `createTextDecorationSkip` as optional', () => {
     const result = createTextDecorationSkip<'a'>()({});
-    expect(result).toEqual([]);
+    expect(toStyles(result)).toEqual({});
   });
 
   it('should allow using a theme', () => {
-    const result = createTextDecorationSkip<'value',never,IThemeWithoutBreakpoints>({
+    const result = createTextDecorationSkip<'value',never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textDecorationSkip: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -47,7 +45,6 @@ describe('textDecorationSkip', () => {
       'a' | 'b' | 'c' | 'd',
       IMedia,
       ITheme
-
     >()({
       textDecorationSkip: {
         all: 'a',
@@ -57,7 +54,7 @@ describe('textDecorationSkip', () => {
       },
       theme,
     });
-    expect(toStyles(result)).toEqual({
+   expect(toStyles(result)).toEqual({
       textDecorationSkip: 'a',
       [MQ.D]: {
         textDecorationSkip: 'b',
