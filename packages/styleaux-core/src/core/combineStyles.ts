@@ -1,4 +1,3 @@
-import { Simplify } from '../types'
 import { CSSObj } from '../cssTypes'
 import { UnionOf, UnionToIntersection, Arg1 } from '../types'
 
@@ -13,7 +12,7 @@ export type Arg1FromFuncTuple<
  * If a prop type wasn't passed, assume from each function arg
 */
 type GetProps<P, FNS extends any[]> = [P] extends [never]
-  ? Simplify<Arg1FromFuncTuple<FNS>>
+  ? Partial<Arg1FromFuncTuple<FNS>>
   : P
 
 /**

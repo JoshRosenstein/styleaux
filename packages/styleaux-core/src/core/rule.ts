@@ -17,7 +17,7 @@ import * as CSS from '@styleaux/csstype'
  *  }))
  *
 */
-export function rule<T, P extends {} = never>(cssProp: keyof CSS.Properties, getValue?: StylerOptions<P, T>['getValue']) {
+export function rule<T, P extends {} = any>(cssProp: keyof CSS.Properties, getValue?: StylerOptions<P, T>['getValue']) {
   return styler<T, P>({
     cssProp,
     getValue,

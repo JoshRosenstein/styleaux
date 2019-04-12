@@ -35,7 +35,7 @@ export interface StylerOptions<P extends {} = any, I = any> {
 }
 
 
-export function styler<I = any, P extends {} = never>({
+export function styler<I = any, P extends {} = any>({
   cssProp,
   getStyle = createWrap(cssProp),
   getValue = identity

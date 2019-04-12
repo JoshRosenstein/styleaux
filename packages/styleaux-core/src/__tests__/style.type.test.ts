@@ -1,19 +1,19 @@
-import {ColorProperty} from '@styleaux/csstype'
-import {assertTrue, Equals} from 'typescript-test-utils'
+import { ColorProperty } from '@styleaux/csstype'
+import { assertTrue, Equals } from 'typescript-test-utils'
 import {
   style,
   styler,
-  Getter,
+  GetValue,
   Arg1,
   DeepSimplify,
-StyleOptions,
+  StyleOptions,
 } from '../'
-import {DeepRequired} from '../types'
+import { DeepRequired } from '../types'
 
 
 const COLOR = 'color'
 
-export interface ColorProps<T=ColorProperty> {
+export interface ColorProps<T = ColorProperty> {
   /**
    * The **`color`** CSS property sets the foreground color value of an element's text and text decorations, and sets the `currentcolor` value. `currentcolor` may be used as an indirect value on _other_ properties and is the default for other color properties, such as `border-color`.
    *
@@ -24,21 +24,21 @@ export interface ColorProps<T=ColorProperty> {
 
 
 export const createColor = <
-T = ColorProperty,
+  T = ColorProperty,
   Media = never,
-  Theme=never,
->({key, transformValue}: Partial<StyleOptions<ColorProps<T>,Theme>> ={} ) =>
-  style< ColorProps<T> ,Theme,Media>({
-    prop:'color' ,
-    cssProp:'color',
+  Theme = never,
+  >({ key, transformValue }: Partial<StyleOptions<ColorProps<T>, Theme>> = {}) =>
+  style<ColorProps<T>, Theme, Media>({
+    prop: 'color',
+    cssProp: 'color',
     key,
     transformValue,
   })
 
 
 
-export const createColorRule = <T = ColorProperty>(transformer?: Getter) =>
-  styler<T>({cssProp: COLOR, getValue: transformer})
+export const createColorRule = <T = ColorProperty>(transformer?: GetValue<T, any>) =>
+  styler<T>({ cssProp: COLOR, getValue: transformer })
 
 export const color = createColor()
 
@@ -50,7 +50,7 @@ it('no theme or media', () => {
   type StylePropType = DeepSimplify<Arg1<Style>>
   type ExpectedPropType = {
     color?: ColorProperty,
-    theme?:any
+    theme?: any
   }
 
   assertTrue<Equals<StylePropType, ExpectedPropType>>()
@@ -61,23 +61,23 @@ it('withMedia', () => {
 
 
   const style = createColor<
-  'ColorProperty',{sm: 'a',md: 'a',lg: 'a'}
-  >({prop:'color'})
+    'ColorProperty', { sm: 'a', md: 'a', lg: 'a' }
+  >({ prop: 'color' })
 
   type Style = typeof style
 
   type StylePropType = DeepRequired<Arg1<Style>>
   type ExpectedPropType = DeepRequired<{
     color:
-      | 'ColorProperty'
-      | 'ColorProperty'[]
-      | {
-          sm: 'ColorProperty'
-          md: 'ColorProperty'
-          lg: 'ColorProperty'
-          all: 'ColorProperty'
-        }
-        theme:any
+    | 'ColorProperty'
+    | 'ColorProperty'[]
+    | {
+      sm: 'ColorProperty'
+      md: 'ColorProperty'
+      lg: 'ColorProperty'
+      all: 'ColorProperty'
+    }
+    theme: any
   }>
 
   assertTrue<Equals<StylePropType, ExpectedPropType>>()

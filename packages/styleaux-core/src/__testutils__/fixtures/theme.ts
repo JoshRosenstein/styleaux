@@ -1,5 +1,5 @@
-export type Theme= typeof theme
-export type Media= typeof media
+export type Theme = typeof theme
+export type Media = typeof media
 
 const media = {
   small: '@media screen and (min-width:320px)',

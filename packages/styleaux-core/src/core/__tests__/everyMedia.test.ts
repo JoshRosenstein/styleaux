@@ -6,7 +6,7 @@ const media = {
   large: "(min-width: 50em)"
 };
 
-const theme={media}
+const theme = { media }
 
 test("Works", () => {
   const result1 = everyMedia(
@@ -37,13 +37,15 @@ test("Default All Key", () => {
 
 
 test("Can use a different default Key", () => {
-  const SOMEKEY='somekey'
-  const theme= {media, default:{media:SOMEKEY}}
+  const SOMEKEY = 'somekey'
+  const theme = { media, default: { media: SOMEKEY } }
 
   const result1 = everyMedia(
     { theme },
-    {  [SOMEKEY]: { height: "1px" },
-    small: { height: "1px" } }
+    {
+      [SOMEKEY]: { height: "1px" },
+      small: { height: "1px" }
+    }
   );
 
   expect(result1).toEqual({
@@ -56,15 +58,17 @@ test("Can use a different default Key", () => {
 
 
 test("Doesnt style base with wrong Key and Warns", () => {
-  const SOMEWRONGKEY='someworngkey'
-  const SOMEKEY='somekey'
-  const theme= {media, default:{media:SOMEKEY}}
-  const spyWarn = jest.spyOn( console, 'warn' );
+  const SOMEWRONGKEY = 'someworngkey'
+  const SOMEKEY = 'somekey'
+  const theme = { media, default: { media: SOMEKEY } }
+  const spyWarn = jest.spyOn(console, 'warn');
 
   const result1 = everyMedia(
     { theme },
-    {  [SOMEWRONGKEY]: { height: "1px" },
-    small: { height: "1px" } }
+    {
+      [SOMEWRONGKEY]: { height: "1px" },
+      small: { height: "1px" }
+    }
   );
 
   expect(result1).toEqual({
@@ -72,7 +76,7 @@ test("Doesnt style base with wrong Key and Warns", () => {
   });
 
   //@ts-ignore
-  expect(spyWarn).toHaveBeenCalledWith('[everyMedia]: Could not Find media for key %s',SOMEWRONGKEY);
+  expect(spyWarn).toHaveBeenCalledWith('[everyMedia]: Could not Find media for key %s', SOMEWRONGKEY);
 
   //expect(outputData).toEqual('[everyMedia]:');
 

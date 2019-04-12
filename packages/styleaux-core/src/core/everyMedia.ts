@@ -20,7 +20,7 @@ const has = (a: string[], b: string[]) => b.some(key => a.includes(key))
  * @example
  *
 */
-export function everyMedia<P, V extends NonNullable<Styles>>(
+export function everyMedia<P, V extends {}>(
   props: P,
   value: V,
   wrapper: (input: V) => Styles = identity as (i: V) => Styles,
