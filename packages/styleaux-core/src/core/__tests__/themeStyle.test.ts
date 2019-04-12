@@ -1,5 +1,5 @@
 import { themeStyle } from "../themeStyle";
-import { createStyles2 } from "../createStyles2";
+import { createStyles } from "../createStyles";
 import {WithTheme} from '../types'
 import { flatten, toArray, mergeAllDeepRight } from "@roseys/futils";
 
@@ -50,7 +50,7 @@ type ConfigProps=WithTheme<{
 //     is: themeStyle<keyof ITheme['someComponentStyles'],ConfigProps >({ themeKey: 'someComponentStyles' })
 //   }
 
-const customProps = createStyles2<ConfigProps>({is:themeStyle({ themeKey: 'someComponentStyles' })})
+const customProps = createStyles<ConfigProps>({is:themeStyle({ themeKey: 'someComponentStyles' })})
 
 /// Types Work
 //const customPropsT=customProps({theme:THEME,is:'small'})

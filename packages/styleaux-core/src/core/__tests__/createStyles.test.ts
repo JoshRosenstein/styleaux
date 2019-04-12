@@ -2,7 +2,7 @@
 import { GetStylePropsLazy} from '../types'
 import {Arg1,DeepSimplify} from '../../types'
 import {toStyles} from '../../__testutils__'
-import {createStyles2, CreateStyleKeys} from '../createStyles2'
+import {createStyles, CreateStyleKeys} from '../createStyles'
 const media = {
   small: '@media (min-width: 30em)',
   medium: '@media (min-width: 40em)',
@@ -35,7 +35,7 @@ const s = {
 
 type SProps=GetStylePropsLazy<typeof s,IMedia>
 
-const styles = createStyles2<SProps>(s)
+const styles = createStyles<SProps>(s)
 
 const THEME = theme
 
@@ -114,11 +114,11 @@ expect(one).toEqual(two)
 test('Prop Order doesnt Matter',()=>{
 
 
-  const styles = createStyles2<{aw:boolean, bw:boolean}>({
+  const styles = createStyles<{aw:boolean, bw:boolean}>({
     aw: {width: '100%'},
     bw: {width: '50%'},
   })
-  const styles2 = createStyles2<{aw:boolean, bw:boolean}>({
+  const styles2 = createStyles<{aw:boolean, bw:boolean}>({
     bw: {width: '50%'},
     aw: {width: '100%'},
 
@@ -136,7 +136,7 @@ test('Prop Order doesnt Matter',()=>{
 
   describe('General statics or functions for Rest args', () => {
   test('Static',()=>{
-    const styles=createStyles2({},{margin:1})({})
+    const styles=createStyles({},{margin:1})({})
 
     expect(styles).toEqual([{margin:1}])
 
@@ -144,14 +144,14 @@ test('Prop Order doesnt Matter',()=>{
 })
 
   test('as Function',()=>{
-    const styles=createStyles2({},(props:any)=>({margin:props.size}))(({size:1}) as any)
+    const styles=createStyles({},(props:any)=>({margin:props.size}))(({size:1}) as any)
 
     expect(styles).toEqual([{margin:1}])
 
   })
 
   test('as Function2',()=>{
-    const styles=createStyles2({},(props:{size:number})=>({margin:props.size}))(({size:1}))
+    const styles=createStyles({},(props:{size:number})=>({margin:props.size}))(({size:1}))
 
     expect(styles).toEqual([{margin:1}])
 
@@ -174,9 +174,9 @@ test('Prop Order doesnt Matter',()=>{
 }
 
   test('Static2',()=>{
-    const styles0=createStyles2({},{margin:1})
+    const styles0=createStyles({},{margin:1})
 
-    const styles=createStyles2({},styles0)
+    const styles=createStyles({},styles0)
 
     expect((styles({}))  ).toEqual([{margin:1}])
     expect( styles[CreateStyleKeys.arg2])

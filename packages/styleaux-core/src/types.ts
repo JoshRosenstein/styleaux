@@ -1,9 +1,15 @@
-export type Omit<ObjectType, KeysType extends keyof ObjectType> = Pick<
-  ObjectType,
-  Exclude<keyof ObjectType, KeysType>
->
+/**
+ * Gives back an object with listed keys removed.
+ * This is the opposite of `Pick`.
+ * @param T the object whose properties will be removed
+ * @param K the union of keys to remove from `T`
+ * @returns `T` with the keys `K` removed
+ */
+export type Omit<T extends object, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
-export type Merge<FirstType, SecondType> = Omit<
+export type OmitIf<T extends object, K extends keyof any> = K extends keyof T? Omit<T,K>:T
+
+export type Merge<FirstType extends object, SecondType> = Omit<
   FirstType,
   Extract<keyof FirstType, keyof SecondType>
 > &

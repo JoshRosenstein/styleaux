@@ -1,35 +1,50 @@
 import { identity } from "@roseys/futils";
-import {ObjectInterpolation3} from '../cssTypes2'
+import { CSSObj } from '../cssTypes'
 import * as CSS from '@styleaux/csstype'
-import { isNumber, isBoolean, isString, isFunction } from "typed-is";
+import { isNumber, isBoolean, isString, isFunction, isNil } from "typed-is";
 import { everyMedia } from "./everyMedia";
 import { createWrap } from "../utils/wrap";
-import {MediaKey} from './types'
+import { MediaKey } from './types'
 
 //export type KeysOrString<T extends {}=never>=T extends [never] ? string : Extract<keyof T,string>
-export type Getter<I=any, P extends {}=any>=(
-  input: I,
-  props?: P,
-  mediaKey?: MediaKey
-) => boolean | Getter<I,P> | null | undefined | string | number | {}
 
-export type StylerOptions<P extends {}=any>={
+type GetterReturnType = null | undefined | string | number | boolean | {}
+
+//https://github.com/Microsoft/TypeScript/issues/10957
+type AnyGetValue = (...args: any[]) => GetterReturnType
+
+
+//https://github.com/Microsoft/TypeScript/issues/10957
+export type GetValue<I, P> = ((
+  input: I,
+) => I | GetterReturnType | AnyGetValue) | ((
+  input: I,
+  props: P,
+) => I | GetterReturnType | AnyGetValue) | ((
+  input: I,
+  props: P,
+  mediaKey: MediaKey
+) => I | GetterReturnType | AnyGetValue)
+
+
+
+export interface StylerOptions<P extends {} = any, I = any> {
   cssProp?: keyof CSS.Properties | CSS.StringHack
-  getStyle?: (result: any, input?: any, props?: P, mediaKey?: MediaKey) => ObjectInterpolation3 | null | string | number
-  getValue?: Getter
+  getStyle?: (result: any, input?: any, props?: P, mediaKey?: MediaKey) => CSSObj | null | string | number
+  getValue?: GetValue<I, P>
 }
 
 
-export function styler<I, P =unknown>({
+export function styler<I = any, P extends {} = never>({
   cssProp,
   getStyle = createWrap(cssProp),
   getValue = identity
-}: StylerOptions<P>) {
+}: StylerOptions<P, I>) {
   function getValues(
-    get: Getter<I,P>,
-    input:I,
-    props:P,
-    mediaKey?:MediaKey
+    get: typeof getValue,
+    input: I,
+    props: P,
+    mediaKey: MediaKey
   ) {
     const result = get(input, props, mediaKey);
 
@@ -37,7 +52,7 @@ export function styler<I, P =unknown>({
       return null;
     }
 
-    if (result === undefined && (isString(input) || isNumber(input))) {
+    if (isNil(result) && (isString(input) || isNumber(input))) {
       return input;
     }
     return isFunction(result)
@@ -45,12 +60,12 @@ export function styler<I, P =unknown>({
       : result;
   }
 
-  return (input: I, props: P, mediaKey?: MediaKey) => {
+  return (input: I, props: P, mediaKey: MediaKey) => {
 
     return everyMedia(
       props,
       getValues(getValue, input, props, mediaKey),
-      result => getStyle(result, input, props, mediaKey )
+      result => getStyle(result, input, props, mediaKey)
     );
   };
 }

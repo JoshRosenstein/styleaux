@@ -24,11 +24,12 @@
     "watch": "yarn run build:src -w --preserveWatchOutput"
   },
   "dependencies": {
-    "@styleaux/csstype": "^0.0.0-beta.0",
     "@roseys/futils": "^2.1.4",
+    "@styleaux/csstype": "^0.0.0-beta.0",
     "typed-is": "^1.0.4"
   },
   "devDependencies": {
+    "simplytyped": "^3.0.0",
     "utility-types": "^3.5.0"
   }
 }

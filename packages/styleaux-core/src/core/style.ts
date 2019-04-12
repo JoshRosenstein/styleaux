@@ -1,80 +1,89 @@
-import {createStyles2} from './createStyles2'
-import {styler} from './styler'
-import {getThemePathOr, safeGet} from '../getters'
+import { createStyles } from './createStyles'
+import { styler } from './styler'
+import { getThemePathOr, safeGet } from '../getters'
 import * as CSS from '@styleaux/csstype'
-import {identity} from '@roseys/futils'
-import {PropStyleFuncArr} from './types'
-export interface GetStyleOptions<T, K = Extract<keyof T, string>> {
-  key?: K
+import { identity } from '@roseys/futils'
+import { PropStyleFuncArr, WithTheme } from './types'
+import { StringKeys, PlainObject, GetKey } from 'simplytyped'
+
+export interface GetStyleOptions<T extends Record<string, any>> {
+  key?: StringKeys<T> | CSS.StringHack,
   transformValue?: Function
   scale?: number[] | string[] | string | number[]
 }
 
 export interface StyleOptions<
-  P extends {} = any,
-  T = any,
-  Prop = Extract<keyof P, string> | keyof CSS.Properties
-> extends GetStyleOptions<T> {
-  prop: Prop
+  Props,
+  Theme
+  > {
   cssProp?: keyof CSS.Properties
-  alias?: Extract<keyof P, string>
-}
 
-type ExtractFB<T, U, FB = never> = T extends U ? T : FB
+  prop: StringKeys<Props>,
 
-export interface GetStyleOptions2<T extends Record<string, any>> {
-  key?: ExtractFB<keyof T, string, string>
+  alias?: StringKeys<Props>,
+
+  key?: StringKeys<Theme> | CSS.StringHack,
+
   transformValue?: Function
   scale?: number[] | string[] | string | number[]
 }
-
-export interface StyleOptions2<
-  P extends {},
-  T,
-  K = Extract<keyof P, string>,
-  CSSP extends K | keyof CSS.Properties = K extends keyof CSS.Properties? K: keyof CSS.Properties
-> extends GetStyleOptions2<T> {
-  prop: K
-  cssProp?: CSSP
-  alias?: K
+export interface StyleOptionsAny {
+  prop: any
+  cssProp?: any
+  alias?: any,
+  key?: any
+  transformValue?: Function
+  scale?: any[]
 }
 
-export function getStyle<Theme, P extends {} = any>({
+export function getStyle<Theme, P extends PlainObject = any>({
   key,
   transformValue = identity,
   scale,
-}: GetStyleOptions2<Theme>) {
+}: GetStyleOptions<Theme>) {
   return (input: unknown, props: P) =>
     key || scale
       ? transformValue(safeGet(input, scale)(getThemePathOr(key, scale)(props)))
       : transformValue(input)
 }
 
+/**
+ * Factory method to provide a similar api as styled-system  {@link createStyles}
+ * @remarks
+ * TODO
+ *
+ * @param cssProp - CSS property or Selector
+ * @param getValue - (input, props, mediaKey) => CSSObj
+ * @param [wrapper=identity]  - transformer
+ *
+ * @example
+ *
+ *  const style=createStyles({
+  *    display: rule('display')
+  *  }))
+  *
+ */
 export function style<
-  P extends Record<string, any>,
-  Theme extends {} = any,
-  K extends keyof P = keyof P
->({
-  prop,
-  cssProp,
-  key,
-  transformValue = identity,
-  alias,
-  scale,
-}: StyleOptions2<P, Theme>): PropStyleFuncArr<P> {
+  P = PlainObject,
+  Theme extends {} = never,
+  Media extends {} = never,
+  >({ prop, cssProp, key, transformValue = identity, alias, scale }: StyleOptions<P, Theme>): PropStyleFuncArr<WithTheme<P, Theme, Media>> {
   const property = cssProp || prop
 
   //const getValue=(input, props, mediaKey) => key?getThemeValue(key, transformValue)(input, input, mediaKey)(props):transformValue(input)
 
-  const getter = styler<P[K], P>({
+  const getter = styler<GetKey<P, typeof prop>, P>({
     cssProp: property,
-    getValue: getStyle({key, transformValue, scale}),
+    getValue: getStyle<Theme, P>({ key, transformValue, scale }),
   })
 
-  const config = {[prop]: getter} as any
+  const config = { [prop]: getter } as any
   if (alias) {
     config[alias] = getter
   }
 
-  return createStyles2<P>(config)
+  return createStyles<WithTheme<P, Theme, Media>>(config)
 }
+
+
+

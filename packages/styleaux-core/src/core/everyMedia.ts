@@ -1,24 +1,39 @@
-import {identity} from '@roseys/futils'
-import {isPlainObject} from 'typed-is'
-import {getThemeMedia} from '../getters'
-import {createWarnOnce} from '../utils/warn-once'
-import {ObjectInterpolation3} from '../cssTypes2'
+import { identity } from '@roseys/futils'
+import { isPlainObject } from 'typed-is'
+import { getThemeMedia } from '../getters'
+import { createWarnOnce, ensureMQ } from '../utils'
+import { Styles, CSSObj } from '../cssTypes'
 const warnOnce = createWarnOnce('everyMedia')
 
 const has = (a: string[], b: string[]) => b.some(key => a.includes(key))
 //const identity = <T>(v: T) => v;
 
-export function everyMedia<P, V extends number | string | Record<string, any>>(
+/**
+ * Checks is value is of responsive type and wraps in media query if so.
+ * @remarks
+ * TODO
+ *
+ * @param props
+ * @param value - maybe responsive value
+ * @param [wrapper=identity]  - transformer
+ *
+ * @example
+ *
+*/
+export function everyMedia<P, V extends NonNullable<Styles>>(
   props: P,
-  value: V ,
-  wrapper: (input: V) => any = identity,
-): ObjectInterpolation3  {
+  value: V,
+  wrapper: (input: V) => Styles = identity as (i: V) => Styles,
+): CSSObj {
   const media = getThemeMedia(props)
 
-  if (isPlainObject(value)) {
+  if (isPlainObject(value) && media) {
+
     const mediaKeys = Object.keys(media)
     const valueKeys = Object.keys(value)
+
     if (has(mediaKeys, valueKeys)) {
+
       return valueKeys.reduce((acc, key) => {
         if (mediaKeys.includes(key)) {
           const q = media[key]
@@ -27,10 +42,11 @@ export function everyMedia<P, V extends number | string | Record<string, any>>(
             return acc
           }
           if (q) {
-            acc[`@media ${q}`] = wrapper(value[key])
+            acc[ensureMQ(q)] = v
             return acc
           } else {
-            return Object.assign(acc, wrapper(value[key]))
+            /// handles is wrapper is a custom responsive generator
+            return Object.assign(acc, v)
           }
         }
         warnOnce(`Could not Find media for key %s`, key)
@@ -38,5 +54,5 @@ export function everyMedia<P, V extends number | string | Record<string, any>>(
       }, {})
     }
   }
-  return wrapper(value as V)
+  return wrapper(value) as CSSObj
 }

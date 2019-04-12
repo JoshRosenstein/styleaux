@@ -1,9 +1,9 @@
-import {createStyles2} from '../createStyles2'
+import {createStyles} from '../createStyles'
 import {rule} from '../rule'
 
 test('Works', () => {
 
-  const style = createStyles2<{height: string}>({ height: rule('height', (input) => input)})
+  const style = createStyles<{height: string}>({ height: rule('height', (input) => input)})
 
   const expected = {
     height: '100%',

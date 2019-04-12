@@ -1,4 +1,4 @@
-import {ResponsiveProp,OmitTheme,createStyles,combineStyles,rule,Arg1,DeepRequired} from '../'
+import {ResponsiveProp,createStyles,combineStyles,rule,Arg1,DeepRequired} from '../'
 
 import { MarginProperty } from "@styleaux/csstype"
 import {assertTrue, Equals} from 'typescript-test-utils'
@@ -29,25 +29,12 @@ export type SpaceKeys =
 
 type Media = {M: string; T: string}
 
-it('marginRule', () => {
-const margin=createStyles({m:marginRule})
-type Style= typeof margin
-
-  type Result = OmitTheme<Arg1<typeof margin>>
-type StyleProp=Style['_styleProps']
-
-
-  assertTrue<Equals<Result, StyleProp>>()
-})
-
 
 it('createStyles with no theme or media', () => {
-  const styleConfig = {
-    margin: (input: string) => ({margin: input}),
-  }
-  const style = createStyles(styleConfig)
+
+  const style = createStyles<{margin:string}>(    {margin: (input: string) => ({margin: input})})
   type Result = DeepRequired<Arg1<typeof style>>
-  type Expected = {margin: string, theme:any}
+  type Expected = {margin: string}
 
   assertTrue<Equals<Result, Expected>>()
 })
@@ -56,33 +43,31 @@ it('createStyles with no theme or media', () => {
 it('createStyles with media', () => {
   type InputType=string | number
 
-  const styleConfig = {
-    margin: (input: InputType) => ({margin: input}),
-  }
 
-  const style = createStyles<typeof styleConfig, Media>(styleConfig)
+  const style = createStyles<{margin:ResponsiveProp<InputType,Media>}>({
+    margin: (input: InputType) => ({margin: input}),
+  })
   type Result = DeepRequired<Arg1<typeof style>>
-  type Expected = {
+  type Expected =  DeepRequired<{
     margin: InputType | {M: InputType; T: InputType; all: InputType} | Array<InputType>
-    theme:any
-  }
+  }>
 
   assertTrue<Equals<Result, Expected>>()
 })
 
 it('Wrapped with combinestyles', () => {
 
+  type InputType=string | number
 
 
-  const styleConfig = {
-    'margin': (input: string) => ({margin: input}),
-  }
-  const style = createStyles<typeof styleConfig,Media>(styleConfig)
+
+  const style = createStyles<{margin:ResponsiveProp<InputType,Media>}>({
+    margin: (input) => ({margin: input}),
+  })
   const styleWrapped = combineStyles(style)
 
   type Expected=DeepRequired<{
-    'margin':ResponsiveProp<string,Media>
-theme:any
+    'margin':ResponsiveProp<InputType,Media>
 
   }>
 
@@ -100,15 +85,15 @@ theme:any
 
 it('Wrapped with combinestyles as rule', () => {
 
-  const styleConfig = {
-    'margin':rule<string>('margin'),
-  }
-  const style = createStyles<typeof styleConfig,Media>(styleConfig)
+  const style = createStyles<{
+    'margin':ResponsiveProp<string,Media>}>({
+      'margin':rule<string>('margin'),
+    })
+
   const styleWrapped = combineStyles(style)
 
   type Expected=DeepRequired<{
     'margin':ResponsiveProp<string,Media>
-    theme:any
   }>
 
   type Style=typeof style
@@ -127,21 +112,20 @@ it('Debug', () => {
   // const position = createStyles({ position: rule<string>('position') })
   // type PositionArg=DeepRequired<Arg1<typeof position>>
 
-  const styleConfig = { position: rule<string>('position') }
 
-  const styleConfig2 = {
-    margin:rule<string>('margin'),
-  }
   //const position = createStyles({ position: rule<string>('position') })
 
-  const style = createStyles(styleConfig)
-   const style2 = createStyles(styleConfig2)
+  const style = createStyles<{position:ResponsiveProp<string>}>({position:rule<string>('position')} )
+   const style2 = createStyles<{margin:ResponsiveProp<string>}>({
+    margin:rule<string>('margin'),
+  })
+
   const styleWrapped = combineStyles(style,style2)
 
   type Expected=DeepRequired<{
     position:ResponsiveProp<string>,
     margin:ResponsiveProp<string>,
-    theme:any
+
   }>
 
   type Style=typeof style
@@ -157,27 +141,3 @@ it('Debug', () => {
   assertTrue<Equals<StyleResult, StyleWrappedResult>>()
 })
 
-it('combineStyles withing combineStyles', () => {
-  const position = createStyles({ position: rule<string>('position') })
-
-   const textColor  = createStyles( {color:rule<string>('color')})
-   const backgroundColor =createStyles({bg:rule<string>('backgroundColor')})
-   const color  =combineStyles(textColor,backgroundColor)
-
-   const style=  combineStyles(color,position)
-
-  type Style=typeof style
-
-  type StyleProps = DeepRequired<OmitTheme<Arg1<Style> >>
-  type StyleProps2 = DeepRequired<Style['_styleProps']>
-
-type Expected={
-  color:string,
-  position:string,
-  bg:string
-}
-
-  assertTrue<Equals<StyleProps, StyleProps2>>()
-  assertTrue<Equals<StyleProps, Expected>>()
-
-})
