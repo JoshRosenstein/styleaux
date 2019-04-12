@@ -1,6 +1,6 @@
 import { ShapeMarginProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const SHAPEMARGIN='shapeMargin'
 
@@ -27,7 +27,7 @@ export const createShapeMargin = <
   })
 
 export const createShapeMarginRule = <T = ShapeMarginProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: SHAPEMARGIN, getValue: transformer})
 
 export const shapeMargin =createShapeMargin()

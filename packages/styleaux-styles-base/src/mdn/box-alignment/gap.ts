@@ -1,6 +1,6 @@
 import { GapProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const GAP='gap'
 
@@ -27,7 +27,7 @@ export const createGap = <
   })
 
 export const createGapRule = <T = GapProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: GAP, getValue: transformer})
 
 export const gap =createGap()

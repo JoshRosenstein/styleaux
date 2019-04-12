@@ -1,6 +1,6 @@
 import { CounterIncrementProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const COUNTERINCREMENT='counterIncrement'
 
@@ -27,7 +27,7 @@ export const createCounterIncrement = <
   })
 
 export const createCounterIncrementRule = <T = CounterIncrementProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: COUNTERINCREMENT, getValue: transformer})
 
 export const counterIncrement =createCounterIncrement()

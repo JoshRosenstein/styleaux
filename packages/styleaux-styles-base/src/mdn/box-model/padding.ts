@@ -1,6 +1,6 @@
 import { PaddingProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const PADDING='padding'
 
@@ -27,7 +27,7 @@ export const createPadding = <
   })
 
 export const createPaddingRule = <T = PaddingProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: PADDING, getValue: transformer})
 
 export const padding =createPadding()

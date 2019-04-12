@@ -1,6 +1,6 @@
 import { FilterProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const FILTER='filter'
 
@@ -27,7 +27,7 @@ export const createFilter = <
   })
 
 export const createFilterRule = <T = FilterProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: FILTER, getValue: transformer})
 
 export const filter =createFilter()

@@ -1,6 +1,6 @@
 import { TransformStyleProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TRANSFORMSTYLE='transformStyle'
 
@@ -27,7 +27,7 @@ export const createTransformStyle = <
   })
 
 export const createTransformStyleRule = <T = TransformStyleProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TRANSFORMSTYLE, getValue: transformer})
 
 export const transformStyle =createTransformStyle()

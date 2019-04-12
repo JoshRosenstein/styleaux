@@ -1,6 +1,6 @@
 import { TextJustifyProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTJUSTIFY='textJustify'
 
@@ -27,7 +27,7 @@ export const createTextJustify = <
   })
 
 export const createTextJustifyRule = <T = TextJustifyProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TEXTJUSTIFY, getValue: transformer})
 
 export const textJustify =createTextJustify()

@@ -1,6 +1,6 @@
 import { TextDecorationProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTDECORATION='textDecoration'
 
@@ -27,7 +27,7 @@ export const createTextDecoration = <
   })
 
 export const createTextDecorationRule = <T = TextDecorationProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TEXTDECORATION, getValue: transformer})
 
 export const textDecoration =createTextDecoration()

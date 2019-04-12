@@ -1,6 +1,6 @@
 import { FlexGrowProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const FLEXGROW='flexGrow'
 
@@ -27,7 +27,7 @@ export const createFlexGrow = <
   })
 
 export const createFlexGrowRule = <T = FlexGrowProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: FLEXGROW, getValue: transformer})
 
 export const flexGrow =createFlexGrow()

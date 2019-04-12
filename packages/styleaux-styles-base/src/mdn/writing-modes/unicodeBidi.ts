@@ -1,6 +1,6 @@
 import { UnicodeBidiProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const UNICODEBIDI='unicodeBidi'
 
@@ -27,7 +27,7 @@ export const createUnicodeBidi = <
   })
 
 export const createUnicodeBidiRule = <T = UnicodeBidiProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: UNICODEBIDI, getValue: transformer})
 
 export const unicodeBidi =createUnicodeBidi()

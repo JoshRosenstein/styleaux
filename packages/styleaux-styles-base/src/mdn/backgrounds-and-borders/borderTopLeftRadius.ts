@@ -1,6 +1,6 @@
 import { BorderTopLeftRadiusProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERTOPLEFTRADIUS='borderTopLeftRadius'
 
@@ -27,7 +27,7 @@ export const createBorderTopLeftRadius = <
   })
 
 export const createBorderTopLeftRadiusRule = <T = BorderTopLeftRadiusProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BORDERTOPLEFTRADIUS, getValue: transformer})
 
 export const borderTopLeftRadius =createBorderTopLeftRadius()

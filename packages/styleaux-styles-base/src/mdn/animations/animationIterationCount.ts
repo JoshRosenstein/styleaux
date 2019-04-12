@@ -1,6 +1,6 @@
 import { AnimationIterationCountProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const ANIMATIONITERATIONCOUNT='animationIterationCount'
 
@@ -27,7 +27,7 @@ export const createAnimationIterationCount = <
   })
 
 export const createAnimationIterationCountRule = <T = AnimationIterationCountProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: ANIMATIONITERATIONCOUNT, getValue: transformer})
 
 export const animationIterationCount =createAnimationIterationCount()

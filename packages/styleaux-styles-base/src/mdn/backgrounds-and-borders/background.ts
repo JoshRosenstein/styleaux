@@ -1,6 +1,6 @@
 import { BackgroundProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BACKGROUND='background'
 
@@ -27,7 +27,7 @@ export const createBackground = <
   })
 
 export const createBackgroundRule = <T = BackgroundProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BACKGROUND, getValue: transformer})
 
 export const background =createBackground()

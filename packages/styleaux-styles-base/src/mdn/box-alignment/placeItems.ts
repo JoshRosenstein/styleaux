@@ -1,6 +1,6 @@
 import { PlaceItemsProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const PLACEITEMS='placeItems'
 
@@ -27,7 +27,7 @@ export const createPlaceItems = <
   })
 
 export const createPlaceItemsRule = <T = PlaceItemsProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: PLACEITEMS, getValue: transformer})
 
 export const placeItems =createPlaceItems()

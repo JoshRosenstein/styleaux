@@ -1,6 +1,6 @@
 import { BoxShadowProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BOXSHADOW='boxShadow'
 
@@ -27,7 +27,7 @@ export const createBoxShadow = <
   })
 
 export const createBoxShadowRule = <T = BoxShadowProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BOXSHADOW, getValue: transformer})
 
 export const boxShadow =createBoxShadow()

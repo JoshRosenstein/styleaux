@@ -1,6 +1,6 @@
 import { AlignSelfProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const ALIGNSELF='alignSelf'
 
@@ -27,7 +27,7 @@ export const createAlignSelf = <
   })
 
 export const createAlignSelfRule = <T = AlignSelfProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: ALIGNSELF, getValue: transformer})
 
 export const alignSelf =createAlignSelf()

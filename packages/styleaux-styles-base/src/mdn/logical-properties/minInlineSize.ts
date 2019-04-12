@@ -1,6 +1,6 @@
 import { MinInlineSizeProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const MININLINESIZE='minInlineSize'
 
@@ -27,7 +27,7 @@ export const createMinInlineSize = <
   })
 
 export const createMinInlineSizeRule = <T = MinInlineSizeProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: MININLINESIZE, getValue: transformer})
 
 export const minInlineSize =createMinInlineSize()

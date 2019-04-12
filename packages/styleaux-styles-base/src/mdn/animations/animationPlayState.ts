@@ -1,6 +1,6 @@
 import { AnimationPlayStateProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const ANIMATIONPLAYSTATE='animationPlayState'
 
@@ -27,7 +27,7 @@ export const createAnimationPlayState = <
   })
 
 export const createAnimationPlayStateRule = <T = AnimationPlayStateProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: ANIMATIONPLAYSTATE, getValue: transformer})
 
 export const animationPlayState =createAnimationPlayState()

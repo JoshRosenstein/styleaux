@@ -1,6 +1,6 @@
 import { MaxInlineSizeProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const MAXINLINESIZE='maxInlineSize'
 
@@ -27,7 +27,7 @@ export const createMaxInlineSize = <
   })
 
 export const createMaxInlineSizeRule = <T = MaxInlineSizeProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: MAXINLINESIZE, getValue: transformer})
 
 export const maxInlineSize =createMaxInlineSize()

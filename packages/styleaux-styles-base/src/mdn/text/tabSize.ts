@@ -1,6 +1,6 @@
 import { TabSizeProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TABSIZE='tabSize'
 
@@ -27,7 +27,7 @@ export const createTabSize = <
   })
 
 export const createTabSizeRule = <T = TabSizeProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TABSIZE, getValue: transformer})
 
 export const tabSize =createTabSize()

@@ -1,6 +1,6 @@
 import { TransitionDelayProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TRANSITIONDELAY='transitionDelay'
 
@@ -27,7 +27,7 @@ export const createTransitionDelay = <
   })
 
 export const createTransitionDelayRule = <T = TransitionDelayProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TRANSITIONDELAY, getValue: transformer})
 
 export const transitionDelay =createTransitionDelay()

@@ -1,6 +1,6 @@
 import { OffsetDistanceProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const OFFSETDISTANCE='offsetDistance'
 
@@ -27,7 +27,7 @@ export const createOffsetDistance = <
   })
 
 export const createOffsetDistanceRule = <T = OffsetDistanceProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: OFFSETDISTANCE, getValue: transformer})
 
 export const offsetDistance =createOffsetDistance()

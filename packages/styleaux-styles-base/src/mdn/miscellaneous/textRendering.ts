@@ -1,6 +1,6 @@
 import { TextRenderingProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTRENDERING='textRendering'
 
@@ -27,7 +27,7 @@ export const createTextRendering = <
   })
 
 export const createTextRenderingRule = <T = TextRenderingProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TEXTRENDERING, getValue: transformer})
 
 export const textRendering =createTextRendering()

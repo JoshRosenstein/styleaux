@@ -1,6 +1,6 @@
 import { BackdropFilterProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BACKDROPFILTER='backdropFilter'
 
@@ -27,7 +27,7 @@ export const createBackdropFilter = <
   })
 
 export const createBackdropFilterRule = <T = BackdropFilterProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BACKDROPFILTER, getValue: transformer})
 
 export const backdropFilter =createBackdropFilter()

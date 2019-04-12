@@ -1,6 +1,6 @@
 import { LetterSpacingProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const LETTERSPACING='letterSpacing'
 
@@ -27,7 +27,7 @@ export const createLetterSpacing = <
   })
 
 export const createLetterSpacingRule = <T = LetterSpacingProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: LETTERSPACING, getValue: transformer})
 
 export const letterSpacing =createLetterSpacing()

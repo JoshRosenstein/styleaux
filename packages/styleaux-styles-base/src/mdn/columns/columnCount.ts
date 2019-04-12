@@ -1,6 +1,6 @@
 import { ColumnCountProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const COLUMNCOUNT='columnCount'
 
@@ -27,7 +27,7 @@ export const createColumnCount = <
   })
 
 export const createColumnCountRule = <T = ColumnCountProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: COLUMNCOUNT, getValue: transformer})
 
 export const columnCount =createColumnCount()

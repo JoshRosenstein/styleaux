@@ -1,6 +1,6 @@
 import { OrderProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const ORDER='order'
 
@@ -27,7 +27,7 @@ export const createOrder = <
   })
 
 export const createOrderRule = <T = OrderProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: ORDER, getValue: transformer})
 
 export const order =createOrder()

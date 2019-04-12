@@ -1,6 +1,6 @@
 import { GridAutoFlowProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const GRIDAUTOFLOW='gridAutoFlow'
 
@@ -27,7 +27,7 @@ export const createGridAutoFlow = <
   })
 
 export const createGridAutoFlowRule = <T = GridAutoFlowProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: GRIDAUTOFLOW, getValue: transformer})
 
 export const gridAutoFlow =createGridAutoFlow()

@@ -1,6 +1,6 @@
 import { MaskRepeatProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const MASKREPEAT='maskRepeat'
 
@@ -27,7 +27,7 @@ export const createMaskRepeat = <
   })
 
 export const createMaskRepeatRule = <T = MaskRepeatProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: MASKREPEAT, getValue: transformer})
 
 export const maskRepeat =createMaskRepeat()

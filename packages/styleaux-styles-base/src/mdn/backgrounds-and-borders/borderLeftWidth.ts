@@ -1,6 +1,6 @@
 import { BorderLeftWidthProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERLEFTWIDTH='borderLeftWidth'
 
@@ -27,7 +27,7 @@ export const createBorderLeftWidth = <
   })
 
 export const createBorderLeftWidthRule = <T = BorderLeftWidthProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BORDERLEFTWIDTH, getValue: transformer})
 
 export const borderLeftWidth =createBorderLeftWidth()

@@ -1,6 +1,6 @@
 import { AppearanceProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const APPEARANCE='appearance'
 
@@ -27,7 +27,7 @@ export const createAppearance = <
   })
 
 export const createAppearanceRule = <T = AppearanceProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: APPEARANCE, getValue: transformer})
 
 export const appearance =createAppearance()

@@ -1,6 +1,6 @@
 import { TextEmphasisPositionProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTEMPHASISPOSITION='textEmphasisPosition'
 
@@ -27,7 +27,7 @@ export const createTextEmphasisPosition = <
   })
 
 export const createTextEmphasisPositionRule = <T = TextEmphasisPositionProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TEXTEMPHASISPOSITION, getValue: transformer})
 
 export const textEmphasisPosition =createTextEmphasisPosition()

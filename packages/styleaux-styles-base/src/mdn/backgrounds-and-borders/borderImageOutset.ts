@@ -1,6 +1,6 @@
 import { BorderImageOutsetProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERIMAGEOUTSET='borderImageOutset'
 
@@ -27,7 +27,7 @@ export const createBorderImageOutset = <
   })
 
 export const createBorderImageOutsetRule = <T = BorderImageOutsetProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BORDERIMAGEOUTSET, getValue: transformer})
 
 export const borderImageOutset =createBorderImageOutset()

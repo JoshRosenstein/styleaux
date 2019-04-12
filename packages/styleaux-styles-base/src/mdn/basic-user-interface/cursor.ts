@@ -1,6 +1,6 @@
 import { CursorProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const CURSOR='cursor'
 
@@ -27,7 +27,7 @@ export const createCursor = <
   })
 
 export const createCursorRule = <T = CursorProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: CURSOR, getValue: transformer})
 
 export const cursor =createCursor()

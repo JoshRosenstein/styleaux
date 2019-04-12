@@ -1,6 +1,6 @@
 import { ScrollMarginBottomProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const SCROLLMARGINBOTTOM='scrollMarginBottom'
 
@@ -27,7 +27,7 @@ export const createScrollMarginBottom = <
   })
 
 export const createScrollMarginBottomRule = <T = ScrollMarginBottomProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: SCROLLMARGINBOTTOM, getValue: transformer})
 
 export const scrollMarginBottom =createScrollMarginBottom()

@@ -1,6 +1,6 @@
 import { PerspectiveOriginProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const PERSPECTIVEORIGIN='perspectiveOrigin'
 
@@ -27,7 +27,7 @@ export const createPerspectiveOrigin = <
   })
 
 export const createPerspectiveOriginRule = <T = PerspectiveOriginProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: PERSPECTIVEORIGIN, getValue: transformer})
 
 export const perspectiveOrigin =createPerspectiveOrigin()

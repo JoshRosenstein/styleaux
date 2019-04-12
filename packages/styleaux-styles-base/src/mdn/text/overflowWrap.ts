@@ -1,6 +1,6 @@
 import { OverflowWrapProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const OVERFLOWWRAP='overflowWrap'
 
@@ -27,7 +27,7 @@ export const createOverflowWrap = <
   })
 
 export const createOverflowWrapRule = <T = OverflowWrapProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: OVERFLOWWRAP, getValue: transformer})
 
 export const overflowWrap =createOverflowWrap()

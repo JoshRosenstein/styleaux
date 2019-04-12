@@ -1,6 +1,6 @@
 import { TransformBoxProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TRANSFORMBOX='transformBox'
 
@@ -27,7 +27,7 @@ export const createTransformBox = <
   })
 
 export const createTransformBoxRule = <T = TransformBoxProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TRANSFORMBOX, getValue: transformer})
 
 export const transformBox =createTransformBox()

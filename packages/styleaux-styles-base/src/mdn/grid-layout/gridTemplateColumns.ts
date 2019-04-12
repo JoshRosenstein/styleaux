@@ -1,6 +1,6 @@
 import { GridTemplateColumnsProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const GRIDTEMPLATECOLUMNS='gridTemplateColumns'
 
@@ -27,7 +27,7 @@ export const createGridTemplateColumns = <
   })
 
 export const createGridTemplateColumnsRule = <T = GridTemplateColumnsProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: GRIDTEMPLATECOLUMNS, getValue: transformer})
 
 export const gridTemplateColumns =createGridTemplateColumns()

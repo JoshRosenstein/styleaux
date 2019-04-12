@@ -1,6 +1,6 @@
 import { ColorAdjustProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const COLORADJUST='colorAdjust'
 
@@ -27,7 +27,7 @@ export const createColorAdjust = <
   })
 
 export const createColorAdjustRule = <T = ColorAdjustProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: COLORADJUST, getValue: transformer})
 
 export const colorAdjust =createColorAdjust()

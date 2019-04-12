@@ -1,6 +1,6 @@
 import { GridRowStartProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const GRIDROWSTART='gridRowStart'
 
@@ -27,7 +27,7 @@ export const createGridRowStart = <
   })
 
 export const createGridRowStartRule = <T = GridRowStartProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: GRIDROWSTART, getValue: transformer})
 
 export const gridRowStart =createGridRowStart()

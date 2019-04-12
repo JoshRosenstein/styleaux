@@ -1,6 +1,6 @@
 import { BorderTopStyleProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERTOPSTYLE='borderTopStyle'
 
@@ -27,7 +27,7 @@ export const createBorderTopStyle = <
   })
 
 export const createBorderTopStyleRule = <T = BorderTopStyleProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BORDERTOPSTYLE, getValue: transformer})
 
 export const borderTopStyle =createBorderTopStyle()

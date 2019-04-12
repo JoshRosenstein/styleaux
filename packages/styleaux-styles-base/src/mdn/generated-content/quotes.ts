@@ -1,6 +1,6 @@
 import { QuotesProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const QUOTES='quotes'
 
@@ -27,7 +27,7 @@ export const createQuotes = <
   })
 
 export const createQuotesRule = <T = QuotesProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: QUOTES, getValue: transformer})
 
 export const quotes =createQuotes()

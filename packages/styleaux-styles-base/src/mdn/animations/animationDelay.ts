@@ -1,6 +1,6 @@
 import { AnimationDelayProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const ANIMATIONDELAY='animationDelay'
 
@@ -27,7 +27,7 @@ export const createAnimationDelay = <
   })
 
 export const createAnimationDelayRule = <T = AnimationDelayProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: ANIMATIONDELAY, getValue: transformer})
 
 export const animationDelay =createAnimationDelay()

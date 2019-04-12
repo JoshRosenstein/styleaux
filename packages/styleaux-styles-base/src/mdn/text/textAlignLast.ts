@@ -1,6 +1,6 @@
 import { TextAlignLastProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTALIGNLAST='textAlignLast'
 
@@ -27,7 +27,7 @@ export const createTextAlignLast = <
   })
 
 export const createTextAlignLastRule = <T = TextAlignLastProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TEXTALIGNLAST, getValue: transformer})
 
 export const textAlignLast =createTextAlignLast()

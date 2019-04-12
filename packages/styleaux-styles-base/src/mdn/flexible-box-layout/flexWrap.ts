@@ -1,6 +1,6 @@
 import { FlexWrapProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const FLEXWRAP='flexWrap'
 
@@ -27,7 +27,7 @@ export const createFlexWrap = <
   })
 
 export const createFlexWrapRule = <T = FlexWrapProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: FLEXWRAP, getValue: transformer})
 
 export const flexWrap =createFlexWrap()

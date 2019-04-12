@@ -1,6 +1,6 @@
 import { OutlineStyleProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const OUTLINESTYLE='outlineStyle'
 
@@ -27,7 +27,7 @@ export const createOutlineStyle = <
   })
 
 export const createOutlineStyleRule = <T = OutlineStyleProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: OUTLINESTYLE, getValue: transformer})
 
 export const outlineStyle =createOutlineStyle()

@@ -1,6 +1,6 @@
 import { WhiteSpaceProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const WHITESPACE='whiteSpace'
 
@@ -27,7 +27,7 @@ export const createWhiteSpace = <
   })
 
 export const createWhiteSpaceRule = <T = WhiteSpaceProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: WHITESPACE, getValue: transformer})
 
 export const whiteSpace =createWhiteSpace()

@@ -1,6 +1,6 @@
 import { TextEmphasisColorProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTEMPHASISCOLOR='textEmphasisColor'
 
@@ -27,7 +27,7 @@ export const createTextEmphasisColor = <
   })
 
 export const createTextEmphasisColorRule = <T = TextEmphasisColorProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TEXTEMPHASISCOLOR, getValue: transformer})
 
 export const textEmphasisColor =createTextEmphasisColor()

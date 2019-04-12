@@ -1,6 +1,6 @@
 import { ShapeOutsideProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const SHAPEOUTSIDE='shapeOutside'
 
@@ -27,7 +27,7 @@ export const createShapeOutside = <
   })
 
 export const createShapeOutsideRule = <T = ShapeOutsideProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: SHAPEOUTSIDE, getValue: transformer})
 
 export const shapeOutside =createShapeOutside()

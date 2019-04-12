@@ -1,6 +1,6 @@
 import { EmptyCellsProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const EMPTYCELLS='emptyCells'
 
@@ -27,7 +27,7 @@ export const createEmptyCells = <
   })
 
 export const createEmptyCellsRule = <T = EmptyCellsProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: EMPTYCELLS, getValue: transformer})
 
 export const emptyCells =createEmptyCells()

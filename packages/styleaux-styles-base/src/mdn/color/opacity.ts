@@ -1,6 +1,6 @@
 import { OpacityProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const OPACITY='opacity'
 
@@ -27,7 +27,7 @@ export const createOpacity = <
   })
 
 export const createOpacityRule = <T = OpacityProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: OPACITY, getValue: transformer})
 
 export const opacity =createOpacity()

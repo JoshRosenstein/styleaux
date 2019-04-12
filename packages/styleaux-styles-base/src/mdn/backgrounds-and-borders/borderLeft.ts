@@ -1,6 +1,6 @@
 import { BorderLeftProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERLEFT='borderLeft'
 
@@ -27,7 +27,7 @@ export const createBorderLeft = <
   })
 
 export const createBorderLeftRule = <T = BorderLeftProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BORDERLEFT, getValue: transformer})
 
 export const borderLeft =createBorderLeft()

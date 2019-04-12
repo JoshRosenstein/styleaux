@@ -1,6 +1,6 @@
 import { ContainProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const CONTAIN='contain'
 
@@ -27,7 +27,7 @@ export const createContain = <
   })
 
 export const createContainRule = <T = ContainProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: CONTAIN, getValue: transformer})
 
 export const contain =createContain()

@@ -1,6 +1,6 @@
 import { ScrollSnapAlignProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const SCROLLSNAPALIGN='scrollSnapAlign'
 
@@ -27,7 +27,7 @@ export const createScrollSnapAlign = <
   })
 
 export const createScrollSnapAlignRule = <T = ScrollSnapAlignProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: SCROLLSNAPALIGN, getValue: transformer})
 
 export const scrollSnapAlign =createScrollSnapAlign()

@@ -1,6 +1,6 @@
 import { ScrollMarginLeftProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const SCROLLMARGINLEFT='scrollMarginLeft'
 
@@ -27,7 +27,7 @@ export const createScrollMarginLeft = <
   })
 
 export const createScrollMarginLeftRule = <T = ScrollMarginLeftProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: SCROLLMARGINLEFT, getValue: transformer})
 
 export const scrollMarginLeft =createScrollMarginLeft()

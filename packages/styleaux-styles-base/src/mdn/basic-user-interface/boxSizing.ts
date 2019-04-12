@@ -1,6 +1,6 @@
 import { BoxSizingProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BOXSIZING='boxSizing'
 
@@ -27,7 +27,7 @@ export const createBoxSizing = <
   })
 
 export const createBoxSizingRule = <T = BoxSizingProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BOXSIZING, getValue: transformer})
 
 export const boxSizing =createBoxSizing()

@@ -1,6 +1,6 @@
 import { PageBreakAfterProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const PAGEBREAKAFTER='pageBreakAfter'
 
@@ -27,7 +27,7 @@ export const createPageBreakAfter = <
   })
 
 export const createPageBreakAfterRule = <T = PageBreakAfterProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: PAGEBREAKAFTER, getValue: transformer})
 
 export const pageBreakAfter =createPageBreakAfter()

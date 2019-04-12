@@ -1,6 +1,6 @@
 import { ColumnSpanProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const COLUMNSPAN='columnSpan'
 
@@ -27,7 +27,7 @@ export const createColumnSpan = <
   })
 
 export const createColumnSpanRule = <T = ColumnSpanProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: COLUMNSPAN, getValue: transformer})
 
 export const columnSpan =createColumnSpan()

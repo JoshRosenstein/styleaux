@@ -1,6 +1,6 @@
 import { BorderInlineStyleProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERINLINESTYLE='borderInlineStyle'
 
@@ -27,7 +27,7 @@ export const createBorderInlineStyle = <
   })
 
 export const createBorderInlineStyleRule = <T = BorderInlineStyleProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BORDERINLINESTYLE, getValue: transformer})
 
 export const borderInlineStyle =createBorderInlineStyle()

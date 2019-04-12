@@ -1,6 +1,6 @@
 import { FontVariantProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const FONTVARIANT='fontVariant'
 
@@ -27,7 +27,7 @@ export const createFontVariant = <
   })
 
 export const createFontVariantRule = <T = FontVariantProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: FONTVARIANT, getValue: transformer})
 
 export const fontVariant =createFontVariant()

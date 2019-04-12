@@ -1,6 +1,6 @@
 import { ScrollPaddingProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const SCROLLPADDING='scrollPadding'
 
@@ -29,7 +29,7 @@ export const createScrollPadding = <
   })
 
 export const createScrollPaddingRule = <T = ScrollPaddingProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: SCROLLPADDING, getValue: transformer})
 
 export const scrollPadding =createScrollPadding()

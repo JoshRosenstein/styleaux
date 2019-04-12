@@ -1,6 +1,6 @@
 import { FontWeightProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const FONTWEIGHT='fontWeight'
 
@@ -27,7 +27,7 @@ export const createFontWeight = <
   })
 
 export const createFontWeightRule = <T = FontWeightProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: FONTWEIGHT, getValue: transformer})
 
 export const fontWeight =createFontWeight()

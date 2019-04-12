@@ -1,6 +1,6 @@
 import { MinWidthProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const MINWIDTH='minWidth'
 
@@ -27,7 +27,7 @@ export const createMinWidth = <
   })
 
 export const createMinWidthRule = <T = MinWidthProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: MINWIDTH, getValue: transformer})
 
 export const minWidth =createMinWidth()

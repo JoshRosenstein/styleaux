@@ -1,12 +1,12 @@
 import { FlexFlowProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const FLEXFLOW='flexFlow'
 
 export interface FlexFlowProps<T=FlexFlowProperty> {
   /**
-   * The **`flex-flow`** CSS property is a shorthand property for `flex-direction` and `flex-wrap` properties.
+   * The **`flex-flow`** CSS property is a shorthand property for `flex-direction` and `flex-wrp` properties.
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-flow
    */
@@ -27,7 +27,7 @@ export const createFlexFlow = <
   })
 
 export const createFlexFlowRule = <T = FlexFlowProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: FLEXFLOW, getValue: transformer})
 
 export const flexFlow =createFlexFlow()

@@ -1,6 +1,6 @@
 import { ResizeProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const RESIZE='resize'
 
@@ -27,7 +27,7 @@ export const createResize = <
   })
 
 export const createResizeRule = <T = ResizeProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: RESIZE, getValue: transformer})
 
 export const resize =createResize()

@@ -1,6 +1,6 @@
 import { BorderBlockEndProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERBLOCKEND='borderBlockEnd'
 
@@ -27,7 +27,7 @@ export const createBorderBlockEnd = <
   })
 
 export const createBorderBlockEndRule = <T = BorderBlockEndProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BORDERBLOCKEND, getValue: transformer})
 
 export const borderBlockEnd =createBorderBlockEnd()

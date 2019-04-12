@@ -1,6 +1,6 @@
 import { LeftProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const LEFT='left'
 
@@ -27,7 +27,7 @@ export const createLeft = <
   })
 
 export const createLeftRule = <T = LeftProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: LEFT, getValue: transformer})
 
 export const left =createLeft()

@@ -1,6 +1,6 @@
 import { WritingModeProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const WRITINGMODE='writingMode'
 
@@ -27,7 +27,7 @@ export const createWritingMode = <
   })
 
 export const createWritingModeRule = <T = WritingModeProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: WRITINGMODE, getValue: transformer})
 
 export const writingMode =createWritingMode()

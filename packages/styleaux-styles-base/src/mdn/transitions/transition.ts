@@ -1,6 +1,6 @@
 import { TransitionProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TRANSITION='transition'
 
@@ -27,7 +27,7 @@ export const createTransition = <
   })
 
 export const createTransitionRule = <T = TransitionProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TRANSITION, getValue: transformer})
 
 export const transition =createTransition()

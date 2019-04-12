@@ -1,6 +1,6 @@
 import { BackgroundSizeProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BACKGROUNDSIZE='backgroundSize'
 
@@ -27,7 +27,7 @@ export const createBackgroundSize = <
   })
 
 export const createBackgroundSizeRule = <T = BackgroundSizeProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BACKGROUNDSIZE, getValue: transformer})
 
 export const backgroundSize =createBackgroundSize()

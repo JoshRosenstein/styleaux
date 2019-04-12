@@ -19,7 +19,7 @@
     "build:bundles": "rollup -c",
     "build": "yarn clean && yarn build:src && yarn build:bundles ",
     "clean": "rimraf dist-*/",
-    "test": "jest",
+    "test": "cd ../.. & yarn run test styles-base",
     "typedoc": "typedoc --options typedoc.ts",
     "generate": "rimraf mdn && ts-node --project tsconfig.node.json generateMDN.ts"
   },

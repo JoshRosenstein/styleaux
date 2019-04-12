@@ -1,6 +1,6 @@
 import { FontStretchProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const FONTSTRETCH='fontStretch'
 
@@ -27,7 +27,7 @@ export const createFontStretch = <
   })
 
 export const createFontStretchRule = <T = FontStretchProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: FONTSTRETCH, getValue: transformer})
 
 export const fontStretch =createFontStretch()

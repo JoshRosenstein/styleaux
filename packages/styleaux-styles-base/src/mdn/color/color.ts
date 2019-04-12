@@ -1,6 +1,6 @@
 import { ColorProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const COLOR='color'
 
@@ -27,7 +27,7 @@ export const createColor = <
   })
 
 export const createColorRule = <T = ColorProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: COLOR, getValue: transformer})
 
 export const color =createColor()

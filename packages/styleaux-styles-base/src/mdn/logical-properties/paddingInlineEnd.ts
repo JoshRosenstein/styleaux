@@ -1,6 +1,6 @@
 import { PaddingInlineEndProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const PADDINGINLINEEND='paddingInlineEnd'
 
@@ -27,7 +27,7 @@ export const createPaddingInlineEnd = <
   })
 
 export const createPaddingInlineEndRule = <T = PaddingInlineEndProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: PADDINGINLINEEND, getValue: transformer})
 
 export const paddingInlineEnd =createPaddingInlineEnd()

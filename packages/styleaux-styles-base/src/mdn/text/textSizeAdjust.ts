@@ -1,6 +1,6 @@
 import { TextSizeAdjustProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTSIZEADJUST='textSizeAdjust'
 
@@ -27,7 +27,7 @@ export const createTextSizeAdjust = <
   })
 
 export const createTextSizeAdjustRule = <T = TextSizeAdjustProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TEXTSIZEADJUST, getValue: transformer})
 
 export const textSizeAdjust =createTextSizeAdjust()

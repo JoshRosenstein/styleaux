@@ -1,6 +1,6 @@
 import { RotateProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const ROTATE='rotate'
 
@@ -27,7 +27,7 @@ export const createRotate = <
   })
 
 export const createRotateRule = <T = RotateProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: ROTATE, getValue: transformer})
 
 export const rotate =createRotate()

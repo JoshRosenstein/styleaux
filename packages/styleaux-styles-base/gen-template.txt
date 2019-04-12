@@ -1,6 +1,6 @@
 import { __TYPE_NAME__ } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const __PROPERTY_NAME_CAP__='__PROPERTY_NAME__'
 
@@ -23,7 +23,7 @@ export const create__PROPERTY_NAME_PASCAL__ = <
   })
 
 export const create__PROPERTY_NAME_PASCAL__Rule = <T = __TYPE_NAME__, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: __PROPERTY_NAME_CAP__, getValue: transformer})
 
 export const __PROPERTY_NAME__ =create__PROPERTY_NAME_PASCAL__()

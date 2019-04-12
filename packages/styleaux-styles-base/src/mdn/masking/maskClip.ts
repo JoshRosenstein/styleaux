@@ -1,6 +1,6 @@
 import { MaskClipProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const MASKCLIP='maskClip'
 
@@ -27,7 +27,7 @@ export const createMaskClip = <
   })
 
 export const createMaskClipRule = <T = MaskClipProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: MASKCLIP, getValue: transformer})
 
 export const maskClip =createMaskClip()

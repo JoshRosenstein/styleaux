@@ -1,6 +1,6 @@
 import { FontVariantCapsProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const FONTVARIANTCAPS='fontVariantCaps'
 
@@ -27,7 +27,7 @@ export const createFontVariantCaps = <
   })
 
 export const createFontVariantCapsRule = <T = FontVariantCapsProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: FONTVARIANTCAPS, getValue: transformer})
 
 export const fontVariantCaps =createFontVariantCaps()

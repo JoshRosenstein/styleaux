@@ -1,6 +1,6 @@
 import { MarginLeftProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const MARGINLEFT='marginLeft'
 
@@ -27,7 +27,7 @@ export const createMarginLeft = <
   })
 
 export const createMarginLeftRule = <T = MarginLeftProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: MARGINLEFT, getValue: transformer})
 
 export const marginLeft =createMarginLeft()

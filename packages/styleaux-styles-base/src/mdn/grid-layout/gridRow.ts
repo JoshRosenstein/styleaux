@@ -1,6 +1,6 @@
 import { GridRowProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const GRIDROW='gridRow'
 
@@ -27,7 +27,7 @@ export const createGridRow = <
   })
 
 export const createGridRowRule = <T = GridRowProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: GRIDROW, getValue: transformer})
 
 export const gridRow =createGridRow()

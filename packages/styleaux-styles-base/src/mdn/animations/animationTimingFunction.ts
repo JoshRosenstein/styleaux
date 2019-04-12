@@ -1,6 +1,6 @@
 import { AnimationTimingFunctionProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const ANIMATIONTIMINGFUNCTION='animationTimingFunction'
 
@@ -27,7 +27,7 @@ export const createAnimationTimingFunction = <
   })
 
 export const createAnimationTimingFunctionRule = <T = AnimationTimingFunctionProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: ANIMATIONTIMINGFUNCTION, getValue: transformer})
 
 export const animationTimingFunction =createAnimationTimingFunction()

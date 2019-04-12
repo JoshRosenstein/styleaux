@@ -1,6 +1,6 @@
 import { OffsetPathProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const OFFSETPATH='offsetPath'
 
@@ -27,7 +27,7 @@ export const createOffsetPath = <
   })
 
 export const createOffsetPathRule = <T = OffsetPathProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: OFFSETPATH, getValue: transformer})
 
 export const offsetPath =createOffsetPath()

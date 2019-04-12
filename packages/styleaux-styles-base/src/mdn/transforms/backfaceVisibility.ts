@@ -1,6 +1,6 @@
 import { BackfaceVisibilityProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BACKFACEVISIBILITY='backfaceVisibility'
 
@@ -27,7 +27,7 @@ export const createBackfaceVisibility = <
   })
 
 export const createBackfaceVisibilityRule = <T = BackfaceVisibilityProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BACKFACEVISIBILITY, getValue: transformer})
 
 export const backfaceVisibility =createBackfaceVisibility()

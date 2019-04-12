@@ -1,6 +1,6 @@
 import { TextCombineUprightProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTCOMBINEUPRIGHT='textCombineUpright'
 
@@ -27,7 +27,7 @@ export const createTextCombineUpright = <
   })
 
 export const createTextCombineUprightRule = <T = TextCombineUprightProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TEXTCOMBINEUPRIGHT, getValue: transformer})
 
 export const textCombineUpright =createTextCombineUpright()

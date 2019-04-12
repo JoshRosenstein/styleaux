@@ -1,6 +1,6 @@
 import { InsetBlockStartProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const INSETBLOCKSTART='insetBlockStart'
 
@@ -27,7 +27,7 @@ export const createInsetBlockStart = <
   })
 
 export const createInsetBlockStartRule = <T = InsetBlockStartProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: INSETBLOCKSTART, getValue: transformer})
 
 export const insetBlockStart =createInsetBlockStart()

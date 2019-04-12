@@ -1,6 +1,6 @@
 import { ZIndexProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const ZINDEX='zIndex'
 
@@ -27,7 +27,7 @@ export const createZIndex = <
   })
 
 export const createZIndexRule = <T = ZIndexProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: ZINDEX, getValue: transformer})
 
 export const zIndex =createZIndex()

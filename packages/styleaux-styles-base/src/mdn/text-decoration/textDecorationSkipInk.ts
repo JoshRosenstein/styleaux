@@ -1,6 +1,6 @@
 import { TextDecorationSkipInkProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTDECORATIONSKIPINK='textDecorationSkipInk'
 
@@ -27,7 +27,7 @@ export const createTextDecorationSkipInk = <
   })
 
 export const createTextDecorationSkipInkRule = <T = TextDecorationSkipInkProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TEXTDECORATIONSKIPINK, getValue: transformer})
 
 export const textDecorationSkipInk =createTextDecorationSkipInk()

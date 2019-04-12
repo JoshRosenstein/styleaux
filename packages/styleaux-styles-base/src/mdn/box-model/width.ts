@@ -1,6 +1,6 @@
 import { WidthProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const WIDTH='width'
 
@@ -27,7 +27,7 @@ export const createWidth = <
   })
 
 export const createWidthRule = <T = WidthProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: WIDTH, getValue: transformer})
 
 export const width =createWidth()

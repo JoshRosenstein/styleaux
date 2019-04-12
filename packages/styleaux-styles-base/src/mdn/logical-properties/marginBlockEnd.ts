@@ -1,6 +1,6 @@
 import { MarginBlockEndProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const MARGINBLOCKEND='marginBlockEnd'
 
@@ -27,7 +27,7 @@ export const createMarginBlockEnd = <
   })
 
 export const createMarginBlockEndRule = <T = MarginBlockEndProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: MARGINBLOCKEND, getValue: transformer})
 
 export const marginBlockEnd =createMarginBlockEnd()

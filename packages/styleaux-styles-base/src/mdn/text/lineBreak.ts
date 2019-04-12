@@ -1,6 +1,6 @@
 import { LineBreakProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const LINEBREAK='lineBreak'
 
@@ -27,7 +27,7 @@ export const createLineBreak = <
   })
 
 export const createLineBreakRule = <T = LineBreakProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: LINEBREAK, getValue: transformer})
 
 export const lineBreak =createLineBreak()

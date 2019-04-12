@@ -1,6 +1,6 @@
 import { BackgroundRepeatProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BACKGROUNDREPEAT='backgroundRepeat'
 
@@ -27,7 +27,7 @@ export const createBackgroundRepeat = <
   })
 
 export const createBackgroundRepeatRule = <T = BackgroundRepeatProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BACKGROUNDREPEAT, getValue: transformer})
 
 export const backgroundRepeat =createBackgroundRepeat()

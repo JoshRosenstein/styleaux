@@ -1,6 +1,6 @@
 import { ScrollPaddingInlineStartProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const SCROLLPADDINGINLINESTART='scrollPaddingInlineStart'
 
@@ -27,7 +27,7 @@ export const createScrollPaddingInlineStart = <
   })
 
 export const createScrollPaddingInlineStartRule = <T = ScrollPaddingInlineStartProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: SCROLLPADDINGINLINESTART, getValue: transformer})
 
 export const scrollPaddingInlineStart =createScrollPaddingInlineStart()

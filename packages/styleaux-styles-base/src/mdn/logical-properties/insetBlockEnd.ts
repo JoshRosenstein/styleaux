@@ -1,6 +1,6 @@
 import { InsetBlockEndProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const INSETBLOCKEND='insetBlockEnd'
 
@@ -27,7 +27,7 @@ export const createInsetBlockEnd = <
   })
 
 export const createInsetBlockEndRule = <T = InsetBlockEndProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: INSETBLOCKEND, getValue: transformer})
 
 export const insetBlockEnd =createInsetBlockEnd()

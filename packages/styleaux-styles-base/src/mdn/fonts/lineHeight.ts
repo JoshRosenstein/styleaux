@@ -1,6 +1,6 @@
 import { LineHeightProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const LINEHEIGHT='lineHeight'
 
@@ -27,7 +27,7 @@ export const createLineHeight = <
   })
 
 export const createLineHeightRule = <T = LineHeightProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: LINEHEIGHT, getValue: transformer})
 
 export const lineHeight =createLineHeight()

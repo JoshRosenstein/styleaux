@@ -1,6 +1,6 @@
 import { OverflowYProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const OVERFLOWY='overflowY'
 
@@ -27,7 +27,7 @@ export const createOverflowY = <
   })
 
 export const createOverflowYRule = <T = OverflowYProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: OVERFLOWY, getValue: transformer})
 
 export const overflowY =createOverflowY()

@@ -1,6 +1,6 @@
 import { BreakInsideProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BREAKINSIDE='breakInside'
 
@@ -27,7 +27,7 @@ export const createBreakInside = <
   })
 
 export const createBreakInsideRule = <T = BreakInsideProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BREAKINSIDE, getValue: transformer})
 
 export const breakInside =createBreakInside()

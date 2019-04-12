@@ -1,6 +1,6 @@
 import { GridTemplateAreasProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const GRIDTEMPLATEAREAS='gridTemplateAreas'
 
@@ -27,7 +27,7 @@ export const createGridTemplateAreas = <
   })
 
 export const createGridTemplateAreasRule = <T = GridTemplateAreasProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: GRIDTEMPLATEAREAS, getValue: transformer})
 
 export const gridTemplateAreas =createGridTemplateAreas()

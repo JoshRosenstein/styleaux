@@ -1,6 +1,6 @@
 import { FlexShrinkProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const FLEXSHRINK='flexShrink'
 
@@ -27,7 +27,7 @@ export const createFlexShrink = <
   })
 
 export const createFlexShrinkRule = <T = FlexShrinkProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: FLEXSHRINK, getValue: transformer})
 
 export const flexShrink =createFlexShrink()

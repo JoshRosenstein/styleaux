@@ -1,6 +1,6 @@
 import { BackgroundClipProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BACKGROUNDCLIP='backgroundClip'
 
@@ -27,7 +27,7 @@ export const createBackgroundClip = <
   })
 
 export const createBackgroundClipRule = <T = BackgroundClipProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BACKGROUNDCLIP, getValue: transformer})
 
 export const backgroundClip =createBackgroundClip()

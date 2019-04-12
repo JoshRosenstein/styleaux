@@ -1,6 +1,6 @@
 import { InsetInlineEndProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const INSETINLINEEND='insetInlineEnd'
 
@@ -27,7 +27,7 @@ export const createInsetInlineEnd = <
   })
 
 export const createInsetInlineEndRule = <T = InsetInlineEndProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: INSETINLINEEND, getValue: transformer})
 
 export const insetInlineEnd =createInsetInlineEnd()

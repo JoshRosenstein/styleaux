@@ -1,6 +1,6 @@
 import { TextDecorationSkipProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTDECORATIONSKIP='textDecorationSkip'
 
@@ -27,7 +27,7 @@ export const createTextDecorationSkip = <
   })
 
 export const createTextDecorationSkipRule = <T = TextDecorationSkipProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TEXTDECORATIONSKIP, getValue: transformer})
 
 export const textDecorationSkip =createTextDecorationSkip()

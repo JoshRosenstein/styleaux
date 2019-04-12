@@ -1,6 +1,6 @@
 import { BorderBlockEndWidthProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERBLOCKENDWIDTH='borderBlockEndWidth'
 
@@ -27,7 +27,7 @@ export const createBorderBlockEndWidth = <
   })
 
 export const createBorderBlockEndWidthRule = <T = BorderBlockEndWidthProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BORDERBLOCKENDWIDTH, getValue: transformer})
 
 export const borderBlockEndWidth =createBorderBlockEndWidth()

@@ -1,6 +1,6 @@
 import { CaretColorProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const CARETCOLOR='caretColor'
 
@@ -27,7 +27,7 @@ export const createCaretColor = <
   })
 
 export const createCaretColorRule = <T = CaretColorProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: CARETCOLOR, getValue: transformer})
 
 export const caretColor =createCaretColor()

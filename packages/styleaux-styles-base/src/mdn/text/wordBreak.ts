@@ -1,6 +1,6 @@
 import { WordBreakProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const WORDBREAK='wordBreak'
 
@@ -27,7 +27,7 @@ export const createWordBreak = <
   })
 
 export const createWordBreakRule = <T = WordBreakProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: WORDBREAK, getValue: transformer})
 
 export const wordBreak =createWordBreak()

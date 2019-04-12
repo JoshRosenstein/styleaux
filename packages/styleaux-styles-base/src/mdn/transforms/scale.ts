@@ -1,6 +1,6 @@
 import { ScaleProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const SCALE='scale'
 
@@ -27,7 +27,7 @@ export const createScale = <
   })
 
 export const createScaleRule = <T = ScaleProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: SCALE, getValue: transformer})
 
 export const scale =createScale()

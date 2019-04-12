@@ -1,6 +1,6 @@
 import { MinHeightProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const MINHEIGHT='minHeight'
 
@@ -27,7 +27,7 @@ export const createMinHeight = <
   })
 
 export const createMinHeightRule = <T = MinHeightProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: MINHEIGHT, getValue: transformer})
 
 export const minHeight =createMinHeight()

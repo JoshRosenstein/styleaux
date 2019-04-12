@@ -1,6 +1,6 @@
 import { PaintOrderProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const PAINTORDER='paintOrder'
 
@@ -27,7 +27,7 @@ export const createPaintOrder = <
   })
 
 export const createPaintOrderRule = <T = PaintOrderProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: PAINTORDER, getValue: transformer})
 
 export const paintOrder =createPaintOrder()

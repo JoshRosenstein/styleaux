@@ -1,6 +1,6 @@
 import { BorderBottomProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERBOTTOM='borderBottom'
 
@@ -27,7 +27,7 @@ export const createBorderBottom = <
   })
 
 export const createBorderBottomRule = <T = BorderBottomProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BORDERBOTTOM, getValue: transformer})
 
 export const borderBottom =createBorderBottom()

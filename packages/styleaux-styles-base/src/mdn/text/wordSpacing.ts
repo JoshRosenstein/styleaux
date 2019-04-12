@@ -1,6 +1,6 @@
 import { WordSpacingProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const WORDSPACING='wordSpacing'
 
@@ -27,7 +27,7 @@ export const createWordSpacing = <
   })
 
 export const createWordSpacingRule = <T = WordSpacingProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: WORDSPACING, getValue: transformer})
 
 export const wordSpacing =createWordSpacing()

@@ -1,6 +1,6 @@
 import { TextOverflowProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTOVERFLOW='textOverflow'
 
@@ -27,7 +27,7 @@ export const createTextOverflow = <
   })
 
 export const createTextOverflowRule = <T = TextOverflowProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TEXTOVERFLOW, getValue: transformer})
 
 export const textOverflow =createTextOverflow()

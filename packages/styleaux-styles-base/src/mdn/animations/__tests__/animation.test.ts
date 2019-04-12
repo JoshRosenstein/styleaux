@@ -32,7 +32,7 @@ describe('createAnimation', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createAnimation<'value',never, IThemeWithoutBreakpoints>({
+    const result = createAnimation<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ animation: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +54,7 @@ describe('createAnimation', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       animation: 'a',
       [MQ.D]: {
         animation: 'b',

@@ -1,6 +1,6 @@
 import { ObjectFitProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const OBJECTFIT='objectFit'
 
@@ -27,7 +27,7 @@ export const createObjectFit = <
   })
 
 export const createObjectFitRule = <T = ObjectFitProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: OBJECTFIT, getValue: transformer})
 
 export const objectFit =createObjectFit()

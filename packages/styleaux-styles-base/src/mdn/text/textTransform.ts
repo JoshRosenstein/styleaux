@@ -1,6 +1,6 @@
 import { TextTransformProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTTRANSFORM='textTransform'
 
@@ -27,7 +27,7 @@ export const createTextTransform = <
   })
 
 export const createTextTransformRule = <T = TextTransformProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TEXTTRANSFORM, getValue: transformer})
 
 export const textTransform =createTextTransform()

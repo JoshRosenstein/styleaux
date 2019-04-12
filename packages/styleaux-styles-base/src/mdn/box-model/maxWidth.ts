@@ -1,6 +1,6 @@
 import { MaxWidthProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const MAXWIDTH='maxWidth'
 
@@ -27,7 +27,7 @@ export const createMaxWidth = <
   })
 
 export const createMaxWidthRule = <T = MaxWidthProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: MAXWIDTH, getValue: transformer})
 
 export const maxWidth =createMaxWidth()

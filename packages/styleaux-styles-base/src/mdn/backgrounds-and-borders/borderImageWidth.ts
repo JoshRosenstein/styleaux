@@ -1,6 +1,6 @@
 import { BorderImageWidthProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERIMAGEWIDTH='borderImageWidth'
 
@@ -27,7 +27,7 @@ export const createBorderImageWidth = <
   })
 
 export const createBorderImageWidthRule = <T = BorderImageWidthProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BORDERIMAGEWIDTH, getValue: transformer})
 
 export const borderImageWidth =createBorderImageWidth()

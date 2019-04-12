@@ -1,6 +1,6 @@
 import { AlignContentProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const ALIGNCONTENT='alignContent'
 
@@ -27,7 +27,7 @@ export const createAlignContent = <
   })
 
 export const createAlignContentRule = <T = AlignContentProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: ALIGNCONTENT, getValue: transformer})
 
 export const alignContent =createAlignContent()

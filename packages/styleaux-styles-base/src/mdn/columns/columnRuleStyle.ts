@@ -1,6 +1,6 @@
 import { ColumnRuleStyleProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const COLUMNRULESTYLE='columnRuleStyle'
 
@@ -27,7 +27,7 @@ export const createColumnRuleStyle = <
   })
 
 export const createColumnRuleStyleRule = <T = ColumnRuleStyleProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: COLUMNRULESTYLE, getValue: transformer})
 
 export const columnRuleStyle =createColumnRuleStyle()

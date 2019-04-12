@@ -1,6 +1,6 @@
 import { OverflowAnchorProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const OVERFLOWANCHOR='overflowAnchor'
 
@@ -27,7 +27,7 @@ export const createOverflowAnchor = <
   })
 
 export const createOverflowAnchorRule = <T = OverflowAnchorProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: OVERFLOWANCHOR, getValue: transformer})
 
 export const overflowAnchor =createOverflowAnchor()

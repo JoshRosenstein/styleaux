@@ -1,6 +1,6 @@
 import { BorderInlineStartColorProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERINLINESTARTCOLOR='borderInlineStartColor'
 
@@ -27,7 +27,7 @@ export const createBorderInlineStartColor = <
   })
 
 export const createBorderInlineStartColorRule = <T = BorderInlineStartColorProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BORDERINLINESTARTCOLOR, getValue: transformer})
 
 export const borderInlineStartColor =createBorderInlineStartColor()

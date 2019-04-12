@@ -1,6 +1,6 @@
 import { ClearProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const CLEAR='clear'
 
@@ -27,7 +27,7 @@ export const createClear = <
   })
 
 export const createClearRule = <T = ClearProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: CLEAR, getValue: transformer})
 
 export const clear =createClear()

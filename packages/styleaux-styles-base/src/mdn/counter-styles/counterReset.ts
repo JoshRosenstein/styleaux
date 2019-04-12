@@ -1,6 +1,6 @@
 import { CounterResetProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const COUNTERRESET='counterReset'
 
@@ -27,7 +27,7 @@ export const createCounterReset = <
   })
 
 export const createCounterResetRule = <T = CounterResetProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: COUNTERRESET, getValue: transformer})
 
 export const counterReset =createCounterReset()

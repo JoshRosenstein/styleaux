@@ -1,6 +1,6 @@
 import { FloatProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const FLOAT='float'
 
@@ -27,7 +27,7 @@ export const createFloat = <
   })
 
 export const createFloatRule = <T = FloatProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: FLOAT, getValue: transformer})
 
 export const float =createFloat()

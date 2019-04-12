@@ -1,6 +1,6 @@
 import { RowGapProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const ROWGAP='rowGap'
 
@@ -27,7 +27,7 @@ export const createRowGap = <
   })
 
 export const createRowGapRule = <T = RowGapProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: ROWGAP, getValue: transformer})
 
 export const rowGap =createRowGap()

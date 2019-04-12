@@ -1,6 +1,6 @@
 import { FlexProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const FLEX='flex'
 
@@ -27,7 +27,7 @@ export const createFlex = <
   })
 
 export const createFlexRule = <T = FlexProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: FLEX, getValue: transformer})
 
 export const flex =createFlex()

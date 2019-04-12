@@ -1,6 +1,6 @@
 import { HeightProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const HEIGHT='height'
 
@@ -27,7 +27,7 @@ export const createHeight = <
   })
 
 export const createHeightRule = <T = HeightProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: HEIGHT, getValue: transformer})
 
 export const height =createHeight()

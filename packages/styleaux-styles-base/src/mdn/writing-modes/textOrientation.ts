@@ -1,6 +1,6 @@
 import { TextOrientationProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTORIENTATION='textOrientation'
 
@@ -27,7 +27,7 @@ export const createTextOrientation = <
   })
 
 export const createTextOrientationRule = <T = TextOrientationProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TEXTORIENTATION, getValue: transformer})
 
 export const textOrientation =createTextOrientation()

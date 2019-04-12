@@ -1,6 +1,6 @@
 import { ColumnGapProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const COLUMNGAP='columnGap'
 
@@ -27,7 +27,7 @@ export const createColumnGap = <
   })
 
 export const createColumnGapRule = <T = ColumnGapProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: COLUMNGAP, getValue: transformer})
 
 export const columnGap =createColumnGap()

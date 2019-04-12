@@ -1,6 +1,6 @@
 import { BoxDecorationBreakProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BOXDECORATIONBREAK='boxDecorationBreak'
 
@@ -27,7 +27,7 @@ export const createBoxDecorationBreak = <
   })
 
 export const createBoxDecorationBreakRule = <T = BoxDecorationBreakProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BOXDECORATIONBREAK, getValue: transformer})
 
 export const boxDecorationBreak =createBoxDecorationBreak()

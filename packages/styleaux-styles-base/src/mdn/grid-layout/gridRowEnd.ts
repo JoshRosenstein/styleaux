@@ -1,6 +1,6 @@
 import { GridRowEndProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const GRIDROWEND='gridRowEnd'
 
@@ -27,7 +27,7 @@ export const createGridRowEnd = <
   })
 
 export const createGridRowEndRule = <T = GridRowEndProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: GRIDROWEND, getValue: transformer})
 
 export const gridRowEnd =createGridRowEnd()

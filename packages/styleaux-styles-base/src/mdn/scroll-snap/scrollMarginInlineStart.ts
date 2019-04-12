@@ -1,6 +1,6 @@
 import { ScrollMarginInlineStartProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const SCROLLMARGININLINESTART='scrollMarginInlineStart'
 
@@ -27,7 +27,7 @@ export const createScrollMarginInlineStart = <
   })
 
 export const createScrollMarginInlineStartRule = <T = ScrollMarginInlineStartProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: SCROLLMARGININLINESTART, getValue: transformer})
 
 export const scrollMarginInlineStart =createScrollMarginInlineStart()

@@ -1,6 +1,6 @@
 import { FontFamilyProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const FONTFAMILY='fontFamily'
 
@@ -27,7 +27,7 @@ export const createFontFamily = <
   })
 
 export const createFontFamilyRule = <T = FontFamilyProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: FONTFAMILY, getValue: transformer})
 
 export const fontFamily =createFontFamily()

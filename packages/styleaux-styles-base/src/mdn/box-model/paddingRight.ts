@@ -1,6 +1,6 @@
 import { PaddingRightProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const PADDINGRIGHT='paddingRight'
 
@@ -27,7 +27,7 @@ export const createPaddingRight = <
   })
 
 export const createPaddingRightRule = <T = PaddingRightProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: PADDINGRIGHT, getValue: transformer})
 
 export const paddingRight =createPaddingRight()

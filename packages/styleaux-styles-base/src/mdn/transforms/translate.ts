@@ -1,6 +1,6 @@
 import { TranslateProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TRANSLATE='translate'
 
@@ -27,7 +27,7 @@ export const createTranslate = <
   })
 
 export const createTranslateRule = <T = TranslateProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TRANSLATE, getValue: transformer})
 
 export const translate =createTranslate()

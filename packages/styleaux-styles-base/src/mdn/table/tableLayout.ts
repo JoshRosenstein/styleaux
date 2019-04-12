@@ -1,6 +1,6 @@
 import { TableLayoutProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TABLELAYOUT='tableLayout'
 
@@ -27,7 +27,7 @@ export const createTableLayout = <
   })
 
 export const createTableLayoutRule = <T = TableLayoutProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: TABLELAYOUT, getValue: transformer})
 
 export const tableLayout =createTableLayout()

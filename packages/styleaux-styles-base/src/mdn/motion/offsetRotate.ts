@@ -1,6 +1,6 @@
 import { OffsetRotateProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const OFFSETROTATE='offsetRotate'
 
@@ -27,7 +27,7 @@ export const createOffsetRotate = <
   })
 
 export const createOffsetRotateRule = <T = OffsetRotateProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: OFFSETROTATE, getValue: transformer})
 
 export const offsetRotate =createOffsetRotate()

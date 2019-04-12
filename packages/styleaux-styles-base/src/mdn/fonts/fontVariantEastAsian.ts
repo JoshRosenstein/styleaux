@@ -1,6 +1,6 @@
 import { FontVariantEastAsianProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const FONTVARIANTEASTASIAN='fontVariantEastAsian'
 
@@ -27,7 +27,7 @@ export const createFontVariantEastAsian = <
   })
 
 export const createFontVariantEastAsianRule = <T = FontVariantEastAsianProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: FONTVARIANTEASTASIAN, getValue: transformer})
 
 export const fontVariantEastAsian =createFontVariantEastAsian()

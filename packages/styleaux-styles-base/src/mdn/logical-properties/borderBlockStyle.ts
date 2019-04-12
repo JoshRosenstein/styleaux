@@ -1,6 +1,6 @@
 import { BorderBlockStyleProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERBLOCKSTYLE='borderBlockStyle'
 
@@ -27,7 +27,7 @@ export const createBorderBlockStyle = <
   })
 
 export const createBorderBlockStyleRule = <T = BorderBlockStyleProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: BORDERBLOCKSTYLE, getValue: transformer})
 
 export const borderBlockStyle =createBorderBlockStyle()

@@ -1,6 +1,6 @@
 import { GridAutoRowsProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const GRIDAUTOROWS='gridAutoRows'
 
@@ -27,7 +27,7 @@ export const createGridAutoRows = <
   })
 
 export const createGridAutoRowsRule = <T = GridAutoRowsProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: GRIDAUTOROWS, getValue: transformer})
 
 export const gridAutoRows =createGridAutoRows()

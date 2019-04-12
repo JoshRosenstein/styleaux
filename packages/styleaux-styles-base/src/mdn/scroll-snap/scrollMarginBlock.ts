@@ -1,6 +1,6 @@
 import { ScrollMarginBlockProperty } from '@styleaux/csstype';
 
-import { style, StyleOptions, styler,Getter  } from '@styleaux/core';
+import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const SCROLLMARGINBLOCK='scrollMarginBlock'
 
@@ -27,7 +27,7 @@ export const createScrollMarginBlock = <
   })
 
 export const createScrollMarginBlockRule = <T = ScrollMarginBlockProperty, P=unknown>(
-  transformer?: Getter<T,P>,
+  transformer?: GetValue<T,P>,
 ) => styler<T,P>({cssProp: SCROLLMARGINBLOCK, getValue: transformer})
 
 export const scrollMarginBlock =createScrollMarginBlock()
