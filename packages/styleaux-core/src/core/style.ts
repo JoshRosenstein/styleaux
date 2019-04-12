@@ -5,18 +5,17 @@ import * as CSS from '@styleaux/csstype'
 import { identity } from '@roseys/futils'
 import { PropStyleFuncArr, WithTheme } from './types'
 import { StringKeys, PlainObject, GetKey } from 'simplytyped'
-
 export interface GetStyleOptions<T extends Record<string, any>> {
   key?: StringKeys<T> | CSS.StringHack,
   transformValue?: Function
   scale?: number[] | string[] | string | number[]
 }
-
+type cssProp = keyof CSS.Properties | CSS.StringHack
 export interface StyleOptions<
   Props,
   Theme
   > {
-  cssProp?: keyof CSS.Properties
+  cssProp?: cssProp | cssProp[]
 
   prop: StringKeys<Props>,
 
@@ -63,8 +62,18 @@ export function getStyle<Theme, P extends PlainObject = any>({
   *  }))
   *
  */
+
+import { isNil } from 'typed-is'
+
+export const wrap2 = (name1: string, name2: string) => value =>
+  isNil(value) ? null : { [name1]: value, [name2]: value }
+
+
+
+
+
 export function style<
-  P = PlainObject,
+  P extends PlainObject,
   Theme extends {} = never,
   Media extends {} = never,
   >({ prop, cssProp, key, transformValue = identity, alias, scale }: StyleOptions<P, Theme>): PropStyleFuncArr<WithTheme<P, Theme, Media>> {

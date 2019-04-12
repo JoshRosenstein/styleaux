@@ -3,8 +3,9 @@ import { CSSObj } from '../cssTypes'
 import * as CSS from '@styleaux/csstype'
 import { isNumber, isBoolean, isString, isFunction, isNil } from "typed-is";
 import { everyMedia } from "./everyMedia";
-import { createWrap } from "../utils/wrap";
+
 import { MediaKey } from './types'
+import { objOf } from '../utils/objOf'
 
 //export type KeysOrString<T extends {}=never>=T extends [never] ? string : Extract<keyof T,string>
 
@@ -26,10 +27,10 @@ export type GetValue<I, P> = ((
   mediaKey: MediaKey
 ) => I | GetterReturnType | AnyGetValue)
 
-
+type cssProp = keyof CSS.Properties | CSS.StringHack
 
 export interface StylerOptions<P extends {} = any, I = any> {
-  cssProp?: keyof CSS.Properties | CSS.StringHack
+  cssProp?: cssProp | cssProp[]
   getStyle?: (result: any, input?: any, props?: P, mediaKey?: MediaKey) => CSSObj | null | string | number
   getValue?: GetValue<I, P>
 }
@@ -37,7 +38,7 @@ export interface StylerOptions<P extends {} = any, I = any> {
 
 export function styler<I = any, P extends {} = any>({
   cssProp,
-  getStyle = createWrap(cssProp),
+  getStyle = objOf(cssProp as any),
   getValue = identity
 }: StylerOptions<P, I>) {
   function getValues(

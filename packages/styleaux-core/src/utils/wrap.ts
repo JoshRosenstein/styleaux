@@ -1,4 +1,4 @@
-import {isNil} from 'typed-is'
+import { isNil } from 'typed-is'
 
 /**
  * Creates an object if name exists and value exists
@@ -9,9 +9,9 @@ import {isNil} from 'typed-is'
 
 export function wrap(
   name?: string | number | null,
-  value?: null | string | number | {[index: string]: any},
+  value?: null | string | number | { [index: string]: any },
 ) {
-  return !isNil(value) ? (name ? {[name]: value} : value) : null
+  return !isNil(value) ? (name ? { [name]: value } : value) : null
 }
 
 /**
@@ -22,5 +22,6 @@ export function wrap(
  * @param name Object Key
  * @param value Object Value
  */
-export const createWrap = (name?: string | number) => (value:null | string | number | {[index: string]: any}) => wrap(name, value)
+
+export const createWrap = (name?: string | number) => (value: null | string | number | { [index: string]: any }) => wrap(name, value) //wrap(name, value)
 

@@ -21,12 +21,16 @@ const theme = {
 
 
 
-type StyleProps = { w: true, gap: ResponsiveProp<string, Media>, theme: Theme }
-const style = createStyles<StyleProps>({
+type StyleProps = { w: true, many: ResponsiveProp<string, Media>, gap: ResponsiveProp<string, Media>, theme: Theme }
+const style = createStyles<Partial<StyleProps>>({
   w: { width: "1px" },
   gap: styler({
     getStyle: val => ({ margin: val, padding: val })
+  }),
+  many: styler({
+    cssProp: ['margin', 'padding']
   })
+
 })
 
 //console.log("styles", t);
@@ -35,5 +39,24 @@ test("Works", () => {
   const t = style({ w: true, gap: { small: '10px' }, theme });
 
   expect(t).toEqual([{ "width": "1px" }, { "@media (min-width: 30em)": { "margin": '10px', "padding": '10px' } }]);
+
+});
+
+test("Many Css Properties", () => {
+  const t = style({ many: '10px', theme });
+
+  expect(t).toEqual([{
+    margin: "10px",
+    padding: "10px",
+  }]);
+
+});
+
+test("Many Css Properties Responsive", () => {
+  const t = style({ many: { medium: '5px', small: '10px' }, theme });
+  expect(t).toEqual([{
+    '@media (min-width: 40em)': { margin: '5px', padding: '5px' },
+    '@media (min-width: 30em)': { margin: '10px', padding: '10px' }
+  }]);
 
 });
