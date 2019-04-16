@@ -5,17 +5,47 @@ import {
   IConstants,
 } from '../constants'
 import { Arg1, OmitIf, NonNever, AnyFunc, UnionOf } from '../types'
-import { CSSObj } from '../cssTypes'
+import { CSSObj, CSSKeys } from '../cssTypes'
+
+export type CSSProp = CSSKeys | CSSKeys[]
 
 export type MediaKey = string | number
+
+export type ExtractPrimitive<T> = T extends object ? never : T
 
 export type PropStyleFunc<P> = (props: P) => CSSObj
 export type PropStyleFuncArr<P> = (props: P) => CSSObj[]
 
+/**
+ * A function accepting some `props` and returning an `CSSObj | CSSObj[
+ * @param T First arg( input type)
+ * @param P Second Arg Props
+ * @param R
+ *
+ * */
+
+export type CreateStylesValueGetter3<T, P = never, R = CSSObj> = (...args: [T, P, MediaKey]) => R;
+export type CreateStylesValueGetter2<T, P = never, R = CSSObj> = (...args: [T, P]) => R;
+
+//export type CreateStylesValueGetter<T, P = never, R = CSSObj> = (...args: [P] extends [never] ? [T] : [T] | [T, P] | [T, P, MediaKey]) => R;
+//((...args:[T, P, MediaKey] |[T, P] |[T]) => R)
+export type CreateStylesValueGetter<T, P = never, R = CSSObj> = ((input: T, props: P, media: MediaKey) => R) | ((input: T, props: P) => R)|  ((input: T) => R)
+export type CreateStylesValueGetterPartial<T, P = never, R = CSSObj> =
+((input: T, props?: P, media?: MediaKey) => R)| ((input: T, props?: P) => R)|  ((input: T) => R)
+
+
+
+/** A function accepting some `props` and returning an `CSSObj | CSSObj[]` */
+export type StaticFuncMixin<P = any> = PropStyleFunc<P> | PropStyleFuncArr<P>
+
+/** A function accepting some `props` and returning an `StaticFuncMixin` */
+export type ResponsiveMixin<P, T, M> = StaticFuncMixin<WithTheme<P, T, M>>
+
+
 export type GetStylePropsLazy<S, M> = WithTheme<EtractInputType<S>, never, M>
 
 
-interface IAllCssValue<T> {
+interface BaseCssValue<T> {
   /**
    * The base css value, without any media queries applied
    */
@@ -31,7 +61,7 @@ type OmitNevers<M> = NonNever<M>
 export type ResponsivePropValue<Media extends {}, ValueType> =
   {
     [key in keyof Media]?: ValueType
-  } & IAllCssValue<ValueType> | Array<ValueType | undefined>
+  } & BaseCssValue<ValueType> | Array<ValueType | undefined>
 
 
 
@@ -69,6 +99,11 @@ export interface ITheme<T> {
 export interface IMediaTheme<T, B> {
   [THEME_KEY]?: T & { [MEDIA_KEY]: B }
 }
+
+export type WithOnlyTheme<T> =
+  [T] extends [never]
+  ? Partial<ITheme<any>>
+  : ITheme<T>
 
 
 export type ThemeWithMedia<T, B> = [B] extends [never]
@@ -114,6 +149,12 @@ export type ExtractArg1FromArray<T extends AnyFunc[]> = Arg1<UnionOf<T>>
 
 export type OmitTheme<T extends {}> = OmitIf<T, IConstants['THEME_KEY']>
 
+/**
+ * Creates Type P based on createSyles map values
+ * {a:(input:number)=>{margin:input}} //=> {a:number}
+ * {b:[(input:number)=>{margin:input}},(input:string)=>{margin:input}}] //=> {b:number | string}
+ * {c:{margin:'1px'}} //=> {c:boolean}
+ */
 export type ResolveCreateStyleMapValueType<T> =
   T extends AnyFunc
   ? Arg1<T>
@@ -128,6 +169,18 @@ export type EtractInputType<P> =
   {
     [K in keyof P]: ResolveCreateStyleMapValueType<P[K]>
   }
+
+/**
+* Simplifies Props extracting only Primitive
+* @example
+* type A= {a:number, b: number | {base:number}}
+* type B= EtractPrimitives<A> //=> {a:number,b:number}
+*/
+export type EtractPrimitives<P> =
+  {
+    [K in keyof P]: ExtractPrimitive<P[K]>
+  }
+
 
 
 export type EtractNonResponsiveInputType<STYLES, I = EtractInputType<STYLES>> = {

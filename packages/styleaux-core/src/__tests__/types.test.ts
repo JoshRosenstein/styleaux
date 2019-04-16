@@ -44,8 +44,9 @@ it('createStyles with media', () => {
   type InputType = string | number
 
 
-  const style = createStyles<{ margin: ResponsiveProp<InputType, Media> }>({
-    margin: (input: InputType) => ({ margin: input }),
+type PropV= ResponsiveProp<InputType, Media>
+  const style = createStyles<{ margin: PropV }>({
+    margin: (input) => ({ margin: input }),
   })
   type Result = DeepRequired<Arg1<typeof style>>
   type Expected = DeepRequired<{
@@ -118,7 +119,7 @@ it('Debug', () => {
 
   const style = createStyles<{ position: ResponsiveProp<string> }>({ position: rule<string>('position') })
   const style2 = createStyles<{ margin: ResponsiveProp<string> }>({
-    margin: rule<string>('margin'),
+    margin: rule('margin'),
   })
 
   const styleWrapped = combineStyles(style, style2)

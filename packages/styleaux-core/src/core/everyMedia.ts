@@ -3,6 +3,7 @@ import { isPlainObject } from 'typed-is'
 import { getThemeMedia } from '../getters'
 import { createWarnOnce, ensureMQ } from '../utils'
 import { Styles, CSSObj } from '../cssTypes'
+
 const warnOnce = createWarnOnce('everyMedia')
 
 const has = (a: string[], b: string[]) => b.some(key => a.includes(key))
@@ -20,10 +21,10 @@ const has = (a: string[], b: string[]) => b.some(key => a.includes(key))
  * @example
  *
 */
-export function everyMedia<P, V extends {}>(
+export function everyMedia<P, V extends Styles | { [mediaKeys: string]: CSSObj }>(
   props: P,
   value: V,
-  wrapper: (input: V) => Styles = identity as (i: V) => Styles,
+  wrapper: (input: Styles) => CSSObj = identity as any,
 ): CSSObj {
   const media = getThemeMedia(props)
 
@@ -54,5 +55,5 @@ export function everyMedia<P, V extends {}>(
       }, {})
     }
   }
-  return wrapper(value) as CSSObj
+  return wrapper(value)
 }

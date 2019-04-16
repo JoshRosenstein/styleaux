@@ -1,8 +1,5 @@
 import { createStyles, combineStyles } from '../'
 
-
-
-
 test('Static', () => {
 
   const debug1 = createStyles({

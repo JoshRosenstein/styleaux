@@ -12,6 +12,7 @@ export type ThemeStyleConfig = {
 const ensureObject = (input: unknown) => {
   return isPlainObject(input) ? input : {}
 }
+
 export function themeStyle<T, P>({
   themeKey,
   transformValue,

@@ -13,7 +13,7 @@ export type Arg1FromFuncTuple<
 */
 type GetProps<P, FNS extends any[]> = [P] extends [never]
   ? Partial<Arg1FromFuncTuple<FNS>>
-  : P
+  : Partial<P>
 
 /**
 * combineStyles

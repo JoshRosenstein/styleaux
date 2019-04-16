@@ -1,37 +1,22 @@
 import { identity } from "@roseys/futils";
-import { CSSObj } from '../cssTypes'
-import * as CSS from '@styleaux/csstype'
+import { CSSObj, Styles } from '../cssTypes'
 import { isNumber, isBoolean, isString, isFunction, isNil } from "typed-is";
 import { everyMedia } from "./everyMedia";
-
+import { CreateStylesValueGetterPartial,CreateStylesValueGetter, CSSProp } from './types'
 import { MediaKey } from './types'
 import { objOf } from '../utils/objOf'
 
-//export type KeysOrString<T extends {}=never>=T extends [never] ? string : Extract<keyof T,string>
-
-type GetterReturnType = null | undefined | string | number | boolean | {}
 
 //https://github.com/Microsoft/TypeScript/issues/10957
-type AnyGetValue = (...args: any[]) => GetterReturnType
+export type GetValue<I, P> = CreateStylesValueGetterPartial<I, P, Styles>
 
 
-//https://github.com/Microsoft/TypeScript/issues/10957
-export type GetValue<I, P> = ((
-  input: I,
-) => I | GetterReturnType | AnyGetValue) | ((
-  input: I,
-  props: P,
-) => I | GetterReturnType | AnyGetValue) | ((
-  input: I,
-  props: P,
-  mediaKey: MediaKey
-) => I | GetterReturnType | AnyGetValue)
+export type GetStyle<P> = (result: any, input?: any, props?: P, mediaKey?: MediaKey) => CSSObj
 
-type cssProp = keyof CSS.Properties | CSS.StringHack
 
 export interface StylerOptions<P extends {} = any, I = any> {
-  cssProp?: cssProp | cssProp[]
-  getStyle?: (result: any, input?: any, props?: P, mediaKey?: MediaKey) => CSSObj | null | string | number
+  cssProp?: CSSProp
+  getStyle?: GetStyle<P>
   getValue?: GetValue<I, P>
 }
 
@@ -39,14 +24,14 @@ export interface StylerOptions<P extends {} = any, I = any> {
 export function styler<I = any, P extends {} = any>({
   cssProp,
   getStyle = objOf(cssProp as any),
-  getValue = identity
+  getValue = identity as any
 }: StylerOptions<P, I>) {
   function getValues(
-    get: typeof getValue,
-    input: I,
-    props: P,
-    mediaKey: MediaKey
-  ) {
+    get,
+    input,
+    props,
+    mediaKey
+  ): Styles {
     const result = get(input, props, mediaKey);
 
     if (isBoolean(result)) {
@@ -61,12 +46,13 @@ export function styler<I = any, P extends {} = any>({
       : result;
   }
 
-  return (input: I, props: P, mediaKey: MediaKey) => {
+  return ((input: I, props: P, mediaKey: MediaKey) => {
 
     return everyMedia(
       props,
       getValues(getValue, input, props, mediaKey),
       result => getStyle(result, input, props, mediaKey)
-    );
-  };
+    )
+  }) as CreateStylesValueGetter<I, P>
+
 }

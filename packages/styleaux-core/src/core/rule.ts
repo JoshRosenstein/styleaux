@@ -1,5 +1,5 @@
-import { styler, StylerOptions } from './styler'
-import * as CSS from '@styleaux/csstype'
+import { styler, StylerOptions, GetValue } from './styler'
+
 
 /**
  * Short wrapper for {@link styler}
@@ -17,7 +17,7 @@ import * as CSS from '@styleaux/csstype'
  *  }))
  *
 */
-export function rule<T, P extends {} = any>(cssProp: keyof CSS.Properties, getValue?: StylerOptions<P, T>['getValue']) {
+export function rule<T, P extends {} = any>(cssProp: StylerOptions['cssProp'], getValue?: GetValue<T, P>) {
   return styler<T, P>({
     cssProp,
     getValue,

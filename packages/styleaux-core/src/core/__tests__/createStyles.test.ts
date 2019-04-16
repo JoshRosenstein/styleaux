@@ -1,6 +1,6 @@
 
-import { GetStylePropsLazy } from '../types'
-import { Arg1, DeepSimplify } from '../../types'
+import {  WithTheme } from '../types'
+import {  DeepSimplify } from '../../types'
 import { toStyles } from '../../__testutils__'
 import { createStyles, CreateStyleKeys } from '../createStyles'
 const media = {
@@ -20,22 +20,14 @@ const theme = {
 //type ITheme = typeof theme
 type IMedia = typeof media
 
-type IStylesArg = DeepSimplify<Arg1<typeof styles>>
-type TestTuple = Array<[string, IStylesArg, any]>
+type TestTuple = Array<[string, ResponsiveStyleProps, any]>
 
-const s = {
-  h: { height: '100vh' },
-  w: (input: number | string) => ({ width: input }),
-  width: (input: number | string) => ({ width: input }),
-  size: [
-    (input: number | string) => ({ width: input }),
-    (input: number | string) => ({ height: input }),
-  ],
-}
 
-type SProps = GetStylePropsLazy<typeof s, IMedia>
+type StyleProps = { h: boolean, w: string | number, width: string | number, size: string | number }
+type ResponsiveStyleProps = DeepSimplify<WithTheme<StyleProps, typeof theme, IMedia>>
 
-const styles = createStyles<SProps>({
+
+const styles = createStyles<ResponsiveStyleProps>({
   h: { height: '100vh' },
   w: (input: number | string) => ({ width: input }),
   width: (input: number | string) => ({ width: input }),

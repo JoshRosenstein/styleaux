@@ -1,7 +1,7 @@
 import { CSSObj } from '../cssTypes'
 import { mapObj, toArray } from '@roseys/futils'
 import { isFunction, isPlainObject, isNil, isNumeric, isArray } from 'typed-is'
-import { PropStyleFunc, PropStyleFuncArr, OmitTheme, MediaKey } from './types'
+import { PropStyleFunc, PropStyleFuncArr, OmitTheme, CreateStylesValueGetter, WithTheme ,ExtractPrimitive} from './types'
 import { DEFAULT_MEDIA_KEY } from '../constants'
 import { getMedia, getThemeMedia, getDefaultMedia } from '../getters/index'
 import { createWarnOnce, ensureMQ } from '../utils'
@@ -15,24 +15,24 @@ export enum CreateStyleKeys {
 
 
 
-type StyleInputValueFunction = (...args: any[]) => CSSObj
+type StyleInputValueFunction = CreateStylesValueGetter<any, any>
 
 type StyleInputValue =
   | CSSObj
   | StyleInputValueFunction
   | StyleInputValueFunction[]
 
-type CreateStyleMapValueTypeFunc<T, P> = ((
-  input: Extract<T, boolean | string | number>,
-) => CSSObj) | ((
-  input: Extract<T, boolean | string | number>,
-  props: P
-) => CSSObj) |
-  ((
-    input: Extract<T, boolean | string | number>,
-    props: P,
-    mediaKey: MediaKey,
-  ) => CSSObj)
+// type CreateStyleMapValueTypeFunc<T, P> = ((
+//   input: Extract<T, boolean | string | number>,
+// ) => CSSObj) | ((
+//   input: Extract<T, boolean | string | number>,
+//   props: P
+// ) => CSSObj) |
+//   ((
+//     input: Extract<T, boolean | string | number>,
+//     props: P,
+//     mediaKey: MediaKey,
+//   ) => CSSObj)
 
 
 
@@ -40,21 +40,39 @@ type MaybeArr<T> = T | T[]
 
 type StyleInputValueP<T, P> =
   | CSSObj
-  | MaybeArr<CreateStyleMapValueTypeFunc<T, P>>
+  | MaybeArr<CreateStylesValueGetter<T, P>>
 
 
 type StyleInput = { [propKey: string]: StyleInputValue | undefined }
 
-type StyleInputFromProps<P> = OmitTheme<{ [K in keyof P]?: StyleInputValueP<P[K], P> }>
+type StyleInputFromProps<P> = OmitTheme<{ [K in keyof P]?: StyleInputValueP<NonNullable<ExtractPrimitive<P[K]>>, P> }>
 
 type Values<T extends object> = T[keyof T]
 
-export interface createStyles<
+export interface CreateStyles<
   PROPS extends {} = any,
   S extends StyleInput = StyleInputFromProps<PROPS>,
   A2 = CSSObj | PropStyleFunc<PROPS> | PropStyleFuncArr<PROPS>
   > {
   (styles: S, staticOrStyleFunc?: A2): PropStyleFuncArr<PROPS>
+
+  [CreateStyleKeys.arg1]: S
+  [CreateStyleKeys.arg2]: A2
+}
+
+/**
+ * Utility to cast all props as responsive
+ */
+export interface CreateStylesResponsive<
+  PROPS extends {} = any,
+  Theme extends {} = never,
+  Media extends {} = never,
+  P = WithTheme<PROPS, Theme, Media>,
+  S = StyleInputFromProps<P>,
+
+  A2 = CSSObj | PropStyleFunc<P> | PropStyleFuncArr<P>
+  > {
+  (styles: S, staticOrStyleFunc?: A2): PropStyleFuncArr<P>
 
   [CreateStyleKeys.arg1]: S
   [CreateStyleKeys.arg2]: A2
