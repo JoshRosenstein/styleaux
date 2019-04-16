@@ -1,3 +1,3 @@
-import {unit} from '@styleaux/tools'
+import { unit } from '@styleaux/tools'
 
-export const px = (n:string | number) => unit(n)
+export const px = (n: string | number) => unit(n)

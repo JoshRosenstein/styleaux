@@ -1,10 +1,8 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6",
-    "lib": ["es7", "es2015.iterable", "dom"],
-    "sourceMap": true,
-    "noUnusedLocals": true
+    "moduleResolution": "node",
+    "strict": true
   },
   "include": ["src/**/*.ts"],
   "exclude": [
@@ -12,7 +10,8 @@
     "node_modules",
     "__tests__",
     "**/__tests__/**",
+    "**/__testutils__/**/*",
     "**/*.spec.ts",
-    "**/*.test.ts",
+    "**/*.test.ts"
   ]
 }

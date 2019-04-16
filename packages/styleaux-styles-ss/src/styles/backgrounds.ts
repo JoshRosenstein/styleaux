@@ -1,2 +1,5 @@
-export {background,backgroundImage,backgroundSize, backgroundPosition,backgroundRepeat} from '@styleaux/styles-base'
+export {
+  background, createBackground, backgroundImage, createBackgroundImage, backgroundSize, createBackgroundSize,
+  backgroundPosition, createBackgroundPosition, backgroundRepeat, createBackgroundRepeat
+} from '@styleaux/styles-base'
 

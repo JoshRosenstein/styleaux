@@ -12,7 +12,7 @@ import {
 import {px} from '../utils/px'
 import {combineStyles} from '@styleaux/core'
 
-export const border = createBorder({key: 'borders'})
+export const border = createBorder({key: 'borders'}) 
 
 export const borderWidth = createBorderWidth({
   key: 'borderWidths',

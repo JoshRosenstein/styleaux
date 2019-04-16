@@ -1,21 +1,15 @@
-import {createMaxWidth,createMinWidth,createHeight,createMaxHeight,createMinHeight,createWidth} from '@styleaux/styles-base'
-import {px} from '../utils/px'
+import { createMaxWidth, createMinWidth, createHeight, createMaxHeight, createMinHeight } from '@styleaux/styles-base'
+import { px } from '../utils/px'
+import { style, StyleOptions } from '@styleaux/core'
+import { widthValue } from '../values/width-value'
+import { WidthProperty } from '@styleaux/csstype';
+export { display } from '@styleaux/styles-base'
 
-import {widthValue} from '../values/width-value'
-import {wrap2} from '../utils/wrap2'
-import {
 
-  styler,
-  getStyle,
-  createStyles,
-
-} from '@styleaux/core'
-
-export {display} from '@styleaux/styles-base'
-
-export const width = createWidth({
+export const width = style<{ w: WidthProperty }>({
+  cssProp: 'width',
+  prop: 'w',
   key: 'widths',
-  alias:'w',
   transformValue: widthValue,
 })
 
@@ -44,10 +38,20 @@ export const minHeight = createMinHeight({
   transformValue: px,
 })
 
+export type SizeProps<T = string | number> = {
+  size?: T
+}
+export const createSize = <
+  T = string | number,
+  Media = never,
+  Theme = any,
+  >({ transformValue = px }: Pick<StyleOptions<SizeProps<T>, Theme>, 'transformValue'> =
+    {}) =>
+  style<SizeProps<T>, Theme, Media>({
+    cssProp: ['height', 'width'],
+    prop: 'size',
+    transformValue,
+  })
 
-export const size = createStyles({
-  size: styler<number | string>({
-    getValue: getStyle({transformValue: px}),
-    getStyle: wrap2('height', 'width'),
-  }),
-})
+
+export const size = createSize()

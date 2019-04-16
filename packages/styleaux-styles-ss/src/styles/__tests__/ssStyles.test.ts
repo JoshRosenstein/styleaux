@@ -8,7 +8,7 @@ import {
   gridRowGap,
   borders,
 } from '../'
-import {combineStyles} from '@styleaux/core'
+import { combineStyles, StyleProps, WithTheme } from '@styleaux/core'
 const theme = {
   colors: {
     blue: '#07c',
@@ -18,10 +18,10 @@ const theme = {
 
 test('returns color values from theme', () => {
   const a = color({ theme, color: 'blue', bg: 'black' })
-expect(a).toEqual([{ color: '#07c' }, { backgroundColor: '#111' }])
+  expect(a).toEqual([{ color: '#07c' }, { backgroundColor: '#111' }])
 })
 
-test('returns raw color values',  () => {
+test('returns raw color values', () => {
   const a = color({
     theme,
     color: 'inherit',
@@ -31,7 +31,7 @@ test('returns raw color values',  () => {
 
 })
 
-test.skip('backgroundColor prop overrides bg prop',  () =>{
+test.skip('backgroundColor prop overrides bg prop', () => {
   const a = color({
     backgroundColor: 'tomato',
     bg: 'blue',
@@ -41,7 +41,7 @@ test.skip('backgroundColor prop overrides bg prop',  () =>{
 
 })
 
-test('returns a pixel font-size',  () => {
+test('returns a pixel font-size', () => {
   const a = fontSize({ fontSize: 48 })
   expect(a).toEqual([{ fontSize: '48px' }])
 
@@ -49,28 +49,28 @@ test('returns a pixel font-size',  () => {
 })
 
 test('uses a default font-size scale', () => {
-  const a = fontSize({ fontSize: 2 ,theme:{'fontSizes':[12, 14, 16, 20, 24, 32, 48, 64, 72]}})
+  const a = fontSize({ fontSize: 2, theme: { 'fontSizes': [12, 14, 16, 20, 24, 32, 48, 64, 72] } })
   expect(a).toEqual([{ fontSize: '16px' }])
 })
 
 test('returns a string font-size', () => {
   const a = fontSize({ fontSize: '2em' })
-  expect(a).toEqual( [{ fontSize: '2em' }])
+  expect(a).toEqual([{ fontSize: '2em' }])
 })
 
 test('returns a percentage based width', () => {
-  const a = width({ width: 1 / 2 })
-  expect(a).toEqual( [{ width: '50%' }])
+  const a = width({ w: 1 / 2 })
+  expect(a).toEqual([{ width: '50%' }])
 })
 
-test('returns a pixel based width',() => {
-  const a = width({ width: 256 })
-  expect(a).toEqual( [{width: '256px' }])
+test('returns a pixel based width', () => {
+  const a = width({ w: 256 })
+  expect(a).toEqual([{ width: '256px' }])
 })
 
 test('returns a string width', () => {
-  const a = width({ width: 'auto' })
-  expect(a).toEqual( [{ width: 'auto' }])
+  const a = width({ w: 'auto' })
+  expect(a).toEqual([{ width: 'auto' }])
 })
 
 
@@ -78,23 +78,23 @@ test('returns an array of style objects', () => {
   const styles = space({
     m: '4px',
   })
-  expect(styles).toEqual( [{ margin: '4px' }])
+  expect(styles).toEqual([{ margin: '4px' }])
 })
 
 test('returns 0 values', () => {
   const styles = space({ m: 0 })
-  expect(styles).toEqual( [{ margin: 0 }])
+  expect(styles).toEqual([{ margin: 0 }])
 })
 
 test('returns negative pixel values', () => {
   const styles = space({ m: -2 })
-  expect(styles).toEqual(  [{ margin: '-8px' }])
+  expect(styles).toEqual([{ margin: '-8px' }])
 })
 
 
-test('returns negative em values', ()=> {
+test('returns negative em values', () => {
   const styles = space({ m: '-16em' })
-  expect(styles).toEqual( [{ margin: '-16em' }])
+  expect(styles).toEqual([{ margin: '-16em' }])
 })
 
 test('returns negative theme values', () => {
@@ -114,16 +114,17 @@ test('returns positive theme values', () => {
     },
     m: 2,
   })
-  expect(styles).toEqual( [{ margin: '2em' }])
+  expect(styles).toEqual([{ margin: '2em' }])
 })
 
-test('returns responsive values',() => {
-  type spaceFn=typeof space
-  const spaceWithTheme=combineStyles<spaceFn[],{},{media:string[]}>(space)
+test('returns responsive values', () => {
+
+  const spaceWithTheme = combineStyles<WithTheme<StyleProps<typeof space>, { media: string[] }, string[]>>(space)
   const styles = spaceWithTheme({
     m: [0, 2, 3],
-    theme:{media:['screen and (min-width: 40em)','screen and (min-width: 52em)']}
+    theme: { media: ['@media screen and (min-width: 40em)', '@media screen and (min-width: 52em)'] }
   })
+
   expect(styles).toEqual([
     [
       { margin: 0 },
@@ -138,7 +139,7 @@ test('returns aliased values', () => {
     px: 2,
   })
 
-  expect(styles).toEqual( [ { paddingLeft: '2px', paddingRight: '2px' } ])
+  expect(styles).toEqual([{ paddingLeft: '8px', paddingRight: '8px' }])
 })
 
 test('returns string values from theme', () => {
@@ -148,7 +149,7 @@ test('returns string values from theme', () => {
     },
     padding: 1,
   })
-  expect(styles).toEqual(  [{ padding: '1em' }])
+  expect(styles).toEqual([{ padding: '1em' }])
 })
 
 
@@ -159,7 +160,7 @@ test('returns negative string values from theme', () => {
     },
     margin: -1,
   })
-  expect(styles).toEqual( [{ margin: '-1em' }])
+  expect(styles).toEqual([{ margin: '-1em' }])
 })
 
 test('returns values from theme object', () => {
@@ -170,17 +171,17 @@ test('returns values from theme object', () => {
     margin: 'sm',
   })
 
-  expect(styles).toEqual( [{ margin: '1px' }])
+  expect(styles).toEqual([{ margin: '1px' }])
 })
 
-test('pl prop sets paddingLeft',() => {
+test('pl prop sets paddingLeft', () => {
   const styles = space({ pl: 2 })
-  expect(styles).toEqual( [{ paddingLeft: '8px' }])
+  expect(styles).toEqual([{ paddingLeft: '8px' }])
 })
 
 test('pl prop sets paddingLeft 0', () => {
   const styles = space({ pl: 0 })
-  expect(styles).toEqual( [{ paddingLeft: 0 }])
+  expect(styles).toEqual([{ paddingLeft: 0 }])
 })
 
 test.skip('px prop overrides pl prop', t => {
@@ -199,7 +200,7 @@ test('size returns width and height', () => {
     size: 4,
   })
 
-  expect(styles).toEqual( [ { height: '4px', width: '4px' } ])
+  expect(styles).toEqual([{ height: '4px', width: '4px' }])
 })
 
 // grid
@@ -222,7 +223,7 @@ test('gridRowGap returns a scalar style', () => {
     rowGap: 3,
   })
 
-  expect(a).toEqual([ { rowGap: '8px' }])
+  expect(a).toEqual([{ rowGap: '8px' }])
 })
 
 test('borders prop returns correct sequence', () => {

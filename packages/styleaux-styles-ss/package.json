@@ -18,7 +18,7 @@
     "build:bundles": "rollup -c",
     "build": "yarn clean && yarn build:src && yarn build:bundles",
     "clean": "rimraf dist-*/",
-    "test": "jest",
+    "test": "cd ../.. & yarn run test styleaux-styles-ss",
     "typedoc": "typedoc --options typedoc.ts"
   },
   "peerDependencies": {
