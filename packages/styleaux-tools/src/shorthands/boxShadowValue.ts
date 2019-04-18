@@ -1,6 +1,6 @@
-import {ColorProperty,BoxShadowProperty} from '@styleaux/csstype'
-import {arrayWrapper} from './arrayWrapper'
-import {isDefined} from 'typed-is'
+import { ColorProperty, BoxShadowProperty } from '@styleaux/csstype'
+import { arrayWrapper } from '../helpers'
+import { isDefined } from 'typed-is'
 export interface BoxShadowOptions {
   /**
    * *The **`inset`** keyword changes the shadow to one inside the frame (as if the content was depressed inside the box). Inset shadows are drawn inside the border (even transparent ones), above the background, but below content.
@@ -34,30 +34,40 @@ export interface BoxShadowOptions {
   color?: ColorProperty
 }
 
+ const shadowOptionHelper = (inset: boolean)=>( offsetX: string | 0,
+  offsetY: string | 0, blurRadius?: string | 0, spreadRadius?: string | 0,
+  color?: ColorProperty): BoxShadowOptions => (
+  { inset, offsetX, offsetY, blurRadius, spreadRadius, color })
+
+  export const shadowO=shadowOptionHelper(false)
+  export const insetShadowO=shadowOptionHelper(true)
+
 /**
  * Generates boxshadow
  *
  */
-export const boxShadow = arrayWrapper(
-  function shadowInner(
-    ...shadows: BoxShadowOptions[]
-  ): BoxShadowProperty {
-    return shadows
-      .map(shadow => {
-        return [
-          shadow.inset && 'inset',
-          shadow.offsetX,
-          shadow.offsetY,
-          shadow.blurRadius,
-          shadow.spreadRadius,
-          shadow.color,
-        ]
-          .filter(isDefined)
-          .join(' ')
-      })
-      .filter(s => s !== '')
-      .join(',')
-  }
+const boxShadowV=(...shadows: BoxShadowOptions[]): BoxShadowProperty=> {
+  return shadows
+    .map(shadow => {
+      return [
+        shadow.inset && 'inset',
+        shadow.offsetX,
+        shadow.offsetY,
+        shadow.blurRadius,
+        shadow.spreadRadius,
+        shadow.color,
+      ]
+        .filter(isDefined)
+        .join(' ')
+    })
+    .filter(s => s !== '')
+    .join(',')
+}
 
-)
+const backgroundS=(...shadows: BoxShadowOptions[])=> ({'boxShadow':boxShadowV(...shadows)})
+
+
+
+export const boxShadowValue= arrayWrapper(boxShadowV)
+export const boxShadow= arrayWrapper(backgroundS)
 

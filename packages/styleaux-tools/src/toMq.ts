@@ -10,8 +10,8 @@ import {
   cond,
   toKebabCase,
 } from '@roseys/futils'
-import {isString, isNumber, isArray} from 'typed-is'
-import {pxToEm} from './units/px-to'
+import { isString, isNumber, isArray } from 'typed-is'
+import { pxToEm } from './units/px-to'
 
 const sizingKeys = [
   'min',
@@ -137,8 +137,7 @@ const isAtRule = (selector: string): boolean => selector.indexOf('@') === 0
 export const isMediaReady = (selector: string): boolean =>
   selector.indexOf('(') === 0
 
-//const replaceShorthandKeys = mapKeys(x => propOr(x, x, nameLookups))
-const prefixMedia = (value: string | number) => `@media ${value}`
+const prefixMedia = (value: string) => `@media ${value}`
 
 export function toMq(
   input: toMqInputAsObj | Array<toMqInputAsObj> | number | string,
@@ -176,7 +175,7 @@ export function toMq(
 
   if (isString(input) || isNumber(input)) {
     return prefixMedia(
-      objParser({screen: true, minWidth: unitConverter(input)}),
+      objParser({ screen: true, minWidth: unitConverter(input) }),
     )
   }
 

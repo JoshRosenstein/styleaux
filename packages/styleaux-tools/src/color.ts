@@ -1,6 +1,6 @@
 // from https://github.com/typestyle/csx/blob/master/src/color.ts
 
-import {ColorProperty, NamedColor} from '@styleaux/csstype'
+import { ColorProperty, NamedColor } from '@styleaux/csstype'
 
 export const round = Math.round
 
@@ -134,7 +134,7 @@ function convertHelper(
   helper: ColorHelper | any,
   forceAlpha?: boolean,
 ): ColorHelper {
-  const {f: fromFormat, r, g, b, a} = helper
+  const { f: fromFormat, r, g, b, a } = helper
   const newAlpha = forceAlpha === undefined ? helper.o : forceAlpha
   if (fromFormat !== toFormat) {
     return converters[fromFormat + toFormat](r, g, b, a, newAlpha)
@@ -205,7 +205,7 @@ export class ColorHelper implements StringType<ColorProperty> {
    * Converts the stored color into string form (which is used by Free Style)
    */
   public toString(): ColorProperty {
-    const {o: hasAlpha, f: format, r, g, b, a} = this
+    const { o: hasAlpha, f: format, r, g, b, a } = this
 
     let fnName: string
     let params: (number | string)[]
@@ -281,15 +281,15 @@ export class ColorHelper implements StringType<ColorProperty> {
   }
 
   public blue(): number {
-    return (this.f === RGB ?this: this.toRGB()).b
+    return (this.f === RGB ? this : this.toRGB()).b
   }
 
   public hue(): number {
-    return (this.f === HSL ?this: this.toHSL()).r
+    return (this.f === HSL ? this : this.toHSL()).r
   }
 
   public saturation(): number {
-    return (this.f === HSL ?this: this.toHSL()).g
+    return (this.f === HSL ? this : this.toHSL()).g
   }
 
   public lightness(): number {
@@ -303,12 +303,12 @@ export class ColorHelper implements StringType<ColorProperty> {
   public opacity(): number {
     return this.a
   }
-/**
- * Decreases the opacity of a color. Its range for the amount is between 0 to 1.
- *
- *
- *
- */
+  /**
+   * Decreases the opacity of a color. Its range for the amount is between 0 to 1.
+   *
+   *
+   *
+   */
   public transparentize(percent: string | number): ColorHelper {
     return this.fade(percent)
   }
@@ -631,13 +631,13 @@ function parseColorFunction(colorString: string): ColorHelper | undefined {
   return new ColorHelper(type, r, g, b, a, hasAlpha)
 }
 
- const parseNumberCode = (a: number) => {
+const parseNumberCode = (a: number) => {
   const r = (a >> 16) & 0xff
   const b = (a >> 8) & 0xff
   const g = a & 0xff
   return new ColorHelper(RGB, r, b, g, 1, false)
 }
-type NC=Record<string,number> & {[K in Exclude<NamedColor, 'transparent'>]: number}
+type NC = Record<string, number> & { [K in Exclude<NamedColor, 'transparent'>]: number }
 
 const NAMED_COLORS: NC = {
   aliceblue: 0xf0f8ff,

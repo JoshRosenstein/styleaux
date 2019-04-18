@@ -1,4 +1,4 @@
-import {pickKeys,allowKeys,inList,pluckKeys,disallowKeys} from '../filter-props'
+import {pickKeys,allowKeys,inList,pluckKeys,disallowKeys} from '..'
 
 test('inList',()=>{
   const props={a:1,b:2,c:3,d:4}

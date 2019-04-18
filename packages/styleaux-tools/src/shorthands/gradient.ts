@@ -2,14 +2,14 @@
  * Gradient helper functions
  */
 
-import { commaSeparatedList, spaceSeparatedList } from "./value-helpers";
+import { commaSeparatedList, spaceSeparatedList } from "../helpers";
 
 
   export interface GradientStep {
     position: string;
     color: string;
   }
-  export const Gradientstep = (color: string, position: string): GradientStep => ({ position, color });
+  export const gradientStep = (color: string, position: string): GradientStep => ({ position, color });
 
   export interface GradientLinearProps {
     direction: string;

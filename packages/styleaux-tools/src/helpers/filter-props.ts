@@ -1,9 +1,4 @@
-/**
- * `Omit<P, K>` removes the keys in K from type T
- */
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-
-export type PickFromString<T, K extends string> = Pick<T, Extract<K,keyof T>>
+import {Omit} from 'simplyTyped'
 
 /**
  * `inList` accepts a list of `values` and returns a function that accepts

@@ -1,13 +1,7 @@
 import {px} from '../units'
-import {OverflowProperty,Box,MaxHeightProperty,WhiteSpaceProperty} from '@styleaux/csstype'
+import {PickCSSProps,PickCSSPropsPartial} from '@styleaux/types'
+export interface MaxLines extends PickCSSProps<'overflow' | 'boxSizing' | 'maxHeight'>, PickCSSPropsPartial<'whiteSpace'> {}
 
-
-export interface MaxLines {
-  overflow: OverflowProperty;
-  boxSizing: Box;
-  maxHeight: MaxHeightProperty<string>;
-  whiteSpace?: WhiteSpaceProperty;
-}
 
 export function applyMaxLines(lines: number, lineHeight: number): MaxLines {
   return {
@@ -17,3 +11,5 @@ export function applyMaxLines(lines: number, lineHeight: number): MaxLines {
       whiteSpace: lines === 1 ? "nowrap" : undefined,
   };
 }
+
+

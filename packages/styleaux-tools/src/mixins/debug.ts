@@ -1,19 +1,16 @@
 import {
-  ColorProperty,
-  OutlineProperty,
   BoxShadowProperty,
   BackgroundPositionProperty,
   BackgroundImageProperty,
   BackgroundSizeProperty,
   BackgroundColorProperty,
 } from '@styleaux/csstype'
-import {important} from '../important'
+import {important} from '../wrappers'
+import {PickCSSProps} from '@styleaux/types'
 
-export type DebugProps = {
-  color: ColorProperty
-  backgroundColor: BackgroundColorProperty
-  outline: OutlineProperty<string>
-}
+export interface DebugProps extends PickCSSProps<'color' | 'backgroundColor' | 'outline'> {}
+
+
 
 export type Debug = {
   backgroundPosition: BackgroundPositionProperty
@@ -26,13 +23,14 @@ export type Debug = {
 /**
  * Outlines all elements to debug CSS
  */
-export function debug(config?: DebugProps): Debug {
-  const {color, backgroundColor, outline} = {
-    color: '#66BBFF',
-    backgroundColor: 'hsla(210, 100%,50%, 0.5)',
-    outline: '0.125rem solid rgba(102,187,255,0.5)',
-    ...config,
-  }
+export function debug(
+  {
+  color= '#66BBFF',
+  backgroundColor= 'hsla(210, 100%,50%, 0.5)',
+  outline= '0.125rem solid rgba(102,187,255,0.5)'
+
+}:Partial<DebugProps>= {}): Debug {
+
   return {
     backgroundPosition: 'top left',
     backgroundImage:
@@ -47,3 +45,4 @@ export function debug(config?: DebugProps): Debug {
     },
   }
 }
+
