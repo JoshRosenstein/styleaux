@@ -1,13 +1,8 @@
+
+
 module.exports = {
-  transform: {
-    '\\.ts$': 'ts-jest',
-  },
-  watchPlugins: ['jest-watch-lerna-packages'],
-  testEnvironment: 'node',
-  collectCoverageFrom: ['{src}/**/*.js'],
-  //  modulePathIgnorePatterns: ['/__fixtures__/'],
-  // roots: ['<rootDir>/packages'],
-  //testRunner: 'jest-circus/runner',
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  testRegex: '((\\.|/)(test|spec))\\.ts?$',
+  preset: '@roseys/jest-preset',
+  watchPlugins: ["jest-watch-select-projects"],
+  projects: [ "<rootDir>/packages/*"],
 }
+

@@ -1,0 +1,33 @@
+{
+  "name": "@styleaux/tools",
+  "version": "0.0.0-beta.0",
+  "author": "Joshua Rosenstein",
+  "license": "MIT",
+  "source": "dist-src/index.js",
+  "types": "dist-src/index.d.ts",
+  "main": "dist-node/index.js",
+  "module": "dist-web/index.js",
+  "sideEffects": "false",
+  "files": [
+    "dist-*/",
+    "assets/",
+    "bin/"
+  ],
+  "scripts": {
+    "build:src": "tsc -d --declarationDir ./dist-src --outDir ./dist-src",
+    "build:debug": "rimraf dist-debug && tsc -p tsconfig.debug.json",
+    "build:bundles": "rollup -c",
+    "build": "yarn clean && yarn build:src && yarn build:bundles",
+    "clean": "rimraf dist-*/",
+    "test": "jest"
+  },
+  "peerDependencies": {
+    "@styleaux/csstype": "^0.0.0-beta.0",
+    "@roseys/futils": "^2.1.4",
+    "typed-is": "^1.0.4"
+  },
+  "devDependencies":{
+    "@roseys/eslint-config": "^1.0.3",
+    "@roseys/csstype":"^2.6.9-beta.0"
+  }
+}

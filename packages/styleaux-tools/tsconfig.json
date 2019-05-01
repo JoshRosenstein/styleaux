@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "declaration": true,
+    "skipLibCheck": true,"isolatedModules": false},
+  "include": ["src/**/*.ts"],
+  "exclude": [
+    "dist-*/",
+    "node_modules",
+    "__tests__",
+    "**/__tests__/**",
+    "**/*.spec.ts",
+    "**/*.test.ts",
+  ]
+}
+

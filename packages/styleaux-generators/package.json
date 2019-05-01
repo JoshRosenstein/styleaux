@@ -1,0 +1,29 @@
+{
+  "name": "@styleaux/generators",
+  "version": "0.0.0-beta.0",
+  "author": "Joshua Rosenstein",
+  "license": "MIT",
+  "source": "dist-src/index.js",
+  "types": "dist-types/index.d.ts",
+  "main": "dist-node/index.js",
+  "module": "dist-web/index.js",
+  "sideEffects": "false",
+  "files": [
+    "dist-*/",
+    "assets/",
+    "bin/"
+  ],
+  "scripts": {
+    "build:src": "tsc -d --declarationDir ./dist-types --outDir ./dist-src",
+    "build:bundles": "rollup -c",
+    "build": "yarn clean && yarn build:src && yarn build:bundles",
+    "clean": "rimraf dist-*/",
+    "test": "jest"
+  },
+  "dependencies": {
+    "chroma-js": "^2.0.3"
+  },
+  "devDependencies": {
+    "@types/chroma-js": "^1.4.1"
+  }
+}

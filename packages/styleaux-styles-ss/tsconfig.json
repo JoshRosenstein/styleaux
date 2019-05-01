@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "strict": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": [
+    "dist-*/",
+    "node_modules",
+    "__tests__",
+    "**/__tests__/**",
+    "**/__testutils__/**/*",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
+}

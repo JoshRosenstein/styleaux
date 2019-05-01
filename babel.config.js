@@ -1,32 +1,27 @@
-module.exports = function babelConfig(api) {
-  api.cache(true)
-  return {
-    presets: [
-      [
-        '@babel/preset-env',
-        {
-          modules: false,
-        },
-      ],
-      '@babel/preset-react',
-      '@babel/preset-flow',
-    ],
-    plugins: ['@babel/plugin-proposal-class-properties'],
-    env: {
-      test: {
-        presets: [
-          '@babel/preset-env',
-          '@babel/preset-react',
-          '@babel/preset-flow',
-        ],
-      },
-      docz: {
-        presets: [
-          '@babel/preset-env',
-          '@babel/preset-react',
-          '@babel/preset-flow',
-        ],
-      },
-    },
+'use strict'
+
+module.exports = api => {
+  const isTest = api.env('test')
+
+  api.cache(() => JSON.stringify({isTest}))
+
+  const presets = ['@babel/react', '@babel/typescript']
+  const plugins = []
+
+  if (isTest) {
+    presets.push(['@babel/env', {targets: {node: true}}])
+  } else {
+    // plugins.push([
+    //   ('transform-module-imports',
+    //   {
+    //     'typed-is': {
+    //       // eslint-disable-next-line no-template-curly-in-string
+    //       transform: 'typed-is/lib/${member}',
+    //       preventFullImport: true,
+    //     },
+    //   }),
+    // ])
   }
+
+  return {presets, plugins}
 }

@@ -1,23 +1,12 @@
 module.exports = {
-  extends: ['plugin:import/errors', 'prettier'],
-  plugins: ['import', 'prettier', 'babel'],
-  parser: 'babel-eslint',
-
+  extends: '@roseys/eslint-config',
+  env: {
+    browser: true,
+    node: true,
+    es6: true,
+  },
   rules: {
-    'arrow-body-style': 2,
-    'import/no-duplicates': 2,
-    'import/order': 0,
-    'no-console': 1,
-    'no-unused-vars': 2,
-    'prettier/prettier': [
-      2,
-      {
-        bracketSpacing: false,
-        printWidth: 80,
-        singleQuote: true,
-        semi: false,
-        trailingComma: 'all',
-      },
-    ],
+    strict: [0, 'safe'],
+    'no-console': 0,
   },
 }

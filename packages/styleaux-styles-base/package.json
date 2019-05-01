@@ -1,0 +1,53 @@
+{
+  "name": "@styleaux/styles-base",
+  "version": "0.0.0-beta.0",
+  "author": "Joshua Rosenstein",
+  "license": "MIT",
+  "source": "dist-src/index.js",
+  "types": "dist-types/index.d.ts",
+  "main": "dist-node/index.js",
+  "module": "dist-web/index.js",
+  "sideEffects": "false",
+  "files": [
+    "dist-*/",
+    "assets/",
+    "bin/"
+  ],
+  "scripts": {
+    "build:src": "tsc -d --declarationDir ./dist-types --outDir ./dist-src",
+    "build:types": "tsc -d --emitDeclarationOnly --declarationDir ./dist-types",
+    "build:bundles": "rollup -c",
+    "build": "yarn clean && yarn build:src && yarn build:bundles ",
+    "clean": "rimraf dist-*/",
+    "test": "cd ../.. & yarn run test styles-base",
+    "typedoc": "typedoc --options typedoc.ts",
+    "generate": "rimraf mdn && ts-node --project tsconfig.node.json generateMDN.ts"
+  },
+  "dependencies": {
+
+  },
+  "peerDependencies": {
+    "@styleaux/core": "^1.9.0-beta.0",
+    "@styleaux/csstype": "^0.0.0-beta.0"
+  },
+  "devDependencies": {
+    "@styleaux/core": "^1.9.0-beta.0",
+    "typed-is": "^1.0.4",
+    "@roseys/futils": "^2.1.4",
+    "@styleaux/csstype": "^0.0.0-beta.0",
+    "@roseys/eslint-config": "^1.0.4",
+    "@types/cheerio": "^0.22.11",
+    "@types/chroma-js": "^1.4.1",
+    "@types/cli-progress": "^1.8.1",
+    "@types/node": "^11.12.0",
+    "@types/turndown": "^5.0.0",
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "mdn-browser-compat-data": "^0.0.73",
+    "mdn-data": "git+https://github.com/mdn/data.git#9ec55b3a1f609f2e4dd5ec6603fe24e27c28e9a4",
+    "ts-node": "^8.0.1",
+    "turndown": "^5.0.1",
+    "typedoc": "^0.14.2",
+    "typedoc-plugin-markdown": "^1.1.27"
+  }
+}
