@@ -6,10 +6,10 @@
  * @param fn A function accepting an argument tuple/array `A` and returning a value of type `R`
  */
 
-const ensureArray=v=>Array.isArray(v)?v:[v]
+const ensureArray = (v) => (Array.isArray(v) ? v : [v]);
 export const arrayWrapper = <A extends T[], T, R>(fn: (...args: A) => R) =>
   ((...args: [A] | A) =>
     fn(...(args.length === 1 ? (ensureArray(args[0]) as A) : (args as A)))) as {
     (...values: A): R;
-    (values: A | A[number] ): R;
+    (values: A | A[number]): R;
   };

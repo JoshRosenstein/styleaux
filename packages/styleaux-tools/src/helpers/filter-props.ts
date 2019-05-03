@@ -1,4 +1,4 @@
-import {Omit} from 'simplyTyped'
+import { Omit } from 'simplyTyped';
 
 /**
  * `inList` accepts a list of `values` and returns a function that accepts
@@ -58,8 +58,8 @@ export const pickKeys = <
   ...keys: KAll
 ) => (props: P): Pick<P, K> => {
   const allowKeyFilter = allowKeys<P, K>(...keys);
-  const o = {} as Pick<P, K>;
-  const existingKeys = Object.keys(props) as Array<keyof P>;
+  const o: Pick<P, K> = <any>{};
+  const existingKeys = Object.keys(props) as (keyof P)[];
   for (const key of existingKeys) {
     if (allowKeyFilter(key)) {
       o[key as K] = props[key as K];
@@ -67,6 +67,8 @@ export const pickKeys = <
   }
   return o;
 };
+
+const getKeys = <T extends object>(v: T): (keyof T)[] => <any>Object.keys(v);
 
 /**
  * Accepts a list of keys `K` of `P` to pluck/omit and returns a function that
@@ -81,8 +83,8 @@ export const pluckKeys = <
   ...keys: KAll
 ) => (props: P): Omit<P, K> => {
   const omitKeyFilter = disallowKeys<P, K>(...keys);
-  const o = {} as Omit<P, K>;
-  const existingKeys = Object.keys(props) as Array<keyof P>;
+  const o: any = {};
+  const existingKeys = getKeys(props); //Object.keys(props)[];
   for (const key of existingKeys) {
     if (omitKeyFilter(key)) {
       o[key as Exclude<keyof P, K>] = props[key as Exclude<keyof P, K>];

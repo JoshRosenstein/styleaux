@@ -1,5 +1,5 @@
-
-export * from './directionalProperty'
-export * from './gradient'
-export * from './margin'
-export * from './background'
+export * from './directionalProperty';
+export * from './gradient';
+export * from './margin';
+export * from './background';
+export * from './boxShadowValue';

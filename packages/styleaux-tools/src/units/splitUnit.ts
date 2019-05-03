@@ -1,6 +1,4 @@
-
-import { isNumber } from "typed-is";
-
+import { isNumber } from 'typed-is';
 
 /**
 * parses input by prefix unit value if any.
@@ -13,15 +11,17 @@ console.log(splitUnit("-10px"));
 console.log(splitUnit("a10%"));
 // {prefix: "a", value: 10, unit: "%"}
 */
-export function splitUnit(input: string | number): {prefix: string, unit: string, value: number} {
-  if(isNumber(input)){
-    return { prefix: "", unit: "", value: input }
+export function splitUnit(
+  input: string | number,
+): { prefix: string; unit: string; value: number } {
+  if (isNumber(input)) {
+    return { prefix: '', unit: '', value: input };
   }
 
   const matches = /^([^\d|e|\-|\+]*)((?:\d|\.|-|e-|e\+)+)(\S*)$/g.exec(input);
 
   if (!matches) {
-    return { prefix: "", unit: "", value: NaN };
+    return { prefix: '', unit: '', value: NaN };
   }
   const prefix = matches[1];
   const value = matches[2];
@@ -29,4 +29,3 @@ export function splitUnit(input: string | number): {prefix: string, unit: string
 
   return { prefix, unit, value: parseFloat(value) };
 }
-

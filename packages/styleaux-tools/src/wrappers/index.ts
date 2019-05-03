@@ -2,8 +2,10 @@
  * Returns the value with !important on the end.
  */
 export function important(val: number): string;
-export function important<T extends string | number>(val: T): Extract<T,string>
-export function important<T extends string >(val: T): T
+export function important<T extends string | number>(
+  val: T,
+): Extract<T, string>;
+export function important<T extends string>(val: T): T;
 export function important(val: number | string): string {
   if (!val && val !== 0) {
     return '';
@@ -25,7 +27,6 @@ export function url(val: string): string {
 export function calc(exp: string): string {
   return `calc(${exp})`;
 }
-
 
 /**
  * Returns the value with '' around it.  Any 's will be escaped \' in the output

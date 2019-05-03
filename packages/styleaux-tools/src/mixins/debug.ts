@@ -1,36 +1,33 @@
 import {
-  BoxShadowProperty,
-  BackgroundPositionProperty,
-  BackgroundImageProperty,
-  BackgroundSizeProperty,
   BackgroundColorProperty,
-} from '@styleaux/csstype'
-import {important} from '../wrappers'
-import {PickCSSProps} from '@styleaux/types'
+  BackgroundImageProperty,
+  BackgroundPositionProperty,
+  BackgroundSizeProperty,
+  BoxShadowProperty,
+} from '@styleaux/csstype';
+import { important } from '../wrappers';
+import { PickCSSProps } from '@styleaux/types';
 
-export interface DebugProps extends PickCSSProps<'color' | 'backgroundColor' | 'outline'> {}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface DebugProps
+  extends PickCSSProps<'color' | 'backgroundColor' | 'outline'> {}
 
-
-
-export type Debug = {
-  backgroundPosition: BackgroundPositionProperty
-  backgroundImage: BackgroundImageProperty
-  backgroundSize: BackgroundSizeProperty
-  backgroundColor: BackgroundColorProperty
-  '*:not(path):not(g)': DebugProps & {boxShadow: BoxShadowProperty}
+export interface Debug {
+  backgroundPosition: BackgroundPositionProperty;
+  backgroundImage: BackgroundImageProperty;
+  backgroundSize: BackgroundSizeProperty;
+  backgroundColor: BackgroundColorProperty;
+  '*:not(path):not(g)': DebugProps & { boxShadow: BoxShadowProperty };
 }
 
 /**
  * Outlines all elements to debug CSS
  */
-export function debug(
-  {
-  color= '#66BBFF',
-  backgroundColor= 'hsla(210, 100%,50%, 0.5)',
-  outline= '0.125rem solid rgba(102,187,255,0.5)'
-
-}:Partial<DebugProps>= {}): Debug {
-
+export function debug({
+  color = '#66BBFF',
+  backgroundColor = 'hsla(210, 100%,50%, 0.5)',
+  outline = '0.125rem solid rgba(102,187,255,0.5)',
+}: Partial<DebugProps> = {}): Debug {
   return {
     backgroundPosition: 'top left',
     backgroundImage:
@@ -43,6 +40,5 @@ export function debug(
       outline: important(outline),
       boxShadow: important('none'),
     },
-  }
+  };
 }
-

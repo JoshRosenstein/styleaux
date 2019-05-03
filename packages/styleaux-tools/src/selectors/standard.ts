@@ -1,17 +1,17 @@
 /** No selector / default styles */
-export const This = "&";
+export const This = '&';
 
 /** All */
-export const All = "*";
+export const All = '*';
 
 /** Joins up CSS selectors, so that any of them has to match */
 export function Or(first: string, ...rest: string[]) {
-  return [first, ...rest].join(", ");
+  return [first, ...rest].join(', ');
 }
 
 /** Joins up CSS selectors which all need to match */
 export function And(first: string, ...rest: string[]) {
-  return [first, ...rest].join("");
+  return [first, ...rest].join('');
 }
 
 /** Specific HTML element */
@@ -29,7 +29,7 @@ export function Class(cls: string) {
   return `.${cls}`;
 }
 
-const ArgHelper=(...args:[] | [string] | [string, string])=>{
+const ArgHelper = (...args: [] | [string] | [string, string]) => {
   let parent: string;
   let children: string;
   if (args.length === 0) {
@@ -37,20 +37,19 @@ const ArgHelper=(...args:[] | [string] | [string, string])=>{
     children = All;
   } else if (args.length === 1) {
     parent = This;
-    children = args[0]!;
+    children = args[0];
   } else {
-    parent = args[0]!;
-    children = args[1]!;
+    parent = args[0];
+    children = args[1];
   }
-  return [parent,children]
-
-}
+  return [parent, children];
+};
 /** Children */
 export function Children(): string;
 export function Children(children: string): string;
 export function Children(parent: string, children: string): string;
 export function Children(...args: [] | [string] | [string, string]): string {
- const [parent,children]=ArgHelper(...args)
+  const [parent, children] = ArgHelper(...args);
   return `${parent} ${children}`;
 }
 
@@ -61,7 +60,7 @@ export function DirectChildren(parent: string, children: string): string;
 export function DirectChildren(
   ...args: [] | [string] | [string, string]
 ): string {
-  const [parent,children]=ArgHelper(...args)
+  const [parent, children] = ArgHelper(...args);
   return `${parent} > ${children}`;
 }
 
@@ -69,12 +68,12 @@ export function ImmediatelyFollowing(): string;
 export function ImmediatelyFollowing(followingElement: string): string;
 export function ImmediatelyFollowing(
   precedingElement: string,
-  followingElement: string
+  followingElement: string,
 ): string;
 export function ImmediatelyFollowing(
   ...args: [] | [string] | [string, string]
 ): string {
-  const [precedingElement,followingElement]=ArgHelper(...args)
+  const [precedingElement, followingElement] = ArgHelper(...args);
   return `${precedingElement} + ${followingElement}`;
 }
 
@@ -82,10 +81,10 @@ export function Following(): string;
 export function Following(followingElement: string): string;
 export function Following(
   precedingElement: string,
-  followingElement: string
+  followingElement: string,
 ): string;
 export function Following(...args: [] | [string] | [string, string]): string {
-  const [precedingElement,followingElement]=ArgHelper(...args)
+  const [precedingElement, followingElement] = ArgHelper(...args);
   return `${precedingElement} ~ ${followingElement}`;
 }
 
@@ -99,7 +98,7 @@ export function HasAttributeWithValue(name: string, value: string) {
 
 export function HasAttributeContainingWord(
   name: string,
-  containedWord: string
+  containedWord: string,
 ) {
   return `[${name}~=${containedWord}]`;
 }

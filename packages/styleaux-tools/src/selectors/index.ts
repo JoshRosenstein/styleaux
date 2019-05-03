@@ -1,2 +1,2 @@
-export * from './pseudo'
-export * from './standard'
+export * from './pseudo';
+export * from './standard';
