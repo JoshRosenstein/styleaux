@@ -1,5 +1,5 @@
-import {getDefault} from './getDefault'
-import {MEDIA_KEY, DEFAULT_MEDIA_KEY, IConstants} from '../constants'
+import { getDefault } from './getDefault';
+import { MEDIA_KEY, DEFAULT_MEDIA_KEY, IConstants } from '../constants';
 
 /**
  * Gets props.theme[DEFAULT_KEY][MEDIA_KEY]
@@ -8,7 +8,7 @@ import {MEDIA_KEY, DEFAULT_MEDIA_KEY, IConstants} from '../constants'
  */
 
 export const getDefaultMedia = (props: any): IConstants['MEDIA_KEY'] =>
-  getDefault(MEDIA_KEY, DEFAULT_MEDIA_KEY)(props)
+  getDefault(MEDIA_KEY, DEFAULT_MEDIA_KEY)(props);
 
 //const t = getDefaultMedia({theme: {default: {media: DEFAULT_MEDIA_KEY}}})
 

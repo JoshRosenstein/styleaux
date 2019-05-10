@@ -1,6 +1,6 @@
-import { ColorProperty } from '@styleaux/csstype';
+import { ColorProperty ,BackgroundColorProperty} from '@styleaux/csstype';
 
-import { style, StyleOptions, styler, StylerOptions } from '../../';
+import { style, StyleOptions, styler, StylerOptions ,combineStyles} from '../../';
 
 const COLOR = 'color' as 'color'
 export { ColorProperty }
@@ -13,7 +13,7 @@ export interface ColorProps<T = ColorProperty> {
   [COLOR]: T;
 }
 
-export const createColor = <
+export const createTextColor = <
   T = ColorProperty,
   Media = never,
   Theme = never,
@@ -26,10 +26,39 @@ export const createColor = <
     transformValue,
   })
 
-export const createColorRule = <T = ColorProperty, P = unknown>(
+export const createTextColorRule = <T = ColorProperty, P = unknown>(
   transformer?: StylerOptions<P, T>['getValue'],
 ) => styler<T, P>({ cssProp: COLOR, getValue: transformer })
 
-export const color = createColor()
+export const textColor = createTextColor({key: 'colors'})
 
-export const colorRule = createColorRule()
+export const textColorRule = createTextColorRule()
+
+export const createBackgroundColor = <Colors, Theme,Media>(themeKey='colors')=>style<{
+  bg?: Colors | BackgroundColorProperty
+  backgroundColor?: Colors | BackgroundColorProperty
+},Theme,Media>({
+  cssProp: 'backgroundColor',
+  prop: 'backgroundColor',
+  alias: 'bg',
+  key: themeKey,
+})
+
+export const backgroundColor = style<{
+  bg?: BackgroundColorProperty
+  backgroundColor?: BackgroundColorProperty
+}>({
+  cssProp: 'backgroundColor',
+  prop: 'backgroundColor',
+  alias: 'bg',
+  key: 'colors',
+})
+
+type ThemeColor<T,K>=K extends keyof T? keyof T[K] |ColorProperty : ColorProperty
+
+export const createColor = <Theme extends Record<string,any>=never,Media=never,
+ColorKey extends keyof Theme ='colors'>
+(themeKey='colors' as any)=>combineStyles(
+  createTextColor<ThemeColor<Theme,ColorKey>,Media,Theme>({key: themeKey}),
+  createBackgroundColor<ThemeColor<Theme,ColorKey>,Theme,Media>(themeKey)
+ )

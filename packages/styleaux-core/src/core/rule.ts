@@ -1,5 +1,5 @@
-import { styler, StylerOptions, GetValue } from './styler'
-
+import { Props } from './types';
+import { styler, StylerOptions, GetValue } from './styler';
 
 /**
  * Short wrapper for {@link styler}
@@ -16,10 +16,13 @@ import { styler, StylerOptions, GetValue } from './styler'
  *    display: rule('display')
  *  }))
  *
-*/
-export function rule<T, P extends {} = any>(cssProp: StylerOptions['cssProp'], getValue?: GetValue<T, P>) {
+ */
+export function rule<T, P extends Props>(
+  cssProp: StylerOptions<P, any>['cssProp'],
+  getValue?: GetValue<T, P>,
+) {
   return styler<T, P>({
     cssProp,
     getValue,
-  })
+  });
 }

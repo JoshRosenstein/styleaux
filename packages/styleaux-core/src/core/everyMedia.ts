@@ -1,12 +1,12 @@
-import { identity } from '@roseys/futils'
-import { isPlainObject } from 'typed-is'
-import { getThemeMedia } from '../getters'
-import { createWarnOnce, ensureMQ } from '../utils'
-import { Styles, CSSObj } from '../cssTypes'
+import { isPlainObject } from 'typed-is';
+import { identity } from '@roseys/futils';
+import { getThemeMedia } from '../getters';
+import { createWarnOnce, ensureMQ } from '../utils';
+import { Style, StyleValue } from '@styleaux/types';
 
-const warnOnce = createWarnOnce('everyMedia')
+const warnOnce = createWarnOnce('everyMedia');
 
-const has = (a: string[], b: string[]) => b.some(key => a.includes(key))
+const has = (a: string[], b: string[]) => b.some((key) => a.includes(key));
 //const identity = <T>(v: T) => v;
 
 /**
@@ -20,40 +20,38 @@ const has = (a: string[], b: string[]) => b.some(key => a.includes(key))
  *
  * @example
  *
-*/
-export function everyMedia<P, V extends Styles | { [mediaKeys: string]: CSSObj }>(
+ */
+export function everyMedia<P, V extends StyleValue | Style>(
   props: P,
   value: V,
-  wrapper: (input: Styles) => CSSObj = identity as any,
-): CSSObj {
-  const media = getThemeMedia(props)
+  wrapper: (input: StyleValue | Style) => Style = <any>identity,
+): Style {
+  const media = getThemeMedia(props);
 
   if (isPlainObject(value) && media) {
-
-    const mediaKeys = Object.keys(media)
-    const valueKeys = Object.keys(value)
+    const mediaKeys = Object.keys(media);
+    const valueKeys = Object.keys(value);
 
     if (has(mediaKeys, valueKeys)) {
-
       return valueKeys.reduce((acc, key) => {
         if (mediaKeys.includes(key)) {
-          const q = media[key]
-          const v = wrapper(value[key])
+          const q = media[key];
+          const v = wrapper(value[key]);
           if (!v) {
-            return acc
+            return acc;
           }
           if (q) {
-            acc[ensureMQ(q)] = v
-            return acc
+            acc[ensureMQ(q)] = v;
+            return acc;
           } else {
             /// handles is wrapper is a custom responsive generator
-            return Object.assign(acc, v)
+            return Object.assign(acc, v);
           }
         }
-        warnOnce(`Could not Find media for key %s`, key)
-        return acc
-      }, {})
+        warnOnce(`Could not Find media for key %s`, key);
+        return acc;
+      }, {});
     }
   }
-  return wrapper(value)
+  return wrapper(value);
 }

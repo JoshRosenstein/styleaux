@@ -1,81 +1,103 @@
-import { CSSObj } from '../cssTypes'
-import { mapObj, toArray } from '@roseys/futils'
-import { isFunction, isPlainObject, isNil, isNumeric, isArray } from 'typed-is'
-import { PropStyleFunc, PropStyleFuncArr, OmitTheme, CreateStylesValueGetter, WithTheme ,ExtractPrimitive} from './types'
-import { DEFAULT_MEDIA_KEY } from '../constants'
-import { getMedia, getThemeMedia, getDefaultMedia } from '../getters/index'
-import { createWarnOnce, ensureMQ } from '../utils'
+import { mapObj, toArray } from '@roseys/futils';
+import { DEFAULT_MEDIA_KEY } from '../constants';
+import { createWarnOnce, ensureMQ } from '../utils';
+import { Style, StyleResult, Nil } from '@styleaux/types';
+import { getDefaultMedia, getMedia, getThemeMedia } from '../getters/index';
+import { isArray, isFunction, isNil, isNumeric, isPlainObject } from 'typed-is';
+import {
+  CreateStylesValueGetterBoth,
+  ExtractPrimitive,
+  MediaKey,
+  OmitTheme,
+  Props,
+  PropStyleFunction,
+  PropStylesFunction,
+  WithTheme,
+} from './types';
 
-const warnOnce = createWarnOnce('createStyle')
+const warnOnce = createWarnOnce('createStyle');
 
-export enum CreateStyleKeys {
-  arg1 = 'style',
-  arg2 = 'staticOrStyleFunc',
-}
-
-
-
-type StyleInputValueFunction = CreateStylesValueGetter<any, any>
-
-type StyleInputValue =
-  | CSSObj
-  | StyleInputValueFunction
-  | StyleInputValueFunction[]
-
-// type CreateStyleMapValueTypeFunc<T, P> = ((
-//   input: Extract<T, boolean | string | number>,
-// ) => CSSObj) | ((
-//   input: Extract<T, boolean | string | number>,
-//   props: P
-// ) => CSSObj) |
-//   ((
-//     input: Extract<T, boolean | string | number>,
-//     props: P,
-//     mediaKey: MediaKey,
-//   ) => CSSObj)
-
-
-
-type MaybeArr<T> = T | T[]
+type MaybeArr<T> = T | T[];
 
 type StyleInputValueP<T, P> =
-  | CSSObj
-  | MaybeArr<CreateStylesValueGetter<T, P>>
+  | Style
+  | MaybeArr<CreateStylesValueGetterBoth<T, P>>;
 
+// Maybe shouldnt extract all primitives if prop value can be a nested object?
+type StyleInputFromProps<P> = OmitTheme<
+  { [K in keyof P]?: StyleInputValueP<NonNullable<ExtractPrimitive<P[K]>>, P> }
+>;
 
-type StyleInput = { [propKey: string]: StyleInputValue | undefined }
-
-type StyleInputFromProps<P> = OmitTheme<{ [K in keyof P]?: StyleInputValueP<NonNullable<ExtractPrimitive<P[K]>>, P> }>
-
-type Values<T extends object> = T[keyof T]
-
-export interface CreateStyles<
-  PROPS extends {} = any,
-  S extends StyleInput = StyleInputFromProps<PROPS>,
-  A2 = CSSObj | PropStyleFunc<PROPS> | PropStyleFuncArr<PROPS>
-  > {
-  (styles: S, staticOrStyleFunc?: A2): PropStyleFuncArr<PROPS>
-
-  [CreateStyleKeys.arg1]: S
-  [CreateStyleKeys.arg2]: A2
+export interface CreateStylesNonResponsive<P extends Props = Props> {
+  (
+    styles: StyleInputFromProps<P>,
+    staticOrStyleFunc?: Style | PropStyleFunction<P> | PropStylesFunction<P>,
+  ): PropStylesFunction<P>;
 }
 
-/**
- * Utility to cast all props as responsive
- */
-export interface CreateStylesResponsive<
-  PROPS extends {} = any,
+export interface CreateStyles<
+  PROPS extends Props = Props,
   Theme extends {} = never,
   Media extends {} = never,
-  P = WithTheme<PROPS, Theme, Media>,
-  S = StyleInputFromProps<P>,
+  PX = WithTheme<PROPS, Theme, Media>
+> {
+  (
+    styles: StyleInputFromProps<PROPS>,
+    staticOrStyleFunc?:
+      | Style
+      | PropStyleFunction<PX | PROPS>
+      | PropStylesFunction<PX | PROPS>,
+  ): PropStylesFunction<PX>;
+}
 
-  A2 = CSSObj | PropStyleFunc<P> | PropStyleFuncArr<P>
-  > {
-  (styles: S, staticOrStyleFunc?: A2): PropStyleFuncArr<P>
+export interface CreateCreateStyles<
+  Theme extends {} = never,
+  Media extends {} = never
+> {
+  <PROPS extends Props = Props, PX = WithTheme<PROPS, Theme, Media>>(
+    styles: StyleInputFromProps<PROPS>,
+    staticOrStyleFunc?:
+      | Style
+      | PropStyleFunction<PX | PROPS>
+      | PropStylesFunction<PX | PROPS>,
+  ): PropStylesFunction<PX>;
+}
 
-  [CreateStyleKeys.arg1]: S
-  [CreateStyleKeys.arg2]: A2
+function handleStyleReturn(
+  query: string | number | Nil,
+  style: Style | Nil,
+  mediaKey: string | false,
+): Style | Nil {
+  if (mediaKey && !query) {
+    warnOnce('Could not find mediaKey: ' + mediaKey);
+    return null;
+  }
+
+  return isNil(style) ? null : query ? { [ensureMQ(query)]: style } : style;
+}
+
+type AnyStyleF = (...args: any[]) => Style;
+
+function handleStyle(
+  style: Style | AnyStyleF,
+  input: boolean | StyleResult | AnyStyleF,
+  props: unknown,
+  mediaKey: MediaKey,
+): Style | Nil {
+  // selector
+  if (isFunction(input)) {
+    return input(
+      props,
+      (value) => handleStyle(style, value, props, mediaKey),
+      mediaKey,
+    );
+  }
+
+  if (isFunction(style)) {
+    return style(input, props, mediaKey);
+  }
+
+  return input === true ? style : null;
 }
 
 /**
@@ -94,62 +116,69 @@ export interface CreateStylesResponsive<
  * @example
  *
  *  const style=createStyles({
-  *    display: rule('display')
-  *  }))
-  *
+ *    display: rule('display')
+ *  }))
+ *
  */
+type StaticOrStyleFunc<P, PX> =
+  | Style
+  | PropStyleFunction<PX | P>
+  | PropStylesFunction<PX | P>;
 
 export function createStyles<
-  PROPS extends {} = any,
-  >(
-    styles: StyleInputFromProps<PROPS>,
-    staticOrStyleFunc?: CSSObj | PropStyleFunc<PROPS> | PropStyleFuncArr<PROPS>,
-): PropStyleFuncArr<PROPS> {
-  function getStyles(props: PROPS): CSSObj[] {
-    const media = getThemeMedia(props)
-    const defaultMediaKey = getDefaultMedia(props)
-    const mediaKeys = Object.keys(media)
-    let initial = isNil(staticOrStyleFunc)
+  P extends Props = Props,
+  Theme extends {} = never,
+  Media extends {} = never,
+  PX = WithTheme<P, Theme, Media>
+>(
+  styles: StyleInputFromProps<P>,
+  staticOrStyleFunc?: StaticOrStyleFunc<P, PX>,
+): PropStylesFunction<PX> {
+  function getStyles(props: PX): Style[] {
+    const media = getThemeMedia(props);
+    const defaultMediaKey = getDefaultMedia(props);
+    const mediaKeys = Object.keys(media);
+    let initial: Style[] = isNil(staticOrStyleFunc)
       ? []
       : isFunction(staticOrStyleFunc)
-        ? toArray(staticOrStyleFunc(props))
-        : (toArray(staticOrStyleFunc))
+      ? toArray(staticOrStyleFunc(props))
+      : toArray(staticOrStyleFunc);
 
-    function mapStyles(input: unknown, style: Values<typeof styles>, mediaKey?: string) {
-      const hasMediaKey =
-        Boolean(mediaKey) && mediaKey !== DEFAULT_MEDIA_KEY && mediaKey !== '0'
-      let mKey = mediaKey
-
-      if (hasMediaKey) {
-        if (isNumeric(mediaKey)) {
-          mKey = mediaKeys[Number(mediaKey)]
-        }
-      }
-
-      /// Only object literals can be responsive
+    function mapStyles(
+      input: boolean | StyleResult | AnyStyleF,
+      style: Style | AnyStyleF,
+      mediaKey: string = '',
+    ) {
+      /// Handling responsive ObjLit
       if (isPlainObject(input)) {
         return mapObj(input, (value, key) =>
           mapStyles(value, style, key as string),
-        )
+        );
       }
 
       /// Handling responsive Array
       if (isArray(input)) {
         return input.map((value, key) =>
           mapStyles(value, style, key.toString()),
-        )
+        );
       }
 
-      const query = getMedia(mKey || defaultMediaKey, media)
+      const hasMediaKey =
+        mediaKey && mediaKey !== DEFAULT_MEDIA_KEY && mediaKey !== '0';
 
-      if (hasMediaKey && !query) {
-        warnOnce('Could not find mediaKey: ' + mediaKey)
-        return undefined
+      let mKey = mediaKey;
+
+      if (hasMediaKey) {
+        if (isNumeric(mediaKey)) {
+          mKey = mediaKeys[mediaKey];
+        }
       }
-      // general prop style
-      const sty = handleStyle(style, input, props, mKey)
 
-      return query ? { [ensureMQ(query)]: sty } : sty
+      return handleStyleReturn(
+        getMedia(mKey || defaultMediaKey, media),
+        handleStyle(style, input, props, mKey),
+        hasMediaKey && mediaKey,
+      );
     }
 
     return Object.keys(styles).reduce(
@@ -158,28 +187,12 @@ export function createStyles<
           isNil(styleKey && props[styleKey])
             ? []
             : toArray(styles[styleKey]).map(
-              style => mapStyles(props[styleKey], style) || [],
-            ),
+                (style) => mapStyles(props[styleKey], style) || [],
+              ),
         ),
       initial,
-    )
+    );
   }
 
-  return Object.assign(getStyles, {
-    [CreateStyleKeys.arg1]: styles,
-    [CreateStyleKeys.arg2]: staticOrStyleFunc,
-  })
-}
-
-function handleStyle(style, input, props, mediaKey) {
-  // selector
-  if (isFunction(input)) {
-    return input(props, value => handleStyle(style, value, props, mediaKey))
-  }
-
-  if (isFunction(style)) {
-    return style(input, props, mediaKey)
-  }
-
-  return input === true ? style : null
+  return getStyles;
 }
