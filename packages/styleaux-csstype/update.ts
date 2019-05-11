@@ -12,10 +12,10 @@ import {
 } from './utils';
 
 async function update() {
-  if ((await spawnAsync('git', 'status', '--porcelain')) !== '') {
-    console.error('Your working directory needs to be clean!');
-    process.exit(1);
-  }
+  // if ((await spawnAsync('git', 'status', '--porcelain')) !== '') {
+  //   console.error('Your working directory needs to be clean!');
+  //   process.exit(1);
+  // }
 
   console.info('Check for updates...');
 

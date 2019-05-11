@@ -1,6 +1,6 @@
-import { BoxShadowProperty, ColorProperty } from '@styleaux/csstype';
-import { arrayWrapper } from '../helpers';
 import { isDefined } from 'typed-is';
+import { arrayWrapper } from '../helpers';
+import { BoxShadowProperty, ColorProperty } from '@styleaux/csstype';
 export interface BoxShadowOptions {
   /**
    * *The **`inset`** keyword changes the shadow to one inside the frame (as if the content was depressed inside the box). Inset shadows are drawn inside the border (even transparent ones), above the background, but below content.

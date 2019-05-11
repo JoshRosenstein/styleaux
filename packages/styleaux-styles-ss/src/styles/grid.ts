@@ -1,5 +1,9 @@
-import {createGap, createColumnGap, createRowGap} from '@styleaux/styles-base'
-import {px} from '../utils/px'
+import { px } from '../utils/px';
+import {
+  createGap,
+  createColumnGap,
+  createRowGap,
+} from '@styleaux/styles-base';
 
 export {
   gridColumn,
@@ -11,19 +15,19 @@ export {
   gridTemplateRows,
   gridTemplateAreas,
   gridArea,
-} from '@styleaux/styles-base'
+} from '@styleaux/styles-base';
 
 export const gridGap = createGap({
   key: 'space',
   transformValue: px,
-})
+});
 
 export const gridColumnGap = createColumnGap({
   key: 'space',
   transformValue: px,
-})
+});
 
 export const gridRowGap = createRowGap({
   key: 'space',
   transformValue: px,
-})
+});

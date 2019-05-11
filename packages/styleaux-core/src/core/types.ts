@@ -28,9 +28,7 @@ export type PropStyleFunc<P extends Props> =
   | ((props: P) => Nil)
   | ((props: P) => Style | Nil);
 
-export type PropStyleArrayFunc<P extends Props> = (
-  props: P,
-) => (Style | Nil)[] | Nil;
+export type PropStyleArrayFunc<P extends Props> = (props: P) => (Style | Nil)[];
 
 export type StyleArrayFunc<T = any> = (...args: T[]) => (Style | Nil)[] | Nil;
 export type StyleFunc<T = any> = (...args: T[]) => Style | Nil;

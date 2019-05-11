@@ -146,8 +146,11 @@ export type StandardLonghandProperties<TLength = StringHack | number> = {
   imageResolution?: ImageResolutionProperty,
   initialLetter?: InitialLetterProperty,
   inlineSize?: InlineSizeProperty<TLength>,
+  inset?: InsetProperty<TLength>,
+  insetBlock?: InsetBlockProperty<TLength>,
   insetBlockEnd?: InsetBlockEndProperty<TLength>,
   insetBlockStart?: InsetBlockStartProperty<TLength>,
+  insetInline?: InsetInlineProperty<TLength>,
   insetInlineEnd?: InsetInlineEndProperty<TLength>,
   insetInlineStart?: InsetInlineStartProperty<TLength>,
   isolation?: IsolationProperty,
@@ -158,6 +161,7 @@ export type StandardLonghandProperties<TLength = StringHack | number> = {
   letterSpacing?: LetterSpacingProperty<TLength>,
   lineBreak?: LineBreakProperty,
   lineHeight?: LineHeightProperty<TLength>,
+  lineHeightStep?: LineHeightStepProperty<TLength>,
   listStyleImage?: ListStyleImageProperty,
   listStylePosition?: ListStylePositionProperty,
   listStyleType?: ListStyleTypeProperty,
@@ -216,9 +220,7 @@ export type StandardLonghandProperties<TLength = StringHack | number> = {
   outlineWidth?: OutlineWidthProperty<TLength>,
   overflow?: OverflowProperty,
   overflowAnchor?: OverflowAnchorProperty,
-  overflowBlock?: OverflowBlockProperty,
   overflowClipBox?: OverflowClipBoxProperty,
-  overflowInline?: OverflowInlineProperty,
   overflowWrap?: OverflowWrapProperty,
   overflowX?: OverflowXProperty,
   overflowY?: OverflowYProperty,
@@ -547,7 +549,7 @@ export type VendorLonghandProperties<TLength = StringHack | number> = {
   WebkitJustifyContent?: JustifyContentProperty,
   WebkitLineBreak?: LineBreakProperty,
   WebkitMarginEnd?: MarginInlineEndProperty<TLength>,
-  WebkitMarginStart?: MarginInlineStartProperty<TLength>,
+  WebkitMarginStart?: MarginInlineEndProperty<TLength>,
   WebkitMaskAttachment?: WebkitMaskAttachmentProperty,
   WebkitMaskClip?: WebkitMaskClipProperty,
   WebkitMaskComposite?: WebkitMaskCompositeProperty,
@@ -594,6 +596,7 @@ export type VendorLonghandProperties<TLength = StringHack | number> = {
   WebkitUserModify?: WebkitUserModifyProperty,
   WebkitUserSelect?: UserSelectProperty,
   WebkitWritingMode?: WritingModeProperty,
+  WebkitmaskSize?: MaskSizeProperty<TLength>,
 };
 
 export type VendorShorthandProperties<TLength = StringHack | number> = {
@@ -608,7 +611,6 @@ export type VendorShorthandProperties<TLength = StringHack | number> = {
   msScrollLimit?: MsScrollLimitProperty,
   msScrollSnapX?: MsScrollSnapXProperty,
   msScrollSnapY?: MsScrollSnapYProperty,
-  OBorderImage?: BorderImageProperty,
   WebkitAnimation?: AnimationProperty,
   WebkitBorderBefore?: WebkitBorderBeforeProperty<TLength>,
   WebkitBorderImage?: BorderImageProperty,
@@ -641,8 +643,10 @@ export type ObsoleteProperties<TLength = StringHack | number> = {
   gridGap?: GridGapProperty<TLength>,
   gridRowGap?: GridRowGapProperty<TLength>,
   imeMode?: ImeModeProperty,
+  offsetBlock?: InsetBlockProperty<TLength>,
   offsetBlockEnd?: InsetBlockEndProperty<TLength>,
   offsetBlockStart?: InsetBlockStartProperty<TLength>,
+  offsetInline?: InsetInlineProperty<TLength>,
   offsetInlineEnd?: InsetInlineEndProperty<TLength>,
   offsetInlineStart?: InsetInlineStartProperty<TLength>,
   scrollSnapCoordinate?: ScrollSnapCoordinateProperty<TLength>,
@@ -660,6 +664,9 @@ export type ObsoleteProperties<TLength = StringHack | number> = {
   KhtmlBoxOrdinalGroup?: BoxOrdinalGroupProperty,
   KhtmlBoxOrient?: BoxOrientProperty,
   KhtmlBoxPack?: BoxPackProperty,
+  KhtmlLineBreak?: LineBreakProperty,
+  KhtmlOpacity?: OpacityProperty,
+  KhtmlUserSelect?: UserSelectProperty,
   MozBackgroundClip?: BackgroundClipProperty,
   MozBackgroundInlinePolicy?: BoxDecorationBreakProperty,
   MozBackgroundOrigin?: BackgroundOriginProperty,
@@ -709,6 +716,7 @@ export type ObsoleteProperties<TLength = StringHack | number> = {
   OAnimationPlayState?: AnimationPlayStateProperty,
   OAnimationTimingFunction?: AnimationTimingFunctionProperty,
   OBackgroundSize?: BackgroundSizeProperty<TLength>,
+  OBorderImage?: BorderImageProperty,
   OTransform?: TransformProperty,
   OTransition?: TransitionProperty,
   OTransitionDelay?: TransitionDelayProperty,
@@ -937,8 +945,11 @@ export type StandardLonghandPropertiesHyphen<TLength = StringHack | number> = {
   "image-resolution"?: ImageResolutionProperty,
   "initial-letter"?: InitialLetterProperty,
   "inline-size"?: InlineSizeProperty<TLength>,
+  inset?: InsetProperty<TLength>,
+  "inset-block"?: InsetBlockProperty<TLength>,
   "inset-block-end"?: InsetBlockEndProperty<TLength>,
   "inset-block-start"?: InsetBlockStartProperty<TLength>,
+  "inset-inline"?: InsetInlineProperty<TLength>,
   "inset-inline-end"?: InsetInlineEndProperty<TLength>,
   "inset-inline-start"?: InsetInlineStartProperty<TLength>,
   isolation?: IsolationProperty,
@@ -949,6 +960,7 @@ export type StandardLonghandPropertiesHyphen<TLength = StringHack | number> = {
   "letter-spacing"?: LetterSpacingProperty<TLength>,
   "line-break"?: LineBreakProperty,
   "line-height"?: LineHeightProperty<TLength>,
+  "line-height-step"?: LineHeightStepProperty<TLength>,
   "list-style-image"?: ListStyleImageProperty,
   "list-style-position"?: ListStylePositionProperty,
   "list-style-type"?: ListStyleTypeProperty,
@@ -1007,9 +1019,7 @@ export type StandardLonghandPropertiesHyphen<TLength = StringHack | number> = {
   "outline-width"?: OutlineWidthProperty<TLength>,
   overflow?: OverflowProperty,
   "overflow-anchor"?: OverflowAnchorProperty,
-  "overflow-block"?: OverflowBlockProperty,
   "overflow-clip-box"?: OverflowClipBoxProperty,
-  "overflow-inline"?: OverflowInlineProperty,
   "overflow-wrap"?: OverflowWrapProperty,
   "overflow-x"?: OverflowXProperty,
   "overflow-y"?: OverflowYProperty,
@@ -1338,7 +1348,7 @@ export type VendorLonghandPropertiesHyphen<TLength = StringHack | number> = {
   "-webkit-justify-content"?: JustifyContentProperty,
   "-webkit-line-break"?: LineBreakProperty,
   "-webkit-margin-end"?: MarginInlineEndProperty<TLength>,
-  "-webkit-margin-start"?: MarginInlineStartProperty<TLength>,
+  "-webkit-margin-start"?: MarginInlineEndProperty<TLength>,
   "-webkit-mask-attachment"?: WebkitMaskAttachmentProperty,
   "-webkit-mask-clip"?: WebkitMaskClipProperty,
   "-webkit-mask-composite"?: WebkitMaskCompositeProperty,
@@ -1385,6 +1395,7 @@ export type VendorLonghandPropertiesHyphen<TLength = StringHack | number> = {
   "-webkit-user-modify"?: WebkitUserModifyProperty,
   "-webkit-user-select"?: UserSelectProperty,
   "-webkit-writing-mode"?: WritingModeProperty,
+  "-webkitmask-size"?: MaskSizeProperty<TLength>,
 };
 
 export type VendorShorthandPropertiesHyphen<TLength = StringHack | number> = {
@@ -1399,7 +1410,6 @@ export type VendorShorthandPropertiesHyphen<TLength = StringHack | number> = {
   "-ms-scroll-limit"?: MsScrollLimitProperty,
   "-ms-scroll-snap-x"?: MsScrollSnapXProperty,
   "-ms-scroll-snap-y"?: MsScrollSnapYProperty,
-  "-o-border-image"?: BorderImageProperty,
   "-webkit-animation"?: AnimationProperty,
   "-webkit-border-before"?: WebkitBorderBeforeProperty<TLength>,
   "-webkit-border-image"?: BorderImageProperty,
@@ -1432,8 +1442,10 @@ export type ObsoletePropertiesHyphen<TLength = StringHack | number> = {
   "grid-gap"?: GridGapProperty<TLength>,
   "grid-row-gap"?: GridRowGapProperty<TLength>,
   "ime-mode"?: ImeModeProperty,
+  "offset-block"?: InsetBlockProperty<TLength>,
   "offset-block-end"?: InsetBlockEndProperty<TLength>,
   "offset-block-start"?: InsetBlockStartProperty<TLength>,
+  "offset-inline"?: InsetInlineProperty<TLength>,
   "offset-inline-end"?: InsetInlineEndProperty<TLength>,
   "offset-inline-start"?: InsetInlineStartProperty<TLength>,
   "scroll-snap-coordinate"?: ScrollSnapCoordinateProperty<TLength>,
@@ -1451,6 +1463,9 @@ export type ObsoletePropertiesHyphen<TLength = StringHack | number> = {
   "-khtml-box-ordinal-group"?: BoxOrdinalGroupProperty,
   "-khtml-box-orient"?: BoxOrientProperty,
   "-khtml-box-pack"?: BoxPackProperty,
+  "-khtml-line-break"?: LineBreakProperty,
+  "-khtml-opacity"?: OpacityProperty,
+  "-khtml-user-select"?: UserSelectProperty,
   "-moz-background-clip"?: BackgroundClipProperty,
   "-moz-background-inline-policy"?: BoxDecorationBreakProperty,
   "-moz-background-origin"?: BackgroundOriginProperty,
@@ -1500,6 +1515,7 @@ export type ObsoletePropertiesHyphen<TLength = StringHack | number> = {
   "-o-animation-play-state"?: AnimationPlayStateProperty,
   "-o-animation-timing-function"?: AnimationTimingFunctionProperty,
   "-o-background-size"?: BackgroundSizeProperty<TLength>,
+  "-o-border-image"?: BorderImageProperty,
   "-o-transform"?: TransformProperty,
   "-o-transition"?: TransitionProperty,
   "-o-transition-delay"?: TransitionDelayProperty,
@@ -1731,8 +1747,11 @@ export type StandardLonghandPropertiesFallback<TLength = StringHack | number> = 
   imageResolution?: ImageResolutionProperty | ImageResolutionProperty[],
   initialLetter?: InitialLetterProperty | InitialLetterProperty[],
   inlineSize?: InlineSizeProperty<TLength> | InlineSizeProperty<TLength>[],
+  inset?: InsetProperty<TLength> | InsetProperty<TLength>[],
+  insetBlock?: InsetBlockProperty<TLength> | InsetBlockProperty<TLength>[],
   insetBlockEnd?: InsetBlockEndProperty<TLength> | InsetBlockEndProperty<TLength>[],
   insetBlockStart?: InsetBlockStartProperty<TLength> | InsetBlockStartProperty<TLength>[],
+  insetInline?: InsetInlineProperty<TLength> | InsetInlineProperty<TLength>[],
   insetInlineEnd?: InsetInlineEndProperty<TLength> | InsetInlineEndProperty<TLength>[],
   insetInlineStart?: InsetInlineStartProperty<TLength> | InsetInlineStartProperty<TLength>[],
   isolation?: IsolationProperty | IsolationProperty[],
@@ -1743,6 +1762,7 @@ export type StandardLonghandPropertiesFallback<TLength = StringHack | number> = 
   letterSpacing?: LetterSpacingProperty<TLength> | LetterSpacingProperty<TLength>[],
   lineBreak?: LineBreakProperty | LineBreakProperty[],
   lineHeight?: LineHeightProperty<TLength> | LineHeightProperty<TLength>[],
+  lineHeightStep?: LineHeightStepProperty<TLength> | LineHeightStepProperty<TLength>[],
   listStyleImage?: ListStyleImageProperty | ListStyleImageProperty[],
   listStylePosition?: ListStylePositionProperty | ListStylePositionProperty[],
   listStyleType?: ListStyleTypeProperty | ListStyleTypeProperty[],
@@ -1801,9 +1821,7 @@ export type StandardLonghandPropertiesFallback<TLength = StringHack | number> = 
   outlineWidth?: OutlineWidthProperty<TLength> | OutlineWidthProperty<TLength>[],
   overflow?: OverflowProperty | OverflowProperty[],
   overflowAnchor?: OverflowAnchorProperty | OverflowAnchorProperty[],
-  overflowBlock?: OverflowBlockProperty | OverflowBlockProperty[],
   overflowClipBox?: OverflowClipBoxProperty | OverflowClipBoxProperty[],
-  overflowInline?: OverflowInlineProperty | OverflowInlineProperty[],
   overflowWrap?: OverflowWrapProperty | OverflowWrapProperty[],
   overflowX?: OverflowXProperty | OverflowXProperty[],
   overflowY?: OverflowYProperty | OverflowYProperty[],
@@ -2132,7 +2150,7 @@ export type VendorLonghandPropertiesFallback<TLength = StringHack | number> = {
   WebkitJustifyContent?: JustifyContentProperty | JustifyContentProperty[],
   WebkitLineBreak?: LineBreakProperty | LineBreakProperty[],
   WebkitMarginEnd?: MarginInlineEndProperty<TLength> | MarginInlineEndProperty<TLength>[],
-  WebkitMarginStart?: MarginInlineStartProperty<TLength> | MarginInlineStartProperty<TLength>[],
+  WebkitMarginStart?: MarginInlineEndProperty<TLength> | MarginInlineEndProperty<TLength>[],
   WebkitMaskAttachment?: WebkitMaskAttachmentProperty | WebkitMaskAttachmentProperty[],
   WebkitMaskClip?: WebkitMaskClipProperty | WebkitMaskClipProperty[],
   WebkitMaskComposite?: WebkitMaskCompositeProperty | WebkitMaskCompositeProperty[],
@@ -2179,6 +2197,7 @@ export type VendorLonghandPropertiesFallback<TLength = StringHack | number> = {
   WebkitUserModify?: WebkitUserModifyProperty | WebkitUserModifyProperty[],
   WebkitUserSelect?: UserSelectProperty | UserSelectProperty[],
   WebkitWritingMode?: WritingModeProperty | WritingModeProperty[],
+  WebkitmaskSize?: MaskSizeProperty<TLength> | MaskSizeProperty<TLength>[],
 };
 
 export type VendorShorthandPropertiesFallback<TLength = StringHack | number> = {
@@ -2193,7 +2212,6 @@ export type VendorShorthandPropertiesFallback<TLength = StringHack | number> = {
   msScrollLimit?: MsScrollLimitProperty | MsScrollLimitProperty[],
   msScrollSnapX?: MsScrollSnapXProperty | MsScrollSnapXProperty[],
   msScrollSnapY?: MsScrollSnapYProperty | MsScrollSnapYProperty[],
-  OBorderImage?: BorderImageProperty | BorderImageProperty[],
   WebkitAnimation?: AnimationProperty | AnimationProperty[],
   WebkitBorderBefore?: WebkitBorderBeforeProperty<TLength> | WebkitBorderBeforeProperty<TLength>[],
   WebkitBorderImage?: BorderImageProperty | BorderImageProperty[],
@@ -2226,8 +2244,10 @@ export type ObsoletePropertiesFallback<TLength = StringHack | number> = {
   gridGap?: GridGapProperty<TLength> | GridGapProperty<TLength>[],
   gridRowGap?: GridRowGapProperty<TLength> | GridRowGapProperty<TLength>[],
   imeMode?: ImeModeProperty | ImeModeProperty[],
+  offsetBlock?: InsetBlockProperty<TLength> | InsetBlockProperty<TLength>[],
   offsetBlockEnd?: InsetBlockEndProperty<TLength> | InsetBlockEndProperty<TLength>[],
   offsetBlockStart?: InsetBlockStartProperty<TLength> | InsetBlockStartProperty<TLength>[],
+  offsetInline?: InsetInlineProperty<TLength> | InsetInlineProperty<TLength>[],
   offsetInlineEnd?: InsetInlineEndProperty<TLength> | InsetInlineEndProperty<TLength>[],
   offsetInlineStart?: InsetInlineStartProperty<TLength> | InsetInlineStartProperty<TLength>[],
   scrollSnapCoordinate?: ScrollSnapCoordinateProperty<TLength> | ScrollSnapCoordinateProperty<TLength>[],
@@ -2245,6 +2265,9 @@ export type ObsoletePropertiesFallback<TLength = StringHack | number> = {
   KhtmlBoxOrdinalGroup?: BoxOrdinalGroupProperty | BoxOrdinalGroupProperty[],
   KhtmlBoxOrient?: BoxOrientProperty | BoxOrientProperty[],
   KhtmlBoxPack?: BoxPackProperty | BoxPackProperty[],
+  KhtmlLineBreak?: LineBreakProperty | LineBreakProperty[],
+  KhtmlOpacity?: OpacityProperty | OpacityProperty[],
+  KhtmlUserSelect?: UserSelectProperty | UserSelectProperty[],
   MozBackgroundClip?: BackgroundClipProperty | BackgroundClipProperty[],
   MozBackgroundInlinePolicy?: BoxDecorationBreakProperty | BoxDecorationBreakProperty[],
   MozBackgroundOrigin?: BackgroundOriginProperty | BackgroundOriginProperty[],
@@ -2294,6 +2317,7 @@ export type ObsoletePropertiesFallback<TLength = StringHack | number> = {
   OAnimationPlayState?: AnimationPlayStateProperty | AnimationPlayStateProperty[],
   OAnimationTimingFunction?: AnimationTimingFunctionProperty | AnimationTimingFunctionProperty[],
   OBackgroundSize?: BackgroundSizeProperty<TLength> | BackgroundSizeProperty<TLength>[],
+  OBorderImage?: BorderImageProperty | BorderImageProperty[],
   OTransform?: TransformProperty | TransformProperty[],
   OTransition?: TransitionProperty | TransitionProperty[],
   OTransitionDelay?: TransitionDelayProperty | TransitionDelayProperty[],
@@ -2525,8 +2549,11 @@ export type StandardLonghandPropertiesHyphenFallback<TLength = StringHack | numb
   "image-resolution"?: ImageResolutionProperty | ImageResolutionProperty[],
   "initial-letter"?: InitialLetterProperty | InitialLetterProperty[],
   "inline-size"?: InlineSizeProperty<TLength> | InlineSizeProperty<TLength>[],
+  inset?: InsetProperty<TLength> | InsetProperty<TLength>[],
+  "inset-block"?: InsetBlockProperty<TLength> | InsetBlockProperty<TLength>[],
   "inset-block-end"?: InsetBlockEndProperty<TLength> | InsetBlockEndProperty<TLength>[],
   "inset-block-start"?: InsetBlockStartProperty<TLength> | InsetBlockStartProperty<TLength>[],
+  "inset-inline"?: InsetInlineProperty<TLength> | InsetInlineProperty<TLength>[],
   "inset-inline-end"?: InsetInlineEndProperty<TLength> | InsetInlineEndProperty<TLength>[],
   "inset-inline-start"?: InsetInlineStartProperty<TLength> | InsetInlineStartProperty<TLength>[],
   isolation?: IsolationProperty | IsolationProperty[],
@@ -2537,6 +2564,7 @@ export type StandardLonghandPropertiesHyphenFallback<TLength = StringHack | numb
   "letter-spacing"?: LetterSpacingProperty<TLength> | LetterSpacingProperty<TLength>[],
   "line-break"?: LineBreakProperty | LineBreakProperty[],
   "line-height"?: LineHeightProperty<TLength> | LineHeightProperty<TLength>[],
+  "line-height-step"?: LineHeightStepProperty<TLength> | LineHeightStepProperty<TLength>[],
   "list-style-image"?: ListStyleImageProperty | ListStyleImageProperty[],
   "list-style-position"?: ListStylePositionProperty | ListStylePositionProperty[],
   "list-style-type"?: ListStyleTypeProperty | ListStyleTypeProperty[],
@@ -2595,9 +2623,7 @@ export type StandardLonghandPropertiesHyphenFallback<TLength = StringHack | numb
   "outline-width"?: OutlineWidthProperty<TLength> | OutlineWidthProperty<TLength>[],
   overflow?: OverflowProperty | OverflowProperty[],
   "overflow-anchor"?: OverflowAnchorProperty | OverflowAnchorProperty[],
-  "overflow-block"?: OverflowBlockProperty | OverflowBlockProperty[],
   "overflow-clip-box"?: OverflowClipBoxProperty | OverflowClipBoxProperty[],
-  "overflow-inline"?: OverflowInlineProperty | OverflowInlineProperty[],
   "overflow-wrap"?: OverflowWrapProperty | OverflowWrapProperty[],
   "overflow-x"?: OverflowXProperty | OverflowXProperty[],
   "overflow-y"?: OverflowYProperty | OverflowYProperty[],
@@ -2927,7 +2953,7 @@ export type VendorLonghandPropertiesHyphenFallback<TLength = StringHack | number
   "-webkit-justify-content"?: JustifyContentProperty | JustifyContentProperty[],
   "-webkit-line-break"?: LineBreakProperty | LineBreakProperty[],
   "-webkit-margin-end"?: MarginInlineEndProperty<TLength> | MarginInlineEndProperty<TLength>[],
-  "-webkit-margin-start"?: MarginInlineStartProperty<TLength> | MarginInlineStartProperty<TLength>[],
+  "-webkit-margin-start"?: MarginInlineEndProperty<TLength> | MarginInlineEndProperty<TLength>[],
   "-webkit-mask-attachment"?: WebkitMaskAttachmentProperty | WebkitMaskAttachmentProperty[],
   "-webkit-mask-clip"?: WebkitMaskClipProperty | WebkitMaskClipProperty[],
   "-webkit-mask-composite"?: WebkitMaskCompositeProperty | WebkitMaskCompositeProperty[],
@@ -2974,6 +3000,7 @@ export type VendorLonghandPropertiesHyphenFallback<TLength = StringHack | number
   "-webkit-user-modify"?: WebkitUserModifyProperty | WebkitUserModifyProperty[],
   "-webkit-user-select"?: UserSelectProperty | UserSelectProperty[],
   "-webkit-writing-mode"?: WritingModeProperty | WritingModeProperty[],
+  "-webkitmask-size"?: MaskSizeProperty<TLength> | MaskSizeProperty<TLength>[],
 };
 
 export type VendorShorthandPropertiesHyphenFallback<TLength = StringHack | number> = {
@@ -2988,7 +3015,6 @@ export type VendorShorthandPropertiesHyphenFallback<TLength = StringHack | numbe
   "-ms-scroll-limit"?: MsScrollLimitProperty | MsScrollLimitProperty[],
   "-ms-scroll-snap-x"?: MsScrollSnapXProperty | MsScrollSnapXProperty[],
   "-ms-scroll-snap-y"?: MsScrollSnapYProperty | MsScrollSnapYProperty[],
-  "-o-border-image"?: BorderImageProperty | BorderImageProperty[],
   "-webkit-animation"?: AnimationProperty | AnimationProperty[],
   "-webkit-border-before"?: WebkitBorderBeforeProperty<TLength> | WebkitBorderBeforeProperty<TLength>[],
   "-webkit-border-image"?: BorderImageProperty | BorderImageProperty[],
@@ -3021,8 +3047,10 @@ export type ObsoletePropertiesHyphenFallback<TLength = StringHack | number> = {
   "grid-gap"?: GridGapProperty<TLength> | GridGapProperty<TLength>[],
   "grid-row-gap"?: GridRowGapProperty<TLength> | GridRowGapProperty<TLength>[],
   "ime-mode"?: ImeModeProperty | ImeModeProperty[],
+  "offset-block"?: InsetBlockProperty<TLength> | InsetBlockProperty<TLength>[],
   "offset-block-end"?: InsetBlockEndProperty<TLength> | InsetBlockEndProperty<TLength>[],
   "offset-block-start"?: InsetBlockStartProperty<TLength> | InsetBlockStartProperty<TLength>[],
+  "offset-inline"?: InsetInlineProperty<TLength> | InsetInlineProperty<TLength>[],
   "offset-inline-end"?: InsetInlineEndProperty<TLength> | InsetInlineEndProperty<TLength>[],
   "offset-inline-start"?: InsetInlineStartProperty<TLength> | InsetInlineStartProperty<TLength>[],
   "scroll-snap-coordinate"?: ScrollSnapCoordinateProperty<TLength> | ScrollSnapCoordinateProperty<TLength>[],
@@ -3040,6 +3068,9 @@ export type ObsoletePropertiesHyphenFallback<TLength = StringHack | number> = {
   "-khtml-box-ordinal-group"?: BoxOrdinalGroupProperty | BoxOrdinalGroupProperty[],
   "-khtml-box-orient"?: BoxOrientProperty | BoxOrientProperty[],
   "-khtml-box-pack"?: BoxPackProperty | BoxPackProperty[],
+  "-khtml-line-break"?: LineBreakProperty | LineBreakProperty[],
+  "-khtml-opacity"?: OpacityProperty | OpacityProperty[],
+  "-khtml-user-select"?: UserSelectProperty | UserSelectProperty[],
   "-moz-background-clip"?: BackgroundClipProperty | BackgroundClipProperty[],
   "-moz-background-inline-policy"?: BoxDecorationBreakProperty | BoxDecorationBreakProperty[],
   "-moz-background-origin"?: BackgroundOriginProperty | BackgroundOriginProperty[],
@@ -3089,6 +3120,7 @@ export type ObsoletePropertiesHyphenFallback<TLength = StringHack | number> = {
   "-o-animation-play-state"?: AnimationPlayStateProperty | AnimationPlayStateProperty[],
   "-o-animation-timing-function"?: AnimationTimingFunctionProperty | AnimationTimingFunctionProperty[],
   "-o-background-size"?: BackgroundSizeProperty<TLength> | BackgroundSizeProperty<TLength>[],
+  "-o-border-image"?: BorderImageProperty | BorderImageProperty[],
   "-o-transform"?: TransformProperty | TransformProperty[],
   "-o-transition"?: TransitionProperty | TransitionProperty[],
   "-o-transition-delay"?: TransitionDelayProperty | TransitionDelayProperty[],
@@ -3464,6 +3496,7 @@ export type SimplePseudos =
   | "::-ms-fill"
   | "::-ms-fill-lower"
   | "::-ms-fill-upper"
+  | "::-ms-input-placeholder"
   | "::-ms-reveal"
   | "::-ms-thumb"
   | "::-ms-ticks-after"
@@ -4030,9 +4063,9 @@ export type AnimationNameProperty = Globals | "none" | StringHack;
 
 export type AnimationPlayStateProperty = Globals | "paused" | "running" | StringHack;
 
-export type AnimationTimingFunctionProperty = Globals | SingleTimingFunction | StringHack;
+export type AnimationTimingFunctionProperty = Globals | TimingFunction | StringHack;
 
-export type AppearanceProperty = Globals | "none";
+export type AppearanceProperty = Globals | Compat | "button" | "none" | "textfield";
 
 export type BackdropFilterProperty = Globals | "none" | StringHack;
 
@@ -4064,7 +4097,19 @@ export type BackgroundSizeProperty<TLength> = Globals | BgSize<TLength> | String
 
 export type BlockOverflowProperty = Globals | "clip" | "ellipsis" | StringHack;
 
-export type BlockSizeProperty<TLength> = Globals | TLength | "auto" | "available" | "fit-content" | "max-content" | "min-content" | StringHack;
+export type BlockSizeProperty<TLength> =
+  | Globals
+  | TLength
+  | "-moz-fit-content"
+  | "-moz-max-content"
+  | "-moz-min-content"
+  | "-webkit-fill-available"
+  | "auto"
+  | "available"
+  | "fit-content"
+  | "max-content"
+  | "min-content"
+  | StringHack;
 
 export type BorderProperty<TLength> = Globals | LineWidth<TLength> | LineStyle | Color | StringHack;
 
@@ -4212,9 +4257,39 @@ export type BoxShadowProperty = Globals | "none" | StringHack;
 
 export type BoxSizingProperty = Globals | "border-box" | "content-box";
 
-export type BreakAfterProperty = Globals | "auto" | "avoid" | "avoid-column" | "avoid-page" | "avoid-region" | "column" | "left" | "page" | "recto" | "region" | "right" | "verso";
+export type BreakAfterProperty =
+  | Globals
+  | "all"
+  | "always"
+  | "auto"
+  | "avoid"
+  | "avoid-column"
+  | "avoid-page"
+  | "avoid-region"
+  | "column"
+  | "left"
+  | "page"
+  | "recto"
+  | "region"
+  | "right"
+  | "verso";
 
-export type BreakBeforeProperty = Globals | "auto" | "avoid" | "avoid-column" | "avoid-page" | "avoid-region" | "column" | "left" | "page" | "recto" | "region" | "right" | "verso";
+export type BreakBeforeProperty =
+  | Globals
+  | "all"
+  | "always"
+  | "auto"
+  | "avoid"
+  | "avoid-column"
+  | "avoid-page"
+  | "avoid-region"
+  | "column"
+  | "left"
+  | "page"
+  | "recto"
+  | "region"
+  | "right"
+  | "verso";
 
 export type BreakInsideProperty = Globals | "auto" | "avoid" | "avoid-column" | "avoid-page" | "avoid-region";
 
@@ -4312,7 +4387,19 @@ export type FilterProperty = Globals | "none" | StringHack;
 
 export type FlexProperty<TLength> = Globals | TLength | "auto" | "available" | "content" | "fit-content" | "max-content" | "min-content" | "none" | StringHack | number;
 
-export type FlexBasisProperty<TLength> = Globals | TLength | "-webkit-auto" | "auto" | "available" | "content" | "fit-content" | "max-content" | "min-content" | StringHack;
+export type FlexBasisProperty<TLength> =
+  | Globals
+  | TLength
+  | "-moz-max-content"
+  | "-moz-min-content"
+  | "-webkit-auto"
+  | "auto"
+  | "available"
+  | "content"
+  | "fit-content"
+  | "max-content"
+  | "min-content"
+  | StringHack;
 
 export type FlexDirectionProperty = Globals | "column" | "column-reverse" | "row" | "row-reverse";
 
@@ -4460,7 +4547,17 @@ export type GridTemplateRowsProperty<TLength> = Globals | TrackBreadth<TLength> 
 
 export type HangingPunctuationProperty = Globals | "allow-end" | "first" | "force-end" | "last" | "none" | StringHack;
 
-export type HeightProperty<TLength> = Globals | TLength | "auto" | "available" | "fit-content" | "max-content" | "min-content" | StringHack;
+export type HeightProperty<TLength> =
+  | Globals
+  | TLength
+  | "-moz-max-content"
+  | "-moz-min-content"
+  | "auto"
+  | "available"
+  | "fit-content"
+  | "max-content"
+  | "min-content"
+  | StringHack;
 
 export type HyphensProperty = Globals | "auto" | "manual" | "none";
 
@@ -4474,11 +4571,29 @@ export type ImeModeProperty = Globals | "active" | "auto" | "disabled" | "inacti
 
 export type InitialLetterProperty = Globals | "normal" | StringHack | number;
 
-export type InlineSizeProperty<TLength> = Globals | TLength | "auto" | "available" | "fit-content" | "max-content" | "min-content" | StringHack;
+export type InlineSizeProperty<TLength> =
+  | Globals
+  | TLength
+  | "-moz-fit-content"
+  | "-moz-max-content"
+  | "-moz-min-content"
+  | "-webkit-fill-available"
+  | "auto"
+  | "available"
+  | "fit-content"
+  | "max-content"
+  | "min-content"
+  | StringHack;
+
+export type InsetProperty<TLength> = Globals | TLength | "auto" | StringHack;
+
+export type InsetBlockProperty<TLength> = Globals | TLength | "auto" | StringHack;
 
 export type InsetBlockEndProperty<TLength> = Globals | TLength | "auto" | StringHack;
 
 export type InsetBlockStartProperty<TLength> = Globals | TLength | "auto" | StringHack;
+
+export type InsetInlineProperty<TLength> = Globals | TLength | "auto" | StringHack;
 
 export type InsetInlineEndProperty<TLength> = Globals | TLength | "auto" | StringHack;
 
@@ -4501,6 +4616,8 @@ export type LineBreakProperty = Globals | "auto" | "loose" | "normal" | "strict"
 export type LineClampProperty = Globals | "none" | number;
 
 export type LineHeightProperty<TLength> = Globals | TLength | "normal" | StringHack | number;
+
+export type LineHeightStepProperty<TLength> = Globals | TLength;
 
 export type ListStyleProperty = Globals | "inside" | "none" | "outside" | StringHack;
 
@@ -4566,23 +4683,129 @@ export type MaskSizeProperty<TLength> = Globals | BgSize<TLength> | StringHack;
 
 export type MaskTypeProperty = Globals | "alpha" | "luminance";
 
-export type MaxBlockSizeProperty<TLength> = Globals | TLength | "fill-available" | "fit-content" | "max-content" | "min-content" | "none" | StringHack;
+export type MaxBlockSizeProperty<TLength> =
+  | Globals
+  | TLength
+  | "-moz-max-content"
+  | "-moz-min-content"
+  | "-webkit-fill-available"
+  | "fill-available"
+  | "fit-content"
+  | "max-content"
+  | "min-content"
+  | "none"
+  | StringHack;
 
-export type MaxHeightProperty<TLength> = Globals | TLength | "fill-available" | "fit-content" | "max-content" | "min-content" | "none" | StringHack;
+export type MaxHeightProperty<TLength> =
+  | Globals
+  | TLength
+  | "-moz-fit-content"
+  | "-moz-max-content"
+  | "-moz-min-content"
+  | "-webkit-fit-content"
+  | "fill-available"
+  | "fit-content"
+  | "intrinsic"
+  | "max-content"
+  | "min-content"
+  | "none"
+  | StringHack;
 
-export type MaxInlineSizeProperty<TLength> = Globals | TLength | "fill-available" | "fit-content" | "max-content" | "min-content" | "none" | StringHack;
+export type MaxInlineSizeProperty<TLength> =
+  | Globals
+  | TLength
+  | "-moz-fit-content"
+  | "-moz-max-content"
+  | "-moz-min-content"
+  | "-webkit-fill-available"
+  | "fill-available"
+  | "fit-content"
+  | "max-content"
+  | "min-content"
+  | "none"
+  | StringHack;
 
 export type MaxLinesProperty = Globals | "none" | number;
 
-export type MaxWidthProperty<TLength> = Globals | TLength | "fill-available" | "fit-content" | "max-content" | "min-content" | "none" | StringHack;
+export type MaxWidthProperty<TLength> =
+  | Globals
+  | TLength
+  | "-moz-fit-content"
+  | "-moz-max-content"
+  | "-moz-min-content"
+  | "-webkit-fit-content"
+  | "-webkit-max-content"
+  | "-webkit-min-content"
+  | "fill-available"
+  | "fit-content"
+  | "intrinsic"
+  | "max-content"
+  | "min-content"
+  | "none"
+  | StringHack;
 
-export type MinBlockSizeProperty<TLength> = Globals | TLength | "auto" | "fill-available" | "fit-content" | "max-content" | "min-content" | StringHack;
+export type MinBlockSizeProperty<TLength> =
+  | Globals
+  | TLength
+  | "-moz-max-content"
+  | "-moz-min-content"
+  | "-webkit-fill-available"
+  | "auto"
+  | "fill-available"
+  | "fit-content"
+  | "max-content"
+  | "min-content"
+  | StringHack;
 
-export type MinHeightProperty<TLength> = Globals | TLength | "auto" | "fill-available" | "fit-content" | "max-content" | "min-content" | StringHack;
+export type MinHeightProperty<TLength> =
+  | Globals
+  | TLength
+  | "-moz-fit-content"
+  | "-moz-max-content"
+  | "-moz-min-content"
+  | "-webkit-fit-content"
+  | "auto"
+  | "fill-available"
+  | "fit-content"
+  | "intrinsic"
+  | "max-content"
+  | "min-content"
+  | StringHack;
 
-export type MinInlineSizeProperty<TLength> = Globals | TLength | "auto" | "fill-available" | "fit-content" | "max-content" | "min-content" | StringHack;
+export type MinInlineSizeProperty<TLength> =
+  | Globals
+  | TLength
+  | "-moz-fit-content"
+  | "-moz-max-content"
+  | "-moz-min-content"
+  | "-webkit-fill-available"
+  | "-webkit-max-content"
+  | "-webkit-min-content"
+  | "auto"
+  | "fill-available"
+  | "fit-content"
+  | "max-content"
+  | "min-content"
+  | StringHack;
 
-export type MinWidthProperty<TLength> = Globals | TLength | "auto" | "fill-available" | "fit-content" | "max-content" | "min-content" | StringHack;
+export type MinWidthProperty<TLength> =
+  | Globals
+  | TLength
+  | "-moz-fit-content"
+  | "-moz-max-content"
+  | "-moz-min-content"
+  | "-webkit-fill-available"
+  | "-webkit-fit-content"
+  | "-webkit-max-content"
+  | "-webkit-min-content"
+  | "auto"
+  | "fill-available"
+  | "fit-content"
+  | "intrinsic"
+  | "max-content"
+  | "min-content"
+  | "min-intrinsic"
+  | StringHack;
 
 export type MixBlendModeProperty = Globals | BlendMode;
 
@@ -4622,11 +4845,7 @@ export type OverflowProperty = Globals | "auto" | "clip" | "hidden" | "scroll" |
 
 export type OverflowAnchorProperty = Globals | "auto" | "none";
 
-export type OverflowBlockProperty = Globals | "auto" | "clip" | "hidden" | "scroll" | "visible" | StringHack;
-
 export type OverflowClipBoxProperty = Globals | "content-box" | "padding-box";
-
-export type OverflowInlineProperty = Globals | "auto" | "clip" | "hidden" | "scroll" | "visible" | StringHack;
 
 export type OverflowWrapProperty = Globals | "anywhere" | "break-word" | "normal";
 
@@ -4829,7 +5048,7 @@ export type TextShadowProperty = Globals | "none" | StringHack;
 
 export type TextSizeAdjustProperty = Globals | "auto" | "none" | StringHack;
 
-export type TextTransformProperty = Globals | "capitalize" | "full-width" | "lowercase" | "none" | "uppercase";
+export type TextTransformProperty = Globals | "capitalize" | "full-size-kana" | "full-width" | "lowercase" | "none" | "uppercase";
 
 export type TextUnderlinePositionProperty = Globals | "auto" | "left" | "right" | "under" | StringHack;
 
@@ -4867,7 +5086,7 @@ export type TransitionDurationProperty = Globals | StringHack;
 
 export type TransitionPropertyProperty = Globals | "all" | "none" | StringHack;
 
-export type TransitionTimingFunctionProperty = Globals | SingleTimingFunction | StringHack;
+export type TransitionTimingFunctionProperty = Globals | TimingFunction | StringHack;
 
 export type TranslateProperty<TLength> = Globals | TLength | "none" | StringHack;
 
@@ -4903,7 +5122,6 @@ export type WidthProperty<TLength> =
   | "-webkit-fill-available"
   | "-webkit-fit-content"
   | "-webkit-max-content"
-  | "-webkit-min-content"
   | "auto"
   | "available"
   | "fit-content"
@@ -5475,6 +5693,21 @@ export type Box = "border-box" | "content-box" | "padding-box";
 
 export type Color = NamedColor | DeprecatedSystemColor | "currentcolor" | StringHack;
 
+export type Compat =
+  | "button-bevel"
+  | "checkbox"
+  | "listbox"
+  | "menulist"
+  | "menulist-button"
+  | "meter"
+  | "progress-bar"
+  | "push-button"
+  | "radio"
+  | "searchfield"
+  | "slider-horizontal"
+  | "square-button"
+  | "textarea";
+
 export type CompositeStyle =
   | "clear"
   | "copy"
@@ -5743,17 +5976,17 @@ export type RepeatStyle = "no-repeat" | "repeat" | "repeat-x" | "repeat-y" | "ro
 
 export type SelfPosition = "center" | "end" | "flex-end" | "flex-start" | "self-end" | "self-start" | "start";
 
-export type SingleAnimation = SingleTimingFunction | SingleAnimationDirection | SingleAnimationFillMode | "infinite" | "none" | "paused" | "running" | StringHack | number;
+export type SingleAnimation = TimingFunction | SingleAnimationDirection | SingleAnimationFillMode | "infinite" | "none" | "paused" | "running" | StringHack | number;
 
 export type SingleAnimationDirection = "alternate" | "alternate-reverse" | "normal" | "reverse";
 
 export type SingleAnimationFillMode = "backwards" | "both" | "forwards" | "none";
 
-export type SingleTimingFunction = CubicBezierTimingFunction | StepTimingFunction | "linear" | StringHack;
-
-export type SingleTransition = SingleTimingFunction | "all" | "none" | StringHack;
+export type SingleTransition = TimingFunction | "all" | "none" | StringHack;
 
 export type StepTimingFunction = "step-end" | "step-start" | StringHack;
+
+export type TimingFunction = CubicBezierTimingFunction | StepTimingFunction | "linear";
 
 export type TrackBreadth<TLength> = TLength | "auto" | "max-content" | "min-content" | StringHack;
 

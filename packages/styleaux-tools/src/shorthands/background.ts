@@ -1,6 +1,6 @@
 import * as CSS from '@styleaux/csstype';
-import { arrayWrapper } from '../helpers';
 import { isDefined } from 'typed-is';
+import { arrayWrapper } from '../helpers';
 
 export interface BackgroundOptions {
   image?: CSS.BackgroundImageProperty;

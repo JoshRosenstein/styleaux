@@ -1,5 +1,5 @@
-import { PickCSSProps, PickCSSPropsPartial } from '@styleaux/types';
 import { px } from '../units';
+import { PickCSSProps, PickCSSPropsPartial } from '@styleaux/types';
 export interface MaxLines
   extends PickCSSProps<'overflow' | 'boxSizing' | 'maxHeight'>,
     PickCSSPropsPartial<'whiteSpace'> {}

@@ -1,18 +1,22 @@
-import { space, defaultSpaceScale } from '../'
-import { toStyles } from "../__testUtils__";
+/* eslint-disable @typescript-eslint/no-object-literal-type-assertion */
+import { toStyles } from '../__testUtils__';
+import { space, defaultSpaceScale } from '../';
 
 const MEDIA = {
   D: '(min-width: 1025px)',
   T: '(min-width: 601px) and (max-width: 1024px)',
   M: '(max-width: 600px)',
   C: '(max-width: 666px)',
-}
-type Media = typeof MEDIA
+};
+type Media = typeof MEDIA;
 
-const MQ = (Object.keys(MEDIA).reduce((acc, k) => {
-acc[k] = '@media ' + MEDIA[k]
-  return acc
-}, {} as Media))
+const MQ = Object.keys(MEDIA).reduce(
+  (acc, k) => {
+    acc[k] = '@media ' + MEDIA[k];
+    return acc;
+  },
+  {} as Media,
+);
 
 const spaceT = {
   none: 0,
@@ -23,13 +27,12 @@ const spaceT = {
   lg: 32,
   xl: 100,
   xxl: 128,
-}
+};
 
 const theme = {
   media: MEDIA,
-  space: spaceT
-
-}
+  space: spaceT,
+};
 
 const THEME = theme;
 type Options = {
@@ -48,32 +51,34 @@ const data = [
     { m: 'xs' },
     {
       margin: '4px',
-    }
+    },
   ],
   [
     'Responsive',
     { m: { all: 1, T: 2 } },
     {
-      margin: defaultSpaceScale[1] + 'px', [MQ.T]: { margin: defaultSpaceScale[2] + 'px' }
-    }
+      margin: defaultSpaceScale[1] + 'px',
+      [MQ.T]: { margin: defaultSpaceScale[2] + 'px' },
+    },
   ],
 
   [
     'Responsive themekey lookup',
     { m: { all: 'xs', T: 'md' } },
     {
-      margin: '4px', [MQ.T]: { margin: '16px' }
-    }
+      margin: '4px',
+      [MQ.T]: { margin: '16px' },
+    },
   ],
 
   [
     'Shorthands overide longs',
     { mx: 'xs', ml: 'lg' },
     {
-      marginLeft: '32px', marginRight: '4px',
-    }
+      marginLeft: '32px',
+      marginRight: '4px',
+    },
   ],
-
 ];
 
 //@ts-ignore
@@ -82,6 +87,6 @@ test.each(data)(
   //@ts-ignore
   (testName: string, props: any, expected: any, theme?: any = THEME) => {
     //expect(theme).toEqual( THEME);
-    expect(toStyles(space({ theme, ...props }))).toEqual(expected);
-  }
+    expect(toStyles(space({ theme, ...props }))).toMatchSnapshot();
+  },
 );

@@ -9,12 +9,11 @@
     "@babel/preset-env": "^7.4.1",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
-    "@roseys/eslint-config": "^1.0.4",
+    "eslint-config-rosey": "^1.0.4",
     "@roseys/futils": "^2.1.4",
     "@roseys/jest-preset": "^1.0.3",
     "@types/jest": "^24.0.11",
     "@types/node": "^11.12.0",
-    "@typescript-eslint/eslint-plugin": "^1.5.0",
     "axios": "^0.18.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
@@ -29,7 +28,7 @@
     "concurrently": "3.6.1",
     "cross-env": "^5.2.0",
     "cz-customizable": "^5.5.3",
-    "eslint": "^5.15.3",
+    "eslint": "^5.16.0",
     "jest": "^24.5.0",
     "jest-circus": "^24.5.0",
     "jest-watch-select-projects": "^0.1.1",
@@ -79,13 +78,6 @@
       "prettier --no-semi --single-quote --write",
       "git add"
     ]
-  },
-  "prettier": {
-    "bracketSpacing": false,
-    "proseWrap": "never",
-    "singleQuote": true,
-    "trailingComma": "all",
-    "semi": false
   },
   "config": {
     "commitizen": {

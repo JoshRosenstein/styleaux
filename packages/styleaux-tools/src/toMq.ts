@@ -1,3 +1,5 @@
+import { pxToEm } from './units/px-to';
+import { isArray, isNumber, isString } from 'typed-is';
 import {
   always,
   cond,
@@ -10,8 +12,6 @@ import {
   toKebabCase,
   toPairs,
 } from '@roseys/futils';
-import { isArray, isNumber, isString } from 'typed-is';
-import { pxToEm } from './units/px-to';
 
 const sizingKeys = [
   'min',

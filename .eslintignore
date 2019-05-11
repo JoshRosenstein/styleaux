@@ -28,3 +28,4 @@ packages/*/**/lib/
 packages/*/**/es/
 packages/*/**/dist/
 **/dist-*/
+/dev-packages/**

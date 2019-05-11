@@ -1,3 +1,5 @@
+import { important } from '../wrappers';
+import { PickCSSProps } from '@styleaux/types';
 import {
   BackgroundColorProperty,
   BackgroundImageProperty,
@@ -5,10 +7,6 @@ import {
   BackgroundSizeProperty,
   BoxShadowProperty,
 } from '@styleaux/csstype';
-import { important } from '../wrappers';
-import { PickCSSProps } from '@styleaux/types';
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface DebugProps
   extends PickCSSProps<'color' | 'backgroundColor' | 'outline'> {}
 
