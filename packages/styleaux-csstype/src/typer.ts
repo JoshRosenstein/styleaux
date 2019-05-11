@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-object-literal-type-assertion */
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable @typescript-eslint/interface-name-prefix */
 import * as cssTypes from 'mdn-data/css/types.json';
-import { isProperty, isSyntax } from './data';
 import { warn } from './logger';
+import { isProperty, isSyntax } from './data';
 import {
   Combinator,
   Component,
@@ -45,33 +48,40 @@ interface INumericLiteral {
 export type DataType = IDataType<Type.DataType>;
 
 // Yet another reminder; naming is hard
-export type TypeType<TDataType = IDataType> = IBasic | IStringLiteral | INumericLiteral | TDataType;
+export type TypeType<TDataType = IDataType> =
+  | IBasic
+  | IStringLiteral
+  | INumericLiteral
+  | TDataType;
 
 export type ResolvedType = TypeType<DataType>;
 
 let getBasicDataTypes = () => {
-  const types = Object.keys(cssTypes).reduce<{ [name: string]: IBasic }>((dataTypes, name) => {
-    switch (name) {
-      case 'number':
-      case 'integer':
-        dataTypes[name] = {
-          type: Type.Number,
-        };
-        break;
-      case 'length':
-        dataTypes[name] = {
-          type: Type.Length,
-        };
-        break;
-      default:
-        if (!isSyntax(name)) {
+  const types = Object.keys(cssTypes).reduce<{ [name: string]: IBasic }>(
+    (dataTypes, name) => {
+      switch (name) {
+        case 'number':
+        case 'integer':
           dataTypes[name] = {
-            type: Type.String,
+            type: Type.Number,
           };
-        }
-    }
-    return dataTypes;
-  }, {});
+          break;
+        case 'length':
+          dataTypes[name] = {
+            type: Type.Length,
+          };
+          break;
+        default:
+          if (!isSyntax(name)) {
+            dataTypes[name] = {
+              type: Type.String,
+            };
+          }
+      }
+      return dataTypes;
+    },
+    {},
+  );
 
   // Cache
   getBasicDataTypes = () => types;
@@ -155,7 +165,10 @@ export default function typing(entities: EntityType[]): TypeType[] {
         }
       }
     } else if (isCombinator(entity)) {
-      if (entity.combinator === Combinator.DoubleBar || isMandatoryEntity(entity)) {
+      if (
+        entity.combinator === Combinator.DoubleBar ||
+        isMandatoryEntity(entity)
+      ) {
         types = addString(types);
       }
     } else {
@@ -170,8 +183,10 @@ export default function typing(entities: EntityType[]): TypeType[] {
   return types;
 }
 
-function addLength<TDataType extends IDataType>(types: Array<TypeType<TDataType>>): Array<TypeType<TDataType>> {
-  if (types.every(type => type.type !== Type.Length)) {
+function addLength<TDataType extends IDataType>(
+  types: TypeType<TDataType>[],
+): TypeType<TDataType>[] {
+  if (types.every((type) => type.type !== Type.Length)) {
     return [
       ...types,
       {
@@ -183,8 +198,10 @@ function addLength<TDataType extends IDataType>(types: Array<TypeType<TDataType>
   return types;
 }
 
-function addString<TDataType extends IDataType>(types: Array<TypeType<TDataType>>): Array<TypeType<TDataType>> {
-  if (types.every(type => type.type !== Type.String)) {
+function addString<TDataType extends IDataType>(
+  types: TypeType<TDataType>[],
+): TypeType<TDataType>[] {
+  if (types.every((type) => type.type !== Type.String)) {
     return [
       ...types,
       {
@@ -196,8 +213,10 @@ function addString<TDataType extends IDataType>(types: Array<TypeType<TDataType>
   return types;
 }
 
-function addNumber<TDataType extends IDataType>(types: Array<TypeType<TDataType>>): Array<TypeType<TDataType>> {
-  if (types.every(type => type.type !== Type.Number)) {
+function addNumber<TDataType extends IDataType>(
+  types: TypeType<TDataType>[],
+): TypeType<TDataType>[] {
+  if (types.every((type) => type.type !== Type.Number)) {
     return [
       ...types,
       {
@@ -210,10 +229,14 @@ function addNumber<TDataType extends IDataType>(types: Array<TypeType<TDataType>
 }
 
 function addStringLiteral<TDataType extends IDataType>(
-  types: Array<TypeType<TDataType>>,
+  types: TypeType<TDataType>[],
   literal: string,
-): Array<TypeType<TDataType>> {
-  if (types.every(type => !(type.type === Type.StringLiteral && type.literal === literal))) {
+): TypeType<TDataType>[] {
+  if (
+    types.every(
+      (type) => !(type.type === Type.StringLiteral && type.literal === literal),
+    )
+  ) {
     return [
       ...types,
       {
@@ -227,10 +250,15 @@ function addStringLiteral<TDataType extends IDataType>(
 }
 
 function addNumericLiteral<TDataType extends IDataType>(
-  types: Array<TypeType<TDataType>>,
+  types: TypeType<TDataType>[],
   literal: number,
-): Array<TypeType<TDataType>> {
-  if (types.every(type => !(type.type === Type.NumericLiteral && type.literal === literal))) {
+): TypeType<TDataType>[] {
+  if (
+    types.every(
+      (type) =>
+        !(type.type === Type.NumericLiteral && type.literal === literal),
+    )
+  ) {
     return [
       ...types,
       {
@@ -244,10 +272,12 @@ function addNumericLiteral<TDataType extends IDataType>(
 }
 
 function addDataType<TDataType extends IDataType>(
-  types: Array<TypeType<TDataType>>,
+  types: TypeType<TDataType>[],
   name: string,
-): Array<TypeType<TDataType>> {
-  if (types.every(type => !(type.type === Type.DataType && type.name === name))) {
+): TypeType<TDataType>[] {
+  if (
+    types.every((type) => !(type.type === Type.DataType && type.name === name))
+  ) {
     return [
       ...types,
       {
@@ -261,10 +291,14 @@ function addDataType<TDataType extends IDataType>(
 }
 
 function addPropertyReference<TDataType extends IDataType>(
-  types: Array<TypeType<TDataType>>,
+  types: TypeType<TDataType>[],
   name: string,
-): Array<TypeType<TDataType>> {
-  if (types.every(type => !(type.type === Type.PropertyReference && type.name === name))) {
+): TypeType<TDataType>[] {
+  if (
+    types.every(
+      (type) => !(type.type === Type.PropertyReference && type.name === name),
+    )
+  ) {
     return [
       ...types,
       {
@@ -278,9 +312,9 @@ function addPropertyReference<TDataType extends IDataType>(
 }
 
 export function addType<TDataType extends IDataType>(
-  types: Array<TypeType<TDataType>>,
+  types: TypeType<TDataType>[],
   type: TypeType,
-): Array<TypeType<TDataType>> {
+): TypeType<TDataType>[] {
   switch (type.type) {
     case Type.Length:
       return addLength(types);

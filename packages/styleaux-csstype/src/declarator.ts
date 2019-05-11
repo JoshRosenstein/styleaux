@@ -1,10 +1,17 @@
-import { getAtRules } from './at-rules';
-import { getHtmlAttributes, getSvgAttributes } from './attributes';
-import { toCamelCase, toPascalCase, toVendorPrefixCase } from './casing';
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable @typescript-eslint/interface-name-prefix */
 import dataTypes from './data-types';
-import { globals, htmlProperties, isVendorProperty, svgProperties } from './properties';
+import { getAtRules } from './at-rules';
 import { getPseudos } from './selectors';
 import { IDataType, Type, TypeType } from './typer';
+import { getHtmlAttributes, getSvgAttributes } from './attributes';
+import { toCamelCase, toPascalCase, toVendorPrefixCase } from './casing';
+import {
+  globals,
+  htmlProperties,
+  isVendorProperty,
+  svgProperties,
+} from './properties';
 
 export interface IAlias {
   type: Type.Alias;
@@ -84,7 +91,10 @@ const simplePseudosDeclaration: IDeclaration = {
 
 declarations.set(pseudos.simple, simplePseudosDeclaration);
 
-const pseudoAliases = [aliasOf(advancedPseudosDeclaration), aliasOf(simplePseudosDeclaration)];
+const pseudoAliases = [
+  aliasOf(advancedPseudosDeclaration),
+  aliasOf(simplePseudosDeclaration),
+];
 
 const pseudosDeclaration: IDeclaration = {
   name: 'Pseudos',
@@ -122,7 +132,10 @@ const globalsDeclaration: IDeclaration = {
 
 declarations.set(globals, globalsDeclaration);
 
-const globalsAndString: DeclarableType[] = [aliasOf(globalsDeclaration), { type: Type.String }];
+const globalsAndString: DeclarableType[] = [
+  aliasOf(globalsDeclaration),
+  { type: Type.String },
+];
 
 const globalsAndStringDeclaration: IDeclaration = {
   name: 'GlobalsString',
@@ -133,7 +146,10 @@ const globalsAndStringDeclaration: IDeclaration = {
 
 declarations.set(globalsAndString, globalsAndStringDeclaration);
 
-const declarableGlobalsAndNumber: DeclarableType[] = [aliasOf(globalsDeclaration), { type: Type.Number }];
+const declarableGlobalsAndNumber: DeclarableType[] = [
+  aliasOf(globalsDeclaration),
+  { type: Type.Number },
+];
 
 const globalsAndNumberDeclaration: IDeclaration = {
   name: 'GlobalsNumber',
@@ -172,10 +188,10 @@ for (const properties of [htmlProperties, svgProperties]) {
   // Sort alphabetical, starting with standard properties
   const propertyNames = ([] as string[]).concat(
     Object.keys(properties)
-      .filter(name => name[0] !== '-')
+      .filter((name) => name[0] !== '-')
       .sort(),
     Object.keys(properties)
-      .filter(name => name[0] === '-')
+      .filter((name) => name[0] === '-')
       .sort(),
   );
 
@@ -268,7 +284,9 @@ for (const name of Object.keys(atRules.rules).sort()) {
       };
 
       atRuleDefinitions[name].push({
-        name: isVendorProperty(property) ? toVendorPrefixCase(property) : toCamelCase(property),
+        name: isVendorProperty(property)
+          ? toVendorPrefixCase(property)
+          : toCamelCase(property),
         type,
         comment: null,
       });
@@ -294,7 +312,9 @@ for (const name of Object.keys(atRules.rules).sort()) {
       }
 
       atRuleDefinitions[name].push({
-        name: isVendorProperty(property) ? toVendorPrefixCase(property) : toCamelCase(property),
+        name: isVendorProperty(property)
+          ? toVendorPrefixCase(property)
+          : toCamelCase(property),
         generics,
         alias: aliasOf(declaration),
         comment: null,
@@ -325,7 +345,8 @@ const LONGHAND = 'Longhand';
 const SHORTHAND = 'Shorthand';
 const STANDARD = 'Standard';
 const INTERFACE_STANDARD_LONGHAND_PROPERTIES = STANDARD + LONGHAND + PROPERTIES;
-const INTERFACE_STANDARD_SHORTHAND_PROPERTIES = STANDARD + SHORTHAND + PROPERTIES;
+const INTERFACE_STANDARD_SHORTHAND_PROPERTIES =
+  STANDARD + SHORTHAND + PROPERTIES;
 const INTERFACE_STANDARD_PROPERTIES = STANDARD + PROPERTIES;
 const VENDOR = 'Vendor';
 const INTERFACE_VENDOR_LONGHAND_PROPERTIES = VENDOR + LONGHAND + PROPERTIES;
@@ -337,45 +358,73 @@ const SVG = 'Svg';
 const INTERFACE_SVG_PROPERTIES = SVG + PROPERTIES;
 const INTERFACE_ALL_PROPERTIES = PROPERTIES;
 const HYPHEN = 'Hyphen';
-const INTERFACE_STANDARD_LONGHAND_PROPERTIES_HYPHEN = INTERFACE_STANDARD_LONGHAND_PROPERTIES + HYPHEN;
-const INTERFACE_STANDARD_SHORTHAND_PROPERTIES_HYPHEN = INTERFACE_STANDARD_SHORTHAND_PROPERTIES + HYPHEN;
-const INTERFACE_STANDARD_PROPERTIES_HYPHEN = INTERFACE_STANDARD_PROPERTIES + HYPHEN;
-const INTERFACE_VENDOR_LONGHAND_PROPERTIES_HYPHEN = INTERFACE_VENDOR_LONGHAND_PROPERTIES + HYPHEN;
-const INTERFACE_VENDOR_SHORTHAND_PROPERTIES_HYPHEN = INTERFACE_VENDOR_SHORTHAND_PROPERTIES + HYPHEN;
+const INTERFACE_STANDARD_LONGHAND_PROPERTIES_HYPHEN =
+  INTERFACE_STANDARD_LONGHAND_PROPERTIES + HYPHEN;
+const INTERFACE_STANDARD_SHORTHAND_PROPERTIES_HYPHEN =
+  INTERFACE_STANDARD_SHORTHAND_PROPERTIES + HYPHEN;
+const INTERFACE_STANDARD_PROPERTIES_HYPHEN =
+  INTERFACE_STANDARD_PROPERTIES + HYPHEN;
+const INTERFACE_VENDOR_LONGHAND_PROPERTIES_HYPHEN =
+  INTERFACE_VENDOR_LONGHAND_PROPERTIES + HYPHEN;
+const INTERFACE_VENDOR_SHORTHAND_PROPERTIES_HYPHEN =
+  INTERFACE_VENDOR_SHORTHAND_PROPERTIES + HYPHEN;
 const INTERFACE_VENDOR_PROPERTIES_HYPHEN = INTERFACE_VENDOR_PROPERTIES + HYPHEN;
-const INTERFACE_OBSOLETE_PROPERTIES_HYPHEN = INTERFACE_OBSOLETE_PROPERTIES + HYPHEN;
+const INTERFACE_OBSOLETE_PROPERTIES_HYPHEN =
+  INTERFACE_OBSOLETE_PROPERTIES + HYPHEN;
 const INTERFACE_SVG_PROPERTIES_HYPHEN = INTERFACE_SVG_PROPERTIES + HYPHEN;
 const INTERFACE_ALL_PROPERTIES_HYPHEN = INTERFACE_ALL_PROPERTIES + HYPHEN;
 const FALLBACK = 'Fallback';
-const INTERFACE_STANDARD_LONGHAND_PROPERTIES_FALLBACK = INTERFACE_STANDARD_LONGHAND_PROPERTIES + FALLBACK;
-const INTERFACE_STANDARD_SHORTHAND_PROPERTIES_FALLBACK = INTERFACE_STANDARD_SHORTHAND_PROPERTIES + FALLBACK;
-const INTERFACE_STANDARD_PROPERTIES_FALLBACK = INTERFACE_STANDARD_PROPERTIES + FALLBACK;
-const INTERFACE_VENDOR_LONGHAND_PROPERTIES_FALLBACK = INTERFACE_VENDOR_LONGHAND_PROPERTIES + FALLBACK;
-const INTERFACE_VENDOR_SHORTHAND_PROPERTIES_FALLBACK = INTERFACE_VENDOR_SHORTHAND_PROPERTIES + FALLBACK;
-const INTERFACE_VENDOR_PROPERTIES_FALLBACK = INTERFACE_VENDOR_PROPERTIES + FALLBACK;
-const INTERFACE_OBSOLETE_PROPERTIES_FALLBACK = INTERFACE_OBSOLETE_PROPERTIES + FALLBACK;
+const INTERFACE_STANDARD_LONGHAND_PROPERTIES_FALLBACK =
+  INTERFACE_STANDARD_LONGHAND_PROPERTIES + FALLBACK;
+const INTERFACE_STANDARD_SHORTHAND_PROPERTIES_FALLBACK =
+  INTERFACE_STANDARD_SHORTHAND_PROPERTIES + FALLBACK;
+const INTERFACE_STANDARD_PROPERTIES_FALLBACK =
+  INTERFACE_STANDARD_PROPERTIES + FALLBACK;
+const INTERFACE_VENDOR_LONGHAND_PROPERTIES_FALLBACK =
+  INTERFACE_VENDOR_LONGHAND_PROPERTIES + FALLBACK;
+const INTERFACE_VENDOR_SHORTHAND_PROPERTIES_FALLBACK =
+  INTERFACE_VENDOR_SHORTHAND_PROPERTIES + FALLBACK;
+const INTERFACE_VENDOR_PROPERTIES_FALLBACK =
+  INTERFACE_VENDOR_PROPERTIES + FALLBACK;
+const INTERFACE_OBSOLETE_PROPERTIES_FALLBACK =
+  INTERFACE_OBSOLETE_PROPERTIES + FALLBACK;
 const INTERFACE_SVG_PROPERTIES_FALLBACK = INTERFACE_SVG_PROPERTIES + FALLBACK;
 const INTERFACE_ALL_PROPERTIES_FALLBACK = INTERFACE_ALL_PROPERTIES + FALLBACK;
 const INTERFACE_STANDARD_LONGHAND_PROPERTIES_HYPHEN_FALLBACK =
   INTERFACE_STANDARD_LONGHAND_PROPERTIES + HYPHEN + FALLBACK;
 const INTERFACE_STANDARD_SHORTHAND_PROPERTIES_HYPHEN_FALLBACK =
   INTERFACE_STANDARD_SHORTHAND_PROPERTIES + HYPHEN + FALLBACK;
-const INTERFACE_STANDARD_PROPERTIES_HYPHEN_FALLBACK = INTERFACE_STANDARD_PROPERTIES + HYPHEN + FALLBACK;
-const INTERFACE_VENDOR_LONGHAND_PROPERTIES_HYPHEN_FALLBACK = INTERFACE_VENDOR_LONGHAND_PROPERTIES + HYPHEN + FALLBACK;
-const INTERFACE_VENDOR_SHORTHAND_PROPERTIES_HYPHEN_FALLBACK = INTERFACE_VENDOR_SHORTHAND_PROPERTIES + HYPHEN + FALLBACK;
-const INTERFACE_VENDOR_PROPERTIES_HYPHEN_FALLBACK = INTERFACE_VENDOR_PROPERTIES + HYPHEN + FALLBACK;
-const INTERFACE_OBSOLETE_PROPERTIES_HYPHEN_FALLBACK = INTERFACE_OBSOLETE_PROPERTIES + HYPHEN + FALLBACK;
-const INTERFACE_SVG_PROPERTIES_HYPHEN_FALLBACK = INTERFACE_SVG_PROPERTIES + HYPHEN + FALLBACK;
-const INTERFACE_ALL_PROPERTIES_HYPHEN_FALLBACK = INTERFACE_ALL_PROPERTIES + HYPHEN + FALLBACK;
+const INTERFACE_STANDARD_PROPERTIES_HYPHEN_FALLBACK =
+  INTERFACE_STANDARD_PROPERTIES + HYPHEN + FALLBACK;
+const INTERFACE_VENDOR_LONGHAND_PROPERTIES_HYPHEN_FALLBACK =
+  INTERFACE_VENDOR_LONGHAND_PROPERTIES + HYPHEN + FALLBACK;
+const INTERFACE_VENDOR_SHORTHAND_PROPERTIES_HYPHEN_FALLBACK =
+  INTERFACE_VENDOR_SHORTHAND_PROPERTIES + HYPHEN + FALLBACK;
+const INTERFACE_VENDOR_PROPERTIES_HYPHEN_FALLBACK =
+  INTERFACE_VENDOR_PROPERTIES + HYPHEN + FALLBACK;
+const INTERFACE_OBSOLETE_PROPERTIES_HYPHEN_FALLBACK =
+  INTERFACE_OBSOLETE_PROPERTIES + HYPHEN + FALLBACK;
+const INTERFACE_SVG_PROPERTIES_HYPHEN_FALLBACK =
+  INTERFACE_SVG_PROPERTIES + HYPHEN + FALLBACK;
+const INTERFACE_ALL_PROPERTIES_HYPHEN_FALLBACK =
+  INTERFACE_ALL_PROPERTIES + HYPHEN + FALLBACK;
 
-const standardLonghandPropertiesGenerics = genericsOf(standardLonghandPropertiesDefinition);
-const standardShorthandPropertiesGenerics = genericsOf(standardShorthandPropertiesDefinition);
+const standardLonghandPropertiesGenerics = genericsOf(
+  standardLonghandPropertiesDefinition,
+);
+const standardShorthandPropertiesGenerics = genericsOf(
+  standardShorthandPropertiesDefinition,
+);
 const standardPropertiesGenerics = genericsOf([
   ...standardLonghandPropertiesDefinition,
   ...standardShorthandPropertiesDefinition,
 ]);
-const vendorLonghandPropertiesGenerics = genericsOf(vendorLonghandPropertiesDefinition);
-const vendorShorthandPropertiesGenerics = genericsOf(vendorShorthandPropertiesDefinition);
+const vendorLonghandPropertiesGenerics = genericsOf(
+  vendorLonghandPropertiesDefinition,
+);
+const vendorShorthandPropertiesGenerics = genericsOf(
+  vendorShorthandPropertiesDefinition,
+);
 const vendorPropertiesGenerics = genericsOf([
   ...vendorLonghandPropertiesDefinition,
   ...vendorShorthandPropertiesDefinition,
@@ -410,7 +459,10 @@ const standardShorthandPropertiesInterface: Interface = {
 const standardPropertiesInterface: Interface = {
   name: INTERFACE_STANDARD_PROPERTIES,
   generics: standardPropertiesGenerics,
-  extends: [standardLonghandPropertiesInterface, standardShorthandPropertiesInterface],
+  extends: [
+    standardLonghandPropertiesInterface,
+    standardShorthandPropertiesInterface,
+  ],
   fallback: false,
   properties: [],
 };
@@ -434,7 +486,10 @@ const vendorShorthandPropertiesInterface: Interface = {
 const vendorPropertiesInterface: Interface = {
   name: INTERFACE_VENDOR_PROPERTIES,
   generics: vendorPropertiesGenerics,
-  extends: [vendorLonghandPropertiesInterface, vendorShorthandPropertiesInterface],
+  extends: [
+    vendorLonghandPropertiesInterface,
+    vendorShorthandPropertiesInterface,
+  ],
   fallback: false,
   properties: [],
 };
@@ -487,7 +542,10 @@ const standardShorthandPropertiesHyphenInterface: Interface = {
 const standardPropertiesHyphenInterface: Interface = {
   name: INTERFACE_STANDARD_PROPERTIES_HYPHEN,
   generics: standardPropertiesGenerics,
-  extends: [standardLonghandPropertiesHyphenInterface, standardShorthandPropertiesHyphenInterface],
+  extends: [
+    standardLonghandPropertiesHyphenInterface,
+    standardShorthandPropertiesHyphenInterface,
+  ],
   fallback: false,
   properties: [],
 };
@@ -511,7 +569,10 @@ const vendorShorthandPropertiesHyphenInterface: Interface = {
 const vendorPropertiesHyphenInterface: Interface = {
   name: INTERFACE_VENDOR_PROPERTIES_HYPHEN,
   generics: vendorPropertiesGenerics,
-  extends: [vendorLonghandPropertiesHyphenInterface, vendorShorthandPropertiesHyphenInterface],
+  extends: [
+    vendorLonghandPropertiesHyphenInterface,
+    vendorShorthandPropertiesHyphenInterface,
+  ],
   fallback: false,
   properties: [],
 };
@@ -560,7 +621,10 @@ const standardShorthandPropertiesFallbackInterface: Interface = {
 const standardPropertiesFallbackInterface: Interface = {
   ...standardPropertiesInterface,
   name: INTERFACE_STANDARD_PROPERTIES_FALLBACK,
-  extends: [standardLongformPropertiesFallbackInterface, standardShorthandPropertiesFallbackInterface],
+  extends: [
+    standardLongformPropertiesFallbackInterface,
+    standardShorthandPropertiesFallbackInterface,
+  ],
   fallback: true,
 };
 
@@ -579,7 +643,10 @@ const vendorShorthandPropertiesFallbackInterface: Interface = {
 const vendorPropertiesFallbackInterface: Interface = {
   ...vendorPropertiesInterface,
   name: INTERFACE_VENDOR_PROPERTIES_FALLBACK,
-  extends: [vendorLonghandPropertiesFallbackInterface, vendorShorthandPropertiesFallbackInterface],
+  extends: [
+    vendorLonghandPropertiesFallbackInterface,
+    vendorShorthandPropertiesFallbackInterface,
+  ],
   fallback: true,
 };
 
@@ -622,7 +689,10 @@ const standardShorthandPropertiesHyphenFallbackInterface: Interface = {
 const standardPropertiesHyphenFallbackInterface: Interface = {
   ...standardPropertiesHyphenInterface,
   name: INTERFACE_STANDARD_PROPERTIES_HYPHEN_FALLBACK,
-  extends: [standardLongformPropertiesHyphenFallbackInterface, standardShorthandPropertiesHyphenFallbackInterface],
+  extends: [
+    standardLongformPropertiesHyphenFallbackInterface,
+    standardShorthandPropertiesHyphenFallbackInterface,
+  ],
   fallback: true,
 };
 
@@ -641,7 +711,10 @@ const vendorShorthandPropertiesHyphenFallbackInterface: Interface = {
 const vendorPropertiesHyphenFallbackInterface: Interface = {
   ...vendorPropertiesHyphenInterface,
   name: INTERFACE_VENDOR_PROPERTIES_HYPHEN_FALLBACK,
-  extends: [vendorLonghandPropertiesHyphenFallbackInterface, vendorShorthandPropertiesHyphenFallbackInterface],
+  extends: [
+    vendorLonghandPropertiesHyphenFallbackInterface,
+    vendorShorthandPropertiesHyphenFallbackInterface,
+  ],
   fallback: true,
 };
 
@@ -752,10 +825,13 @@ export function isAliasProperty(value: PropertyType): value is IPropertyAlias {
 }
 
 function declarable(types: MixedType[]): DeclarableType[] {
-  return types.sort(sorter).map<DeclarableType>(type => {
+  return types.sort(sorter).map<DeclarableType>((type) => {
     switch (type.type) {
       case Type.DataType:
-        return alias(toPascalCase(type.name), type.name in dataTypes ? dataTypes[type.name] : null);
+        return alias(
+          toPascalCase(type.name),
+          type.name in dataTypes ? dataTypes[type.name] : null,
+        );
       default:
         return type;
     }
@@ -773,11 +849,17 @@ function sorter(a: MixedType, b: MixedType) {
 }
 
 function genericsOf(definitions: IPropertyAlias[]) {
-  return Array.from(new Set(([] as IGenerics[]).concat(...definitions.map(definition => definition.generics))));
+  return Array.from(
+    new Set(
+      ([] as IGenerics[]).concat(
+        ...definitions.map((definition) => definition.generics),
+      ),
+    ),
+  );
 }
 
 function lengthIn(types: MixedType[]): boolean {
-  return !types.every(type => {
+  return !types.every((type) => {
     switch (type.type) {
       case Type.Length:
         return false;
@@ -802,11 +884,11 @@ function aliasOf({ name, types }: IDeclaration): IAlias {
 }
 
 function onlyContainsString(types: MixedType[]) {
-  return types.every(type => type.type === Type.String);
+  return types.every((type) => type.type === Type.String);
 }
 
 function onlyContainsNumber(types: MixedType[]) {
-  return types.every(type => type.type === Type.Number);
+  return types.every((type) => type.type === Type.Number);
 }
 
 function declarationNameExists(name: string) {

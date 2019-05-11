@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 const REGEX_LEADING_LETTER = /^(\w)/;
 const REGEX_KEBAB_SEPARATOR = /-(\w)/g;
 const REGEX_VENDOR_PREFIXED = /^-(\w)/;
@@ -11,11 +12,15 @@ export function toPascalCase(kebabCase: string) {
 }
 
 export function toVendorPrefixCase(property: string) {
-  return REGEX_MS_PREFIXED.test(property) ? 'ms' + toPascalCase(property.slice(4)) : toPascalCase(property);
+  return REGEX_MS_PREFIXED.test(property)
+    ? 'ms' + toPascalCase(property.slice(4))
+    : toPascalCase(property);
 }
 
 export function toCamelCase(kebabCase: string) {
-  return kebabCase.replace(REGEX_VENDOR_PREFIXED, toLowerReplacer).replace(REGEX_KEBAB_SEPARATOR, toUpperReplacer);
+  return kebabCase
+    .replace(REGEX_VENDOR_PREFIXED, toLowerReplacer)
+    .replace(REGEX_KEBAB_SEPARATOR, toUpperReplacer);
 }
 
 function toUpperReplacer(substring: string, ...args: string[]): string {

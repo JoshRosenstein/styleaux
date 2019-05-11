@@ -1,12 +1,20 @@
-import * as rawProperties from 'mdn-data/css/properties.json';
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import * as rawSyntaxes from 'mdn-data/css/syntaxes.json';
-import { getPropertyData, getTypesData } from './compat';
-import { createPropertyDataTypeResolver, resolveDataTypes } from './data-types';
-import { IExtendedProperty, properties as patchedProperties, syntaxes as patchedSyntaxes } from './data/patches';
-import { properties as rawSvgProperties, syntaxes as rawSvgSyntaxes } from './data/svg';
-import { error, warn } from './logger';
+import * as rawProperties from 'mdn-data/css/properties.json';
 import parse from './parser';
 import typing, { hasType } from './typer';
+import { error, warn } from './logger';
+import { getPropertyData, getTypesData } from './compat';
+import { createPropertyDataTypeResolver, resolveDataTypes } from './data-types';
+import {
+  properties as rawSvgProperties,
+  syntaxes as rawSvgSyntaxes,
+} from './data/svg';
+import {
+  IExtendedProperty,
+  properties as patchedProperties,
+  syntaxes as patchedSyntaxes,
+} from './data/patches';
 
 export let getProperties = () => {
   const properties: { [property: string]: IExtendedProperty } = {};
@@ -16,7 +24,8 @@ export let getProperties = () => {
       ...rawProperties[name],
       syntax: getPropertySyntax(name),
       shorthand:
-        name in patchedProperties && typeof patchedProperties[name].shorthand === 'boolean'
+        name in patchedProperties &&
+        typeof patchedProperties[name].shorthand === 'boolean'
           ? patchedProperties[name].shorthand
           : Array.isArray(rawProperties[name].computed),
     };
@@ -63,12 +72,18 @@ export let getSyntaxes = () => {
 
 export function isProperty(name: string) {
   return (
-    name in rawProperties || name in rawSvgProperties || (name in patchedProperties && !!patchedProperties[name].syntax)
+    name in rawProperties ||
+    name in rawSvgProperties ||
+    (name in patchedProperties && !!patchedProperties[name].syntax)
   );
 }
 
 export function isSyntax(name: string) {
-  return name in rawSyntaxes || name in rawSvgSyntaxes || (name in patchedSyntaxes && !!patchedSyntaxes[name].syntax);
+  return (
+    name in rawSyntaxes ||
+    name in rawSvgSyntaxes ||
+    (name in patchedSyntaxes && !!patchedSyntaxes[name].syntax)
+  );
 }
 
 const validatedPropertySyntaxes: string[] = [];
@@ -81,7 +96,13 @@ export function getPropertySyntax(name: string) {
     if (rawSyntax && !validatedPropertySyntaxes.includes(name)) {
       const compatibilityData = getPropertyData(name);
 
-      if (!validatePatch(compatibilityData, rawProperties[name].syntax, patch.syntax)) {
+      if (
+        !validatePatch(
+          compatibilityData,
+          rawProperties[name].syntax,
+          patch.syntax,
+        )
+      ) {
         error(
           'The patched property `%s` did not patch the source with anything or was incomplete compared to source',
           name,
@@ -107,13 +128,21 @@ export function getSyntax(name: string) {
   const patch = patchedSyntaxes[name];
 
   const rawSyntax =
-    name in rawSyntaxes ? rawSyntaxes[name].syntax : rawSvgSyntaxes[name] && rawSvgSyntaxes[name].syntax;
+    name in rawSyntaxes
+      ? rawSyntaxes[name].syntax
+      : rawSvgSyntaxes[name] && rawSvgSyntaxes[name].syntax;
 
   if (patch && patch.syntax) {
     if (rawSyntax && !validatedSyntaxes.includes(name)) {
       const compatibilityData = getTypesData(name);
 
-      if (!validatePatch(compatibilityData, rawSyntaxes[name].syntax, patch.syntax)) {
+      if (
+        !validatePatch(
+          compatibilityData,
+          rawSyntaxes[name].syntax,
+          patch.syntax,
+        )
+      ) {
         error(
           'The patched syntax `%s` did not patch the source with anything or was incomplete compared to source',
           name,
@@ -133,7 +162,11 @@ export function getSyntax(name: string) {
   return rawSyntax;
 }
 
-function validatePatch(compat: MDN.CompatData | null, sourceSyntax: string, patchSyntax: string): boolean {
+function validatePatch(
+  compat: MDN.CompatData | null,
+  sourceSyntax: string,
+  patchSyntax: string,
+): boolean {
   // Dissolve all data types to check whether it already exists or not
   const dissolvedSourceTypes = resolveDataTypes(
     typing(parse(sourceSyntax)),

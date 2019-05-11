@@ -1,4 +1,12 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable @typescript-eslint/interface-name-prefix */
+import parse from './parser';
+import typing, { ResolvedType } from './typer';
+import { warn } from './logger';
 import { composeCommentBlock } from './comment';
+import { getProperties, getPropertySyntax } from './data';
+import { properties as rawSvgProperties } from './data/svg';
+import { createPropertyDataTypeResolver, resolveDataTypes } from './data-types';
 import {
   compatNames,
   compatSyntax,
@@ -8,12 +16,6 @@ import {
   isAddedBySome,
   isDeprecated,
 } from './compat';
-import { getProperties, getPropertySyntax } from './data';
-import { createPropertyDataTypeResolver, resolveDataTypes } from './data-types';
-import { properties as rawSvgProperties } from './data/svg';
-import { warn } from './logger';
-import parse from './parser';
-import typing, { ResolvedType } from './typer';
 
 const ALL = 'all';
 
@@ -39,7 +41,9 @@ const propertiesData = getProperties();
 
 const globalCompatibilityData = getTypesData('global_keywords');
 if (!globalCompatibilityData) {
-  throw new Error('Compatibility data for CSS-wide keywords is missing or may have been moved');
+  throw new Error(
+    'Compatibility data for CSS-wide keywords is missing or may have been moved',
+  );
 }
 
 // The CSS-wide keywords are identical to the `all` property
@@ -79,19 +83,23 @@ for (const originalName in propertiesData) {
   if (compatibilityData) {
     const compats = getCompats(compatibilityData);
 
-    if (compats.every(compat => !isAddedBySome(compat))) {
+    if (compats.every((compat) => !isAddedBySome(compat))) {
       // The property needs to be added by some browsers
       continue;
     }
 
     entities = compatSyntax(compatibilityData, entities);
     currentNames = currentNames.concat(
-      ...compats.map(compat => filterMissingProperties(compatNames(compat, originalName))),
+      ...compats.map((compat) =>
+        filterMissingProperties(compatNames(compat, originalName)),
+      ),
     );
     obsoleteNames = obsoleteNames.concat(
-      ...compats.map(compat => filterMissingProperties(compatNames(compat, originalName, true))),
+      ...compats.map((compat) =>
+        filterMissingProperties(compatNames(compat, originalName, true)),
+      ),
     );
-    deprecated = compats.every(compat => isDeprecated(data, compat));
+    deprecated = compats.every((compat) => isDeprecated(data, compat));
   }
 
   if (deprecated) {
@@ -100,7 +108,10 @@ for (const originalName in propertiesData) {
     currentNames = [];
   }
 
-  const types = resolveDataTypes(typing(entities), createPropertyDataTypeResolver(compatibilityData));
+  const types = resolveDataTypes(
+    typing(entities),
+    createPropertyDataTypeResolver(compatibilityData),
+  );
 
   // Remove duplicates
   for (const name of new Set(currentNames)) {
@@ -141,7 +152,10 @@ for (const name in rawSvgProperties) {
       shorthand: false,
       obsolete: false,
       comment: null,
-      types: resolveDataTypes(typing(parse(syntax)), createPropertyDataTypeResolver(compatibilityData)),
+      types: resolveDataTypes(
+        typing(parse(syntax)),
+        createPropertyDataTypeResolver(compatibilityData),
+      ),
     };
   }
 }
@@ -152,7 +166,7 @@ export function isVendorProperty(name: string) {
 
 function filterMissingProperties(names: string[]) {
   // Filter only those which isn't defined in MDN data
-  return names.filter(name => !(name in propertiesData));
+  return names.filter((name) => !(name in propertiesData));
 }
 
 function mergeRecurrent(name: string, property: IProperty) {
@@ -160,7 +174,12 @@ function mergeRecurrent(name: string, property: IProperty) {
     const current = htmlProperties[name];
 
     if (current.name !== property.name) {
-      warn('Property `%s` resolved by `%s` was duplicated by `%s`', name, property.name, current.name);
+      warn(
+        'Property `%s` resolved by `%s` was duplicated by `%s`',
+        name,
+        property.name,
+        current.name,
+      );
     }
 
     return {

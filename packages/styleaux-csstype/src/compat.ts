@@ -1,22 +1,36 @@
-import { Combinator, combinators, Component, componentData, componentGroupData, Entity, EntityType } from './parser';
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-use-before-define */
+import {
+  Combinator,
+  combinators,
+  Component,
+  componentData,
+  componentGroupData,
+  Entity,
+  EntityType,
+} from './parser';
 
 const importsCache: { [cssPath: string]: MDN.CompatData | null } = {};
 
-interface IRegularCompat {
+interface RegularCompat {
   __compat: MDN.Compat;
 }
 
-interface IContextCompat {
-  [context: string]: IRegularCompat;
+interface ContextCompat {
+  [context: string]: RegularCompat;
 }
 
-export function getCompats(data: IRegularCompat | IContextCompat): MDN.Compat[] {
+export function getCompats(data: RegularCompat | ContextCompat): MDN.Compat[] {
   return '__compat' in data
-    ? [(data as IRegularCompat).__compat]
-    : Object.keys(data).map(context => (data as IContextCompat)[context].__compat);
+    ? [(data as RegularCompat).__compat]
+    : Object.keys(data).map(
+        (context) => (data as ContextCompat)[context].__compat,
+      );
 }
 
-export function getSupport(support: MDN.Support | MDN.Support[]): MDN.Support[] {
+export function getSupport(
+  support: MDN.Support | MDN.Support[],
+): MDN.Support[] {
   return Array.isArray(support) ? support : [support];
 }
 
@@ -56,7 +70,11 @@ function getData(type: string, name: string): MDN.CompatData | null {
   }
 }
 
-export function compatNames(compat: MDN.Compat, name: string, onlyRemoved = false): string[] {
+export function compatNames(
+  compat: MDN.Compat,
+  name: string,
+  onlyRemoved = false,
+): string[] {
   const properties: string[] = [];
 
   let browser: MDN.Browsers;
@@ -82,7 +100,10 @@ export function compatNames(compat: MDN.Compat, name: string, onlyRemoved = fals
   return properties;
 }
 
-export function compatSyntax(data: MDN.CompatData, entities: EntityType[]): EntityType[] {
+export function compatSyntax(
+  data: MDN.CompatData,
+  entities: EntityType[],
+): EntityType[] {
   const compatEntities: EntityType[] = [];
 
   for (const entity of entities) {
@@ -91,7 +112,7 @@ export function compatSyntax(data: MDN.CompatData, entities: EntityType[]): Enti
         case Component.Keyword: {
           if (entity.value in data) {
             const compats = getCompats(data[entity.value]);
-            if (compats.every(compat => !isAddedBySome(compat))) {
+            if (compats.every((compat) => !isAddedBySome(compat))) {
               // The keyword needs to be added by some browsers so we remove previous
               // combinator and skip this keyword
               compatEntities.pop();
@@ -105,7 +126,10 @@ export function compatSyntax(data: MDN.CompatData, entities: EntityType[]): Enti
             const alternativeEntities: EntityType[] = [entity];
 
             for (const keyword of alternatives) {
-              alternativeEntities.push(combinators[Combinator.SingleBar], componentData(Component.Keyword, keyword));
+              alternativeEntities.push(
+                combinators[Combinator.SingleBar],
+                componentData(Component.Keyword, keyword),
+              );
             }
 
             compatEntities.push(componentGroupData(alternativeEntities));
@@ -114,7 +138,12 @@ export function compatSyntax(data: MDN.CompatData, entities: EntityType[]): Enti
           break;
         }
         case Component.Group: {
-          compatEntities.push(componentGroupData(compatSyntax(data, entity.entities), entity.multiplier));
+          compatEntities.push(
+            componentGroupData(
+              compatSyntax(data, entity.entities),
+              entity.multiplier,
+            ),
+          );
           continue;
         }
       }
@@ -143,10 +172,16 @@ function alternativeKeywords(data: MDN.CompatData, value: string): string[] {
             !!version.version_added || version.version_added === null;
 
           if (isCurrent) {
-            if (version.prefix && !alternatives.includes(version.prefix + value)) {
+            if (
+              version.prefix &&
+              !alternatives.includes(version.prefix + value)
+            ) {
               alternatives.push(version.prefix + value);
             }
-            if (version.alternative_name && !alternatives.includes(version.alternative_name)) {
+            if (
+              version.alternative_name &&
+              !alternatives.includes(version.alternative_name)
+            ) {
               alternatives.push(version.alternative_name);
             }
           }
@@ -160,7 +195,10 @@ function alternativeKeywords(data: MDN.CompatData, value: string): string[] {
 
 export function isDeprecated(data: { status?: string }, compat?: MDN.Compat) {
   // Assume not deprecated if is status i missing
-  return data.status === 'obsolete' || (!!compat && !!compat.status && compat.status.deprecated);
+  return (
+    data.status === 'obsolete' ||
+    (!!compat && !!compat.status && compat.status.deprecated)
+  );
 }
 
 export function isAddedBySome(compat: MDN.Compat): boolean {
@@ -197,7 +235,8 @@ export function alternativeSelectors(selector: string): string[] {
 
         for (const version of getSupport(support)) {
           // Assume that the version has the property implemented if `null`
-          const isAdded = !!version.version_added || version.version_added === null;
+          const isAdded =
+            !!version.version_added || version.version_added === null;
 
           if (isAdded) {
             if (version.prefix) {
@@ -217,7 +256,10 @@ export function alternativeSelectors(selector: string): string[] {
   return alternatives;
 }
 
-export function alternativeAttributes(name: string, data: MDN.CompatData): string[] {
+export function alternativeAttributes(
+  name: string,
+  data: MDN.CompatData,
+): string[] {
   const alternatives: string[] = [];
   const compats = getCompats(data);
 
@@ -227,7 +269,8 @@ export function alternativeAttributes(name: string, data: MDN.CompatData): strin
 
       for (const version of getSupport(support)) {
         // Assume that the version has the property implemented if `null`
-        const isAdded = !!version.version_added || version.version_added === null;
+        const isAdded =
+          !!version.version_added || version.version_added === null;
 
         if (isAdded) {
           if (version.prefix) {

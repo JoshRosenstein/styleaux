@@ -1,8 +1,8 @@
-import * as chokidar from 'chokidar';
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import * as path from 'path';
+import * as chokidar from 'chokidar';
 import * as prettier from 'prettier';
 import { FLOW_FILENAME, TYPESCRIPT_FILENAME, writeFileAsync } from './utils';
-//import { FLOW_FILENAME, spawnAsync, TYPESCRIPT_FILENAME, writeFileAsync } from './utils';
 
 const ROOT_DIR = __dirname;
 //const TEST_FILENAME = 'typecheck.ts';
@@ -12,26 +12,29 @@ if (process.argv.includes('--start')) {
     .then(() => {
       process.exit(0);
     })
-    .catch(e => {
+    .catch((e) => {
       console.error(e);
       process.exit(1);
     });
 } else if (process.argv.includes('--watch')) {
   trigger()
-    .catch(e => {
+    .catch((e) => {
       console.error(e);
     })
     .then(() => {
       console.info('Done! Watching...');
       let debounce: NodeJS.Timer;
       chokidar
-        .watch(path.join(ROOT_DIR, 'src'), { ignored: '*.json', ignoreInitial: true })
-        .on('all', (event: string) => {
+        .watch(path.join(ROOT_DIR, 'src'), {
+          ignored: '*.json',
+          ignoreInitial: true,
+        })
+        .on('all', (_event: string) => {
           clearTimeout(debounce);
           debounce = setTimeout(
             () =>
               trigger()
-                .catch(e => console.error(e))
+                .catch((e) => console.error(e))
                 .then(() => console.info('Done! Moving on...')),
             300,
           );
@@ -43,9 +46,15 @@ export default async function trigger() {
   console.info('Generating...');
   const output = await create();
   console.info('Formatting...');
-  const [flow, typescript] = await Promise.all([format(output.flow, 'flow'), format(output.typescript, 'typescript')]);
+  const [flow, typescript] = await Promise.all([
+    format(output.flow, 'flow'),
+    format(output.typescript, 'typescript'),
+  ]);
   console.info(`Writing files...`);
-  await Promise.all([writeFileAsync(FLOW_FILENAME, flow), writeFileAsync(TYPESCRIPT_FILENAME, typescript)]);
+  await Promise.all([
+    writeFileAsync(FLOW_FILENAME, flow),
+    writeFileAsync(TYPESCRIPT_FILENAME, typescript),
+  ]);
   console.info('Type checking...');
   //await typecheck();
 }
@@ -62,7 +71,9 @@ async function create() {
 }
 
 async function format(output: string, parser: prettier.BuiltInParserName) {
-  const options = await prettier.resolveConfig(path.join(ROOT_DIR, '.prettierrc'));
+  const options = await prettier.resolveConfig(
+    path.join(ROOT_DIR, '.prettierrc'),
+  );
   try {
     return prettier.format(output, {
       ...options,
