@@ -1,3 +1,4 @@
+import { createGridTemplateColumns } from '../gridTemplateColumns';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createGridTemplateColumns } from '../gridTemplateColumns';
 
 describe('createGridTemplateColumns', () => {
   it('should return a function', () => {
@@ -17,12 +16,16 @@ describe('createGridTemplateColumns', () => {
   });
 
   it('should use `createGridTemplateColumns` as component and css prop', () => {
-    const result = createGridTemplateColumns()({ gridTemplateColumns: 'inherit' });
+    const result = createGridTemplateColumns()({
+      gridTemplateColumns: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ gridTemplateColumns: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = createGridTemplateColumns<'a'>()({ gridTemplateColumns: 'a' });
+    const result = createGridTemplateColumns<'a'>()({
+      gridTemplateColumns: 'a',
+    });
     expect(toStyles(result)).toEqual({ gridTemplateColumns: 'a' });
   });
 
@@ -32,7 +35,11 @@ describe('createGridTemplateColumns', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createGridTemplateColumns<'value',never, IThemeWithoutBreakpoints>({
+    const result = createGridTemplateColumns<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ gridTemplateColumns: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +61,7 @@ describe('createGridTemplateColumns', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       gridTemplateColumns: 'a',
       [MQ.D]: {
         gridTemplateColumns: 'b',

@@ -1,4 +1,4 @@
-import {toMq} from '../toMq'
+import {toMq} from '..'
 
 describe('Basics', () => {
 

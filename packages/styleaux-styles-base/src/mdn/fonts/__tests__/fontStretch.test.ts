@@ -1,3 +1,4 @@
+import { createFontStretch } from '../fontStretch';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFontStretch } from '../fontStretch';
 
 describe('createFontStretch', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createFontStretch', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFontStretch<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFontStretch<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontStretch: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createFontStretch', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createFontStretch<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createFontStretch<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       fontStretch: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createFontStretch', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       fontStretch: 'a',
       [MQ.D]: {
         fontStretch: 'b',

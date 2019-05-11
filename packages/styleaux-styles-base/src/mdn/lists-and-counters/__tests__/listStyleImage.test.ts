@@ -1,3 +1,4 @@
+import { createListStyleImage } from '../listStyleImage';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createListStyleImage } from '../listStyleImage';
 
 describe('createListStyleImage', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createListStyleImage', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createListStyleImage<'value',never, IThemeWithoutBreakpoints>({
+    const result = createListStyleImage<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ listStyleImage: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createListStyleImage', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       listStyleImage: 'a',
       [MQ.D]: {
         listStyleImage: 'b',

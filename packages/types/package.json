@@ -1,0 +1,13 @@
+{
+  "name": "@styleaux/types",
+  "version": "0.0.0-beta.0",
+  "author": "Joshua Rosenstein",
+  "license": "MIT",
+  "main": "",
+  "files": [
+    "index.d.ts"
+  ],
+  "dependencies": {
+    "@styleaux/csstype": "^0.0.0-beta.0"
+  }
+}

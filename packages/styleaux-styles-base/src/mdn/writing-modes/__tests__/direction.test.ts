@@ -1,3 +1,4 @@
+import { createDirection } from '../direction';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createDirection } from '../direction';
 
 describe('createDirection', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createDirection', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createDirection<'value',never, IThemeWithoutBreakpoints>({
+    const result = createDirection<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ direction: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createDirection', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createDirection<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createDirection<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       direction: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createDirection', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       direction: 'a',
       [MQ.D]: {
         direction: 'b',

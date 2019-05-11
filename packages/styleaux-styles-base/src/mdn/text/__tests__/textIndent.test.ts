@@ -1,3 +1,4 @@
+import { createTextIndent } from '../textIndent';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextIndent } from '../textIndent';
 
 describe('createTextIndent', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createTextIndent', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextIndent<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTextIndent<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textIndent: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createTextIndent', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createTextIndent<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createTextIndent<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       textIndent: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createTextIndent', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       textIndent: 'a',
       [MQ.D]: {
         textIndent: 'b',

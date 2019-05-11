@@ -1,3 +1,4 @@
+import { createZIndex } from '../zIndex';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createZIndex } from '../zIndex';
 
 describe('createZIndex', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createZIndex', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createZIndex<'value',never, IThemeWithoutBreakpoints>({
+    const result = createZIndex<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ zIndex: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createZIndex', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createZIndex<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createZIndex<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       zIndex: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createZIndex', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       zIndex: 'a',
       [MQ.D]: {
         zIndex: 'b',

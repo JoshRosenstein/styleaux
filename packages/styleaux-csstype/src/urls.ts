@@ -1,10 +1,10 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 import * as fs from 'fs';
-import * as jsdom from 'jsdom';
 import * as path from 'path';
-import syncRequest = require('sync-request');
+import * as jsdom from 'jsdom';
 import { error, warn } from './logger';
-
-// tslint:disable-next-line:no-var-requires
+import syncRequest = require('sync-request');
 const TurndownService = require('turndown');
 
 const pathToCache = path.join(__dirname, 'data/urls.json');
@@ -25,7 +25,9 @@ function scrapeSummary(url: string): string {
     const htmlContents = syncRequest.default('GET', url).getBody() as string;
 
     const { window } = new jsdom.JSDOM(htmlContents);
-    const summaryElement = window.document.querySelector('#wikiArticle > p:not(:empty)');
+    const summaryElement = window.document.querySelector(
+      '#wikiArticle > p:not(:empty)',
+    );
     window.close();
 
     if (summaryElement) {

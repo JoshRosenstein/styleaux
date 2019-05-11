@@ -1,3 +1,4 @@
+import { createBorderSpacing } from '../borderSpacing';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBorderSpacing } from '../borderSpacing';
 
 describe('createBorderSpacing', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createBorderSpacing', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderSpacing<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBorderSpacing<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ borderSpacing: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,20 +44,18 @@ describe('createBorderSpacing', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createBorderSpacing<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
-      borderSpacing: {
-        all: 'a',
-        D: 'b',
-        T: 'c',
-        M: 'd',
+    const result = createBorderSpacing<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()(
+      {
+        borderSpacing: {
+          all: 'a',
+          D: 'b',
+          T: 'c',
+          M: 'd',
+        },
+        theme,
       },
-      theme,
-    });
-   expect(toStyles(result)).toEqual({
+    );
+    expect(toStyles(result)).toEqual({
       borderSpacing: 'a',
       [MQ.D]: {
         borderSpacing: 'b',

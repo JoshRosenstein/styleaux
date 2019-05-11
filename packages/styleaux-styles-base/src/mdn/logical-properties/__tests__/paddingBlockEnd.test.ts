@@ -1,3 +1,4 @@
+import { createPaddingBlockEnd } from '../paddingBlockEnd';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createPaddingBlockEnd } from '../paddingBlockEnd';
 
 describe('createPaddingBlockEnd', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createPaddingBlockEnd', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createPaddingBlockEnd<'value',never, IThemeWithoutBreakpoints>({
+    const result = createPaddingBlockEnd<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ paddingBlockEnd: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createPaddingBlockEnd', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       paddingBlockEnd: 'a',
       [MQ.D]: {
         paddingBlockEnd: 'b',

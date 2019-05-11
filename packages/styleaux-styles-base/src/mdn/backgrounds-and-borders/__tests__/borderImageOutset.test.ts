@@ -1,3 +1,4 @@
+import { createBorderImageOutset } from '../borderImageOutset';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBorderImageOutset } from '../borderImageOutset';
 
 describe('createBorderImageOutset', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createBorderImageOutset', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderImageOutset<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBorderImageOutset<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ borderImageOutset: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createBorderImageOutset', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       borderImageOutset: 'a',
       [MQ.D]: {
         borderImageOutset: 'b',

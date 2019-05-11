@@ -2,11 +2,17 @@ import { InsetBlockStartProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
-const INSETBLOCKSTART='insetBlockStart'
+const INSETBLOCKSTART = 'insetBlockStart';
 
-export interface InsetBlockStartProps<T=InsetBlockStartProperty> {
+export interface InsetBlockStartProps<T = InsetBlockStartProperty> {
   /**
    * The **`inset-block-start`** CSS property defines the logical block start offset of an element, which maps to a physical inset depending on the element's writing mode, directionality, and text orientation. It corresponds to the `top`, `right`, `bottom`, or `left` property depending on the values defined for `writing-mode`, `direction`, and `text-orientation`.
+   *
+   * **Initial value**: `auto`
+   *
+   * | Chrome | Firefox | Safari | Edge | IE  |
+   * | :----: | :-----: | :----: | :--: | :-: |
+   * |  n/a   | **63**  |   No   |  No  | No  |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-block-start
    */
@@ -16,20 +22,27 @@ export interface InsetBlockStartProps<T=InsetBlockStartProperty> {
 export const createInsetBlockStart = <
   T = InsetBlockStartProperty,
   Media = never,
-  Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<InsetBlockStartProps<T>,Theme>,'key'| 'transformValue'>> =
-{}) =>
-  style<InsetBlockStartProps<T>,Theme,Media>({
-    cssProp:INSETBLOCKSTART,
-    prop:INSETBLOCKSTART,
+  Theme = never
+>({
+  key,
+  transformValue,
+}: Partial<
+  Pick<StyleOptions<InsetBlockStartProps<T>, Theme>, 'key' | 'transformValue'>
+> = {}) =>
+  style<InsetBlockStartProps<T>, Theme, Media>({
+    cssProp: INSETBLOCKSTART,
+    prop: INSETBLOCKSTART,
     key,
     transformValue,
-  })
+  });
 
-export const createInsetBlockStartRule = <T = InsetBlockStartProperty, P=unknown>(
-  transformer?: GetValue<T,P>,
-) => styler<T,P>({cssProp: INSETBLOCKSTART, getValue: transformer})
+export const createInsetBlockStartRule = <
+  T = InsetBlockStartProperty,
+  P = unknown
+>(
+  transformer?: GetValue<T, P>,
+) => styler<T, P>({ cssProp: INSETBLOCKSTART, getValue: transformer });
 
-export const insetBlockStart =createInsetBlockStart()
+export const insetBlockStart = createInsetBlockStart();
 
-export const insetBlockStartRule =createInsetBlockStartRule()
+export const insetBlockStartRule = createInsetBlockStartRule();

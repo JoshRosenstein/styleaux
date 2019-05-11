@@ -1,3 +1,4 @@
+import { createMarginRight } from '../marginRight';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMarginRight } from '../marginRight';
 
 describe('createMarginRight', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createMarginRight', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMarginRight<'value',never, IThemeWithoutBreakpoints>({
+    const result = createMarginRight<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ marginRight: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createMarginRight', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createMarginRight<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createMarginRight<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       marginRight: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createMarginRight', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       marginRight: 'a',
       [MQ.D]: {
         marginRight: 'b',

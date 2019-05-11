@@ -1,3 +1,4 @@
+import { createWillChange } from '../willChange';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createWillChange } from '../willChange';
 
 describe('createWillChange', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createWillChange', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createWillChange<'value',never, IThemeWithoutBreakpoints>({
+    const result = createWillChange<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ willChange: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createWillChange', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createWillChange<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createWillChange<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       willChange: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createWillChange', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       willChange: 'a',
       [MQ.D]: {
         willChange: 'b',

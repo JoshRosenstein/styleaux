@@ -1,3 +1,4 @@
+import { createTranslate } from '../translate';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTranslate } from '../translate';
 
 describe('createTranslate', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createTranslate', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTranslate<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTranslate<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ translate: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createTranslate', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createTranslate<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createTranslate<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       translate: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createTranslate', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       translate: 'a',
       [MQ.D]: {
         translate: 'b',

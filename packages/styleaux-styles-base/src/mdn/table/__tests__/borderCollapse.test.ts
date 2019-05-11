@@ -1,3 +1,4 @@
+import { createBorderCollapse } from '../borderCollapse';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBorderCollapse } from '../borderCollapse';
 
 describe('createBorderCollapse', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createBorderCollapse', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderCollapse<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBorderCollapse<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ borderCollapse: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createBorderCollapse', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       borderCollapse: 'a',
       [MQ.D]: {
         borderCollapse: 'b',

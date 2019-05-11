@@ -1,15 +1,15 @@
-'use strict'
+'use strict';
 
-module.exports = api => {
-  const isTest = api.env('test')
+module.exports = (api) => {
+  const isTest = api.env('test');
 
-  api.cache(() => JSON.stringify({isTest}))
+  api.cache(() => JSON.stringify({ isTest }));
 
-  const presets = []
-  const plugins = []
+  const presets = [];
+  const plugins = [];
 
   if (isTest) {
-    presets.push(['@babel/env', {targets: {node: true}}])
+    presets.push(['@babel/env', { targets: { node: true } }]);
   } else {
     // plugins.push([
     //   ('transform-module-imports',
@@ -23,8 +23,8 @@ module.exports = api => {
     // ])
   }
 
-  return {presets, plugins}
-}
+  return { presets, plugins };
+};
 
 // module.exports = api => {
 //   const isTest = api.env('test')

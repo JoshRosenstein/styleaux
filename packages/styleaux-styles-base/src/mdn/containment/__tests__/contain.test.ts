@@ -1,3 +1,4 @@
+import { createContain } from '../contain';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createContain } from '../contain';
 
 describe('createContain', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createContain', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createContain<'value',never, IThemeWithoutBreakpoints>({
+    const result = createContain<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ contain: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createContain', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createContain<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createContain<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       contain: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createContain', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       contain: 'a',
       [MQ.D]: {
         contain: 'b',

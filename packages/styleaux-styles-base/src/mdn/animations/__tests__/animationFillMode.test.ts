@@ -1,3 +1,4 @@
+import { createAnimationFillMode } from '../animationFillMode';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createAnimationFillMode } from '../animationFillMode';
 
 describe('createAnimationFillMode', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createAnimationFillMode', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createAnimationFillMode<'value',never, IThemeWithoutBreakpoints>({
+    const result = createAnimationFillMode<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ animationFillMode: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createAnimationFillMode', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       animationFillMode: 'a',
       [MQ.D]: {
         animationFillMode: 'b',

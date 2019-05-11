@@ -1,3 +1,4 @@
+import { createBackgroundPosition } from '../backgroundPosition';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBackgroundPosition } from '../backgroundPosition';
 
 describe('createBackgroundPosition', () => {
   it('should return a function', () => {
@@ -17,7 +16,9 @@ describe('createBackgroundPosition', () => {
   });
 
   it('should use `createBackgroundPosition` as component and css prop', () => {
-    const result = createBackgroundPosition()({ backgroundPosition: 'inherit' });
+    const result = createBackgroundPosition()({
+      backgroundPosition: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ backgroundPosition: 'inherit' });
   });
 
@@ -32,7 +33,11 @@ describe('createBackgroundPosition', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBackgroundPosition<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBackgroundPosition<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ backgroundPosition: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +59,7 @@ describe('createBackgroundPosition', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       backgroundPosition: 'a',
       [MQ.D]: {
         backgroundPosition: 'b',

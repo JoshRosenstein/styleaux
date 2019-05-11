@@ -2,11 +2,18 @@ import { FlexWrapProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
-const FLEXWRAP='flexWrap'
+const FLEXWRAP = 'flexWrap';
 
-export interface FlexWrapProps<T=FlexWrapProperty> {
+export interface FlexWrapProps<T = FlexWrapProperty> {
   /**
    * The **`flex-wrap`** CSS property sets whether flex items are forced onto one line or can wrap onto multiple lines. If wrapping is allowed, it sets the direction that lines are stacked.
+   *
+   * **Initial value**: `nowrap`
+   *
+   * |  Chrome  | Firefox | Safari |  Edge  |   IE   |
+   * | :------: | :-----: | :----: | :----: | :----: |
+   * |  **29**  | **28**  | **9**  | **12** | **11** |
+   * | 21 _-x-_ |         |        |        |        |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-wrap
    */
@@ -16,20 +23,24 @@ export interface FlexWrapProps<T=FlexWrapProperty> {
 export const createFlexWrap = <
   T = FlexWrapProperty,
   Media = never,
-  Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<FlexWrapProps<T>,Theme>,'key'| 'transformValue'>> =
-{}) =>
-  style<FlexWrapProps<T>,Theme,Media>({
-    cssProp:FLEXWRAP,
-    prop:FLEXWRAP,
+  Theme = never
+>({
+  key,
+  transformValue,
+}: Partial<
+  Pick<StyleOptions<FlexWrapProps<T>, Theme>, 'key' | 'transformValue'>
+> = {}) =>
+  style<FlexWrapProps<T>, Theme, Media>({
+    cssProp: FLEXWRAP,
+    prop: FLEXWRAP,
     key,
     transformValue,
-  })
+  });
 
-export const createFlexWrapRule = <T = FlexWrapProperty, P=unknown>(
-  transformer?: GetValue<T,P>,
-) => styler<T,P>({cssProp: FLEXWRAP, getValue: transformer})
+export const createFlexWrapRule = <T = FlexWrapProperty, P = unknown>(
+  transformer?: GetValue<T, P>,
+) => styler<T, P>({ cssProp: FLEXWRAP, getValue: transformer });
 
-export const flexWrap =createFlexWrap()
+export const flexWrap = createFlexWrap();
 
-export const flexWrapRule =createFlexWrapRule()
+export const flexWrapRule = createFlexWrapRule();

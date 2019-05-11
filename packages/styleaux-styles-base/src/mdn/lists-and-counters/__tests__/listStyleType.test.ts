@@ -1,3 +1,4 @@
+import { createListStyleType } from '../listStyleType';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createListStyleType } from '../listStyleType';
 
 describe('createListStyleType', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createListStyleType', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createListStyleType<'value',never, IThemeWithoutBreakpoints>({
+    const result = createListStyleType<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ listStyleType: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,20 +44,18 @@ describe('createListStyleType', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createListStyleType<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
-      listStyleType: {
-        all: 'a',
-        D: 'b',
-        T: 'c',
-        M: 'd',
+    const result = createListStyleType<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()(
+      {
+        listStyleType: {
+          all: 'a',
+          D: 'b',
+          T: 'c',
+          M: 'd',
+        },
+        theme,
       },
-      theme,
-    });
-   expect(toStyles(result)).toEqual({
+    );
+    expect(toStyles(result)).toEqual({
       listStyleType: 'a',
       [MQ.D]: {
         listStyleType: 'b',

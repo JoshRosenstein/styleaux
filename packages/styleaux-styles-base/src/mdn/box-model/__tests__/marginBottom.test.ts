@@ -1,3 +1,4 @@
+import { createMarginBottom } from '../marginBottom';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMarginBottom } from '../marginBottom';
 
 describe('createMarginBottom', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createMarginBottom', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMarginBottom<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ marginBottom: 'value', theme: themeWithoutBreakpoints });
+    const result = createMarginBottom<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ marginBottom: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       marginBottom: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createMarginBottom<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createMarginBottom<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       marginBottom: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createMarginBottom', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       marginBottom: 'a',
       [MQ.D]: {
         marginBottom: 'b',

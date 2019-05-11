@@ -1,3 +1,4 @@
+import { createTextSizeAdjust } from '../textSizeAdjust';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextSizeAdjust } from '../textSizeAdjust';
 
 describe('createTextSizeAdjust', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createTextSizeAdjust', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextSizeAdjust<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTextSizeAdjust<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ textSizeAdjust: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createTextSizeAdjust', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       textSizeAdjust: 'a',
       [MQ.D]: {
         textSizeAdjust: 'b',

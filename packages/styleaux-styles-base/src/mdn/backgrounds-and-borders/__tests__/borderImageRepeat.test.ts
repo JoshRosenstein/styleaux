@@ -1,3 +1,4 @@
+import { createBorderImageRepeat } from '../borderImageRepeat';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBorderImageRepeat } from '../borderImageRepeat';
 
 describe('createBorderImageRepeat', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createBorderImageRepeat', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderImageRepeat<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBorderImageRepeat<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ borderImageRepeat: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createBorderImageRepeat', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       borderImageRepeat: 'a',
       [MQ.D]: {
         borderImageRepeat: 'b',

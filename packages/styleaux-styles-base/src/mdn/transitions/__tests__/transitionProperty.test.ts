@@ -1,3 +1,4 @@
+import { createTransitionProperty } from '../transitionProperty';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTransitionProperty } from '../transitionProperty';
 
 describe('createTransitionProperty', () => {
   it('should return a function', () => {
@@ -17,7 +16,9 @@ describe('createTransitionProperty', () => {
   });
 
   it('should use `createTransitionProperty` as component and css prop', () => {
-    const result = createTransitionProperty()({ transitionProperty: 'inherit' });
+    const result = createTransitionProperty()({
+      transitionProperty: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ transitionProperty: 'inherit' });
   });
 
@@ -32,7 +33,11 @@ describe('createTransitionProperty', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTransitionProperty<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTransitionProperty<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ transitionProperty: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +59,7 @@ describe('createTransitionProperty', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       transitionProperty: 'a',
       [MQ.D]: {
         transitionProperty: 'b',

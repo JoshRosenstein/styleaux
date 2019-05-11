@@ -1,3 +1,4 @@
+import { createTextAlign } from '../textAlign';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextAlign } from '../textAlign';
 
 describe('createTextAlign', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createTextAlign', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextAlign<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTextAlign<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textAlign: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createTextAlign', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createTextAlign<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createTextAlign<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       textAlign: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createTextAlign', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       textAlign: 'a',
       [MQ.D]: {
         textAlign: 'b',

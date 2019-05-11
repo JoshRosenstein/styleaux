@@ -2,11 +2,17 @@ import { PositionProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
-const POSITION='position'
+const POSITION = 'position';
 
-export interface PositionProps<T=PositionProperty> {
+export interface PositionProps<T = PositionProperty> {
   /**
    * The **`position`** CSS property sets how an element is positioned in a document. The `top`, `right`, `bottom`, and `left` properties determine the final location of positioned elements.
+   *
+   * **Initial value**: `static`
+   *
+   * | Chrome | Firefox | Safari |  Edge  |  IE   |
+   * | :----: | :-----: | :----: | :----: | :---: |
+   * | **1**  |  **1**  | **1**  | **12** | **4** |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/position
    */
@@ -16,20 +22,24 @@ export interface PositionProps<T=PositionProperty> {
 export const createPosition = <
   T = PositionProperty,
   Media = never,
-  Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<PositionProps<T>,Theme>,'key'| 'transformValue'>> =
-{}) =>
-  style<PositionProps<T>,Theme,Media>({
-    cssProp:POSITION,
-    prop:POSITION,
+  Theme = never
+>({
+  key,
+  transformValue,
+}: Partial<
+  Pick<StyleOptions<PositionProps<T>, Theme>, 'key' | 'transformValue'>
+> = {}) =>
+  style<PositionProps<T>, Theme, Media>({
+    cssProp: POSITION,
+    prop: POSITION,
     key,
     transformValue,
-  })
+  });
 
-export const createPositionRule = <T = PositionProperty, P=unknown>(
-  transformer?: GetValue<T,P>,
-) => styler<T,P>({cssProp: POSITION, getValue: transformer})
+export const createPositionRule = <T = PositionProperty, P = unknown>(
+  transformer?: GetValue<T, P>,
+) => styler<T, P>({ cssProp: POSITION, getValue: transformer });
 
-export const position =createPosition()
+export const position = createPosition();
 
-export const positionRule =createPositionRule()
+export const positionRule = createPositionRule();

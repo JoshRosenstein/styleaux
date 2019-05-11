@@ -1,7 +1,16 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
+import parse from './parser';
+import typing, {
+  addType,
+  DataType,
+  hasType,
+  IDataType,
+  ResolvedType,
+  Type,
+  TypeType,
+} from './typer';
 import { compatSyntax } from './compat';
 import { getPropertySyntax, getSyntax } from './data';
-import parse from './parser';
-import typing, { addType, DataType, hasType, IDataType, ResolvedType, Type, TypeType } from './typer';
 
 const dataTypes: { [key: string]: ResolvedType[] } = {};
 
@@ -21,7 +30,10 @@ export function resolveDataTypes(
 
         if (resolvedDataType.length >= min) {
           // Dissolve data type if it's too small
-          resolvedDataTypes = addType(resolvedDataTypes, addDataType(type.name, resolvedDataType));
+          resolvedDataTypes = addType(
+            resolvedDataTypes,
+            addDataType(type.name, resolvedDataType),
+          );
         } else {
           for (const resolvedType of resolvedDataType) {
             resolvedDataTypes = addType(resolvedDataTypes, resolvedType);
@@ -48,14 +60,27 @@ export function resolveDataTypes(
 
 function simpleDataTypeResolver(dataType: IDataType): ResolvedType[] {
   const syntax = getSyntax(dataType.name);
-  return syntax ? resolveDataTypes(typing(parse(syntax)), simpleDataTypeResolver) : [{ type: Type.String }];
+  return syntax
+    ? resolveDataTypes(typing(parse(syntax)), simpleDataTypeResolver)
+    : [{ type: Type.String }];
 }
 
-export function createPropertyDataTypeResolver(data: MDN.CompatData | null, min?: number) {
-  const resolver: (dataType: IDataType) => ResolvedType[] = dataType => {
-    const syntax = dataType.type === Type.DataType ? getSyntax(dataType.name) : getPropertySyntax(dataType.name);
+export function createPropertyDataTypeResolver(
+  data: MDN.CompatData | null,
+  _min?: number,
+) {
+  const resolver: (dataType: IDataType) => ResolvedType[] = (dataType) => {
+    const syntax =
+      dataType.type === Type.DataType
+        ? getSyntax(dataType.name)
+        : getPropertySyntax(dataType.name);
     return syntax
-      ? resolveDataTypes(data ? typing(compatSyntax(data, parse(syntax))) : typing(parse(syntax)), resolver)
+      ? resolveDataTypes(
+          data
+            ? typing(compatSyntax(data, parse(syntax)))
+            : typing(parse(syntax)),
+          resolver,
+        )
       : [{ type: Type.String }];
   };
 

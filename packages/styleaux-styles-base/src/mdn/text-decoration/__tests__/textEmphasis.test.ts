@@ -1,3 +1,4 @@
+import { createTextEmphasis } from '../textEmphasis';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextEmphasis } from '../textEmphasis';
 
 describe('createTextEmphasis', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createTextEmphasis', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextEmphasis<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ textEmphasis: 'value', theme: themeWithoutBreakpoints });
+    const result = createTextEmphasis<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ textEmphasis: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       textEmphasis: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createTextEmphasis<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createTextEmphasis<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       textEmphasis: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createTextEmphasis', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       textEmphasis: 'a',
       [MQ.D]: {
         textEmphasis: 'b',

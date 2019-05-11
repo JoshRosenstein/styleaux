@@ -1,8 +1,15 @@
+/* eslint-disable @typescript-eslint/interface-name-prefix */
 import * as atRules from 'mdn-data/css/at-rules.json';
-import { compatNames, compatSyntax, getAtRuleData, getCompats, isAddedBySome } from './compat';
-import { resolveDataTypes } from './data-types';
 import parse from './parser';
 import typing, { IStringLiteral, ResolvedType, Type } from './typer';
+import { resolveDataTypes } from './data-types';
+import {
+  compatNames,
+  compatSyntax,
+  getAtRuleData,
+  getCompats,
+  isAddedBySome,
+} from './compat';
 
 interface IDescriptor {
   name: string;
@@ -39,18 +46,18 @@ export let getAtRules = () => {
         if (compatibilityData && descriptor in compatibilityData) {
           const compats = getCompats(compatibilityData[descriptor]);
 
-          if (compats.every(compat => !isAddedBySome(compat))) {
+          if (compats.every((compat) => !isAddedBySome(compat))) {
             // The property needs to be added by some browsers
             continue;
           }
 
           entities = compatSyntax(compatibilityData, entities);
           properties = properties.concat(
-            ...compats.map(compat =>
+            ...compats.map((compat) =>
               // We mix current and obsolete for now
               compatNames(compat, descriptor)
                 .concat(compatNames(compat, descriptor, true))
-                .filter(property => !(property in atRule.descriptors)),
+                .filter((property) => !(property in atRule.descriptors)),
             ),
           );
         }

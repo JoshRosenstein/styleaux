@@ -1,3 +1,4 @@
+import { createColumnRuleWidth } from '../columnRuleWidth';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createColumnRuleWidth } from '../columnRuleWidth';
 
 describe('createColumnRuleWidth', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createColumnRuleWidth', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createColumnRuleWidth<'value',never, IThemeWithoutBreakpoints>({
+    const result = createColumnRuleWidth<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ columnRuleWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createColumnRuleWidth', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       columnRuleWidth: 'a',
       [MQ.D]: {
         columnRuleWidth: 'b',

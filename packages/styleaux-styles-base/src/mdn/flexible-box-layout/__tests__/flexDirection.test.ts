@@ -1,3 +1,4 @@
+import { createFlexDirection } from '../flexDirection';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFlexDirection } from '../flexDirection';
 
 describe('createFlexDirection', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createFlexDirection', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFlexDirection<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFlexDirection<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ flexDirection: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,20 +44,18 @@ describe('createFlexDirection', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createFlexDirection<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
-      flexDirection: {
-        all: 'a',
-        D: 'b',
-        T: 'c',
-        M: 'd',
+    const result = createFlexDirection<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()(
+      {
+        flexDirection: {
+          all: 'a',
+          D: 'b',
+          T: 'c',
+          M: 'd',
+        },
+        theme,
       },
-      theme,
-    });
-   expect(toStyles(result)).toEqual({
+    );
+    expect(toStyles(result)).toEqual({
       flexDirection: 'a',
       [MQ.D]: {
         flexDirection: 'b',

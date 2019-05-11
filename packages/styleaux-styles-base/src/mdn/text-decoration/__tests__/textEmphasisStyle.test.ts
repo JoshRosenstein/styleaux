@@ -1,3 +1,4 @@
+import { createTextEmphasisStyle } from '../textEmphasisStyle';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextEmphasisStyle } from '../textEmphasisStyle';
 
 describe('createTextEmphasisStyle', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createTextEmphasisStyle', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextEmphasisStyle<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTextEmphasisStyle<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ textEmphasisStyle: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createTextEmphasisStyle', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       textEmphasisStyle: 'a',
       [MQ.D]: {
         textEmphasisStyle: 'b',

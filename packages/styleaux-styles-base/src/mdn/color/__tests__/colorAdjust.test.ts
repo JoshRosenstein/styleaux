@@ -1,3 +1,4 @@
+import { createColorAdjust } from '../colorAdjust';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createColorAdjust } from '../colorAdjust';
 
 describe('createColorAdjust', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createColorAdjust', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createColorAdjust<'value',never, IThemeWithoutBreakpoints>({
+    const result = createColorAdjust<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ colorAdjust: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createColorAdjust', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createColorAdjust<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createColorAdjust<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       colorAdjust: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createColorAdjust', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       colorAdjust: 'a',
       [MQ.D]: {
         colorAdjust: 'b',

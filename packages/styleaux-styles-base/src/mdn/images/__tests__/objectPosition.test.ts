@@ -1,3 +1,4 @@
+import { createObjectPosition } from '../objectPosition';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createObjectPosition } from '../objectPosition';
 
 describe('createObjectPosition', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createObjectPosition', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createObjectPosition<'value',never, IThemeWithoutBreakpoints>({
+    const result = createObjectPosition<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ objectPosition: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createObjectPosition', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       objectPosition: 'a',
       [MQ.D]: {
         objectPosition: 'b',

@@ -1,3 +1,4 @@
+import { createPlaceItems } from '../placeItems';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createPlaceItems } from '../placeItems';
 
 describe('createPlaceItems', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createPlaceItems', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createPlaceItems<'value',never, IThemeWithoutBreakpoints>({
+    const result = createPlaceItems<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ placeItems: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createPlaceItems', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createPlaceItems<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createPlaceItems<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       placeItems: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createPlaceItems', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       placeItems: 'a',
       [MQ.D]: {
         placeItems: 'b',

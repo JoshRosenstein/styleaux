@@ -1,21 +1,33 @@
-import build from './build';
+/* eslint-disable @typescript-eslint/no-use-before-define */
 // @ts-ignore
 import * as packageJson from './package.json';
-import { FLOW_FILENAME, getJsonAsync, questionAsync, spawnAsync, TYPESCRIPT_FILENAME, writeFileAsync } from './utils';
+import build from './build';
+import {
+  FLOW_FILENAME,
+  getJsonAsync,
+  questionAsync,
+  spawnAsync,
+  TYPESCRIPT_FILENAME,
+  writeFileAsync,
+} from './utils';
 
 async function update() {
-  if ((await spawnAsync('git', 'status', '--porcelain')) !== '') {
-    console.error('Your working directory needs to be clean!');
-    process.exit(1);
-  }
+  // if ((await spawnAsync('git', 'status', '--porcelain')) !== '') {
+  //   console.error('Your working directory needs to be clean!');
+  //   process.exit(1);
+  // }
 
   console.info('Check for updates...');
 
   const MDN_DATA = 'mdn-data';
   const MDN_COMPAT = 'mdn-browser-compat-data';
 
-  const [mdnDataRepo, currentMdnDataCommit] = packageJson.devDependencies[MDN_DATA].split('#');
-  const [mdnCompatRepo, currentMdnCompatCommit] = packageJson.devDependencies[MDN_COMPAT].split('#');
+  const [mdnDataRepo, currentMdnDataCommit] = packageJson.devDependencies[
+    MDN_DATA
+  ].split('#');
+  const [mdnCompatRepo, currentMdnCompatCommit] = packageJson.devDependencies[
+    MDN_COMPAT
+  ].split('#');
 
   const [mdnDataMaster, mdnCompatMaster] = [
     await getJsonAsync({
@@ -33,14 +45,24 @@ async function update() {
   const latestMdnDataCommit = mdnDataMaster.commit.sha;
   const latestMdnCompatCommit = mdnCompatMaster.commit.sha;
 
-  if (latestMdnDataCommit !== currentMdnDataCommit || latestMdnCompatCommit !== currentMdnCompatCommit) {
+  if (
+    latestMdnDataCommit !== currentMdnDataCommit ||
+    latestMdnCompatCommit !== currentMdnCompatCommit
+  ) {
     console.info('Update found!');
     console.info('Upgrading...');
 
-    packageJson.devDependencies[MDN_DATA] = `${mdnDataRepo}#${latestMdnDataCommit}`;
-    packageJson.devDependencies[MDN_COMPAT] = `${mdnCompatRepo}#${latestMdnCompatCommit}`;
+    packageJson.devDependencies[
+      MDN_DATA
+    ] = `${mdnDataRepo}#${latestMdnDataCommit}`;
+    packageJson.devDependencies[
+      MDN_COMPAT
+    ] = `${mdnCompatRepo}#${latestMdnCompatCommit}`;
 
-    await writeFileAsync('./package.json', JSON.stringify(packageJson, null, 2) + '\n');
+    await writeFileAsync(
+      './package.json',
+      JSON.stringify(packageJson, null, 2) + '\n',
+    );
     await install();
 
     try {
@@ -50,7 +72,13 @@ async function update() {
     }
 
     const [indexDtsDiff, indexFlowDiff] = [
-      await spawnAsync('git', '--no-pager', 'diff', '--color', TYPESCRIPT_FILENAME),
+      await spawnAsync(
+        'git',
+        '--no-pager',
+        'diff',
+        '--color',
+        TYPESCRIPT_FILENAME,
+      ),
       await spawnAsync('git', '--no-pager', 'diff', '--color', FLOW_FILENAME),
     ];
 
@@ -59,7 +87,9 @@ async function update() {
       console.info(indexDtsDiff);
       console.info(indexFlowDiff);
 
-      const doPrepare = await questionAsync('Do you want to prepare a release for this? (y/n) ');
+      const doPrepare = await questionAsync(
+        'Do you want to prepare a release for this? (y/n) ',
+      );
 
       if (doPrepare === 'y') {
         await spawnAsync('git', 'commit', '-am', 'Bump MDN');
@@ -71,7 +101,10 @@ async function update() {
         packageJson.version = version;
 
         try {
-          await writeFileAsync('./package.json', JSON.stringify(packageJson, null, 2) + '\n');
+          await writeFileAsync(
+            './package.json',
+            JSON.stringify(packageJson, null, 2) + '\n',
+          );
           await spawnAsync('git', 'commit', '-am', tag);
           await spawnAsync('git', 'tag', tag);
         } catch (e) {

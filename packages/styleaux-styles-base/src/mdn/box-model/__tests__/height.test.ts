@@ -1,3 +1,4 @@
+import { createHeight } from '../height';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createHeight } from '../height';
 
 describe('createHeight', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createHeight', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createHeight<'value',never, IThemeWithoutBreakpoints>({
+    const result = createHeight<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ height: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createHeight', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createHeight<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createHeight<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       height: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createHeight', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       height: 'a',
       [MQ.D]: {
         height: 'b',

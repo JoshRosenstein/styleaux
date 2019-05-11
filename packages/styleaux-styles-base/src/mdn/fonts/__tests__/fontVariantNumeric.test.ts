@@ -1,3 +1,4 @@
+import { createFontVariantNumeric } from '../fontVariantNumeric';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFontVariantNumeric } from '../fontVariantNumeric';
 
 describe('createFontVariantNumeric', () => {
   it('should return a function', () => {
@@ -17,7 +16,9 @@ describe('createFontVariantNumeric', () => {
   });
 
   it('should use `createFontVariantNumeric` as component and css prop', () => {
-    const result = createFontVariantNumeric()({ fontVariantNumeric: 'inherit' });
+    const result = createFontVariantNumeric()({
+      fontVariantNumeric: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ fontVariantNumeric: 'inherit' });
   });
 
@@ -32,7 +33,11 @@ describe('createFontVariantNumeric', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFontVariantNumeric<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFontVariantNumeric<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ fontVariantNumeric: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +59,7 @@ describe('createFontVariantNumeric', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       fontVariantNumeric: 'a',
       [MQ.D]: {
         fontVariantNumeric: 'b',

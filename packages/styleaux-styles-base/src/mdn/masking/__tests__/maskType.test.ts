@@ -1,3 +1,4 @@
+import { createMaskType } from '../maskType';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMaskType } from '../maskType';
 
 describe('createMaskType', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createMaskType', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMaskType<'value',never, IThemeWithoutBreakpoints>({
+    const result = createMaskType<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ maskType: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createMaskType', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createMaskType<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createMaskType<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       maskType: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createMaskType', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       maskType: 'a',
       [MQ.D]: {
         maskType: 'b',

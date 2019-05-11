@@ -1,3 +1,4 @@
+import { createTextCombineUpright } from '../textCombineUpright';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextCombineUpright } from '../textCombineUpright';
 
 describe('createTextCombineUpright', () => {
   it('should return a function', () => {
@@ -17,7 +16,9 @@ describe('createTextCombineUpright', () => {
   });
 
   it('should use `createTextCombineUpright` as component and css prop', () => {
-    const result = createTextCombineUpright()({ textCombineUpright: 'inherit' });
+    const result = createTextCombineUpright()({
+      textCombineUpright: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ textCombineUpright: 'inherit' });
   });
 
@@ -32,7 +33,11 @@ describe('createTextCombineUpright', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextCombineUpright<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTextCombineUpright<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ textCombineUpright: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +59,7 @@ describe('createTextCombineUpright', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       textCombineUpright: 'a',
       [MQ.D]: {
         textCombineUpright: 'b',

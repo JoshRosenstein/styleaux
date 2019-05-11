@@ -1,3 +1,4 @@
+import { createOverflowAnchor } from '../overflowAnchor';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createOverflowAnchor } from '../overflowAnchor';
 
 describe('createOverflowAnchor', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createOverflowAnchor', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createOverflowAnchor<'value',never, IThemeWithoutBreakpoints>({
+    const result = createOverflowAnchor<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ overflowAnchor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createOverflowAnchor', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       overflowAnchor: 'a',
       [MQ.D]: {
         overflowAnchor: 'b',

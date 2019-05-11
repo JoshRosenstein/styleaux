@@ -1,3 +1,4 @@
+import { createColumnRuleStyle } from '../columnRuleStyle';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createColumnRuleStyle } from '../columnRuleStyle';
 
 describe('createColumnRuleStyle', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createColumnRuleStyle', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createColumnRuleStyle<'value',never, IThemeWithoutBreakpoints>({
+    const result = createColumnRuleStyle<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ columnRuleStyle: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createColumnRuleStyle', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       columnRuleStyle: 'a',
       [MQ.D]: {
         columnRuleStyle: 'b',

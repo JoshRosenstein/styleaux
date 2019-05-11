@@ -1,3 +1,4 @@
+import { createBreakAfter } from '../breakAfter';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBreakAfter } from '../breakAfter';
 
 describe('createBreakAfter', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createBreakAfter', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBreakAfter<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBreakAfter<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ breakAfter: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createBreakAfter', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createBreakAfter<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createBreakAfter<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       breakAfter: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createBreakAfter', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       breakAfter: 'a',
       [MQ.D]: {
         breakAfter: 'b',

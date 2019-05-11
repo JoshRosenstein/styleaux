@@ -1,3 +1,4 @@
+import { createRowGap } from '../rowGap';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createRowGap } from '../rowGap';
 
 describe('createRowGap', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createRowGap', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createRowGap<'value',never, IThemeWithoutBreakpoints>({
+    const result = createRowGap<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ rowGap: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createRowGap', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createRowGap<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createRowGap<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       rowGap: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createRowGap', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       rowGap: 'a',
       [MQ.D]: {
         rowGap: 'b',

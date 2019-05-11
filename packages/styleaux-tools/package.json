@@ -19,8 +19,10 @@
     "build:bundles": "rollup -c",
     "build": "yarn clean && yarn build:src && yarn build:bundles",
     "clean": "rimraf dist-*/",
-    "test": "jest"
+    "test": "cd ../.. & yarn run test styleaux-tools"
   },
+  "dependencies": { "@styleaux/types":"^0.0.0-beta.0"},
+
   "peerDependencies": {
     "@styleaux/csstype": "^0.0.0-beta.0",
     "@roseys/futils": "^2.1.4",

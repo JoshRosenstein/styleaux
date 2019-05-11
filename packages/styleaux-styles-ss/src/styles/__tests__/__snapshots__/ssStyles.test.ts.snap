@@ -1,0 +1,236 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`borders prop returns correct sequence 1`] = `
+Array [
+  Object {
+    "borderBottom": "1px solid",
+  },
+  Object {
+    "borderWidth": "2px",
+  },
+  Object {
+    "borderStyle": "dashed",
+  },
+  Object {
+    "borderColor": "red",
+  },
+]
+`;
+
+exports[`gridGap returns a scalar style 1`] = `
+Array [
+  Object {
+    "gap": "8px",
+  },
+]
+`;
+
+exports[`gridRowGap returns a scalar style 1`] = `
+Array [
+  Object {
+    "rowGap": "8px",
+  },
+]
+`;
+
+exports[`pl prop sets paddingLeft 0 1`] = `
+Array [
+  Object {
+    "paddingLeft": 0,
+  },
+]
+`;
+
+exports[`pl prop sets paddingLeft 1`] = `
+Array [
+  Object {
+    "paddingLeft": "8px",
+  },
+]
+`;
+
+exports[`returns 0 values 1`] = `
+Array [
+  Object {
+    "marginBottom": 0,
+    "marginLeft": 0,
+    "marginRight": 0,
+    "marginTop": 0,
+  },
+]
+`;
+
+exports[`returns a percentage based width 1`] = `
+Array [
+  Object {
+    "width": "50%",
+  },
+]
+`;
+
+exports[`returns a pixel based width 1`] = `
+Array [
+  Object {
+    "width": "256px",
+  },
+]
+`;
+
+exports[`returns a string font-size 1`] = `
+Array [
+  Object {
+    "fontSize": "2em",
+  },
+]
+`;
+
+exports[`returns a string width 1`] = `
+Array [
+  Object {
+    "width": "auto",
+  },
+]
+`;
+
+exports[`returns aliased values 1`] = `
+Array [
+  Object {
+    "paddingLeft": "8px",
+    "paddingRight": "8px",
+  },
+]
+`;
+
+exports[`returns an array of style objects 1`] = `
+Array [
+  Object {
+    "marginBottom": "4px",
+    "marginLeft": "4px",
+    "marginRight": "4px",
+    "marginTop": "4px",
+  },
+]
+`;
+
+exports[`returns negative em values 1`] = `
+Array [
+  Object {
+    "marginBottom": "-16em",
+    "marginLeft": "-16em",
+    "marginRight": "-16em",
+    "marginTop": "-16em",
+  },
+]
+`;
+
+exports[`returns negative pixel values 1`] = `
+Array [
+  Object {
+    "marginBottom": "-8px",
+    "marginLeft": "-8px",
+    "marginRight": "-8px",
+    "marginTop": "-8px",
+  },
+]
+`;
+
+exports[`returns negative string values from theme 1`] = `
+Array [
+  Object {
+    "marginBottom": "-1em",
+    "marginLeft": "-1em",
+    "marginRight": "-1em",
+    "marginTop": "-1em",
+  },
+]
+`;
+
+exports[`returns negative theme values 1`] = `
+Array [
+  Object {
+    "marginBottom": "-8px",
+    "marginLeft": "-8px",
+    "marginRight": "-8px",
+    "marginTop": "-8px",
+  },
+]
+`;
+
+exports[`returns positive theme values 1`] = `
+Array [
+  Object {
+    "marginBottom": "2em",
+    "marginLeft": "2em",
+    "marginRight": "2em",
+    "marginTop": "2em",
+  },
+]
+`;
+
+exports[`returns responsive values 1`] = `
+Array [
+  Array [
+    Object {
+      "marginBottom": 0,
+      "marginLeft": 0,
+      "marginRight": 0,
+      "marginTop": 0,
+    },
+    Object {
+      "@media screen and (min-width: 40em)": Object {
+        "marginBottom": "8px",
+        "marginLeft": "8px",
+        "marginRight": "8px",
+        "marginTop": "8px",
+      },
+    },
+    Object {
+      "@media screen and (min-width: 52em)": Object {
+        "marginBottom": "16px",
+        "marginLeft": "16px",
+        "marginRight": "16px",
+        "marginTop": "16px",
+      },
+    },
+  ],
+]
+`;
+
+exports[`returns string values from theme 1`] = `
+Array [
+  Object {
+    "paddingBottom": "1em",
+    "paddingLeft": "1em",
+    "paddingRight": "1em",
+    "paddingTop": "1em",
+  },
+]
+`;
+
+exports[`returns values from theme object 1`] = `
+Array [
+  Object {
+    "marginBottom": "1px",
+    "marginLeft": "1px",
+    "marginRight": "1px",
+    "marginTop": "1px",
+  },
+]
+`;
+
+exports[`size returns width and height 1`] = `
+Array [
+  Object {
+    "height": "4px",
+    "width": "4px",
+  },
+]
+`;
+
+exports[`uses a default font-size scale 1`] = `
+Array [
+  Object {
+    "fontSize": "16px",
+  },
+]
+`;

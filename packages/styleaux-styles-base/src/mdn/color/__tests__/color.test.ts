@@ -1,3 +1,4 @@
+import { createColor } from '../color';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createColor } from '../color';
 
 describe('createColor', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createColor', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createColor<'value',never, IThemeWithoutBreakpoints>({
+    const result = createColor<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ color: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createColor', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createColor<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createColor<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       color: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createColor', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       color: 'a',
       [MQ.D]: {
         color: 'b',

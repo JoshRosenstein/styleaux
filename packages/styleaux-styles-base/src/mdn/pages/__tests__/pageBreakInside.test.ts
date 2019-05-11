@@ -1,3 +1,4 @@
+import { createPageBreakInside } from '../pageBreakInside';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createPageBreakInside } from '../pageBreakInside';
 
 describe('createPageBreakInside', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createPageBreakInside', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createPageBreakInside<'value',never, IThemeWithoutBreakpoints>({
+    const result = createPageBreakInside<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ pageBreakInside: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createPageBreakInside', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       pageBreakInside: 'a',
       [MQ.D]: {
         pageBreakInside: 'b',

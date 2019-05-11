@@ -1,3 +1,4 @@
+import { createPerspectiveOrigin } from '../perspectiveOrigin';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createPerspectiveOrigin } from '../perspectiveOrigin';
 
 describe('createPerspectiveOrigin', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createPerspectiveOrigin', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createPerspectiveOrigin<'value',never, IThemeWithoutBreakpoints>({
+    const result = createPerspectiveOrigin<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ perspectiveOrigin: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createPerspectiveOrigin', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       perspectiveOrigin: 'a',
       [MQ.D]: {
         perspectiveOrigin: 'b',

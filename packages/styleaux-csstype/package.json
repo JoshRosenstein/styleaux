@@ -17,17 +17,16 @@
     "chokidar": "^2.1.2",
     "fast-glob": "^2.2.6",
     "flow-bin": "^0.94.0",
-    "jest": "^24.1.0",
     "jsdom": "^13.2.0",
-    "mdn-browser-compat-data": "git+https://github.com/mdn/browser-compat-data.git#f9f1b8375fa922b2a30489f6c7ed69d62894a433",
-    "mdn-data": "git+https://github.com/mdn/data.git#9ec55b3a1f609f2e4dd5ec6603fe24e27c28e9a4",
+    "mdn-browser-compat-data": "git+https://github.com/mdn/browser-compat-data.git#61d6c8861994ccab607cad70e989018e3b9ff756",
+    "mdn-data": "git+https://github.com/mdn/data.git#5f078c97f0c048b6c375919c6a6b9d7c248d74b8",
     "prettier": "^1.16.4",
     "sync-request": "^6.0.0",
     "ts-node": "^8.0.2",
     "tslint": "^5.13.1",
     "tslint-config-prettier": "^1.18.0",
     "turndown": "^5.0.3",
-    "typescript":"3.4.1"
+    "typescript": "3.4.3"
   },
   "scripts": {
     "update": "ts-node --files update.ts",
@@ -44,7 +43,8 @@
   },
   "files": [
     "index.d.ts",
-    "index.js.flow"
+    "index.js.flow",
+    "comments.json"
   ],
   "keywords": [
     "css",

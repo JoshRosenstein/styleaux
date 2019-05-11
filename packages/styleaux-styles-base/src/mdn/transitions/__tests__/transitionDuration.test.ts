@@ -1,3 +1,4 @@
+import { createTransitionDuration } from '../transitionDuration';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTransitionDuration } from '../transitionDuration';
 
 describe('createTransitionDuration', () => {
   it('should return a function', () => {
@@ -17,7 +16,9 @@ describe('createTransitionDuration', () => {
   });
 
   it('should use `createTransitionDuration` as component and css prop', () => {
-    const result = createTransitionDuration()({ transitionDuration: 'inherit' });
+    const result = createTransitionDuration()({
+      transitionDuration: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ transitionDuration: 'inherit' });
   });
 
@@ -32,7 +33,11 @@ describe('createTransitionDuration', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTransitionDuration<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTransitionDuration<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ transitionDuration: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +59,7 @@ describe('createTransitionDuration', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       transitionDuration: 'a',
       [MQ.D]: {
         transitionDuration: 'b',

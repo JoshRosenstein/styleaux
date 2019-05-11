@@ -1,3 +1,4 @@
+import { createAlignItems } from '../alignItems';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createAlignItems } from '../alignItems';
 
 describe('createAlignItems', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createAlignItems', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createAlignItems<'value',never, IThemeWithoutBreakpoints>({
+    const result = createAlignItems<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ alignItems: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createAlignItems', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createAlignItems<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createAlignItems<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       alignItems: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createAlignItems', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       alignItems: 'a',
       [MQ.D]: {
         alignItems: 'b',

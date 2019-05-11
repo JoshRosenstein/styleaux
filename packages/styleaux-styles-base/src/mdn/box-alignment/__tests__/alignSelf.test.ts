@@ -1,3 +1,4 @@
+import { createAlignSelf } from '../alignSelf';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createAlignSelf } from '../alignSelf';
 
 describe('createAlignSelf', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createAlignSelf', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createAlignSelf<'value',never, IThemeWithoutBreakpoints>({
+    const result = createAlignSelf<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ alignSelf: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createAlignSelf', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createAlignSelf<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createAlignSelf<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       alignSelf: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createAlignSelf', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       alignSelf: 'a',
       [MQ.D]: {
         alignSelf: 'b',

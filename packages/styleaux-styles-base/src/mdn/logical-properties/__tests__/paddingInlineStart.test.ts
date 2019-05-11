@@ -1,3 +1,4 @@
+import { createPaddingInlineStart } from '../paddingInlineStart';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createPaddingInlineStart } from '../paddingInlineStart';
 
 describe('createPaddingInlineStart', () => {
   it('should return a function', () => {
@@ -17,7 +16,9 @@ describe('createPaddingInlineStart', () => {
   });
 
   it('should use `createPaddingInlineStart` as component and css prop', () => {
-    const result = createPaddingInlineStart()({ paddingInlineStart: 'inherit' });
+    const result = createPaddingInlineStart()({
+      paddingInlineStart: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ paddingInlineStart: 'inherit' });
   });
 
@@ -32,7 +33,11 @@ describe('createPaddingInlineStart', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createPaddingInlineStart<'value',never, IThemeWithoutBreakpoints>({
+    const result = createPaddingInlineStart<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ paddingInlineStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +59,7 @@ describe('createPaddingInlineStart', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       paddingInlineStart: 'a',
       [MQ.D]: {
         paddingInlineStart: 'b',

@@ -1,37 +1,39 @@
-import { identity } from "@roseys/futils";
-import { CSSObj, Styles } from '../cssTypes'
-import { isNumber, isBoolean, isString, isFunction, isNil } from "typed-is";
-import { everyMedia } from "./everyMedia";
-import { CreateStylesValueGetterPartial,CreateStylesValueGetter, CSSProp } from './types'
-import { MediaKey } from './types'
-import { objOf } from '../utils/objOf'
+import { objOf } from '../utils/objOf';
+import { MediaKey, Props } from './types';
+import { identity } from '@roseys/futils';
+import { everyMedia } from './everyMedia';
+import { Style, StyleValue } from '@styleaux/types';
+import { isNumber, isBoolean, isString, isFunction, isNil } from 'typed-is';
+import {
+  CreateStylesValueGetterPartial,
+  CreateStylesValueGetter,
+  CSSProp,
+} from './types';
+export type GetValue<I, P, R = StyleValue> = CreateStylesValueGetterPartial<
+  I,
+  P,
+  R
+>;
 
+export type GetStyle<P> = (
+  result: any,
+  input?: any,
+  props?: P,
+  mediaKey?: MediaKey,
+) => Style;
 
-//https://github.com/Microsoft/TypeScript/issues/10957
-export type GetValue<I, P> = CreateStylesValueGetterPartial<I, P, Styles>
-
-
-export type GetStyle<P> = (result: any, input?: any, props?: P, mediaKey?: MediaKey) => CSSObj
-
-
-export interface StylerOptions<P extends {} = any, I = any> {
-  cssProp?: CSSProp
-  getStyle?: GetStyle<P>
-  getValue?: GetValue<I, P>
+export interface StylerOptions<P extends Props, I> {
+  cssProp?: CSSProp;
+  getStyle?: GetStyle<P>;
+  getValue?: GetValue<I, P>;
 }
 
-
-export function styler<I = any, P extends {} = any>({
+export function styler<I, P extends Props>({
   cssProp,
-  getStyle = objOf(cssProp as any),
-  getValue = identity as any
+  getStyle = objOf<any>(cssProp),
+  getValue = <any>identity,
 }: StylerOptions<P, I>) {
-  function getValues(
-    get,
-    input,
-    props,
-    mediaKey
-  ): Styles {
+  function getValues(get, input, props, mediaKey): StyleValue {
     const result = get(input, props, mediaKey);
 
     if (isBoolean(result)) {
@@ -47,12 +49,10 @@ export function styler<I = any, P extends {} = any>({
   }
 
   return ((input: I, props: P, mediaKey: MediaKey) => {
-
     return everyMedia(
       props,
       getValues(getValue, input, props, mediaKey),
-      result => getStyle(result, input, props, mediaKey)
-    )
-  }) as CreateStylesValueGetter<I, P>
-
+      (result) => getStyle(result, input, props, mediaKey),
+    );
+  }) as CreateStylesValueGetter<I, P>;
 }

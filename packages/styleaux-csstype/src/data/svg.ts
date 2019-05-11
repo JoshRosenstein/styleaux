@@ -3,7 +3,12 @@
 
 import * as styleProperties from 'mdn-data/css/properties.json';
 
-export const properties: { [property: string]: Pick<MDN.Property, 'syntax' | 'initial' | 'inherited' | 'media'> } = {
+export const properties: {
+  [property: string]: Pick<
+    MDN.Property,
+    'syntax' | 'initial' | 'inherited' | 'media'
+  >;
+} = {
   'alignment-baseline': {
     syntax:
       'auto | baseline | before-edge | text-before-edge | middle | central | after-edge | text-after-edge | ideographic | alphabetic | hanging | mathematical',
@@ -220,7 +225,8 @@ export const properties: { [property: string]: Pick<MDN.Property, 'syntax' | 'in
 
 export const syntaxes: MDN.Syntaxes = {
   paint: {
-    syntax: 'none | child | child(<integer>) | <color> | <url> [ none | <color> ]? | context-fill | context-stroke',
+    syntax:
+      'none | child | child(<integer>) | <color> | <url> [ none | <color> ]? | context-fill | context-stroke',
   },
   dasharray: {
     syntax: '[ <length> | <percentage> | <number> ]#',

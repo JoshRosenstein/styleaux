@@ -1,3 +1,4 @@
+import { createFontKerning } from '../fontKerning';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFontKerning } from '../fontKerning';
 
 describe('createFontKerning', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createFontKerning', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFontKerning<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFontKerning<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontKerning: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createFontKerning', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createFontKerning<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createFontKerning<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       fontKerning: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createFontKerning', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       fontKerning: 'a',
       [MQ.D]: {
         fontKerning: 'b',

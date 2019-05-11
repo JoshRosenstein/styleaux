@@ -1,4 +1,4 @@
-import {linear,linearRepeating,radial,repeatingRadial} from '../gradient'
+import {linear,linearRepeating,radial,repeatingRadial} from '..'
 
 const steps=[ {position: '0%', color: 'rgba(2,0,36,1)'},
 {position: '35%', color: 'rgba(9,9,121,1)'},

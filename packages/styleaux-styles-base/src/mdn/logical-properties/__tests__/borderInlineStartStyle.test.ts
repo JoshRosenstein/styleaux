@@ -1,3 +1,4 @@
+import { createBorderInlineStartStyle } from '../borderInlineStartStyle';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBorderInlineStartStyle } from '../borderInlineStartStyle';
 
 describe('createBorderInlineStartStyle', () => {
   it('should return a function', () => {
@@ -17,12 +16,16 @@ describe('createBorderInlineStartStyle', () => {
   });
 
   it('should use `createBorderInlineStartStyle` as component and css prop', () => {
-    const result = createBorderInlineStartStyle()({ borderInlineStartStyle: 'inherit' });
+    const result = createBorderInlineStartStyle()({
+      borderInlineStartStyle: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ borderInlineStartStyle: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = createBorderInlineStartStyle<'a'>()({ borderInlineStartStyle: 'a' });
+    const result = createBorderInlineStartStyle<'a'>()({
+      borderInlineStartStyle: 'a',
+    });
     expect(toStyles(result)).toEqual({ borderInlineStartStyle: 'a' });
   });
 
@@ -32,7 +35,11 @@ describe('createBorderInlineStartStyle', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderInlineStartStyle<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBorderInlineStartStyle<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ borderInlineStartStyle: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +61,7 @@ describe('createBorderInlineStartStyle', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       borderInlineStartStyle: 'a',
       [MQ.D]: {
         borderInlineStartStyle: 'b',

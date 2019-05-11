@@ -1,3 +1,4 @@
+import { createOverflowWrap } from '../overflowWrap';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createOverflowWrap } from '../overflowWrap';
 
 describe('createOverflowWrap', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createOverflowWrap', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createOverflowWrap<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ overflowWrap: 'value', theme: themeWithoutBreakpoints });
+    const result = createOverflowWrap<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ overflowWrap: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       overflowWrap: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createOverflowWrap<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createOverflowWrap<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       overflowWrap: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createOverflowWrap', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       overflowWrap: 'a',
       [MQ.D]: {
         overflowWrap: 'b',

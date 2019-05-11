@@ -1,3 +1,4 @@
+import { createClear } from '../clear';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createClear } from '../clear';
 
 describe('createClear', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createClear', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createClear<'value',never, IThemeWithoutBreakpoints>({
+    const result = createClear<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ clear: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createClear', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createClear<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createClear<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       clear: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createClear', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       clear: 'a',
       [MQ.D]: {
         clear: 'b',

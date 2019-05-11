@@ -1,3 +1,4 @@
+import { createBorderTopRightRadius } from '../borderTopRightRadius';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBorderTopRightRadius } from '../borderTopRightRadius';
 
 describe('createBorderTopRightRadius', () => {
   it('should return a function', () => {
@@ -17,12 +16,16 @@ describe('createBorderTopRightRadius', () => {
   });
 
   it('should use `createBorderTopRightRadius` as component and css prop', () => {
-    const result = createBorderTopRightRadius()({ borderTopRightRadius: 'inherit' });
+    const result = createBorderTopRightRadius()({
+      borderTopRightRadius: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ borderTopRightRadius: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = createBorderTopRightRadius<'a'>()({ borderTopRightRadius: 'a' });
+    const result = createBorderTopRightRadius<'a'>()({
+      borderTopRightRadius: 'a',
+    });
     expect(toStyles(result)).toEqual({ borderTopRightRadius: 'a' });
   });
 
@@ -32,7 +35,11 @@ describe('createBorderTopRightRadius', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderTopRightRadius<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBorderTopRightRadius<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ borderTopRightRadius: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +61,7 @@ describe('createBorderTopRightRadius', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       borderTopRightRadius: 'a',
       [MQ.D]: {
         borderTopRightRadius: 'b',

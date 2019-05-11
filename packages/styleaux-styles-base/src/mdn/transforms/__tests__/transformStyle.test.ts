@@ -1,3 +1,4 @@
+import { createTransformStyle } from '../transformStyle';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTransformStyle } from '../transformStyle';
 
 describe('createTransformStyle', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createTransformStyle', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTransformStyle<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTransformStyle<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ transformStyle: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createTransformStyle', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       transformStyle: 'a',
       [MQ.D]: {
         transformStyle: 'b',

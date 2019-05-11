@@ -1,3 +1,4 @@
+import { createScrollSnapAlign } from '../scrollSnapAlign';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createScrollSnapAlign } from '../scrollSnapAlign';
 
 describe('createScrollSnapAlign', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createScrollSnapAlign', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollSnapAlign<'value',never, IThemeWithoutBreakpoints>({
+    const result = createScrollSnapAlign<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ scrollSnapAlign: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createScrollSnapAlign', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       scrollSnapAlign: 'a',
       [MQ.D]: {
         scrollSnapAlign: 'b',

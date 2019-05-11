@@ -1,3 +1,4 @@
+import { createFontStyle } from '../fontStyle';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFontStyle } from '../fontStyle';
 
 describe('createFontStyle', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createFontStyle', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFontStyle<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFontStyle<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontStyle: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createFontStyle', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createFontStyle<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createFontStyle<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       fontStyle: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createFontStyle', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       fontStyle: 'a',
       [MQ.D]: {
         fontStyle: 'b',

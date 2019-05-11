@@ -1,3 +1,4 @@
+import { createAnimationDelay } from '../animationDelay';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createAnimationDelay } from '../animationDelay';
 
 describe('createAnimationDelay', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createAnimationDelay', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createAnimationDelay<'value',never, IThemeWithoutBreakpoints>({
+    const result = createAnimationDelay<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ animationDelay: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createAnimationDelay', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       animationDelay: 'a',
       [MQ.D]: {
         animationDelay: 'b',

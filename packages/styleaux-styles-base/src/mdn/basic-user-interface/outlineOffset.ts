@@ -2,11 +2,17 @@ import { OutlineOffsetProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
-const OUTLINEOFFSET='outlineOffset'
+const OUTLINEOFFSET = 'outlineOffset';
 
-export interface OutlineOffsetProps<T=OutlineOffsetProperty> {
+export interface OutlineOffsetProps<T = OutlineOffsetProperty> {
   /**
    * The **`outline-offset`** CSS property sets the amount of space between an outline and the edge or border of an element.
+   *
+   * **Initial value**: `0`
+   *
+   * | Chrome | Firefox | Safari  |  Edge  | IE  |
+   * | :----: | :-----: | :-----: | :----: | :-: |
+   * | **1**  | **1.5** | **1.2** | **15** | No  |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline-offset
    */
@@ -16,20 +22,24 @@ export interface OutlineOffsetProps<T=OutlineOffsetProperty> {
 export const createOutlineOffset = <
   T = OutlineOffsetProperty,
   Media = never,
-  Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<OutlineOffsetProps<T>,Theme>,'key'| 'transformValue'>> =
-{}) =>
-  style<OutlineOffsetProps<T>,Theme,Media>({
-    cssProp:OUTLINEOFFSET,
-    prop:OUTLINEOFFSET,
+  Theme = never
+>({
+  key,
+  transformValue,
+}: Partial<
+  Pick<StyleOptions<OutlineOffsetProps<T>, Theme>, 'key' | 'transformValue'>
+> = {}) =>
+  style<OutlineOffsetProps<T>, Theme, Media>({
+    cssProp: OUTLINEOFFSET,
+    prop: OUTLINEOFFSET,
     key,
     transformValue,
-  })
+  });
 
-export const createOutlineOffsetRule = <T = OutlineOffsetProperty, P=unknown>(
-  transformer?: GetValue<T,P>,
-) => styler<T,P>({cssProp: OUTLINEOFFSET, getValue: transformer})
+export const createOutlineOffsetRule = <T = OutlineOffsetProperty, P = unknown>(
+  transformer?: GetValue<T, P>,
+) => styler<T, P>({ cssProp: OUTLINEOFFSET, getValue: transformer });
 
-export const outlineOffset =createOutlineOffset()
+export const outlineOffset = createOutlineOffset();
 
-export const outlineOffsetRule =createOutlineOffsetRule()
+export const outlineOffsetRule = createOutlineOffsetRule();

@@ -1,4 +1,4 @@
-import {wrapWithQuotesIfStringContainsSpace,spaceSeparatedList,commaSeparatedList} from '../value-helpers'
+import {wrapWithQuotesIfStringContainsSpace,spaceSeparatedList,commaSeparatedList} from '../'
 import {Arg1} from '../__testUtils__/types'
 
 
@@ -18,7 +18,7 @@ test.each(basicInputdata)("pxToRem(input:%p)", (input, expected) =>{
 })
 test('SpaceSeparatedList',()=>{
 
-  expect(spaceSeparatedList('works','with','args')).toEqual('works with args')
+  expect(spaceSeparatedList('works')).toEqual('works')
   expect(spaceSeparatedList(['works','with','array'])).toEqual('works with array')
 })
 

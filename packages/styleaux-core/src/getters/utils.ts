@@ -1,9 +1,9 @@
-import {pathOr, identity, pipe} from '@roseys/futils'
-import {isString, isNumber, isBoolean, isNil} from 'typed-is'
+import { pathOr, identity, pipe } from '@roseys/futils';
+import { isString, isNumber, isBoolean, isNil } from 'typed-is';
 
-export const toNeg = (v: string | number) => (isNumber(v) ? v * -1 : `-${v}`)
+export const toNeg = (v: string | number) => (isNumber(v) ? v * -1 : `-${v}`);
 export const isNeg = (v: string | number) =>
-  isString(v) ? /^-.+/.test(v) : v < 0
+  isString(v) ? /^-.+/.test(v) : v < 0;
 
 export const stripNeg = (v: string | number | boolean) =>
   isBoolean(v)
@@ -12,7 +12,7 @@ export const stripNeg = (v: string | number | boolean) =>
     ? isString(v)
       ? v.slice(1)
       : Math.abs(v)
-    : v
+    : v;
 
 export const lookUpTransformNegative = (
   input,
@@ -20,7 +20,7 @@ export const lookUpTransformNegative = (
   transformValue = identity,
 ) => {
   if (isNil(input)) {
-    return [identity, null]
+    return [identity, null];
   }
   return [
     isNeg(input)
@@ -29,11 +29,11 @@ export const lookUpTransformNegative = (
           transformValue,
         )
       : transformValue,
-      pathOr(input,stripNeg(input), obj),
-  ]
-}
+    pathOr(input, stripNeg(input), obj),
+  ];
+};
 
 export const transformNegatives = (input, obj, transformValue) => {
-  const [t, v] = lookUpTransformNegative(input, obj, transformValue)
-  return t(v)
-}
+  const [t, v] = lookUpTransformNegative(input, obj, transformValue);
+  return t(v);
+};

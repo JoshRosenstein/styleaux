@@ -1,3 +1,4 @@
+import { createTouchAction } from '../touchAction';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTouchAction } from '../touchAction';
 
 describe('createTouchAction', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createTouchAction', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTouchAction<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTouchAction<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ touchAction: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createTouchAction', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createTouchAction<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createTouchAction<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       touchAction: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createTouchAction', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       touchAction: 'a',
       [MQ.D]: {
         touchAction: 'b',

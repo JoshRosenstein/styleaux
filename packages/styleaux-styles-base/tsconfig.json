@@ -3,8 +3,11 @@
   "compilerOptions": {
     "moduleResolution": "node",
     "strict": true,
+    "skipLibCheck": true
   },
-  "include": ["src/**/*.ts"],
+  "include": [
+    "src/**/*.ts"
+  ],
   "exclude": [
     "dist-*/",
     "node_modules",

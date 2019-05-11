@@ -1,3 +1,4 @@
+import { createMarginBlockEnd } from '../marginBlockEnd';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMarginBlockEnd } from '../marginBlockEnd';
 
 describe('createMarginBlockEnd', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createMarginBlockEnd', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMarginBlockEnd<'value',never, IThemeWithoutBreakpoints>({
+    const result = createMarginBlockEnd<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ marginBlockEnd: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createMarginBlockEnd', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       marginBlockEnd: 'a',
       [MQ.D]: {
         marginBlockEnd: 'b',

@@ -1,3 +1,4 @@
+import { createFontVariantCaps } from '../fontVariantCaps';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFontVariantCaps } from '../fontVariantCaps';
 
 describe('createFontVariantCaps', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createFontVariantCaps', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFontVariantCaps<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFontVariantCaps<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ fontVariantCaps: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createFontVariantCaps', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       fontVariantCaps: 'a',
       [MQ.D]: {
         fontVariantCaps: 'b',

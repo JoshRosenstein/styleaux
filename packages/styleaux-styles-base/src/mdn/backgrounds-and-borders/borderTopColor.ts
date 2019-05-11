@@ -2,11 +2,17 @@ import { BorderTopColorProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
-const BORDERTOPCOLOR='borderTopColor'
+const BORDERTOPCOLOR = 'borderTopColor';
 
-export interface BorderTopColorProps<T=BorderTopColorProperty> {
+export interface BorderTopColorProps<T = BorderTopColorProperty> {
   /**
    * The **`border-top-color`** CSS property sets the color of an element's top border. It can also be set with the shorthand CSS properties `border-color` or `border-top`.
+   *
+   * **Initial value**: `currentcolor`
+   *
+   * | Chrome | Firefox | Safari |  Edge  |  IE   |
+   * | :----: | :-----: | :----: | :----: | :---: |
+   * | **1**  |  **1**  | **1**  | **12** | **4** |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-color
    */
@@ -16,20 +22,27 @@ export interface BorderTopColorProps<T=BorderTopColorProperty> {
 export const createBorderTopColor = <
   T = BorderTopColorProperty,
   Media = never,
-  Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<BorderTopColorProps<T>,Theme>,'key'| 'transformValue'>> =
-{}) =>
-  style<BorderTopColorProps<T>,Theme,Media>({
-    cssProp:BORDERTOPCOLOR,
-    prop:BORDERTOPCOLOR,
+  Theme = never
+>({
+  key,
+  transformValue,
+}: Partial<
+  Pick<StyleOptions<BorderTopColorProps<T>, Theme>, 'key' | 'transformValue'>
+> = {}) =>
+  style<BorderTopColorProps<T>, Theme, Media>({
+    cssProp: BORDERTOPCOLOR,
+    prop: BORDERTOPCOLOR,
     key,
     transformValue,
-  })
+  });
 
-export const createBorderTopColorRule = <T = BorderTopColorProperty, P=unknown>(
-  transformer?: GetValue<T,P>,
-) => styler<T,P>({cssProp: BORDERTOPCOLOR, getValue: transformer})
+export const createBorderTopColorRule = <
+  T = BorderTopColorProperty,
+  P = unknown
+>(
+  transformer?: GetValue<T, P>,
+) => styler<T, P>({ cssProp: BORDERTOPCOLOR, getValue: transformer });
 
-export const borderTopColor =createBorderTopColor()
+export const borderTopColor = createBorderTopColor();
 
-export const borderTopColorRule =createBorderTopColorRule()
+export const borderTopColorRule = createBorderTopColorRule();

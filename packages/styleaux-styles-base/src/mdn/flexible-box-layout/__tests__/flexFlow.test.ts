@@ -1,3 +1,4 @@
+import { createFlexFlow } from '../flexFlow';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFlexFlow } from '../flexFlow';
 
 describe('createFlexFlow', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createFlexFlow', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFlexFlow<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFlexFlow<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ flexFlow: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createFlexFlow', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createFlexFlow<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createFlexFlow<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       flexFlow: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createFlexFlow', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       flexFlow: 'a',
       [MQ.D]: {
         flexFlow: 'b',

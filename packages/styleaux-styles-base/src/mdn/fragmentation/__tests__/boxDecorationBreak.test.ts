@@ -1,3 +1,4 @@
+import { createBoxDecorationBreak } from '../boxDecorationBreak';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBoxDecorationBreak } from '../boxDecorationBreak';
 
 describe('createBoxDecorationBreak', () => {
   it('should return a function', () => {
@@ -17,7 +16,9 @@ describe('createBoxDecorationBreak', () => {
   });
 
   it('should use `createBoxDecorationBreak` as component and css prop', () => {
-    const result = createBoxDecorationBreak()({ boxDecorationBreak: 'inherit' });
+    const result = createBoxDecorationBreak()({
+      boxDecorationBreak: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ boxDecorationBreak: 'inherit' });
   });
 
@@ -32,7 +33,11 @@ describe('createBoxDecorationBreak', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBoxDecorationBreak<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBoxDecorationBreak<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ boxDecorationBreak: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +59,7 @@ describe('createBoxDecorationBreak', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       boxDecorationBreak: 'a',
       [MQ.D]: {
         boxDecorationBreak: 'b',

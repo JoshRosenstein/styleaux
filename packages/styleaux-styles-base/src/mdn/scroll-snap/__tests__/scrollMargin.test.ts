@@ -1,3 +1,4 @@
+import { createScrollMargin } from '../scrollMargin';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createScrollMargin } from '../scrollMargin';
 
 describe('createScrollMargin', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createScrollMargin', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollMargin<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ scrollMargin: 'value', theme: themeWithoutBreakpoints });
+    const result = createScrollMargin<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ scrollMargin: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       scrollMargin: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createScrollMargin<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createScrollMargin<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       scrollMargin: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createScrollMargin', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       scrollMargin: 'a',
       [MQ.D]: {
         scrollMargin: 'b',

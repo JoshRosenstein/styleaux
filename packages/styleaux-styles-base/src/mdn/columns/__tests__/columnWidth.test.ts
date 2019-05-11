@@ -1,3 +1,4 @@
+import { createColumnWidth } from '../columnWidth';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createColumnWidth } from '../columnWidth';
 
 describe('createColumnWidth', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createColumnWidth', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createColumnWidth<'value',never, IThemeWithoutBreakpoints>({
+    const result = createColumnWidth<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ columnWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createColumnWidth', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createColumnWidth<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createColumnWidth<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       columnWidth: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createColumnWidth', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       columnWidth: 'a',
       [MQ.D]: {
         columnWidth: 'b',

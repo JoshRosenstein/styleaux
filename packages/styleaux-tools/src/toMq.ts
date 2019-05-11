@@ -1,17 +1,17 @@
+import { pxToEm } from './units/px-to';
+import { isArray, isNumber, isString } from 'typed-is';
 import {
-  map,
   always,
-  equals,
-  toPairs,
-  join,
-  flow,
-  T,
-  propOr,
   cond,
+  equals,
+  flow,
+  join,
+  map,
+  propOr,
+  T,
   toKebabCase,
-} from '@roseys/futils'
-import {isString, isNumber, isArray} from 'typed-is'
-import {pxToEm} from './units/px-to'
+  toPairs,
+} from '@roseys/futils';
 
 const sizingKeys = [
   'min',
@@ -26,102 +26,102 @@ const sizingKeys = [
   'height',
   'minHeight',
   'maxHeight',
-]
+];
 
-const isSizeVariable = (x: string) => sizingKeys.includes(x)
+const isSizeVariable = (x: string) => sizingKeys.includes(x);
 
-export interface toMqInputAsObj {
-  min?: string | number
-  max?: string | number
-  minW?: string | number
-  maxW?: string | number
-  minH?: string | number
-  maxH?: string | number
+export interface ToMqInputAsObj {
+  min?: string | number;
+  max?: string | number;
+  minW?: string | number;
+  maxW?: string | number;
+  minH?: string | number;
+  maxH?: string | number;
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/width
-  width?: string | number
-  minWidth?: string | number
-  maxWidth?: string | number
+  width?: string | number;
+  minWidth?: string | number;
+  maxWidth?: string | number;
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/height
-  height?: string
-  minHeight?: string | number
-  maxHeight?: string | number
+  height?: string;
+  minHeight?: string | number;
+  maxHeight?: string | number;
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/aspect-ratio
-  aspectRatio?: string
-  minAspectRatio?: string
-  maxAspectRatio?: string
+  aspectRatio?: string;
+  minAspectRatio?: string;
+  maxAspectRatio?: string;
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/orientation
-  orientation?: 'portrait' | 'landscape'
+  orientation?: 'portrait' | 'landscape';
 
-  'max-width'?: string | number
-  'max-height'?: string | number
-  'min-width'?: string | number
-  'min-height'?: string | number
+  'max-width'?: string | number;
+  'max-height'?: string | number;
+  'min-width'?: string | number;
+  'min-height'?: string | number;
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/resolution
-  resolution?: string
-  minResolution?: string
-  maxResolution?: string
+  resolution?: string;
+  minResolution?: string;
+  maxResolution?: string;
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/scan
-  scan?: 'interlace' | 'progressive'
+  scan?: 'interlace' | 'progressive';
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/grid
-  grid?: 0 | 1
+  grid?: 0 | 1;
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/update-frequency
-  update?: 'none' | 'slow' | 'fast'
+  update?: 'none' | 'slow' | 'fast';
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/overflow-block
-  overflowBlock?: 'none' | 'scroll' | 'optional-paged' | 'paged'
+  overflowBlock?: 'none' | 'scroll' | 'optional-paged' | 'paged';
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/overflow-inline
-  overflowInline?: 'none' | 'scroll'
+  overflowInline?: 'none' | 'scroll';
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/color
-  color?: number | true
-  minColor?: number | true
-  maxColor?: number | true
+  color?: number | true;
+  minColor?: number | true;
+  maxColor?: number | true;
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/color-gamut
-  colorGamut?: 'srgb' | 'p3' | 'rec2020'
+  colorGamut?: 'srgb' | 'p3' | 'rec2020';
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/color-index
-  colorIndex?: number | true
-  minColorIndex?: number | true
-  maxColorIndex?: number | true
+  colorIndex?: number | true;
+  minColorIndex?: number | true;
+  maxColorIndex?: number | true;
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/display-mode
-  displayMode?: 'fullscreen' | 'standalone' | 'minimal-ui' | 'browser'
+  displayMode?: 'fullscreen' | 'standalone' | 'minimal-ui' | 'browser';
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/monochrome
-  monochrome?: number | true
-  minMonochrome?: number | true
-  maxMonochrome?: number | true
+  monochrome?: number | true;
+  minMonochrome?: number | true;
+  maxMonochrome?: number | true;
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/inverted-colors
-  invertedColors?: 'none' | 'inverted'
+  invertedColors?: 'none' | 'inverted';
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/pointer
-  pointer?: 'none' | 'coarse' | 'fine'
+  pointer?: 'none' | 'coarse' | 'fine';
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/hover
-  hover?: 'none' | 'hover'
+  hover?: 'none' | 'hover';
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/any-pointer
-  anyPointer?: 'none' | 'coarse' | 'fine'
+  anyPointer?: 'none' | 'coarse' | 'fine';
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/any-hover
-  anyHover?: 'none' | 'hover'
+  anyHover?: 'none' | 'hover';
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/light-level
-  lightLevel?: 'dim' | 'normal' | 'washed'
+  lightLevel?: 'dim' | 'normal' | 'washed';
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/scripting
-  scripting?: 'none' | 'initial-only' | 'enabled'
+  scripting?: 'none' | 'initial-only' | 'enabled';
 
-  handheld?: boolean
-  screen?: boolean
-  print?: boolean
-  all?: boolean
+  handheld?: boolean;
+  screen?: boolean;
+  print?: boolean;
+  all?: boolean;
 
-  'aspect-ratio'?: string
+  'aspect-ratio'?: string;
 
-  maxaspectRatio?: string
-  'max-aspect-ratio'?: string
+  maxaspectRatio?: string;
+  'max-aspect-ratio'?: string;
 }
 const nameLookups = {
   min: 'min-width',
@@ -130,59 +130,62 @@ const nameLookups = {
   maxW: 'max-width',
   minH: 'min-height',
   maxH: 'max-height',
-}
+};
 
-const isAtRule = (selector: string): boolean => selector.indexOf('@') === 0
+const isAtRule = (selector: string): boolean => selector.indexOf('@') === 0;
 
 export const isMediaReady = (selector: string): boolean =>
-  selector.indexOf('(') === 0
+  selector.indexOf('(') === 0;
 
-//const replaceShorthandKeys = mapKeys(x => propOr(x, x, nameLookups))
-const prefixMedia = (value: string | number) => `@media ${value}`
+const prefixMedia = (value: string) => `@media ${value}`;
 
 export function toMq(
-  input: toMqInputAsObj | Array<toMqInputAsObj> | number | string,
+  input: ToMqInputAsObj | ToMqInputAsObj[] | number | string,
   unitConverter = pxToEm,
 ): string {
   if (isString(input)) {
-    if (isAtRule(input)) return input
+    if (isAtRule(input)) {
+      return input;
+    }
     // Handle media theme Prop
-    if (isMediaReady(input)) return prefixMedia(input)
+    if (isMediaReady(input)) {
+      return prefixMedia(input);
+    }
   }
 
-  const objParser = (obj: toMqInputAsObj): string => {
+  const objParser = (obj: ToMqInputAsObj): string => {
     const fn = ([feature, value]: any[]) => {
       const formattedFeature = toKebabCase(
         propOr(feature, feature, nameLookups),
-      )
+      );
       const covertedValue =
         isNumber(value) && isSizeVariable(feature)
           ? unitConverter(value)
-          : value
+          : value;
       return cond([
         [equals(true), always(formattedFeature)],
         [equals(false), always(`not ${formattedFeature}`)],
         [T, (temp: any) => `(${formattedFeature}:${temp})`],
-      ])(covertedValue)
-    }
+      ])(covertedValue);
+    };
     /// TODO: fix types
     return flow(
       obj as {},
       toPairs,
       map(fn),
       join(' and '),
-    )
-  }
+    );
+  };
 
   if (isString(input) || isNumber(input)) {
     return prefixMedia(
-      objParser({screen: true, minWidth: unitConverter(input)}),
-    )
+      objParser({ screen: true, minWidth: unitConverter(input) }),
+    );
   }
 
   if (isArray(input)) {
-    return prefixMedia(input.map(objParser).join(', '))
+    return prefixMedia(input.map(objParser).join(', '));
   }
   /// Must be object
-  return prefixMedia(objParser(input))
+  return prefixMedia(objParser(input));
 }

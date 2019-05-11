@@ -1,5 +1,5 @@
-import {createFlexBasis} from '@styleaux/styles-base'
-import {getWidth} from '../values/width-value'
+import { getWidth } from '../values/width-value';
+import { createFlexBasis } from '@styleaux/styles-base';
 
 export {
   alignItems,
@@ -12,6 +12,6 @@ export {
   justifySelf,
   alignSelf,
   order,
-} from '@styleaux/styles-base'
+} from '@styleaux/styles-base';
 
-export const flexBasis = createFlexBasis({transformValue:getWidth})
+export const flexBasis = createFlexBasis({ transformValue: getWidth });

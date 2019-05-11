@@ -2,11 +2,17 @@ import { OutlineColorProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
-const OUTLINECOLOR='outlineColor'
+const OUTLINECOLOR = 'outlineColor';
 
-export interface OutlineColorProps<T=OutlineColorProperty> {
+export interface OutlineColorProps<T = OutlineColorProperty> {
   /**
    * The **`outline-color`** CSS property sets the color of an element's outline.
+   *
+   * **Initial value**: `invert`, for browsers supporting it, `currentColor` for the other
+   *
+   * | Chrome | Firefox | Safari  |  Edge  |  IE   |
+   * | :----: | :-----: | :-----: | :----: | :---: |
+   * | **1**  | **1.5** | **1.2** | **12** | **8** |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline-color
    */
@@ -16,20 +22,24 @@ export interface OutlineColorProps<T=OutlineColorProperty> {
 export const createOutlineColor = <
   T = OutlineColorProperty,
   Media = never,
-  Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<OutlineColorProps<T>,Theme>,'key'| 'transformValue'>> =
-{}) =>
-  style<OutlineColorProps<T>,Theme,Media>({
-    cssProp:OUTLINECOLOR,
-    prop:OUTLINECOLOR,
+  Theme = never
+>({
+  key,
+  transformValue,
+}: Partial<
+  Pick<StyleOptions<OutlineColorProps<T>, Theme>, 'key' | 'transformValue'>
+> = {}) =>
+  style<OutlineColorProps<T>, Theme, Media>({
+    cssProp: OUTLINECOLOR,
+    prop: OUTLINECOLOR,
     key,
     transformValue,
-  })
+  });
 
-export const createOutlineColorRule = <T = OutlineColorProperty, P=unknown>(
-  transformer?: GetValue<T,P>,
-) => styler<T,P>({cssProp: OUTLINECOLOR, getValue: transformer})
+export const createOutlineColorRule = <T = OutlineColorProperty, P = unknown>(
+  transformer?: GetValue<T, P>,
+) => styler<T, P>({ cssProp: OUTLINECOLOR, getValue: transformer });
 
-export const outlineColor =createOutlineColor()
+export const outlineColor = createOutlineColor();
 
-export const outlineColorRule =createOutlineColorRule()
+export const outlineColorRule = createOutlineColorRule();

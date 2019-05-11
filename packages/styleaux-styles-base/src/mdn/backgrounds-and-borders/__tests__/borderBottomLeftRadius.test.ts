@@ -1,3 +1,4 @@
+import { createBorderBottomLeftRadius } from '../borderBottomLeftRadius';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBorderBottomLeftRadius } from '../borderBottomLeftRadius';
 
 describe('createBorderBottomLeftRadius', () => {
   it('should return a function', () => {
@@ -17,12 +16,16 @@ describe('createBorderBottomLeftRadius', () => {
   });
 
   it('should use `createBorderBottomLeftRadius` as component and css prop', () => {
-    const result = createBorderBottomLeftRadius()({ borderBottomLeftRadius: 'inherit' });
+    const result = createBorderBottomLeftRadius()({
+      borderBottomLeftRadius: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ borderBottomLeftRadius: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = createBorderBottomLeftRadius<'a'>()({ borderBottomLeftRadius: 'a' });
+    const result = createBorderBottomLeftRadius<'a'>()({
+      borderBottomLeftRadius: 'a',
+    });
     expect(toStyles(result)).toEqual({ borderBottomLeftRadius: 'a' });
   });
 
@@ -32,7 +35,11 @@ describe('createBorderBottomLeftRadius', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderBottomLeftRadius<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBorderBottomLeftRadius<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ borderBottomLeftRadius: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +61,7 @@ describe('createBorderBottomLeftRadius', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       borderBottomLeftRadius: 'a',
       [MQ.D]: {
         borderBottomLeftRadius: 'b',

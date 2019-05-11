@@ -1,3 +1,4 @@
+import { createTextRendering } from '../textRendering';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextRendering } from '../textRendering';
 
 describe('createTextRendering', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createTextRendering', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextRendering<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTextRendering<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ textRendering: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,20 +44,18 @@ describe('createTextRendering', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createTextRendering<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
-      textRendering: {
-        all: 'a',
-        D: 'b',
-        T: 'c',
-        M: 'd',
+    const result = createTextRendering<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()(
+      {
+        textRendering: {
+          all: 'a',
+          D: 'b',
+          T: 'c',
+          M: 'd',
+        },
+        theme,
       },
-      theme,
-    });
-   expect(toStyles(result)).toEqual({
+    );
+    expect(toStyles(result)).toEqual({
       textRendering: 'a',
       [MQ.D]: {
         textRendering: 'b',

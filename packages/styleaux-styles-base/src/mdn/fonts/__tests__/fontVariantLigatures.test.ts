@@ -1,3 +1,4 @@
+import { createFontVariantLigatures } from '../fontVariantLigatures';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFontVariantLigatures } from '../fontVariantLigatures';
 
 describe('createFontVariantLigatures', () => {
   it('should return a function', () => {
@@ -17,12 +16,16 @@ describe('createFontVariantLigatures', () => {
   });
 
   it('should use `createFontVariantLigatures` as component and css prop', () => {
-    const result = createFontVariantLigatures()({ fontVariantLigatures: 'inherit' });
+    const result = createFontVariantLigatures()({
+      fontVariantLigatures: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ fontVariantLigatures: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = createFontVariantLigatures<'a'>()({ fontVariantLigatures: 'a' });
+    const result = createFontVariantLigatures<'a'>()({
+      fontVariantLigatures: 'a',
+    });
     expect(toStyles(result)).toEqual({ fontVariantLigatures: 'a' });
   });
 
@@ -32,7 +35,11 @@ describe('createFontVariantLigatures', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFontVariantLigatures<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFontVariantLigatures<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ fontVariantLigatures: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +61,7 @@ describe('createFontVariantLigatures', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       fontVariantLigatures: 'a',
       [MQ.D]: {
         fontVariantLigatures: 'b',

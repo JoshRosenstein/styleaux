@@ -1,3 +1,1 @@
-
-
-export * from './mdn'
+export * from './mdn';

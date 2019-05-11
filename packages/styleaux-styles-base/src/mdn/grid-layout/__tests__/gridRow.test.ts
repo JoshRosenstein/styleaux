@@ -1,3 +1,4 @@
+import { createGridRow } from '../gridRow';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createGridRow } from '../gridRow';
 
 describe('createGridRow', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createGridRow', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createGridRow<'value',never, IThemeWithoutBreakpoints>({
+    const result = createGridRow<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ gridRow: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createGridRow', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createGridRow<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createGridRow<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       gridRow: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createGridRow', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       gridRow: 'a',
       [MQ.D]: {
         gridRow: 'b',

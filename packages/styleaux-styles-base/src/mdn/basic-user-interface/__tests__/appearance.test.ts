@@ -1,3 +1,4 @@
+import { createAppearance } from '../appearance';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createAppearance } from '../appearance';
 
 describe('createAppearance', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createAppearance', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createAppearance<'value',never, IThemeWithoutBreakpoints>({
+    const result = createAppearance<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ appearance: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createAppearance', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createAppearance<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createAppearance<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       appearance: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createAppearance', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       appearance: 'a',
       [MQ.D]: {
         appearance: 'b',

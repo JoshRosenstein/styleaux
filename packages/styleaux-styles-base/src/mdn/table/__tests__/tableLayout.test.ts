@@ -1,3 +1,4 @@
+import { createTableLayout } from '../tableLayout';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTableLayout } from '../tableLayout';
 
 describe('createTableLayout', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createTableLayout', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTableLayout<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTableLayout<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ tableLayout: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createTableLayout', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createTableLayout<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createTableLayout<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       tableLayout: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createTableLayout', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       tableLayout: 'a',
       [MQ.D]: {
         tableLayout: 'b',

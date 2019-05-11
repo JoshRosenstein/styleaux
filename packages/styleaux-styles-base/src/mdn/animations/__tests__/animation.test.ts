@@ -1,3 +1,4 @@
+import { createAnimation } from '../animation';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createAnimation } from '../animation';
 
 describe('createAnimation', () => {
   it('should return a function', () => {
@@ -41,11 +40,7 @@ describe('createAnimation', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createAnimation<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createAnimation<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       animation: {
         all: 'a',
         D: 'b',

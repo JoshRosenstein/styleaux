@@ -1,3 +1,4 @@
+import { createRotate } from '../rotate';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createRotate } from '../rotate';
 
 describe('createRotate', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createRotate', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createRotate<'value',never, IThemeWithoutBreakpoints>({
+    const result = createRotate<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ rotate: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createRotate', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createRotate<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createRotate<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       rotate: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createRotate', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       rotate: 'a',
       [MQ.D]: {
         rotate: 'b',

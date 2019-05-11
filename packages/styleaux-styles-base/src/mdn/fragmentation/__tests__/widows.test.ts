@@ -1,3 +1,4 @@
+import { createWidows } from '../widows';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createWidows } from '../widows';
 
 describe('createWidows', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createWidows', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createWidows<'value',never, IThemeWithoutBreakpoints>({
+    const result = createWidows<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ widows: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createWidows', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createWidows<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createWidows<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       widows: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createWidows', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       widows: 'a',
       [MQ.D]: {
         widows: 'b',

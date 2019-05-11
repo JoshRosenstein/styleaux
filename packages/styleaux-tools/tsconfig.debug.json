@@ -1,5 +1,4 @@
 {
-
   "compilerOptions": {
     "module": "commonjs",
     "moduleResolution": "node",
@@ -10,9 +9,10 @@
     "outDir": "dist-debug/",
     "emitDeclarationOnly": true,
     "skipLibCheck": true, /// Needs to be true to fix wrong alias types being used
-
   },
-  "include": ["src/**/*.ts"],
+  "include": [
+    "src/**/*.ts"
+  ],
   "exclude": [
     "dist-*/",
     "node_modules",
@@ -22,4 +22,3 @@
     "**/*.test.ts",
   ]
 }
-

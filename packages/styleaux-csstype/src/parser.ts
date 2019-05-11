@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable @typescript-eslint/interface-name-prefix */
 export enum Entity {
   Component,
   Combinator,
@@ -119,7 +121,10 @@ export default function parse(syntax: string): EntityType[] {
   while ((entityMatch = REGEX_ENTITY.exec(syntax))) {
     const [, value, ...rawMultiplier] = entityMatch;
     if (value.indexOf('(') !== -1) {
-      deepestLevel().push({ entity: Entity.Function, multiplier: multiplierData(rawMultiplier) });
+      deepestLevel().push({
+        entity: Entity.Function,
+        multiplier: multiplierData(rawMultiplier),
+      });
       previousMatchWasComponent = false;
       continue;
     } else if (value.indexOf('&&') === 0) {
@@ -137,7 +142,12 @@ export default function parse(syntax: string): EntityType[] {
     } else if (value.indexOf(']') === 0) {
       const definitions = levels.pop();
       if (definitions) {
-        deepestLevel().push(componentGroupData(groupByPrecedence(definitions), multiplierData(rawMultiplier)));
+        deepestLevel().push(
+          componentGroupData(
+            groupByPrecedence(definitions),
+            multiplierData(rawMultiplier),
+          ),
+        );
       }
       previousMatchWasComponent = true;
       continue;
@@ -155,17 +165,28 @@ export default function parse(syntax: string): EntityType[] {
       let componentMatch: RegExpMatchArray | null;
       if ((componentMatch = value.match(REGEX_DATA_TYPE))) {
         const name = componentMatch[0];
-        deepestLevel().push(componentData(Component.DataType, name, multiplierData(rawMultiplier)));
+        deepestLevel().push(
+          componentData(
+            Component.DataType,
+            name,
+            multiplierData(rawMultiplier),
+          ),
+        );
         previousMatchWasComponent = true;
         continue;
       } else if ((componentMatch = value.match(REGEX_KEYWORD))) {
         const name = componentMatch[0];
-        deepestLevel().push(componentData(Component.Keyword, name, multiplierData(rawMultiplier)));
+        deepestLevel().push(
+          componentData(Component.Keyword, name, multiplierData(rawMultiplier)),
+        );
         previousMatchWasComponent = true;
         continue;
       }
     }
-    deepestLevel().push({ entity: Entity.Unknown, multiplier: multiplierData(rawMultiplier) });
+    deepestLevel().push({
+      entity: Entity.Unknown,
+      multiplier: multiplierData(rawMultiplier),
+    });
   }
 
   function deepestLevel() {
@@ -183,18 +204,25 @@ export function isCombinator(entity: EntityType): entity is ICombinator {
   return entity.entity === Entity.Combinator;
 }
 
-export function isCurlyBracetMultiplier(multiplier: MultiplierType): multiplier is IMultiplierCurlyBracet {
+export function isCurlyBracetMultiplier(
+  multiplier: MultiplierType,
+): multiplier is IMultiplierCurlyBracet {
   return multiplier.sign === Multiplier.CurlyBracet;
 }
 
 export function isMandatoryMultiplied(multiplier: MultiplierType | null) {
-  return multiplier !== null && (isCurlyBracetMultiplier(multiplier) && multiplier.min > 1);
+  return (
+    multiplier !== null &&
+    (isCurlyBracetMultiplier(multiplier) && multiplier.min > 1)
+  );
 }
 
 export function isOptionallyMultiplied(multiplier: MultiplierType | null) {
   return (
     multiplier !== null &&
-    ((isCurlyBracetMultiplier(multiplier) && multiplier.min < multiplier.max && multiplier.max > 1) ||
+    ((isCurlyBracetMultiplier(multiplier) &&
+      multiplier.min < multiplier.max &&
+      multiplier.max > 1) ||
       multiplier.sign === Multiplier.Asterisk ||
       multiplier.sign === Multiplier.PlusSign ||
       multiplier.sign === Multiplier.HashMark ||
@@ -204,12 +232,16 @@ export function isOptionallyMultiplied(multiplier: MultiplierType | null) {
 
 export function isMandatoryEntity(entity: EntityType) {
   if (isCombinator(entity)) {
-    return entity === combinators[Combinator.DoubleAmpersand] || entity === combinators[Combinator.Juxtaposition];
+    return (
+      entity === combinators[Combinator.DoubleAmpersand] ||
+      entity === combinators[Combinator.Juxtaposition]
+    );
   }
 
   if (entity.multiplier) {
     return (
-      (isCurlyBracetMultiplier(entity.multiplier) && entity.multiplier.min > 0) ||
+      (isCurlyBracetMultiplier(entity.multiplier) &&
+        entity.multiplier.min > 0) ||
       entity.multiplier.sign === Multiplier.PlusSign ||
       entity.multiplier.sign === Multiplier.HashMark ||
       entity.multiplier.sign === Multiplier.ExclamationPoint
@@ -232,7 +264,10 @@ export function componentData(
   };
 }
 
-export function componentGroupData(entities: EntityType[], multiplier: MultiplierType | null = null): ComponentType {
+export function componentGroupData(
+  entities: EntityType[],
+  multiplier: MultiplierType | null = null,
+): ComponentType {
   return {
     entity: Entity.Component,
     component: Component.Group,
@@ -257,13 +292,20 @@ function multiplierData(raw: string[]): MultiplierType | null {
     case '!':
       return { sign: Multiplier.ExclamationPoint };
     case '{':
-      return { sign: Multiplier.CurlyBracet, min: Number(raw[1]), max: Number(raw[2]) };
+      return {
+        sign: Multiplier.CurlyBracet,
+        min: Number(raw[1]),
+        max: Number(raw[2]),
+      };
     default:
       return null;
   }
 }
 
-function groupByPrecedence(entities: EntityType[], precedence: number = Combinator.SingleBar): EntityType[] {
+function groupByPrecedence(
+  entities: EntityType[],
+  precedence: number = Combinator.SingleBar,
+): EntityType[] {
   if (precedence < 0) {
     // We've reached the lowest precedence possible
     return entities;
@@ -273,7 +315,11 @@ function groupByPrecedence(entities: EntityType[], precedence: number = Combinat
   const combinatorIndexes: number[] = [];
 
   // Search for indexes where the combinator is used
-  for (let i = entities.indexOf(combinator); i > -1; i = entities.indexOf(combinator, i + 1)) {
+  for (
+    let i = entities.indexOf(combinator);
+    i > -1;
+    i = entities.indexOf(combinator, i + 1)
+  ) {
     combinatorIndexes.push(i);
   }
 
@@ -305,7 +351,9 @@ function groupByPrecedence(entities: EntityType[], precedence: number = Combinat
 
     // Only group if there's more than one entity in between
     if (sectionEntities.length > 1) {
-      groupedEntities.push(componentGroupData(groupByPrecedence(sectionEntities, nextPrecedence)));
+      groupedEntities.push(
+        componentGroupData(groupByPrecedence(sectionEntities, nextPrecedence)),
+      );
     } else {
       groupedEntities.push(...sectionEntities);
     }

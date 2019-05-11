@@ -1,3 +1,4 @@
+import { createBackgroundPositionY } from '../backgroundPositionY';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBackgroundPositionY } from '../backgroundPositionY';
 
 describe('createBackgroundPositionY', () => {
   it('should return a function', () => {
@@ -17,12 +16,16 @@ describe('createBackgroundPositionY', () => {
   });
 
   it('should use `createBackgroundPositionY` as component and css prop', () => {
-    const result = createBackgroundPositionY()({ backgroundPositionY: 'inherit' });
+    const result = createBackgroundPositionY()({
+      backgroundPositionY: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ backgroundPositionY: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = createBackgroundPositionY<'a'>()({ backgroundPositionY: 'a' });
+    const result = createBackgroundPositionY<'a'>()({
+      backgroundPositionY: 'a',
+    });
     expect(toStyles(result)).toEqual({ backgroundPositionY: 'a' });
   });
 
@@ -32,7 +35,11 @@ describe('createBackgroundPositionY', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBackgroundPositionY<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBackgroundPositionY<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ backgroundPositionY: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +61,7 @@ describe('createBackgroundPositionY', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       backgroundPositionY: 'a',
       [MQ.D]: {
         backgroundPositionY: 'b',

@@ -1,3 +1,4 @@
+import { createPaddingBlock } from '../paddingBlock';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createPaddingBlock } from '../paddingBlock';
 
 describe('createPaddingBlock', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createPaddingBlock', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createPaddingBlock<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ paddingBlock: 'value', theme: themeWithoutBreakpoints });
+    const result = createPaddingBlock<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ paddingBlock: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       paddingBlock: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createPaddingBlock<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createPaddingBlock<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       paddingBlock: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createPaddingBlock', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       paddingBlock: 'a',
       [MQ.D]: {
         paddingBlock: 'b',

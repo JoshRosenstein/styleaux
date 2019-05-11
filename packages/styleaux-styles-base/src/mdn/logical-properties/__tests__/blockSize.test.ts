@@ -1,3 +1,4 @@
+import { createBlockSize } from '../blockSize';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBlockSize } from '../blockSize';
 
 describe('createBlockSize', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createBlockSize', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBlockSize<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBlockSize<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ blockSize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createBlockSize', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createBlockSize<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createBlockSize<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       blockSize: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createBlockSize', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       blockSize: 'a',
       [MQ.D]: {
         blockSize: 'b',

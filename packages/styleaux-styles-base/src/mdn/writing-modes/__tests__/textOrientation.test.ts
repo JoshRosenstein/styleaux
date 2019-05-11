@@ -1,3 +1,4 @@
+import { createTextOrientation } from '../textOrientation';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextOrientation } from '../textOrientation';
 
 describe('createTextOrientation', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createTextOrientation', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextOrientation<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTextOrientation<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ textOrientation: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createTextOrientation', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       textOrientation: 'a',
       [MQ.D]: {
         textOrientation: 'b',

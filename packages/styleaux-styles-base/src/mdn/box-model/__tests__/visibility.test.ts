@@ -1,3 +1,4 @@
+import { createVisibility } from '../visibility';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createVisibility } from '../visibility';
 
 describe('createVisibility', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createVisibility', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createVisibility<'value',never, IThemeWithoutBreakpoints>({
+    const result = createVisibility<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ visibility: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createVisibility', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createVisibility<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createVisibility<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       visibility: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createVisibility', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       visibility: 'a',
       [MQ.D]: {
         visibility: 'b',

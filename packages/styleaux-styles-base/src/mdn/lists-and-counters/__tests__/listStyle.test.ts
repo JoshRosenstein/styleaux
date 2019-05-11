@@ -1,3 +1,4 @@
+import { createListStyle } from '../listStyle';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createListStyle } from '../listStyle';
 
 describe('createListStyle', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createListStyle', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createListStyle<'value',never, IThemeWithoutBreakpoints>({
+    const result = createListStyle<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ listStyle: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createListStyle', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createListStyle<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createListStyle<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       listStyle: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createListStyle', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       listStyle: 'a',
       [MQ.D]: {
         listStyle: 'b',

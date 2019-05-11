@@ -1,3 +1,4 @@
+import { createTextDecorationSkip } from '../textDecorationSkip';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextDecorationSkip } from '../textDecorationSkip';
 
 describe('createTextDecorationSkip', () => {
   it('should return a function', () => {
@@ -17,7 +16,9 @@ describe('createTextDecorationSkip', () => {
   });
 
   it('should use `createTextDecorationSkip` as component and css prop', () => {
-    const result = createTextDecorationSkip()({ textDecorationSkip: 'inherit' });
+    const result = createTextDecorationSkip()({
+      textDecorationSkip: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ textDecorationSkip: 'inherit' });
   });
 
@@ -32,7 +33,11 @@ describe('createTextDecorationSkip', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextDecorationSkip<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTextDecorationSkip<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ textDecorationSkip: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +59,7 @@ describe('createTextDecorationSkip', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       textDecorationSkip: 'a',
       [MQ.D]: {
         textDecorationSkip: 'b',

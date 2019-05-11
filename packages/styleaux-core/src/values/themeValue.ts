@@ -1,9 +1,9 @@
-import { getThemeValue } from "../getters";
+import { getThemeValue } from '../getters';
 
 export function themeValue<T>({
   themeKey,
   transformValue,
-  themeGetter = getThemeValue(themeKey, transformValue)
+  themeGetter = getThemeValue(themeKey, transformValue),
 }: {
   themeKey: string;
   transformValue?: any;

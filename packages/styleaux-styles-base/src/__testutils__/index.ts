@@ -1,2 +1,2 @@
-export * from './theme'
-export * from './toStyles'
+export * from './theme';
+export * from './toStyles';

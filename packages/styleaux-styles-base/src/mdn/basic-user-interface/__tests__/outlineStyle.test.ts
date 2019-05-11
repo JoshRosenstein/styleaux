@@ -1,3 +1,4 @@
+import { createOutlineStyle } from '../outlineStyle';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createOutlineStyle } from '../outlineStyle';
 
 describe('createOutlineStyle', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createOutlineStyle', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createOutlineStyle<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ outlineStyle: 'value', theme: themeWithoutBreakpoints });
+    const result = createOutlineStyle<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ outlineStyle: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       outlineStyle: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createOutlineStyle<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createOutlineStyle<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       outlineStyle: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createOutlineStyle', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       outlineStyle: 'a',
       [MQ.D]: {
         outlineStyle: 'b',

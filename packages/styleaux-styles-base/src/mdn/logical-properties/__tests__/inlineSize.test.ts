@@ -1,3 +1,4 @@
+import { createInlineSize } from '../inlineSize';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createInlineSize } from '../inlineSize';
 
 describe('createInlineSize', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createInlineSize', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createInlineSize<'value',never, IThemeWithoutBreakpoints>({
+    const result = createInlineSize<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ inlineSize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createInlineSize', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createInlineSize<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createInlineSize<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       inlineSize: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createInlineSize', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       inlineSize: 'a',
       [MQ.D]: {
         inlineSize: 'b',

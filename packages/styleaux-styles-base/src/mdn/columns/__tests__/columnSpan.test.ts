@@ -1,3 +1,4 @@
+import { createColumnSpan } from '../columnSpan';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createColumnSpan } from '../columnSpan';
 
 describe('createColumnSpan', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createColumnSpan', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createColumnSpan<'value',never, IThemeWithoutBreakpoints>({
+    const result = createColumnSpan<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ columnSpan: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createColumnSpan', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createColumnSpan<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createColumnSpan<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       columnSpan: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createColumnSpan', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       columnSpan: 'a',
       [MQ.D]: {
         columnSpan: 'b',

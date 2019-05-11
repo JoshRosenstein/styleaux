@@ -1,3 +1,4 @@
+import { createBorderImageWidth } from '../borderImageWidth';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBorderImageWidth } from '../borderImageWidth';
 
 describe('createBorderImageWidth', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createBorderImageWidth', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderImageWidth<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBorderImageWidth<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ borderImageWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createBorderImageWidth', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       borderImageWidth: 'a',
       [MQ.D]: {
         borderImageWidth: 'b',

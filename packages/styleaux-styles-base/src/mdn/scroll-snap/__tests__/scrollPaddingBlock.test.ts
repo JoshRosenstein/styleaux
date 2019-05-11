@@ -1,3 +1,4 @@
+import { createScrollPaddingBlock } from '../scrollPaddingBlock';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createScrollPaddingBlock } from '../scrollPaddingBlock';
 
 describe('createScrollPaddingBlock', () => {
   it('should return a function', () => {
@@ -17,7 +16,9 @@ describe('createScrollPaddingBlock', () => {
   });
 
   it('should use `createScrollPaddingBlock` as component and css prop', () => {
-    const result = createScrollPaddingBlock()({ scrollPaddingBlock: 'inherit' });
+    const result = createScrollPaddingBlock()({
+      scrollPaddingBlock: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ scrollPaddingBlock: 'inherit' });
   });
 
@@ -32,7 +33,11 @@ describe('createScrollPaddingBlock', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollPaddingBlock<'value',never, IThemeWithoutBreakpoints>({
+    const result = createScrollPaddingBlock<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ scrollPaddingBlock: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +59,7 @@ describe('createScrollPaddingBlock', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       scrollPaddingBlock: 'a',
       [MQ.D]: {
         scrollPaddingBlock: 'b',

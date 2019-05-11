@@ -1,3 +1,4 @@
+import { createTextOverflow } from '../textOverflow';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextOverflow } from '../textOverflow';
 
 describe('createTextOverflow', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createTextOverflow', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextOverflow<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ textOverflow: 'value', theme: themeWithoutBreakpoints });
+    const result = createTextOverflow<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ textOverflow: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       textOverflow: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createTextOverflow<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createTextOverflow<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       textOverflow: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createTextOverflow', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       textOverflow: 'a',
       [MQ.D]: {
         textOverflow: 'b',

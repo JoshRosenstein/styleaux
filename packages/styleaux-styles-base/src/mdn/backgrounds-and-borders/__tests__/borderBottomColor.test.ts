@@ -1,3 +1,4 @@
+import { createBorderBottomColor } from '../borderBottomColor';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBorderBottomColor } from '../borderBottomColor';
 
 describe('createBorderBottomColor', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createBorderBottomColor', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderBottomColor<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBorderBottomColor<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ borderBottomColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createBorderBottomColor', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       borderBottomColor: 'a',
       [MQ.D]: {
         borderBottomColor: 'b',

@@ -1,3 +1,4 @@
+import { createWidth } from '../width';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createWidth } from '../width';
 
 describe('createWidth', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createWidth', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createWidth<'value',never, IThemeWithoutBreakpoints>({
+    const result = createWidth<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ width: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createWidth', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createWidth<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createWidth<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       width: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createWidth', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       width: 'a',
       [MQ.D]: {
         width: 'b',

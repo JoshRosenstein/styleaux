@@ -1,3 +1,4 @@
+import { createScrollMarginBlockEnd } from '../scrollMarginBlockEnd';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createScrollMarginBlockEnd } from '../scrollMarginBlockEnd';
 
 describe('createScrollMarginBlockEnd', () => {
   it('should return a function', () => {
@@ -17,12 +16,16 @@ describe('createScrollMarginBlockEnd', () => {
   });
 
   it('should use `createScrollMarginBlockEnd` as component and css prop', () => {
-    const result = createScrollMarginBlockEnd()({ scrollMarginBlockEnd: 'inherit' });
+    const result = createScrollMarginBlockEnd()({
+      scrollMarginBlockEnd: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ scrollMarginBlockEnd: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = createScrollMarginBlockEnd<'a'>()({ scrollMarginBlockEnd: 'a' });
+    const result = createScrollMarginBlockEnd<'a'>()({
+      scrollMarginBlockEnd: 'a',
+    });
     expect(toStyles(result)).toEqual({ scrollMarginBlockEnd: 'a' });
   });
 
@@ -32,7 +35,11 @@ describe('createScrollMarginBlockEnd', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollMarginBlockEnd<'value',never, IThemeWithoutBreakpoints>({
+    const result = createScrollMarginBlockEnd<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ scrollMarginBlockEnd: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +61,7 @@ describe('createScrollMarginBlockEnd', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       scrollMarginBlockEnd: 'a',
       [MQ.D]: {
         scrollMarginBlockEnd: 'b',

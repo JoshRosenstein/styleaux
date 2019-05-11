@@ -1,3 +1,4 @@
+import { createOutlineWidth } from '../outlineWidth';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createOutlineWidth } from '../outlineWidth';
 
 describe('createOutlineWidth', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createOutlineWidth', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createOutlineWidth<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ outlineWidth: 'value', theme: themeWithoutBreakpoints });
+    const result = createOutlineWidth<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ outlineWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       outlineWidth: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createOutlineWidth<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createOutlineWidth<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       outlineWidth: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createOutlineWidth', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       outlineWidth: 'a',
       [MQ.D]: {
         outlineWidth: 'b',

@@ -1,3 +1,4 @@
+import { createBorderTopColor } from '../borderTopColor';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBorderTopColor } from '../borderTopColor';
 
 describe('createBorderTopColor', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createBorderTopColor', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderTopColor<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBorderTopColor<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ borderTopColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createBorderTopColor', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       borderTopColor: 'a',
       [MQ.D]: {
         borderTopColor: 'b',

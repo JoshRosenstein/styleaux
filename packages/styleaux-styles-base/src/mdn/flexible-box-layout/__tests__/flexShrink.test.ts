@@ -1,3 +1,4 @@
+import { createFlexShrink } from '../flexShrink';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFlexShrink } from '../flexShrink';
 
 describe('createFlexShrink', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createFlexShrink', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFlexShrink<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFlexShrink<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ flexShrink: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createFlexShrink', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createFlexShrink<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createFlexShrink<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       flexShrink: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createFlexShrink', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       flexShrink: 'a',
       [MQ.D]: {
         flexShrink: 'b',

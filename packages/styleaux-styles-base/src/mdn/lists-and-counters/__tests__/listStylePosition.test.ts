@@ -1,3 +1,4 @@
+import { createListStylePosition } from '../listStylePosition';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createListStylePosition } from '../listStylePosition';
 
 describe('createListStylePosition', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createListStylePosition', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createListStylePosition<'value',never, IThemeWithoutBreakpoints>({
+    const result = createListStylePosition<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ listStylePosition: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createListStylePosition', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       listStylePosition: 'a',
       [MQ.D]: {
         listStylePosition: 'b',

@@ -2,11 +2,18 @@ import { OffsetDistanceProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
-const OFFSETDISTANCE='offsetDistance'
+const OFFSETDISTANCE = 'offsetDistance';
 
-export interface OffsetDistanceProps<T=OffsetDistanceProperty> {
+export interface OffsetDistanceProps<T = OffsetDistanceProperty> {
   /**
-   * The **`offset-distance`** CSS property specifies a position along an `offset-path`.
+   * The **`offset-distance`** CSS property specifies a position along an `offset-path`.
+   *
+   * **Initial value**: `0`
+   *
+   * |         Chrome         | Firefox | Safari | Edge | IE  |
+   * | :--------------------: | :-----: | :----: | :--: | :-: |
+   * |         **55**         |   No    |   No   |  No  | No  |
+   * | 46 _(motion-distance)_ |         |        |      |     |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-distance
    */
@@ -16,20 +23,27 @@ export interface OffsetDistanceProps<T=OffsetDistanceProperty> {
 export const createOffsetDistance = <
   T = OffsetDistanceProperty,
   Media = never,
-  Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<OffsetDistanceProps<T>,Theme>,'key'| 'transformValue'>> =
-{}) =>
-  style<OffsetDistanceProps<T>,Theme,Media>({
-    cssProp:OFFSETDISTANCE,
-    prop:OFFSETDISTANCE,
+  Theme = never
+>({
+  key,
+  transformValue,
+}: Partial<
+  Pick<StyleOptions<OffsetDistanceProps<T>, Theme>, 'key' | 'transformValue'>
+> = {}) =>
+  style<OffsetDistanceProps<T>, Theme, Media>({
+    cssProp: OFFSETDISTANCE,
+    prop: OFFSETDISTANCE,
     key,
     transformValue,
-  })
+  });
 
-export const createOffsetDistanceRule = <T = OffsetDistanceProperty, P=unknown>(
-  transformer?: GetValue<T,P>,
-) => styler<T,P>({cssProp: OFFSETDISTANCE, getValue: transformer})
+export const createOffsetDistanceRule = <
+  T = OffsetDistanceProperty,
+  P = unknown
+>(
+  transformer?: GetValue<T, P>,
+) => styler<T, P>({ cssProp: OFFSETDISTANCE, getValue: transformer });
 
-export const offsetDistance =createOffsetDistance()
+export const offsetDistance = createOffsetDistance();
 
-export const offsetDistanceRule =createOffsetDistanceRule()
+export const offsetDistanceRule = createOffsetDistanceRule();

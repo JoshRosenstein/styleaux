@@ -1,3 +1,4 @@
+import { createBorderInlineEndColor } from '../borderInlineEndColor';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBorderInlineEndColor } from '../borderInlineEndColor';
 
 describe('createBorderInlineEndColor', () => {
   it('should return a function', () => {
@@ -17,12 +16,16 @@ describe('createBorderInlineEndColor', () => {
   });
 
   it('should use `createBorderInlineEndColor` as component and css prop', () => {
-    const result = createBorderInlineEndColor()({ borderInlineEndColor: 'inherit' });
+    const result = createBorderInlineEndColor()({
+      borderInlineEndColor: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ borderInlineEndColor: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = createBorderInlineEndColor<'a'>()({ borderInlineEndColor: 'a' });
+    const result = createBorderInlineEndColor<'a'>()({
+      borderInlineEndColor: 'a',
+    });
     expect(toStyles(result)).toEqual({ borderInlineEndColor: 'a' });
   });
 
@@ -32,7 +35,11 @@ describe('createBorderInlineEndColor', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderInlineEndColor<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBorderInlineEndColor<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ borderInlineEndColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +61,7 @@ describe('createBorderInlineEndColor', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       borderInlineEndColor: 'a',
       [MQ.D]: {
         borderInlineEndColor: 'b',

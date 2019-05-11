@@ -1,3 +1,4 @@
+import { createOffset } from '../offset';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createOffset } from '../offset';
 
 describe('createOffset', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createOffset', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createOffset<'value',never, IThemeWithoutBreakpoints>({
+    const result = createOffset<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ offset: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createOffset', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createOffset<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createOffset<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       offset: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createOffset', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       offset: 'a',
       [MQ.D]: {
         offset: 'b',

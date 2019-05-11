@@ -1,3 +1,4 @@
+import { createColumns } from '../columns';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createColumns } from '../columns';
 
 describe('createColumns', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createColumns', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createColumns<'value',never, IThemeWithoutBreakpoints>({
+    const result = createColumns<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ columns: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createColumns', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createColumns<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createColumns<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       columns: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createColumns', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       columns: 'a',
       [MQ.D]: {
         columns: 'b',

@@ -1,3 +1,4 @@
+import { createFilter } from '../filter';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFilter } from '../filter';
 
 describe('createFilter', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createFilter', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFilter<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFilter<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ filter: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createFilter', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createFilter<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createFilter<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       filter: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createFilter', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       filter: 'a',
       [MQ.D]: {
         filter: 'b',

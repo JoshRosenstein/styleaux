@@ -1,3 +1,4 @@
+import { createTextEmphasisPosition } from '../textEmphasisPosition';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextEmphasisPosition } from '../textEmphasisPosition';
 
 describe('createTextEmphasisPosition', () => {
   it('should return a function', () => {
@@ -17,12 +16,16 @@ describe('createTextEmphasisPosition', () => {
   });
 
   it('should use `createTextEmphasisPosition` as component and css prop', () => {
-    const result = createTextEmphasisPosition()({ textEmphasisPosition: 'inherit' });
+    const result = createTextEmphasisPosition()({
+      textEmphasisPosition: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ textEmphasisPosition: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = createTextEmphasisPosition<'a'>()({ textEmphasisPosition: 'a' });
+    const result = createTextEmphasisPosition<'a'>()({
+      textEmphasisPosition: 'a',
+    });
     expect(toStyles(result)).toEqual({ textEmphasisPosition: 'a' });
   });
 
@@ -32,7 +35,11 @@ describe('createTextEmphasisPosition', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextEmphasisPosition<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTextEmphasisPosition<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ textEmphasisPosition: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +61,7 @@ describe('createTextEmphasisPosition', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       textEmphasisPosition: 'a',
       [MQ.D]: {
         textEmphasisPosition: 'b',

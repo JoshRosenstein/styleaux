@@ -1,3 +1,4 @@
+import { createBackgroundSize } from '../backgroundSize';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBackgroundSize } from '../backgroundSize';
 
 describe('createBackgroundSize', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createBackgroundSize', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBackgroundSize<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBackgroundSize<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ backgroundSize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createBackgroundSize', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       backgroundSize: 'a',
       [MQ.D]: {
         backgroundSize: 'b',

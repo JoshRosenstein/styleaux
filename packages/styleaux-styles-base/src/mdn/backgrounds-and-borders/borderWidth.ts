@@ -2,11 +2,15 @@ import { BorderWidthProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
-const BORDERWIDTH='borderWidth'
+const BORDERWIDTH = 'borderWidth';
 
-export interface BorderWidthProps<T=BorderWidthProperty> {
+export interface BorderWidthProps<T = BorderWidthProperty> {
   /**
    * The **`border-width`** shorthand CSS property sets the widths of all four sides of an element's border.
+   *
+   * | Chrome | Firefox | Safari |  Edge  |  IE   |
+   * | :----: | :-----: | :----: | :----: | :---: |
+   * | **1**  |  **1**  | **1**  | **12** | **4** |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-width
    */
@@ -16,20 +20,24 @@ export interface BorderWidthProps<T=BorderWidthProperty> {
 export const createBorderWidth = <
   T = BorderWidthProperty,
   Media = never,
-  Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<BorderWidthProps<T>,Theme>,'key'| 'transformValue'>> =
-{}) =>
-  style<BorderWidthProps<T>,Theme,Media>({
-    cssProp:BORDERWIDTH,
-    prop:BORDERWIDTH,
+  Theme = never
+>({
+  key,
+  transformValue,
+}: Partial<
+  Pick<StyleOptions<BorderWidthProps<T>, Theme>, 'key' | 'transformValue'>
+> = {}) =>
+  style<BorderWidthProps<T>, Theme, Media>({
+    cssProp: BORDERWIDTH,
+    prop: BORDERWIDTH,
     key,
     transformValue,
-  })
+  });
 
-export const createBorderWidthRule = <T = BorderWidthProperty, P=unknown>(
-  transformer?: GetValue<T,P>,
-) => styler<T,P>({cssProp: BORDERWIDTH, getValue: transformer})
+export const createBorderWidthRule = <T = BorderWidthProperty, P = unknown>(
+  transformer?: GetValue<T, P>,
+) => styler<T, P>({ cssProp: BORDERWIDTH, getValue: transformer });
 
-export const borderWidth =createBorderWidth()
+export const borderWidth = createBorderWidth();
 
-export const borderWidthRule =createBorderWidthRule()
+export const borderWidthRule = createBorderWidthRule();

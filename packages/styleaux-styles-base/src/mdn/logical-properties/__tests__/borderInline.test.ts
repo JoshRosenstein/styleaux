@@ -1,3 +1,4 @@
+import { createBorderInline } from '../borderInline';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBorderInline } from '../borderInline';
 
 describe('createBorderInline', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createBorderInline', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderInline<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ borderInline: 'value', theme: themeWithoutBreakpoints });
+    const result = createBorderInline<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ borderInline: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       borderInline: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createBorderInline<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createBorderInline<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       borderInline: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createBorderInline', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       borderInline: 'a',
       [MQ.D]: {
         borderInline: 'b',

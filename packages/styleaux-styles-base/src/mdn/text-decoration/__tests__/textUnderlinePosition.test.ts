@@ -1,3 +1,4 @@
+import { createTextUnderlinePosition } from '../textUnderlinePosition';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextUnderlinePosition } from '../textUnderlinePosition';
 
 describe('createTextUnderlinePosition', () => {
   it('should return a function', () => {
@@ -17,12 +16,16 @@ describe('createTextUnderlinePosition', () => {
   });
 
   it('should use `createTextUnderlinePosition` as component and css prop', () => {
-    const result = createTextUnderlinePosition()({ textUnderlinePosition: 'inherit' });
+    const result = createTextUnderlinePosition()({
+      textUnderlinePosition: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ textUnderlinePosition: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = createTextUnderlinePosition<'a'>()({ textUnderlinePosition: 'a' });
+    const result = createTextUnderlinePosition<'a'>()({
+      textUnderlinePosition: 'a',
+    });
     expect(toStyles(result)).toEqual({ textUnderlinePosition: 'a' });
   });
 
@@ -32,7 +35,11 @@ describe('createTextUnderlinePosition', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextUnderlinePosition<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTextUnderlinePosition<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ textUnderlinePosition: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +61,7 @@ describe('createTextUnderlinePosition', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       textUnderlinePosition: 'a',
       [MQ.D]: {
         textUnderlinePosition: 'b',

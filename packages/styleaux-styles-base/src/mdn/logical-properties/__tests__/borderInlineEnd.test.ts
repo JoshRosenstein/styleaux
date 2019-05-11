@@ -1,3 +1,4 @@
+import { createBorderInlineEnd } from '../borderInlineEnd';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBorderInlineEnd } from '../borderInlineEnd';
 
 describe('createBorderInlineEnd', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createBorderInlineEnd', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderInlineEnd<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBorderInlineEnd<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ borderInlineEnd: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createBorderInlineEnd', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       borderInlineEnd: 'a',
       [MQ.D]: {
         borderInlineEnd: 'b',

@@ -1,3 +1,4 @@
+import { createBackgroundRepeat } from '../backgroundRepeat';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBackgroundRepeat } from '../backgroundRepeat';
 
 describe('createBackgroundRepeat', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createBackgroundRepeat', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBackgroundRepeat<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBackgroundRepeat<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ backgroundRepeat: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createBackgroundRepeat', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       backgroundRepeat: 'a',
       [MQ.D]: {
         backgroundRepeat: 'b',

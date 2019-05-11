@@ -1,3 +1,4 @@
+import { createBoxShadow } from '../boxShadow';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBoxShadow } from '../boxShadow';
 
 describe('createBoxShadow', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createBoxShadow', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBoxShadow<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBoxShadow<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ boxShadow: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createBoxShadow', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createBoxShadow<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createBoxShadow<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       boxShadow: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createBoxShadow', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       boxShadow: 'a',
       [MQ.D]: {
         boxShadow: 'b',

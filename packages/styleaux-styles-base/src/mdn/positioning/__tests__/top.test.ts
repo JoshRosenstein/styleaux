@@ -1,3 +1,4 @@
+import { createTop } from '../top';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTop } from '../top';
 
 describe('createTop', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createTop', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTop<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTop<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ top: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createTop', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createTop<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createTop<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       top: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createTop', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       top: 'a',
       [MQ.D]: {
         top: 'b',

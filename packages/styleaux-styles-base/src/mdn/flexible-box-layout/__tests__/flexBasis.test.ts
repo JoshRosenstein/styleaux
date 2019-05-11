@@ -1,3 +1,4 @@
+import { createFlexBasis } from '../flexBasis';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFlexBasis } from '../flexBasis';
 
 describe('createFlexBasis', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createFlexBasis', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFlexBasis<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFlexBasis<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ flexBasis: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createFlexBasis', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createFlexBasis<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createFlexBasis<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       flexBasis: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createFlexBasis', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       flexBasis: 'a',
       [MQ.D]: {
         flexBasis: 'b',

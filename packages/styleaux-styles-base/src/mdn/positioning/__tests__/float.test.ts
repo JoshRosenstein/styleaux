@@ -1,3 +1,4 @@
+import { createFloat } from '../float';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFloat } from '../float';
 
 describe('createFloat', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createFloat', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFloat<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFloat<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ float: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createFloat', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createFloat<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createFloat<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       float: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createFloat', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       float: 'a',
       [MQ.D]: {
         float: 'b',

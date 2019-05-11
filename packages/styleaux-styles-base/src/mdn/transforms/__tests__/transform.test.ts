@@ -1,3 +1,4 @@
+import { createTransform } from '../transform';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTransform } from '../transform';
 
 describe('createTransform', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createTransform', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTransform<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTransform<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ transform: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createTransform', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createTransform<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createTransform<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       transform: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createTransform', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       transform: 'a',
       [MQ.D]: {
         transform: 'b',

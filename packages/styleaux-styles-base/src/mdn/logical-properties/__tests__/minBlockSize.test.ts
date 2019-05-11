@@ -1,3 +1,4 @@
+import { createMinBlockSize } from '../minBlockSize';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMinBlockSize } from '../minBlockSize';
 
 describe('createMinBlockSize', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createMinBlockSize', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMinBlockSize<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ minBlockSize: 'value', theme: themeWithoutBreakpoints });
+    const result = createMinBlockSize<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ minBlockSize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       minBlockSize: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createMinBlockSize<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createMinBlockSize<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       minBlockSize: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createMinBlockSize', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       minBlockSize: 'a',
       [MQ.D]: {
         minBlockSize: 'b',

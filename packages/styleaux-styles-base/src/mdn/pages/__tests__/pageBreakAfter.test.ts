@@ -1,3 +1,4 @@
+import { createPageBreakAfter } from '../pageBreakAfter';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createPageBreakAfter } from '../pageBreakAfter';
 
 describe('createPageBreakAfter', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createPageBreakAfter', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createPageBreakAfter<'value',never, IThemeWithoutBreakpoints>({
+    const result = createPageBreakAfter<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ pageBreakAfter: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createPageBreakAfter', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       pageBreakAfter: 'a',
       [MQ.D]: {
         pageBreakAfter: 'b',

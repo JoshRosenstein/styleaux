@@ -1,3 +1,4 @@
+import { createColumnFill } from '../columnFill';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createColumnFill } from '../columnFill';
 
 describe('createColumnFill', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createColumnFill', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createColumnFill<'value',never, IThemeWithoutBreakpoints>({
+    const result = createColumnFill<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ columnFill: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createColumnFill', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createColumnFill<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createColumnFill<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       columnFill: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createColumnFill', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       columnFill: 'a',
       [MQ.D]: {
         columnFill: 'b',

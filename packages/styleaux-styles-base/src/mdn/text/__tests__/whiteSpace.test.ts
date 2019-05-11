@@ -1,3 +1,4 @@
+import { createWhiteSpace } from '../whiteSpace';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createWhiteSpace } from '../whiteSpace';
 
 describe('createWhiteSpace', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createWhiteSpace', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createWhiteSpace<'value',never, IThemeWithoutBreakpoints>({
+    const result = createWhiteSpace<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ whiteSpace: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createWhiteSpace', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createWhiteSpace<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createWhiteSpace<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       whiteSpace: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createWhiteSpace', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       whiteSpace: 'a',
       [MQ.D]: {
         whiteSpace: 'b',

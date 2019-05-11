@@ -1,3 +1,4 @@
+import { createTextShadow } from '../textShadow';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextShadow } from '../textShadow';
 
 describe('createTextShadow', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createTextShadow', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextShadow<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTextShadow<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ textShadow: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createTextShadow', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createTextShadow<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createTextShadow<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       textShadow: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createTextShadow', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       textShadow: 'a',
       [MQ.D]: {
         textShadow: 'b',

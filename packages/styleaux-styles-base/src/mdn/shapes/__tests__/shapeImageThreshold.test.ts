@@ -1,3 +1,4 @@
+import { createShapeImageThreshold } from '../shapeImageThreshold';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createShapeImageThreshold } from '../shapeImageThreshold';
 
 describe('createShapeImageThreshold', () => {
   it('should return a function', () => {
@@ -17,12 +16,16 @@ describe('createShapeImageThreshold', () => {
   });
 
   it('should use `createShapeImageThreshold` as component and css prop', () => {
-    const result = createShapeImageThreshold()({ shapeImageThreshold: 'inherit' });
+    const result = createShapeImageThreshold()({
+      shapeImageThreshold: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ shapeImageThreshold: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = createShapeImageThreshold<'a'>()({ shapeImageThreshold: 'a' });
+    const result = createShapeImageThreshold<'a'>()({
+      shapeImageThreshold: 'a',
+    });
     expect(toStyles(result)).toEqual({ shapeImageThreshold: 'a' });
   });
 
@@ -32,7 +35,11 @@ describe('createShapeImageThreshold', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createShapeImageThreshold<'value',never, IThemeWithoutBreakpoints>({
+    const result = createShapeImageThreshold<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ shapeImageThreshold: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +61,7 @@ describe('createShapeImageThreshold', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       shapeImageThreshold: 'a',
       [MQ.D]: {
         shapeImageThreshold: 'b',

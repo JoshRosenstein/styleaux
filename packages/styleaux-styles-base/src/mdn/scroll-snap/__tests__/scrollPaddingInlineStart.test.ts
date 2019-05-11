@@ -1,3 +1,4 @@
+import { createScrollPaddingInlineStart } from '../scrollPaddingInlineStart';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createScrollPaddingInlineStart } from '../scrollPaddingInlineStart';
 
 describe('createScrollPaddingInlineStart', () => {
   it('should return a function', () => {
@@ -17,12 +16,16 @@ describe('createScrollPaddingInlineStart', () => {
   });
 
   it('should use `createScrollPaddingInlineStart` as component and css prop', () => {
-    const result = createScrollPaddingInlineStart()({ scrollPaddingInlineStart: 'inherit' });
+    const result = createScrollPaddingInlineStart()({
+      scrollPaddingInlineStart: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ scrollPaddingInlineStart: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = createScrollPaddingInlineStart<'a'>()({ scrollPaddingInlineStart: 'a' });
+    const result = createScrollPaddingInlineStart<'a'>()({
+      scrollPaddingInlineStart: 'a',
+    });
     expect(toStyles(result)).toEqual({ scrollPaddingInlineStart: 'a' });
   });
 
@@ -32,7 +35,11 @@ describe('createScrollPaddingInlineStart', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollPaddingInlineStart<'value',never, IThemeWithoutBreakpoints>({
+    const result = createScrollPaddingInlineStart<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ scrollPaddingInlineStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +61,7 @@ describe('createScrollPaddingInlineStart', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       scrollPaddingInlineStart: 'a',
       [MQ.D]: {
         scrollPaddingInlineStart: 'b',

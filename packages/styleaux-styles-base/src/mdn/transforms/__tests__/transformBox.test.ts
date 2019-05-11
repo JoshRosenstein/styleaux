@@ -1,3 +1,4 @@
+import { createTransformBox } from '../transformBox';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTransformBox } from '../transformBox';
 
 describe('createTransformBox', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createTransformBox', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTransformBox<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ transformBox: 'value', theme: themeWithoutBreakpoints });
+    const result = createTransformBox<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ transformBox: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       transformBox: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createTransformBox<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createTransformBox<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       transformBox: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createTransformBox', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       transformBox: 'a',
       [MQ.D]: {
         transformBox: 'b',

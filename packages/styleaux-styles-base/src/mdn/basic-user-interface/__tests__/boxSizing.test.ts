@@ -1,3 +1,4 @@
+import { createBoxSizing } from '../boxSizing';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBoxSizing } from '../boxSizing';
 
 describe('createBoxSizing', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createBoxSizing', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBoxSizing<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBoxSizing<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ boxSizing: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createBoxSizing', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createBoxSizing<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createBoxSizing<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       boxSizing: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createBoxSizing', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       boxSizing: 'a',
       [MQ.D]: {
         boxSizing: 'b',

@@ -2,11 +2,17 @@ import { PaddingLeftProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
-const PADDINGLEFT='paddingLeft'
+const PADDINGLEFT = 'paddingLeft';
 
-export interface PaddingLeftProps<T=PaddingLeftProperty> {
+export interface PaddingLeftProps<T = PaddingLeftProperty> {
   /**
-   * The **`padding-left`** CSS property sets the width of the padding area on the top of an element.
+   * The **`padding-left`** CSS property sets the width of the padding area on the left side of an element.
+   *
+   * **Initial value**: `0`
+   *
+   * | Chrome | Firefox | Safari |  Edge  |  IE   |
+   * | :----: | :-----: | :----: | :----: | :---: |
+   * | **1**  |  **1**  | **1**  | **12** | **4** |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-left
    */
@@ -16,20 +22,24 @@ export interface PaddingLeftProps<T=PaddingLeftProperty> {
 export const createPaddingLeft = <
   T = PaddingLeftProperty,
   Media = never,
-  Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<PaddingLeftProps<T>,Theme>,'key'| 'transformValue'>> =
-{}) =>
-  style<PaddingLeftProps<T>,Theme,Media>({
-    cssProp:PADDINGLEFT,
-    prop:PADDINGLEFT,
+  Theme = never
+>({
+  key,
+  transformValue,
+}: Partial<
+  Pick<StyleOptions<PaddingLeftProps<T>, Theme>, 'key' | 'transformValue'>
+> = {}) =>
+  style<PaddingLeftProps<T>, Theme, Media>({
+    cssProp: PADDINGLEFT,
+    prop: PADDINGLEFT,
     key,
     transformValue,
-  })
+  });
 
-export const createPaddingLeftRule = <T = PaddingLeftProperty, P=unknown>(
-  transformer?: GetValue<T,P>,
-) => styler<T,P>({cssProp: PADDINGLEFT, getValue: transformer})
+export const createPaddingLeftRule = <T = PaddingLeftProperty, P = unknown>(
+  transformer?: GetValue<T, P>,
+) => styler<T, P>({ cssProp: PADDINGLEFT, getValue: transformer });
 
-export const paddingLeft =createPaddingLeft()
+export const paddingLeft = createPaddingLeft();
 
-export const paddingLeftRule =createPaddingLeftRule()
+export const paddingLeftRule = createPaddingLeftRule();
