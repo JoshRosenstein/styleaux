@@ -1,3 +1,4 @@
+import { createOffsetDistance } from '../offsetDistance';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createOffsetDistance } from '../offsetDistance';
 
 describe('createOffsetDistance', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createOffsetDistance', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createOffsetDistance<'value',never, IThemeWithoutBreakpoints>({
+    const result = createOffsetDistance<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ offsetDistance: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createOffsetDistance', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       offsetDistance: 'a',
       [MQ.D]: {
         offsetDistance: 'b',

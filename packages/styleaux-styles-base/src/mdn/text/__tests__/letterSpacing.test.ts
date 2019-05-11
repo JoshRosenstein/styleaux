@@ -1,3 +1,4 @@
+import { createLetterSpacing } from '../letterSpacing';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createLetterSpacing } from '../letterSpacing';
 
 describe('createLetterSpacing', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createLetterSpacing', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createLetterSpacing<'value',never, IThemeWithoutBreakpoints>({
+    const result = createLetterSpacing<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ letterSpacing: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,20 +44,18 @@ describe('createLetterSpacing', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createLetterSpacing<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
-      letterSpacing: {
-        all: 'a',
-        D: 'b',
-        T: 'c',
-        M: 'd',
+    const result = createLetterSpacing<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()(
+      {
+        letterSpacing: {
+          all: 'a',
+          D: 'b',
+          T: 'c',
+          M: 'd',
+        },
+        theme,
       },
-      theme,
-    });
-   expect(toStyles(result)).toEqual({
+    );
+    expect(toStyles(result)).toEqual({
       letterSpacing: 'a',
       [MQ.D]: {
         letterSpacing: 'b',

@@ -1,3 +1,4 @@
+import { createScrollMarginBottom } from '../scrollMarginBottom';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createScrollMarginBottom } from '../scrollMarginBottom';
 
 describe('createScrollMarginBottom', () => {
   it('should return a function', () => {
@@ -17,7 +16,9 @@ describe('createScrollMarginBottom', () => {
   });
 
   it('should use `createScrollMarginBottom` as component and css prop', () => {
-    const result = createScrollMarginBottom()({ scrollMarginBottom: 'inherit' });
+    const result = createScrollMarginBottom()({
+      scrollMarginBottom: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ scrollMarginBottom: 'inherit' });
   });
 
@@ -32,7 +33,11 @@ describe('createScrollMarginBottom', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollMarginBottom<'value',never, IThemeWithoutBreakpoints>({
+    const result = createScrollMarginBottom<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ scrollMarginBottom: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +59,7 @@ describe('createScrollMarginBottom', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       scrollMarginBottom: 'a',
       [MQ.D]: {
         scrollMarginBottom: 'b',

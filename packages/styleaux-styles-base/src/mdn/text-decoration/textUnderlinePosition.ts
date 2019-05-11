@@ -2,11 +2,17 @@ import { TextUnderlinePositionProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
-const TEXTUNDERLINEPOSITION='textUnderlinePosition'
+const TEXTUNDERLINEPOSITION = 'textUnderlinePosition';
 
-export interface TextUnderlinePositionProps<T=TextUnderlinePositionProperty> {
+export interface TextUnderlinePositionProps<T = TextUnderlinePositionProperty> {
   /**
    * The **`text-underline-position`** CSS property specifies the position of the underline which is set using the `text-decoration` property's `underline` value.
+   *
+   * **Initial value**: `auto`
+   *
+   * | Chrome | Firefox | Safari |  Edge  |  IE   |
+   * | :----: | :-----: | :----: | :----: | :---: |
+   * | **33** |   No    |   No   | **12** | **6** |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-underline-position
    */
@@ -16,20 +22,30 @@ export interface TextUnderlinePositionProps<T=TextUnderlinePositionProperty> {
 export const createTextUnderlinePosition = <
   T = TextUnderlinePositionProperty,
   Media = never,
-  Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<TextUnderlinePositionProps<T>,Theme>,'key'| 'transformValue'>> =
-{}) =>
-  style<TextUnderlinePositionProps<T>,Theme,Media>({
-    cssProp:TEXTUNDERLINEPOSITION,
-    prop:TEXTUNDERLINEPOSITION,
+  Theme = never
+>({
+  key,
+  transformValue,
+}: Partial<
+  Pick<
+    StyleOptions<TextUnderlinePositionProps<T>, Theme>,
+    'key' | 'transformValue'
+  >
+> = {}) =>
+  style<TextUnderlinePositionProps<T>, Theme, Media>({
+    cssProp: TEXTUNDERLINEPOSITION,
+    prop: TEXTUNDERLINEPOSITION,
     key,
     transformValue,
-  })
+  });
 
-export const createTextUnderlinePositionRule = <T = TextUnderlinePositionProperty, P=unknown>(
-  transformer?: GetValue<T,P>,
-) => styler<T,P>({cssProp: TEXTUNDERLINEPOSITION, getValue: transformer})
+export const createTextUnderlinePositionRule = <
+  T = TextUnderlinePositionProperty,
+  P = unknown
+>(
+  transformer?: GetValue<T, P>,
+) => styler<T, P>({ cssProp: TEXTUNDERLINEPOSITION, getValue: transformer });
 
-export const textUnderlinePosition =createTextUnderlinePosition()
+export const textUnderlinePosition = createTextUnderlinePosition();
 
-export const textUnderlinePositionRule =createTextUnderlinePositionRule()
+export const textUnderlinePositionRule = createTextUnderlinePositionRule();

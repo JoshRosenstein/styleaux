@@ -1,3 +1,4 @@
+import { createFlexGrow } from '../flexGrow';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFlexGrow } from '../flexGrow';
 
 describe('createFlexGrow', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createFlexGrow', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFlexGrow<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFlexGrow<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ flexGrow: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createFlexGrow', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createFlexGrow<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createFlexGrow<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       flexGrow: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createFlexGrow', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       flexGrow: 'a',
       [MQ.D]: {
         flexGrow: 'b',

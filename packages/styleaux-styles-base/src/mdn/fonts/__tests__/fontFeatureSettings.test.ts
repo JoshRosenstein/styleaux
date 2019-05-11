@@ -1,3 +1,4 @@
+import { createFontFeatureSettings } from '../fontFeatureSettings';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFontFeatureSettings } from '../fontFeatureSettings';
 
 describe('createFontFeatureSettings', () => {
   it('should return a function', () => {
@@ -17,12 +16,16 @@ describe('createFontFeatureSettings', () => {
   });
 
   it('should use `createFontFeatureSettings` as component and css prop', () => {
-    const result = createFontFeatureSettings()({ fontFeatureSettings: 'inherit' });
+    const result = createFontFeatureSettings()({
+      fontFeatureSettings: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ fontFeatureSettings: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = createFontFeatureSettings<'a'>()({ fontFeatureSettings: 'a' });
+    const result = createFontFeatureSettings<'a'>()({
+      fontFeatureSettings: 'a',
+    });
     expect(toStyles(result)).toEqual({ fontFeatureSettings: 'a' });
   });
 
@@ -32,7 +35,11 @@ describe('createFontFeatureSettings', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFontFeatureSettings<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFontFeatureSettings<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ fontFeatureSettings: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +61,7 @@ describe('createFontFeatureSettings', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       fontFeatureSettings: 'a',
       [MQ.D]: {
         fontFeatureSettings: 'b',

@@ -1,3 +1,4 @@
+import { createWritingMode } from '../writingMode';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createWritingMode } from '../writingMode';
 
 describe('createWritingMode', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createWritingMode', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createWritingMode<'value',never, IThemeWithoutBreakpoints>({
+    const result = createWritingMode<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ writingMode: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createWritingMode', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createWritingMode<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createWritingMode<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       writingMode: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createWritingMode', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       writingMode: 'a',
       [MQ.D]: {
         writingMode: 'b',

@@ -1,3 +1,4 @@
+import { createScrollMarginBlock } from '../scrollMarginBlock';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createScrollMarginBlock } from '../scrollMarginBlock';
 
 describe('createScrollMarginBlock', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createScrollMarginBlock', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollMarginBlock<'value',never, IThemeWithoutBreakpoints>({
+    const result = createScrollMarginBlock<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ scrollMarginBlock: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createScrollMarginBlock', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       scrollMarginBlock: 'a',
       [MQ.D]: {
         scrollMarginBlock: 'b',

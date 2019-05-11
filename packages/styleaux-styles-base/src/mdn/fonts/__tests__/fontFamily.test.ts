@@ -1,3 +1,4 @@
+import { createFontFamily } from '../fontFamily';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFontFamily } from '../fontFamily';
 
 describe('createFontFamily', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createFontFamily', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFontFamily<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFontFamily<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontFamily: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createFontFamily', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createFontFamily<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createFontFamily<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       fontFamily: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createFontFamily', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       fontFamily: 'a',
       [MQ.D]: {
         fontFamily: 'b',

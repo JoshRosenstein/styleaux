@@ -20,8 +20,9 @@
     "build": "yarn clean && yarn build:src && yarn build:bundles ",
     "clean": "rimraf dist-*/",
     "test": "cd ../.. & yarn run test styles-base",
+    "lint": "eslint --quiet --fix ./src/**",
     "typedoc": "typedoc --options typedoc.ts",
-    "generate": "rimraf mdn && ts-node --project tsconfig.node.json generateMDN.ts"
+    "generate": "rimraf mdn && ts-node --project tsconfig.node.json generateMDN.ts && yarn lint"
   },
   "dependencies": {
 
@@ -35,7 +36,6 @@
     "typed-is": "^1.0.4",
     "@roseys/futils": "^2.1.4",
     "@styleaux/csstype": "^0.0.0-beta.0",
-    "@roseys/eslint-config": "^1.0.4",
     "@types/cheerio": "^0.22.11",
     "@types/chroma-js": "^1.4.1",
     "@types/cli-progress": "^1.8.1",
@@ -43,8 +43,8 @@
     "@types/turndown": "^5.0.0",
     "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
-    "mdn-browser-compat-data": "^0.0.73",
-    "mdn-data": "git+https://github.com/mdn/data.git#9ec55b3a1f609f2e4dd5ec6603fe24e27c28e9a4",
+    "mdn-browser-compat-data": "^0.0.79",
+    "mdn-data": "^2.0.2",
     "ts-node": "^8.0.1",
     "turndown": "^5.0.1",
     "typedoc": "^0.14.2",

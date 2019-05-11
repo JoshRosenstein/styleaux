@@ -1,3 +1,4 @@
+import { createTransitionDelay } from '../transitionDelay';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTransitionDelay } from '../transitionDelay';
 
 describe('createTransitionDelay', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createTransitionDelay', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTransitionDelay<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTransitionDelay<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ transitionDelay: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createTransitionDelay', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       transitionDelay: 'a',
       [MQ.D]: {
         transitionDelay: 'b',

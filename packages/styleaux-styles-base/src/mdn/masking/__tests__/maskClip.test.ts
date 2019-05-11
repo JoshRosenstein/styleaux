@@ -1,3 +1,4 @@
+import { createMaskClip } from '../maskClip';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMaskClip } from '../maskClip';
 
 describe('createMaskClip', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createMaskClip', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMaskClip<'value',never, IThemeWithoutBreakpoints>({
+    const result = createMaskClip<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ maskClip: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createMaskClip', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createMaskClip<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createMaskClip<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       maskClip: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createMaskClip', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       maskClip: 'a',
       [MQ.D]: {
         maskClip: 'b',

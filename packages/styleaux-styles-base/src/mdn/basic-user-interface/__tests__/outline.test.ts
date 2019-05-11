@@ -1,3 +1,4 @@
+import { createOutline } from '../outline';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createOutline } from '../outline';
 
 describe('createOutline', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createOutline', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createOutline<'value',never, IThemeWithoutBreakpoints>({
+    const result = createOutline<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ outline: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createOutline', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createOutline<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createOutline<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       outline: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createOutline', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       outline: 'a',
       [MQ.D]: {
         outline: 'b',

@@ -1,3 +1,4 @@
+import { createMaxWidth } from '../maxWidth';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMaxWidth } from '../maxWidth';
 
 describe('createMaxWidth', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createMaxWidth', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMaxWidth<'value',never, IThemeWithoutBreakpoints>({
+    const result = createMaxWidth<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ maxWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createMaxWidth', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createMaxWidth<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createMaxWidth<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       maxWidth: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createMaxWidth', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       maxWidth: 'a',
       [MQ.D]: {
         maxWidth: 'b',

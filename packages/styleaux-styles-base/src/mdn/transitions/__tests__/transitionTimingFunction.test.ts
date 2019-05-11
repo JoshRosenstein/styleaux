@@ -1,3 +1,4 @@
+import { createTransitionTimingFunction } from '../transitionTimingFunction';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTransitionTimingFunction } from '../transitionTimingFunction';
 
 describe('createTransitionTimingFunction', () => {
   it('should return a function', () => {
@@ -17,12 +16,16 @@ describe('createTransitionTimingFunction', () => {
   });
 
   it('should use `createTransitionTimingFunction` as component and css prop', () => {
-    const result = createTransitionTimingFunction()({ transitionTimingFunction: 'inherit' });
+    const result = createTransitionTimingFunction()({
+      transitionTimingFunction: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ transitionTimingFunction: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = createTransitionTimingFunction<'a'>()({ transitionTimingFunction: 'a' });
+    const result = createTransitionTimingFunction<'a'>()({
+      transitionTimingFunction: 'a',
+    });
     expect(toStyles(result)).toEqual({ transitionTimingFunction: 'a' });
   });
 
@@ -32,7 +35,11 @@ describe('createTransitionTimingFunction', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTransitionTimingFunction<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTransitionTimingFunction<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ transitionTimingFunction: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +61,7 @@ describe('createTransitionTimingFunction', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       transitionTimingFunction: 'a',
       [MQ.D]: {
         transitionTimingFunction: 'b',

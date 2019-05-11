@@ -1,3 +1,4 @@
+import { createMaskRepeat } from '../maskRepeat';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMaskRepeat } from '../maskRepeat';
 
 describe('createMaskRepeat', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createMaskRepeat', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMaskRepeat<'value',never, IThemeWithoutBreakpoints>({
+    const result = createMaskRepeat<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ maskRepeat: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createMaskRepeat', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createMaskRepeat<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createMaskRepeat<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       maskRepeat: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createMaskRepeat', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       maskRepeat: 'a',
       [MQ.D]: {
         maskRepeat: 'b',

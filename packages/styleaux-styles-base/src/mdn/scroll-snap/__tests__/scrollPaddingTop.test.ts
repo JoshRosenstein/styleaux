@@ -1,3 +1,4 @@
+import { createScrollPaddingTop } from '../scrollPaddingTop';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createScrollPaddingTop } from '../scrollPaddingTop';
 
 describe('createScrollPaddingTop', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createScrollPaddingTop', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollPaddingTop<'value',never, IThemeWithoutBreakpoints>({
+    const result = createScrollPaddingTop<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ scrollPaddingTop: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createScrollPaddingTop', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       scrollPaddingTop: 'a',
       [MQ.D]: {
         scrollPaddingTop: 'b',

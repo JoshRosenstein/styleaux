@@ -1,3 +1,4 @@
+import { createGridAutoFlow } from '../gridAutoFlow';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createGridAutoFlow } from '../gridAutoFlow';
 
 describe('createGridAutoFlow', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createGridAutoFlow', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createGridAutoFlow<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ gridAutoFlow: 'value', theme: themeWithoutBreakpoints });
+    const result = createGridAutoFlow<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ gridAutoFlow: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       gridAutoFlow: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createGridAutoFlow<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createGridAutoFlow<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       gridAutoFlow: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createGridAutoFlow', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       gridAutoFlow: 'a',
       [MQ.D]: {
         gridAutoFlow: 'b',

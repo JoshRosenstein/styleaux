@@ -1,3 +1,4 @@
+import { createAnimationDuration } from '../animationDuration';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createAnimationDuration } from '../animationDuration';
 
 describe('createAnimationDuration', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createAnimationDuration', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createAnimationDuration<'value',never, IThemeWithoutBreakpoints>({
+    const result = createAnimationDuration<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ animationDuration: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createAnimationDuration', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       animationDuration: 'a',
       [MQ.D]: {
         animationDuration: 'b',

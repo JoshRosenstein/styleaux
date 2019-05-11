@@ -2,11 +2,15 @@ import { BorderStyleProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
-const BORDERSTYLE='borderStyle'
+const BORDERSTYLE = 'borderStyle';
 
-export interface BorderStyleProps<T=BorderStyleProperty> {
+export interface BorderStyleProps<T = BorderStyleProperty> {
   /**
    * The **`border-style`** CSS property is a shorthand property that sets the line style for all four sides of an element's border.
+   *
+   * | Chrome | Firefox | Safari |  Edge  |  IE   |
+   * | :----: | :-----: | :----: | :----: | :---: |
+   * | **1**  |  **1**  | **1**  | **12** | **4** |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-style
    */
@@ -16,20 +20,24 @@ export interface BorderStyleProps<T=BorderStyleProperty> {
 export const createBorderStyle = <
   T = BorderStyleProperty,
   Media = never,
-  Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<BorderStyleProps<T>,Theme>,'key'| 'transformValue'>> =
-{}) =>
-  style<BorderStyleProps<T>,Theme,Media>({
-    cssProp:BORDERSTYLE,
-    prop:BORDERSTYLE,
+  Theme = never
+>({
+  key,
+  transformValue,
+}: Partial<
+  Pick<StyleOptions<BorderStyleProps<T>, Theme>, 'key' | 'transformValue'>
+> = {}) =>
+  style<BorderStyleProps<T>, Theme, Media>({
+    cssProp: BORDERSTYLE,
+    prop: BORDERSTYLE,
     key,
     transformValue,
-  })
+  });
 
-export const createBorderStyleRule = <T = BorderStyleProperty, P=unknown>(
-  transformer?: GetValue<T,P>,
-) => styler<T,P>({cssProp: BORDERSTYLE, getValue: transformer})
+export const createBorderStyleRule = <T = BorderStyleProperty, P = unknown>(
+  transformer?: GetValue<T, P>,
+) => styler<T, P>({ cssProp: BORDERSTYLE, getValue: transformer });
 
-export const borderStyle =createBorderStyle()
+export const borderStyle = createBorderStyle();
 
-export const borderStyleRule =createBorderStyleRule()
+export const borderStyleRule = createBorderStyleRule();

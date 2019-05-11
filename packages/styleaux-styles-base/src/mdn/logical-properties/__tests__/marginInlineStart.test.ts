@@ -1,3 +1,4 @@
+import { createMarginInlineStart } from '../marginInlineStart';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMarginInlineStart } from '../marginInlineStart';
 
 describe('createMarginInlineStart', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createMarginInlineStart', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMarginInlineStart<'value',never, IThemeWithoutBreakpoints>({
+    const result = createMarginInlineStart<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ marginInlineStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createMarginInlineStart', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       marginInlineStart: 'a',
       [MQ.D]: {
         marginInlineStart: 'b',

@@ -1,3 +1,4 @@
+import { createBorderImageSlice } from '../borderImageSlice';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBorderImageSlice } from '../borderImageSlice';
 
 describe('createBorderImageSlice', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createBorderImageSlice', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderImageSlice<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBorderImageSlice<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ borderImageSlice: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createBorderImageSlice', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       borderImageSlice: 'a',
       [MQ.D]: {
         borderImageSlice: 'b',

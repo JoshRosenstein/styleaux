@@ -1,3 +1,4 @@
+import { createTransformOrigin } from '../transformOrigin';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTransformOrigin } from '../transformOrigin';
 
 describe('createTransformOrigin', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createTransformOrigin', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTransformOrigin<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTransformOrigin<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ transformOrigin: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createTransformOrigin', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       transformOrigin: 'a',
       [MQ.D]: {
         transformOrigin: 'b',

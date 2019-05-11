@@ -1,3 +1,4 @@
+import { createWordSpacing } from '../wordSpacing';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createWordSpacing } from '../wordSpacing';
 
 describe('createWordSpacing', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createWordSpacing', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createWordSpacing<'value',never, IThemeWithoutBreakpoints>({
+    const result = createWordSpacing<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ wordSpacing: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createWordSpacing', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createWordSpacing<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createWordSpacing<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       wordSpacing: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createWordSpacing', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       wordSpacing: 'a',
       [MQ.D]: {
         wordSpacing: 'b',

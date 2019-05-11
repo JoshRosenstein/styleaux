@@ -1,3 +1,4 @@
+import { createGridColumnStart } from '../gridColumnStart';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createGridColumnStart } from '../gridColumnStart';
 
 describe('createGridColumnStart', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createGridColumnStart', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createGridColumnStart<'value',never, IThemeWithoutBreakpoints>({
+    const result = createGridColumnStart<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ gridColumnStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createGridColumnStart', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       gridColumnStart: 'a',
       [MQ.D]: {
         gridColumnStart: 'b',

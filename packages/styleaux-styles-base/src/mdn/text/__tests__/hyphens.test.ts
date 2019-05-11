@@ -1,3 +1,4 @@
+import { createHyphens } from '../hyphens';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createHyphens } from '../hyphens';
 
 describe('createHyphens', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createHyphens', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createHyphens<'value',never, IThemeWithoutBreakpoints>({
+    const result = createHyphens<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ hyphens: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createHyphens', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createHyphens<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createHyphens<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       hyphens: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createHyphens', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       hyphens: 'a',
       [MQ.D]: {
         hyphens: 'b',

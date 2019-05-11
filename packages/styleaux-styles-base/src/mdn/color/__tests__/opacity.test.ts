@@ -1,3 +1,4 @@
+import { createOpacity } from '../opacity';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createOpacity } from '../opacity';
 
 describe('createOpacity', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createOpacity', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createOpacity<'value',never, IThemeWithoutBreakpoints>({
+    const result = createOpacity<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ opacity: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createOpacity', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createOpacity<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createOpacity<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       opacity: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createOpacity', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       opacity: 'a',
       [MQ.D]: {
         opacity: 'b',

@@ -1,3 +1,4 @@
+import { createOverflow } from '../overflow';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createOverflow } from '../overflow';
 
 describe('createOverflow', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createOverflow', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createOverflow<'value',never, IThemeWithoutBreakpoints>({
+    const result = createOverflow<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ overflow: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createOverflow', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createOverflow<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createOverflow<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       overflow: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createOverflow', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       overflow: 'a',
       [MQ.D]: {
         overflow: 'b',

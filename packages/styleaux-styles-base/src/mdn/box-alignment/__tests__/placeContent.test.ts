@@ -1,3 +1,4 @@
+import { createPlaceContent } from '../placeContent';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createPlaceContent } from '../placeContent';
 
 describe('createPlaceContent', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createPlaceContent', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createPlaceContent<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ placeContent: 'value', theme: themeWithoutBreakpoints });
+    const result = createPlaceContent<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ placeContent: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       placeContent: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createPlaceContent<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createPlaceContent<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       placeContent: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createPlaceContent', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       placeContent: 'a',
       [MQ.D]: {
         placeContent: 'b',

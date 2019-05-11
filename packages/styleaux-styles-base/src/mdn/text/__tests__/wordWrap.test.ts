@@ -1,3 +1,4 @@
+import { createWordWrap } from '../wordWrap';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createWordWrap } from '../wordWrap';
 
 describe('createWordWrap', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createWordWrap', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createWordWrap<'value',never, IThemeWithoutBreakpoints>({
+    const result = createWordWrap<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ wordWrap: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createWordWrap', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createWordWrap<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createWordWrap<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       wordWrap: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createWordWrap', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       wordWrap: 'a',
       [MQ.D]: {
         wordWrap: 'b',

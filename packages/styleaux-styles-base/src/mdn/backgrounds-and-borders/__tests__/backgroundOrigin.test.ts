@@ -1,3 +1,4 @@
+import { createBackgroundOrigin } from '../backgroundOrigin';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBackgroundOrigin } from '../backgroundOrigin';
 
 describe('createBackgroundOrigin', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createBackgroundOrigin', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBackgroundOrigin<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBackgroundOrigin<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ backgroundOrigin: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createBackgroundOrigin', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       backgroundOrigin: 'a',
       [MQ.D]: {
         backgroundOrigin: 'b',

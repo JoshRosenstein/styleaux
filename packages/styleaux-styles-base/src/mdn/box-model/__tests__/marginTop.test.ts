@@ -1,3 +1,4 @@
+import { createMarginTop } from '../marginTop';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMarginTop } from '../marginTop';
 
 describe('createMarginTop', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createMarginTop', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMarginTop<'value',never, IThemeWithoutBreakpoints>({
+    const result = createMarginTop<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ marginTop: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createMarginTop', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createMarginTop<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createMarginTop<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       marginTop: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createMarginTop', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       marginTop: 'a',
       [MQ.D]: {
         marginTop: 'b',

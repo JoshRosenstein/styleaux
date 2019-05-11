@@ -1,3 +1,4 @@
+import { createOffsetRotate } from '../offsetRotate';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createOffsetRotate } from '../offsetRotate';
 
 describe('createOffsetRotate', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createOffsetRotate', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createOffsetRotate<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ offsetRotate: 'value', theme: themeWithoutBreakpoints });
+    const result = createOffsetRotate<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ offsetRotate: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       offsetRotate: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createOffsetRotate<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createOffsetRotate<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       offsetRotate: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createOffsetRotate', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       offsetRotate: 'a',
       [MQ.D]: {
         offsetRotate: 'b',

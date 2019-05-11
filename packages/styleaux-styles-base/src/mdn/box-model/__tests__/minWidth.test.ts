@@ -1,3 +1,4 @@
+import { createMinWidth } from '../minWidth';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMinWidth } from '../minWidth';
 
 describe('createMinWidth', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createMinWidth', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMinWidth<'value',never, IThemeWithoutBreakpoints>({
+    const result = createMinWidth<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ minWidth: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createMinWidth', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createMinWidth<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createMinWidth<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       minWidth: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createMinWidth', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       minWidth: 'a',
       [MQ.D]: {
         minWidth: 'b',

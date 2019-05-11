@@ -1,3 +1,4 @@
+import { createBackdropFilter } from '../backdropFilter';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBackdropFilter } from '../backdropFilter';
 
 describe('createBackdropFilter', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createBackdropFilter', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBackdropFilter<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBackdropFilter<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ backdropFilter: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createBackdropFilter', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       backdropFilter: 'a',
       [MQ.D]: {
         backdropFilter: 'b',

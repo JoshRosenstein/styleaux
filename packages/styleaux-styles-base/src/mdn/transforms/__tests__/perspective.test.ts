@@ -1,3 +1,4 @@
+import { createPerspective } from '../perspective';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createPerspective } from '../perspective';
 
 describe('createPerspective', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createPerspective', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createPerspective<'value',never, IThemeWithoutBreakpoints>({
+    const result = createPerspective<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ perspective: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createPerspective', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createPerspective<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createPerspective<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       perspective: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createPerspective', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       perspective: 'a',
       [MQ.D]: {
         perspective: 'b',

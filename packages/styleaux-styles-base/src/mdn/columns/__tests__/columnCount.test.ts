@@ -1,3 +1,4 @@
+import { createColumnCount } from '../columnCount';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createColumnCount } from '../columnCount';
 
 describe('createColumnCount', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createColumnCount', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createColumnCount<'value',never, IThemeWithoutBreakpoints>({
+    const result = createColumnCount<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ columnCount: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createColumnCount', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createColumnCount<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createColumnCount<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       columnCount: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createColumnCount', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       columnCount: 'a',
       [MQ.D]: {
         columnCount: 'b',

@@ -1,3 +1,4 @@
+import { createAlignContent } from '../alignContent';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createAlignContent } from '../alignContent';
 
 describe('createAlignContent', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createAlignContent', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createAlignContent<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ alignContent: 'value', theme: themeWithoutBreakpoints });
+    const result = createAlignContent<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ alignContent: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       alignContent: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createAlignContent<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createAlignContent<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       alignContent: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createAlignContent', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       alignContent: 'a',
       [MQ.D]: {
         alignContent: 'b',

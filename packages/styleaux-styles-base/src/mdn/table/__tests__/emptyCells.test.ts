@@ -1,3 +1,4 @@
+import { createEmptyCells } from '../emptyCells';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createEmptyCells } from '../emptyCells';
 
 describe('createEmptyCells', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createEmptyCells', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createEmptyCells<'value',never, IThemeWithoutBreakpoints>({
+    const result = createEmptyCells<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ emptyCells: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createEmptyCells', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createEmptyCells<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createEmptyCells<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       emptyCells: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createEmptyCells', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       emptyCells: 'a',
       [MQ.D]: {
         emptyCells: 'b',

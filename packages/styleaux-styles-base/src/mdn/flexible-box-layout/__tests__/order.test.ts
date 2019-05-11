@@ -1,3 +1,4 @@
+import { createOrder } from '../order';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createOrder } from '../order';
 
 describe('createOrder', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createOrder', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createOrder<'value',never, IThemeWithoutBreakpoints>({
+    const result = createOrder<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ order: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createOrder', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createOrder<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createOrder<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       order: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createOrder', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       order: 'a',
       [MQ.D]: {
         order: 'b',

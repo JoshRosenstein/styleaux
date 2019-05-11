@@ -1,3 +1,4 @@
+import { createIsolation } from '../isolation';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createIsolation } from '../isolation';
 
 describe('createIsolation', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createIsolation', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createIsolation<'value',never, IThemeWithoutBreakpoints>({
+    const result = createIsolation<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ isolation: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createIsolation', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createIsolation<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createIsolation<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       isolation: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createIsolation', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       isolation: 'a',
       [MQ.D]: {
         isolation: 'b',

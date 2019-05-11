@@ -1,3 +1,4 @@
+import { createCaretColor } from '../caretColor';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createCaretColor } from '../caretColor';
 
 describe('createCaretColor', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createCaretColor', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createCaretColor<'value',never, IThemeWithoutBreakpoints>({
+    const result = createCaretColor<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ caretColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createCaretColor', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createCaretColor<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createCaretColor<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       caretColor: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createCaretColor', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       caretColor: 'a',
       [MQ.D]: {
         caretColor: 'b',

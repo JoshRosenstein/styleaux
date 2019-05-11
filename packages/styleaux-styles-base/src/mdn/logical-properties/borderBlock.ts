@@ -2,11 +2,15 @@ import { BorderBlockProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
-const BORDERBLOCK='borderBlock'
+const BORDERBLOCK = 'borderBlock';
 
-export interface BorderBlockProps<T=BorderBlockProperty> {
+export interface BorderBlockProps<T = BorderBlockProperty> {
   /**
-   * The **`border-block`** CSS property is a shorthand property for setting the individual logical block border property values in a single place in the style sheet.
+   * The **`border-block`** CSS property is a shorthand property for setting the individual logical block border property values in a single place in the style sheet.
+   *
+   * | Chrome | Firefox | Safari | Edge | IE  |
+   * | :----: | :-----: | :----: | :--: | :-: |
+   * |  n/a   | **66**  |   No   |  No  | No  |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block
    */
@@ -16,20 +20,24 @@ export interface BorderBlockProps<T=BorderBlockProperty> {
 export const createBorderBlock = <
   T = BorderBlockProperty,
   Media = never,
-  Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<BorderBlockProps<T>,Theme>,'key'| 'transformValue'>> =
-{}) =>
-  style<BorderBlockProps<T>,Theme,Media>({
-    cssProp:BORDERBLOCK,
-    prop:BORDERBLOCK,
+  Theme = never
+>({
+  key,
+  transformValue,
+}: Partial<
+  Pick<StyleOptions<BorderBlockProps<T>, Theme>, 'key' | 'transformValue'>
+> = {}) =>
+  style<BorderBlockProps<T>, Theme, Media>({
+    cssProp: BORDERBLOCK,
+    prop: BORDERBLOCK,
     key,
     transformValue,
-  })
+  });
 
-export const createBorderBlockRule = <T = BorderBlockProperty, P=unknown>(
-  transformer?: GetValue<T,P>,
-) => styler<T,P>({cssProp: BORDERBLOCK, getValue: transformer})
+export const createBorderBlockRule = <T = BorderBlockProperty, P = unknown>(
+  transformer?: GetValue<T, P>,
+) => styler<T, P>({ cssProp: BORDERBLOCK, getValue: transformer });
 
-export const borderBlock =createBorderBlock()
+export const borderBlock = createBorderBlock();
 
-export const borderBlockRule =createBorderBlockRule()
+export const borderBlockRule = createBorderBlockRule();

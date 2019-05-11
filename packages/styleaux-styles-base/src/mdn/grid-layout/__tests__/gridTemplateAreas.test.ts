@@ -1,3 +1,4 @@
+import { createGridTemplateAreas } from '../gridTemplateAreas';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createGridTemplateAreas } from '../gridTemplateAreas';
 
 describe('createGridTemplateAreas', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createGridTemplateAreas', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createGridTemplateAreas<'value',never, IThemeWithoutBreakpoints>({
+    const result = createGridTemplateAreas<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ gridTemplateAreas: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createGridTemplateAreas', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       gridTemplateAreas: 'a',
       [MQ.D]: {
         gridTemplateAreas: 'b',

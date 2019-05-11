@@ -1,3 +1,4 @@
+import { createTextEmphasisColor } from '../textEmphasisColor';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextEmphasisColor } from '../textEmphasisColor';
 
 describe('createTextEmphasisColor', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createTextEmphasisColor', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextEmphasisColor<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTextEmphasisColor<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ textEmphasisColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createTextEmphasisColor', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       textEmphasisColor: 'a',
       [MQ.D]: {
         textEmphasisColor: 'b',

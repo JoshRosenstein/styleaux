@@ -1,3 +1,4 @@
+import { createObjectFit } from '../objectFit';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createObjectFit } from '../objectFit';
 
 describe('createObjectFit', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createObjectFit', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createObjectFit<'value',never, IThemeWithoutBreakpoints>({
+    const result = createObjectFit<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ objectFit: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createObjectFit', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createObjectFit<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createObjectFit<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       objectFit: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createObjectFit', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       objectFit: 'a',
       [MQ.D]: {
         objectFit: 'b',

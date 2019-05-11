@@ -1,3 +1,4 @@
+import { createCaptionSide } from '../captionSide';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createCaptionSide } from '../captionSide';
 
 describe('createCaptionSide', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createCaptionSide', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createCaptionSide<'value',never, IThemeWithoutBreakpoints>({
+    const result = createCaptionSide<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ captionSide: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createCaptionSide', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createCaptionSide<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createCaptionSide<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       captionSide: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createCaptionSide', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       captionSide: 'a',
       [MQ.D]: {
         captionSide: 'b',

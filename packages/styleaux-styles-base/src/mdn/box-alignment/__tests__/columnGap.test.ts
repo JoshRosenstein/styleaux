@@ -1,3 +1,4 @@
+import { createColumnGap } from '../columnGap';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createColumnGap } from '../columnGap';
 
 describe('createColumnGap', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createColumnGap', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createColumnGap<'value',never, IThemeWithoutBreakpoints>({
+    const result = createColumnGap<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ columnGap: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createColumnGap', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createColumnGap<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createColumnGap<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       columnGap: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createColumnGap', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       columnGap: 'a',
       [MQ.D]: {
         columnGap: 'b',

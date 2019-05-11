@@ -1,3 +1,4 @@
+import { createFontWeight } from '../fontWeight';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFontWeight } from '../fontWeight';
 
 describe('createFontWeight', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createFontWeight', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFontWeight<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFontWeight<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontWeight: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createFontWeight', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createFontWeight<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createFontWeight<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       fontWeight: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createFontWeight', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       fontWeight: 'a',
       [MQ.D]: {
         fontWeight: 'b',

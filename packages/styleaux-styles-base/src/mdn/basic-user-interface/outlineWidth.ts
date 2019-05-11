@@ -2,11 +2,17 @@ import { OutlineWidthProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
-const OUTLINEWIDTH='outlineWidth'
+const OUTLINEWIDTH = 'outlineWidth';
 
-export interface OutlineWidthProps<T=OutlineWidthProperty> {
+export interface OutlineWidthProps<T = OutlineWidthProperty> {
   /**
    * The **`outline-width`** CSS property sets the thickness of an element's outline. An outline is a line that is drawn around an element, outside the `border`.
+   *
+   * **Initial value**: `medium`
+   *
+   * | Chrome | Firefox | Safari  |  Edge  |  IE   |
+   * | :----: | :-----: | :-----: | :----: | :---: |
+   * | **1**  | **1.5** | **1.2** | **12** | **8** |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline-width
    */
@@ -16,20 +22,24 @@ export interface OutlineWidthProps<T=OutlineWidthProperty> {
 export const createOutlineWidth = <
   T = OutlineWidthProperty,
   Media = never,
-  Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<OutlineWidthProps<T>,Theme>,'key'| 'transformValue'>> =
-{}) =>
-  style<OutlineWidthProps<T>,Theme,Media>({
-    cssProp:OUTLINEWIDTH,
-    prop:OUTLINEWIDTH,
+  Theme = never
+>({
+  key,
+  transformValue,
+}: Partial<
+  Pick<StyleOptions<OutlineWidthProps<T>, Theme>, 'key' | 'transformValue'>
+> = {}) =>
+  style<OutlineWidthProps<T>, Theme, Media>({
+    cssProp: OUTLINEWIDTH,
+    prop: OUTLINEWIDTH,
     key,
     transformValue,
-  })
+  });
 
-export const createOutlineWidthRule = <T = OutlineWidthProperty, P=unknown>(
-  transformer?: GetValue<T,P>,
-) => styler<T,P>({cssProp: OUTLINEWIDTH, getValue: transformer})
+export const createOutlineWidthRule = <T = OutlineWidthProperty, P = unknown>(
+  transformer?: GetValue<T, P>,
+) => styler<T, P>({ cssProp: OUTLINEWIDTH, getValue: transformer });
 
-export const outlineWidth =createOutlineWidth()
+export const outlineWidth = createOutlineWidth();
 
-export const outlineWidthRule =createOutlineWidthRule()
+export const outlineWidthRule = createOutlineWidthRule();

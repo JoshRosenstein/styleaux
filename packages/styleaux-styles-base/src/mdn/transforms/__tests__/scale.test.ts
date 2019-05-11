@@ -1,3 +1,4 @@
+import { createScale } from '../scale';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createScale } from '../scale';
 
 describe('createScale', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createScale', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createScale<'value',never, IThemeWithoutBreakpoints>({
+    const result = createScale<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ scale: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createScale', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createScale<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createScale<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       scale: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createScale', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       scale: 'a',
       [MQ.D]: {
         scale: 'b',

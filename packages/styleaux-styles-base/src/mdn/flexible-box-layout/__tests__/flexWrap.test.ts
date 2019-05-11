@@ -1,3 +1,4 @@
+import { createFlexWrap } from '../flexWrap';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFlexWrap } from '../flexWrap';
 
 describe('createFlexWrap', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createFlexWrap', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFlexWrap<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFlexWrap<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ flexWrap: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createFlexWrap', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createFlexWrap<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createFlexWrap<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       flexWrap: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createFlexWrap', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       flexWrap: 'a',
       [MQ.D]: {
         flexWrap: 'b',

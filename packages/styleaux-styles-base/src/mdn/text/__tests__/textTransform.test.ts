@@ -1,3 +1,4 @@
+import { createTextTransform } from '../textTransform';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextTransform } from '../textTransform';
 
 describe('createTextTransform', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createTextTransform', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextTransform<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTextTransform<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ textTransform: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,20 +44,18 @@ describe('createTextTransform', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createTextTransform<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
-      textTransform: {
-        all: 'a',
-        D: 'b',
-        T: 'c',
-        M: 'd',
+    const result = createTextTransform<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()(
+      {
+        textTransform: {
+          all: 'a',
+          D: 'b',
+          T: 'c',
+          M: 'd',
+        },
+        theme,
       },
-      theme,
-    });
-   expect(toStyles(result)).toEqual({
+    );
+    expect(toStyles(result)).toEqual({
       textTransform: 'a',
       [MQ.D]: {
         textTransform: 'b',

@@ -1,3 +1,4 @@
+import { createMaxInlineSize } from '../maxInlineSize';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMaxInlineSize } from '../maxInlineSize';
 
 describe('createMaxInlineSize', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createMaxInlineSize', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMaxInlineSize<'value',never, IThemeWithoutBreakpoints>({
+    const result = createMaxInlineSize<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ maxInlineSize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,20 +44,18 @@ describe('createMaxInlineSize', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createMaxInlineSize<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
-      maxInlineSize: {
-        all: 'a',
-        D: 'b',
-        T: 'c',
-        M: 'd',
+    const result = createMaxInlineSize<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()(
+      {
+        maxInlineSize: {
+          all: 'a',
+          D: 'b',
+          T: 'c',
+          M: 'd',
+        },
+        theme,
       },
-      theme,
-    });
-   expect(toStyles(result)).toEqual({
+    );
+    expect(toStyles(result)).toEqual({
       maxInlineSize: 'a',
       [MQ.D]: {
         maxInlineSize: 'b',

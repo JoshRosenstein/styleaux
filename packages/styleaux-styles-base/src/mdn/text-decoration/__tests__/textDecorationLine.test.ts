@@ -1,3 +1,4 @@
+import { createTextDecorationLine } from '../textDecorationLine';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextDecorationLine } from '../textDecorationLine';
 
 describe('createTextDecorationLine', () => {
   it('should return a function', () => {
@@ -17,7 +16,9 @@ describe('createTextDecorationLine', () => {
   });
 
   it('should use `createTextDecorationLine` as component and css prop', () => {
-    const result = createTextDecorationLine()({ textDecorationLine: 'inherit' });
+    const result = createTextDecorationLine()({
+      textDecorationLine: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ textDecorationLine: 'inherit' });
   });
 
@@ -32,7 +33,11 @@ describe('createTextDecorationLine', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextDecorationLine<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTextDecorationLine<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ textDecorationLine: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +59,7 @@ describe('createTextDecorationLine', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       textDecorationLine: 'a',
       [MQ.D]: {
         textDecorationLine: 'b',

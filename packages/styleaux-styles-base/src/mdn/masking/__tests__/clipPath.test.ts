@@ -1,3 +1,4 @@
+import { createClipPath } from '../clipPath';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createClipPath } from '../clipPath';
 
 describe('createClipPath', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createClipPath', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createClipPath<'value',never, IThemeWithoutBreakpoints>({
+    const result = createClipPath<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ clipPath: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createClipPath', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createClipPath<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createClipPath<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       clipPath: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createClipPath', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       clipPath: 'a',
       [MQ.D]: {
         clipPath: 'b',

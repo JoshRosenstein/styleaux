@@ -1,3 +1,4 @@
+import { createOffsetPath } from '../offsetPath';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createOffsetPath } from '../offsetPath';
 
 describe('createOffsetPath', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createOffsetPath', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createOffsetPath<'value',never, IThemeWithoutBreakpoints>({
+    const result = createOffsetPath<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ offsetPath: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createOffsetPath', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createOffsetPath<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createOffsetPath<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       offsetPath: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createOffsetPath', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       offsetPath: 'a',
       [MQ.D]: {
         offsetPath: 'b',

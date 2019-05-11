@@ -1,3 +1,4 @@
+import { createFontSize } from '../fontSize';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFontSize } from '../fontSize';
 
 describe('createFontSize', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createFontSize', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFontSize<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFontSize<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontSize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createFontSize', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createFontSize<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createFontSize<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       fontSize: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createFontSize', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       fontSize: 'a',
       [MQ.D]: {
         fontSize: 'b',

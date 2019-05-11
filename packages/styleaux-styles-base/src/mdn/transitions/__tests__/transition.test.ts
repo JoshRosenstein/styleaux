@@ -1,3 +1,4 @@
+import { createTransition } from '../transition';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTransition } from '../transition';
 
 describe('createTransition', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createTransition', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTransition<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTransition<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ transition: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createTransition', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createTransition<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createTransition<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       transition: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createTransition', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       transition: 'a',
       [MQ.D]: {
         transition: 'b',

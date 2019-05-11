@@ -1,3 +1,4 @@
+import { createBorderBlockEndColor } from '../borderBlockEndColor';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBorderBlockEndColor } from '../borderBlockEndColor';
 
 describe('createBorderBlockEndColor', () => {
   it('should return a function', () => {
@@ -17,12 +16,16 @@ describe('createBorderBlockEndColor', () => {
   });
 
   it('should use `createBorderBlockEndColor` as component and css prop', () => {
-    const result = createBorderBlockEndColor()({ borderBlockEndColor: 'inherit' });
+    const result = createBorderBlockEndColor()({
+      borderBlockEndColor: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ borderBlockEndColor: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = createBorderBlockEndColor<'a'>()({ borderBlockEndColor: 'a' });
+    const result = createBorderBlockEndColor<'a'>()({
+      borderBlockEndColor: 'a',
+    });
     expect(toStyles(result)).toEqual({ borderBlockEndColor: 'a' });
   });
 
@@ -32,7 +35,11 @@ describe('createBorderBlockEndColor', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderBlockEndColor<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBorderBlockEndColor<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ borderBlockEndColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +61,7 @@ describe('createBorderBlockEndColor', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       borderBlockEndColor: 'a',
       [MQ.D]: {
         borderBlockEndColor: 'b',

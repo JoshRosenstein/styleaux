@@ -1,3 +1,4 @@
+import { createAnimationIterationCount } from '../animationIterationCount';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createAnimationIterationCount } from '../animationIterationCount';
 
 describe('createAnimationIterationCount', () => {
   it('should return a function', () => {
@@ -17,12 +16,16 @@ describe('createAnimationIterationCount', () => {
   });
 
   it('should use `createAnimationIterationCount` as component and css prop', () => {
-    const result = createAnimationIterationCount()({ animationIterationCount: 'inherit' });
+    const result = createAnimationIterationCount()({
+      animationIterationCount: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ animationIterationCount: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = createAnimationIterationCount<'a'>()({ animationIterationCount: 'a' });
+    const result = createAnimationIterationCount<'a'>()({
+      animationIterationCount: 'a',
+    });
     expect(toStyles(result)).toEqual({ animationIterationCount: 'a' });
   });
 
@@ -32,7 +35,11 @@ describe('createAnimationIterationCount', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createAnimationIterationCount<'value',never, IThemeWithoutBreakpoints>({
+    const result = createAnimationIterationCount<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ animationIterationCount: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +61,7 @@ describe('createAnimationIterationCount', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       animationIterationCount: 'a',
       [MQ.D]: {
         animationIterationCount: 'b',

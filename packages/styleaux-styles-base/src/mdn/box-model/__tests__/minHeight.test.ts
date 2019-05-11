@@ -1,3 +1,4 @@
+import { createMinHeight } from '../minHeight';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMinHeight } from '../minHeight';
 
 describe('createMinHeight', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createMinHeight', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMinHeight<'value',never, IThemeWithoutBreakpoints>({
+    const result = createMinHeight<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ minHeight: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createMinHeight', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createMinHeight<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createMinHeight<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       minHeight: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createMinHeight', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       minHeight: 'a',
       [MQ.D]: {
         minHeight: 'b',

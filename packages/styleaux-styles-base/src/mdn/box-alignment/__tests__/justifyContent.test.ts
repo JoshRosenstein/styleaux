@@ -1,3 +1,4 @@
+import { createJustifyContent } from '../justifyContent';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createJustifyContent } from '../justifyContent';
 
 describe('createJustifyContent', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createJustifyContent', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createJustifyContent<'value',never, IThemeWithoutBreakpoints>({
+    const result = createJustifyContent<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ justifyContent: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createJustifyContent', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       justifyContent: 'a',
       [MQ.D]: {
         justifyContent: 'b',

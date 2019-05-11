@@ -1,3 +1,4 @@
+import { createOutlineColor } from '../outlineColor';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createOutlineColor } from '../outlineColor';
 
 describe('createOutlineColor', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createOutlineColor', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createOutlineColor<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ outlineColor: 'value', theme: themeWithoutBreakpoints });
+    const result = createOutlineColor<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ outlineColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       outlineColor: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createOutlineColor<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createOutlineColor<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       outlineColor: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createOutlineColor', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       outlineColor: 'a',
       [MQ.D]: {
         outlineColor: 'b',

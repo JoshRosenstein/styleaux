@@ -1,3 +1,4 @@
+import { createGridAutoColumns } from '../gridAutoColumns';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createGridAutoColumns } from '../gridAutoColumns';
 
 describe('createGridAutoColumns', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createGridAutoColumns', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createGridAutoColumns<'value',never, IThemeWithoutBreakpoints>({
+    const result = createGridAutoColumns<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ gridAutoColumns: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createGridAutoColumns', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       gridAutoColumns: 'a',
       [MQ.D]: {
         gridAutoColumns: 'b',

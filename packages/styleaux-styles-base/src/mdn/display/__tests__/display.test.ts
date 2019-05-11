@@ -1,3 +1,4 @@
+import { createDisplay } from '../display';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createDisplay } from '../display';
 
 describe('createDisplay', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createDisplay', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createDisplay<'value',never, IThemeWithoutBreakpoints>({
+    const result = createDisplay<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ display: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createDisplay', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createDisplay<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createDisplay<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       display: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createDisplay', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       display: 'a',
       [MQ.D]: {
         display: 'b',

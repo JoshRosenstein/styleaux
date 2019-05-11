@@ -1,3 +1,4 @@
+import { createMaskOrigin } from '../maskOrigin';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMaskOrigin } from '../maskOrigin';
 
 describe('createMaskOrigin', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createMaskOrigin', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMaskOrigin<'value',never, IThemeWithoutBreakpoints>({
+    const result = createMaskOrigin<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ maskOrigin: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createMaskOrigin', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createMaskOrigin<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createMaskOrigin<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       maskOrigin: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createMaskOrigin', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       maskOrigin: 'a',
       [MQ.D]: {
         maskOrigin: 'b',

@@ -1,3 +1,4 @@
+import { createMixBlendMode } from '../mixBlendMode';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMixBlendMode } from '../mixBlendMode';
 
 describe('createMixBlendMode', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createMixBlendMode', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMixBlendMode<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ mixBlendMode: 'value', theme: themeWithoutBreakpoints });
+    const result = createMixBlendMode<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ mixBlendMode: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       mixBlendMode: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createMixBlendMode<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createMixBlendMode<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       mixBlendMode: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createMixBlendMode', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       mixBlendMode: 'a',
       [MQ.D]: {
         mixBlendMode: 'b',

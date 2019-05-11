@@ -1,3 +1,4 @@
+import { createOutlineOffset } from '../outlineOffset';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createOutlineOffset } from '../outlineOffset';
 
 describe('createOutlineOffset', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createOutlineOffset', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createOutlineOffset<'value',never, IThemeWithoutBreakpoints>({
+    const result = createOutlineOffset<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ outlineOffset: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,20 +44,18 @@ describe('createOutlineOffset', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createOutlineOffset<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
-      outlineOffset: {
-        all: 'a',
-        D: 'b',
-        T: 'c',
-        M: 'd',
+    const result = createOutlineOffset<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()(
+      {
+        outlineOffset: {
+          all: 'a',
+          D: 'b',
+          T: 'c',
+          M: 'd',
+        },
+        theme,
       },
-      theme,
-    });
-   expect(toStyles(result)).toEqual({
+    );
+    expect(toStyles(result)).toEqual({
       outlineOffset: 'a',
       [MQ.D]: {
         outlineOffset: 'b',

@@ -1,3 +1,4 @@
+import { createBottom } from '../bottom';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBottom } from '../bottom';
 
 describe('createBottom', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createBottom', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBottom<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBottom<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ bottom: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createBottom', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createBottom<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createBottom<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       bottom: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createBottom', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       bottom: 'a',
       [MQ.D]: {
         bottom: 'b',

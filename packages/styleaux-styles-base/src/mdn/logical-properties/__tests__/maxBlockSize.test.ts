@@ -1,3 +1,4 @@
+import { createMaxBlockSize } from '../maxBlockSize';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMaxBlockSize } from '../maxBlockSize';
 
 describe('createMaxBlockSize', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createMaxBlockSize', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMaxBlockSize<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ maxBlockSize: 'value', theme: themeWithoutBreakpoints });
+    const result = createMaxBlockSize<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ maxBlockSize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       maxBlockSize: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createMaxBlockSize<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createMaxBlockSize<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       maxBlockSize: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createMaxBlockSize', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       maxBlockSize: 'a',
       [MQ.D]: {
         maxBlockSize: 'b',

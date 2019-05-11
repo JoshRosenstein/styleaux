@@ -1,3 +1,4 @@
+import { createLineHeight } from '../lineHeight';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createLineHeight } from '../lineHeight';
 
 describe('createLineHeight', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createLineHeight', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createLineHeight<'value',never, IThemeWithoutBreakpoints>({
+    const result = createLineHeight<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ lineHeight: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createLineHeight', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createLineHeight<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createLineHeight<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       lineHeight: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createLineHeight', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       lineHeight: 'a',
       [MQ.D]: {
         lineHeight: 'b',

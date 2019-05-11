@@ -1,3 +1,4 @@
+import { createMaskPosition } from '../maskPosition';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMaskPosition } from '../maskPosition';
 
 describe('createMaskPosition', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createMaskPosition', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMaskPosition<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ maskPosition: 'value', theme: themeWithoutBreakpoints });
+    const result = createMaskPosition<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ maskPosition: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       maskPosition: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createMaskPosition<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createMaskPosition<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       maskPosition: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createMaskPosition', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       maskPosition: 'a',
       [MQ.D]: {
         maskPosition: 'b',

@@ -1,3 +1,4 @@
+import { createScrollSnapType } from '../scrollSnapType';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createScrollSnapType } from '../scrollSnapType';
 
 describe('createScrollSnapType', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createScrollSnapType', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollSnapType<'value',never, IThemeWithoutBreakpoints>({
+    const result = createScrollSnapType<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ scrollSnapType: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createScrollSnapType', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       scrollSnapType: 'a',
       [MQ.D]: {
         scrollSnapType: 'b',

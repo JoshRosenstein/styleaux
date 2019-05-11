@@ -1,3 +1,4 @@
+import { createTextAlignLast } from '../textAlignLast';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextAlignLast } from '../textAlignLast';
 
 describe('createTextAlignLast', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createTextAlignLast', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextAlignLast<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTextAlignLast<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ textAlignLast: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,20 +44,18 @@ describe('createTextAlignLast', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createTextAlignLast<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
-      textAlignLast: {
-        all: 'a',
-        D: 'b',
-        T: 'c',
-        M: 'd',
+    const result = createTextAlignLast<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()(
+      {
+        textAlignLast: {
+          all: 'a',
+          D: 'b',
+          T: 'c',
+          M: 'd',
+        },
+        theme,
       },
-      theme,
-    });
-   expect(toStyles(result)).toEqual({
+    );
+    expect(toStyles(result)).toEqual({
       textAlignLast: 'a',
       [MQ.D]: {
         textAlignLast: 'b',

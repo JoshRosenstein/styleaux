@@ -1,3 +1,4 @@
+import { createColumnRule } from '../columnRule';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createColumnRule } from '../columnRule';
 
 describe('createColumnRule', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createColumnRule', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createColumnRule<'value',never, IThemeWithoutBreakpoints>({
+    const result = createColumnRule<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ columnRule: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createColumnRule', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createColumnRule<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createColumnRule<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       columnRule: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createColumnRule', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       columnRule: 'a',
       [MQ.D]: {
         columnRule: 'b',

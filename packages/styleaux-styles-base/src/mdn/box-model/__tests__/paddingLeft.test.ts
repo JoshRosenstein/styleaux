@@ -1,3 +1,4 @@
+import { createPaddingLeft } from '../paddingLeft';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createPaddingLeft } from '../paddingLeft';
 
 describe('createPaddingLeft', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createPaddingLeft', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createPaddingLeft<'value',never, IThemeWithoutBreakpoints>({
+    const result = createPaddingLeft<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ paddingLeft: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createPaddingLeft', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createPaddingLeft<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createPaddingLeft<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       paddingLeft: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createPaddingLeft', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       paddingLeft: 'a',
       [MQ.D]: {
         paddingLeft: 'b',

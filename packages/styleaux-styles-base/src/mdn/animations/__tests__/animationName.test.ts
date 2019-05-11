@@ -1,3 +1,4 @@
+import { createAnimationName } from '../animationName';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createAnimationName } from '../animationName';
 
 describe('createAnimationName', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createAnimationName', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createAnimationName<'value',never, IThemeWithoutBreakpoints>({
+    const result = createAnimationName<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ animationName: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,20 +44,18 @@ describe('createAnimationName', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createAnimationName<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
-      animationName: {
-        all: 'a',
-        D: 'b',
-        T: 'c',
-        M: 'd',
+    const result = createAnimationName<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()(
+      {
+        animationName: {
+          all: 'a',
+          D: 'b',
+          T: 'c',
+          M: 'd',
+        },
+        theme,
       },
-      theme,
-    });
-   expect(toStyles(result)).toEqual({
+    );
+    expect(toStyles(result)).toEqual({
       animationName: 'a',
       [MQ.D]: {
         animationName: 'b',

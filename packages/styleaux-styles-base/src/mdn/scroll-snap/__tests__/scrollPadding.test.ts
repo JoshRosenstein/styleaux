@@ -1,3 +1,4 @@
+import { createScrollPadding } from '../scrollPadding';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createScrollPadding } from '../scrollPadding';
 
 describe('createScrollPadding', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createScrollPadding', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollPadding<'value',never, IThemeWithoutBreakpoints>({
+    const result = createScrollPadding<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ scrollPadding: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,20 +44,18 @@ describe('createScrollPadding', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createScrollPadding<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
-      scrollPadding: {
-        all: 'a',
-        D: 'b',
-        T: 'c',
-        M: 'd',
+    const result = createScrollPadding<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()(
+      {
+        scrollPadding: {
+          all: 'a',
+          D: 'b',
+          T: 'c',
+          M: 'd',
+        },
+        theme,
       },
-      theme,
-    });
-   expect(toStyles(result)).toEqual({
+    );
+    expect(toStyles(result)).toEqual({
       scrollPadding: 'a',
       [MQ.D]: {
         scrollPadding: 'b',

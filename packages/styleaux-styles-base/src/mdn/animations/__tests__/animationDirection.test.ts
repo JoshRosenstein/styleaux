@@ -1,3 +1,4 @@
+import { createAnimationDirection } from '../animationDirection';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createAnimationDirection } from '../animationDirection';
 
 describe('createAnimationDirection', () => {
   it('should return a function', () => {
@@ -17,7 +16,9 @@ describe('createAnimationDirection', () => {
   });
 
   it('should use `createAnimationDirection` as component and css prop', () => {
-    const result = createAnimationDirection()({ animationDirection: 'inherit' });
+    const result = createAnimationDirection()({
+      animationDirection: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ animationDirection: 'inherit' });
   });
 
@@ -32,7 +33,11 @@ describe('createAnimationDirection', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createAnimationDirection<'value',never, IThemeWithoutBreakpoints>({
+    const result = createAnimationDirection<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ animationDirection: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +59,7 @@ describe('createAnimationDirection', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       animationDirection: 'a',
       [MQ.D]: {
         animationDirection: 'b',

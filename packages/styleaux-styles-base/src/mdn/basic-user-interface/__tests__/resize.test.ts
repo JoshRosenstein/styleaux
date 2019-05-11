@@ -1,3 +1,4 @@
+import { createResize } from '../resize';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createResize } from '../resize';
 
 describe('createResize', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createResize', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createResize<'value',never, IThemeWithoutBreakpoints>({
+    const result = createResize<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ resize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createResize', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createResize<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createResize<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       resize: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createResize', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       resize: 'a',
       [MQ.D]: {
         resize: 'b',

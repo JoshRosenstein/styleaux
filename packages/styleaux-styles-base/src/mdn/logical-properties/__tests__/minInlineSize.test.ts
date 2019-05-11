@@ -1,3 +1,4 @@
+import { createMinInlineSize } from '../minInlineSize';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMinInlineSize } from '../minInlineSize';
 
 describe('createMinInlineSize', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createMinInlineSize', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMinInlineSize<'value',never, IThemeWithoutBreakpoints>({
+    const result = createMinInlineSize<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ minInlineSize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,20 +44,18 @@ describe('createMinInlineSize', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createMinInlineSize<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
-      minInlineSize: {
-        all: 'a',
-        D: 'b',
-        T: 'c',
-        M: 'd',
+    const result = createMinInlineSize<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()(
+      {
+        minInlineSize: {
+          all: 'a',
+          D: 'b',
+          T: 'c',
+          M: 'd',
+        },
+        theme,
       },
-      theme,
-    });
-   expect(toStyles(result)).toEqual({
+    );
+    expect(toStyles(result)).toEqual({
       minInlineSize: 'a',
       [MQ.D]: {
         minInlineSize: 'b',

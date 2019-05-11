@@ -1,3 +1,4 @@
+import { createTextDecorationColor } from '../textDecorationColor';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextDecorationColor } from '../textDecorationColor';
 
 describe('createTextDecorationColor', () => {
   it('should return a function', () => {
@@ -17,12 +16,16 @@ describe('createTextDecorationColor', () => {
   });
 
   it('should use `createTextDecorationColor` as component and css prop', () => {
-    const result = createTextDecorationColor()({ textDecorationColor: 'inherit' });
+    const result = createTextDecorationColor()({
+      textDecorationColor: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ textDecorationColor: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = createTextDecorationColor<'a'>()({ textDecorationColor: 'a' });
+    const result = createTextDecorationColor<'a'>()({
+      textDecorationColor: 'a',
+    });
     expect(toStyles(result)).toEqual({ textDecorationColor: 'a' });
   });
 
@@ -32,7 +35,11 @@ describe('createTextDecorationColor', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextDecorationColor<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTextDecorationColor<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ textDecorationColor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +61,7 @@ describe('createTextDecorationColor', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       textDecorationColor: 'a',
       [MQ.D]: {
         textDecorationColor: 'b',

@@ -1,3 +1,4 @@
+import { createUnicodeBidi } from '../unicodeBidi';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createUnicodeBidi } from '../unicodeBidi';
 
 describe('createUnicodeBidi', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createUnicodeBidi', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createUnicodeBidi<'value',never, IThemeWithoutBreakpoints>({
+    const result = createUnicodeBidi<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ unicodeBidi: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createUnicodeBidi', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createUnicodeBidi<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createUnicodeBidi<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       unicodeBidi: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createUnicodeBidi', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       unicodeBidi: 'a',
       [MQ.D]: {
         unicodeBidi: 'b',

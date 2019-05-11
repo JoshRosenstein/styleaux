@@ -1,3 +1,4 @@
+import { createBorderRadius } from '../borderRadius';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBorderRadius } from '../borderRadius';
 
 describe('createBorderRadius', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createBorderRadius', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBorderRadius<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ borderRadius: 'value', theme: themeWithoutBreakpoints });
+    const result = createBorderRadius<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ borderRadius: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       borderRadius: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createBorderRadius<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createBorderRadius<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       borderRadius: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createBorderRadius', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       borderRadius: 'a',
       [MQ.D]: {
         borderRadius: 'b',

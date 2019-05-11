@@ -1,3 +1,4 @@
+import { createLineBreak } from '../lineBreak';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createLineBreak } from '../lineBreak';
 
 describe('createLineBreak', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createLineBreak', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createLineBreak<'value',never, IThemeWithoutBreakpoints>({
+    const result = createLineBreak<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ lineBreak: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createLineBreak', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createLineBreak<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createLineBreak<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       lineBreak: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createLineBreak', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       lineBreak: 'a',
       [MQ.D]: {
         lineBreak: 'b',

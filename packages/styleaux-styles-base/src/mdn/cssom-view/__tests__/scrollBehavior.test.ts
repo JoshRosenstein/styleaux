@@ -1,3 +1,4 @@
+import { createScrollBehavior } from '../scrollBehavior';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createScrollBehavior } from '../scrollBehavior';
 
 describe('createScrollBehavior', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createScrollBehavior', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createScrollBehavior<'value',never, IThemeWithoutBreakpoints>({
+    const result = createScrollBehavior<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ scrollBehavior: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createScrollBehavior', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       scrollBehavior: 'a',
       [MQ.D]: {
         scrollBehavior: 'b',

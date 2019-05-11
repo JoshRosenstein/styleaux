@@ -1,3 +1,4 @@
+import { createOrphans } from '../orphans';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createOrphans } from '../orphans';
 
 describe('createOrphans', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createOrphans', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createOrphans<'value',never, IThemeWithoutBreakpoints>({
+    const result = createOrphans<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ orphans: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createOrphans', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createOrphans<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createOrphans<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       orphans: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createOrphans', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       orphans: 'a',
       [MQ.D]: {
         orphans: 'b',

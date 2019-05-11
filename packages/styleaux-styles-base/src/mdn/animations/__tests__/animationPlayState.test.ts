@@ -1,3 +1,4 @@
+import { createAnimationPlayState } from '../animationPlayState';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createAnimationPlayState } from '../animationPlayState';
 
 describe('createAnimationPlayState', () => {
   it('should return a function', () => {
@@ -17,7 +16,9 @@ describe('createAnimationPlayState', () => {
   });
 
   it('should use `createAnimationPlayState` as component and css prop', () => {
-    const result = createAnimationPlayState()({ animationPlayState: 'inherit' });
+    const result = createAnimationPlayState()({
+      animationPlayState: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ animationPlayState: 'inherit' });
   });
 
@@ -32,7 +33,11 @@ describe('createAnimationPlayState', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createAnimationPlayState<'value',never, IThemeWithoutBreakpoints>({
+    const result = createAnimationPlayState<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ animationPlayState: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +59,7 @@ describe('createAnimationPlayState', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       animationPlayState: 'a',
       [MQ.D]: {
         animationPlayState: 'b',

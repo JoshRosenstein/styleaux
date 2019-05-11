@@ -2,11 +2,17 @@ import { ListStyleTypeProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
-const LISTSTYLETYPE='listStyleType'
+const LISTSTYLETYPE = 'listStyleType';
 
-export interface ListStyleTypeProps<T=ListStyleTypeProperty> {
+export interface ListStyleTypeProps<T = ListStyleTypeProperty> {
   /**
    * The **`list-style-type`** CSS property sets the marker (such as a disc, character, or custom counter style) of a list item element.
+   *
+   * **Initial value**: `disc`
+   *
+   * | Chrome | Firefox | Safari |  Edge  |  IE   |
+   * | :----: | :-----: | :----: | :----: | :---: |
+   * | **1**  |  **1**  | **1**  | **12** | **4** |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style-type
    */
@@ -16,20 +22,24 @@ export interface ListStyleTypeProps<T=ListStyleTypeProperty> {
 export const createListStyleType = <
   T = ListStyleTypeProperty,
   Media = never,
-  Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<ListStyleTypeProps<T>,Theme>,'key'| 'transformValue'>> =
-{}) =>
-  style<ListStyleTypeProps<T>,Theme,Media>({
-    cssProp:LISTSTYLETYPE,
-    prop:LISTSTYLETYPE,
+  Theme = never
+>({
+  key,
+  transformValue,
+}: Partial<
+  Pick<StyleOptions<ListStyleTypeProps<T>, Theme>, 'key' | 'transformValue'>
+> = {}) =>
+  style<ListStyleTypeProps<T>, Theme, Media>({
+    cssProp: LISTSTYLETYPE,
+    prop: LISTSTYLETYPE,
     key,
     transformValue,
-  })
+  });
 
-export const createListStyleTypeRule = <T = ListStyleTypeProperty, P=unknown>(
-  transformer?: GetValue<T,P>,
-) => styler<T,P>({cssProp: LISTSTYLETYPE, getValue: transformer})
+export const createListStyleTypeRule = <T = ListStyleTypeProperty, P = unknown>(
+  transformer?: GetValue<T, P>,
+) => styler<T, P>({ cssProp: LISTSTYLETYPE, getValue: transformer });
 
-export const listStyleType =createListStyleType()
+export const listStyleType = createListStyleType();
 
-export const listStyleTypeRule =createListStyleTypeRule()
+export const listStyleTypeRule = createListStyleTypeRule();

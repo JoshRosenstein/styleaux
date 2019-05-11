@@ -1,3 +1,4 @@
+import { createCounterIncrement } from '../counterIncrement';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createCounterIncrement } from '../counterIncrement';
 
 describe('createCounterIncrement', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createCounterIncrement', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createCounterIncrement<'value',never, IThemeWithoutBreakpoints>({
+    const result = createCounterIncrement<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ counterIncrement: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createCounterIncrement', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       counterIncrement: 'a',
       [MQ.D]: {
         counterIncrement: 'b',

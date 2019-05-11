@@ -2,11 +2,18 @@ import { FlexGrowProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
-const FLEXGROW='flexGrow'
+const FLEXGROW = 'flexGrow';
 
-export interface FlexGrowProps<T=FlexGrowProperty> {
+export interface FlexGrowProps<T = FlexGrowProperty> {
   /**
-   * The **`flex-grow`** CSS property sets how much of the remaining space in the flex container should be assigned to that item (the flex grow factor). The remaining space is the size of the flex container minus the size of all flex items together. If all sibling items have the same flex grow factor, then all items will receive the same share of remaining space, otherwise it is distributed according to the ratio defined by the different flex grow factors.
+   * The **`flex-grow`** CSS property sets how much of the available space in the flex container should be assigned to that item (the flex grow factor). If all sibling items have the same flex grow factor, then all items will receive the same share of available space, otherwise it is distributed according to the ratio defined by the different flex grow factors.
+   *
+   * **Initial value**: `0`
+   *
+   * |  Chrome  | Firefox |    Safari     |  Edge  |            IE            |
+   * | :------: | :-----: | :-----------: | :----: | :----------------------: |
+   * |  **29**  | **20**  | **6.1** _-x-_ | **12** |          **11**          |
+   * | 21 _-x-_ |         |               |        | 10 _(-ms-flex-positive)_ |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-grow
    */
@@ -16,20 +23,24 @@ export interface FlexGrowProps<T=FlexGrowProperty> {
 export const createFlexGrow = <
   T = FlexGrowProperty,
   Media = never,
-  Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<FlexGrowProps<T>,Theme>,'key'| 'transformValue'>> =
-{}) =>
-  style<FlexGrowProps<T>,Theme,Media>({
-    cssProp:FLEXGROW,
-    prop:FLEXGROW,
+  Theme = never
+>({
+  key,
+  transformValue,
+}: Partial<
+  Pick<StyleOptions<FlexGrowProps<T>, Theme>, 'key' | 'transformValue'>
+> = {}) =>
+  style<FlexGrowProps<T>, Theme, Media>({
+    cssProp: FLEXGROW,
+    prop: FLEXGROW,
     key,
     transformValue,
-  })
+  });
 
-export const createFlexGrowRule = <T = FlexGrowProperty, P=unknown>(
-  transformer?: GetValue<T,P>,
-) => styler<T,P>({cssProp: FLEXGROW, getValue: transformer})
+export const createFlexGrowRule = <T = FlexGrowProperty, P = unknown>(
+  transformer?: GetValue<T, P>,
+) => styler<T, P>({ cssProp: FLEXGROW, getValue: transformer });
 
-export const flexGrow =createFlexGrow()
+export const flexGrow = createFlexGrow();
 
-export const flexGrowRule =createFlexGrowRule()
+export const flexGrowRule = createFlexGrowRule();

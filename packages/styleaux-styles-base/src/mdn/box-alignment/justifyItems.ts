@@ -2,11 +2,31 @@ import { JustifyItemsProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
-const JUSTIFYITEMS='justifyItems'
+const JUSTIFYITEMS = 'justifyItems';
 
-export interface JustifyItemsProps<T=JustifyItemsProperty> {
+export interface JustifyItemsProps<T = JustifyItemsProperty> {
   /**
    * The CSS **`justify-items`** property defines the default `justify-self` for all items of the box, giving them all a default way of justifying each box along the appropriate axis.
+   *
+   * **Initial value**: `legacy`
+   *
+   * ---
+   *
+   * _Supported in Flex Layout_
+   *
+   * | Chrome | Firefox | Safari |  Edge  |   IE   |
+   * | :----: | :-----: | :----: | :----: | :----: |
+   * | **52** | **20**  | **9**  | **12** | **11** |
+   *
+   * ---
+   *
+   * _Supported in Grid Layout_
+   *
+   * | Chrome | Firefox |  Safari  |  Edge  | IE  |
+   * | :----: | :-----: | :------: | :----: | :-: |
+   * | **57** | **45**  | **10.1** | **16** | No  |
+   *
+   * ---
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/justify-items
    */
@@ -16,20 +36,24 @@ export interface JustifyItemsProps<T=JustifyItemsProperty> {
 export const createJustifyItems = <
   T = JustifyItemsProperty,
   Media = never,
-  Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<JustifyItemsProps<T>,Theme>,'key'| 'transformValue'>> =
-{}) =>
-  style<JustifyItemsProps<T>,Theme,Media>({
-    cssProp:JUSTIFYITEMS,
-    prop:JUSTIFYITEMS,
+  Theme = never
+>({
+  key,
+  transformValue,
+}: Partial<
+  Pick<StyleOptions<JustifyItemsProps<T>, Theme>, 'key' | 'transformValue'>
+> = {}) =>
+  style<JustifyItemsProps<T>, Theme, Media>({
+    cssProp: JUSTIFYITEMS,
+    prop: JUSTIFYITEMS,
     key,
     transformValue,
-  })
+  });
 
-export const createJustifyItemsRule = <T = JustifyItemsProperty, P=unknown>(
-  transformer?: GetValue<T,P>,
-) => styler<T,P>({cssProp: JUSTIFYITEMS, getValue: transformer})
+export const createJustifyItemsRule = <T = JustifyItemsProperty, P = unknown>(
+  transformer?: GetValue<T, P>,
+) => styler<T, P>({ cssProp: JUSTIFYITEMS, getValue: transformer });
 
-export const justifyItems =createJustifyItems()
+export const justifyItems = createJustifyItems();
 
-export const justifyItemsRule =createJustifyItemsRule()
+export const justifyItemsRule = createJustifyItemsRule();

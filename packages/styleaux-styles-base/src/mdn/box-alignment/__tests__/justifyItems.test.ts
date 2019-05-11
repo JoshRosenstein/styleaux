@@ -1,3 +1,4 @@
+import { createJustifyItems } from '../justifyItems';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createJustifyItems } from '../justifyItems';
 
 describe('createJustifyItems', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createJustifyItems', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createJustifyItems<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ justifyItems: 'value', theme: themeWithoutBreakpoints });
+    const result = createJustifyItems<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ justifyItems: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       justifyItems: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createJustifyItems<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createJustifyItems<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       justifyItems: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createJustifyItems', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       justifyItems: 'a',
       [MQ.D]: {
         justifyItems: 'b',

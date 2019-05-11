@@ -2,11 +2,17 @@ import { PointerEventsProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
-const POINTEREVENTS='pointerEvents'
+const POINTEREVENTS = 'pointerEvents';
 
-export interface PointerEventsProps<T=PointerEventsProperty> {
+export interface PointerEventsProps<T = PointerEventsProperty> {
   /**
-   * The **`pointer-events`** CSS property sets under what circumstances (if any) a particular graphic element can become the target of pointer events.
+   * The **`pointer-events`** CSS property sets under what circumstances (if any) a particular graphic element can become the target of mouse events.
+   *
+   * **Initial value**: `auto`
+   *
+   * | Chrome | Firefox | Safari |  Edge  |   IE   |
+   * | :----: | :-----: | :----: | :----: | :----: |
+   * | **1**  | **1.5** | **4**  | **12** | **11** |
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/pointer-events
    */
@@ -16,20 +22,24 @@ export interface PointerEventsProps<T=PointerEventsProperty> {
 export const createPointerEvents = <
   T = PointerEventsProperty,
   Media = never,
-  Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<PointerEventsProps<T>,Theme>,'key'| 'transformValue'>> =
-{}) =>
-  style<PointerEventsProps<T>,Theme,Media>({
-    cssProp:POINTEREVENTS,
-    prop:POINTEREVENTS,
+  Theme = never
+>({
+  key,
+  transformValue,
+}: Partial<
+  Pick<StyleOptions<PointerEventsProps<T>, Theme>, 'key' | 'transformValue'>
+> = {}) =>
+  style<PointerEventsProps<T>, Theme, Media>({
+    cssProp: POINTEREVENTS,
+    prop: POINTEREVENTS,
     key,
     transformValue,
-  })
+  });
 
-export const createPointerEventsRule = <T = PointerEventsProperty, P=unknown>(
-  transformer?: GetValue<T,P>,
-) => styler<T,P>({cssProp: POINTEREVENTS, getValue: transformer})
+export const createPointerEventsRule = <T = PointerEventsProperty, P = unknown>(
+  transformer?: GetValue<T, P>,
+) => styler<T, P>({ cssProp: POINTEREVENTS, getValue: transformer });
 
-export const pointerEvents =createPointerEvents()
+export const pointerEvents = createPointerEvents();
 
-export const pointerEventsRule =createPointerEventsRule()
+export const pointerEventsRule = createPointerEventsRule();

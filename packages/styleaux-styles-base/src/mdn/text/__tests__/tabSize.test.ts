@@ -1,3 +1,4 @@
+import { createTabSize } from '../tabSize';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTabSize } from '../tabSize';
 
 describe('createTabSize', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createTabSize', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTabSize<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTabSize<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ tabSize: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createTabSize', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createTabSize<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createTabSize<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       tabSize: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createTabSize', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       tabSize: 'a',
       [MQ.D]: {
         tabSize: 'b',

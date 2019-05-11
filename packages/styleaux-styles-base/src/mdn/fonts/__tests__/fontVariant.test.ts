@@ -1,3 +1,4 @@
+import { createFontVariant } from '../fontVariant';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createFontVariant } from '../fontVariant';
 
 describe('createFontVariant', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createFontVariant', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createFontVariant<'value',never, IThemeWithoutBreakpoints>({
+    const result = createFontVariant<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ fontVariant: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createFontVariant', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createFontVariant<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createFontVariant<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       fontVariant: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createFontVariant', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       fontVariant: 'a',
       [MQ.D]: {
         fontVariant: 'b',

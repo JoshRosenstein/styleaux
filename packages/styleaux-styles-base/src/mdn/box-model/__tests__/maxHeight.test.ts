@@ -1,3 +1,4 @@
+import { createMaxHeight } from '../maxHeight';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createMaxHeight } from '../maxHeight';
 
 describe('createMaxHeight', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createMaxHeight', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createMaxHeight<'value',never, IThemeWithoutBreakpoints>({
+    const result = createMaxHeight<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ maxHeight: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createMaxHeight', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createMaxHeight<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createMaxHeight<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       maxHeight: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createMaxHeight', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       maxHeight: 'a',
       [MQ.D]: {
         maxHeight: 'b',

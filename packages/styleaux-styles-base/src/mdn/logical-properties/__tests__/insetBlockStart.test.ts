@@ -1,3 +1,4 @@
+import { createInsetBlockStart } from '../insetBlockStart';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createInsetBlockStart } from '../insetBlockStart';
 
 describe('createInsetBlockStart', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createInsetBlockStart', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createInsetBlockStart<'value',never, IThemeWithoutBreakpoints>({
+    const result = createInsetBlockStart<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ insetBlockStart: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createInsetBlockStart', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       insetBlockStart: 'a',
       [MQ.D]: {
         insetBlockStart: 'b',

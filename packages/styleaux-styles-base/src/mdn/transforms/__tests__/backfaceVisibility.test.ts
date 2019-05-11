@@ -1,3 +1,4 @@
+import { createBackfaceVisibility } from '../backfaceVisibility';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBackfaceVisibility } from '../backfaceVisibility';
 
 describe('createBackfaceVisibility', () => {
   it('should return a function', () => {
@@ -17,7 +16,9 @@ describe('createBackfaceVisibility', () => {
   });
 
   it('should use `createBackfaceVisibility` as component and css prop', () => {
-    const result = createBackfaceVisibility()({ backfaceVisibility: 'inherit' });
+    const result = createBackfaceVisibility()({
+      backfaceVisibility: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ backfaceVisibility: 'inherit' });
   });
 
@@ -32,7 +33,11 @@ describe('createBackfaceVisibility', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBackfaceVisibility<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBackfaceVisibility<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ backfaceVisibility: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +59,7 @@ describe('createBackfaceVisibility', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       backfaceVisibility: 'a',
       [MQ.D]: {
         backfaceVisibility: 'b',

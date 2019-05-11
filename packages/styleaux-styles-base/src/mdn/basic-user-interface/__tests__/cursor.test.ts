@@ -1,3 +1,4 @@
+import { createCursor } from '../cursor';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createCursor } from '../cursor';
 
 describe('createCursor', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createCursor', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createCursor<'value',never, IThemeWithoutBreakpoints>({
+    const result = createCursor<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ cursor: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createCursor', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createCursor<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createCursor<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       cursor: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createCursor', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       cursor: 'a',
       [MQ.D]: {
         cursor: 'b',

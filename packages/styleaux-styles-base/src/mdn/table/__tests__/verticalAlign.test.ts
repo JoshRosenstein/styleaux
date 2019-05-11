@@ -1,3 +1,4 @@
+import { createVerticalAlign } from '../verticalAlign';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createVerticalAlign } from '../verticalAlign';
 
 describe('createVerticalAlign', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createVerticalAlign', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createVerticalAlign<'value',never, IThemeWithoutBreakpoints>({
+    const result = createVerticalAlign<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ verticalAlign: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,20 +44,18 @@ describe('createVerticalAlign', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createVerticalAlign<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
-      verticalAlign: {
-        all: 'a',
-        D: 'b',
-        T: 'c',
-        M: 'd',
+    const result = createVerticalAlign<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()(
+      {
+        verticalAlign: {
+          all: 'a',
+          D: 'b',
+          T: 'c',
+          M: 'd',
+        },
+        theme,
       },
-      theme,
-    });
-   expect(toStyles(result)).toEqual({
+    );
+    expect(toStyles(result)).toEqual({
       verticalAlign: 'a',
       [MQ.D]: {
         verticalAlign: 'b',

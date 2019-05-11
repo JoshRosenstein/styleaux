@@ -1,3 +1,4 @@
+import { createBorder } from '../border';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBorder } from '../border';
 
 describe('createBorder', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createBorder', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBorder<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBorder<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ border: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createBorder', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createBorder<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createBorder<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       border: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createBorder', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       border: 'a',
       [MQ.D]: {
         border: 'b',

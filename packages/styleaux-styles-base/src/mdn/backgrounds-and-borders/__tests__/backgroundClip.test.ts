@@ -1,3 +1,4 @@
+import { createBackgroundClip } from '../backgroundClip';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBackgroundClip } from '../backgroundClip';
 
 describe('createBackgroundClip', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createBackgroundClip', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBackgroundClip<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBackgroundClip<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ backgroundClip: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createBackgroundClip', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       backgroundClip: 'a',
       [MQ.D]: {
         backgroundClip: 'b',

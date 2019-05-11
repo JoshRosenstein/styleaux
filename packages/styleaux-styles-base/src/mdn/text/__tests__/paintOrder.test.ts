@@ -1,3 +1,4 @@
+import { createPaintOrder } from '../paintOrder';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createPaintOrder } from '../paintOrder';
 
 describe('createPaintOrder', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createPaintOrder', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createPaintOrder<'value',never, IThemeWithoutBreakpoints>({
+    const result = createPaintOrder<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ paintOrder: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createPaintOrder', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createPaintOrder<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createPaintOrder<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       paintOrder: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createPaintOrder', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       paintOrder: 'a',
       [MQ.D]: {
         paintOrder: 'b',

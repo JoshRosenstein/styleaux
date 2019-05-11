@@ -1,3 +1,4 @@
+import { createPlaceSelf } from '../placeSelf';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createPlaceSelf } from '../placeSelf';
 
 describe('createPlaceSelf', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createPlaceSelf', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createPlaceSelf<'value',never, IThemeWithoutBreakpoints>({
+    const result = createPlaceSelf<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ placeSelf: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createPlaceSelf', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createPlaceSelf<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createPlaceSelf<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       placeSelf: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createPlaceSelf', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       placeSelf: 'a',
       [MQ.D]: {
         placeSelf: 'b',

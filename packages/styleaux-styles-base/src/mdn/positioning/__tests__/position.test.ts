@@ -1,3 +1,4 @@
+import { createPosition } from '../position';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createPosition } from '../position';
 
 describe('createPosition', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createPosition', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createPosition<'value',never, IThemeWithoutBreakpoints>({
+    const result = createPosition<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ position: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createPosition', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createPosition<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createPosition<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       position: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createPosition', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       position: 'a',
       [MQ.D]: {
         position: 'b',

@@ -1,3 +1,4 @@
+import { createImageRendering } from '../imageRendering';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createImageRendering } from '../imageRendering';
 
 describe('createImageRendering', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createImageRendering', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createImageRendering<'value',never, IThemeWithoutBreakpoints>({
+    const result = createImageRendering<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ imageRendering: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createImageRendering', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       imageRendering: 'a',
       [MQ.D]: {
         imageRendering: 'b',

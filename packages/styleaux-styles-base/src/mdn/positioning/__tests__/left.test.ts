@@ -1,3 +1,4 @@
+import { createLeft } from '../left';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createLeft } from '../left';
 
 describe('createLeft', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createLeft', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createLeft<'value',never, IThemeWithoutBreakpoints>({
+    const result = createLeft<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ left: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createLeft', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createLeft<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createLeft<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       left: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createLeft', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       left: 'a',
       [MQ.D]: {
         left: 'b',

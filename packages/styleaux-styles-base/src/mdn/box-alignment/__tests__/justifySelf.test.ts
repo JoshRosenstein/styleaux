@@ -1,3 +1,4 @@
+import { createJustifySelf } from '../justifySelf';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createJustifySelf } from '../justifySelf';
 
 describe('createJustifySelf', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createJustifySelf', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createJustifySelf<'value',never, IThemeWithoutBreakpoints>({
+    const result = createJustifySelf<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ justifySelf: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createJustifySelf', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createJustifySelf<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createJustifySelf<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       justifySelf: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createJustifySelf', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       justifySelf: 'a',
       [MQ.D]: {
         justifySelf: 'b',

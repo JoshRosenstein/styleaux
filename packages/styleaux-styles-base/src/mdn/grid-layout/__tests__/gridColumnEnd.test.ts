@@ -1,3 +1,4 @@
+import { createGridColumnEnd } from '../gridColumnEnd';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createGridColumnEnd } from '../gridColumnEnd';
 
 describe('createGridColumnEnd', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createGridColumnEnd', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createGridColumnEnd<'value',never, IThemeWithoutBreakpoints>({
+    const result = createGridColumnEnd<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ gridColumnEnd: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,20 +44,18 @@ describe('createGridColumnEnd', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createGridColumnEnd<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
-      gridColumnEnd: {
-        all: 'a',
-        D: 'b',
-        T: 'c',
-        M: 'd',
+    const result = createGridColumnEnd<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()(
+      {
+        gridColumnEnd: {
+          all: 'a',
+          D: 'b',
+          T: 'c',
+          M: 'd',
+        },
+        theme,
       },
-      theme,
-    });
-   expect(toStyles(result)).toEqual({
+    );
+    expect(toStyles(result)).toEqual({
       gridColumnEnd: 'a',
       [MQ.D]: {
         gridColumnEnd: 'b',

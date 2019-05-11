@@ -1,3 +1,4 @@
+import { createTextDecoration } from '../textDecoration';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextDecoration } from '../textDecoration';
 
 describe('createTextDecoration', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createTextDecoration', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextDecoration<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTextDecoration<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ textDecoration: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createTextDecoration', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       textDecoration: 'a',
       [MQ.D]: {
         textDecoration: 'b',

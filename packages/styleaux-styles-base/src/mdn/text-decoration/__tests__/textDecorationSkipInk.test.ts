@@ -1,3 +1,4 @@
+import { createTextDecorationSkipInk } from '../textDecorationSkipInk';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createTextDecorationSkipInk } from '../textDecorationSkipInk';
 
 describe('createTextDecorationSkipInk', () => {
   it('should return a function', () => {
@@ -17,12 +16,16 @@ describe('createTextDecorationSkipInk', () => {
   });
 
   it('should use `createTextDecorationSkipInk` as component and css prop', () => {
-    const result = createTextDecorationSkipInk()({ textDecorationSkipInk: 'inherit' });
+    const result = createTextDecorationSkipInk()({
+      textDecorationSkipInk: 'inherit',
+    });
     expect(toStyles(result)).toEqual({ textDecorationSkipInk: 'inherit' });
   });
 
   it('should allow using a custom value type', () => {
-    const result = createTextDecorationSkipInk<'a'>()({ textDecorationSkipInk: 'a' });
+    const result = createTextDecorationSkipInk<'a'>()({
+      textDecorationSkipInk: 'a',
+    });
     expect(toStyles(result)).toEqual({ textDecorationSkipInk: 'a' });
   });
 
@@ -32,7 +35,11 @@ describe('createTextDecorationSkipInk', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createTextDecorationSkipInk<'value',never, IThemeWithoutBreakpoints>({
+    const result = createTextDecorationSkipInk<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ textDecorationSkipInk: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +61,7 @@ describe('createTextDecorationSkipInk', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       textDecorationSkipInk: 'a',
       [MQ.D]: {
         textDecorationSkipInk: 'b',

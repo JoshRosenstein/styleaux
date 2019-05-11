@@ -1,3 +1,4 @@
+import { createGap } from '../gap';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createGap } from '../gap';
 
 describe('createGap', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createGap', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createGap<'value',never, IThemeWithoutBreakpoints>({
+    const result = createGap<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ gap: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createGap', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createGap<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createGap<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       gap: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createGap', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       gap: 'a',
       [MQ.D]: {
         gap: 'b',

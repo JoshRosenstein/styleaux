@@ -1,3 +1,4 @@
+import { createBreakInside } from '../breakInside';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createBreakInside } from '../breakInside';
 
 describe('createBreakInside', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createBreakInside', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createBreakInside<'value',never, IThemeWithoutBreakpoints>({
+    const result = createBreakInside<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ breakInside: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createBreakInside', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createBreakInside<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createBreakInside<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       breakInside: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createBreakInside', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       breakInside: 'a',
       [MQ.D]: {
         breakInside: 'b',

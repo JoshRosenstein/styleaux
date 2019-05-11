@@ -1,3 +1,4 @@
+import { createPaddingInlineEnd } from '../paddingInlineEnd';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createPaddingInlineEnd } from '../paddingInlineEnd';
 
 describe('createPaddingInlineEnd', () => {
   it('should return a function', () => {
@@ -32,7 +31,11 @@ describe('createPaddingInlineEnd', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createPaddingInlineEnd<'value',never, IThemeWithoutBreakpoints>({
+    const result = createPaddingInlineEnd<
+      'value',
+      never,
+      IThemeWithoutBreakpoints
+    >({
       key: 'dummy',
     })({ paddingInlineEnd: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -54,7 +57,7 @@ describe('createPaddingInlineEnd', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       paddingInlineEnd: 'a',
       [MQ.D]: {
         paddingInlineEnd: 'b',

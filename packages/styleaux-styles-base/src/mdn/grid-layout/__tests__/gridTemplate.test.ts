@@ -1,3 +1,4 @@
+import { createGridTemplate } from '../gridTemplate';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createGridTemplate } from '../gridTemplate';
 
 describe('createGridTemplate', () => {
   it('should return a function', () => {
@@ -32,20 +31,18 @@ describe('createGridTemplate', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createGridTemplate<'value',never, IThemeWithoutBreakpoints>({
-      key: 'dummy',
-    })({ gridTemplate: 'value', theme: themeWithoutBreakpoints });
+    const result = createGridTemplate<'value', never, IThemeWithoutBreakpoints>(
+      {
+        key: 'dummy',
+      },
+    )({ gridTemplate: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
       gridTemplate: themeWithoutBreakpoints.dummy.value,
     });
   });
 
   it('should allow using breakpoints', () => {
-    const result = createGridTemplate<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createGridTemplate<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       gridTemplate: {
         all: 'a',
         D: 'b',
@@ -54,7 +51,7 @@ describe('createGridTemplate', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       gridTemplate: 'a',
       [MQ.D]: {
         gridTemplate: 'b',

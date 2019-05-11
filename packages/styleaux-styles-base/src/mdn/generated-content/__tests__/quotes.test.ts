@@ -1,3 +1,4 @@
+import { createQuotes } from '../quotes';
 import {
   IMedia,
   ITheme,
@@ -5,10 +6,8 @@ import {
   theme,
   themeWithoutBreakpoints,
   MQ,
-  toStyles
+  toStyles,
 } from '../../../__testutils__';
-
-import { createQuotes } from '../quotes';
 
 describe('createQuotes', () => {
   it('should return a function', () => {
@@ -32,7 +31,7 @@ describe('createQuotes', () => {
   });
 
   it('should allow using a theme', () => {
-    const result = createQuotes<'value',never, IThemeWithoutBreakpoints>({
+    const result = createQuotes<'value', never, IThemeWithoutBreakpoints>({
       key: 'dummy',
     })({ quotes: 'value', theme: themeWithoutBreakpoints });
     expect(toStyles(result)).toEqual({
@@ -41,11 +40,7 @@ describe('createQuotes', () => {
   });
 
   it('should allow using breakpoints', () => {
-    const result = createQuotes<
-      'a' | 'b' | 'c' | 'd',
-      IMedia,
-      ITheme
-    >()({
+    const result = createQuotes<'a' | 'b' | 'c' | 'd', IMedia, ITheme>()({
       quotes: {
         all: 'a',
         D: 'b',
@@ -54,7 +49,7 @@ describe('createQuotes', () => {
       },
       theme,
     });
-   expect(toStyles(result)).toEqual({
+    expect(toStyles(result)).toEqual({
       quotes: 'a',
       [MQ.D]: {
         quotes: 'b',

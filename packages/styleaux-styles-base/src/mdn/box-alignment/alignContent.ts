@@ -2,11 +2,32 @@ import { AlignContentProperty } from '@styleaux/csstype';
 
 import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
-const ALIGNCONTENT='alignContent'
+const ALIGNCONTENT = 'alignContent';
 
-export interface AlignContentProps<T=AlignContentProperty> {
+export interface AlignContentProps<T = AlignContentProperty> {
   /**
-   * The CSS **`align-content`** property sets the distribution of space between and around content items along a flexbox's cross-axis or a grid's block axis.
+   * The CSS **`align-content`** property sets how the browser distributes space between and around content items along the cross-axis of a flexbox container, and the main-axis of a grid container.
+   *
+   * **Initial value**: `normal`
+   *
+   * ---
+   *
+   * _Supported in Flex Layout_
+   *
+   * |  Chrome  | Firefox |  Safari   |  Edge  |   IE   |
+   * | :------: | :-----: | :-------: | :----: | :----: |
+   * |  **29**  | **28**  |   **9**   | **12** | **11** |
+   * | 21 _-x-_ |         | 6.1 _-x-_ |        |        |
+   *
+   * ---
+   *
+   * _Supported in Grid Layout_
+   *
+   * | Chrome | Firefox |  Safari  |  Edge  | IE  |
+   * | :----: | :-----: | :------: | :----: | :-: |
+   * | **57** | **52**  | **10.1** | **16** | No  |
+   *
+   * ---
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/align-content
    */
@@ -16,20 +37,24 @@ export interface AlignContentProps<T=AlignContentProperty> {
 export const createAlignContent = <
   T = AlignContentProperty,
   Media = never,
-  Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<AlignContentProps<T>,Theme>,'key'| 'transformValue'>> =
-{}) =>
-  style<AlignContentProps<T>,Theme,Media>({
-    cssProp:ALIGNCONTENT,
-    prop:ALIGNCONTENT,
+  Theme = never
+>({
+  key,
+  transformValue,
+}: Partial<
+  Pick<StyleOptions<AlignContentProps<T>, Theme>, 'key' | 'transformValue'>
+> = {}) =>
+  style<AlignContentProps<T>, Theme, Media>({
+    cssProp: ALIGNCONTENT,
+    prop: ALIGNCONTENT,
     key,
     transformValue,
-  })
+  });
 
-export const createAlignContentRule = <T = AlignContentProperty, P=unknown>(
-  transformer?: GetValue<T,P>,
-) => styler<T,P>({cssProp: ALIGNCONTENT, getValue: transformer})
+export const createAlignContentRule = <T = AlignContentProperty, P = unknown>(
+  transformer?: GetValue<T, P>,
+) => styler<T, P>({ cssProp: ALIGNCONTENT, getValue: transformer });
 
-export const alignContent =createAlignContent()
+export const alignContent = createAlignContent();
 
-export const alignContentRule =createAlignContentRule()
+export const alignContentRule = createAlignContentRule();
