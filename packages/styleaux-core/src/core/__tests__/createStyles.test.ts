@@ -139,7 +139,7 @@ test('as Function', () => {
     size: 1,
   });
 
-  const nostyles = createStyles<{ size: number }>({}, (props) => ({
+  const nostyles = createStyles({}, (props: { size?: number }) => ({
     margin: props.size,
   }))({});
 

@@ -1,12 +1,17 @@
 /* eslint-disable @typescript-eslint/interface-name-prefix */
-import { Arg1, OmitIf, AnyFunc, UnionOf } from '../types';
-import { CSSKeys, Unit, Style, StyleArray, Nil } from '@styleaux/types';
+import { CSSKeys, Unit, Style, Nil, CSSObj } from '@styleaux/types';
+/* eslint-disable @typescript-eslint/interface-name-prefix */
+import { Arg1, OmitIf, AnyFunc, UnionOf, UnionToIntersection } from '../types';
 import {
   DEFAULT_MEDIA_KEY,
   THEME_KEY,
   MEDIA_KEY,
   IConstants,
 } from '../constants';
+
+export type Key = string;
+
+export type Keys = Key[];
 
 export type CSSProp = CSSKeys | CSSKeys[];
 export interface Props {
@@ -15,17 +20,20 @@ export interface Props {
 
 export type MediaKey = string | number;
 
-export type StyleFunction<P extends Props> = (props: P) => StyleArray | null;
-
 export type ExtractPrimitive<T> = T extends object ? never : T;
 
-export type PropStyleFunc<P extends Props> = (props: P) => Style | Nil;
-export type PropStyleFuncArr<P extends Props> = (props: P) => StyleArray | Nil;
+export type PropStyleFunc<P extends Props> =
+  | ((props: P) => CSSObj)
+  | ((props: P) => Style)
+  | ((props: P) => Nil)
+  | ((props: P) => Style | Nil);
 
-export type PropStylesFunction<P extends Props> = (
+export type PropStyleArrayFunc<P extends Props> = (
   props: P,
-) => StyleArray | Nil;
-export type PropStyleFunction<P extends Props> = (props: P) => Style | Nil;
+) => (Style | Nil)[] | Nil;
+
+export type StyleArrayFunc<T = any> = (...args: T[]) => (Style | Nil)[] | Nil;
+export type StyleFunc<T = any> = (...args: T[]) => Style | Nil;
 
 /**
  * A function accepting some `props` and returning an `CSSObj | CSSObj[
@@ -58,25 +66,10 @@ export type CreateStylesValueGetterBoth<T, P = never, R = Style> =
   | ((input: T, props?: P) => R)
   | ((input: T) => R);
 
-export type ICreateStylesValueGetter<T, P = never, R = Style> = {
-  (input: T, props: P, media?: MediaKey): R;
-  (input: T, props?: P, media?: MediaKey): R;
-  (input: T, props?: P): R;
-  (input: T, props: P): R;
-  (input: T): R;
-};
 export type CreateStylesValueGetterPartial<T, P = never, R = Style> =
   | ((input: T, props?: P, media?: MediaKey) => R)
   | ((input: T, props?: P) => R)
   | ((input: T) => R);
-
-/** A function accepting some `props` and returning an `CSSObj | CSSObj[]` */
-export type StaticFuncMixin<P = any> = PropStyleFunc<P> | PropStyleFuncArr<P>;
-
-/** A function accepting some `props` and returning an `StaticFuncMixin` */
-export type ResponsiveMixin<P, T, M> = StaticFuncMixin<WithTheme<P, T, M>>;
-
-export type GetStylePropsLazy<S, M> = WithTheme<EtractInputType<S>, never, M>;
 
 interface BaseCssValue<T> {
   /**
@@ -85,68 +78,59 @@ interface BaseCssValue<T> {
   [DEFAULT_MEDIA_KEY]?: T;
 }
 
-/**
- * ResponsivePropValue
- */
-export type ResponsivePropValue<Media extends {}, ValueType> =
-  | { [key in keyof Media]?: ValueType } & BaseCssValue<ValueType>
-  | (ValueType | undefined)[];
+export type ResponsivePropArray<P> = (P | undefined)[];
+export interface ResponsivePropObject<P> {
+  [key: string]: P;
+}
+export type ResponsivePropObjectMedia<P, Media = never> = [Media] extends [
+  never
+]
+  ? ResponsivePropObject<P>
+  : { [key in keyof Media]?: P } & BaseCssValue<P>;
 
-//type If<Condition extends boolean, Then, Else = never> = Condition extends true ? Then : Else;
+export type ResponsiveProp<ValueType = Unit, Media extends {} = never> =
+  | ValueType
+  | ResponsivePropObjectMedia<ValueType, Media>
+  | ResponsivePropArray<ValueType>;
 
-export type ResponsiveProp<ValueType, Media extends {} = never> = [
-  Media
-] extends [never]
-  ? ValueType
-  : ValueType | ResponsivePropValue<Media, ValueType>;
-
-export type ResponsiveObject<P, B> = {
+export type ResponsiveProps<P, B = never> = {
   [K in keyof P]?: ResponsiveProp<IfNever<P[K], Unit>, B>
 };
 
 export type IfNever<T, Then> = [T] extends [never] ? Then : T;
 
-export type ResponsiveProps<P, B> = {
-  [K in keyof P]?: ResponsiveProp<IfNever<P[K], Unit>, B>
-};
-
-export interface ITheme<T> {
+export interface ThemeWithUnkownMedia<T> {
   [THEME_KEY]?: T & { [MEDIA_KEY]?: undefined };
 }
-export interface IMediaTheme<T, B> {
-  [THEME_KEY]?: T & { [MEDIA_KEY]: B };
+
+export type WithUnkownMedia<T> = T & { [MEDIA_KEY]?: undefined };
+
+export type NeverToAny<T> = [T] extends [never] ? any : T;
+
+export interface WrapTheme<T> {
+  [THEME_KEY]?: NeverToAny<T>;
 }
 
-export type WithOnlyTheme<T> = [T] extends [never]
-  ? Partial<ITheme<any>>
-  : ITheme<T>;
-
-export type ThemeWithMedia<T, B> = [B] extends [never]
-  ? [T] extends [never]
-    ? Partial<ITheme<any>>
-    : ITheme<T>
-  : [T] extends [never]
-  ? { [THEME_KEY]?: any }
-  : IMediaTheme<T, B>;
-
-export type WithTheme<P extends Props, T, B> = ResponsiveObject<P, B> &
-  ThemeWithMedia<T, B>;
-
-export type ExtractNonResponsiveValue<T> = T extends ResponsiveProp<
-  infer U,
-  any
->
-  ? U
-  : T;
-
-export type InferResponsivePropValue<T> = T extends ResponsiveProp<infer U, any>
-  ? U
-  : T;
-
-export interface IStyles {
-  [ruleOrSelector: string]: string | number | IStyles;
+export interface WrapMedia<B> {
+  [MEDIA_KEY]?: NeverToAny<B>;
 }
 
+export interface ResponsiveTheme<T, B> {
+  [THEME_KEY]?: NeverToAny<T> & WrapMedia<B>;
+}
+
+export type WithTheme<P extends Props, T, B> = ResponsiveProps<P, B> &
+  ResponsiveTheme<T, B>;
+
+/**
+ * UnboxResponsiveProp
+ * Unbox type wrapped with ResponsiveProp
+ */
+export type UnboxResponsiveProp<T> = T extends ResponsiveProp<infer R> ? R : T;
+
+export type UnboxResponsiveProps<T> = T extends ResponsiveProps<infer R>
+  ? R
+  : T;
 /**
  * Returns Array Indexes as union
  * Indices<[1,2]> => "0" | "!"
@@ -189,13 +173,10 @@ export type EtractInputType<P> = {
  */
 export type EtractPrimitives<P> = { [K in keyof P]: ExtractPrimitive<P[K]> };
 
-export type EtractNonResponsiveInputType<
-  STYLES,
-  I = EtractInputType<STYLES>
-> = { [K in keyof I]?: InferResponsivePropValue<I[K]> };
-
-export type InferPropsFromFunctionArgument<T> = T extends (
-  props: infer R,
-) => any
-  ? R //OmitTheme<R>
-  : {};
+export type GetProps<T> = T extends AnyFunc[]
+  ? UnionToIntersection<Arg1<UnionOf<T>>>
+  : T extends AnyFunc
+  ? Arg1<T>
+  : T extends Props
+  ? T
+  : Props;

@@ -1,7 +1,15 @@
 import { DeepRequired } from '../types';
 import { ColorProperty } from '@styleaux/csstype';
 import { assertTrue, Equals } from 'typescript-test-utils';
-import { style, styler, GetValue, Arg1, DeepSimplify, StyleOptions } from '../';
+import {
+  style,
+  styler,
+  GetValue,
+  Arg1,
+  DeepSimplify,
+  StyleOptions,
+  ResponsiveProp,
+} from '../';
 
 const COLOR = 'color';
 
@@ -56,7 +64,7 @@ it('no theme or media', () => {
 
   type StylePropType = DeepSimplify<Arg1<Style>>;
   type ExpectedPropType = {
-    color?: ColorProperty;
+    color?: ResponsiveProp<ColorProperty>;
     theme?: any;
   };
 

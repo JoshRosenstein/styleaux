@@ -1,13 +1,13 @@
 import * as AUX from '../types';
 import * as UT from 'utility-types';
 import * as TU from 'typescript-test-utils';
+import { ResponsiveProp } from '../';
 import { toStyles } from '../__testutils__/index';
 import {
   createColor,
   ColorProperty,
   createTextColor,
 } from '../__testutils__/fixtures/color';
-
 type DeepRequiredEquals<A, B> = TU.Equals<
   UT.DeepRequired<A>,
   UT.DeepRequired<B>
@@ -17,7 +17,7 @@ test('A', () => {
   const style = createTextColor();
   type styleProps = AUX.DeepSimplify<AUX.Arg1<typeof style>>;
   type ExpectedStyleProps = {
-    color?: ColorProperty;
+    color?: ResponsiveProp<ColorProperty>;
     theme?: any;
   };
 

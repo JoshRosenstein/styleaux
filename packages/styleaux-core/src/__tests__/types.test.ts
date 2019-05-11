@@ -1,144 +1,148 @@
-// import { MarginProperty } from '@styleaux/csstype';
-// import { assertTrue, Equals } from 'typescript-test-utils';
-// import {
-//   ResponsiveProp,
-//   createStyles,
-//   combineStyles,
-//   rule,
-//   Arg1,
-//   DeepRequired,
-//   Simplify,
-// } from '../';
+import { MarginProperty } from '@styleaux/csstype';
+import { assertTrue, Equals } from 'typescript-test-utils';
+import {
+  createStyles,
+  combineStyles,
+  rule,
+  Arg1,
+  DeepRequired,
+  Simplify,
+  ResponsiveProp,
+  GetProps,
+} from '../';
 
-// export type SpaceType = MarginProperty<number>;
+export type SpaceType = MarginProperty<number>;
 
-// export type SpaceKeys =
-//   | 'margin'
-//   | 'marginLeft'
-//   | 'marginRight'
-//   | 'marginTop'
-//   | 'marginBottom'
-//   | 'padding'
-//   | 'paddingLeft'
-//   | 'paddingRight'
-//   | 'paddingTop'
-//   | 'paddingBottom';
+export type SpaceKeys =
+  | 'margin'
+  | 'marginLeft'
+  | 'marginRight'
+  | 'marginTop'
+  | 'marginBottom'
+  | 'padding'
+  | 'paddingLeft'
+  | 'paddingRight'
+  | 'paddingTop'
+  | 'paddingBottom';
 
-// const spaceRule = (name: SpaceKeys) => rule<SpaceType>(name);
+const spaceRule = <P>(name: SpaceKeys) => rule<SpaceType, P>(name);
 
-// export const marginRule = spaceRule('margin');
+export const marginRule = spaceRule('margin');
 
-// type Media = { M: string; T: string };
+type Media = { M: string; T: string };
 
 it.todo('Fix');
 
-// it('createStyles with no theme or media', () => {
-//   const style = createStyles({
-//     margin: (input: string) => ({ margin: input }),
-//   });
-//   type Result = DeepRequired<Arg1<typeof style>>;
-//   type Expected = { margin: string; theme: any };
+it('createStyles with no theme or media', () => {
+  // const style = createStyles({
+  //   margin: (input: string) => ({ margin: input }),
+  // });
+  // type Result = DeepRequired<GetProps<typeof style>>;
+  // type Expected = DeepRequired<{ margin: ResponsiveProp<string>; theme: any }>;
+  // assertTrue<Equals<Result, Expected>>();
+});
 
-//   assertTrue<Equals<Result, Expected>>();
-// });
+it('createStyles with media', () => {
+  type InputType = string | number;
 
-// it('createStyles with media', () => {
-//   type InputType = string | number;
+  //type PropV = ResponsiveProp<InputType, Media>;
 
-//   //type PropV = ResponsiveProp<InputType, Media>;
+  const style = createStyles<{ margin: InputType }, never, Media>({
+    margin: (input) => ({ margin: input }),
+  });
 
-//   const style = createStyles<{ margin: InputType }, never, Media>({
-//     margin: (input) => ({ margin: input }),
-//   });
+  type Result = DeepRequired<Simplify<Arg1<typeof style>>>;
+  type Expected = DeepRequired<{
+    margin:
+      | InputType
+      | { M?: InputType; T?: InputType; all?: InputType }
+      | InputType[];
+    theme: Media;
+  }>;
 
-//   type Result = Required<Simplify<Arg1<typeof style>>>;
-//   type Expected = {
-//     margin:
-//       | InputType
-//       | { M?: InputType; T?: InputType; all?: InputType }
-//       | InputType[];
-//     theme: Media;
-//   };
+  assertTrue<Equals<Result, Expected>>();
+});
 
-//   assertTrue<Equals<Result, Expected>>();
-// });
+it('Wrapped with combinestyles', () => {
+  type InputType = string | number;
 
-// it('Wrapped with combinestyles', () => {
-//   type InputType = string | number;
+  const style = createStyles<{ margin: InputType }, never, Media>({
+    margin: (input) => ({ margin: input }),
+  });
+  const styleWrapped = combineStyles(style);
 
-//   const style = createStyles<{ margin: ResponsiveProp<InputType, Media> }>({
-//     margin: (input) => ({ margin: input }),
-//   });
-//   const styleWrapped = combineStyles(style);
+  type Expected = DeepRequired<{
+    margin: ResponsiveProp<InputType, Media>;
+    theme: any;
+  }>;
 
-//   type Expected = DeepRequired<{
-//     margin: ResponsiveProp<InputType, Media>;
-//   }>;
+  type Style = typeof style;
+  type StyleWrapped = typeof styleWrapped;
 
-//   type Style = typeof style;
-//   type StyleWrapped = typeof styleWrapped;
+  type StyleResult = DeepRequired<Arg1<Style>>;
 
-//   type StyleResult = DeepRequired<Arg1<Style>>;
+  type StyleWrappedResult = DeepRequired<Arg1<StyleWrapped>>;
 
-//   type StyleWrappedResult = DeepRequired<Arg1<StyleWrapped>>;
+  assertTrue<Equals<StyleResult, Expected>>();
+  assertTrue<Equals<StyleResult, StyleWrappedResult>>();
+});
 
-//   //assertTrue<Equals<StyleResult, Expected>>();
-//   //assertTrue<Equals<StyleResult, StyleWrappedResult>>();
-// });
+it('Wrapped with combinestyles as rule', () => {
+  const style = createStyles<
+    {
+      margin: string;
+    },
+    never,
+    Media
+  >({
+    margin: rule('margin'),
+  });
 
-// it('Wrapped with combinestyles as rule', () => {
-//   const style = createStyles<{
-//     margin: ResponsiveProp<string, Media>;
-//   }>({
-//     margin: rule<string>('margin'),
-//   });
+  const styleWrapped = combineStyles(style);
 
-//   const styleWrapped = combineStyles(style);
+  // type Expected = DeepRequired<{
+  //   margin: ResponsiveProp<string, Media>;
+  // }>;
 
-//   // type Expected = DeepRequired<{
-//   //   margin: ResponsiveProp<string, Media>;
-//   // }>;
+  type Style = typeof style;
+  type StyleWrapped = typeof styleWrapped;
 
-//   type Style = typeof style;
-//   type StyleWrapped = typeof styleWrapped;
+  type StyleResult = DeepRequired<Arg1<Style>>;
 
-//   type StyleResult = DeepRequired<Arg1<Style>>;
+  type StyleWrappedResult = DeepRequired<Arg1<StyleWrapped>>;
 
-//   type StyleWrappedResult = DeepRequired<Arg1<StyleWrapped>>;
+  //assertTrue<Equals<StyleResult, Expected>>();
+  assertTrue<Equals<StyleResult, StyleWrappedResult>>();
+});
 
-//   //assertTrue<Equals<StyleResult, Expected>>();
-//   assertTrue<Equals<StyleResult, StyleWrappedResult>>();
-// });
+it('Debug', () => {
+  // const position = createStyles({ position: rule<string>('position') })
+  // type PositionArg=DeepRequired<Arg1<typeof position>>
 
-// it('Debug', () => {
-//   // const position = createStyles({ position: rule<string>('position') })
-//   // type PositionArg=DeepRequired<Arg1<typeof position>>
+  //const position = createStyles({ position: rule<string>('position') })
 
-//   //const position = createStyles({ position: rule<string>('position') })
+  const style = createStyles<{ position: string }>({
+    position: rule('position'),
+  });
+  const style2 = createStyles<{ margin: string }>({
+    margin: rule('margin'),
+  });
 
-//   const style = createStyles<{ position: ResponsiveProp<string> }>({
-//     position: rule<string>('position'),
-//   });
-//   const style2 = createStyles<{ margin: ResponsiveProp<string> }>({
-//     margin: rule('margin'),
-//   });
+  const styleWrapped = combineStyles(style, style2);
 
-//   const styleWrapped = combineStyles(style, style2);
+  type GP = Simplify<GetProps<[typeof style2, typeof style]>>;
 
-//   type Expected = DeepRequired<{
-//     position: ResponsiveProp<string>;
-//     margin: ResponsiveProp<string>;
-//   }>;
+  type Expected = DeepRequired<GP>;
 
-//   type Style = typeof style;
-//   type StyleWrapped = typeof styleWrapped;
+  type Style = typeof style;
+  type StyleWrapped = typeof styleWrapped;
 
-//   //type StyleWrappedProps=DeepRequired<StyleWrapped['_styleProps']>
+  //type StyleWrappedProps=DeepRequired<StyleWrapped['_styleProps']>
 
-//   type StyleResult = DeepRequired<Arg1<Style> & Arg1<typeof style2>>;
+  type StyleResult = DeepRequired<Arg1<Style> & Arg1<typeof style2>>;
 
-//   type StyleWrappedResult = DeepRequired<Arg1<StyleWrapped>>;
+  type StyleWrappedResult = DeepRequired<Arg1<StyleWrapped>>;
 
-//   //assertTrue<Equals<StyleResult, Expected>>();
-//   assertTrue<Equals<StyleResult, StyleWrappedResult>>();
-// });
+  assertTrue<Equals<StyleResult, Expected>>();
+  assertTrue<Equals<StyleResult, StyleWrappedResult>>();
+});

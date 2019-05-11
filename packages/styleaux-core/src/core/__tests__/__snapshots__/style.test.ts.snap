@@ -1,0 +1,390 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Extends overrides base options: {
+  "c": "C"
+} 1`] = `
+Array [
+  Object {
+    "x": "C",
+    "y": "C",
+  },
+]
+`;
+
+exports[`Extends overrides base options: {
+  "d": "D"
+} 1`] = `
+Array [
+  Object {
+    "x": "D",
+    "y": "D",
+  },
+]
+`;
+
+exports[`Extends returns style object array: {
+  "a": "foo"
+} 1`] = `
+Array [
+  Object {
+    "a": "foo",
+    "b": "foo",
+  },
+]
+`;
+
+exports[`Extends returns style object array: {
+  "b": "bar"
+} 1`] = `
+Array [
+  Object {
+    "a": "bar",
+    "b": "bar",
+  },
+]
+`;
+
+exports[`Style Can Handle Multiple PropKeys & cssKeys Responsive: [marginY] {
+  "marginY": {
+    "sm": 1,
+    "md": 2
+  },
+  "theme": {
+    "space": [
+      0,
+      "10px",
+      "20px"
+    ],
+    "media": {
+      "sm": "40em",
+      "md": "52em"
+    }
+  }
+} 1`] = `
+Array [
+  Object {
+    "@media screen and (min-width: 40em)": Object {
+      "marginBottom": "10px",
+      "marginTop": "10px",
+    },
+    "@media screen and (min-width: 52em)": Object {
+      "marginBottom": "20px",
+      "marginTop": "20px",
+    },
+  },
+]
+`;
+
+exports[`Style Can Handle Multiple PropKeys & cssKeys Responsive: [my] {
+  "my": {
+    "sm": 1,
+    "md": 2
+  },
+  "theme": {
+    "space": [
+      0,
+      "10px",
+      "20px"
+    ],
+    "media": {
+      "sm": "40em",
+      "md": "52em"
+    }
+  }
+} 1`] = `
+Array [
+  Object {
+    "@media screen and (min-width: 40em)": Object {
+      "marginBottom": "10px",
+      "marginTop": "10px",
+    },
+    "@media screen and (min-width: 52em)": Object {
+      "marginBottom": "20px",
+      "marginTop": "20px",
+    },
+  },
+]
+`;
+
+exports[`Style Can Handle Multiple PropKeys & cssKeys: [marginY] {
+  "marginY": "1px"
+} 1`] = `
+Array [
+  Object {
+    "marginBottom": "1px",
+    "marginTop": "1px",
+  },
+]
+`;
+
+exports[`Style Can Handle Multiple PropKeys & cssKeys: [my] {
+  "marginY": "1px"
+} 1`] = `
+Array [
+  Object {
+    "marginBottom": "1px",
+    "marginTop": "1px",
+  },
+]
+`;
+
+exports[`Style Can Handle Multiple PropKeys: [First Prop] {
+  "color": "black",
+  "fg": "blue"
+} 1`] = `
+Array [
+  Object {
+    "color": "black",
+  },
+]
+`;
+
+exports[`Style Can Handle Multiple PropKeys: [color] {
+  "color": "black"
+} 1`] = `
+Array [
+  Object {
+    "color": "black",
+  },
+]
+`;
+
+exports[`Style Can Handle Multiple PropKeys: [fg] {
+  "fg": "blue"
+} 1`] = `
+Array [
+  Object {
+    "color": "blue",
+  },
+]
+`;
+
+exports[`Style handles aliased props: {
+  "theme": {
+    "colors": {
+      "blue": "#07c",
+      "black": "#111"
+    },
+    "media": {
+      "sm": "40em",
+      "md": "52em"
+    }
+  },
+  "bg": "blue"
+} 1`] = `
+Array [
+  Object {
+    "backgroundColor": "#07c",
+  },
+]
+`;
+
+exports[`Style looksup from Object Theme with negative: {
+  "margin": "-sm",
+  "theme": {
+    "space": {
+      "sm": 11
+    }
+  }
+} 1`] = `
+Array [
+  Object {
+    "margin": "-11px",
+  },
+]
+`;
+
+exports[`Style looksup from Object Theme: {
+  "margin": "sm",
+  "theme": {
+    "space": {
+      "sm": 11
+    }
+  }
+} 1`] = `
+Array [
+  Object {
+    "margin": "11px",
+  },
+]
+`;
+
+exports[`Style looksup from array Theme with Negative: {
+  "margin": -1,
+  "theme": {
+    "space": [
+      0,
+      11,
+      22,
+      33,
+      44
+    ]
+  }
+} 1`] = `
+Array [
+  Object {
+    "margin": "-11px",
+  },
+]
+`;
+
+exports[`Style looksup from array Theme: {
+  "margin": 1,
+  "theme": {
+    "space": [
+      0,
+      11,
+      22,
+      33,
+      44
+    ]
+  }
+} 1`] = `
+Array [
+  Object {
+    "margin": "11px",
+  },
+]
+`;
+
+exports[`Style returns 0: {
+  "width": 0
+} 1`] = `
+Array [
+  Object {
+    "width": 0,
+  },
+]
+`;
+
+exports[`Style returns responsive style objects from array with media as array: {
+  "theme": {
+    "media": [
+      "40em",
+      "52em"
+    ]
+  },
+  "width": [
+    "100%",
+    "50%"
+  ]
+} 1`] = `
+Array [
+  Array [
+    Object {
+      "width": "100%",
+    },
+    Object {
+      "@media screen and (min-width: 40em)": Object {
+        "width": "50%",
+      },
+    },
+  ],
+]
+`;
+
+exports[`Style returns responsive style objects from array with media as object: {
+  "theme": {
+    "media": {
+      "sm": "40em",
+      "md": "52em"
+    }
+  },
+  "width": [
+    "100%",
+    "50%"
+  ]
+} 1`] = `
+Array [
+  Array [
+    Object {
+      "width": "100%",
+    },
+    Object {
+      "@media screen and (min-width: 40em)": Object {
+        "width": "50%",
+      },
+    },
+  ],
+]
+`;
+
+exports[`Style returns responsive style objects: {
+  "theme": {
+    "media": {
+      "sm": "40em",
+      "md": "52em"
+    }
+  },
+  "width": {
+    "all": "100%",
+    "sm": "50%"
+  }
+} 1`] = `
+Array [
+  Object {
+    "@media screen and (min-width: 40em)": Object {
+      "width": "50%",
+    },
+    "width": "100%",
+  },
+]
+`;
+
+exports[`Style returns values from theme: {
+  "theme": {
+    "colors": {
+      "blue": "#07c",
+      "black": "#111"
+    },
+    "media": {
+      "sm": "40em",
+      "md": "52em"
+    }
+  },
+  "color": "blue"
+} 1`] = `
+Array [
+  Object {
+    "color": "#07c",
+  },
+]
+`;
+
+exports[`Style skips undefined responsive values: {
+  "theme": {
+    "media": {
+      "sm": "40em",
+      "md": "52em"
+    }
+  },
+  "width": [
+    "100%",
+    null,
+    "50%"
+  ]
+} 1`] = `
+Array [
+  Array [
+    Object {
+      "width": "100%",
+    },
+    undefined,
+    Object {
+      "@media screen and (min-width: 52em)": Object {
+        "width": "50%",
+      },
+    },
+  ],
+]
+`;
+
+exports[`Style uses input if not themeKey: {
+  "margin": 20
+} 1`] = `
+Array [
+  Object {
+    "margin": "20px",
+  },
+]
+`;

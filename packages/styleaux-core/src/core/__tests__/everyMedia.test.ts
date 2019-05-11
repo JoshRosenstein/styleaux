@@ -74,5 +74,3 @@ test('Doesnt style base with wrong Key and Warns', () => {
 
   //expect(outputData).toEqual('[everyMedia]:');
 });
-
-test.todo('Better way to test a warning was logged');

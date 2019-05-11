@@ -9,7 +9,3 @@ import { MEDIA_KEY, DEFAULT_MEDIA_KEY, IConstants } from '../constants';
 
 export const getDefaultMedia = (props: any): IConstants['MEDIA_KEY'] =>
   getDefault(MEDIA_KEY, DEFAULT_MEDIA_KEY)(props);
-
-//const t = getDefaultMedia({theme: {default: {media: DEFAULT_MEDIA_KEY}}})
-
-//const t=getDefault('as')({default:{as:2}})

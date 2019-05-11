@@ -6,7 +6,7 @@ import { getDefaultMedia } from './getDefaultMedia';
 
 export const getThemeMedia = <T extends { theme?: any }>(props: T) => {
   let media = pathObj(getTheme(props), [MEDIA_KEY]);
-  const defaultKey = { [getDefaultMedia(props)]: null };
+
   if (isArray(media)) {
     return media.reduce(
       (acc, v, i) => {
@@ -17,11 +17,5 @@ export const getThemeMedia = <T extends { theme?: any }>(props: T) => {
     );
   }
 
-  return Object.assign(
-    defaultKey,
-
-    { ...media },
-  );
+  return { [getDefaultMedia(props)]: null, ...media };
 };
-
-//const t2=getThemeMedia({theme:{media:{m:1},default:{media:MEDIA_KEY}}})
