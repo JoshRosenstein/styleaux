@@ -25,15 +25,15 @@ export const createVisibility = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<VisibilityProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<VisibilityProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<VisibilityProps<T>, Theme, Media>({
     cssProp: VISIBILITY,
     prop: VISIBILITY,
     key,
-    transformValue,
+    transform,
   });
 
 export const createVisibilityRule = <T = VisibilityProperty, P = unknown>(

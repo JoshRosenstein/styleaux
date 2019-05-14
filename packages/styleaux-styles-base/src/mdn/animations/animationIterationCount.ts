@@ -28,18 +28,18 @@ export const createAnimationIterationCount = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<AnimationIterationCountProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<AnimationIterationCountProps<T>, Theme, Media>({
     cssProp: ANIMATIONITERATIONCOUNT,
     prop: ANIMATIONITERATIONCOUNT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createAnimationIterationCountRule = <

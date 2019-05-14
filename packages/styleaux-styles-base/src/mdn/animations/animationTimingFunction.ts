@@ -28,18 +28,18 @@ export const createAnimationTimingFunction = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<AnimationTimingFunctionProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<AnimationTimingFunctionProps<T>, Theme, Media>({
     cssProp: ANIMATIONTIMINGFUNCTION,
     prop: ANIMATIONTIMINGFUNCTION,
     key,
-    transformValue,
+    transform,
   });
 
 export const createAnimationTimingFunctionRule = <

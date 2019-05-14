@@ -25,18 +25,18 @@ export const createScrollMarginBottom = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<ScrollMarginBottomProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<ScrollMarginBottomProps<T>, Theme, Media>({
     cssProp: SCROLLMARGINBOTTOM,
     prop: SCROLLMARGINBOTTOM,
     key,
-    transformValue,
+    transform,
   });
 
 export const createScrollMarginBottomRule = <

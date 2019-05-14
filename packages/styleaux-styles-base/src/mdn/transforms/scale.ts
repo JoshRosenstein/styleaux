@@ -21,15 +21,15 @@ export interface ScaleProps<T = ScaleProperty> {
 
 export const createScale = <T = ScaleProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ScaleProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ScaleProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ScaleProps<T>, Theme, Media>({
     cssProp: SCALE,
     prop: SCALE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createScaleRule = <T = ScaleProperty, P = unknown>(

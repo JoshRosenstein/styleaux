@@ -40,15 +40,15 @@ export const createAlignSelf = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<AlignSelfProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<AlignSelfProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<AlignSelfProps<T>, Theme, Media>({
     cssProp: ALIGNSELF,
     prop: ALIGNSELF,
     key,
-    transformValue,
+    transform,
   });
 
 export const createAlignSelfRule = <T = AlignSelfProperty, P = unknown>(

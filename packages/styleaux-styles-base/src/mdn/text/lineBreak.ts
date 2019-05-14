@@ -26,15 +26,15 @@ export const createLineBreak = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<LineBreakProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<LineBreakProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<LineBreakProps<T>, Theme, Media>({
     cssProp: LINEBREAK,
     prop: LINEBREAK,
     key,
-    transformValue,
+    transform,
   });
 
 export const createLineBreakRule = <T = LineBreakProperty, P = unknown>(

@@ -25,15 +25,15 @@ export const createBorderBottomWidth = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BorderBottomWidthProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BorderBottomWidthProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BorderBottomWidthProps<T>, Theme, Media>({
     cssProp: BORDERBOTTOMWIDTH,
     prop: BORDERBOTTOMWIDTH,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderBottomWidthRule = <

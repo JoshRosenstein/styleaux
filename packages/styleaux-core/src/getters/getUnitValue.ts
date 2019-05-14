@@ -3,7 +3,7 @@ import { getTheme } from './getTheme';
 import { stripNeg, isNeg, toNeg } from './utils';
 import { isNil, isObject, isString, isNumber } from 'typed-is';
 
-export const safeGet = (keyOrValue: any, fallbackObjOrValue?: any) => <
+export const getUnitValue = (keyOrValue: any, fallbackObjOrValue?: any) => <
   P extends {}
 >(
   obj: P,
@@ -33,4 +33,4 @@ export const safeGetThemeValue = (
   keyOrValue: any,
   fallbackObjOrValue?: any,
 ) => <P extends { theme?: any }>(obj: P) =>
-  safeGet(keyOrValue, fallbackObjOrValue)(getTheme(obj));
+  getUnitValue(keyOrValue, fallbackObjOrValue)(getTheme(obj));

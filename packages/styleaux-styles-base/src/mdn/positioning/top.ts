@@ -21,15 +21,15 @@ export interface TopProps<T = TopProperty> {
 
 export const createTop = <T = TopProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TopProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TopProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TopProps<T>, Theme, Media>({
     cssProp: TOP,
     prop: TOP,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTopRule = <T = TopProperty, P = unknown>(

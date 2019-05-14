@@ -24,15 +24,15 @@ export const createBorderImage = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BorderImageProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BorderImageProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BorderImageProps<T>, Theme, Media>({
     cssProp: BORDERIMAGE,
     prop: BORDERIMAGE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderImageRule = <T = BorderImageProperty, P = unknown>(

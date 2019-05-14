@@ -26,18 +26,18 @@ export const createBorderInlineEndStyle = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<BorderInlineEndStyleProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<BorderInlineEndStyleProps<T>, Theme, Media>({
     cssProp: BORDERINLINEENDSTYLE,
     prop: BORDERINLINEENDSTYLE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderInlineEndStyleRule = <

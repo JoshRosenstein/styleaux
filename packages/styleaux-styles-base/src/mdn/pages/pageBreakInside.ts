@@ -25,15 +25,15 @@ export const createPageBreakInside = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<PageBreakInsideProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<PageBreakInsideProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<PageBreakInsideProps<T>, Theme, Media>({
     cssProp: PAGEBREAKINSIDE,
     prop: PAGEBREAKINSIDE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createPageBreakInsideRule = <

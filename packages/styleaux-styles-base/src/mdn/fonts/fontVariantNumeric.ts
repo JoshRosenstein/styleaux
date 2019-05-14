@@ -25,18 +25,18 @@ export const createFontVariantNumeric = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<FontVariantNumericProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<FontVariantNumericProps<T>, Theme, Media>({
     cssProp: FONTVARIANTNUMERIC,
     prop: FONTVARIANTNUMERIC,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFontVariantNumericRule = <

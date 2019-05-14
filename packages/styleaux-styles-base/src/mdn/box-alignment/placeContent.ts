@@ -47,15 +47,15 @@ export const createPlaceContent = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<PlaceContentProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<PlaceContentProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<PlaceContentProps<T>, Theme, Media>({
     cssProp: PLACECONTENT,
     prop: PLACECONTENT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createPlaceContentRule = <T = PlaceContentProperty, P = unknown>(

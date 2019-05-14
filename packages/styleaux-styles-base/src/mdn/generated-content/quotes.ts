@@ -21,15 +21,15 @@ export interface QuotesProps<T = QuotesProperty> {
 
 export const createQuotes = <T = QuotesProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<QuotesProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<QuotesProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<QuotesProps<T>, Theme, Media>({
     cssProp: QUOTES,
     prop: QUOTES,
     key,
-    transformValue,
+    transform,
   });
 
 export const createQuotesRule = <T = QuotesProperty, P = unknown>(

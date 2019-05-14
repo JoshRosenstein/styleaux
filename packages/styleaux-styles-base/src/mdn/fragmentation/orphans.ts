@@ -25,15 +25,15 @@ export const createOrphans = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<OrphansProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<OrphansProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<OrphansProps<T>, Theme, Media>({
     cssProp: ORPHANS,
     prop: ORPHANS,
     key,
-    transformValue,
+    transform,
   });
 
 export const createOrphansRule = <T = OrphansProperty, P = unknown>(

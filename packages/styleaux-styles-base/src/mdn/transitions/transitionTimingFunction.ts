@@ -28,18 +28,18 @@ export const createTransitionTimingFunction = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<TransitionTimingFunctionProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<TransitionTimingFunctionProps<T>, Theme, Media>({
     cssProp: TRANSITIONTIMINGFUNCTION,
     prop: TRANSITIONTIMINGFUNCTION,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTransitionTimingFunctionRule = <

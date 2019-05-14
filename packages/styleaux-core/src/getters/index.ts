@@ -1,10 +1,10 @@
 export { getTheme } from './getTheme';
 export { getThemePathOr } from './getThemePathOr';
-export { getDefault } from './getDefault';
+export { getDefaultKey } from './getDefaultKey';
 
-export { getDefaultMedia } from './getDefaultMedia';
+export { getDefaultMediaKey } from './getDefaultMediaKey';
 export { getThemeMedia } from './getThemeMedia';
-export { safeGet, safeGetThemeValue } from './safeGet';
+export { getUnitValue, safeGetThemeValue } from './getUnitValue';
 export { getMedia } from './getMedia';
 
 export {

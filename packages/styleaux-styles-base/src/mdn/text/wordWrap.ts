@@ -25,15 +25,15 @@ export const createWordWrap = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<WordWrapProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<WordWrapProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<WordWrapProps<T>, Theme, Media>({
     cssProp: WORDWRAP,
     prop: WORDWRAP,
     key,
-    transformValue,
+    transform,
   });
 
 export const createWordWrapRule = <T = WordWrapProperty, P = unknown>(

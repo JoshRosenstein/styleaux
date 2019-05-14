@@ -25,15 +25,15 @@ export const createTextEmphasisStyle = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TextEmphasisStyleProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TextEmphasisStyleProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TextEmphasisStyleProps<T>, Theme, Media>({
     cssProp: TEXTEMPHASISSTYLE,
     prop: TEXTEMPHASISSTYLE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTextEmphasisStyleRule = <

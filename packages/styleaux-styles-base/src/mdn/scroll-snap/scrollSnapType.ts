@@ -26,15 +26,15 @@ export const createScrollSnapType = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ScrollSnapTypeProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ScrollSnapTypeProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ScrollSnapTypeProps<T>, Theme, Media>({
     cssProp: SCROLLSNAPTYPE,
     prop: SCROLLSNAPTYPE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createScrollSnapTypeRule = <

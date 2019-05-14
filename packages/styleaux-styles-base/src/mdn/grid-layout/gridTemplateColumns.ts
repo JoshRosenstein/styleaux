@@ -25,18 +25,18 @@ export const createGridTemplateColumns = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<GridTemplateColumnsProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<GridTemplateColumnsProps<T>, Theme, Media>({
     cssProp: GRIDTEMPLATECOLUMNS,
     prop: GRIDTEMPLATECOLUMNS,
     key,
-    transformValue,
+    transform,
   });
 
 export const createGridTemplateColumnsRule = <

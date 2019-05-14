@@ -25,18 +25,18 @@ export const createTextCombineUpright = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<TextCombineUprightProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<TextCombineUprightProps<T>, Theme, Media>({
     cssProp: TEXTCOMBINEUPRIGHT,
     prop: TEXTCOMBINEUPRIGHT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTextCombineUprightRule = <

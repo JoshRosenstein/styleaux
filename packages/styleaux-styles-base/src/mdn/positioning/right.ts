@@ -21,15 +21,15 @@ export interface RightProps<T = RightProperty> {
 
 export const createRight = <T = RightProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<RightProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<RightProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<RightProps<T>, Theme, Media>({
     cssProp: RIGHT,
     prop: RIGHT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createRightRule = <T = RightProperty, P = unknown>(

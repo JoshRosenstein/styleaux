@@ -47,15 +47,15 @@ export const createBreakBefore = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BreakBeforeProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BreakBeforeProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BreakBeforeProps<T>, Theme, Media>({
     cssProp: BREAKBEFORE,
     prop: BREAKBEFORE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBreakBeforeRule = <T = BreakBeforeProperty, P = unknown>(

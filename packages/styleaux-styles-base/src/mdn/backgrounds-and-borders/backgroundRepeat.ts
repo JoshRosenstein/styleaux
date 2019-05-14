@@ -25,15 +25,15 @@ export const createBackgroundRepeat = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BackgroundRepeatProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BackgroundRepeatProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BackgroundRepeatProps<T>, Theme, Media>({
     cssProp: BACKGROUNDREPEAT,
     prop: BACKGROUNDREPEAT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBackgroundRepeatRule = <

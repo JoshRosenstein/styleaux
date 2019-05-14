@@ -25,15 +25,15 @@ export const createPaintOrder = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<PaintOrderProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<PaintOrderProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<PaintOrderProps<T>, Theme, Media>({
     cssProp: PAINTORDER,
     prop: PAINTORDER,
     key,
-    transformValue,
+    transform,
   });
 
 export const createPaintOrderRule = <T = PaintOrderProperty, P = unknown>(

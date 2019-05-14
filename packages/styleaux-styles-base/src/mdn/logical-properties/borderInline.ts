@@ -23,15 +23,15 @@ export const createBorderInline = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BorderInlineProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BorderInlineProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BorderInlineProps<T>, Theme, Media>({
     cssProp: BORDERINLINE,
     prop: BORDERINLINE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderInlineRule = <T = BorderInlineProperty, P = unknown>(

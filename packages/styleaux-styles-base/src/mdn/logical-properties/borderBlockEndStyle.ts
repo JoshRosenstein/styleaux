@@ -25,18 +25,18 @@ export const createBorderBlockEndStyle = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<BorderBlockEndStyleProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<BorderBlockEndStyleProps<T>, Theme, Media>({
     cssProp: BORDERBLOCKENDSTYLE,
     prop: BORDERBLOCKENDSTYLE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderBlockEndStyleRule = <

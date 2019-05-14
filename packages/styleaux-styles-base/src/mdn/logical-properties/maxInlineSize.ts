@@ -26,15 +26,15 @@ export const createMaxInlineSize = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MaxInlineSizeProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MaxInlineSizeProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MaxInlineSizeProps<T>, Theme, Media>({
     cssProp: MAXINLINESIZE,
     prop: MAXINLINESIZE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMaxInlineSizeRule = <T = MaxInlineSizeProperty, P = unknown>(

@@ -25,15 +25,15 @@ export const createBorderImageOutset = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BorderImageOutsetProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BorderImageOutsetProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BorderImageOutsetProps<T>, Theme, Media>({
     cssProp: BORDERIMAGEOUTSET,
     prop: BORDERIMAGEOUTSET,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderImageOutsetRule = <

@@ -25,15 +25,15 @@ export const createDirection = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<DirectionProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<DirectionProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<DirectionProps<T>, Theme, Media>({
     cssProp: DIRECTION,
     prop: DIRECTION,
     key,
-    transformValue,
+    transform,
   });
 
 export const createDirectionRule = <T = DirectionProperty, P = unknown>(

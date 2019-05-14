@@ -25,15 +25,15 @@ export const createVerticalAlign = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<VerticalAlignProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<VerticalAlignProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<VerticalAlignProps<T>, Theme, Media>({
     cssProp: VERTICALALIGN,
     prop: VERTICALALIGN,
     key,
-    transformValue,
+    transform,
   });
 
 export const createVerticalAlignRule = <T = VerticalAlignProperty, P = unknown>(

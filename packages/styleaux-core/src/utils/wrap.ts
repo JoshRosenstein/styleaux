@@ -9,7 +9,7 @@ import { isNil } from 'typed-is';
 
 export function wrap(
   name?: string | number | null,
-  value?: null | string | number | { [index: string]: any },
+  value?: null | string | number | Record<string, any>,
 ) {
   return !isNil(value) ? (name ? { [name]: value } : value) : null;
 }
@@ -24,5 +24,5 @@ export function wrap(
  */
 
 export const createWrap = (name?: string | number) => (
-  value: null | string | number | { [index: string]: any },
+  value: null | string | number | Record<string, any>,
 ) => wrap(name, value); //wrap(name, value)

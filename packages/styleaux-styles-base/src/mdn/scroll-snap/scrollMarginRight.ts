@@ -25,15 +25,15 @@ export const createScrollMarginRight = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ScrollMarginRightProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ScrollMarginRightProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ScrollMarginRightProps<T>, Theme, Media>({
     cssProp: SCROLLMARGINRIGHT,
     prop: SCROLLMARGINRIGHT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createScrollMarginRightRule = <

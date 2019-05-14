@@ -25,15 +25,15 @@ export const createGridRowEnd = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<GridRowEndProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<GridRowEndProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<GridRowEndProps<T>, Theme, Media>({
     cssProp: GRIDROWEND,
     prop: GRIDROWEND,
     key,
-    transformValue,
+    transform,
   });
 
 export const createGridRowEndRule = <T = GridRowEndProperty, P = unknown>(

@@ -25,15 +25,15 @@ export const createFontKerning = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<FontKerningProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<FontKerningProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<FontKerningProps<T>, Theme, Media>({
     cssProp: FONTKERNING,
     prop: FONTKERNING,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFontKerningRule = <T = FontKerningProperty, P = unknown>(

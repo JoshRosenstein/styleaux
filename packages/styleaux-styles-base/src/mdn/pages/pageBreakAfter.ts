@@ -25,15 +25,15 @@ export const createPageBreakAfter = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<PageBreakAfterProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<PageBreakAfterProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<PageBreakAfterProps<T>, Theme, Media>({
     cssProp: PAGEBREAKAFTER,
     prop: PAGEBREAKAFTER,
     key,
-    transformValue,
+    transform,
   });
 
 export const createPageBreakAfterRule = <

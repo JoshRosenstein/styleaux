@@ -26,15 +26,15 @@ export const createTransformOrigin = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TransformOriginProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TransformOriginProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TransformOriginProps<T>, Theme, Media>({
     cssProp: TRANSFORMORIGIN,
     prop: TRANSFORMORIGIN,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTransformOriginRule = <

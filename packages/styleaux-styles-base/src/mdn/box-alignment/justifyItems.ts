@@ -39,15 +39,15 @@ export const createJustifyItems = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<JustifyItemsProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<JustifyItemsProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<JustifyItemsProps<T>, Theme, Media>({
     cssProp: JUSTIFYITEMS,
     prop: JUSTIFYITEMS,
     key,
-    transformValue,
+    transform,
   });
 
 export const createJustifyItemsRule = <T = JustifyItemsProperty, P = unknown>(

@@ -26,15 +26,15 @@ export const createAnimationDelay = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<AnimationDelayProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<AnimationDelayProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<AnimationDelayProps<T>, Theme, Media>({
     cssProp: ANIMATIONDELAY,
     prop: ANIMATIONDELAY,
     key,
-    transformValue,
+    transform,
   });
 
 export const createAnimationDelayRule = <

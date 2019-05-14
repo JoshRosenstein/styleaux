@@ -25,15 +25,15 @@ export const createTextJustify = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TextJustifyProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TextJustifyProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TextJustifyProps<T>, Theme, Media>({
     cssProp: TEXTJUSTIFY,
     prop: TEXTJUSTIFY,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTextJustifyRule = <T = TextJustifyProperty, P = unknown>(

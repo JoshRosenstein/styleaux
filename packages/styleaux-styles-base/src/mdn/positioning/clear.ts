@@ -21,15 +21,15 @@ export interface ClearProps<T = ClearProperty> {
 
 export const createClear = <T = ClearProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ClearProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ClearProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ClearProps<T>, Theme, Media>({
     cssProp: CLEAR,
     prop: CLEAR,
     key,
-    transformValue,
+    transform,
   });
 
 export const createClearRule = <T = ClearProperty, P = unknown>(

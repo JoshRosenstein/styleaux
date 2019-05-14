@@ -25,15 +25,15 @@ export const createMixBlendMode = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MixBlendModeProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MixBlendModeProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MixBlendModeProps<T>, Theme, Media>({
     cssProp: MIXBLENDMODE,
     prop: MIXBLENDMODE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMixBlendModeRule = <T = MixBlendModeProperty, P = unknown>(

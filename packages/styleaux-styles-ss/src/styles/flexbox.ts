@@ -14,4 +14,4 @@ export {
   order,
 } from '@styleaux/styles-base';
 
-export const flexBasis = createFlexBasis({ transformValue: getWidth });
+export const flexBasis = createFlexBasis({ transform: getWidth });

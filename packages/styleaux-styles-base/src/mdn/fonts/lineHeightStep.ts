@@ -25,15 +25,15 @@ export const createLineHeightStep = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<LineHeightStepProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<LineHeightStepProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<LineHeightStepProps<T>, Theme, Media>({
     cssProp: LINEHEIGHTSTEP,
     prop: LINEHEIGHTSTEP,
     key,
-    transformValue,
+    transform,
   });
 
 export const createLineHeightStepRule = <

@@ -25,15 +25,15 @@ export const createBorderImageSlice = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BorderImageSliceProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BorderImageSliceProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BorderImageSliceProps<T>, Theme, Media>({
     cssProp: BORDERIMAGESLICE,
     prop: BORDERIMAGESLICE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderImageSliceRule = <

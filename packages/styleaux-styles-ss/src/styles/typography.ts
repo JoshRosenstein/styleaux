@@ -11,7 +11,7 @@ export { textAlign, fontStyle } from '@styleaux/styles-base';
 
 export const fontSize = createFontSize({
   key: 'fontSizes',
-  transformValue: px,
+  transform: px,
 });
 
 export const fontFamily = createFontFamily({
@@ -28,5 +28,5 @@ export const lineHeight = createLineHeight({
 
 export const letterSpacing = createLetterSpacing({
   key: 'letterSpacings',
-  transformValue: px,
+  transform: px,
 });

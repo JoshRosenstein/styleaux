@@ -25,15 +25,15 @@ export const createPaddingRight = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<PaddingRightProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<PaddingRightProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<PaddingRightProps<T>, Theme, Media>({
     cssProp: PADDINGRIGHT,
     prop: PADDINGRIGHT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createPaddingRightRule = <T = PaddingRightProperty, P = unknown>(

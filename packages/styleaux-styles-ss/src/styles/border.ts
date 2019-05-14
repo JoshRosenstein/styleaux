@@ -16,7 +16,7 @@ export const border = createBorder({ key: 'borders' });
 
 export const borderWidth = createBorderWidth({
   key: 'borderWidths',
-  transformValue: px,
+  transform: px,
 });
 
 export const borderStyle = createBorderStyle({ key: 'borderStyles' });
@@ -33,7 +33,7 @@ export const borderLeft = createBorderLeft({ key: 'borders' });
 
 export const borderRadius = createBorderRadius({
   key: 'radii',
-  transformValue: px,
+  transform: px,
 });
 
 export const borders = combineStyles(

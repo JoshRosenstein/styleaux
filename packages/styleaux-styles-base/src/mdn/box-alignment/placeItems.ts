@@ -37,15 +37,15 @@ export const createPlaceItems = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<PlaceItemsProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<PlaceItemsProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<PlaceItemsProps<T>, Theme, Media>({
     cssProp: PLACEITEMS,
     prop: PLACEITEMS,
     key,
-    transformValue,
+    transform,
   });
 
 export const createPlaceItemsRule = <T = PlaceItemsProperty, P = unknown>(

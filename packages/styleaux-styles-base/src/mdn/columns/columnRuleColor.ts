@@ -26,15 +26,15 @@ export const createColumnRuleColor = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ColumnRuleColorProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ColumnRuleColorProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ColumnRuleColorProps<T>, Theme, Media>({
     cssProp: COLUMNRULECOLOR,
     prop: COLUMNRULECOLOR,
     key,
-    transformValue,
+    transform,
   });
 
 export const createColumnRuleColorRule = <

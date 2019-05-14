@@ -25,15 +25,15 @@ export const createInsetBlock = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<InsetBlockProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<InsetBlockProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<InsetBlockProps<T>, Theme, Media>({
     cssProp: INSETBLOCK,
     prop: INSETBLOCK,
     key,
-    transformValue,
+    transform,
   });
 
 export const createInsetBlockRule = <T = InsetBlockProperty, P = unknown>(

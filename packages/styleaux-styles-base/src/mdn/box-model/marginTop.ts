@@ -25,15 +25,15 @@ export const createMarginTop = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MarginTopProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MarginTopProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MarginTopProps<T>, Theme, Media>({
     cssProp: MARGINTOP,
     prop: MARGINTOP,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMarginTopRule = <T = MarginTopProperty, P = unknown>(

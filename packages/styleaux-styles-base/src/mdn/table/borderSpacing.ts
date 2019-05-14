@@ -25,15 +25,15 @@ export const createBorderSpacing = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BorderSpacingProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BorderSpacingProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BorderSpacingProps<T>, Theme, Media>({
     cssProp: BORDERSPACING,
     prop: BORDERSPACING,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderSpacingRule = <T = BorderSpacingProperty, P = unknown>(

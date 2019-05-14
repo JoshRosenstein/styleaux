@@ -26,15 +26,15 @@ export const createAnimationName = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<AnimationNameProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<AnimationNameProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<AnimationNameProps<T>, Theme, Media>({
     cssProp: ANIMATIONNAME,
     prop: ANIMATIONNAME,
     key,
-    transformValue,
+    transform,
   });
 
 export const createAnimationNameRule = <T = AnimationNameProperty, P = unknown>(

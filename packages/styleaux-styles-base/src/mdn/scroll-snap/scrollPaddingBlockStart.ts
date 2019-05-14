@@ -27,18 +27,18 @@ export const createScrollPaddingBlockStart = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<ScrollPaddingBlockStartProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<ScrollPaddingBlockStartProps<T>, Theme, Media>({
     cssProp: SCROLLPADDINGBLOCKSTART,
     prop: SCROLLPADDINGBLOCKSTART,
     key,
-    transformValue,
+    transform,
   });
 
 export const createScrollPaddingBlockStartRule = <

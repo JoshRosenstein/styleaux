@@ -1,7 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Extends overrides base options: {
-  "c": "C"
+  "args": [
+    {
+      "prop": [
+        "c",
+        "d"
+      ]
+    }
+  ],
+  "props": {
+    "c": "C"
+  }
 } 1`] = `
 Array [
   Object {
@@ -12,7 +22,17 @@ Array [
 `;
 
 exports[`Extends overrides base options: {
-  "d": "D"
+  "args": [
+    {
+      "prop": [
+        "c",
+        "d"
+      ]
+    }
+  ],
+  "props": {
+    "d": "D"
+  }
 } 1`] = `
 Array [
   Object {
@@ -23,7 +43,17 @@ Array [
 `;
 
 exports[`Extends returns style object array: {
-  "a": "foo"
+  "args": [
+    {
+      "prop": [
+        "a",
+        "b"
+      ]
+    }
+  ],
+  "props": {
+    "a": "foo"
+  }
 } 1`] = `
 Array [
   Object {
@@ -34,7 +64,17 @@ Array [
 `;
 
 exports[`Extends returns style object array: {
-  "b": "bar"
+  "args": [
+    {
+      "prop": [
+        "a",
+        "b"
+      ]
+    }
+  ],
+  "props": {
+    "b": "bar"
+  }
 } 1`] = `
 Array [
   Object {
@@ -45,19 +85,34 @@ Array [
 `;
 
 exports[`Style Can Handle Multiple PropKeys & cssKeys Responsive: [marginY] {
-  "marginY": {
-    "sm": 1,
-    "md": 2
-  },
-  "theme": {
-    "space": [
-      0,
-      "10px",
-      "20px"
-    ],
-    "media": {
-      "sm": "40em",
-      "md": "52em"
+  "args": [
+    {
+      "cssProp": [
+        "marginTop",
+        "marginBottom"
+      ],
+      "prop": [
+        "marginY",
+        "my"
+      ],
+      "key": "space"
+    }
+  ],
+  "props": {
+    "marginY": {
+      "sm": 1,
+      "md": 2
+    },
+    "theme": {
+      "media": {
+        "sm": "40em",
+        "md": "52em"
+      },
+      "space": [
+        0,
+        "10px",
+        "20px"
+      ]
     }
   }
 } 1`] = `
@@ -76,19 +131,34 @@ Array [
 `;
 
 exports[`Style Can Handle Multiple PropKeys & cssKeys Responsive: [my] {
-  "my": {
-    "sm": 1,
-    "md": 2
-  },
-  "theme": {
-    "space": [
-      0,
-      "10px",
-      "20px"
-    ],
-    "media": {
-      "sm": "40em",
-      "md": "52em"
+  "args": [
+    {
+      "cssProp": [
+        "marginTop",
+        "marginBottom"
+      ],
+      "prop": [
+        "marginY",
+        "my"
+      ],
+      "key": "space"
+    }
+  ],
+  "props": {
+    "my": {
+      "sm": 1,
+      "md": 2
+    },
+    "theme": {
+      "media": {
+        "sm": "40em",
+        "md": "52em"
+      },
+      "space": [
+        0,
+        "10px",
+        "20px"
+      ]
     }
   }
 } 1`] = `
@@ -107,7 +177,22 @@ Array [
 `;
 
 exports[`Style Can Handle Multiple PropKeys & cssKeys: [marginY] {
-  "marginY": "1px"
+  "args": [
+    {
+      "cssProp": [
+        "marginTop",
+        "marginBottom"
+      ],
+      "prop": [
+        "marginY",
+        "my"
+      ],
+      "key": "space"
+    }
+  ],
+  "props": {
+    "marginY": "1px"
+  }
 } 1`] = `
 Array [
   Object {
@@ -118,7 +203,22 @@ Array [
 `;
 
 exports[`Style Can Handle Multiple PropKeys & cssKeys: [my] {
-  "marginY": "1px"
+  "args": [
+    {
+      "cssProp": [
+        "marginTop",
+        "marginBottom"
+      ],
+      "prop": [
+        "marginY",
+        "my"
+      ],
+      "key": "space"
+    }
+  ],
+  "props": {
+    "marginY": "1px"
+  }
 } 1`] = `
 Array [
   Object {
@@ -129,8 +229,20 @@ Array [
 `;
 
 exports[`Style Can Handle Multiple PropKeys: [First Prop] {
-  "color": "black",
-  "fg": "blue"
+  "args": [
+    {
+      "cssProp": "color",
+      "prop": [
+        "color",
+        "fg"
+      ],
+      "key": "colors"
+    }
+  ],
+  "props": {
+    "color": "black",
+    "fg": "blue"
+  }
 } 1`] = `
 Array [
   Object {
@@ -140,7 +252,19 @@ Array [
 `;
 
 exports[`Style Can Handle Multiple PropKeys: [color] {
-  "color": "black"
+  "args": [
+    {
+      "cssProp": "color",
+      "prop": [
+        "color",
+        "fg"
+      ],
+      "key": "colors"
+    }
+  ],
+  "props": {
+    "color": "black"
+  }
 } 1`] = `
 Array [
   Object {
@@ -150,7 +274,19 @@ Array [
 `;
 
 exports[`Style Can Handle Multiple PropKeys: [fg] {
-  "fg": "blue"
+  "args": [
+    {
+      "cssProp": "color",
+      "prop": [
+        "color",
+        "fg"
+      ],
+      "key": "colors"
+    }
+  ],
+  "props": {
+    "fg": "blue"
+  }
 } 1`] = `
 Array [
   Object {
@@ -160,17 +296,22 @@ Array [
 `;
 
 exports[`Style handles aliased props: {
-  "theme": {
-    "colors": {
-      "blue": "#07c",
-      "black": "#111"
-    },
-    "media": {
-      "sm": "40em",
-      "md": "52em"
+  "args": [
+    {
+      "prop": "backgroundColor",
+      "alias": "bg",
+      "key": "colors"
     }
-  },
-  "bg": "blue"
+  ],
+  "props": {
+    "bg": "blue",
+    "theme": {
+      "colors": {
+        "blue": "#07c",
+        "black": "#111"
+      }
+    }
+  }
 } 1`] = `
 Array [
   Object {
@@ -180,10 +321,19 @@ Array [
 `;
 
 exports[`Style looksup from Object Theme with negative: {
-  "margin": "-sm",
-  "theme": {
-    "space": {
-      "sm": 11
+  "args": [
+    {
+      "prop": "margin",
+      "cssProp": "margin",
+      "key": "space"
+    }
+  ],
+  "props": {
+    "margin": "-sm",
+    "theme": {
+      "space": {
+        "sm": 11
+      }
     }
   }
 } 1`] = `
@@ -195,10 +345,19 @@ Array [
 `;
 
 exports[`Style looksup from Object Theme: {
-  "margin": "sm",
-  "theme": {
-    "space": {
-      "sm": 11
+  "args": [
+    {
+      "prop": "margin",
+      "cssProp": "margin",
+      "key": "space"
+    }
+  ],
+  "props": {
+    "margin": "sm",
+    "theme": {
+      "space": {
+        "sm": 11
+      }
     }
   }
 } 1`] = `
@@ -210,15 +369,24 @@ Array [
 `;
 
 exports[`Style looksup from array Theme with Negative: {
-  "margin": -1,
-  "theme": {
-    "space": [
-      0,
-      11,
-      22,
-      33,
-      44
-    ]
+  "args": [
+    {
+      "prop": "margin",
+      "cssProp": "margin",
+      "key": "space"
+    }
+  ],
+  "props": {
+    "margin": -1,
+    "theme": {
+      "space": [
+        0,
+        11,
+        22,
+        33,
+        44
+      ]
+    }
   }
 } 1`] = `
 Array [
@@ -229,15 +397,24 @@ Array [
 `;
 
 exports[`Style looksup from array Theme: {
-  "margin": 1,
-  "theme": {
-    "space": [
-      0,
-      11,
-      22,
-      33,
-      44
-    ]
+  "args": [
+    {
+      "prop": "margin",
+      "cssProp": "margin",
+      "key": "space"
+    }
+  ],
+  "props": {
+    "margin": 1,
+    "theme": {
+      "space": [
+        0,
+        11,
+        22,
+        33,
+        44
+      ]
+    }
   }
 } 1`] = `
 Array [
@@ -248,7 +425,14 @@ Array [
 `;
 
 exports[`Style returns 0: {
-  "width": 0
+  "args": [
+    {
+      "prop": "width"
+    }
+  ],
+  "props": {
+    "width": 0
+  }
 } 1`] = `
 Array [
   Object {
@@ -258,16 +442,23 @@ Array [
 `;
 
 exports[`Style returns responsive style objects from array with media as array: {
-  "theme": {
-    "media": [
-      "40em",
-      "52em"
-    ]
-  },
-  "width": [
-    "100%",
-    "50%"
-  ]
+  "args": [
+    {
+      "prop": "width"
+    }
+  ],
+  "props": {
+    "width": [
+      "100%",
+      "50%"
+    ],
+    "theme": {
+      "media": [
+        "40em",
+        "52em"
+      ]
+    }
+  }
 } 1`] = `
 Array [
   Array [
@@ -284,16 +475,23 @@ Array [
 `;
 
 exports[`Style returns responsive style objects from array with media as object: {
-  "theme": {
-    "media": {
-      "sm": "40em",
-      "md": "52em"
+  "args": [
+    {
+      "prop": "width"
     }
-  },
-  "width": [
-    "100%",
-    "50%"
-  ]
+  ],
+  "props": {
+    "theme": {
+      "media": {
+        "sm": "40em",
+        "md": "52em"
+      }
+    },
+    "width": [
+      "100%",
+      "50%"
+    ]
+  }
 } 1`] = `
 Array [
   Array [
@@ -310,15 +508,22 @@ Array [
 `;
 
 exports[`Style returns responsive style objects: {
-  "theme": {
-    "media": {
-      "sm": "40em",
-      "md": "52em"
+  "args": [
+    {
+      "prop": "width"
     }
-  },
-  "width": {
-    "all": "100%",
-    "sm": "50%"
+  ],
+  "props": {
+    "theme": {
+      "media": {
+        "sm": "40em",
+        "md": "52em"
+      }
+    },
+    "width": {
+      "all": "100%",
+      "sm": "50%"
+    }
   }
 } 1`] = `
 Array [
@@ -332,17 +537,21 @@ Array [
 `;
 
 exports[`Style returns values from theme: {
-  "theme": {
-    "colors": {
-      "blue": "#07c",
-      "black": "#111"
-    },
-    "media": {
-      "sm": "40em",
-      "md": "52em"
+  "args": [
+    {
+      "prop": "color",
+      "key": "colors"
     }
-  },
-  "color": "blue"
+  ],
+  "props": {
+    "color": "blue",
+    "theme": {
+      "colors": {
+        "blue": "#07c",
+        "black": "#111"
+      }
+    }
+  }
 } 1`] = `
 Array [
   Object {
@@ -352,17 +561,24 @@ Array [
 `;
 
 exports[`Style skips undefined responsive values: {
-  "theme": {
-    "media": {
-      "sm": "40em",
-      "md": "52em"
+  "args": [
+    {
+      "prop": "width"
     }
-  },
-  "width": [
-    "100%",
-    null,
-    "50%"
-  ]
+  ],
+  "props": {
+    "theme": {
+      "media": {
+        "sm": "40em",
+        "md": "52em"
+      }
+    },
+    "width": [
+      "100%",
+      null,
+      "50%"
+    ]
+  }
 } 1`] = `
 Array [
   Array [
@@ -380,7 +596,16 @@ Array [
 `;
 
 exports[`Style uses input if not themeKey: {
-  "margin": 20
+  "args": [
+    {
+      "prop": "margin",
+      "cssProp": "margin",
+      "key": "space"
+    }
+  ],
+  "props": {
+    "margin": 20
+  }
 } 1`] = `
 Array [
   Object {

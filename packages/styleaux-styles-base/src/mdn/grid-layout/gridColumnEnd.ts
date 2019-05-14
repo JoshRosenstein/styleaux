@@ -25,15 +25,15 @@ export const createGridColumnEnd = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<GridColumnEndProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<GridColumnEndProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<GridColumnEndProps<T>, Theme, Media>({
     cssProp: GRIDCOLUMNEND,
     prop: GRIDCOLUMNEND,
     key,
-    transformValue,
+    transform,
   });
 
 export const createGridColumnEndRule = <T = GridColumnEndProperty, P = unknown>(

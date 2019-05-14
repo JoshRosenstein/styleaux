@@ -24,15 +24,15 @@ export const createColumns = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ColumnsProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ColumnsProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ColumnsProps<T>, Theme, Media>({
     cssProp: COLUMNS,
     prop: COLUMNS,
     key,
-    transformValue,
+    transform,
   });
 
 export const createColumnsRule = <T = ColumnsProperty, P = unknown>(

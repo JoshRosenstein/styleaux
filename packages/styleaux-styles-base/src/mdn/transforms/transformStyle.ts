@@ -26,15 +26,15 @@ export const createTransformStyle = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TransformStyleProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TransformStyleProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TransformStyleProps<T>, Theme, Media>({
     cssProp: TRANSFORMSTYLE,
     prop: TRANSFORMSTYLE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTransformStyleRule = <

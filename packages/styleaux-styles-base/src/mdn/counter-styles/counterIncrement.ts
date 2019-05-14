@@ -25,15 +25,15 @@ export const createCounterIncrement = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<CounterIncrementProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<CounterIncrementProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<CounterIncrementProps<T>, Theme, Media>({
     cssProp: COUNTERINCREMENT,
     prop: COUNTERINCREMENT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createCounterIncrementRule = <

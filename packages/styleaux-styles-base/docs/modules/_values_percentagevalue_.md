@@ -21,7 +21,7 @@
 ### `<Const>` percentageValue
 
 **● percentageValue**: *`percentageValue`* =  createPercentageValue({
-  transformValue: px
+  transform: px
 })
 
 *Defined in [values/percentageValue.ts:22](https://github.com/JoshRosenstein/styleaux/blob/d996b95/packages/styleaux-styles-base/src/values/percentageValue.ts#L22)*

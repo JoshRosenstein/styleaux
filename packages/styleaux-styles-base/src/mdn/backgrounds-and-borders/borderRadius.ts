@@ -24,15 +24,15 @@ export const createBorderRadius = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BorderRadiusProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BorderRadiusProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BorderRadiusProps<T>, Theme, Media>({
     cssProp: BORDERRADIUS,
     prop: BORDERRADIUS,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderRadiusRule = <T = BorderRadiusProperty, P = unknown>(

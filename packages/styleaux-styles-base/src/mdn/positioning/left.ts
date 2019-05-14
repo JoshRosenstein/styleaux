@@ -21,15 +21,15 @@ export interface LeftProps<T = LeftProperty> {
 
 export const createLeft = <T = LeftProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<LeftProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<LeftProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<LeftProps<T>, Theme, Media>({
     cssProp: LEFT,
     prop: LEFT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createLeftRule = <T = LeftProperty, P = unknown>(

@@ -25,15 +25,15 @@ export const createMarginBottom = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MarginBottomProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MarginBottomProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MarginBottomProps<T>, Theme, Media>({
     cssProp: MARGINBOTTOM,
     prop: MARGINBOTTOM,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMarginBottomRule = <T = MarginBottomProperty, P = unknown>(

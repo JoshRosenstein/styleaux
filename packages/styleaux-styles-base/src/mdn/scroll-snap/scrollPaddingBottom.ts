@@ -25,18 +25,18 @@ export const createScrollPaddingBottom = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<ScrollPaddingBottomProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<ScrollPaddingBottomProps<T>, Theme, Media>({
     cssProp: SCROLLPADDINGBOTTOM,
     prop: SCROLLPADDINGBOTTOM,
     key,
-    transformValue,
+    transform,
   });
 
 export const createScrollPaddingBottomRule = <

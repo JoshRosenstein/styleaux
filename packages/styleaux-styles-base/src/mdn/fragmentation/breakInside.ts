@@ -47,15 +47,15 @@ export const createBreakInside = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BreakInsideProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BreakInsideProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BreakInsideProps<T>, Theme, Media>({
     cssProp: BREAKINSIDE,
     prop: BREAKINSIDE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBreakInsideRule = <T = BreakInsideProperty, P = unknown>(

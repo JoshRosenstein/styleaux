@@ -21,15 +21,15 @@ export interface ColorProps<T = ColorProperty> {
 
 export const createColor = <T = ColorProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ColorProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ColorProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ColorProps<T>, Theme, Media>({
     cssProp: COLOR,
     prop: COLOR,
     key,
-    transformValue,
+    transform,
   });
 
 export const createColorRule = <T = ColorProperty, P = unknown>(

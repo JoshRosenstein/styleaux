@@ -25,15 +25,15 @@ export const createBackdropFilter = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BackdropFilterProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BackdropFilterProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BackdropFilterProps<T>, Theme, Media>({
     cssProp: BACKDROPFILTER,
     prop: BACKDROPFILTER,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBackdropFilterRule = <

@@ -26,15 +26,15 @@ export const createOverflowWrap = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<OverflowWrapProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<OverflowWrapProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<OverflowWrapProps<T>, Theme, Media>({
     cssProp: OVERFLOWWRAP,
     prop: OVERFLOWWRAP,
     key,
-    transformValue,
+    transform,
   });
 
 export const createOverflowWrapRule = <T = OverflowWrapProperty, P = unknown>(

@@ -25,15 +25,15 @@ export const createPointerEvents = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<PointerEventsProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<PointerEventsProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<PointerEventsProps<T>, Theme, Media>({
     cssProp: POINTEREVENTS,
     prop: POINTEREVENTS,
     key,
-    transformValue,
+    transform,
   });
 
 export const createPointerEventsRule = <T = PointerEventsProperty, P = unknown>(

@@ -25,15 +25,15 @@ export const createAppearance = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<AppearanceProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<AppearanceProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<AppearanceProps<T>, Theme, Media>({
     cssProp: APPEARANCE,
     prop: APPEARANCE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createAppearanceRule = <T = AppearanceProperty, P = unknown>(

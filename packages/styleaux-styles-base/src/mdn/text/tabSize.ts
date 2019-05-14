@@ -25,15 +25,15 @@ export const createTabSize = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TabSizeProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TabSizeProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TabSizeProps<T>, Theme, Media>({
     cssProp: TABSIZE,
     prop: TABSIZE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTabSizeRule = <T = TabSizeProperty, P = unknown>(

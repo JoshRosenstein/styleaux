@@ -37,15 +37,15 @@ export const createPlaceSelf = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<PlaceSelfProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<PlaceSelfProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<PlaceSelfProps<T>, Theme, Media>({
     cssProp: PLACESELF,
     prop: PLACESELF,
     key,
-    transformValue,
+    transform,
   });
 
 export const createPlaceSelfRule = <T = PlaceSelfProperty, P = unknown>(

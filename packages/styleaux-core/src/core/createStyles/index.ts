@@ -3,7 +3,7 @@ import { DEFAULT_MEDIA_KEY } from '../../constants';
 import { createWarnOnce, ensureMQ } from '../../utils';
 import { Style, StyleResult, Nil } from '@styleaux/types';
 import { StaticOrStyleFunc, StyleInputFromProps } from './types';
-import { getDefaultMedia, getMedia, getThemeMedia } from '../../getters/index';
+import { getDefaultMediaKey, getMedia, getThemeMedia } from '../../getters';
 import { isArray, isFunction, isNil, isNumeric, isPlainObject } from 'typed-is';
 import {
   MediaKey,
@@ -81,7 +81,7 @@ export function createStyles<
 ): PropStyleArrayFunc<PX> {
   function getStyles(props: PX): Style[] {
     const media = getThemeMedia(props);
-    const defaultMediaKey = getDefaultMedia(props);
+    const defaultMediaKey = getDefaultMediaKey(props);
     const mediaKeys = Object.keys(media);
     let initial: Style[] = isNil(staticOrStyleFunc)
       ? []

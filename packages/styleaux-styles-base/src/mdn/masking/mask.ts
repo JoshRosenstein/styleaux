@@ -19,15 +19,15 @@ export interface MaskProps<T = MaskProperty> {
 
 export const createMask = <T = MaskProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MaskProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MaskProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MaskProps<T>, Theme, Media>({
     cssProp: MASK,
     prop: MASK,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMaskRule = <T = MaskProperty, P = unknown>(

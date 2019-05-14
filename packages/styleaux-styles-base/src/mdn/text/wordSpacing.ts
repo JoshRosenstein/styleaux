@@ -25,15 +25,15 @@ export const createWordSpacing = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<WordSpacingProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<WordSpacingProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<WordSpacingProps<T>, Theme, Media>({
     cssProp: WORDSPACING,
     prop: WORDSPACING,
     key,
-    transformValue,
+    transform,
   });
 
 export const createWordSpacingRule = <T = WordSpacingProperty, P = unknown>(

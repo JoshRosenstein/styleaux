@@ -25,15 +25,15 @@ export const createTextAlignLast = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TextAlignLastProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TextAlignLastProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TextAlignLastProps<T>, Theme, Media>({
     cssProp: TEXTALIGNLAST,
     prop: TEXTALIGNLAST,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTextAlignLastRule = <T = TextAlignLastProperty, P = unknown>(

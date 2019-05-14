@@ -21,15 +21,15 @@ export interface FloatProps<T = FloatProperty> {
 
 export const createFloat = <T = FloatProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<FloatProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<FloatProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<FloatProps<T>, Theme, Media>({
     cssProp: FLOAT,
     prop: FLOAT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFloatRule = <T = FloatProperty, P = unknown>(

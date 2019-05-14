@@ -26,15 +26,15 @@ export const createHyphens = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<HyphensProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<HyphensProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<HyphensProps<T>, Theme, Media>({
     cssProp: HYPHENS,
     prop: HYPHENS,
     key,
-    transformValue,
+    transform,
   });
 
 export const createHyphensRule = <T = HyphensProperty, P = unknown>(

@@ -25,18 +25,18 @@ export const createTextDecorationStyle = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<TextDecorationStyleProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<TextDecorationStyleProps<T>, Theme, Media>({
     cssProp: TEXTDECORATIONSTYLE,
     prop: TEXTDECORATIONSTYLE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTextDecorationStyleRule = <

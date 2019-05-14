@@ -25,15 +25,15 @@ export const createWordBreak = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<WordBreakProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<WordBreakProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<WordBreakProps<T>, Theme, Media>({
     cssProp: WORDBREAK,
     prop: WORDBREAK,
     key,
-    transformValue,
+    transform,
   });
 
 export const createWordBreakRule = <T = WordBreakProperty, P = unknown>(

@@ -10,7 +10,7 @@ import {
 export { position } from '@styleaux/styles-base';
 
 export const zIndex = createZIndex({ key: 'zIndices' });
-export const top = createTop({ transformValue: px });
-export const right = createRight({ transformValue: px });
-export const bottom = createBottom({ transformValue: px });
-export const left = createLeft({ transformValue: px });
+export const top = createTop({ transform: px });
+export const right = createRight({ transform: px });
+export const bottom = createBottom({ transform: px });
+export const left = createLeft({ transform: px });

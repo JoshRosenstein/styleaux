@@ -25,18 +25,18 @@ export const createBoxDecorationBreak = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<BoxDecorationBreakProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<BoxDecorationBreakProps<T>, Theme, Media>({
     cssProp: BOXDECORATIONBREAK,
     prop: BOXDECORATIONBREAK,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBoxDecorationBreakRule = <

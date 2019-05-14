@@ -25,15 +25,15 @@ export const createListStylePosition = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ListStylePositionProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ListStylePositionProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ListStylePositionProps<T>, Theme, Media>({
     cssProp: LISTSTYLEPOSITION,
     prop: LISTSTYLEPOSITION,
     key,
-    transformValue,
+    transform,
   });
 
 export const createListStylePositionRule = <

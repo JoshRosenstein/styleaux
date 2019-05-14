@@ -25,18 +25,18 @@ export const createTextEmphasisPosition = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<TextEmphasisPositionProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<TextEmphasisPositionProps<T>, Theme, Media>({
     cssProp: TEXTEMPHASISPOSITION,
     prop: TEXTEMPHASISPOSITION,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTextEmphasisPositionRule = <

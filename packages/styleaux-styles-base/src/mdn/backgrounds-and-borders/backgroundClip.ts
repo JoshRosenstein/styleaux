@@ -25,15 +25,15 @@ export const createBackgroundClip = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BackgroundClipProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BackgroundClipProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BackgroundClipProps<T>, Theme, Media>({
     cssProp: BACKGROUNDCLIP,
     prop: BACKGROUNDCLIP,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBackgroundClipRule = <

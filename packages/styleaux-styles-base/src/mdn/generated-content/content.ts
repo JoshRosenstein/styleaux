@@ -25,15 +25,15 @@ export const createContent = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ContentProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ContentProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ContentProps<T>, Theme, Media>({
     cssProp: CONTENT,
     prop: CONTENT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createContentRule = <T = ContentProperty, P = unknown>(

@@ -26,18 +26,18 @@ export const createTransitionDuration = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<TransitionDurationProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<TransitionDurationProps<T>, Theme, Media>({
     cssProp: TRANSITIONDURATION,
     prop: TRANSITIONDURATION,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTransitionDurationRule = <

@@ -22,15 +22,15 @@ export interface OrderProps<T = OrderProperty> {
 
 export const createOrder = <T = OrderProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<OrderProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<OrderProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<OrderProps<T>, Theme, Media>({
     cssProp: ORDER,
     prop: ORDER,
     key,
-    transformValue,
+    transform,
   });
 
 export const createOrderRule = <T = OrderProperty, P = unknown>(

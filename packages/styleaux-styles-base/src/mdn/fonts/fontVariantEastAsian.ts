@@ -25,18 +25,18 @@ export const createFontVariantEastAsian = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<FontVariantEastAsianProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<FontVariantEastAsianProps<T>, Theme, Media>({
     cssProp: FONTVARIANTEASTASIAN,
     prop: FONTVARIANTEASTASIAN,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFontVariantEastAsianRule = <

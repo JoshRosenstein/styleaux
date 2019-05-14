@@ -25,15 +25,15 @@ export const createUnicodeBidi = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<UnicodeBidiProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<UnicodeBidiProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<UnicodeBidiProps<T>, Theme, Media>({
     cssProp: UNICODEBIDI,
     prop: UNICODEBIDI,
     key,
-    transformValue,
+    transform,
   });
 
 export const createUnicodeBidiRule = <T = UnicodeBidiProperty, P = unknown>(

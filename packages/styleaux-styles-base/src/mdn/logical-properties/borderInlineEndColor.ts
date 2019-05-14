@@ -25,18 +25,18 @@ export const createBorderInlineEndColor = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<BorderInlineEndColorProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<BorderInlineEndColorProps<T>, Theme, Media>({
     cssProp: BORDERINLINEENDCOLOR,
     prop: BORDERINLINEENDCOLOR,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderInlineEndColorRule = <

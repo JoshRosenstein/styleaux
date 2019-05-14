@@ -40,15 +40,15 @@ export const createAlignItems = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<AlignItemsProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<AlignItemsProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<AlignItemsProps<T>, Theme, Media>({
     cssProp: ALIGNITEMS,
     prop: ALIGNITEMS,
     key,
-    transformValue,
+    transform,
   });
 
 export const createAlignItemsRule = <T = AlignItemsProperty, P = unknown>(

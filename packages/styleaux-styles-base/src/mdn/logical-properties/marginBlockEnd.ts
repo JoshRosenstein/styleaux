@@ -25,15 +25,15 @@ export const createMarginBlockEnd = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MarginBlockEndProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MarginBlockEndProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MarginBlockEndProps<T>, Theme, Media>({
     cssProp: MARGINBLOCKEND,
     prop: MARGINBLOCKEND,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMarginBlockEndRule = <

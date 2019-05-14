@@ -25,15 +25,15 @@ export const createScrollSnapAlign = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ScrollSnapAlignProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ScrollSnapAlignProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ScrollSnapAlignProps<T>, Theme, Media>({
     cssProp: SCROLLSNAPALIGN,
     prop: SCROLLSNAPALIGN,
     key,
-    transformValue,
+    transform,
   });
 
 export const createScrollSnapAlignRule = <

@@ -25,15 +25,15 @@ export const createTextIndent = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TextIndentProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TextIndentProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TextIndentProps<T>, Theme, Media>({
     cssProp: TEXTINDENT,
     prop: TEXTINDENT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTextIndentRule = <T = TextIndentProperty, P = unknown>(

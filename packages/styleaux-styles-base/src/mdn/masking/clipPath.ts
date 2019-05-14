@@ -26,15 +26,15 @@ export const createClipPath = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ClipPathProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ClipPathProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ClipPathProps<T>, Theme, Media>({
     cssProp: CLIPPATH,
     prop: CLIPPATH,
     key,
-    transformValue,
+    transform,
   });
 
 export const createClipPathRule = <T = ClipPathProperty, P = unknown>(

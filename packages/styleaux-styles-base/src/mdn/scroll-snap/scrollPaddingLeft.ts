@@ -25,15 +25,15 @@ export const createScrollPaddingLeft = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ScrollPaddingLeftProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ScrollPaddingLeftProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ScrollPaddingLeftProps<T>, Theme, Media>({
     cssProp: SCROLLPADDINGLEFT,
     prop: SCROLLPADDINGLEFT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createScrollPaddingLeftRule = <

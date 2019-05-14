@@ -25,15 +25,15 @@ export const createDisplay = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<DisplayProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<DisplayProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<DisplayProps<T>, Theme, Media>({
     cssProp: DISPLAY,
     prop: DISPLAY,
     key,
-    transformValue,
+    transform,
   });
 
 export const createDisplayRule = <T = DisplayProperty, P = unknown>(

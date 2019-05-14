@@ -25,15 +25,15 @@ export const createBlockSize = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BlockSizeProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BlockSizeProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BlockSizeProps<T>, Theme, Media>({
     cssProp: BLOCKSIZE,
     prop: BLOCKSIZE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBlockSizeRule = <T = BlockSizeProperty, P = unknown>(

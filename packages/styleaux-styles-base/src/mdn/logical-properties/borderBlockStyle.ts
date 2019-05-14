@@ -25,15 +25,15 @@ export const createBorderBlockStyle = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BorderBlockStyleProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BorderBlockStyleProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BorderBlockStyleProps<T>, Theme, Media>({
     cssProp: BORDERBLOCKSTYLE,
     prop: BORDERBLOCKSTYLE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderBlockStyleRule = <

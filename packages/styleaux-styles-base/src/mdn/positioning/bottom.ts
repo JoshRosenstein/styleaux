@@ -21,15 +21,15 @@ export interface BottomProps<T = BottomProperty> {
 
 export const createBottom = <T = BottomProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BottomProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BottomProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BottomProps<T>, Theme, Media>({
     cssProp: BOTTOM,
     prop: BOTTOM,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBottomRule = <T = BottomProperty, P = unknown>(

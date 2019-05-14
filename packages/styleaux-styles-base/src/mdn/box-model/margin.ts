@@ -19,15 +19,15 @@ export interface MarginProps<T = MarginProperty> {
 
 export const createMargin = <T = MarginProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MarginProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MarginProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MarginProps<T>, Theme, Media>({
     cssProp: MARGIN,
     prop: MARGIN,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMarginRule = <T = MarginProperty, P = unknown>(

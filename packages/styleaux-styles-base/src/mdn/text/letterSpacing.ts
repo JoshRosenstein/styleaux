@@ -25,15 +25,15 @@ export const createLetterSpacing = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<LetterSpacingProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<LetterSpacingProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<LetterSpacingProps<T>, Theme, Media>({
     cssProp: LETTERSPACING,
     prop: LETTERSPACING,
     key,
-    transformValue,
+    transform,
   });
 
 export const createLetterSpacingRule = <T = LetterSpacingProperty, P = unknown>(

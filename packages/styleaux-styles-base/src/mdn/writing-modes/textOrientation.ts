@@ -25,15 +25,15 @@ export const createTextOrientation = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TextOrientationProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TextOrientationProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TextOrientationProps<T>, Theme, Media>({
     cssProp: TEXTORIENTATION,
     prop: TEXTORIENTATION,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTextOrientationRule = <

@@ -25,15 +25,15 @@ export const createMaskOrigin = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MaskOriginProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MaskOriginProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MaskOriginProps<T>, Theme, Media>({
     cssProp: MASKORIGIN,
     prop: MASKORIGIN,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMaskOriginRule = <T = MaskOriginProperty, P = unknown>(

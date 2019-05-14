@@ -19,15 +19,15 @@ export {
 
 export const gridGap = createGap({
   key: 'space',
-  transformValue: px,
+  transform: px,
 });
 
 export const gridColumnGap = createColumnGap({
   key: 'space',
-  transformValue: px,
+  transform: px,
 });
 
 export const gridRowGap = createRowGap({
   key: 'space',
-  transformValue: px,
+  transform: px,
 });

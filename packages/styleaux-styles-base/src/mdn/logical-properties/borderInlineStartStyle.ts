@@ -27,18 +27,18 @@ export const createBorderInlineStartStyle = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<BorderInlineStartStyleProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<BorderInlineStartStyleProps<T>, Theme, Media>({
     cssProp: BORDERINLINESTARTSTYLE,
     prop: BORDERINLINESTARTSTYLE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderInlineStartStyleRule = <

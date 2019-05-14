@@ -1,4 +1,4 @@
-import { pathOr, identity, pipe } from '@roseys/futils';
+import { path, identity, pipe } from '@roseys/futils';
 import { isString, isNumber, isBoolean, isNil } from 'typed-is';
 
 export const toNeg = (v: string | number) => (isNumber(v) ? v * -1 : `-${v}`);
@@ -29,7 +29,7 @@ export const lookUpTransformNegative = (
           transformValue,
         )
       : transformValue,
-    pathOr(input, stripNeg(input), obj),
+    path<any, any, any>(stripNeg(input) as any, obj),
   ];
 };
 

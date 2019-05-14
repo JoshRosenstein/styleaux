@@ -20,15 +20,15 @@ export interface OffsetProps<T = OffsetProperty> {
 
 export const createOffset = <T = OffsetProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<OffsetProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<OffsetProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<OffsetProps<T>, Theme, Media>({
     cssProp: OFFSET,
     prop: OFFSET,
     key,
-    transformValue,
+    transform,
   });
 
 export const createOffsetRule = <T = OffsetProperty, P = unknown>(

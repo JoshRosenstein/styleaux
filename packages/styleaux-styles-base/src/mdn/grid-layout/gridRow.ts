@@ -23,15 +23,15 @@ export const createGridRow = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<GridRowProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<GridRowProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<GridRowProps<T>, Theme, Media>({
     cssProp: GRIDROW,
     prop: GRIDROW,
     key,
-    transformValue,
+    transform,
   });
 
 export const createGridRowRule = <T = GridRowProperty, P = unknown>(

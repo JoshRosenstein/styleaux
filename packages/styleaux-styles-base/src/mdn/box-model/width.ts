@@ -21,15 +21,15 @@ export interface WidthProps<T = WidthProperty> {
 
 export const createWidth = <T = WidthProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<WidthProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<WidthProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<WidthProps<T>, Theme, Media>({
     cssProp: WIDTH,
     prop: WIDTH,
     key,
-    transformValue,
+    transform,
   });
 
 export const createWidthRule = <T = WidthProperty, P = unknown>(

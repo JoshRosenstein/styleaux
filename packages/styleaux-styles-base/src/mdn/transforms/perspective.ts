@@ -26,15 +26,15 @@ export const createPerspective = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<PerspectiveProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<PerspectiveProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<PerspectiveProps<T>, Theme, Media>({
     cssProp: PERSPECTIVE,
     prop: PERSPECTIVE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createPerspectiveRule = <T = PerspectiveProperty, P = unknown>(

@@ -25,15 +25,15 @@ export const createOverflowX = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<OverflowXProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<OverflowXProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<OverflowXProps<T>, Theme, Media>({
     cssProp: OVERFLOWX,
     prop: OVERFLOWX,
     key,
-    transformValue,
+    transform,
   });
 
 export const createOverflowXRule = <T = OverflowXProperty, P = unknown>(

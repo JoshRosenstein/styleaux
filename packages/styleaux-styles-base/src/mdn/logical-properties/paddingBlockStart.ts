@@ -25,15 +25,15 @@ export const createPaddingBlockStart = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<PaddingBlockStartProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<PaddingBlockStartProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<PaddingBlockStartProps<T>, Theme, Media>({
     cssProp: PADDINGBLOCKSTART,
     prop: PADDINGBLOCKSTART,
     key,
-    transformValue,
+    transform,
   });
 
 export const createPaddingBlockStartRule = <

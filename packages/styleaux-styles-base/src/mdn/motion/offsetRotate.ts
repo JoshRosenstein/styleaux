@@ -26,15 +26,15 @@ export const createOffsetRotate = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<OffsetRotateProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<OffsetRotateProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<OffsetRotateProps<T>, Theme, Media>({
     cssProp: OFFSETROTATE,
     prop: OFFSETROTATE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createOffsetRotateRule = <T = OffsetRotateProperty, P = unknown>(

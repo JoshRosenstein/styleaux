@@ -40,15 +40,15 @@ export const createAlignContent = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<AlignContentProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<AlignContentProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<AlignContentProps<T>, Theme, Media>({
     cssProp: ALIGNCONTENT,
     prop: ALIGNCONTENT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createAlignContentRule = <T = AlignContentProperty, P = unknown>(

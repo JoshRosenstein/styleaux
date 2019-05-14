@@ -25,15 +25,15 @@ export const createMaskRepeat = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MaskRepeatProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MaskRepeatProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MaskRepeatProps<T>, Theme, Media>({
     cssProp: MASKREPEAT,
     prop: MASKREPEAT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMaskRepeatRule = <T = MaskRepeatProperty, P = unknown>(

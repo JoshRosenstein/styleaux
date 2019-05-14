@@ -25,15 +25,15 @@ export const createFontWeight = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<FontWeightProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<FontWeightProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<FontWeightProps<T>, Theme, Media>({
     cssProp: FONTWEIGHT,
     prop: FONTWEIGHT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFontWeightRule = <T = FontWeightProperty, P = unknown>(

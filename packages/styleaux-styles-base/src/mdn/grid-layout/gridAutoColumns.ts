@@ -26,15 +26,15 @@ export const createGridAutoColumns = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<GridAutoColumnsProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<GridAutoColumnsProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<GridAutoColumnsProps<T>, Theme, Media>({
     cssProp: GRIDAUTOCOLUMNS,
     prop: GRIDAUTOCOLUMNS,
     key,
-    transformValue,
+    transform,
   });
 
 export const createGridAutoColumnsRule = <

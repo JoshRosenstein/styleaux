@@ -25,15 +25,15 @@ export const createTranslate = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TranslateProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TranslateProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TranslateProps<T>, Theme, Media>({
     cssProp: TRANSLATE,
     prop: TRANSLATE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTranslateRule = <T = TranslateProperty, P = unknown>(

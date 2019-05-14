@@ -5,7 +5,7 @@
  * @param K the union of keys to remove from `T`
  * @returns `T` with the keys `K` removed
  */
-export type Omit<T extends object, K extends keyof T> = Pick<
+export type Omit<T extends object, K extends keyof T | string> = Pick<
   T,
   Exclude<keyof T, K>
 >;
@@ -21,6 +21,12 @@ export type Merge<FirstType extends object, SecondType> = Omit<
   SecondType;
 
 export type NeverToUndefined<T> = [T] extends [never] ? undefined : T;
+
+export type Args<T> = T extends () => any
+  ? never // will never have a first argument type
+  : T extends ((...args: infer U) => any)
+  ? U
+  : never;
 
 export type Arg1<T> = T extends () => any
   ? never // will never have a first argument type

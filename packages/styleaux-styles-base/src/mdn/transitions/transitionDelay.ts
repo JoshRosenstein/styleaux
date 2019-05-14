@@ -26,15 +26,15 @@ export const createTransitionDelay = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TransitionDelayProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TransitionDelayProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TransitionDelayProps<T>, Theme, Media>({
     cssProp: TRANSITIONDELAY,
     prop: TRANSITIONDELAY,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTransitionDelayRule = <

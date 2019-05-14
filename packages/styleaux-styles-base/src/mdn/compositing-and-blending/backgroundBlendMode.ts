@@ -25,18 +25,18 @@ export const createBackgroundBlendMode = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<BackgroundBlendModeProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<BackgroundBlendModeProps<T>, Theme, Media>({
     cssProp: BACKGROUNDBLENDMODE,
     prop: BACKGROUNDBLENDMODE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBackgroundBlendModeRule = <

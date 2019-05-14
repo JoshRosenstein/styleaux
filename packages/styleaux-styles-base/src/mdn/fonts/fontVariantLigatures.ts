@@ -26,18 +26,18 @@ export const createFontVariantLigatures = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<FontVariantLigaturesProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<FontVariantLigaturesProps<T>, Theme, Media>({
     cssProp: FONTVARIANTLIGATURES,
     prop: FONTVARIANTLIGATURES,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFontVariantLigaturesRule = <

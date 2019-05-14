@@ -25,15 +25,15 @@ export const createTextAlign = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TextAlignProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TextAlignProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TextAlignProps<T>, Theme, Media>({
     cssProp: TEXTALIGN,
     prop: TEXTALIGN,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTextAlignRule = <T = TextAlignProperty, P = unknown>(

@@ -25,15 +25,15 @@ export const createLineHeight = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<LineHeightProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<LineHeightProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<LineHeightProps<T>, Theme, Media>({
     cssProp: LINEHEIGHT,
     prop: LINEHEIGHT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createLineHeightRule = <T = LineHeightProperty, P = unknown>(

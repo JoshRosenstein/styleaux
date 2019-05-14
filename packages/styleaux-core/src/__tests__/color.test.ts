@@ -1,4 +1,4 @@
-import * as AUX from '../types';
+import * as AUX from '../utility-types';
 import * as UT from 'utility-types';
 import * as TU from 'typescript-test-utils';
 import { ResponsiveProp } from '../';
@@ -8,6 +8,7 @@ import {
   ColorProperty,
   createTextColor,
 } from '../__testutils__/fixtures/color';
+
 type DeepRequiredEquals<A, B> = TU.Equals<
   UT.DeepRequired<A>,
   UT.DeepRequired<B>

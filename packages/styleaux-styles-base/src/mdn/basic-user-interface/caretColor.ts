@@ -25,15 +25,15 @@ export const createCaretColor = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<CaretColorProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<CaretColorProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<CaretColorProps<T>, Theme, Media>({
     cssProp: CARETCOLOR,
     prop: CARETCOLOR,
     key,
-    transformValue,
+    transform,
   });
 
 export const createCaretColorRule = <T = CaretColorProperty, P = unknown>(

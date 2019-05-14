@@ -25,15 +25,15 @@ export const createTextShadow = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TextShadowProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TextShadowProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TextShadowProps<T>, Theme, Media>({
     cssProp: TEXTSHADOW,
     prop: TEXTSHADOW,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTextShadowRule = <T = TextShadowProperty, P = unknown>(

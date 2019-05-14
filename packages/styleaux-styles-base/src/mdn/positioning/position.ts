@@ -25,15 +25,15 @@ export const createPosition = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<PositionProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<PositionProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<PositionProps<T>, Theme, Media>({
     cssProp: POSITION,
     prop: POSITION,
     key,
-    transformValue,
+    transform,
   });
 
 export const createPositionRule = <T = PositionProperty, P = unknown>(
