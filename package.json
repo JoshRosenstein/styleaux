@@ -67,7 +67,7 @@
     "cleanup": "yarn run clean && rm -rf node_modules/ && npm install && npm run boot",
     "lint": "eslint . --ignore-path .eslintignore --cache",
     "test": "jest",
-    "ci:buildAndTest": " yarn build && yarn test",
+    "ci:buildAndTest": "yarn bootstrap && yarn build && yarn test",
     "commit": "git cz"
   },
   "workspaces": [
