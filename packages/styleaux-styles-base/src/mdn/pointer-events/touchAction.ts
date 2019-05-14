@@ -26,15 +26,15 @@ export const createTouchAction = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TouchActionProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TouchActionProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TouchActionProps<T>, Theme, Media>({
     cssProp: TOUCHACTION,
     prop: TOUCHACTION,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTouchActionRule = <T = TouchActionProperty, P = unknown>(

@@ -25,15 +25,15 @@ export const createImageRendering = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ImageRenderingProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ImageRenderingProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ImageRenderingProps<T>, Theme, Media>({
     cssProp: IMAGERENDERING,
     prop: IMAGERENDERING,
     key,
-    transformValue,
+    transform,
   });
 
 export const createImageRenderingRule = <

@@ -26,18 +26,18 @@ export const createBackfaceVisibility = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<BackfaceVisibilityProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<BackfaceVisibilityProps<T>, Theme, Media>({
     cssProp: BACKFACEVISIBILITY,
     prop: BACKFACEVISIBILITY,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBackfaceVisibilityRule = <

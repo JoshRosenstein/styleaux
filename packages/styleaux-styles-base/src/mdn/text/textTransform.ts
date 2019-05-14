@@ -25,15 +25,15 @@ export const createTextTransform = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TextTransformProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TextTransformProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TextTransformProps<T>, Theme, Media>({
     cssProp: TEXTTRANSFORM,
     prop: TEXTTRANSFORM,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTextTransformRule = <T = TextTransformProperty, P = unknown>(

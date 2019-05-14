@@ -26,15 +26,15 @@ export const createBoxShadow = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BoxShadowProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BoxShadowProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BoxShadowProps<T>, Theme, Media>({
     cssProp: BOXSHADOW,
     prop: BOXSHADOW,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBoxShadowRule = <T = BoxShadowProperty, P = unknown>(

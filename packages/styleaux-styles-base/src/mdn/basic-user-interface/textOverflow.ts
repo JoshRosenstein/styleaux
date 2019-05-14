@@ -25,15 +25,15 @@ export const createTextOverflow = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TextOverflowProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TextOverflowProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TextOverflowProps<T>, Theme, Media>({
     cssProp: TEXTOVERFLOW,
     prop: TEXTOVERFLOW,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTextOverflowRule = <T = TextOverflowProperty, P = unknown>(

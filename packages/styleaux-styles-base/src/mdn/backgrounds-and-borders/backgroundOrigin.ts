@@ -25,15 +25,15 @@ export const createBackgroundOrigin = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BackgroundOriginProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BackgroundOriginProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BackgroundOriginProps<T>, Theme, Media>({
     cssProp: BACKGROUNDORIGIN,
     prop: BACKGROUNDORIGIN,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBackgroundOriginRule = <

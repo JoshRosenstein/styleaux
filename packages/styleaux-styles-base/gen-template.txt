@@ -13,13 +13,13 @@ export const create__PROPERTY_NAME_PASCAL__ = <
   T = __TYPE_NAME__,
   Media = never,
   Theme= never,
->({key, transformValue}: Partial<Pick<StyleOptions<__INTERFACE_PROPERTY_NAME__Props<T>,Theme>,'key'| 'transformValue'>> =
+>({key, transform}: Partial<Pick<StyleOptions<__INTERFACE_PROPERTY_NAME__Props<T>,Theme>,'key'| 'transform'>> =
 {}) =>
   style<__INTERFACE_PROPERTY_NAME__Props<T>,Theme,Media>({
     cssProp:__PROPERTY_NAME_CAP__,
     prop:__PROPERTY_NAME_CAP__,
     key,
-    transformValue,
+    transform,
   })
 
 export const create__PROPERTY_NAME_PASCAL__Rule = <T = __TYPE_NAME__, P=unknown>(

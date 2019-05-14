@@ -25,15 +25,15 @@ export const createMinInlineSize = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MinInlineSizeProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MinInlineSizeProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MinInlineSizeProps<T>, Theme, Media>({
     cssProp: MININLINESIZE,
     prop: MININLINESIZE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMinInlineSizeRule = <T = MinInlineSizeProperty, P = unknown>(

@@ -25,15 +25,15 @@ export const createMaxHeight = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MaxHeightProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MaxHeightProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MaxHeightProps<T>, Theme, Media>({
     cssProp: MAXHEIGHT,
     prop: MAXHEIGHT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMaxHeightRule = <T = MaxHeightProperty, P = unknown>(

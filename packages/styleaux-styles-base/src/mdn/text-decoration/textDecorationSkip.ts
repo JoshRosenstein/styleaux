@@ -26,18 +26,18 @@ export const createTextDecorationSkip = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<TextDecorationSkipProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<TextDecorationSkipProps<T>, Theme, Media>({
     cssProp: TEXTDECORATIONSKIP,
     prop: TEXTDECORATIONSKIP,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTextDecorationSkipRule = <

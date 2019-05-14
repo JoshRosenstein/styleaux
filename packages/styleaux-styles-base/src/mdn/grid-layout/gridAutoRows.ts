@@ -26,15 +26,15 @@ export const createGridAutoRows = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<GridAutoRowsProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<GridAutoRowsProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<GridAutoRowsProps<T>, Theme, Media>({
     cssProp: GRIDAUTOROWS,
     prop: GRIDAUTOROWS,
     key,
-    transformValue,
+    transform,
   });
 
 export const createGridAutoRowsRule = <T = GridAutoRowsProperty, P = unknown>(

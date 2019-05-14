@@ -25,15 +25,15 @@ export const createObjectFit = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ObjectFitProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ObjectFitProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ObjectFitProps<T>, Theme, Media>({
     cssProp: OBJECTFIT,
     prop: OBJECTFIT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createObjectFitRule = <T = ObjectFitProperty, P = unknown>(

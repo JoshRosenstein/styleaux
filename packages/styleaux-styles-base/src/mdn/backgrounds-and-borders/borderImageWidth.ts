@@ -25,15 +25,15 @@ export const createBorderImageWidth = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BorderImageWidthProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BorderImageWidthProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BorderImageWidthProps<T>, Theme, Media>({
     cssProp: BORDERIMAGEWIDTH,
     prop: BORDERIMAGEWIDTH,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderImageWidthRule = <

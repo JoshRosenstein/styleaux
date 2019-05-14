@@ -25,18 +25,18 @@ export const createShapeImageThreshold = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<ShapeImageThresholdProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<ShapeImageThresholdProps<T>, Theme, Media>({
     cssProp: SHAPEIMAGETHRESHOLD,
     prop: SHAPEIMAGETHRESHOLD,
     key,
-    transformValue,
+    transform,
   });
 
 export const createShapeImageThresholdRule = <

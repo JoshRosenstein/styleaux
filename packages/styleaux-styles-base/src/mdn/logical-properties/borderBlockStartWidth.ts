@@ -25,18 +25,18 @@ export const createBorderBlockStartWidth = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<BorderBlockStartWidthProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<BorderBlockStartWidthProps<T>, Theme, Media>({
     cssProp: BORDERBLOCKSTARTWIDTH,
     prop: BORDERBLOCKSTARTWIDTH,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderBlockStartWidthRule = <

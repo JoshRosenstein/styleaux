@@ -25,15 +25,15 @@ export const createOutlineOffset = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<OutlineOffsetProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<OutlineOffsetProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<OutlineOffsetProps<T>, Theme, Media>({
     cssProp: OUTLINEOFFSET,
     prop: OUTLINEOFFSET,
     key,
-    transformValue,
+    transform,
   });
 
 export const createOutlineOffsetRule = <T = OutlineOffsetProperty, P = unknown>(

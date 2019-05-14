@@ -25,15 +25,15 @@ export const createInsetInline = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<InsetInlineProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<InsetInlineProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<InsetInlineProps<T>, Theme, Media>({
     cssProp: INSETINLINE,
     prop: INSETINLINE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createInsetInlineRule = <T = InsetInlineProperty, P = unknown>(

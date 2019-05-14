@@ -25,15 +25,15 @@ export const createInsetInlineStart = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<InsetInlineStartProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<InsetInlineStartProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<InsetInlineStartProps<T>, Theme, Media>({
     cssProp: INSETINLINESTART,
     prop: INSETINLINESTART,
     key,
-    transformValue,
+    transform,
   });
 
 export const createInsetInlineStartRule = <

@@ -25,15 +25,15 @@ export const createMaskPosition = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MaskPositionProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MaskPositionProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MaskPositionProps<T>, Theme, Media>({
     cssProp: MASKPOSITION,
     prop: MASKPOSITION,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMaskPositionRule = <T = MaskPositionProperty, P = unknown>(

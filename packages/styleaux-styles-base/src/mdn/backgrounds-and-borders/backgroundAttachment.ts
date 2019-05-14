@@ -25,18 +25,18 @@ export const createBackgroundAttachment = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<BackgroundAttachmentProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<BackgroundAttachmentProps<T>, Theme, Media>({
     cssProp: BACKGROUNDATTACHMENT,
     prop: BACKGROUNDATTACHMENT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBackgroundAttachmentRule = <

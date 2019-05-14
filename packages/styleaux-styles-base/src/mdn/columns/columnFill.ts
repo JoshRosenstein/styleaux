@@ -26,15 +26,15 @@ export const createColumnFill = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ColumnFillProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ColumnFillProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ColumnFillProps<T>, Theme, Media>({
     cssProp: COLUMNFILL,
     prop: COLUMNFILL,
     key,
-    transformValue,
+    transform,
   });
 
 export const createColumnFillRule = <T = ColumnFillProperty, P = unknown>(

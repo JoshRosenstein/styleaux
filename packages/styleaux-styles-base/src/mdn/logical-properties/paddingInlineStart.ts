@@ -26,18 +26,18 @@ export const createPaddingInlineStart = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<PaddingInlineStartProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<PaddingInlineStartProps<T>, Theme, Media>({
     cssProp: PADDINGINLINESTART,
     prop: PADDINGINLINESTART,
     key,
-    transformValue,
+    transform,
   });
 
 export const createPaddingInlineStartRule = <

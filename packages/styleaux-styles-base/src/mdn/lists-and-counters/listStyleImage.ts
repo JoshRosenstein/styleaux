@@ -25,15 +25,15 @@ export const createListStyleImage = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ListStyleImageProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ListStyleImageProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ListStyleImageProps<T>, Theme, Media>({
     cssProp: LISTSTYLEIMAGE,
     prop: LISTSTYLEIMAGE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createListStyleImageRule = <

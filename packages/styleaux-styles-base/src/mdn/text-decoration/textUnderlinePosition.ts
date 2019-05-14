@@ -25,18 +25,18 @@ export const createTextUnderlinePosition = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<TextUnderlinePositionProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<TextUnderlinePositionProps<T>, Theme, Media>({
     cssProp: TEXTUNDERLINEPOSITION,
     prop: TEXTUNDERLINEPOSITION,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTextUnderlinePositionRule = <

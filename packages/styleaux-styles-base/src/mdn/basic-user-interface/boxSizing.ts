@@ -26,15 +26,15 @@ export const createBoxSizing = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BoxSizingProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BoxSizingProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BoxSizingProps<T>, Theme, Media>({
     cssProp: BOXSIZING,
     prop: BOXSIZING,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBoxSizingRule = <T = BoxSizingProperty, P = unknown>(

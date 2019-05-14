@@ -25,15 +25,15 @@ export const createTableLayout = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TableLayoutProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TableLayoutProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TableLayoutProps<T>, Theme, Media>({
     cssProp: TABLELAYOUT,
     prop: TABLELAYOUT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTableLayoutRule = <T = TableLayoutProperty, P = unknown>(

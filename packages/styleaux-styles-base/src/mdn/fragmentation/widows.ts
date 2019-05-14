@@ -21,15 +21,15 @@ export interface WidowsProps<T = WidowsProperty> {
 
 export const createWidows = <T = WidowsProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<WidowsProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<WidowsProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<WidowsProps<T>, Theme, Media>({
     cssProp: WIDOWS,
     prop: WIDOWS,
     key,
-    transformValue,
+    transform,
   });
 
 export const createWidowsRule = <T = WidowsProperty, P = unknown>(

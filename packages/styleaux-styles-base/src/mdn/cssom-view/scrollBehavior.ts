@@ -25,15 +25,15 @@ export const createScrollBehavior = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ScrollBehaviorProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ScrollBehaviorProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ScrollBehaviorProps<T>, Theme, Media>({
     cssProp: SCROLLBEHAVIOR,
     prop: SCROLLBEHAVIOR,
     key,
-    transformValue,
+    transform,
   });
 
 export const createScrollBehaviorRule = <

@@ -25,15 +25,15 @@ export const createWritingMode = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<WritingModeProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<WritingModeProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<WritingModeProps<T>, Theme, Media>({
     cssProp: WRITINGMODE,
     prop: WRITINGMODE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createWritingModeRule = <T = WritingModeProperty, P = unknown>(

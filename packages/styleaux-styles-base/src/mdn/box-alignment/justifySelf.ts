@@ -39,15 +39,15 @@ export const createJustifySelf = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<JustifySelfProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<JustifySelfProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<JustifySelfProps<T>, Theme, Media>({
     cssProp: JUSTIFYSELF,
     prop: JUSTIFYSELF,
     key,
-    transformValue,
+    transform,
   });
 
 export const createJustifySelfRule = <T = JustifySelfProperty, P = unknown>(

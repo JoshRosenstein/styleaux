@@ -26,15 +26,15 @@ export const createColumnCount = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ColumnCountProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ColumnCountProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ColumnCountProps<T>, Theme, Media>({
     cssProp: COLUMNCOUNT,
     prop: COLUMNCOUNT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createColumnCountRule = <T = ColumnCountProperty, P = unknown>(

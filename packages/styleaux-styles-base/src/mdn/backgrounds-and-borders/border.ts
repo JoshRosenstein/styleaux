@@ -19,15 +19,15 @@ export interface BorderProps<T = BorderProperty> {
 
 export const createBorder = <T = BorderProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BorderProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BorderProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BorderProps<T>, Theme, Media>({
     cssProp: BORDER,
     prop: BORDER,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderRule = <T = BorderProperty, P = unknown>(

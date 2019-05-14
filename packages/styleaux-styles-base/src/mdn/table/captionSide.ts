@@ -25,15 +25,15 @@ export const createCaptionSide = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<CaptionSideProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<CaptionSideProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<CaptionSideProps<T>, Theme, Media>({
     cssProp: CAPTIONSIDE,
     prop: CAPTIONSIDE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createCaptionSideRule = <T = CaptionSideProperty, P = unknown>(

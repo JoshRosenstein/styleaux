@@ -25,15 +25,15 @@ export const createInlineSize = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<InlineSizeProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<InlineSizeProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<InlineSizeProps<T>, Theme, Media>({
     cssProp: INLINESIZE,
     prop: INLINESIZE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createInlineSizeRule = <T = InlineSizeProperty, P = unknown>(

@@ -27,18 +27,18 @@ export const createScrollPaddingInlineStart = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<ScrollPaddingInlineStartProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<ScrollPaddingInlineStartProps<T>, Theme, Media>({
     cssProp: SCROLLPADDINGINLINESTART,
     prop: SCROLLPADDINGINLINESTART,
     key,
-    transformValue,
+    transform,
   });
 
 export const createScrollPaddingInlineStartRule = <

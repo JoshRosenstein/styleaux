@@ -27,18 +27,18 @@ export const createBorderInlineStartWidth = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<BorderInlineStartWidthProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<BorderInlineStartWidthProps<T>, Theme, Media>({
     cssProp: BORDERINLINESTARTWIDTH,
     prop: BORDERINLINESTARTWIDTH,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderInlineStartWidthRule = <

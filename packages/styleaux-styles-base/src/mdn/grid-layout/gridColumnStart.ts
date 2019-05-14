@@ -25,15 +25,15 @@ export const createGridColumnStart = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<GridColumnStartProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<GridColumnStartProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<GridColumnStartProps<T>, Theme, Media>({
     cssProp: GRIDCOLUMNSTART,
     prop: GRIDCOLUMNSTART,
     key,
-    transformValue,
+    transform,
   });
 
 export const createGridColumnStartRule = <

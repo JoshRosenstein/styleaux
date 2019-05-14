@@ -25,15 +25,15 @@ export const createBorderImageRepeat = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BorderImageRepeatProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BorderImageRepeatProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BorderImageRepeatProps<T>, Theme, Media>({
     cssProp: BORDERIMAGEREPEAT,
     prop: BORDERIMAGEREPEAT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderImageRepeatRule = <

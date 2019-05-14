@@ -47,15 +47,15 @@ export const createBreakAfter = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BreakAfterProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BreakAfterProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BreakAfterProps<T>, Theme, Media>({
     cssProp: BREAKAFTER,
     prop: BREAKAFTER,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBreakAfterRule = <T = BreakAfterProperty, P = unknown>(

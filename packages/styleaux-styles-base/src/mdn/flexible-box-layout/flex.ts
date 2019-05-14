@@ -20,15 +20,15 @@ export interface FlexProps<T = FlexProperty> {
 
 export const createFlex = <T = FlexProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<FlexProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<FlexProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<FlexProps<T>, Theme, Media>({
     cssProp: FLEX,
     prop: FLEX,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFlexRule = <T = FlexProperty, P = unknown>(

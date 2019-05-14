@@ -25,15 +25,15 @@ export const createShapeOutside = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ShapeOutsideProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ShapeOutsideProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ShapeOutsideProps<T>, Theme, Media>({
     cssProp: SHAPEOUTSIDE,
     prop: SHAPEOUTSIDE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createShapeOutsideRule = <T = ShapeOutsideProperty, P = unknown>(

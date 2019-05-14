@@ -26,15 +26,15 @@ export const createFlexBasis = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<FlexBasisProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<FlexBasisProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<FlexBasisProps<T>, Theme, Media>({
     cssProp: FLEXBASIS,
     prop: FLEXBASIS,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFlexBasisRule = <T = FlexBasisProperty, P = unknown>(

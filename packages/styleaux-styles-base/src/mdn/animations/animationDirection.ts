@@ -26,18 +26,18 @@ export const createAnimationDirection = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<AnimationDirectionProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<AnimationDirectionProps<T>, Theme, Media>({
     cssProp: ANIMATIONDIRECTION,
     prop: ANIMATIONDIRECTION,
     key,
-    transformValue,
+    transform,
   });
 
 export const createAnimationDirectionRule = <

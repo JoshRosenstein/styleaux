@@ -25,15 +25,15 @@ export const createIsolation = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<IsolationProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<IsolationProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<IsolationProps<T>, Theme, Media>({
     cssProp: ISOLATION,
     prop: ISOLATION,
     key,
-    transformValue,
+    transform,
   });
 
 export const createIsolationRule = <T = IsolationProperty, P = unknown>(

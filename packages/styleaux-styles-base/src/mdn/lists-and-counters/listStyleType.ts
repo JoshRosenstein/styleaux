@@ -25,15 +25,15 @@ export const createListStyleType = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ListStyleTypeProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ListStyleTypeProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ListStyleTypeProps<T>, Theme, Media>({
     cssProp: LISTSTYLETYPE,
     prop: LISTSTYLETYPE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createListStyleTypeRule = <T = ListStyleTypeProperty, P = unknown>(

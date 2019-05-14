@@ -26,15 +26,15 @@ export const createOffsetPath = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<OffsetPathProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<OffsetPathProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<OffsetPathProps<T>, Theme, Media>({
     cssProp: OFFSETPATH,
     prop: OFFSETPATH,
     key,
-    transformValue,
+    transform,
   });
 
 export const createOffsetPathRule = <T = OffsetPathProperty, P = unknown>(

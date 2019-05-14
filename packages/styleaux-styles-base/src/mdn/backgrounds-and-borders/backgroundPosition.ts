@@ -25,18 +25,18 @@ export const createBackgroundPosition = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<BackgroundPositionProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<BackgroundPositionProps<T>, Theme, Media>({
     cssProp: BACKGROUNDPOSITION,
     prop: BACKGROUNDPOSITION,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBackgroundPositionRule = <

@@ -25,15 +25,15 @@ export const createTextRendering = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TextRenderingProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TextRenderingProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TextRenderingProps<T>, Theme, Media>({
     cssProp: TEXTRENDERING,
     prop: TEXTRENDERING,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTextRenderingRule = <T = TextRenderingProperty, P = unknown>(

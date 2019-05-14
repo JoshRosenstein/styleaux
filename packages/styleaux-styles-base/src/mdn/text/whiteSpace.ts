@@ -25,15 +25,15 @@ export const createWhiteSpace = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<WhiteSpaceProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<WhiteSpaceProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<WhiteSpaceProps<T>, Theme, Media>({
     cssProp: WHITESPACE,
     prop: WHITESPACE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createWhiteSpaceRule = <T = WhiteSpaceProperty, P = unknown>(

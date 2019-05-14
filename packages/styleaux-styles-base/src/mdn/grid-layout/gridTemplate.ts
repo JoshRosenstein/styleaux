@@ -23,15 +23,15 @@ export const createGridTemplate = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<GridTemplateProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<GridTemplateProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<GridTemplateProps<T>, Theme, Media>({
     cssProp: GRIDTEMPLATE,
     prop: GRIDTEMPLATE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createGridTemplateRule = <T = GridTemplateProperty, P = unknown>(

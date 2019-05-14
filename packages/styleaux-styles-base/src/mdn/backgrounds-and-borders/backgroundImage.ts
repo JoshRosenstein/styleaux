@@ -25,15 +25,15 @@ export const createBackgroundImage = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BackgroundImageProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BackgroundImageProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BackgroundImageProps<T>, Theme, Media>({
     cssProp: BACKGROUNDIMAGE,
     prop: BACKGROUNDIMAGE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBackgroundImageRule = <

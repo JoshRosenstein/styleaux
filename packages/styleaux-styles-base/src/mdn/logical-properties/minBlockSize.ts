@@ -25,15 +25,15 @@ export const createMinBlockSize = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MinBlockSizeProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MinBlockSizeProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MinBlockSizeProps<T>, Theme, Media>({
     cssProp: MINBLOCKSIZE,
     prop: MINBLOCKSIZE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMinBlockSizeRule = <T = MinBlockSizeProperty, P = unknown>(

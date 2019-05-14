@@ -25,15 +25,15 @@ export const createFontFamily = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<FontFamilyProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<FontFamilyProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<FontFamilyProps<T>, Theme, Media>({
     cssProp: FONTFAMILY,
     prop: FONTFAMILY,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFontFamilyRule = <T = FontFamilyProperty, P = unknown>(

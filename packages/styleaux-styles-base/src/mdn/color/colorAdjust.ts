@@ -25,15 +25,15 @@ export const createColorAdjust = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ColorAdjustProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ColorAdjustProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ColorAdjustProps<T>, Theme, Media>({
     cssProp: COLORADJUST,
     prop: COLORADJUST,
     key,
-    transformValue,
+    transform,
   });
 
 export const createColorAdjustRule = <T = ColorAdjustProperty, P = unknown>(

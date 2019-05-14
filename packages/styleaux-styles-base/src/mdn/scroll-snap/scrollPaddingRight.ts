@@ -25,18 +25,18 @@ export const createScrollPaddingRight = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<ScrollPaddingRightProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<ScrollPaddingRightProps<T>, Theme, Media>({
     cssProp: SCROLLPADDINGRIGHT,
     prop: SCROLLPADDINGRIGHT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createScrollPaddingRightRule = <

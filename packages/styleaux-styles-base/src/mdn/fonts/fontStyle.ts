@@ -25,15 +25,15 @@ export const createFontStyle = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<FontStyleProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<FontStyleProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<FontStyleProps<T>, Theme, Media>({
     cssProp: FONTSTYLE,
     prop: FONTSTYLE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFontStyleRule = <T = FontStyleProperty, P = unknown>(

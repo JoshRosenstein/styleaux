@@ -21,15 +21,15 @@ export interface HeightProps<T = HeightProperty> {
 
 export const createHeight = <T = HeightProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<HeightProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<HeightProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<HeightProps<T>, Theme, Media>({
     cssProp: HEIGHT,
     prop: HEIGHT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createHeightRule = <T = HeightProperty, P = unknown>(

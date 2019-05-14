@@ -19,15 +19,15 @@ export interface FontProps<T = FontProperty> {
 
 export const createFont = <T = FontProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<FontProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<FontProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<FontProps<T>, Theme, Media>({
     cssProp: FONT,
     prop: FONT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFontRule = <T = FontProperty, P = unknown>(

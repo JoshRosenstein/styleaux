@@ -25,15 +25,15 @@ export const createMinWidth = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MinWidthProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MinWidthProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MinWidthProps<T>, Theme, Media>({
     cssProp: MINWIDTH,
     prop: MINWIDTH,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMinWidthRule = <T = MinWidthProperty, P = unknown>(

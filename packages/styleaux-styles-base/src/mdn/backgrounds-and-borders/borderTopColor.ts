@@ -25,15 +25,15 @@ export const createBorderTopColor = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BorderTopColorProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BorderTopColorProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BorderTopColorProps<T>, Theme, Media>({
     cssProp: BORDERTOPCOLOR,
     prop: BORDERTOPCOLOR,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderTopColorRule = <

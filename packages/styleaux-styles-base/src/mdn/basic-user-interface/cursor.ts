@@ -21,15 +21,15 @@ export interface CursorProps<T = CursorProperty> {
 
 export const createCursor = <T = CursorProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<CursorProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<CursorProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<CursorProps<T>, Theme, Media>({
     cssProp: CURSOR,
     prop: CURSOR,
     key,
-    transformValue,
+    transform,
   });
 
 export const createCursorRule = <T = CursorProperty, P = unknown>(

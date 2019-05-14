@@ -25,18 +25,18 @@ export const createFontVariationSettings = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<FontVariationSettingsProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<FontVariationSettingsProps<T>, Theme, Media>({
     cssProp: FONTVARIATIONSETTINGS,
     prop: FONTVARIATIONSETTINGS,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFontVariationSettingsRule = <

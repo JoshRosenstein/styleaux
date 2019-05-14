@@ -26,15 +26,15 @@ export const createColumnWidth = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ColumnWidthProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ColumnWidthProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ColumnWidthProps<T>, Theme, Media>({
     cssProp: COLUMNWIDTH,
     prop: COLUMNWIDTH,
     key,
-    transformValue,
+    transform,
   });
 
 export const createColumnWidthRule = <T = ColumnWidthProperty, P = unknown>(

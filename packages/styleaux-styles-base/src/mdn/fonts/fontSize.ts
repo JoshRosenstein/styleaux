@@ -25,15 +25,15 @@ export const createFontSize = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<FontSizeProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<FontSizeProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<FontSizeProps<T>, Theme, Media>({
     cssProp: FONTSIZE,
     prop: FONTSIZE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFontSizeRule = <T = FontSizeProperty, P = unknown>(

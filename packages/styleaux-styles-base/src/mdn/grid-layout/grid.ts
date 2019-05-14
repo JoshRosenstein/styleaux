@@ -19,15 +19,15 @@ export interface GridProps<T = GridProperty> {
 
 export const createGrid = <T = GridProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<GridProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<GridProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<GridProps<T>, Theme, Media>({
     cssProp: GRID,
     prop: GRID,
     key,
-    transformValue,
+    transform,
   });
 
 export const createGridRule = <T = GridProperty, P = unknown>(

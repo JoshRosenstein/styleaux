@@ -49,15 +49,15 @@ export const createColumnGap = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ColumnGapProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ColumnGapProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ColumnGapProps<T>, Theme, Media>({
     cssProp: COLUMNGAP,
     prop: COLUMNGAP,
     key,
-    transformValue,
+    transform,
   });
 
 export const createColumnGapRule = <T = ColumnGapProperty, P = unknown>(

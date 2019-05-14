@@ -25,15 +25,15 @@ export const createGridAutoFlow = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<GridAutoFlowProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<GridAutoFlowProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<GridAutoFlowProps<T>, Theme, Media>({
     cssProp: GRIDAUTOFLOW,
     prop: GRIDAUTOFLOW,
     key,
-    transformValue,
+    transform,
   });
 
 export const createGridAutoFlowRule = <T = GridAutoFlowProperty, P = unknown>(

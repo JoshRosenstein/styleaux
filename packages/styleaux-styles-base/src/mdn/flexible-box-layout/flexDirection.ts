@@ -26,15 +26,15 @@ export const createFlexDirection = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<FlexDirectionProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<FlexDirectionProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<FlexDirectionProps<T>, Theme, Media>({
     cssProp: FLEXDIRECTION,
     prop: FLEXDIRECTION,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFlexDirectionRule = <T = FlexDirectionProperty, P = unknown>(

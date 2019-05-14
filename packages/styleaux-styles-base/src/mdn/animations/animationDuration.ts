@@ -26,15 +26,15 @@ export const createAnimationDuration = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<AnimationDurationProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<AnimationDurationProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<AnimationDurationProps<T>, Theme, Media>({
     cssProp: ANIMATIONDURATION,
     prop: ANIMATIONDURATION,
     key,
-    transformValue,
+    transform,
   });
 
 export const createAnimationDurationRule = <

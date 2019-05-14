@@ -21,15 +21,15 @@ export interface RotateProps<T = RotateProperty> {
 
 export const createRotate = <T = RotateProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<RotateProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<RotateProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<RotateProps<T>, Theme, Media>({
     cssProp: ROTATE,
     prop: ROTATE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createRotateRule = <T = RotateProperty, P = unknown>(

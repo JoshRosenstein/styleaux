@@ -23,15 +23,15 @@ export const createGridArea = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<GridAreaProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<GridAreaProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<GridAreaProps<T>, Theme, Media>({
     cssProp: GRIDAREA,
     prop: GRIDAREA,
     key,
-    transformValue,
+    transform,
   });
 
 export const createGridAreaRule = <T = GridAreaProperty, P = unknown>(

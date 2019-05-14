@@ -26,18 +26,18 @@ export const createFontFeatureSettings = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<FontFeatureSettingsProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<FontFeatureSettingsProps<T>, Theme, Media>({
     cssProp: FONTFEATURESETTINGS,
     prop: FONTFEATURESETTINGS,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFontFeatureSettingsRule = <

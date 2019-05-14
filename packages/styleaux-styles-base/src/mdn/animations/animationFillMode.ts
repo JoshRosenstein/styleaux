@@ -26,15 +26,15 @@ export const createAnimationFillMode = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<AnimationFillModeProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<AnimationFillModeProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<AnimationFillModeProps<T>, Theme, Media>({
     cssProp: ANIMATIONFILLMODE,
     prop: ANIMATIONFILLMODE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createAnimationFillModeRule = <

@@ -25,15 +25,15 @@ export const createPaddingTop = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<PaddingTopProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<PaddingTopProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<PaddingTopProps<T>, Theme, Media>({
     cssProp: PADDINGTOP,
     prop: PADDINGTOP,
     key,
-    transformValue,
+    transform,
   });
 
 export const createPaddingTopRule = <T = PaddingTopProperty, P = unknown>(

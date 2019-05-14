@@ -28,18 +28,18 @@ export const createBorderBottomRightRadius = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<BorderBottomRightRadiusProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<BorderBottomRightRadiusProps<T>, Theme, Media>({
     cssProp: BORDERBOTTOMRIGHTRADIUS,
     prop: BORDERBOTTOMRIGHTRADIUS,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderBottomRightRadiusRule = <

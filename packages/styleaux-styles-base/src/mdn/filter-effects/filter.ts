@@ -22,15 +22,15 @@ export interface FilterProps<T = FilterProperty> {
 
 export const createFilter = <T = FilterProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<FilterProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<FilterProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<FilterProps<T>, Theme, Media>({
     cssProp: FILTER,
     prop: FILTER,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFilterRule = <T = FilterProperty, P = unknown>(

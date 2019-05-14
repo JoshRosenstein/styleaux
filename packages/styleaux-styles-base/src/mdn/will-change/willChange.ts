@@ -25,15 +25,15 @@ export const createWillChange = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<WillChangeProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<WillChangeProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<WillChangeProps<T>, Theme, Media>({
     cssProp: WILLCHANGE,
     prop: WILLCHANGE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createWillChangeRule = <T = WillChangeProperty, P = unknown>(

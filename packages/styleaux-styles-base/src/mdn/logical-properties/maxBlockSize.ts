@@ -25,15 +25,15 @@ export const createMaxBlockSize = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MaxBlockSizeProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MaxBlockSizeProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MaxBlockSizeProps<T>, Theme, Media>({
     cssProp: MAXBLOCKSIZE,
     prop: MAXBLOCKSIZE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMaxBlockSizeRule = <T = MaxBlockSizeProperty, P = unknown>(

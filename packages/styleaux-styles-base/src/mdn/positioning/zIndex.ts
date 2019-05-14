@@ -21,15 +21,15 @@ export interface ZIndexProps<T = ZIndexProperty> {
 
 export const createZIndex = <T = ZIndexProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ZIndexProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ZIndexProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ZIndexProps<T>, Theme, Media>({
     cssProp: ZINDEX,
     prop: ZINDEX,
     key,
-    transformValue,
+    transform,
   });
 
 export const createZIndexRule = <T = ZIndexProperty, P = unknown>(

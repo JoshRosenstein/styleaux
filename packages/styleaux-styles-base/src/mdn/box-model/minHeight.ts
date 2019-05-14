@@ -25,15 +25,15 @@ export const createMinHeight = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MinHeightProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MinHeightProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MinHeightProps<T>, Theme, Media>({
     cssProp: MINHEIGHT,
     prop: MINHEIGHT,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMinHeightRule = <T = MinHeightProperty, P = unknown>(

@@ -25,15 +25,15 @@ export const createShapeMargin = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ShapeMarginProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ShapeMarginProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ShapeMarginProps<T>, Theme, Media>({
     cssProp: SHAPEMARGIN,
     prop: SHAPEMARGIN,
     key,
-    transformValue,
+    transform,
   });
 
 export const createShapeMarginRule = <T = ShapeMarginProperty, P = unknown>(

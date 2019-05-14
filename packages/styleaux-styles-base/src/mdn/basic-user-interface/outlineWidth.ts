@@ -25,15 +25,15 @@ export const createOutlineWidth = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<OutlineWidthProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<OutlineWidthProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<OutlineWidthProps<T>, Theme, Media>({
     cssProp: OUTLINEWIDTH,
     prop: OUTLINEWIDTH,
     key,
-    transformValue,
+    transform,
   });
 
 export const createOutlineWidthRule = <T = OutlineWidthProperty, P = unknown>(

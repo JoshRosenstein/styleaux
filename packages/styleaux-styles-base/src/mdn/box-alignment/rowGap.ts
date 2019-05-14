@@ -36,15 +36,15 @@ export interface RowGapProps<T = RowGapProperty> {
 
 export const createRowGap = <T = RowGapProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<RowGapProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<RowGapProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<RowGapProps<T>, Theme, Media>({
     cssProp: ROWGAP,
     prop: ROWGAP,
     key,
-    transformValue,
+    transform,
   });
 
 export const createRowGapRule = <T = RowGapProperty, P = unknown>(

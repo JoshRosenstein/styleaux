@@ -25,18 +25,18 @@ export const createBorderBlockStartColor = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<BorderBlockStartColorProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<BorderBlockStartColorProps<T>, Theme, Media>({
     cssProp: BORDERBLOCKSTARTCOLOR,
     prop: BORDERBLOCKSTARTCOLOR,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderBlockStartColorRule = <

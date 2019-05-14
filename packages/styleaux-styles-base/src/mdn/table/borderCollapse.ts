@@ -25,15 +25,15 @@ export const createBorderCollapse = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BorderCollapseProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BorderCollapseProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BorderCollapseProps<T>, Theme, Media>({
     cssProp: BORDERCOLLAPSE,
     prop: BORDERCOLLAPSE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBorderCollapseRule = <

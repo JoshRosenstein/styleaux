@@ -21,15 +21,15 @@ export interface ResizeProps<T = ResizeProperty> {
 
 export const createResize = <T = ResizeProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ResizeProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ResizeProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ResizeProps<T>, Theme, Media>({
     cssProp: RESIZE,
     prop: RESIZE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createResizeRule = <T = ResizeProperty, P = unknown>(

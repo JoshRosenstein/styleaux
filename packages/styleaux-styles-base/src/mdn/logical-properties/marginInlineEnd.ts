@@ -26,15 +26,15 @@ export const createMarginInlineEnd = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MarginInlineEndProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MarginInlineEndProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MarginInlineEndProps<T>, Theme, Media>({
     cssProp: MARGININLINEEND,
     prop: MARGININLINEEND,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMarginInlineEndRule = <

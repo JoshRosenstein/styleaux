@@ -25,15 +25,15 @@ export const createPaddingBlockEnd = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<PaddingBlockEndProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<PaddingBlockEndProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<PaddingBlockEndProps<T>, Theme, Media>({
     cssProp: PADDINGBLOCKEND,
     prop: PADDINGBLOCKEND,
     key,
-    transformValue,
+    transform,
   });
 
 export const createPaddingBlockEndRule = <

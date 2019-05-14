@@ -25,15 +25,15 @@ export const createMaskImage = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MaskImageProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MaskImageProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MaskImageProps<T>, Theme, Media>({
     cssProp: MASKIMAGE,
     prop: MASKIMAGE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMaskImageRule = <T = MaskImageProperty, P = unknown>(

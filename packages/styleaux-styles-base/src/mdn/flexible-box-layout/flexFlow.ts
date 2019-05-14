@@ -24,15 +24,15 @@ export const createFlexFlow = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<FlexFlowProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<FlexFlowProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<FlexFlowProps<T>, Theme, Media>({
     cssProp: FLEXFLOW,
     prop: FLEXFLOW,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFlexFlowRule = <T = FlexFlowProperty, P = unknown>(

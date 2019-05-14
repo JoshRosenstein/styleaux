@@ -25,15 +25,15 @@ export const createBackgroundColor = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BackgroundColorProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BackgroundColorProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BackgroundColorProps<T>, Theme, Media>({
     cssProp: BACKGROUNDCOLOR,
     prop: BACKGROUNDCOLOR,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBackgroundColorRule = <

@@ -25,15 +25,15 @@ export const createMaskType = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MaskTypeProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MaskTypeProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MaskTypeProps<T>, Theme, Media>({
     cssProp: MASKTYPE,
     prop: MASKTYPE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMaskTypeRule = <T = MaskTypeProperty, P = unknown>(

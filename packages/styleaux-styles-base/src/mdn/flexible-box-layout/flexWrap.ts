@@ -26,15 +26,15 @@ export const createFlexWrap = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<FlexWrapProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<FlexWrapProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<FlexWrapProps<T>, Theme, Media>({
     cssProp: FLEXWRAP,
     prop: FLEXWRAP,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFlexWrapRule = <T = FlexWrapProperty, P = unknown>(

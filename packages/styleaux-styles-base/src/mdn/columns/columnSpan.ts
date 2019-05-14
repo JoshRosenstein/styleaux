@@ -25,15 +25,15 @@ export const createColumnSpan = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ColumnSpanProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ColumnSpanProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ColumnSpanProps<T>, Theme, Media>({
     cssProp: COLUMNSPAN,
     prop: COLUMNSPAN,
     key,
-    transformValue,
+    transform,
   });
 
 export const createColumnSpanRule = <T = ColumnSpanProperty, P = unknown>(

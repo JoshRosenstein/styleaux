@@ -25,15 +25,15 @@ export const createMaskClip = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MaskClipProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MaskClipProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MaskClipProps<T>, Theme, Media>({
     cssProp: MASKCLIP,
     prop: MASKCLIP,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMaskClipRule = <T = MaskClipProperty, P = unknown>(

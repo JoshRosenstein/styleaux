@@ -25,15 +25,15 @@ export const createFontVariantCaps = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<FontVariantCapsProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<FontVariantCapsProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<FontVariantCapsProps<T>, Theme, Media>({
     cssProp: FONTVARIANTCAPS,
     prop: FONTVARIANTCAPS,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFontVariantCapsRule = <

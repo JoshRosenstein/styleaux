@@ -26,15 +26,15 @@ export const createBackgroundSize = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<BackgroundSizeProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<BackgroundSizeProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<BackgroundSizeProps<T>, Theme, Media>({
     cssProp: BACKGROUNDSIZE,
     prop: BACKGROUNDSIZE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createBackgroundSizeRule = <

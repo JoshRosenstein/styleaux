@@ -25,15 +25,15 @@ export const createTransformBox = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TransformBoxProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TransformBoxProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TransformBoxProps<T>, Theme, Media>({
     cssProp: TRANSFORMBOX,
     prop: TRANSFORMBOX,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTransformBoxRule = <T = TransformBoxProperty, P = unknown>(

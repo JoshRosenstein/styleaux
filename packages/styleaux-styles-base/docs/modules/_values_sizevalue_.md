@@ -21,7 +21,7 @@
 
 ### `<Const>` siveValuepx
 
-**● siveValuepx**: *`(Anonymous function)`* =  createSizeValue({ transformValue: px })
+**● siveValuepx**: *`(Anonymous function)`* =  createSizeValue({ transform: px })
 
 *Defined in [values/sizeValue.ts:40](https://github.com/JoshRosenstein/styleaux/blob/d996b95/packages/styleaux-styles-base/src/values/sizeValue.ts#L40)*
 

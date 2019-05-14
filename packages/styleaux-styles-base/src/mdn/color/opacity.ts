@@ -25,15 +25,15 @@ export const createOpacity = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<OpacityProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<OpacityProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<OpacityProps<T>, Theme, Media>({
     cssProp: OPACITY,
     prop: OPACITY,
     key,
-    transformValue,
+    transform,
   });
 
 export const createOpacityRule = <T = OpacityProperty, P = unknown>(

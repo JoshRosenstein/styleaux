@@ -25,15 +25,15 @@ export const createCounterReset = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<CounterResetProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<CounterResetProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<CounterResetProps<T>, Theme, Media>({
     cssProp: COUNTERRESET,
     prop: COUNTERRESET,
     key,
-    transformValue,
+    transform,
   });
 
 export const createCounterResetRule = <T = CounterResetProperty, P = unknown>(

@@ -26,15 +26,15 @@ export const createPerspectiveOrigin = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<PerspectiveOriginProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<PerspectiveOriginProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<PerspectiveOriginProps<T>, Theme, Media>({
     cssProp: PERSPECTIVEORIGIN,
     prop: PERSPECTIVEORIGIN,
     key,
-    transformValue,
+    transform,
   });
 
 export const createPerspectiveOriginRule = <

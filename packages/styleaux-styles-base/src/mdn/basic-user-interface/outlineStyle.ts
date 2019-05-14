@@ -25,15 +25,15 @@ export const createOutlineStyle = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<OutlineStyleProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<OutlineStyleProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<OutlineStyleProps<T>, Theme, Media>({
     cssProp: OUTLINESTYLE,
     prop: OUTLINESTYLE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createOutlineStyleRule = <T = OutlineStyleProperty, P = unknown>(

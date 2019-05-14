@@ -26,15 +26,15 @@ export const createOffsetDistance = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<OffsetDistanceProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<OffsetDistanceProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<OffsetDistanceProps<T>, Theme, Media>({
     cssProp: OFFSETDISTANCE,
     prop: OFFSETDISTANCE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createOffsetDistanceRule = <

@@ -25,15 +25,15 @@ export const createContain = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ContainProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ContainProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ContainProps<T>, Theme, Media>({
     cssProp: CONTAIN,
     prop: CONTAIN,
     key,
-    transformValue,
+    transform,
   });
 
 export const createContainRule = <T = ContainProperty, P = unknown>(

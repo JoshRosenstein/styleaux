@@ -25,15 +25,15 @@ export const createFontStretch = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<FontStretchProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<FontStretchProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<FontStretchProps<T>, Theme, Media>({
     cssProp: FONTSTRETCH,
     prop: FONTSTRETCH,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFontStretchRule = <T = FontStretchProperty, P = unknown>(

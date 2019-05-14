@@ -25,18 +25,18 @@ export const createTextDecorationLine = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<TextDecorationLineProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<TextDecorationLineProps<T>, Theme, Media>({
     cssProp: TEXTDECORATIONLINE,
     prop: TEXTDECORATIONLINE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTextDecorationLineRule = <

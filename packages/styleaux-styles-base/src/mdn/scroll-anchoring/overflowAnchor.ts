@@ -23,15 +23,15 @@ export const createOverflowAnchor = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<OverflowAnchorProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<OverflowAnchorProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<OverflowAnchorProps<T>, Theme, Media>({
     cssProp: OVERFLOWANCHOR,
     prop: OVERFLOWANCHOR,
     key,
-    transformValue,
+    transform,
   });
 
 export const createOverflowAnchorRule = <

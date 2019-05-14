@@ -26,15 +26,15 @@ export const createPaddingInlineEnd = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<PaddingInlineEndProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<PaddingInlineEndProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<PaddingInlineEndProps<T>, Theme, Media>({
     cssProp: PADDINGINLINEEND,
     prop: PADDINGINLINEEND,
     key,
-    transformValue,
+    transform,
   });
 
 export const createPaddingInlineEndRule = <

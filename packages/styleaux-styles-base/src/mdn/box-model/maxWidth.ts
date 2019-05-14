@@ -25,15 +25,15 @@ export const createMaxWidth = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MaxWidthProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MaxWidthProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MaxWidthProps<T>, Theme, Media>({
     cssProp: MAXWIDTH,
     prop: MAXWIDTH,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMaxWidthRule = <T = MaxWidthProperty, P = unknown>(

@@ -27,18 +27,18 @@ export const createScrollMarginInlineStart = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<ScrollMarginInlineStartProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<ScrollMarginInlineStartProps<T>, Theme, Media>({
     cssProp: SCROLLMARGININLINESTART,
     prop: SCROLLMARGININLINESTART,
     key,
-    transformValue,
+    transform,
   });
 
 export const createScrollMarginInlineStartRule = <

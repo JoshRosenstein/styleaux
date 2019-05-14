@@ -24,15 +24,15 @@ export const createTransition = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<TransitionProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<TransitionProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<TransitionProps<T>, Theme, Media>({
     cssProp: TRANSITION,
     prop: TRANSITION,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTransitionRule = <T = TransitionProperty, P = unknown>(

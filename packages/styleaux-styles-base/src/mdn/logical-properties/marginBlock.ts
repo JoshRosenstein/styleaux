@@ -25,15 +25,15 @@ export const createMarginBlock = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<MarginBlockProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<MarginBlockProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<MarginBlockProps<T>, Theme, Media>({
     cssProp: MARGINBLOCK,
     prop: MARGINBLOCK,
     key,
-    transformValue,
+    transform,
   });
 
 export const createMarginBlockRule = <T = MarginBlockProperty, P = unknown>(

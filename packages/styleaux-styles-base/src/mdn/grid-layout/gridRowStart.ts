@@ -25,15 +25,15 @@ export const createGridRowStart = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<GridRowStartProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<GridRowStartProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<GridRowStartProps<T>, Theme, Media>({
     cssProp: GRIDROWSTART,
     prop: GRIDROWSTART,
     key,
-    transformValue,
+    transform,
   });
 
 export const createGridRowStartRule = <T = GridRowStartProperty, P = unknown>(

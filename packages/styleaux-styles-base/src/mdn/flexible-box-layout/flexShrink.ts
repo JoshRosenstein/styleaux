@@ -26,15 +26,15 @@ export const createFlexShrink = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<FlexShrinkProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<FlexShrinkProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<FlexShrinkProps<T>, Theme, Media>({
     cssProp: FLEXSHRINK,
     prop: FLEXSHRINK,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFlexShrinkRule = <T = FlexShrinkProperty, P = unknown>(

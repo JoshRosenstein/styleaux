@@ -26,15 +26,15 @@ export const createFlexGrow = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<FlexGrowProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<FlexGrowProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<FlexGrowProps<T>, Theme, Media>({
     cssProp: FLEXGROW,
     prop: FLEXGROW,
     key,
-    transformValue,
+    transform,
   });
 
 export const createFlexGrowRule = <T = FlexGrowProperty, P = unknown>(

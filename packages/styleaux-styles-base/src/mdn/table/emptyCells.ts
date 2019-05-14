@@ -25,15 +25,15 @@ export const createEmptyCells = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<EmptyCellsProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<EmptyCellsProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<EmptyCellsProps<T>, Theme, Media>({
     cssProp: EMPTYCELLS,
     prop: EMPTYCELLS,
     key,
-    transformValue,
+    transform,
   });
 
 export const createEmptyCellsRule = <T = EmptyCellsProperty, P = unknown>(

@@ -26,18 +26,18 @@ export const createAnimationPlayState = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
   Pick<
     StyleOptions<AnimationPlayStateProps<T>, Theme>,
-    'key' | 'transformValue'
+    'key' | 'transform'
   >
 > = {}) =>
   style<AnimationPlayStateProps<T>, Theme, Media>({
     cssProp: ANIMATIONPLAYSTATE,
     prop: ANIMATIONPLAYSTATE,
     key,
-    transformValue,
+    transform,
   });
 
 export const createAnimationPlayStateRule = <
