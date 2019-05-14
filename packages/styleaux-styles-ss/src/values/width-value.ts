@@ -9,8 +9,8 @@ export const getWidth = (n: string | number) =>
 
 export const createwidthValue = ({
   themeKey = WIDTH_KEY,
-  transformValue = getWidth,
-}: { themeKey?: string; transformValue?: AnyFunc } = {}) =>
-  themeValue({ themeKey, transformValue });
+  transform = getWidth,
+}: { themeKey?: string; transform?: AnyFunc } = {}) =>
+  themeValue({ themeKey, transform });
 
 export const widthValue = createwidthValue();

@@ -2,11 +2,11 @@ import { getThemeValue } from '@styleaux/core';
 
 export function themeValue<T>({
   themeKey,
-  transformValue,
-  themeGetter = getThemeValue(themeKey, transformValue),
+  transform,
+  themeGetter = getThemeValue(themeKey, transform),
 }: {
   themeKey: string;
-  transformValue?: any;
+  transform?: any;
   themeGetter?: any;
 }) {
   return (input: T, props?: {}, mediaKey?: string) =>

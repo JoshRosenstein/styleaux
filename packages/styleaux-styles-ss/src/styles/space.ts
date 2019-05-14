@@ -5,7 +5,7 @@ import { style, combineStyles, WithTheme, StyleOptions } from '@styleaux/core';
 export const defaultSpaceScale = [0, 4, 8, 16, 32, 64, 128, 256, 512];
 
 type PartialStyleOptions<P, T> = Partial<
-  Pick<StyleOptions<P, T>, 'key' | 'transformValue' | 'scale'>
+  Pick<StyleOptions<P, T>, 'key' | 'transform' | 'scale'>
 >;
 
 export interface MarginProps<T = MarginProperty> {
@@ -15,14 +15,14 @@ export interface MarginProps<T = MarginProperty> {
 
 export const createMargin = <T = MarginProperty, Media = never, Theme = never>({
   key = 'space',
-  transformValue = px,
+  transform = px,
   scale = defaultSpaceScale,
 }: PartialStyleOptions<MarginProps<T>, Theme> = {}) =>
   style<MarginProps<T>, Theme, Media>({
     cssProp: ['marginTop', 'marginLeft', 'marginRight', 'marginBottom'],
     prop: ['margin', 'm'],
     key,
-    transformValue,
+    transform,
     scale,
   });
 
@@ -39,14 +39,14 @@ export const createMarginTop = <
   Theme = never
 >({
   key = 'space',
-  transformValue = px,
+  transform = px,
   scale = defaultSpaceScale,
 }: PartialStyleOptions<MarginTopProps<T>, Theme> = {}) =>
   style<MarginTopProps<T>, Theme, Media>({
     cssProp: 'marginTop',
     prop: ['marginTop', 'mt'],
     key,
-    transformValue,
+    transform,
     scale,
   });
 
@@ -62,14 +62,14 @@ export const createMarginBottom = <
   Theme = any
 >({
   key = 'space',
-  transformValue = px,
+  transform = px,
   scale = defaultSpaceScale,
 }: PartialStyleOptions<MarginBottomProps<T>, Theme> = {}) =>
   style<MarginBottomProps<T>, Theme, Media>({
     cssProp: 'marginBottom',
     prop: ['marginBottom', 'mb'],
     key,
-    transformValue,
+    transform,
     scale,
   });
 
@@ -86,14 +86,14 @@ export const createMarginLeft = <
   Theme = any
 >({
   key = 'space',
-  transformValue = px,
+  transform = px,
   scale = defaultSpaceScale,
 }: PartialStyleOptions<MarginLeftProps<T>, Theme> = {}) =>
   style<MarginLeftProps<T>, Theme, Media>({
     cssProp: 'marginLeft',
     prop: ['marginLeft', 'ml'],
     key,
-    transformValue,
+    transform,
     scale,
   });
 
@@ -110,14 +110,14 @@ export const createMarginRight = <
   Theme = any
 >({
   key = 'space',
-  transformValue = px,
+  transform = px,
   scale = defaultSpaceScale,
 }: PartialStyleOptions<MarginRightProps<T>, Theme> = {}) =>
   style<MarginRightProps<T>, Theme, Media>({
     cssProp: 'marginRight',
     prop: ['marginRight', 'mr'],
     key,
-    transformValue,
+    transform,
     scale,
   });
 
@@ -129,14 +129,14 @@ export interface MarginYProps<T = MarginProperty> {
 
 export const createMarginY = <T = MarginProperty, Media = never, Theme = any>({
   key = 'space',
-  transformValue = px,
+  transform = px,
   scale = defaultSpaceScale,
 }: PartialStyleOptions<MarginYProps<T>, Theme> = {}) =>
   style<MarginYProps<T>, Theme, Media>({
     cssProp: ['marginTop', 'marginBottom'],
     prop: 'my',
     key,
-    transformValue,
+    transform,
     scale,
   });
 
@@ -148,14 +148,14 @@ export interface MarginXProps<T = MarginProperty> {
 
 export const createMarginX = <T = MarginProperty, Media = never, Theme = any>({
   key = 'space',
-  transformValue = px,
+  transform = px,
   scale = defaultSpaceScale,
 }: PartialStyleOptions<MarginXProps<T>, Theme> = {}) =>
   style<MarginXProps<T>, Theme, Media>({
     cssProp: ['marginLeft', 'marginRight'],
     prop: 'mx',
     key,
-    transformValue,
+    transform,
     scale,
   });
 
@@ -172,14 +172,14 @@ export const createPadding = <
   Theme = never
 >({
   key = 'space',
-  transformValue = px,
+  transform = px,
   scale = defaultSpaceScale,
 }: PartialStyleOptions<PaddingProps<T>, Theme> = {}) =>
   style<PaddingProps<T>, Theme, Media>({
     cssProp: ['paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'],
     prop: ['padding', 'p'],
     key,
-    transformValue,
+    transform,
     scale,
   });
 
@@ -196,14 +196,14 @@ export const createPaddingTop = <
   Theme = never
 >({
   key = 'space',
-  transformValue = px,
+  transform = px,
   scale = defaultSpaceScale,
 }: PartialStyleOptions<PaddingTopProps<T>, Theme> = {}) =>
   style<PaddingTopProps<T>, Theme, Media>({
     cssProp: 'paddingTop',
     prop: ['paddingTop', 'pt'],
     key,
-    transformValue,
+    transform,
     scale,
   });
 
@@ -219,14 +219,14 @@ export const createPaddingBottom = <
   Theme = any
 >({
   key = 'space',
-  transformValue = px,
+  transform = px,
   scale = defaultSpaceScale,
 }: PartialStyleOptions<PaddingBottomProps<T>, Theme> = {}) =>
   style<PaddingBottomProps<T>, Theme, Media>({
     cssProp: 'paddingBottom',
     prop: ['paddingBottom', 'pb'],
     key,
-    transformValue,
+    transform,
     scale,
   });
 
@@ -243,14 +243,14 @@ export const createPaddingLeft = <
   Theme = any
 >({
   key = 'space',
-  transformValue = px,
+  transform = px,
   scale = defaultSpaceScale,
 }: PartialStyleOptions<PaddingLeftProps<T>, Theme> = {}) =>
   style<PaddingLeftProps<T>, Theme, Media>({
     cssProp: 'paddingLeft',
     prop: ['paddingLeft', 'pl'],
     key,
-    transformValue,
+    transform,
     scale,
   });
 
@@ -267,14 +267,14 @@ export const createPaddingRight = <
   Theme = any
 >({
   key = 'space',
-  transformValue = px,
+  transform = px,
   scale = defaultSpaceScale,
 }: PartialStyleOptions<PaddingRightProps<T>, Theme> = {}) =>
   style<PaddingRightProps<T>, Theme, Media>({
     cssProp: 'paddingRight',
     prop: ['paddingRight', 'pr'],
     key,
-    transformValue,
+    transform,
     scale,
   });
 
@@ -290,14 +290,14 @@ export const createPaddingY = <
   Theme = any
 >({
   key = 'space',
-  transformValue = px,
+  transform = px,
   scale = defaultSpaceScale,
 }: PartialStyleOptions<PaddingYProps<T>, Theme> = {}) =>
   style<PaddingYProps<T>, Theme, Media>({
     cssProp: ['paddingTop', 'paddingBottom'],
     prop: 'py',
     key,
-    transformValue,
+    transform,
     scale,
   });
 
@@ -313,14 +313,14 @@ export const createPaddingX = <
   Theme = any
 >({
   key = 'space',
-  transformValue = px,
+  transform = px,
   scale = defaultSpaceScale,
 }: PartialStyleOptions<PaddingXProps<T>, Theme> = {}) =>
   style<PaddingXProps<T>, Theme, Media>({
     cssProp: ['paddingLeft', 'paddingRight'],
     prop: 'px',
     key,
-    transformValue,
+    transform,
     scale,
   });
 export const paddingX = createPaddingX();
