@@ -40,8 +40,8 @@ ___
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
+| Name              | Type     |
+| ----------------- | -------- |
 | __namedParameters | `object` |
 
 **Returns:** `percentageValue`

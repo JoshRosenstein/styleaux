@@ -59,7 +59,7 @@
     "commit:tools": "git add packages\\styleaux-tools && yarn commit",
     "commit:all": "git add . && yarn commit",
     "add": "lerna add",
-    "boot": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap",
     "clean": "lerna clean",
     "ls": "yarn run lerna ls",
     "link": "yarn run lerna link",
@@ -67,11 +67,11 @@
     "cleanup": "yarn run clean && rm -rf node_modules/ && npm install && npm run boot",
     "lint": "eslint . --ignore-path .eslintignore --cache",
     "test": "jest",
+    "ci:buildAndTest": " yarn build && yarn test",
     "commit": "git cz"
   },
   "workspaces": [
-    "packages/*",
-    "dev-packages/*"
+    "packages/*"
   ],
   "lint-staged": {
     "*.js": [

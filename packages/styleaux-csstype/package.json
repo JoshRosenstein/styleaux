@@ -30,7 +30,8 @@
   },
   "scripts": {
     "update": "ts-node --files update.ts",
-    "build": "ts-node --files build.ts --start",
+    "build:main": "ts-node --files build.ts --start",
+    "build": "echo 'This will skip lerna build'",
     "build:files": "ts-node --files buildFiles.ts --start",
     "watch": "ts-node --files build.ts --watch",
     "lint": "tslint --exclude node_modules/**/* --exclude **/*.d.ts --fix **/*.ts",

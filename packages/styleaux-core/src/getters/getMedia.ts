@@ -1,5 +1,5 @@
 import { path } from '@roseys/futils';
-import { Dictionary } from '../types';
+import { Dictionary } from '../utility-types';
 import { getThemeMedia } from './getThemeMedia';
 
 export const getMedia = (

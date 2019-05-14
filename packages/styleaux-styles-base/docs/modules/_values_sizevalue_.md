@@ -39,8 +39,8 @@ ___
 
 **Parameters:**
 
-| Name | Type |
-| ------ | ------ |
+| Name              | Type     |
+| ----------------- | -------- |
 | __namedParameters | `object` |
 
 **Returns:** `(Anonymous function)`
@@ -59,9 +59,9 @@ ___
 #### T 
 **Parameters:**
 
-| Name | Type | Default value |
-| ------ | ------ | ------ |
-| `Default value` input | `T` |  (undefined as any) |
+| Name                  | Type | Default value      |
+| --------------------- | ---- | ------------------ |
+| `Default value` input | `T`  | (undefined as any) |
 
 **Returns:** `(Anonymous function)`
 
