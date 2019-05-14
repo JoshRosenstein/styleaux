@@ -30,6 +30,7 @@
   },
   "devDependencies":{
     "@roseys/eslint-config": "^1.0.3",
-    "@roseys/csstype":"^2.6.9-beta.0"
+    "@roseys/csstype":"^2.6.9-beta.0",
+    "simplytyped":"^3.1.0"
   }
 }

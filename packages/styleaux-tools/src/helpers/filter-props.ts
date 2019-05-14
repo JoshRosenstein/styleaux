@@ -1,4 +1,4 @@
-import { Omit } from 'simplyTyped';
+import { Omit } from 'simplytyped';
 
 /**
  * `inList` accepts a list of `values` and returns a function that accepts
