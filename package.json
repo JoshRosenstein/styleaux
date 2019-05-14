@@ -43,7 +43,8 @@
     "typed-is": "^1.0.4",
     "typedoc": "^0.14.2",
     "typedoc-plugin-markdown": "^1.1.27",
-    "typescript-test-utils": "^1.2.1"
+    "typescript-test-utils": "^1.2.1",
+    "typescript":"^3.4.5"
   },
   "scripts": {
     "clean:modules": "rimraf node_modules/*",
