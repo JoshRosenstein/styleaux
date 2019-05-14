@@ -25,15 +25,15 @@ export const createTextColor = <
   Theme = never
 >({
   key,
-  transformValue,
+  transform,
 }: Partial<
-  Pick<StyleOptions<ColorProps<T>, Theme>, 'key' | 'transformValue'>
+  Pick<StyleOptions<ColorProps<T>, Theme>, 'key' | 'transform'>
 > = {}) =>
   style<ColorProps<T>, Theme, Media>({
     cssProp: COLOR,
     prop: COLOR,
     key,
-    transformValue,
+    transform,
   });
 
 export const createTextColorRule = <T = ColorProperty, P = unknown>(

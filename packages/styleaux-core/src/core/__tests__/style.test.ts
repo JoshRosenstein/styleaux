@@ -1,107 +1,92 @@
-import { WithTheme } from '../types';
-import { Arg1, AnyFunc } from '../../types';
-import { style, extendStyle } from '../style';
-import { prop, merge, pick } from '@roseys/futils';
+import { Unit } from '@styleaux/types';
+import { style, extendStyle, StyleFn } from '../style';
+import { snapshot, createPicker } from '../../__testutils__';
+
 type Media = { sm: string; md: string };
 const media: Media = {
   sm: '40em',
   md: '52em',
 };
 
+const colors = {
+  blue: '#07c',
+  black: '#111',
+};
+const spaceAsArray = [0, '10px', '20px'];
+
 const theme = {
   media,
-  space: [0, '10px', '20px'],
-  colors: {
-    blue: '#07c',
-    black: '#111',
-  },
+  space: spaceAsArray,
+  colors,
 };
-type Theme = typeof theme;
+const pickTheme = createPicker(theme);
+type Theme = Partial<typeof theme>;
 const themeArr = {
   media: ['40em', '52em'],
-  colors: {
-    blue: '#07c',
-    black: '#111',
-  },
+  space: spaceAsArray,
+  colors,
 };
-type ThemeArr = typeof themeArr;
+type ThemeArr = Partial<typeof themeArr>;
 
-export function snapshot<Fn extends AnyFunc>(fn: Fn, pickthemeKeys?: string[]) {
-  return (props: Arg1<Fn>, label?: string) => {
-    const NewProps = props.theme
-      ? merge(props, {
-          theme: pick(
-            pickthemeKeys === undefined
-              ? ['media']
-              : pickthemeKeys.concat('media'),
-            prop('theme', props),
-          ),
-        })
-      : props;
+const testWidth = snapshot(
+  style as StyleFn<{ width: Unit }, Theme | ThemeArr, Media>,
+  {
+    prop: 'width',
+  },
+);
 
-    let snapshotName = JSON.stringify(NewProps, null, 2);
-    if (label) {
-      snapshotName = `[${label}] ${snapshotName}`;
-    }
-    expect(fn(props)).toMatchSnapshot(snapshotName);
-  };
-}
+const testWidthArr = snapshot(
+  style as StyleFn<{ width: Unit }, ThemeArr, string[]>,
+  {
+    prop: 'width',
+  },
+);
 
-const width = style<
-  WithTheme<{ width: number | string }, Theme | ThemeArr, Media>
->({
-  prop: 'width',
-});
-const testWidth = snapshot(width);
-const widthArr = style<
-  WithTheme<{ width: number | string }, ThemeArr, string[]>
->({
-  prop: 'width',
-});
-const testWidthArr = snapshot(widthArr);
-const backgroundColor = style<
-  WithTheme<{ backgroundColor: string; bg: string }, Theme | ThemeArr, Media>
->({
-  prop: 'backgroundColor',
-  alias: 'bg',
-  key: 'colors',
-});
+const testBg = snapshot(
+  style as StyleFn<
+    { backgroundColor: string; bg: string },
+    Theme | ThemeArr,
+    Media
+  >,
+  {
+    prop: 'backgroundColor',
+    alias: 'bg',
+    key: 'colors',
+  },
+);
 
-const testBg = snapshot(backgroundColor, ['colors']);
-
-const margin = style<{ margin: string | number }>({
+const testMargin = snapshot(style as StyleFn<{ margin: Unit }>, {
   prop: 'margin',
   cssProp: 'margin',
-  transformValue: (n) => n + 'px',
+  transform: (n) => n + 'px',
   key: 'space',
 });
-const testMargin = snapshot(margin, ['space']);
 
 const testmarginY = snapshot(
-  style<{ marginY: string | number; my: string | number }, Theme, Media>({
+  style as StyleFn<{ marginY: Unit; my: Unit }, Theme, Media>,
+  {
     cssProp: ['marginTop', 'marginBottom'],
     prop: ['marginY', 'my'],
     key: 'space',
-  }),
-  ['space'],
+  },
 );
 
 describe('Style', () => {
   test('returns values from theme', () => {
-    const styleFn = style<
-      WithTheme<{ color: string }, Theme | ThemeArr, Media>
-    >({
-      prop: 'color',
-      key: 'colors',
-    });
-    const testProps = snapshot(styleFn, ['colors']);
-    testProps({ theme, color: 'blue' });
+    const testProps = snapshot(
+      style as StyleFn<{ color: string }, Theme, Media>,
+      {
+        prop: 'color',
+        key: 'colors',
+      },
+    );
+    testProps({ color: 'blue', theme: pickTheme('colors') });
   });
 
   test('handles aliased props', () => {
     testBg({
-      theme,
       bg: 'blue',
+      theme: pickTheme('colors'),
     });
   });
 
@@ -110,31 +95,22 @@ describe('Style', () => {
   });
 
   test('returns responsive style objects', () => {
-    testWidth({
-      theme,
-      width: { all: '100%', sm: '50%' },
-    });
+    testWidth({ theme: pickTheme('media'), width: { all: '100%', sm: '50%' } });
   });
 
   test('returns responsive style objects from array with media as array', () => {
     testWidthArr({
-      theme: themeArr,
       width: ['100%', '50%'],
+      theme: { media: themeArr.media },
     });
   });
 
   test('returns responsive style objects from array with media as object', () => {
-    testWidth({
-      theme,
-      width: ['100%', '50%'],
-    });
+    testWidth({ theme: pickTheme('media'), width: ['100%', '50%'] });
   });
 
   test('skips undefined responsive values', () => {
-    testWidth({
-      theme,
-      width: ['100%', , '50%'],
-    });
+    testWidth({ theme: pickTheme('media'), width: ['100%', , '50%'] });
   });
 
   test('looksup from array Theme', () => {
@@ -159,12 +135,12 @@ describe('Style', () => {
 
   test('Can Handle Multiple PropKeys', () => {
     const testcolor = snapshot(
-      style<{ color: string; fg: string }>({
+      style as StyleFn<{ color: string; fg: string }>,
+      {
         cssProp: 'color',
         prop: ['color', 'fg'],
         key: 'colors',
-      }),
-      ['colors'],
+      },
     );
     testcolor({ fg: 'blue' }, 'fg');
     testcolor({ color: 'black' }, 'color');
@@ -176,6 +152,7 @@ describe('Style', () => {
     testmarginY({ marginY: '1px' }, 'my');
   });
   test('Can Handle Multiple PropKeys & cssKeys Responsive', () => {
+    const theme = pickTheme('media', 'space');
     testmarginY({ marginY: { sm: 1, md: 2 }, theme }, 'marginY');
     testmarginY({ my: { sm: 1, md: 2 }, theme }, 'my');
   });
@@ -183,8 +160,7 @@ describe('Style', () => {
 
 describe('Extends', () => {
   test('returns style object array', () => {
-    const styleFunc = extendStyle({})({ prop: ['a', 'b'] });
-    const testProps = snapshot(styleFunc);
+    const testProps = snapshot(extendStyle({}) as any, { prop: ['a', 'b'] });
     testProps({ a: 'foo' });
     testProps({ b: 'bar' });
   });
@@ -194,10 +170,10 @@ describe('Extends', () => {
       prop: ['a', 'b'],
       cssProp: ['x', 'y'],
     });
-    const styleFunc = styleFact({
+
+    const testProps = snapshot(styleFact as any, {
       prop: ['c', 'd'],
     });
-    const testProps = snapshot(styleFunc);
     testProps({ c: 'C' });
     testProps({ d: 'D' });
   });

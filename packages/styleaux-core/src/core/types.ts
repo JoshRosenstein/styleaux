@@ -1,13 +1,17 @@
-/* eslint-disable @typescript-eslint/interface-name-prefix */
 import { CSSKeys, Unit, Style, Nil, CSSObj } from '@styleaux/types';
-/* eslint-disable @typescript-eslint/interface-name-prefix */
-import { Arg1, OmitIf, AnyFunc, UnionOf, UnionToIntersection } from '../types';
 import {
   DEFAULT_MEDIA_KEY,
   THEME_KEY,
   MEDIA_KEY,
   IConstants,
 } from '../constants';
+import {
+  Arg1,
+  OmitIf,
+  AnyFunc,
+  UnionOf,
+  UnionToIntersection,
+} from '../utility-types';
 
 export type Key = string;
 

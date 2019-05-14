@@ -6,7 +6,7 @@ import { getThemeValue } from '../getters';
 
 export type ThemeStyleConfig = {
   themeKey: string;
-  transformValue?: (...args: any[]) => any;
+  transform?: (...args: any[]) => any;
   themeGetter?: (...args: any[]) => any;
 };
 
@@ -16,8 +16,8 @@ const ensureObject = (input: unknown) => {
 
 export function themeStyle<T, P>({
   themeKey,
-  transformValue,
-  themeGetter = getThemeValue(themeKey, transformValue),
+  transform,
+  themeGetter = getThemeValue(themeKey, transform),
 }: ThemeStyleConfig) {
   return function themeStyleInner(inputs: T, props: P, mediaKey): Style {
     return toArray(inputs).reduce(

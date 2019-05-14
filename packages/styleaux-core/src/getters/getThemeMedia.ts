@@ -2,7 +2,7 @@ import { isArray } from 'typed-is';
 import { getTheme } from './getTheme';
 import { pathObj } from '@roseys/futils';
 import { MEDIA_KEY } from '../constants';
-import { getDefaultMedia } from './getDefaultMedia';
+import { getDefaultMediaKey } from './getDefaultMediaKey';
 
 export const getThemeMedia = <T extends { theme?: any }>(props: T) => {
   let media = pathObj(getTheme(props), [MEDIA_KEY]);
@@ -17,5 +17,5 @@ export const getThemeMedia = <T extends { theme?: any }>(props: T) => {
     );
   }
 
-  return { [getDefaultMedia(props)]: null, ...media };
+  return { [getDefaultMediaKey(props)]: null, ...media };
 };

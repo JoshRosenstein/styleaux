@@ -12,7 +12,7 @@ type PropsOrGetProps<P, FNS extends any[]> = [P] extends [never]
  * ![Random](https://www.fillmurray.com/180/180)
  */
 export function combineStyles<
-  P extends Props = Props,
+  P extends Props = never,
   FNS extends any[] = PropStyleArrayFunc<Props>[]
 >(...fns: FNS) {
   return (props: PropsOrGetProps<P, FNS>): Style[] =>

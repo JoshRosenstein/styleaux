@@ -1,8 +1,8 @@
-import { NeverToUndefined } from '../types';
 import { getThemePathOr } from './getThemePathOr';
+import { NeverToUndefined } from '../utility-types';
 import { DEFAULT_KEY, THEME_KEY } from '../constants';
 
-export function getDefault<K extends string, D = never>(
+export function getDefaultKey<K extends string, D = never>(
   input: K,
   defaultValue?: D,
 ): <P>(
@@ -17,10 +17,8 @@ export function getDefault<K extends string, D = never>(
     : NeverToUndefined<D>
   : NeverToUndefined<D>;
 
-export function getDefault(input: any, defaultValue = DEFAULT_KEY) {
+export function getDefaultKey(input: any, defaultValue = DEFAULT_KEY) {
   return getThemePathOr([DEFAULT_KEY, input], defaultValue);
 }
 
-export default getDefault;
-
-// const t=getDefault('as')({default:{as:2}})
+export default getDefaultKey;

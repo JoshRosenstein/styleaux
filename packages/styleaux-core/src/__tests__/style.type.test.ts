@@ -1,4 +1,4 @@
-import { DeepRequired } from '../types';
+import { DeepRequired } from '../utility-types';
 import { ColorProperty } from '@styleaux/csstype';
 import { assertTrue, Equals } from 'typescript-test-utils';
 import {
@@ -42,13 +42,13 @@ export const getValue = <P extends Props>(props: P, keys?: Keys) => {
 
 export const createColor = <T = ColorProperty, Media = never, Theme = never>({
   key,
-  transformValue,
+  transform,
 }: Partial<StyleOptions<ColorProps<T>, Theme>> = {}) =>
   style<ColorProps<T>, Theme, Media>({
     prop: 'color',
     cssProp: 'color',
     key,
-    transformValue,
+    transform,
   });
 
 export const createColorRule = <T = ColorProperty>(

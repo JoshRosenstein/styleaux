@@ -3,11 +3,11 @@ import { StringKeys } from 'simplytyped';
 import { styler, GetValue } from './styler';
 import { createStyles } from './createStyles';
 import { identity, toArray } from '@roseys/futils';
-import { getThemePathOr, safeGet } from '../getters';
+import { getThemePathOr, getUnitValue } from '../getters';
 import { CSSProp, Props, Keys, PropStyleArrayFunc, WithTheme } from './types';
 export interface GetStyleOptions<T extends Record<string, any>> {
   key?: StringKeys<T> | CSS.StringHack;
-  transformValue?: GetValue<unknown, unknown, any>;
+  transform?: GetValue<unknown, unknown, any>;
   scale?: number[] | string[] | string | number[];
 }
 export interface StyleOptions<Props, Theme> {
@@ -19,7 +19,7 @@ export interface StyleOptions<Props, Theme> {
 
   key?: StringKeys<Theme> | CSS.StringHack;
 
-  transformValue?: GetValue<any, Props, any>;
+  transform?: GetValue<any, Props, any>;
   scale?: number[] | string[] | string | number[];
 }
 export interface StyleOptionsAny {
@@ -27,7 +27,7 @@ export interface StyleOptionsAny {
   cssProp?: any;
   alias?: any;
   key?: any;
-  transformValue?: GetValue<any, any, any>;
+  transform?: GetValue<any, any, any>;
   scale?: any[];
 }
 
@@ -38,13 +38,13 @@ export const getKey = <P extends Props>(
 
 export function styleGetValue<Theme, P extends Props = any, Input = any>({
   key,
-  transformValue = identity as any,
+  transform = identity as any,
   scale,
 }: GetStyleOptions<Theme>): GetValue<Input, P> {
   return (input, props) =>
     key || scale
-      ? transformValue(safeGet(input, scale)(getThemePathOr(key, scale)(props)))
-      : transformValue(input);
+      ? transform(getUnitValue(input, scale)(getThemePathOr(key, scale)(props)))
+      : transform(input);
 }
 
 /**
@@ -64,6 +64,14 @@ export function styleGetValue<Theme, P extends Props = any, Input = any>({
  *
  */
 
+export type StyleFn<
+  P extends Props,
+  Theme extends {} = never,
+  Media extends {} = never
+> = (
+  config: StyleOptions<P, Theme>,
+) => PropStyleArrayFunc<WithTheme<P, Theme, Media>>;
+
 export function style<
   P extends Props,
   Theme extends {} = never,
@@ -72,7 +80,7 @@ export function style<
   prop,
   cssProp,
   key,
-  transformValue = identity as any,
+  transform = identity as any,
   alias,
   scale,
 }: StyleOptions<P, Theme>): PropStyleArrayFunc<WithTheme<P, Theme, Media>> {
@@ -82,7 +90,7 @@ export function style<
     cssProp: property,
     getValue: styleGetValue({
       key,
-      transformValue,
+      transform,
       scale,
     }),
   });
