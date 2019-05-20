@@ -1,6 +1,6 @@
-export type By<P> = (value: any, key: string | number, context: P) => any;
-
-export function partition<Props extends {}>(by: By<Props>) {
+export function partition<Props extends {}>(
+  by: (value: any, key?: string | number, context?: Props) => any,
+) {
   return (props: Props) => {
     const match: Partial<Props> = {};
     const rest: Partial<Props> = {};

@@ -1,12 +1,11 @@
-import * as CSS from '@styleaux/csstype';
-import { StringKeys } from 'simplytyped';
 import { styler, GetValue } from './styler';
 import { createStyles } from './createStyles';
 import { identity, toArray } from '@roseys/futils';
-import { getThemePathOr, getUnitValue } from '../getters';
-import { CSSProp, Props, Keys, PropStyleArrayFunc, WithTheme } from './types';
+import { KeyOfOrString, StringKeys, Optional } from '@styleaux/types';
+import { CSSProp, Props, PropStyleArrayFunc, WithTheme } from './types';
+import { getThemePathOr, getUnitValue, getKey, getThemeKey } from '../getters';
 export interface GetStyleOptions<T extends Record<string, any>> {
-  key?: StringKeys<T> | CSS.StringHack;
+  key?: KeyOfOrString<T>;
   transform?: GetValue<unknown, unknown, any>;
   scale?: number[] | string[] | string | number[];
 }
@@ -17,7 +16,7 @@ export interface StyleOptions<Props, Theme> {
 
   alias?: StringKeys<Props>;
 
-  key?: StringKeys<Theme> | CSS.StringHack;
+  key?: KeyOfOrString<Theme> | KeyOfOrString<Theme>[];
 
   transform?: GetValue<any, Props, any>;
   scale?: number[] | string[] | string | number[];
@@ -30,11 +29,6 @@ export interface StyleOptionsAny {
   transform?: GetValue<any, any, any>;
   scale?: any[];
 }
-
-export const getKey = <P extends Props>(
-  props: P,
-  keys?: Keys,
-): string | null | undefined => keys && keys.find((k) => props[k] != null);
 
 export function styleGetValue<Theme, P extends Props = any, Input = any>({
   key,
@@ -72,6 +66,16 @@ export type StyleFn<
   config: StyleOptions<P, Theme>,
 ) => PropStyleArrayFunc<WithTheme<P, Theme, Media>>;
 
+export const styleRule = (cssProp, key, transform, scale) =>
+  styler({
+    cssProp,
+    getValue: styleGetValue({
+      key,
+      transform,
+      scale,
+    }),
+  });
+
 export function style<
   P extends Props,
   Theme extends {} = never,
@@ -84,17 +88,6 @@ export function style<
   alias,
   scale,
 }: StyleOptions<P, Theme>): PropStyleArrayFunc<WithTheme<P, Theme, Media>> {
-  const property = cssProp || prop;
-
-  const getter = styler({
-    cssProp: property,
-    getValue: styleGetValue({
-      key,
-      transform,
-      scale,
-    }),
-  });
-
   return (props: WithTheme<P, Theme, Media>) => {
     let keys = toArray(prop);
     if (alias) {
@@ -102,17 +95,25 @@ export function style<
     }
     const propKey = getKey(props, keys);
     if (propKey) {
-      return createStyles({ [propKey]: getter } as any)(props);
+      return createStyles({
+        [propKey]: styleRule(
+          cssProp || prop,
+          getThemeKey(props, toArray(key)),
+          transform,
+          scale,
+        ),
+      } as any)(props);
     }
 
     return [];
   };
 }
 
-export const extendStyle = (a: Partial<StyleOptionsAny>) => <
-  P extends Props,
-  Theme extends {} = never,
-  Media extends {} = never
->(
-  b: StyleOptions<P, Theme>,
-) => style<P, Theme, Media>({ ...a, ...b });
+export const extendStyle = <Defaults extends Partial<StyleOptionsAny>>(
+  defaultConfig: Defaults,
+) => <P extends Props, Theme extends {} = never, Media extends {} = never>(
+  overrides: Optional<
+    StyleOptions<P, Theme>,
+    Extract<keyof Defaults, keyof StyleOptions<P, Theme>>
+  >,
+) => style<P, Theme, Media>({ ...defaultConfig, ...overrides } as any);

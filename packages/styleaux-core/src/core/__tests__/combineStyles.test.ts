@@ -1,6 +1,6 @@
 import { createStyles } from '../createStyles';
 import { combineStyles } from '../combineStyles';
-import { Arg1, DeepSimplify } from '../../types';
+import { Arg1, DeepSimplify } from '@styleaux/types';
 const media = {
   small: '@media (min-width: 30em)',
   medium: '@media (min-width: 40em)',

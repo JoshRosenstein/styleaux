@@ -4,9 +4,9 @@ export { getDefaultKey } from './getDefaultKey';
 
 export { getDefaultMediaKey } from './getDefaultMediaKey';
 export { getThemeMedia } from './getThemeMedia';
-export { getUnitValue, safeGetThemeValue } from './getUnitValue';
+export { getUnitValue, getThemeUnitValue } from './getUnitValue';
 export { getMedia } from './getMedia';
-
+export * from './getKey';
 export {
   toNeg,
   isNeg,

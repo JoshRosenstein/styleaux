@@ -1,4 +1,4 @@
-import { DeepRequired } from '../utility-types';
+import { DeepRequired } from '@styleaux/types';
 import { ColorProperty } from '@styleaux/csstype';
 import { assertTrue, Equals } from 'typescript-test-utils';
 import {

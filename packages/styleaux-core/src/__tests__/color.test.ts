@@ -1,5 +1,4 @@
-import * as AUX from '../utility-types';
-import * as UT from 'utility-types';
+import * as AUX from '@styleaux/types';
 import * as TU from 'typescript-test-utils';
 import { ResponsiveProp } from '../';
 import { toStyles } from '../__testutils__/index';
@@ -10,8 +9,8 @@ import {
 } from '../__testutils__/fixtures/color';
 
 type DeepRequiredEquals<A, B> = TU.Equals<
-  UT.DeepRequired<A>,
-  UT.DeepRequired<B>
+  AUX.DeepRequired<A>,
+  AUX.DeepRequired<B>
 >;
 
 test('A', () => {

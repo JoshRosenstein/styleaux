@@ -28,26 +28,26 @@ export interface StylerOptions<P extends Props, I> {
   getValue?: GetValue<I, P>;
 }
 
+function getValues(get, input, props, mediaKey): StyleValue {
+  const result = get(input, props, mediaKey);
+
+  if (isBoolean(result)) {
+    return null;
+  }
+
+  if (isNil(result) && (isString(input) || isNumber(input))) {
+    return input;
+  }
+  return isFunction(result)
+    ? getValues(result, input, props, mediaKey)
+    : result;
+}
+
 export function styler<I, P extends Props>({
   cssProp,
   getStyle = objOf<any>(cssProp),
   getValue = <any>identity,
 }: StylerOptions<P, I>) {
-  function getValues(get, input, props, mediaKey): StyleValue {
-    const result = get(input, props, mediaKey);
-
-    if (isBoolean(result)) {
-      return null;
-    }
-
-    if (isNil(result) && (isString(input) || isNumber(input))) {
-      return input;
-    }
-    return isFunction(result)
-      ? getValues(result, input, props, mediaKey)
-      : result;
-  }
-
   return ((input: I, props: P, mediaKey: MediaKey) => {
     return everyMedia(
       props,

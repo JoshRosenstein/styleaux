@@ -1,7 +1,7 @@
 import { WithTheme } from '../types';
-import { DeepSimplify } from '../../types';
 import { toStyles } from '../../__testutils__';
 import { createStyles } from '../createStyles';
+import { DeepSimplify } from '@styleaux/types';
 const media = {
   small: '@media (min-width: 30em)',
   medium: '@media (min-width: 40em)',

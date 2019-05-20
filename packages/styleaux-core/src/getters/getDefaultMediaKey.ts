@@ -1,5 +1,5 @@
 import { getDefaultKey } from './getDefaultKey';
-import { MEDIA_KEY, DEFAULT_MEDIA_KEY, IConstants } from '../constants';
+import { MEDIA_KEY, DEFAULT_MEDIA_KEY } from '../constants';
 
 /**
  * Gets props.theme[DEFAULT_KEY][MEDIA_KEY]
@@ -7,5 +7,5 @@ import { MEDIA_KEY, DEFAULT_MEDIA_KEY, IConstants } from '../constants';
  *@param props
  */
 
-export const getDefaultMediaKey = (props: any): IConstants['MEDIA_KEY'] =>
+export const getDefaultMediaKey = (props: Record<string, any>): string =>
   getDefaultKey(MEDIA_KEY, DEFAULT_MEDIA_KEY)(props);

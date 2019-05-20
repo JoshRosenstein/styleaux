@@ -1,4 +1,4 @@
-import { Arg1, Args, AnyFunc } from '../utility-types';
+import { Arg1, Args, AnyFunc } from '@styleaux/types';
 import {
   flatten,
   toArray,

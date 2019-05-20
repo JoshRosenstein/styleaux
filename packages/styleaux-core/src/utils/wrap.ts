@@ -1,4 +1,4 @@
-import { isNil } from 'typed-is';
+import { isDefined } from 'typed-is';
 
 /**
  * Creates an object if name exists and value exists
@@ -11,7 +11,7 @@ export function wrap(
   name?: string | number | null,
   value?: null | string | number | Record<string, any>,
 ) {
-  return !isNil(value) ? (name ? { [name]: value } : value) : null;
+  return isDefined(value) ? (name ? { [name]: value } : value) : null;
 }
 
 /**

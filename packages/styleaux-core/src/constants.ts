@@ -1,34 +1,7 @@
-export const THEME_KEY = 'theme' as 'theme';
+export const THEME_KEY = 'theme';
 
-export const DEFAULT_KEY = 'default' as 'default';
+export const DEFAULT_KEY = 'default';
 
-export const MEDIA_KEY = 'media' as 'media';
+export const MEDIA_KEY = 'media';
 
-export const DEFAULT_MEDIA_KEY = 'all' as 'all';
-
-export const STATIC_STYLES_KEY = '_staticStyles' as '_staticStyles';
-
-export const STYLES_KEY = 'styles' as 'styles';
-
-export const STYLE_PROPS_KEY = '_styleProps' as '_styleProps';
-
-// eslint-disable-next-line @typescript-eslint/interface-name-prefix
-export interface IConstants {
-  DEFAULT_KEY: 'default';
-  THEME_KEY: 'theme';
-  MEDIA_KEY: 'media';
-  DEFAULT_MEDIA_KEY: 'all';
-  STYLES_KEY: 'styles';
-  STATIC_STYLES_KEY: '_staticStyles';
-  STYLE_PROPS_KEY: '_styleProps';
-}
-
-export enum CONSTANTS {
-  DEFAULT_KEY = 'default',
-  THEME_KEY = 'theme',
-  MEDIA_KEY = 'media',
-  DEFAULT_MEDIA_KEY = 'all',
-  STYLES_KEY = 'styles',
-  STATIC_STYLES_KEY = '_staticStyles',
-  STYLE_PROPS_KEY = '_styleProps',
-}
+export const DEFAULT_MEDIA_KEY = 'all';

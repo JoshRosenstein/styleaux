@@ -2,8 +2,8 @@ import { path, identity, pipe } from '@roseys/futils';
 import { isString, isNumber, isBoolean, isNil } from 'typed-is';
 
 export const toNeg = (v: string | number) => (isNumber(v) ? v * -1 : `-${v}`);
-export const isNeg = (v: string | number) =>
-  isString(v) ? /^-.+/.test(v) : v < 0;
+export const isNeg = (v: unknown) =>
+  isString(v) ? /^-.+/.test(v) : isNumber(v) ? v < 0 : false;
 
 export const stripNeg = (v: string | number | boolean) =>
   isBoolean(v)

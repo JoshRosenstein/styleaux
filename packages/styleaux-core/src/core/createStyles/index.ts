@@ -14,7 +14,7 @@ import {
 } from '../types';
 const warnOnce = createWarnOnce('createStyle');
 
-function handleStyleReturn(
+function wrapStyle(
   query: string | number | Nil,
   style: Style | Nil,
   mediaKey: string | false,
@@ -49,6 +49,42 @@ function handleStyle(
   return input === true ? style : null;
 }
 
+export const createStyleMapper = <P extends Props>(props: P) => {
+  const media = getThemeMedia(props);
+  const defaultMediaKey = getDefaultMediaKey(props);
+  const mediaKeys = Object.keys(media);
+
+  return function mapStyles(
+    input: boolean | StyleResult | StyleFunc,
+    style: Style | StyleFunc,
+    mediaKey: string = '',
+  ) {
+    /// Handling responsive ObjLit
+    if (isPlainObject(input)) {
+      return mapObj(input, (value, key) =>
+        mapStyles(value, style, key as string),
+      );
+    }
+
+    /// Handling responsive Array
+    if (isArray(input)) {
+      return input.map((value, key) => mapStyles(value, style, key.toString()));
+    }
+
+    const hasMediaKey =
+      mediaKey && mediaKey !== DEFAULT_MEDIA_KEY && mediaKey !== '0';
+
+    let mKey =
+      hasMediaKey && isNumeric(mediaKey) ? mediaKeys[mediaKey] : mediaKey;
+
+    return wrapStyle(
+      getMedia(mKey || defaultMediaKey, media),
+      handleStyle(style, input, props, mKey),
+      hasMediaKey && mediaKey,
+    );
+  };
+};
+
 /**
  * Create styles from {@link Object} with keys that represents component `prop` and
  * the value is a `style` that will be applied in the order it was passed.
@@ -69,7 +105,6 @@ function handleStyle(
  *  }))
  *
  */
-
 export function createStyles<
   P extends Props = Props,
   Theme extends {} = never,
@@ -80,61 +115,22 @@ export function createStyles<
   staticOrStyleFunc?: StaticOrStyleFunc<P, PX>,
 ): PropStyleArrayFunc<PX> {
   function getStyles(props: PX): Style[] {
-    const media = getThemeMedia(props);
-    const defaultMediaKey = getDefaultMediaKey(props);
-    const mediaKeys = Object.keys(media);
     let initial: Style[] = isNil(staticOrStyleFunc)
       ? []
       : isFunction(staticOrStyleFunc)
       ? toArray(staticOrStyleFunc(props))
       : toArray(staticOrStyleFunc);
-
-    function mapStyles(
-      input: boolean | StyleResult | StyleFunc,
-      style: Style | StyleFunc,
-      mediaKey: string = '',
-    ) {
-      /// Handling responsive ObjLit
-      if (isPlainObject(input)) {
-        return mapObj(input, (value, key) =>
-          mapStyles(value, style, key as string),
-        );
-      }
-
-      /// Handling responsive Array
-      if (isArray(input)) {
-        return input.map((value, key) =>
-          mapStyles(value, style, key.toString()),
-        );
-      }
-
-      const hasMediaKey =
-        mediaKey && mediaKey !== DEFAULT_MEDIA_KEY && mediaKey !== '0';
-
-      let mKey = mediaKey;
-
-      if (hasMediaKey) {
-        if (isNumeric(mediaKey)) {
-          mKey = mediaKeys[mediaKey];
-        }
-      }
-
-      return handleStyleReturn(
-        getMedia(mKey || defaultMediaKey, media),
-        handleStyle(style, input, props, mKey),
-        hasMediaKey && mediaKey,
-      );
-    }
+    const mapStyles = createStyleMapper(props);
 
     return Object.keys(styles).reduce(
       (acc, styleKey) =>
-        acc.concat(
-          isNil(styleKey && props[styleKey])
-            ? []
-            : toArray(styles[styleKey]).map(
+        isNil(styleKey && props[styleKey])
+          ? acc
+          : acc.concat(
+              toArray(styles[styleKey]).map(
                 (style) => mapStyles(props[styleKey], style) || [],
               ),
-        ),
+            ),
       initial,
     );
   }

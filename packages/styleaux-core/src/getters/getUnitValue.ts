@@ -3,14 +3,17 @@ import { getTheme } from './getTheme';
 import { stripNeg, isNeg, toNeg } from './utils';
 import { isNil, isObject, isString, isNumber } from 'typed-is';
 
+const isStringOrNumber = (v: unknown): v is string | number =>
+  isString(v) || isNumber(v);
+
 export const getUnitValue = (keyOrValue: any, fallbackObjOrValue?: any) => <
   P extends {}
 >(
   obj: P,
 ) => {
-  if (isString(keyOrValue) || isNumber(keyOrValue)) {
+  if (isStringOrNumber(keyOrValue)) {
     const transform = (v: any) =>
-      isNeg(keyOrValue) && (isString(v) || isNumber(v)) ? toNeg(v) : v;
+      isNeg(keyOrValue) && isStringOrNumber(v) ? toNeg(v) : v;
     const strippedNeg = stripNeg(keyOrValue);
     let value = transform(path(strippedNeg as any, obj));
 
@@ -29,7 +32,7 @@ export const getUnitValue = (keyOrValue: any, fallbackObjOrValue?: any) => <
   return keyOrValue;
 };
 
-export const safeGetThemeValue = (
+export const getThemeUnitValue = (
   keyOrValue: any,
   fallbackObjOrValue?: any,
 ) => <P extends { theme?: any }>(obj: P) =>

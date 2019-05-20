@@ -1,10 +1,9 @@
 import { Props, MediaKey } from '../core/types';
-
 import { getDefaultKey } from './getDefaultKey';
 import { lookUpTransformNegative } from './utils';
 import { getThemePathOr } from './getThemePathOr';
-import { isPlainObject, isNumeric } from 'typed-is';
-import { isFunction, identity, mapObj } from '@roseys/futils';
+import { identity, mapObj } from '@roseys/futils';
+import { isPlainObject, isNumeric, isFunction, isDefined } from 'typed-is';
 
 export function getThemeValue(themeKey: string, transformer?: any) {
   const isTransformValue = isFunction(transformer);
@@ -26,7 +25,7 @@ export function getThemeValue(themeKey: string, transformer?: any) {
     );
 
     if (
-      mediaKey &&
+      isDefined(mediaKey) &&
       !isNumeric(mediaKey) &&
       Object(themeValue).hasOwnProperty(mediaKey)
     ) {

@@ -1,17 +1,16 @@
-import { CSSKeys, Unit, Style, Nil, CSSObj } from '@styleaux/types';
+import { DEFAULT_MEDIA_KEY, THEME_KEY, MEDIA_KEY } from '../constants';
 import {
-  DEFAULT_MEDIA_KEY,
-  THEME_KEY,
-  MEDIA_KEY,
-  IConstants,
-} from '../constants';
-import {
+  CSSKeys,
+  Unit,
+  Style,
+  Nil,
+  CSSObj,
   Arg1,
-  OmitIf,
+  Omit,
   AnyFunc,
   UnionOf,
   UnionToIntersection,
-} from '../utility-types';
+} from '@styleaux/types';
 
 export type Key = string;
 
@@ -144,7 +143,7 @@ export type Indices<T> = Exclude<keyof T, keyof any[]>;
  */
 export type ExtractArg1FromArray<T extends AnyFunc[]> = Arg1<UnionOf<T>>;
 
-export type OmitTheme<T extends {}> = OmitIf<T, IConstants['THEME_KEY']>;
+export type OmitTheme<T extends {}> = Omit<T, typeof THEME_KEY>;
 
 /**
  * Creates Type P based on createSyles map values

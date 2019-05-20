@@ -1,10 +1,9 @@
 import { path } from '@roseys/futils';
-import { Dictionary } from '../utility-types';
 import { getThemeMedia } from './getThemeMedia';
 
 export const getMedia = (
   input: string,
-  media?: Dictionary,
+  media?: Record<string, any>,
 ): string | number | null | undefined =>
   media
     ? path<any>(input, media)

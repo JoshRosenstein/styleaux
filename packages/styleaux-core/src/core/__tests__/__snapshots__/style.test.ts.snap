@@ -295,11 +295,65 @@ Array [
 ]
 `;
 
+exports[`Style Can Handle Multiple ThemeKeys: {
+  "args": [
+    {
+      "prop": "width",
+      "key": [
+        "widths",
+        "space"
+      ]
+    }
+  ],
+  "props": {
+    "width": "spaceSM",
+    "theme": {
+      "space": {
+        "spaceSM": "1px"
+      }
+    }
+  }
+} 1`] = `
+Array [
+  Object {
+    "width": "1px",
+  },
+]
+`;
+
+exports[`Style Can Handle Multiple ThemeKeys: {
+  "args": [
+    {
+      "prop": "width",
+      "key": [
+        "widths",
+        "space"
+      ]
+    }
+  ],
+  "props": {
+    "width": "widthsSM",
+    "theme": {
+      "widths": {
+        "widthsSM": ".5px"
+      }
+    }
+  }
+} 1`] = `
+Array [
+  Object {
+    "width": ".5px",
+  },
+]
+`;
+
 exports[`Style handles aliased props: {
   "args": [
     {
-      "prop": "backgroundColor",
-      "alias": "bg",
+      "prop": [
+        "backgroundColor",
+        "bg"
+      ],
       "key": "colors"
     }
   ],
@@ -316,6 +370,7 @@ exports[`Style handles aliased props: {
 Array [
   Object {
     "backgroundColor": "#07c",
+    "bg": "#07c",
   },
 ]
 `;

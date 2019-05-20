@@ -1,5 +1,5 @@
 import { getThemePathOr } from './getThemePathOr';
-import { NeverToUndefined } from '../utility-types';
+import { NeverToUndefined } from '@styleaux/types';
 import { DEFAULT_KEY, THEME_KEY } from '../constants';
 
 export function getDefaultKey<K extends string, D = never>(

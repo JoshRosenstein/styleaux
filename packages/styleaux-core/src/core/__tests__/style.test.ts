@@ -49,8 +49,7 @@ const testBg = snapshot(
     Media
   >,
   {
-    prop: 'backgroundColor',
-    alias: 'bg',
+    prop: ['backgroundColor', 'bg'],
     key: 'colors',
   },
 );
@@ -155,6 +154,22 @@ describe('Style', () => {
     const theme = pickTheme('media', 'space');
     testmarginY({ marginY: { sm: 1, md: 2 }, theme }, 'marginY');
     testmarginY({ my: { sm: 1, md: 2 }, theme }, 'my');
+  });
+
+  test('Can Handle Multiple ThemeKeys', () => {
+    const testWidthThemed = snapshot(
+      style as StyleFn<{ width: Unit }, never, Media>,
+      {
+        prop: 'width',
+        key: ['widths', 'space'],
+      },
+    );
+
+    testWidthThemed({ width: 'spaceSM', theme: { space: { spaceSM: '1px' } } });
+    testWidthThemed({
+      width: 'widthsSM',
+      theme: { widths: { widthsSM: '.5px' } },
+    });
   });
 });
 
