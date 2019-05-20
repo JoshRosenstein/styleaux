@@ -1,12 +1,10 @@
 import { MarginProperty } from '@styleaux/csstype';
 import { assertTrue, Equals } from 'typescript-test-utils';
+import { Simplify, DeepRequired, Arg1 } from '@styleaux/types';
 import {
   createStyles,
   combineStyles,
   rule,
-  Arg1,
-  DeepRequired,
-  Simplify,
   ResponsiveProp,
   GetProps,
 } from '../';
