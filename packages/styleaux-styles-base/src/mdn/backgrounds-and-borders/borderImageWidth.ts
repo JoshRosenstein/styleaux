@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BorderImageWidthProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERIMAGEWIDTH = 'borderImageWidth';
 
@@ -23,17 +23,13 @@ export const createBorderImageWidth = <
   T = BorderImageWidthProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BorderImageWidthProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BorderImageWidthProps<T>, Theme> = {},
+) =>
   style<BorderImageWidthProps<T>, Theme, Media>({
     cssProp: BORDERIMAGEWIDTH,
     prop: BORDERIMAGEWIDTH,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBorderImageWidthRule = <

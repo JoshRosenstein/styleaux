@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BorderBottomRightRadiusProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERBOTTOMRIGHTRADIUS = 'borderBottomRightRadius';
 
@@ -26,20 +26,13 @@ export const createBorderBottomRightRadius = <
   T = BorderBottomRightRadiusProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<BorderBottomRightRadiusProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<BorderBottomRightRadiusProps<T>, Theme> = {},
+) =>
   style<BorderBottomRightRadiusProps<T>, Theme, Media>({
     cssProp: BORDERBOTTOMRIGHTRADIUS,
     prop: BORDERBOTTOMRIGHTRADIUS,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBorderBottomRightRadiusRule = <

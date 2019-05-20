@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { TextRenderingProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTRENDERING = 'textRendering';
 
@@ -23,17 +23,13 @@ export const createTextRendering = <
   T = TextRenderingProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<TextRenderingProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<TextRenderingProps<T>, Theme> = {},
+) =>
   style<TextRenderingProps<T>, Theme, Media>({
     cssProp: TEXTRENDERING,
     prop: TEXTRENDERING,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTextRenderingRule = <T = TextRenderingProperty, P = unknown>(

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { AnimationFillModeProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const ANIMATIONFILLMODE = 'animationFillMode';
 
@@ -24,17 +24,13 @@ export const createAnimationFillMode = <
   T = AnimationFillModeProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<AnimationFillModeProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<AnimationFillModeProps<T>, Theme> = {},
+) =>
   style<AnimationFillModeProps<T>, Theme, Media>({
     cssProp: ANIMATIONFILLMODE,
     prop: ANIMATIONFILLMODE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createAnimationFillModeRule = <

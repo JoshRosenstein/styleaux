@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { ScrollMarginBlockStartProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const SCROLLMARGINBLOCKSTART = 'scrollMarginBlockStart';
 
@@ -25,20 +25,13 @@ export const createScrollMarginBlockStart = <
   T = ScrollMarginBlockStartProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<ScrollMarginBlockStartProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<ScrollMarginBlockStartProps<T>, Theme> = {},
+) =>
   style<ScrollMarginBlockStartProps<T>, Theme, Media>({
     cssProp: SCROLLMARGINBLOCKSTART,
     prop: SCROLLMARGINBLOCKSTART,
-    key,
-    transform,
+    ...config,
   });
 
 export const createScrollMarginBlockStartRule = <

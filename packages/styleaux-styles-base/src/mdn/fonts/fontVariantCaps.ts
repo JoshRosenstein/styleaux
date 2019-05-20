@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { FontVariantCapsProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const FONTVARIANTCAPS = 'fontVariantCaps';
 
@@ -23,17 +23,13 @@ export const createFontVariantCaps = <
   T = FontVariantCapsProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<FontVariantCapsProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<FontVariantCapsProps<T>, Theme> = {},
+) =>
   style<FontVariantCapsProps<T>, Theme, Media>({
     cssProp: FONTVARIANTCAPS,
     prop: FONTVARIANTCAPS,
-    key,
-    transform,
+    ...config,
   });
 
 export const createFontVariantCapsRule = <

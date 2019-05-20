@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { ScrollPaddingRightProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const SCROLLPADDINGRIGHT = 'scrollPaddingRight';
 
@@ -23,20 +23,13 @@ export const createScrollPaddingRight = <
   T = ScrollPaddingRightProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<ScrollPaddingRightProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<ScrollPaddingRightProps<T>, Theme> = {},
+) =>
   style<ScrollPaddingRightProps<T>, Theme, Media>({
     cssProp: SCROLLPADDINGRIGHT,
     prop: SCROLLPADDINGRIGHT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createScrollPaddingRightRule = <

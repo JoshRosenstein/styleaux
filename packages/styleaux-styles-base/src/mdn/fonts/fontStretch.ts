@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { FontStretchProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const FONTSTRETCH = 'fontStretch';
 
@@ -23,17 +23,13 @@ export const createFontStretch = <
   T = FontStretchProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<FontStretchProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<FontStretchProps<T>, Theme> = {},
+) =>
   style<FontStretchProps<T>, Theme, Media>({
     cssProp: FONTSTRETCH,
     prop: FONTSTRETCH,
-    key,
-    transform,
+    ...config,
   });
 
 export const createFontStretchRule = <T = FontStretchProperty, P = unknown>(

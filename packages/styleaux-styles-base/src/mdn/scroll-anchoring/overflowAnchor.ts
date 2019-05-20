@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { OverflowAnchorProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const OVERFLOWANCHOR = 'overflowAnchor';
 
@@ -21,17 +21,13 @@ export const createOverflowAnchor = <
   T = OverflowAnchorProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<OverflowAnchorProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<OverflowAnchorProps<T>, Theme> = {},
+) =>
   style<OverflowAnchorProps<T>, Theme, Media>({
     cssProp: OVERFLOWANCHOR,
     prop: OVERFLOWANCHOR,
-    key,
-    transform,
+    ...config,
   });
 
 export const createOverflowAnchorRule = <

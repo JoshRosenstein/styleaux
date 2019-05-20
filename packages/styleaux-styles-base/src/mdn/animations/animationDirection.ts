@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { AnimationDirectionProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const ANIMATIONDIRECTION = 'animationDirection';
 
@@ -24,20 +24,13 @@ export const createAnimationDirection = <
   T = AnimationDirectionProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<AnimationDirectionProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<AnimationDirectionProps<T>, Theme> = {},
+) =>
   style<AnimationDirectionProps<T>, Theme, Media>({
     cssProp: ANIMATIONDIRECTION,
     prop: ANIMATIONDIRECTION,
-    key,
-    transform,
+    ...config,
   });
 
 export const createAnimationDirectionRule = <

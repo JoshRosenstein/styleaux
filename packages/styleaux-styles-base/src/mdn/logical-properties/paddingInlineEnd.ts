@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { PaddingInlineEndProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const PADDINGINLINEEND = 'paddingInlineEnd';
 
@@ -24,17 +24,13 @@ export const createPaddingInlineEnd = <
   T = PaddingInlineEndProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<PaddingInlineEndProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<PaddingInlineEndProps<T>, Theme> = {},
+) =>
   style<PaddingInlineEndProps<T>, Theme, Media>({
     cssProp: PADDINGINLINEEND,
     prop: PADDINGINLINEEND,
-    key,
-    transform,
+    ...config,
   });
 
 export const createPaddingInlineEndRule = <

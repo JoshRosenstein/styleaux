@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { ResizeProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const RESIZE = 'resize';
 
@@ -19,17 +19,13 @@ export interface ResizeProps<T = ResizeProperty> {
   [RESIZE]: T;
 }
 
-export const createResize = <T = ResizeProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ResizeProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createResize = <T = ResizeProperty, Media = never, Theme = never>(
+  config: Config<ResizeProps<T>, Theme> = {},
+) =>
   style<ResizeProps<T>, Theme, Media>({
     cssProp: RESIZE,
     prop: RESIZE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createResizeRule = <T = ResizeProperty, P = unknown>(

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { LeftProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const LEFT = 'left';
 
@@ -19,17 +19,13 @@ export interface LeftProps<T = LeftProperty> {
   [LEFT]: T;
 }
 
-export const createLeft = <T = LeftProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<LeftProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createLeft = <T = LeftProperty, Media = never, Theme = never>(
+  config: Config<LeftProps<T>, Theme> = {},
+) =>
   style<LeftProps<T>, Theme, Media>({
     cssProp: LEFT,
     prop: LEFT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createLeftRule = <T = LeftProperty, P = unknown>(

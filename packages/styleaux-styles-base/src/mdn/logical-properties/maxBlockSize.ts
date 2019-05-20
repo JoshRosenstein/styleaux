@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { MaxBlockSizeProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const MAXBLOCKSIZE = 'maxBlockSize';
 
@@ -23,17 +23,13 @@ export const createMaxBlockSize = <
   T = MaxBlockSizeProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<MaxBlockSizeProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<MaxBlockSizeProps<T>, Theme> = {},
+) =>
   style<MaxBlockSizeProps<T>, Theme, Media>({
     cssProp: MAXBLOCKSIZE,
     prop: MAXBLOCKSIZE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createMaxBlockSizeRule = <T = MaxBlockSizeProperty, P = unknown>(

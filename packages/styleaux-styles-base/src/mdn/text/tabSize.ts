@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { TabSizeProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const TABSIZE = 'tabSize';
 
@@ -23,17 +23,13 @@ export const createTabSize = <
   T = TabSizeProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<TabSizeProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<TabSizeProps<T>, Theme> = {},
+) =>
   style<TabSizeProps<T>, Theme, Media>({
     cssProp: TABSIZE,
     prop: TABSIZE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTabSizeRule = <T = TabSizeProperty, P = unknown>(

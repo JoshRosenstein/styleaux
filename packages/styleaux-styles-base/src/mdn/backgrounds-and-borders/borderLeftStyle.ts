@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BorderLeftStyleProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERLEFTSTYLE = 'borderLeftStyle';
 
@@ -23,17 +23,13 @@ export const createBorderLeftStyle = <
   T = BorderLeftStyleProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BorderLeftStyleProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BorderLeftStyleProps<T>, Theme> = {},
+) =>
   style<BorderLeftStyleProps<T>, Theme, Media>({
     cssProp: BORDERLEFTSTYLE,
     prop: BORDERLEFTSTYLE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBorderLeftStyleRule = <

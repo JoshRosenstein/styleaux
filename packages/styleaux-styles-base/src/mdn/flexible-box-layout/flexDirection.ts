@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { FlexDirectionProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const FLEXDIRECTION = 'flexDirection';
 
@@ -24,17 +24,13 @@ export const createFlexDirection = <
   T = FlexDirectionProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<FlexDirectionProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<FlexDirectionProps<T>, Theme> = {},
+) =>
   style<FlexDirectionProps<T>, Theme, Media>({
     cssProp: FLEXDIRECTION,
     prop: FLEXDIRECTION,
-    key,
-    transform,
+    ...config,
   });
 
 export const createFlexDirectionRule = <T = FlexDirectionProperty, P = unknown>(

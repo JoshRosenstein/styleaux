@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { WhiteSpaceProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const WHITESPACE = 'whiteSpace';
 
@@ -23,17 +23,13 @@ export const createWhiteSpace = <
   T = WhiteSpaceProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<WhiteSpaceProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<WhiteSpaceProps<T>, Theme> = {},
+) =>
   style<WhiteSpaceProps<T>, Theme, Media>({
     cssProp: WHITESPACE,
     prop: WHITESPACE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createWhiteSpaceRule = <T = WhiteSpaceProperty, P = unknown>(

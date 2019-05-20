@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { HeightProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const HEIGHT = 'height';
 
@@ -19,17 +19,13 @@ export interface HeightProps<T = HeightProperty> {
   [HEIGHT]: T;
 }
 
-export const createHeight = <T = HeightProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<HeightProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createHeight = <T = HeightProperty, Media = never, Theme = never>(
+  config: Config<HeightProps<T>, Theme> = {},
+) =>
   style<HeightProps<T>, Theme, Media>({
     cssProp: HEIGHT,
     prop: HEIGHT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createHeightRule = <T = HeightProperty, P = unknown>(

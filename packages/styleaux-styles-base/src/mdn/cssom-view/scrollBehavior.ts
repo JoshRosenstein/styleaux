@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { ScrollBehaviorProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const SCROLLBEHAVIOR = 'scrollBehavior';
 
@@ -23,17 +23,13 @@ export const createScrollBehavior = <
   T = ScrollBehaviorProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ScrollBehaviorProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<ScrollBehaviorProps<T>, Theme> = {},
+) =>
   style<ScrollBehaviorProps<T>, Theme, Media>({
     cssProp: SCROLLBEHAVIOR,
     prop: SCROLLBEHAVIOR,
-    key,
-    transform,
+    ...config,
   });
 
 export const createScrollBehaviorRule = <

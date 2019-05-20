@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { FlexShrinkProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const FLEXSHRINK = 'flexShrink';
 
@@ -24,17 +24,13 @@ export const createFlexShrink = <
   T = FlexShrinkProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<FlexShrinkProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<FlexShrinkProps<T>, Theme> = {},
+) =>
   style<FlexShrinkProps<T>, Theme, Media>({
     cssProp: FLEXSHRINK,
     prop: FLEXSHRINK,
-    key,
-    transform,
+    ...config,
   });
 
 export const createFlexShrinkRule = <T = FlexShrinkProperty, P = unknown>(

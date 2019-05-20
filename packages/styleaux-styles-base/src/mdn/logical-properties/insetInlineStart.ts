@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { InsetInlineStartProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const INSETINLINESTART = 'insetInlineStart';
 
@@ -23,17 +23,13 @@ export const createInsetInlineStart = <
   T = InsetInlineStartProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<InsetInlineStartProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<InsetInlineStartProps<T>, Theme> = {},
+) =>
   style<InsetInlineStartProps<T>, Theme, Media>({
     cssProp: INSETINLINESTART,
     prop: INSETINLINESTART,
-    key,
-    transform,
+    ...config,
   });
 
 export const createInsetInlineStartRule = <

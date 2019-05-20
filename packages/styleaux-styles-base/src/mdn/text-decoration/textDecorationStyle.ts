@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { TextDecorationStyleProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTDECORATIONSTYLE = 'textDecorationStyle';
 
@@ -23,20 +23,13 @@ export const createTextDecorationStyle = <
   T = TextDecorationStyleProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<TextDecorationStyleProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<TextDecorationStyleProps<T>, Theme> = {},
+) =>
   style<TextDecorationStyleProps<T>, Theme, Media>({
     cssProp: TEXTDECORATIONSTYLE,
     prop: TEXTDECORATIONSTYLE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTextDecorationStyleRule = <

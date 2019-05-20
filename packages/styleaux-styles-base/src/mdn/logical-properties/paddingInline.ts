@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { PaddingInlineProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const PADDINGINLINE = 'paddingInline';
 
@@ -23,17 +23,13 @@ export const createPaddingInline = <
   T = PaddingInlineProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<PaddingInlineProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<PaddingInlineProps<T>, Theme> = {},
+) =>
   style<PaddingInlineProps<T>, Theme, Media>({
     cssProp: PADDINGINLINE,
     prop: PADDINGINLINE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createPaddingInlineRule = <T = PaddingInlineProperty, P = unknown>(

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { MinInlineSizeProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const MININLINESIZE = 'minInlineSize';
 
@@ -23,17 +23,13 @@ export const createMinInlineSize = <
   T = MinInlineSizeProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<MinInlineSizeProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<MinInlineSizeProps<T>, Theme> = {},
+) =>
   style<MinInlineSizeProps<T>, Theme, Media>({
     cssProp: MININLINESIZE,
     prop: MININLINESIZE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createMinInlineSizeRule = <T = MinInlineSizeProperty, P = unknown>(

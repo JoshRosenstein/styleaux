@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { CursorProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const CURSOR = 'cursor';
 
@@ -19,17 +19,13 @@ export interface CursorProps<T = CursorProperty> {
   [CURSOR]: T;
 }
 
-export const createCursor = <T = CursorProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<CursorProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createCursor = <T = CursorProperty, Media = never, Theme = never>(
+  config: Config<CursorProps<T>, Theme> = {},
+) =>
   style<CursorProps<T>, Theme, Media>({
     cssProp: CURSOR,
     prop: CURSOR,
-    key,
-    transform,
+    ...config,
   });
 
 export const createCursorRule = <T = CursorProperty, P = unknown>(

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { ListStyleProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const LISTSTYLE = 'listStyle';
 
@@ -21,17 +21,13 @@ export const createListStyle = <
   T = ListStyleProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ListStyleProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<ListStyleProps<T>, Theme> = {},
+) =>
   style<ListStyleProps<T>, Theme, Media>({
     cssProp: LISTSTYLE,
     prop: LISTSTYLE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createListStyleRule = <T = ListStyleProperty, P = unknown>(

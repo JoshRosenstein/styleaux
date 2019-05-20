@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { TransformProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const TRANSFORM = 'transform';
 
@@ -24,17 +24,13 @@ export const createTransform = <
   T = TransformProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<TransformProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<TransformProps<T>, Theme> = {},
+) =>
   style<TransformProps<T>, Theme, Media>({
     cssProp: TRANSFORM,
     prop: TRANSFORM,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTransformRule = <T = TransformProperty, P = unknown>(

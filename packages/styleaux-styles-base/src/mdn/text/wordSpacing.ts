@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { WordSpacingProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const WORDSPACING = 'wordSpacing';
 
@@ -23,17 +23,13 @@ export const createWordSpacing = <
   T = WordSpacingProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<WordSpacingProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<WordSpacingProps<T>, Theme> = {},
+) =>
   style<WordSpacingProps<T>, Theme, Media>({
     cssProp: WORDSPACING,
     prop: WORDSPACING,
-    key,
-    transform,
+    ...config,
   });
 
 export const createWordSpacingRule = <T = WordSpacingProperty, P = unknown>(

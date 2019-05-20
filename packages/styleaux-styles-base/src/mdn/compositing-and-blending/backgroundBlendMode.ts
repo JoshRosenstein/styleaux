@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BackgroundBlendModeProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BACKGROUNDBLENDMODE = 'backgroundBlendMode';
 
@@ -23,20 +23,13 @@ export const createBackgroundBlendMode = <
   T = BackgroundBlendModeProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<BackgroundBlendModeProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<BackgroundBlendModeProps<T>, Theme> = {},
+) =>
   style<BackgroundBlendModeProps<T>, Theme, Media>({
     cssProp: BACKGROUNDBLENDMODE,
     prop: BACKGROUNDBLENDMODE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBackgroundBlendModeRule = <

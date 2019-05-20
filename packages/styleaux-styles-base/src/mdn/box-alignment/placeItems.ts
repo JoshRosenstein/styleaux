@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { PlaceItemsProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const PLACEITEMS = 'placeItems';
 
@@ -35,17 +35,13 @@ export const createPlaceItems = <
   T = PlaceItemsProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<PlaceItemsProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<PlaceItemsProps<T>, Theme> = {},
+) =>
   style<PlaceItemsProps<T>, Theme, Media>({
     cssProp: PLACEITEMS,
     prop: PLACEITEMS,
-    key,
-    transform,
+    ...config,
   });
 
 export const createPlaceItemsRule = <T = PlaceItemsProperty, P = unknown>(

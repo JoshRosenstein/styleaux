@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { TransitionDurationProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TRANSITIONDURATION = 'transitionDuration';
 
@@ -24,20 +24,13 @@ export const createTransitionDuration = <
   T = TransitionDurationProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<TransitionDurationProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<TransitionDurationProps<T>, Theme> = {},
+) =>
   style<TransitionDurationProps<T>, Theme, Media>({
     cssProp: TRANSITIONDURATION,
     prop: TRANSITIONDURATION,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTransitionDurationRule = <

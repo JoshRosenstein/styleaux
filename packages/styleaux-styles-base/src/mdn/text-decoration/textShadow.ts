@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { TextShadowProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const TEXTSHADOW = 'textShadow';
 
@@ -23,17 +23,13 @@ export const createTextShadow = <
   T = TextShadowProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<TextShadowProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<TextShadowProps<T>, Theme> = {},
+) =>
   style<TextShadowProps<T>, Theme, Media>({
     cssProp: TEXTSHADOW,
     prop: TEXTSHADOW,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTextShadowRule = <T = TextShadowProperty, P = unknown>(

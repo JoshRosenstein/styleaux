@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { TextSizeAdjustProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTSIZEADJUST = 'textSizeAdjust';
 
@@ -23,17 +23,13 @@ export const createTextSizeAdjust = <
   T = TextSizeAdjustProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<TextSizeAdjustProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<TextSizeAdjustProps<T>, Theme> = {},
+) =>
   style<TextSizeAdjustProps<T>, Theme, Media>({
     cssProp: TEXTSIZEADJUST,
     prop: TEXTSIZEADJUST,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTextSizeAdjustRule = <

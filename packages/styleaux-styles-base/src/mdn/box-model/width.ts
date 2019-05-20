@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { WidthProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const WIDTH = 'width';
 
@@ -19,17 +19,13 @@ export interface WidthProps<T = WidthProperty> {
   [WIDTH]: T;
 }
 
-export const createWidth = <T = WidthProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<WidthProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createWidth = <T = WidthProperty, Media = never, Theme = never>(
+  config: Config<WidthProps<T>, Theme> = {},
+) =>
   style<WidthProps<T>, Theme, Media>({
     cssProp: WIDTH,
     prop: WIDTH,
-    key,
-    transform,
+    ...config,
   });
 
 export const createWidthRule = <T = WidthProperty, P = unknown>(

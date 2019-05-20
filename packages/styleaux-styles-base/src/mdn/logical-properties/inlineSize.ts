@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { InlineSizeProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const INLINESIZE = 'inlineSize';
 
@@ -23,17 +23,13 @@ export const createInlineSize = <
   T = InlineSizeProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<InlineSizeProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<InlineSizeProps<T>, Theme> = {},
+) =>
   style<InlineSizeProps<T>, Theme, Media>({
     cssProp: INLINESIZE,
     prop: INLINESIZE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createInlineSizeRule = <T = InlineSizeProperty, P = unknown>(

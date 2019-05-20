@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { OpacityProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const OPACITY = 'opacity';
 
@@ -23,17 +23,13 @@ export const createOpacity = <
   T = OpacityProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<OpacityProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<OpacityProps<T>, Theme> = {},
+) =>
   style<OpacityProps<T>, Theme, Media>({
     cssProp: OPACITY,
     prop: OPACITY,
-    key,
-    transform,
+    ...config,
   });
 
 export const createOpacityRule = <T = OpacityProperty, P = unknown>(

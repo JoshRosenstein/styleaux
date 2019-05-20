@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { PageBreakInsideProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const PAGEBREAKINSIDE = 'pageBreakInside';
 
@@ -23,17 +23,13 @@ export const createPageBreakInside = <
   T = PageBreakInsideProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<PageBreakInsideProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<PageBreakInsideProps<T>, Theme> = {},
+) =>
   style<PageBreakInsideProps<T>, Theme, Media>({
     cssProp: PAGEBREAKINSIDE,
     prop: PAGEBREAKINSIDE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createPageBreakInsideRule = <

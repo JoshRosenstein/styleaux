@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { ObjectFitProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const OBJECTFIT = 'objectFit';
 
@@ -23,17 +23,13 @@ export const createObjectFit = <
   T = ObjectFitProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ObjectFitProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<ObjectFitProps<T>, Theme> = {},
+) =>
   style<ObjectFitProps<T>, Theme, Media>({
     cssProp: OBJECTFIT,
     prop: OBJECTFIT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createObjectFitRule = <T = ObjectFitProperty, P = unknown>(

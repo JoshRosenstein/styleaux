@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { TextUnderlinePositionProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTUNDERLINEPOSITION = 'textUnderlinePosition';
 
@@ -23,20 +23,13 @@ export const createTextUnderlinePosition = <
   T = TextUnderlinePositionProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<TextUnderlinePositionProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<TextUnderlinePositionProps<T>, Theme> = {},
+) =>
   style<TextUnderlinePositionProps<T>, Theme, Media>({
     cssProp: TEXTUNDERLINEPOSITION,
     prop: TEXTUNDERLINEPOSITION,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTextUnderlinePositionRule = <

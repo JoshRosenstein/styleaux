@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { PaintOrderProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const PAINTORDER = 'paintOrder';
 
@@ -23,17 +23,13 @@ export const createPaintOrder = <
   T = PaintOrderProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<PaintOrderProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<PaintOrderProps<T>, Theme> = {},
+) =>
   style<PaintOrderProps<T>, Theme, Media>({
     cssProp: PAINTORDER,
     prop: PAINTORDER,
-    key,
-    transform,
+    ...config,
   });
 
 export const createPaintOrderRule = <T = PaintOrderProperty, P = unknown>(

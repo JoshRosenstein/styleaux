@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { LineBreakProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const LINEBREAK = 'lineBreak';
 
@@ -24,17 +24,13 @@ export const createLineBreak = <
   T = LineBreakProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<LineBreakProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<LineBreakProps<T>, Theme> = {},
+) =>
   style<LineBreakProps<T>, Theme, Media>({
     cssProp: LINEBREAK,
     prop: LINEBREAK,
-    key,
-    transform,
+    ...config,
   });
 
 export const createLineBreakRule = <T = LineBreakProperty, P = unknown>(

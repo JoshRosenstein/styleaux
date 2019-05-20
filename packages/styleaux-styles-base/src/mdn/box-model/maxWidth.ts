@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { MaxWidthProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const MAXWIDTH = 'maxWidth';
 
@@ -23,17 +23,13 @@ export const createMaxWidth = <
   T = MaxWidthProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<MaxWidthProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<MaxWidthProps<T>, Theme> = {},
+) =>
   style<MaxWidthProps<T>, Theme, Media>({
     cssProp: MAXWIDTH,
     prop: MAXWIDTH,
-    key,
-    transform,
+    ...config,
   });
 
 export const createMaxWidthRule = <T = MaxWidthProperty, P = unknown>(

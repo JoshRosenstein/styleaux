@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { BorderStyleProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const BORDERSTYLE = 'borderStyle';
 
@@ -21,17 +21,13 @@ export const createBorderStyle = <
   T = BorderStyleProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BorderStyleProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BorderStyleProps<T>, Theme> = {},
+) =>
   style<BorderStyleProps<T>, Theme, Media>({
     cssProp: BORDERSTYLE,
     prop: BORDERSTYLE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBorderStyleRule = <T = BorderStyleProperty, P = unknown>(

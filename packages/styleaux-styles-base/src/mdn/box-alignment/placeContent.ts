@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { PlaceContentProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const PLACECONTENT = 'placeContent';
 
@@ -45,17 +45,13 @@ export const createPlaceContent = <
   T = PlaceContentProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<PlaceContentProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<PlaceContentProps<T>, Theme> = {},
+) =>
   style<PlaceContentProps<T>, Theme, Media>({
     cssProp: PLACECONTENT,
     prop: PLACECONTENT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createPlaceContentRule = <T = PlaceContentProperty, P = unknown>(

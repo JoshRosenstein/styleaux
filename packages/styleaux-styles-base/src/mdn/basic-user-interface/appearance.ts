@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { AppearanceProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const APPEARANCE = 'appearance';
 
@@ -23,17 +23,13 @@ export const createAppearance = <
   T = AppearanceProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<AppearanceProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<AppearanceProps<T>, Theme> = {},
+) =>
   style<AppearanceProps<T>, Theme, Media>({
     cssProp: APPEARANCE,
     prop: APPEARANCE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createAppearanceRule = <T = AppearanceProperty, P = unknown>(

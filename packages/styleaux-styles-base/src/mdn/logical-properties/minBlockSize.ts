@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { MinBlockSizeProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const MINBLOCKSIZE = 'minBlockSize';
 
@@ -23,17 +23,13 @@ export const createMinBlockSize = <
   T = MinBlockSizeProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<MinBlockSizeProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<MinBlockSizeProps<T>, Theme> = {},
+) =>
   style<MinBlockSizeProps<T>, Theme, Media>({
     cssProp: MINBLOCKSIZE,
     prop: MINBLOCKSIZE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createMinBlockSizeRule = <T = MinBlockSizeProperty, P = unknown>(

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { AlignItemsProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const ALIGNITEMS = 'alignItems';
 
@@ -38,17 +38,13 @@ export const createAlignItems = <
   T = AlignItemsProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<AlignItemsProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<AlignItemsProps<T>, Theme> = {},
+) =>
   style<AlignItemsProps<T>, Theme, Media>({
     cssProp: ALIGNITEMS,
     prop: ALIGNITEMS,
-    key,
-    transform,
+    ...config,
   });
 
 export const createAlignItemsRule = <T = AlignItemsProperty, P = unknown>(

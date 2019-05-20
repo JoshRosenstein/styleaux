@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { MarginTopProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const MARGINTOP = 'marginTop';
 
@@ -23,17 +23,13 @@ export const createMarginTop = <
   T = MarginTopProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<MarginTopProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<MarginTopProps<T>, Theme> = {},
+) =>
   style<MarginTopProps<T>, Theme, Media>({
     cssProp: MARGINTOP,
     prop: MARGINTOP,
-    key,
-    transform,
+    ...config,
   });
 
 export const createMarginTopRule = <T = MarginTopProperty, P = unknown>(

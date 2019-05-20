@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { TextTransformProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTTRANSFORM = 'textTransform';
 
@@ -23,17 +23,13 @@ export const createTextTransform = <
   T = TextTransformProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<TextTransformProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<TextTransformProps<T>, Theme> = {},
+) =>
   style<TextTransformProps<T>, Theme, Media>({
     cssProp: TEXTTRANSFORM,
     prop: TEXTTRANSFORM,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTextTransformRule = <T = TextTransformProperty, P = unknown>(

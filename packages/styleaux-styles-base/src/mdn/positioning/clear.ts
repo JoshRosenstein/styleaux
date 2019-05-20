@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { ClearProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const CLEAR = 'clear';
 
@@ -19,17 +19,13 @@ export interface ClearProps<T = ClearProperty> {
   [CLEAR]: T;
 }
 
-export const createClear = <T = ClearProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ClearProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createClear = <T = ClearProperty, Media = never, Theme = never>(
+  config: Config<ClearProps<T>, Theme> = {},
+) =>
   style<ClearProps<T>, Theme, Media>({
     cssProp: CLEAR,
     prop: CLEAR,
-    key,
-    transform,
+    ...config,
   });
 
 export const createClearRule = <T = ClearProperty, P = unknown>(

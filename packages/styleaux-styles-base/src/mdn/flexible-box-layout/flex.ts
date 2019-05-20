@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { FlexProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const FLEX = 'flex';
 
@@ -18,17 +18,13 @@ export interface FlexProps<T = FlexProperty> {
   [FLEX]: T;
 }
 
-export const createFlex = <T = FlexProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<FlexProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createFlex = <T = FlexProperty, Media = never, Theme = never>(
+  config: Config<FlexProps<T>, Theme> = {},
+) =>
   style<FlexProps<T>, Theme, Media>({
     cssProp: FLEX,
     prop: FLEX,
-    key,
-    transform,
+    ...config,
   });
 
 export const createFlexRule = <T = FlexProperty, P = unknown>(

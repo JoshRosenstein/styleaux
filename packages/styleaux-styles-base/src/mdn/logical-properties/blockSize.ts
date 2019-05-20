@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { BlockSizeProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const BLOCKSIZE = 'blockSize';
 
@@ -23,17 +23,13 @@ export const createBlockSize = <
   T = BlockSizeProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BlockSizeProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BlockSizeProps<T>, Theme> = {},
+) =>
   style<BlockSizeProps<T>, Theme, Media>({
     cssProp: BLOCKSIZE,
     prop: BLOCKSIZE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBlockSizeRule = <T = BlockSizeProperty, P = unknown>(

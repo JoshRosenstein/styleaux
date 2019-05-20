@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { PageBreakAfterProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const PAGEBREAKAFTER = 'pageBreakAfter';
 
@@ -23,17 +23,13 @@ export const createPageBreakAfter = <
   T = PageBreakAfterProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<PageBreakAfterProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<PageBreakAfterProps<T>, Theme> = {},
+) =>
   style<PageBreakAfterProps<T>, Theme, Media>({
     cssProp: PAGEBREAKAFTER,
     prop: PAGEBREAKAFTER,
-    key,
-    transform,
+    ...config,
   });
 
 export const createPageBreakAfterRule = <

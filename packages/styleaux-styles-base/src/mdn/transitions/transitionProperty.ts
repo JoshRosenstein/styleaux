@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { TransitionPropertyProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TRANSITIONPROPERTY = 'transitionProperty';
 
@@ -24,20 +24,13 @@ export const createTransitionProperty = <
   T = TransitionPropertyProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<TransitionPropertyProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<TransitionPropertyProps<T>, Theme> = {},
+) =>
   style<TransitionPropertyProps<T>, Theme, Media>({
     cssProp: TRANSITIONPROPERTY,
     prop: TRANSITIONPROPERTY,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTransitionPropertyRule = <

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { ContentProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const CONTENT = 'content';
 
@@ -23,17 +23,13 @@ export const createContent = <
   T = ContentProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ContentProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<ContentProps<T>, Theme> = {},
+) =>
   style<ContentProps<T>, Theme, Media>({
     cssProp: CONTENT,
     prop: CONTENT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createContentRule = <T = ContentProperty, P = unknown>(

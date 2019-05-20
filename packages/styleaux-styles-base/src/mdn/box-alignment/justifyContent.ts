@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { JustifyContentProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const JUSTIFYCONTENT = 'justifyContent';
 
@@ -38,17 +38,13 @@ export const createJustifyContent = <
   T = JustifyContentProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<JustifyContentProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<JustifyContentProps<T>, Theme> = {},
+) =>
   style<JustifyContentProps<T>, Theme, Media>({
     cssProp: JUSTIFYCONTENT,
     prop: JUSTIFYCONTENT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createJustifyContentRule = <

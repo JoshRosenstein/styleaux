@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { TextJustifyProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const TEXTJUSTIFY = 'textJustify';
 
@@ -23,17 +23,13 @@ export const createTextJustify = <
   T = TextJustifyProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<TextJustifyProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<TextJustifyProps<T>, Theme> = {},
+) =>
   style<TextJustifyProps<T>, Theme, Media>({
     cssProp: TEXTJUSTIFY,
     prop: TEXTJUSTIFY,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTextJustifyRule = <T = TextJustifyProperty, P = unknown>(

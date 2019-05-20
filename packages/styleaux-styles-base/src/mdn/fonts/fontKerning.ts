@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { FontKerningProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const FONTKERNING = 'fontKerning';
 
@@ -23,17 +23,13 @@ export const createFontKerning = <
   T = FontKerningProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<FontKerningProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<FontKerningProps<T>, Theme> = {},
+) =>
   style<FontKerningProps<T>, Theme, Media>({
     cssProp: FONTKERNING,
     prop: FONTKERNING,
-    key,
-    transform,
+    ...config,
   });
 
 export const createFontKerningRule = <T = FontKerningProperty, P = unknown>(

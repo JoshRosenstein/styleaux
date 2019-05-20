@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { FlexWrapProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const FLEXWRAP = 'flexWrap';
 
@@ -24,17 +24,13 @@ export const createFlexWrap = <
   T = FlexWrapProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<FlexWrapProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<FlexWrapProps<T>, Theme> = {},
+) =>
   style<FlexWrapProps<T>, Theme, Media>({
     cssProp: FLEXWRAP,
     prop: FLEXWRAP,
-    key,
-    transform,
+    ...config,
   });
 
 export const createFlexWrapRule = <T = FlexWrapProperty, P = unknown>(

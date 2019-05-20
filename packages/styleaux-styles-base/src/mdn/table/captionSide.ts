@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { CaptionSideProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const CAPTIONSIDE = 'captionSide';
 
@@ -23,17 +23,13 @@ export const createCaptionSide = <
   T = CaptionSideProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<CaptionSideProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<CaptionSideProps<T>, Theme> = {},
+) =>
   style<CaptionSideProps<T>, Theme, Media>({
     cssProp: CAPTIONSIDE,
     prop: CAPTIONSIDE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createCaptionSideRule = <T = CaptionSideProperty, P = unknown>(

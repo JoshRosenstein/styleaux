@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { RightProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const RIGHT = 'right';
 
@@ -19,17 +19,13 @@ export interface RightProps<T = RightProperty> {
   [RIGHT]: T;
 }
 
-export const createRight = <T = RightProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<RightProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createRight = <T = RightProperty, Media = never, Theme = never>(
+  config: Config<RightProps<T>, Theme> = {},
+) =>
   style<RightProps<T>, Theme, Media>({
     cssProp: RIGHT,
     prop: RIGHT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createRightRule = <T = RightProperty, P = unknown>(

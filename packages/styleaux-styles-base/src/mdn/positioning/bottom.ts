@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { BottomProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const BOTTOM = 'bottom';
 
@@ -19,17 +19,13 @@ export interface BottomProps<T = BottomProperty> {
   [BOTTOM]: T;
 }
 
-export const createBottom = <T = BottomProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BottomProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createBottom = <T = BottomProperty, Media = never, Theme = never>(
+  config: Config<BottomProps<T>, Theme> = {},
+) =>
   style<BottomProps<T>, Theme, Media>({
     cssProp: BOTTOM,
     prop: BOTTOM,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBottomRule = <T = BottomProperty, P = unknown>(

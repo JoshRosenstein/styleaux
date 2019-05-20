@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { InsetBlockProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const INSETBLOCK = 'insetBlock';
 
@@ -23,17 +23,13 @@ export const createInsetBlock = <
   T = InsetBlockProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<InsetBlockProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<InsetBlockProps<T>, Theme> = {},
+) =>
   style<InsetBlockProps<T>, Theme, Media>({
     cssProp: INSETBLOCK,
     prop: INSETBLOCK,
-    key,
-    transform,
+    ...config,
   });
 
 export const createInsetBlockRule = <T = InsetBlockProperty, P = unknown>(

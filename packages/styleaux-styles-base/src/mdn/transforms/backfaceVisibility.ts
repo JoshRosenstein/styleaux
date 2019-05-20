@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BackfaceVisibilityProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BACKFACEVISIBILITY = 'backfaceVisibility';
 
@@ -24,20 +24,13 @@ export const createBackfaceVisibility = <
   T = BackfaceVisibilityProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<BackfaceVisibilityProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<BackfaceVisibilityProps<T>, Theme> = {},
+) =>
   style<BackfaceVisibilityProps<T>, Theme, Media>({
     cssProp: BACKFACEVISIBILITY,
     prop: BACKFACEVISIBILITY,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBackfaceVisibilityRule = <

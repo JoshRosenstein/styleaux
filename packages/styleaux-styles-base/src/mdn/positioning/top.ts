@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { TopProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const TOP = 'top';
 
@@ -19,17 +19,13 @@ export interface TopProps<T = TopProperty> {
   [TOP]: T;
 }
 
-export const createTop = <T = TopProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<TopProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createTop = <T = TopProperty, Media = never, Theme = never>(
+  config: Config<TopProps<T>, Theme> = {},
+) =>
   style<TopProps<T>, Theme, Media>({
     cssProp: TOP,
     prop: TOP,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTopRule = <T = TopProperty, P = unknown>(

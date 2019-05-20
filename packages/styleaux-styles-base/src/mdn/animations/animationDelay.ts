@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { AnimationDelayProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const ANIMATIONDELAY = 'animationDelay';
 
@@ -24,17 +24,13 @@ export const createAnimationDelay = <
   T = AnimationDelayProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<AnimationDelayProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<AnimationDelayProps<T>, Theme> = {},
+) =>
   style<AnimationDelayProps<T>, Theme, Media>({
     cssProp: ANIMATIONDELAY,
     prop: ANIMATIONDELAY,
-    key,
-    transform,
+    ...config,
   });
 
 export const createAnimationDelayRule = <

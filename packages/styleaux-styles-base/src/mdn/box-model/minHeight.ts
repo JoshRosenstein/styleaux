@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { MinHeightProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const MINHEIGHT = 'minHeight';
 
@@ -23,17 +23,13 @@ export const createMinHeight = <
   T = MinHeightProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<MinHeightProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<MinHeightProps<T>, Theme> = {},
+) =>
   style<MinHeightProps<T>, Theme, Media>({
     cssProp: MINHEIGHT,
     prop: MINHEIGHT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createMinHeightRule = <T = MinHeightProperty, P = unknown>(

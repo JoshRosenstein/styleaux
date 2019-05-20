@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { WillChangeProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const WILLCHANGE = 'willChange';
 
@@ -23,17 +23,13 @@ export const createWillChange = <
   T = WillChangeProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<WillChangeProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<WillChangeProps<T>, Theme> = {},
+) =>
   style<WillChangeProps<T>, Theme, Media>({
     cssProp: WILLCHANGE,
     prop: WILLCHANGE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createWillChangeRule = <T = WillChangeProperty, P = unknown>(

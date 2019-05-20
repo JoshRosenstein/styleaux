@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { GridRowStartProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const GRIDROWSTART = 'gridRowStart';
 
@@ -23,17 +23,13 @@ export const createGridRowStart = <
   T = GridRowStartProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<GridRowStartProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<GridRowStartProps<T>, Theme> = {},
+) =>
   style<GridRowStartProps<T>, Theme, Media>({
     cssProp: GRIDROWSTART,
     prop: GRIDROWSTART,
-    key,
-    transform,
+    ...config,
   });
 
 export const createGridRowStartRule = <T = GridRowStartProperty, P = unknown>(

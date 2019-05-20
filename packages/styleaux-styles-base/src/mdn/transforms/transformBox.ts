@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { TransformBoxProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const TRANSFORMBOX = 'transformBox';
 
@@ -23,17 +23,13 @@ export const createTransformBox = <
   T = TransformBoxProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<TransformBoxProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<TransformBoxProps<T>, Theme> = {},
+) =>
   style<TransformBoxProps<T>, Theme, Media>({
     cssProp: TRANSFORMBOX,
     prop: TRANSFORMBOX,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTransformBoxRule = <T = TransformBoxProperty, P = unknown>(

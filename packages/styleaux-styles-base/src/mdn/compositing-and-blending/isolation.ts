@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { IsolationProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const ISOLATION = 'isolation';
 
@@ -23,17 +23,13 @@ export const createIsolation = <
   T = IsolationProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<IsolationProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<IsolationProps<T>, Theme> = {},
+) =>
   style<IsolationProps<T>, Theme, Media>({
     cssProp: ISOLATION,
     prop: ISOLATION,
-    key,
-    transform,
+    ...config,
   });
 
 export const createIsolationRule = <T = IsolationProperty, P = unknown>(

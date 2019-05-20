@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { InsetInlineEndProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const INSETINLINEEND = 'insetInlineEnd';
 
@@ -23,17 +23,13 @@ export const createInsetInlineEnd = <
   T = InsetInlineEndProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<InsetInlineEndProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<InsetInlineEndProps<T>, Theme> = {},
+) =>
   style<InsetInlineEndProps<T>, Theme, Media>({
     cssProp: INSETINLINEEND,
     prop: INSETINLINEEND,
-    key,
-    transform,
+    ...config,
   });
 
 export const createInsetInlineEndRule = <

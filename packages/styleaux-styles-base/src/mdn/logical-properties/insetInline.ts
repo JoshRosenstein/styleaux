@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { InsetInlineProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const INSETINLINE = 'insetInline';
 
@@ -23,17 +23,13 @@ export const createInsetInline = <
   T = InsetInlineProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<InsetInlineProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<InsetInlineProps<T>, Theme> = {},
+) =>
   style<InsetInlineProps<T>, Theme, Media>({
     cssProp: INSETINLINE,
     prop: INSETINLINE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createInsetInlineRule = <T = InsetInlineProperty, P = unknown>(

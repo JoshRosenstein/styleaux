@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { MaskRepeatProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const MASKREPEAT = 'maskRepeat';
 
@@ -23,17 +23,13 @@ export const createMaskRepeat = <
   T = MaskRepeatProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<MaskRepeatProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<MaskRepeatProps<T>, Theme> = {},
+) =>
   style<MaskRepeatProps<T>, Theme, Media>({
     cssProp: MASKREPEAT,
     prop: MASKREPEAT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createMaskRepeatRule = <T = MaskRepeatProperty, P = unknown>(

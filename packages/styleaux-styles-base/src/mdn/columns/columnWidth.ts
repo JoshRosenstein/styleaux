@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { ColumnWidthProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const COLUMNWIDTH = 'columnWidth';
 
@@ -24,17 +24,13 @@ export const createColumnWidth = <
   T = ColumnWidthProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ColumnWidthProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<ColumnWidthProps<T>, Theme> = {},
+) =>
   style<ColumnWidthProps<T>, Theme, Media>({
     cssProp: COLUMNWIDTH,
     prop: COLUMNWIDTH,
-    key,
-    transform,
+    ...config,
   });
 
 export const createColumnWidthRule = <T = ColumnWidthProperty, P = unknown>(

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { TransitionDelayProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TRANSITIONDELAY = 'transitionDelay';
 
@@ -24,17 +24,13 @@ export const createTransitionDelay = <
   T = TransitionDelayProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<TransitionDelayProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<TransitionDelayProps<T>, Theme> = {},
+) =>
   style<TransitionDelayProps<T>, Theme, Media>({
     cssProp: TRANSITIONDELAY,
     prop: TRANSITIONDELAY,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTransitionDelayRule = <

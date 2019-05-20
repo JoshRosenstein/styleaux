@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { MarginBlockStartProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const MARGINBLOCKSTART = 'marginBlockStart';
 
@@ -23,17 +23,13 @@ export const createMarginBlockStart = <
   T = MarginBlockStartProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<MarginBlockStartProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<MarginBlockStartProps<T>, Theme> = {},
+) =>
   style<MarginBlockStartProps<T>, Theme, Media>({
     cssProp: MARGINBLOCKSTART,
     prop: MARGINBLOCKSTART,
-    key,
-    transform,
+    ...config,
   });
 
 export const createMarginBlockStartRule = <

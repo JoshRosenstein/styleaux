@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { MaxInlineSizeProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const MAXINLINESIZE = 'maxInlineSize';
 
@@ -24,17 +24,13 @@ export const createMaxInlineSize = <
   T = MaxInlineSizeProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<MaxInlineSizeProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<MaxInlineSizeProps<T>, Theme> = {},
+) =>
   style<MaxInlineSizeProps<T>, Theme, Media>({
     cssProp: MAXINLINESIZE,
     prop: MAXINLINESIZE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createMaxInlineSizeRule = <T = MaxInlineSizeProperty, P = unknown>(

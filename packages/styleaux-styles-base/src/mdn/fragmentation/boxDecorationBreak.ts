@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BoxDecorationBreakProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BOXDECORATIONBREAK = 'boxDecorationBreak';
 
@@ -23,20 +23,13 @@ export const createBoxDecorationBreak = <
   T = BoxDecorationBreakProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<BoxDecorationBreakProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<BoxDecorationBreakProps<T>, Theme> = {},
+) =>
   style<BoxDecorationBreakProps<T>, Theme, Media>({
     cssProp: BOXDECORATIONBREAK,
     prop: BOXDECORATIONBREAK,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBoxDecorationBreakRule = <

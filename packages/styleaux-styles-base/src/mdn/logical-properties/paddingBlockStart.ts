@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { PaddingBlockStartProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const PADDINGBLOCKSTART = 'paddingBlockStart';
 
@@ -23,17 +23,13 @@ export const createPaddingBlockStart = <
   T = PaddingBlockStartProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<PaddingBlockStartProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<PaddingBlockStartProps<T>, Theme> = {},
+) =>
   style<PaddingBlockStartProps<T>, Theme, Media>({
     cssProp: PADDINGBLOCKSTART,
     prop: PADDINGBLOCKSTART,
-    key,
-    transform,
+    ...config,
   });
 
 export const createPaddingBlockStartRule = <

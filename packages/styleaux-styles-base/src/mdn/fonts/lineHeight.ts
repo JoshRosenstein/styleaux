@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { LineHeightProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const LINEHEIGHT = 'lineHeight';
 
@@ -23,17 +23,13 @@ export const createLineHeight = <
   T = LineHeightProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<LineHeightProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<LineHeightProps<T>, Theme> = {},
+) =>
   style<LineHeightProps<T>, Theme, Media>({
     cssProp: LINEHEIGHT,
     prop: LINEHEIGHT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createLineHeightRule = <T = LineHeightProperty, P = unknown>(

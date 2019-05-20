@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BorderInlineEndProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERINLINEEND = 'borderInlineEnd';
 
@@ -21,17 +21,13 @@ export const createBorderInlineEnd = <
   T = BorderInlineEndProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BorderInlineEndProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BorderInlineEndProps<T>, Theme> = {},
+) =>
   style<BorderInlineEndProps<T>, Theme, Media>({
     cssProp: BORDERINLINEEND,
     prop: BORDERINLINEEND,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBorderInlineEndRule = <

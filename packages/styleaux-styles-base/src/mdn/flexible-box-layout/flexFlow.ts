@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { FlexFlowProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const FLEXFLOW = 'flexFlow';
 
@@ -22,17 +22,13 @@ export const createFlexFlow = <
   T = FlexFlowProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<FlexFlowProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<FlexFlowProps<T>, Theme> = {},
+) =>
   style<FlexFlowProps<T>, Theme, Media>({
     cssProp: FLEXFLOW,
     prop: FLEXFLOW,
-    key,
-    transform,
+    ...config,
   });
 
 export const createFlexFlowRule = <T = FlexFlowProperty, P = unknown>(

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { FontVariantLigaturesProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const FONTVARIANTLIGATURES = 'fontVariantLigatures';
 
@@ -24,20 +24,13 @@ export const createFontVariantLigatures = <
   T = FontVariantLigaturesProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<FontVariantLigaturesProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<FontVariantLigaturesProps<T>, Theme> = {},
+) =>
   style<FontVariantLigaturesProps<T>, Theme, Media>({
     cssProp: FONTVARIANTLIGATURES,
     prop: FONTVARIANTLIGATURES,
-    key,
-    transform,
+    ...config,
   });
 
 export const createFontVariantLigaturesRule = <

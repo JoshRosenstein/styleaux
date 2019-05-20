@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { PointerEventsProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const POINTEREVENTS = 'pointerEvents';
 
@@ -23,17 +23,13 @@ export const createPointerEvents = <
   T = PointerEventsProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<PointerEventsProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<PointerEventsProps<T>, Theme> = {},
+) =>
   style<PointerEventsProps<T>, Theme, Media>({
     cssProp: POINTEREVENTS,
     prop: POINTEREVENTS,
-    key,
-    transform,
+    ...config,
   });
 
 export const createPointerEventsRule = <T = PointerEventsProperty, P = unknown>(

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { BreakBeforeProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const BREAKBEFORE = 'breakBefore';
 
@@ -45,17 +45,13 @@ export const createBreakBefore = <
   T = BreakBeforeProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BreakBeforeProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BreakBeforeProps<T>, Theme> = {},
+) =>
   style<BreakBeforeProps<T>, Theme, Media>({
     cssProp: BREAKBEFORE,
     prop: BREAKBEFORE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBreakBeforeRule = <T = BreakBeforeProperty, P = unknown>(

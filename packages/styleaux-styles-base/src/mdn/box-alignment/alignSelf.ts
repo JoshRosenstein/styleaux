@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { AlignSelfProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const ALIGNSELF = 'alignSelf';
 
@@ -38,17 +38,13 @@ export const createAlignSelf = <
   T = AlignSelfProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<AlignSelfProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<AlignSelfProps<T>, Theme> = {},
+) =>
   style<AlignSelfProps<T>, Theme, Media>({
     cssProp: ALIGNSELF,
     prop: ALIGNSELF,
-    key,
-    transform,
+    ...config,
   });
 
 export const createAlignSelfRule = <T = AlignSelfProperty, P = unknown>(

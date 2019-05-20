@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { MarginBottomProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const MARGINBOTTOM = 'marginBottom';
 
@@ -23,17 +23,13 @@ export const createMarginBottom = <
   T = MarginBottomProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<MarginBottomProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<MarginBottomProps<T>, Theme> = {},
+) =>
   style<MarginBottomProps<T>, Theme, Media>({
     cssProp: MARGINBOTTOM,
     prop: MARGINBOTTOM,
-    key,
-    transform,
+    ...config,
   });
 
 export const createMarginBottomRule = <T = MarginBottomProperty, P = unknown>(

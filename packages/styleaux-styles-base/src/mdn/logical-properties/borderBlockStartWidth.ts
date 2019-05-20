@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BorderBlockStartWidthProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERBLOCKSTARTWIDTH = 'borderBlockStartWidth';
 
@@ -23,20 +23,13 @@ export const createBorderBlockStartWidth = <
   T = BorderBlockStartWidthProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<BorderBlockStartWidthProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<BorderBlockStartWidthProps<T>, Theme> = {},
+) =>
   style<BorderBlockStartWidthProps<T>, Theme, Media>({
     cssProp: BORDERBLOCKSTARTWIDTH,
     prop: BORDERBLOCKSTARTWIDTH,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBorderBlockStartWidthRule = <

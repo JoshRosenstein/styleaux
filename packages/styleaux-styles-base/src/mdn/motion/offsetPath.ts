@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { OffsetPathProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const OFFSETPATH = 'offsetPath';
 
@@ -24,17 +24,13 @@ export const createOffsetPath = <
   T = OffsetPathProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<OffsetPathProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<OffsetPathProps<T>, Theme> = {},
+) =>
   style<OffsetPathProps<T>, Theme, Media>({
     cssProp: OFFSETPATH,
     prop: OFFSETPATH,
-    key,
-    transform,
+    ...config,
   });
 
 export const createOffsetPathRule = <T = OffsetPathProperty, P = unknown>(

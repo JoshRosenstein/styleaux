@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { PaddingBlockEndProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const PADDINGBLOCKEND = 'paddingBlockEnd';
 
@@ -23,17 +23,13 @@ export const createPaddingBlockEnd = <
   T = PaddingBlockEndProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<PaddingBlockEndProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<PaddingBlockEndProps<T>, Theme> = {},
+) =>
   style<PaddingBlockEndProps<T>, Theme, Media>({
     cssProp: PADDINGBLOCKEND,
     prop: PADDINGBLOCKEND,
-    key,
-    transform,
+    ...config,
   });
 
 export const createPaddingBlockEndRule = <

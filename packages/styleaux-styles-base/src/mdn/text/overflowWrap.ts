@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { OverflowWrapProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const OVERFLOWWRAP = 'overflowWrap';
 
@@ -24,17 +24,13 @@ export const createOverflowWrap = <
   T = OverflowWrapProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<OverflowWrapProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<OverflowWrapProps<T>, Theme> = {},
+) =>
   style<OverflowWrapProps<T>, Theme, Media>({
     cssProp: OVERFLOWWRAP,
     prop: OVERFLOWWRAP,
-    key,
-    transform,
+    ...config,
   });
 
 export const createOverflowWrapRule = <T = OverflowWrapProperty, P = unknown>(

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { ShapeImageThresholdProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const SHAPEIMAGETHRESHOLD = 'shapeImageThreshold';
 
@@ -23,20 +23,13 @@ export const createShapeImageThreshold = <
   T = ShapeImageThresholdProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<ShapeImageThresholdProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<ShapeImageThresholdProps<T>, Theme> = {},
+) =>
   style<ShapeImageThresholdProps<T>, Theme, Media>({
     cssProp: SHAPEIMAGETHRESHOLD,
     prop: SHAPEIMAGETHRESHOLD,
-    key,
-    transform,
+    ...config,
   });
 
 export const createShapeImageThresholdRule = <

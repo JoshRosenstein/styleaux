@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { CounterResetProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const COUNTERRESET = 'counterReset';
 
@@ -23,17 +23,13 @@ export const createCounterReset = <
   T = CounterResetProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<CounterResetProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<CounterResetProps<T>, Theme> = {},
+) =>
   style<CounterResetProps<T>, Theme, Media>({
     cssProp: COUNTERRESET,
     prop: COUNTERRESET,
-    key,
-    transform,
+    ...config,
   });
 
 export const createCounterResetRule = <T = CounterResetProperty, P = unknown>(

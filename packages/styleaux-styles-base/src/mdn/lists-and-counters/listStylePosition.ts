@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { ListStylePositionProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const LISTSTYLEPOSITION = 'listStylePosition';
 
@@ -23,17 +23,13 @@ export const createListStylePosition = <
   T = ListStylePositionProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ListStylePositionProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<ListStylePositionProps<T>, Theme> = {},
+) =>
   style<ListStylePositionProps<T>, Theme, Media>({
     cssProp: LISTSTYLEPOSITION,
     prop: LISTSTYLEPOSITION,
-    key,
-    transform,
+    ...config,
   });
 
 export const createListStylePositionRule = <

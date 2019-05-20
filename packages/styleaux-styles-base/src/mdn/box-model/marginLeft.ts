@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { MarginLeftProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const MARGINLEFT = 'marginLeft';
 
@@ -23,17 +23,13 @@ export const createMarginLeft = <
   T = MarginLeftProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<MarginLeftProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<MarginLeftProps<T>, Theme> = {},
+) =>
   style<MarginLeftProps<T>, Theme, Media>({
     cssProp: MARGINLEFT,
     prop: MARGINLEFT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createMarginLeftRule = <T = MarginLeftProperty, P = unknown>(

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { ShapeMarginProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const SHAPEMARGIN = 'shapeMargin';
 
@@ -23,17 +23,13 @@ export const createShapeMargin = <
   T = ShapeMarginProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ShapeMarginProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<ShapeMarginProps<T>, Theme> = {},
+) =>
   style<ShapeMarginProps<T>, Theme, Media>({
     cssProp: SHAPEMARGIN,
     prop: SHAPEMARGIN,
-    key,
-    transform,
+    ...config,
   });
 
 export const createShapeMarginRule = <T = ShapeMarginProperty, P = unknown>(

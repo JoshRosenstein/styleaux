@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { ContainProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const CONTAIN = 'contain';
 
@@ -23,17 +23,13 @@ export const createContain = <
   T = ContainProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ContainProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<ContainProps<T>, Theme> = {},
+) =>
   style<ContainProps<T>, Theme, Media>({
     cssProp: CONTAIN,
     prop: CONTAIN,
-    key,
-    transform,
+    ...config,
   });
 
 export const createContainRule = <T = ContainProperty, P = unknown>(

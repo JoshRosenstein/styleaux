@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { OffsetProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const OFFSET = 'offset';
 
@@ -18,17 +18,13 @@ export interface OffsetProps<T = OffsetProperty> {
   [OFFSET]: T;
 }
 
-export const createOffset = <T = OffsetProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<OffsetProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createOffset = <T = OffsetProperty, Media = never, Theme = never>(
+  config: Config<OffsetProps<T>, Theme> = {},
+) =>
   style<OffsetProps<T>, Theme, Media>({
     cssProp: OFFSET,
     prop: OFFSET,
-    key,
-    transform,
+    ...config,
   });
 
 export const createOffsetRule = <T = OffsetProperty, P = unknown>(

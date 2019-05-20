@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BorderTopColorProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERTOPCOLOR = 'borderTopColor';
 
@@ -23,17 +23,13 @@ export const createBorderTopColor = <
   T = BorderTopColorProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BorderTopColorProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BorderTopColorProps<T>, Theme> = {},
+) =>
   style<BorderTopColorProps<T>, Theme, Media>({
     cssProp: BORDERTOPCOLOR,
     prop: BORDERTOPCOLOR,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBorderTopColorRule = <

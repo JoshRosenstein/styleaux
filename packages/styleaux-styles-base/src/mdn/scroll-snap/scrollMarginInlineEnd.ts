@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { ScrollMarginInlineEndProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const SCROLLMARGININLINEEND = 'scrollMarginInlineEnd';
 
@@ -23,20 +23,13 @@ export const createScrollMarginInlineEnd = <
   T = ScrollMarginInlineEndProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<ScrollMarginInlineEndProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<ScrollMarginInlineEndProps<T>, Theme> = {},
+) =>
   style<ScrollMarginInlineEndProps<T>, Theme, Media>({
     cssProp: SCROLLMARGININLINEEND,
     prop: SCROLLMARGININLINEEND,
-    key,
-    transform,
+    ...config,
   });
 
 export const createScrollMarginInlineEndRule = <

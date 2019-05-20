@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { TransitionTimingFunctionProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TRANSITIONTIMINGFUNCTION = 'transitionTimingFunction';
 
@@ -26,20 +26,13 @@ export const createTransitionTimingFunction = <
   T = TransitionTimingFunctionProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<TransitionTimingFunctionProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<TransitionTimingFunctionProps<T>, Theme> = {},
+) =>
   style<TransitionTimingFunctionProps<T>, Theme, Media>({
     cssProp: TRANSITIONTIMINGFUNCTION,
     prop: TRANSITIONTIMINGFUNCTION,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTransitionTimingFunctionRule = <

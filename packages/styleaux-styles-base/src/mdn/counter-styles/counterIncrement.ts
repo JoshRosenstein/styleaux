@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { CounterIncrementProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const COUNTERINCREMENT = 'counterIncrement';
 
@@ -23,17 +23,13 @@ export const createCounterIncrement = <
   T = CounterIncrementProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<CounterIncrementProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<CounterIncrementProps<T>, Theme> = {},
+) =>
   style<CounterIncrementProps<T>, Theme, Media>({
     cssProp: COUNTERINCREMENT,
     prop: COUNTERINCREMENT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createCounterIncrementRule = <

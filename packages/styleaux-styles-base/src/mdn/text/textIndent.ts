@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { TextIndentProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const TEXTINDENT = 'textIndent';
 
@@ -23,17 +23,13 @@ export const createTextIndent = <
   T = TextIndentProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<TextIndentProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<TextIndentProps<T>, Theme> = {},
+) =>
   style<TextIndentProps<T>, Theme, Media>({
     cssProp: TEXTINDENT,
     prop: TEXTINDENT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTextIndentRule = <T = TextIndentProperty, P = unknown>(

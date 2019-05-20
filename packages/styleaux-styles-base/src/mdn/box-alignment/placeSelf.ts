@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { PlaceSelfProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const PLACESELF = 'placeSelf';
 
@@ -35,17 +35,13 @@ export const createPlaceSelf = <
   T = PlaceSelfProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<PlaceSelfProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<PlaceSelfProps<T>, Theme> = {},
+) =>
   style<PlaceSelfProps<T>, Theme, Media>({
     cssProp: PLACESELF,
     prop: PLACESELF,
-    key,
-    transform,
+    ...config,
   });
 
 export const createPlaceSelfRule = <T = PlaceSelfProperty, P = unknown>(

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BorderCollapseProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERCOLLAPSE = 'borderCollapse';
 
@@ -23,17 +23,13 @@ export const createBorderCollapse = <
   T = BorderCollapseProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BorderCollapseProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BorderCollapseProps<T>, Theme> = {},
+) =>
   style<BorderCollapseProps<T>, Theme, Media>({
     cssProp: BORDERCOLLAPSE,
     prop: BORDERCOLLAPSE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBorderCollapseRule = <

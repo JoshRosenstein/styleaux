@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { GridAutoFlowProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const GRIDAUTOFLOW = 'gridAutoFlow';
 
@@ -23,17 +23,13 @@ export const createGridAutoFlow = <
   T = GridAutoFlowProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<GridAutoFlowProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<GridAutoFlowProps<T>, Theme> = {},
+) =>
   style<GridAutoFlowProps<T>, Theme, Media>({
     cssProp: GRIDAUTOFLOW,
     prop: GRIDAUTOFLOW,
-    key,
-    transform,
+    ...config,
   });
 
 export const createGridAutoFlowRule = <T = GridAutoFlowProperty, P = unknown>(

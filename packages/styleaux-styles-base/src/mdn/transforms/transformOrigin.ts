@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { TransformOriginProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TRANSFORMORIGIN = 'transformOrigin';
 
@@ -24,17 +24,13 @@ export const createTransformOrigin = <
   T = TransformOriginProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<TransformOriginProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<TransformOriginProps<T>, Theme> = {},
+) =>
   style<TransformOriginProps<T>, Theme, Media>({
     cssProp: TRANSFORMORIGIN,
     prop: TRANSFORMORIGIN,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTransformOriginRule = <

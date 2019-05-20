@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { VisibilityProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const VISIBILITY = 'visibility';
 
@@ -23,17 +23,13 @@ export const createVisibility = <
   T = VisibilityProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<VisibilityProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<VisibilityProps<T>, Theme> = {},
+) =>
   style<VisibilityProps<T>, Theme, Media>({
     cssProp: VISIBILITY,
     prop: VISIBILITY,
-    key,
-    transform,
+    ...config,
   });
 
 export const createVisibilityRule = <T = VisibilityProperty, P = unknown>(

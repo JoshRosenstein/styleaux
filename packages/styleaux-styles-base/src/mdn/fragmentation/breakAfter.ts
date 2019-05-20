@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { BreakAfterProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const BREAKAFTER = 'breakAfter';
 
@@ -45,17 +45,13 @@ export const createBreakAfter = <
   T = BreakAfterProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BreakAfterProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BreakAfterProps<T>, Theme> = {},
+) =>
   style<BreakAfterProps<T>, Theme, Media>({
     cssProp: BREAKAFTER,
     prop: BREAKAFTER,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBreakAfterRule = <T = BreakAfterProperty, P = unknown>(

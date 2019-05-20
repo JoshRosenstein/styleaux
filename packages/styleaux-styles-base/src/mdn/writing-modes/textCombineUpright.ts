@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { TextCombineUprightProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTCOMBINEUPRIGHT = 'textCombineUpright';
 
@@ -23,20 +23,13 @@ export const createTextCombineUpright = <
   T = TextCombineUprightProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<TextCombineUprightProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<TextCombineUprightProps<T>, Theme> = {},
+) =>
   style<TextCombineUprightProps<T>, Theme, Media>({
     cssProp: TEXTCOMBINEUPRIGHT,
     prop: TEXTCOMBINEUPRIGHT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTextCombineUprightRule = <

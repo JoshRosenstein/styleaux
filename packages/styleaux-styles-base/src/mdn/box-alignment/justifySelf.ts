@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { JustifySelfProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const JUSTIFYSELF = 'justifySelf';
 
@@ -37,17 +37,13 @@ export const createJustifySelf = <
   T = JustifySelfProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<JustifySelfProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<JustifySelfProps<T>, Theme> = {},
+) =>
   style<JustifySelfProps<T>, Theme, Media>({
     cssProp: JUSTIFYSELF,
     prop: JUSTIFYSELF,
-    key,
-    transform,
+    ...config,
   });
 
 export const createJustifySelfRule = <T = JustifySelfProperty, P = unknown>(

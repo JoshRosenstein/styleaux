@@ -43,9 +43,7 @@ export interface GapProps<T = GapProperty> {
 export const createGap = <T = GapProperty, Media = never, Theme = never>({
   key,
   transform,
-}: Partial<
-  Pick<StyleOptions<GapProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+}: Partial<Pick<StyleOptions<GapProps<T>, Theme>, 'key' | 'transform'>> = {}) =>
   style<GapProps<T>, Theme, Media>({
     cssProp: GAP,
     prop: GAP,

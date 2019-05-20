@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { ColorAdjustProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const COLORADJUST = 'colorAdjust';
 
@@ -23,17 +23,13 @@ export const createColorAdjust = <
   T = ColorAdjustProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ColorAdjustProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<ColorAdjustProps<T>, Theme> = {},
+) =>
   style<ColorAdjustProps<T>, Theme, Media>({
     cssProp: COLORADJUST,
     prop: COLORADJUST,
-    key,
-    transform,
+    ...config,
   });
 
 export const createColorAdjustRule = <T = ColorAdjustProperty, P = unknown>(

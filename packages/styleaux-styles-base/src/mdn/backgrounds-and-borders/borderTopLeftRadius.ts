@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BorderTopLeftRadiusProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERTOPLEFTRADIUS = 'borderTopLeftRadius';
 
@@ -24,20 +24,13 @@ export const createBorderTopLeftRadius = <
   T = BorderTopLeftRadiusProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<BorderTopLeftRadiusProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<BorderTopLeftRadiusProps<T>, Theme> = {},
+) =>
   style<BorderTopLeftRadiusProps<T>, Theme, Media>({
     cssProp: BORDERTOPLEFTRADIUS,
     prop: BORDERTOPLEFTRADIUS,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBorderTopLeftRadiusRule = <

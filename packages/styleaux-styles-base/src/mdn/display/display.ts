@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { DisplayProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const DISPLAY = 'display';
 
@@ -23,17 +23,13 @@ export const createDisplay = <
   T = DisplayProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<DisplayProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<DisplayProps<T>, Theme> = {},
+) =>
   style<DisplayProps<T>, Theme, Media>({
     cssProp: DISPLAY,
     prop: DISPLAY,
-    key,
-    transform,
+    ...config,
   });
 
 export const createDisplayRule = <T = DisplayProperty, P = unknown>(

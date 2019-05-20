@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { FontVariantEastAsianProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const FONTVARIANTEASTASIAN = 'fontVariantEastAsian';
 
@@ -23,20 +23,13 @@ export const createFontVariantEastAsian = <
   T = FontVariantEastAsianProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<FontVariantEastAsianProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<FontVariantEastAsianProps<T>, Theme> = {},
+) =>
   style<FontVariantEastAsianProps<T>, Theme, Media>({
     cssProp: FONTVARIANTEASTASIAN,
     prop: FONTVARIANTEASTASIAN,
-    key,
-    transform,
+    ...config,
   });
 
 export const createFontVariantEastAsianRule = <

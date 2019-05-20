@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { MixBlendModeProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const MIXBLENDMODE = 'mixBlendMode';
 
@@ -23,17 +23,13 @@ export const createMixBlendMode = <
   T = MixBlendModeProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<MixBlendModeProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<MixBlendModeProps<T>, Theme> = {},
+) =>
   style<MixBlendModeProps<T>, Theme, Media>({
     cssProp: MIXBLENDMODE,
     prop: MIXBLENDMODE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createMixBlendModeRule = <T = MixBlendModeProperty, P = unknown>(

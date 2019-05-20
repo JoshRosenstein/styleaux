@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { TextAlignProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const TEXTALIGN = 'textAlign';
 
@@ -23,17 +23,13 @@ export const createTextAlign = <
   T = TextAlignProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<TextAlignProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<TextAlignProps<T>, Theme> = {},
+) =>
   style<TextAlignProps<T>, Theme, Media>({
     cssProp: TEXTALIGN,
     prop: TEXTALIGN,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTextAlignRule = <T = TextAlignProperty, P = unknown>(

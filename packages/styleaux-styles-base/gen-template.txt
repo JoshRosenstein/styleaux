@@ -1,6 +1,7 @@
+import { Config } from '../../types';
 import { __TYPE_NAME__ } from '@styleaux/csstype';
+import { style, styler, GetValue } from '@styleaux/core';
 
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const __PROPERTY_NAME_CAP__='__PROPERTY_NAME__'
 
@@ -13,13 +14,11 @@ export const create__PROPERTY_NAME_PASCAL__ = <
   T = __TYPE_NAME__,
   Media = never,
   Theme= never,
->({key, transform}: Partial<Pick<StyleOptions<__INTERFACE_PROPERTY_NAME__Props<T>,Theme>,'key'| 'transform'>> =
-{}) =>
+>(config: Config<__INTERFACE_PROPERTY_NAME__Props<T>, Theme> = {}) =>
   style<__INTERFACE_PROPERTY_NAME__Props<T>,Theme,Media>({
     cssProp:__PROPERTY_NAME_CAP__,
     prop:__PROPERTY_NAME_CAP__,
-    key,
-    transform,
+  ...config,
   })
 
 export const create__PROPERTY_NAME_PASCAL__Rule = <T = __TYPE_NAME__, P=unknown>(

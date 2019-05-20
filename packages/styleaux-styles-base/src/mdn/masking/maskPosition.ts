@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { MaskPositionProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const MASKPOSITION = 'maskPosition';
 
@@ -23,17 +23,13 @@ export const createMaskPosition = <
   T = MaskPositionProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<MaskPositionProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<MaskPositionProps<T>, Theme> = {},
+) =>
   style<MaskPositionProps<T>, Theme, Media>({
     cssProp: MASKPOSITION,
     prop: MASKPOSITION,
-    key,
-    transform,
+    ...config,
   });
 
 export const createMaskPositionRule = <T = MaskPositionProperty, P = unknown>(

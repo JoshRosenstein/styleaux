@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { PaddingBlockProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const PADDINGBLOCK = 'paddingBlock';
 
@@ -23,17 +23,13 @@ export const createPaddingBlock = <
   T = PaddingBlockProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<PaddingBlockProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<PaddingBlockProps<T>, Theme> = {},
+) =>
   style<PaddingBlockProps<T>, Theme, Media>({
     cssProp: PADDINGBLOCK,
     prop: PADDINGBLOCK,
-    key,
-    transform,
+    ...config,
   });
 
 export const createPaddingBlockRule = <T = PaddingBlockProperty, P = unknown>(

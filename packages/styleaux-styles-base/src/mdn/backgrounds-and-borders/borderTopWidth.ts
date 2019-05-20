@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BorderTopWidthProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERTOPWIDTH = 'borderTopWidth';
 
@@ -23,17 +23,13 @@ export const createBorderTopWidth = <
   T = BorderTopWidthProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BorderTopWidthProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BorderTopWidthProps<T>, Theme> = {},
+) =>
   style<BorderTopWidthProps<T>, Theme, Media>({
     cssProp: BORDERTOPWIDTH,
     prop: BORDERTOPWIDTH,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBorderTopWidthRule = <

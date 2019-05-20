@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { PerspectiveProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const PERSPECTIVE = 'perspective';
 
@@ -24,17 +24,13 @@ export const createPerspective = <
   T = PerspectiveProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<PerspectiveProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<PerspectiveProps<T>, Theme> = {},
+) =>
   style<PerspectiveProps<T>, Theme, Media>({
     cssProp: PERSPECTIVE,
     prop: PERSPECTIVE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createPerspectiveRule = <T = PerspectiveProperty, P = unknown>(

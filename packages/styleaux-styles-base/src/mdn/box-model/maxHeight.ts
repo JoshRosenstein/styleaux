@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { MaxHeightProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const MAXHEIGHT = 'maxHeight';
 
@@ -23,17 +23,13 @@ export const createMaxHeight = <
   T = MaxHeightProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<MaxHeightProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<MaxHeightProps<T>, Theme> = {},
+) =>
   style<MaxHeightProps<T>, Theme, Media>({
     cssProp: MAXHEIGHT,
     prop: MAXHEIGHT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createMaxHeightRule = <T = MaxHeightProperty, P = unknown>(

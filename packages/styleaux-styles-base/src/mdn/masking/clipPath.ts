@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { ClipPathProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const CLIPPATH = 'clipPath';
 
@@ -24,17 +24,13 @@ export const createClipPath = <
   T = ClipPathProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ClipPathProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<ClipPathProps<T>, Theme> = {},
+) =>
   style<ClipPathProps<T>, Theme, Media>({
     cssProp: CLIPPATH,
     prop: CLIPPATH,
-    key,
-    transform,
+    ...config,
   });
 
 export const createClipPathRule = <T = ClipPathProperty, P = unknown>(

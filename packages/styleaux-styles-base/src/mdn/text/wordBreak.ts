@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { WordBreakProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const WORDBREAK = 'wordBreak';
 
@@ -23,17 +23,13 @@ export const createWordBreak = <
   T = WordBreakProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<WordBreakProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<WordBreakProps<T>, Theme> = {},
+) =>
   style<WordBreakProps<T>, Theme, Media>({
     cssProp: WORDBREAK,
     prop: WORDBREAK,
-    key,
-    transform,
+    ...config,
   });
 
 export const createWordBreakRule = <T = WordBreakProperty, P = unknown>(

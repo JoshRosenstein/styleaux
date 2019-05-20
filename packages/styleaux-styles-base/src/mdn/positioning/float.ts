@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { FloatProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const FLOAT = 'float';
 
@@ -19,17 +19,13 @@ export interface FloatProps<T = FloatProperty> {
   [FLOAT]: T;
 }
 
-export const createFloat = <T = FloatProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<FloatProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createFloat = <T = FloatProperty, Media = never, Theme = never>(
+  config: Config<FloatProps<T>, Theme> = {},
+) =>
   style<FloatProps<T>, Theme, Media>({
     cssProp: FLOAT,
     prop: FLOAT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createFloatRule = <T = FloatProperty, P = unknown>(

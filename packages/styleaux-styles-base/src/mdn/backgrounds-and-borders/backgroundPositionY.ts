@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BackgroundPositionYProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BACKGROUNDPOSITIONY = 'backgroundPositionY';
 
@@ -23,20 +23,13 @@ export const createBackgroundPositionY = <
   T = BackgroundPositionYProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<BackgroundPositionYProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<BackgroundPositionYProps<T>, Theme> = {},
+) =>
   style<BackgroundPositionYProps<T>, Theme, Media>({
     cssProp: BACKGROUNDPOSITIONY,
     prop: BACKGROUNDPOSITIONY,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBackgroundPositionYRule = <

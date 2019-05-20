@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { OutlineWidthProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const OUTLINEWIDTH = 'outlineWidth';
 
@@ -23,17 +23,13 @@ export const createOutlineWidth = <
   T = OutlineWidthProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<OutlineWidthProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<OutlineWidthProps<T>, Theme> = {},
+) =>
   style<OutlineWidthProps<T>, Theme, Media>({
     cssProp: OUTLINEWIDTH,
     prop: OUTLINEWIDTH,
-    key,
-    transform,
+    ...config,
   });
 
 export const createOutlineWidthRule = <T = OutlineWidthProperty, P = unknown>(

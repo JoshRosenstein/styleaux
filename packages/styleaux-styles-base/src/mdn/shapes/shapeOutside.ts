@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { ShapeOutsideProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const SHAPEOUTSIDE = 'shapeOutside';
 
@@ -23,17 +23,13 @@ export const createShapeOutside = <
   T = ShapeOutsideProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ShapeOutsideProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<ShapeOutsideProps<T>, Theme> = {},
+) =>
   style<ShapeOutsideProps<T>, Theme, Media>({
     cssProp: SHAPEOUTSIDE,
     prop: SHAPEOUTSIDE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createShapeOutsideRule = <T = ShapeOutsideProperty, P = unknown>(

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { VerticalAlignProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const VERTICALALIGN = 'verticalAlign';
 
@@ -23,17 +23,13 @@ export const createVerticalAlign = <
   T = VerticalAlignProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<VerticalAlignProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<VerticalAlignProps<T>, Theme> = {},
+) =>
   style<VerticalAlignProps<T>, Theme, Media>({
     cssProp: VERTICALALIGN,
     prop: VERTICALALIGN,
-    key,
-    transform,
+    ...config,
   });
 
 export const createVerticalAlignRule = <T = VerticalAlignProperty, P = unknown>(

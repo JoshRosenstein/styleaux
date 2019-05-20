@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { OffsetRotateProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const OFFSETROTATE = 'offsetRotate';
 
@@ -24,17 +24,13 @@ export const createOffsetRotate = <
   T = OffsetRotateProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<OffsetRotateProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<OffsetRotateProps<T>, Theme> = {},
+) =>
   style<OffsetRotateProps<T>, Theme, Media>({
     cssProp: OFFSETROTATE,
     prop: OFFSETROTATE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createOffsetRotateRule = <T = OffsetRotateProperty, P = unknown>(

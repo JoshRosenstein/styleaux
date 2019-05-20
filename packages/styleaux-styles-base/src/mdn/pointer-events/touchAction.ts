@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { TouchActionProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const TOUCHACTION = 'touchAction';
 
@@ -24,17 +24,13 @@ export const createTouchAction = <
   T = TouchActionProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<TouchActionProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<TouchActionProps<T>, Theme> = {},
+) =>
   style<TouchActionProps<T>, Theme, Media>({
     cssProp: TOUCHACTION,
     prop: TOUCHACTION,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTouchActionRule = <T = TouchActionProperty, P = unknown>(

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { CaretColorProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const CARETCOLOR = 'caretColor';
 
@@ -23,17 +23,13 @@ export const createCaretColor = <
   T = CaretColorProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<CaretColorProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<CaretColorProps<T>, Theme> = {},
+) =>
   style<CaretColorProps<T>, Theme, Media>({
     cssProp: CARETCOLOR,
     prop: CARETCOLOR,
-    key,
-    transform,
+    ...config,
   });
 
 export const createCaretColorRule = <T = CaretColorProperty, P = unknown>(

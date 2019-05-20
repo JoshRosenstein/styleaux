@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { ColumnSpanProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const COLUMNSPAN = 'columnSpan';
 
@@ -23,17 +23,13 @@ export const createColumnSpan = <
   T = ColumnSpanProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ColumnSpanProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<ColumnSpanProps<T>, Theme> = {},
+) =>
   style<ColumnSpanProps<T>, Theme, Media>({
     cssProp: COLUMNSPAN,
     prop: COLUMNSPAN,
-    key,
-    transform,
+    ...config,
   });
 
 export const createColumnSpanRule = <T = ColumnSpanProperty, P = unknown>(

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { BorderRightProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const BORDERRIGHT = 'borderRight';
 
@@ -21,17 +21,13 @@ export const createBorderRight = <
   T = BorderRightProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BorderRightProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BorderRightProps<T>, Theme> = {},
+) =>
   style<BorderRightProps<T>, Theme, Media>({
     cssProp: BORDERRIGHT,
     prop: BORDERRIGHT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBorderRightRule = <T = BorderRightProperty, P = unknown>(

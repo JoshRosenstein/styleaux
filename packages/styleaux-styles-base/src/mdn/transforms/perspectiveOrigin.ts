@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { PerspectiveOriginProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const PERSPECTIVEORIGIN = 'perspectiveOrigin';
 
@@ -24,17 +24,13 @@ export const createPerspectiveOrigin = <
   T = PerspectiveOriginProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<PerspectiveOriginProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<PerspectiveOriginProps<T>, Theme> = {},
+) =>
   style<PerspectiveOriginProps<T>, Theme, Media>({
     cssProp: PERSPECTIVEORIGIN,
     prop: PERSPECTIVEORIGIN,
-    key,
-    transform,
+    ...config,
   });
 
 export const createPerspectiveOriginRule = <

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { EmptyCellsProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const EMPTYCELLS = 'emptyCells';
 
@@ -23,17 +23,13 @@ export const createEmptyCells = <
   T = EmptyCellsProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<EmptyCellsProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<EmptyCellsProps<T>, Theme> = {},
+) =>
   style<EmptyCellsProps<T>, Theme, Media>({
     cssProp: EMPTYCELLS,
     prop: EMPTYCELLS,
-    key,
-    transform,
+    ...config,
   });
 
 export const createEmptyCellsRule = <T = EmptyCellsProperty, P = unknown>(

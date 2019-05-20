@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { JustifyItemsProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const JUSTIFYITEMS = 'justifyItems';
 
@@ -37,17 +37,13 @@ export const createJustifyItems = <
   T = JustifyItemsProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<JustifyItemsProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<JustifyItemsProps<T>, Theme> = {},
+) =>
   style<JustifyItemsProps<T>, Theme, Media>({
     cssProp: JUSTIFYITEMS,
     prop: JUSTIFYITEMS,
-    key,
-    transform,
+    ...config,
   });
 
 export const createJustifyItemsRule = <T = JustifyItemsProperty, P = unknown>(

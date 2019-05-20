@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { OrphansProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const ORPHANS = 'orphans';
 
@@ -23,17 +23,13 @@ export const createOrphans = <
   T = OrphansProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<OrphansProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<OrphansProps<T>, Theme> = {},
+) =>
   style<OrphansProps<T>, Theme, Media>({
     cssProp: ORPHANS,
     prop: ORPHANS,
-    key,
-    transform,
+    ...config,
   });
 
 export const createOrphansRule = <T = OrphansProperty, P = unknown>(

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { WidowsProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const WIDOWS = 'widows';
 
@@ -19,17 +19,13 @@ export interface WidowsProps<T = WidowsProperty> {
   [WIDOWS]: T;
 }
 
-export const createWidows = <T = WidowsProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<WidowsProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createWidows = <T = WidowsProperty, Media = never, Theme = never>(
+  config: Config<WidowsProps<T>, Theme> = {},
+) =>
   style<WidowsProps<T>, Theme, Media>({
     cssProp: WIDOWS,
     prop: WIDOWS,
-    key,
-    transform,
+    ...config,
   });
 
 export const createWidowsRule = <T = WidowsProperty, P = unknown>(

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BackgroundAttachmentProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BACKGROUNDATTACHMENT = 'backgroundAttachment';
 
@@ -23,20 +23,13 @@ export const createBackgroundAttachment = <
   T = BackgroundAttachmentProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<BackgroundAttachmentProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<BackgroundAttachmentProps<T>, Theme> = {},
+) =>
   style<BackgroundAttachmentProps<T>, Theme, Media>({
     cssProp: BACKGROUNDATTACHMENT,
     prop: BACKGROUNDATTACHMENT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBackgroundAttachmentRule = <

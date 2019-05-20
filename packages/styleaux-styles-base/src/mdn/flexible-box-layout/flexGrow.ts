@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { FlexGrowProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const FLEXGROW = 'flexGrow';
 
@@ -24,17 +24,13 @@ export const createFlexGrow = <
   T = FlexGrowProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<FlexGrowProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<FlexGrowProps<T>, Theme> = {},
+) =>
   style<FlexGrowProps<T>, Theme, Media>({
     cssProp: FLEXGROW,
     prop: FLEXGROW,
-    key,
-    transform,
+    ...config,
   });
 
 export const createFlexGrowRule = <T = FlexGrowProperty, P = unknown>(

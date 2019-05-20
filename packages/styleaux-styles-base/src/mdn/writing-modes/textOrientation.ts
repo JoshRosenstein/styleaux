@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { TextOrientationProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTORIENTATION = 'textOrientation';
 
@@ -23,17 +23,13 @@ export const createTextOrientation = <
   T = TextOrientationProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<TextOrientationProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<TextOrientationProps<T>, Theme> = {},
+) =>
   style<TextOrientationProps<T>, Theme, Media>({
     cssProp: TEXTORIENTATION,
     prop: TEXTORIENTATION,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTextOrientationRule = <

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { ColumnRuleStyleProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const COLUMNRULESTYLE = 'columnRuleStyle';
 
@@ -23,17 +23,13 @@ export const createColumnRuleStyle = <
   T = ColumnRuleStyleProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ColumnRuleStyleProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<ColumnRuleStyleProps<T>, Theme> = {},
+) =>
   style<ColumnRuleStyleProps<T>, Theme, Media>({
     cssProp: COLUMNRULESTYLE,
     prop: COLUMNRULESTYLE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createColumnRuleStyleRule = <

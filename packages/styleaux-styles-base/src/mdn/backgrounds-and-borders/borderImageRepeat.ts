@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BorderImageRepeatProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERIMAGEREPEAT = 'borderImageRepeat';
 
@@ -23,17 +23,13 @@ export const createBorderImageRepeat = <
   T = BorderImageRepeatProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BorderImageRepeatProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BorderImageRepeatProps<T>, Theme> = {},
+) =>
   style<BorderImageRepeatProps<T>, Theme, Media>({
     cssProp: BORDERIMAGEREPEAT,
     prop: BORDERIMAGEREPEAT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBorderImageRepeatRule = <

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { ColumnCountProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const COLUMNCOUNT = 'columnCount';
 
@@ -24,17 +24,13 @@ export const createColumnCount = <
   T = ColumnCountProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ColumnCountProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<ColumnCountProps<T>, Theme> = {},
+) =>
   style<ColumnCountProps<T>, Theme, Media>({
     cssProp: COLUMNCOUNT,
     prop: COLUMNCOUNT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createColumnCountRule = <T = ColumnCountProperty, P = unknown>(

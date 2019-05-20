@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { BoxSizingProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const BOXSIZING = 'boxSizing';
 
@@ -24,17 +24,13 @@ export const createBoxSizing = <
   T = BoxSizingProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BoxSizingProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BoxSizingProps<T>, Theme> = {},
+) =>
   style<BoxSizingProps<T>, Theme, Media>({
     cssProp: BOXSIZING,
     prop: BOXSIZING,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBoxSizingRule = <T = BoxSizingProperty, P = unknown>(

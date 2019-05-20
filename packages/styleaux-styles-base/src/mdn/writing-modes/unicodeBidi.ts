@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { UnicodeBidiProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const UNICODEBIDI = 'unicodeBidi';
 
@@ -23,17 +23,13 @@ export const createUnicodeBidi = <
   T = UnicodeBidiProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<UnicodeBidiProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<UnicodeBidiProps<T>, Theme> = {},
+) =>
   style<UnicodeBidiProps<T>, Theme, Media>({
     cssProp: UNICODEBIDI,
     prop: UNICODEBIDI,
-    key,
-    transform,
+    ...config,
   });
 
 export const createUnicodeBidiRule = <T = UnicodeBidiProperty, P = unknown>(

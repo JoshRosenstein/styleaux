@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { OrderProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const ORDER = 'order';
 
@@ -20,17 +20,13 @@ export interface OrderProps<T = OrderProperty> {
   [ORDER]: T;
 }
 
-export const createOrder = <T = OrderProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<OrderProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createOrder = <T = OrderProperty, Media = never, Theme = never>(
+  config: Config<OrderProps<T>, Theme> = {},
+) =>
   style<OrderProps<T>, Theme, Media>({
     cssProp: ORDER,
     prop: ORDER,
-    key,
-    transform,
+    ...config,
   });
 
 export const createOrderRule = <T = OrderProperty, P = unknown>(

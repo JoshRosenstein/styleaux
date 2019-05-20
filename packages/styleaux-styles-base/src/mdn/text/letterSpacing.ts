@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { LetterSpacingProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const LETTERSPACING = 'letterSpacing';
 
@@ -23,17 +23,13 @@ export const createLetterSpacing = <
   T = LetterSpacingProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<LetterSpacingProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<LetterSpacingProps<T>, Theme> = {},
+) =>
   style<LetterSpacingProps<T>, Theme, Media>({
     cssProp: LETTERSPACING,
     prop: LETTERSPACING,
-    key,
-    transform,
+    ...config,
   });
 
 export const createLetterSpacingRule = <T = LetterSpacingProperty, P = unknown>(

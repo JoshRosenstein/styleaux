@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BorderInlineWidthProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERINLINEWIDTH = 'borderInlineWidth';
 
@@ -23,17 +23,13 @@ export const createBorderInlineWidth = <
   T = BorderInlineWidthProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BorderInlineWidthProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BorderInlineWidthProps<T>, Theme> = {},
+) =>
   style<BorderInlineWidthProps<T>, Theme, Media>({
     cssProp: BORDERINLINEWIDTH,
     prop: BORDERINLINEWIDTH,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBorderInlineWidthRule = <

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { QuotesProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const QUOTES = 'quotes';
 
@@ -19,17 +19,13 @@ export interface QuotesProps<T = QuotesProperty> {
   [QUOTES]: T;
 }
 
-export const createQuotes = <T = QuotesProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<QuotesProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createQuotes = <T = QuotesProperty, Media = never, Theme = never>(
+  config: Config<QuotesProps<T>, Theme> = {},
+) =>
   style<QuotesProps<T>, Theme, Media>({
     cssProp: QUOTES,
     prop: QUOTES,
-    key,
-    transform,
+    ...config,
   });
 
 export const createQuotesRule = <T = QuotesProperty, P = unknown>(

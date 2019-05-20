@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { TableLayoutProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const TABLELAYOUT = 'tableLayout';
 
@@ -23,17 +23,13 @@ export const createTableLayout = <
   T = TableLayoutProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<TableLayoutProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<TableLayoutProps<T>, Theme> = {},
+) =>
   style<TableLayoutProps<T>, Theme, Media>({
     cssProp: TABLELAYOUT,
     prop: TABLELAYOUT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTableLayoutRule = <T = TableLayoutProperty, P = unknown>(

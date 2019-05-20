@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { MaskOriginProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const MASKORIGIN = 'maskOrigin';
 
@@ -23,17 +23,13 @@ export const createMaskOrigin = <
   T = MaskOriginProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<MaskOriginProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<MaskOriginProps<T>, Theme> = {},
+) =>
   style<MaskOriginProps<T>, Theme, Media>({
     cssProp: MASKORIGIN,
     prop: MASKORIGIN,
-    key,
-    transform,
+    ...config,
   });
 
 export const createMaskOriginRule = <T = MaskOriginProperty, P = unknown>(

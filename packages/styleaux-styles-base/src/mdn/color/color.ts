@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { ColorProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const COLOR = 'color';
 
@@ -19,17 +19,13 @@ export interface ColorProps<T = ColorProperty> {
   [COLOR]: T;
 }
 
-export const createColor = <T = ColorProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ColorProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createColor = <T = ColorProperty, Media = never, Theme = never>(
+  config: Config<ColorProps<T>, Theme> = {},
+) =>
   style<ColorProps<T>, Theme, Media>({
     cssProp: COLOR,
     prop: COLOR,
-    key,
-    transform,
+    ...config,
   });
 
 export const createColorRule = <T = ColorProperty, P = unknown>(

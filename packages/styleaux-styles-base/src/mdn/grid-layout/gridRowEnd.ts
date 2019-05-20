@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { GridRowEndProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const GRIDROWEND = 'gridRowEnd';
 
@@ -23,17 +23,13 @@ export const createGridRowEnd = <
   T = GridRowEndProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<GridRowEndProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<GridRowEndProps<T>, Theme> = {},
+) =>
   style<GridRowEndProps<T>, Theme, Media>({
     cssProp: GRIDROWEND,
     prop: GRIDROWEND,
-    key,
-    transform,
+    ...config,
   });
 
 export const createGridRowEndRule = <T = GridRowEndProperty, P = unknown>(

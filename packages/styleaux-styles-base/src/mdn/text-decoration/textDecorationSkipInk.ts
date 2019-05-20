@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { TextDecorationSkipInkProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTDECORATIONSKIPINK = 'textDecorationSkipInk';
 
@@ -23,20 +23,13 @@ export const createTextDecorationSkipInk = <
   T = TextDecorationSkipInkProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<TextDecorationSkipInkProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<TextDecorationSkipInkProps<T>, Theme> = {},
+) =>
   style<TextDecorationSkipInkProps<T>, Theme, Media>({
     cssProp: TEXTDECORATIONSKIPINK,
     prop: TEXTDECORATIONSKIPINK,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTextDecorationSkipInkRule = <

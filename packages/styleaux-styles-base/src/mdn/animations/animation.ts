@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { AnimationProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const ANIMATION = 'animation';
 
@@ -22,17 +22,13 @@ export const createAnimation = <
   T = AnimationProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<AnimationProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<AnimationProps<T>, Theme> = {},
+) =>
   style<AnimationProps<T>, Theme, Media>({
     cssProp: ANIMATION,
     prop: ANIMATION,
-    key,
-    transform,
+    ...config,
   });
 
 export const createAnimationRule = <T = AnimationProperty, P = unknown>(

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { AnimationTimingFunctionProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const ANIMATIONTIMINGFUNCTION = 'animationTimingFunction';
 
@@ -26,20 +26,13 @@ export const createAnimationTimingFunction = <
   T = AnimationTimingFunctionProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<AnimationTimingFunctionProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<AnimationTimingFunctionProps<T>, Theme> = {},
+) =>
   style<AnimationTimingFunctionProps<T>, Theme, Media>({
     cssProp: ANIMATIONTIMINGFUNCTION,
     prop: ANIMATIONTIMINGFUNCTION,
-    key,
-    transform,
+    ...config,
   });
 
 export const createAnimationTimingFunctionRule = <

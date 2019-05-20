@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { GridColumnEndProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const GRIDCOLUMNEND = 'gridColumnEnd';
 
@@ -23,17 +23,13 @@ export const createGridColumnEnd = <
   T = GridColumnEndProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<GridColumnEndProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<GridColumnEndProps<T>, Theme> = {},
+) =>
   style<GridColumnEndProps<T>, Theme, Media>({
     cssProp: GRIDCOLUMNEND,
     prop: GRIDCOLUMNEND,
-    key,
-    transform,
+    ...config,
   });
 
 export const createGridColumnEndRule = <T = GridColumnEndProperty, P = unknown>(

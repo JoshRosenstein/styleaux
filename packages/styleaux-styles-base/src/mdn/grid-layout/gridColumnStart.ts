@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { GridColumnStartProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const GRIDCOLUMNSTART = 'gridColumnStart';
 
@@ -23,17 +23,13 @@ export const createGridColumnStart = <
   T = GridColumnStartProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<GridColumnStartProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<GridColumnStartProps<T>, Theme> = {},
+) =>
   style<GridColumnStartProps<T>, Theme, Media>({
     cssProp: GRIDCOLUMNSTART,
     prop: GRIDCOLUMNSTART,
-    key,
-    transform,
+    ...config,
   });
 
 export const createGridColumnStartRule = <

@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { WordWrapProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const WORDWRAP = 'wordWrap';
 
@@ -23,17 +23,13 @@ export const createWordWrap = <
   T = WordWrapProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<WordWrapProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<WordWrapProps<T>, Theme> = {},
+) =>
   style<WordWrapProps<T>, Theme, Media>({
     cssProp: WORDWRAP,
     prop: WORDWRAP,
-    key,
-    transform,
+    ...config,
   });
 
 export const createWordWrapRule = <T = WordWrapProperty, P = unknown>(

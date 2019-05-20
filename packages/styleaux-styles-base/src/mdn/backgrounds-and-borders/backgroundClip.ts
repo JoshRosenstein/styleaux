@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BackgroundClipProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BACKGROUNDCLIP = 'backgroundClip';
 
@@ -23,17 +23,13 @@ export const createBackgroundClip = <
   T = BackgroundClipProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BackgroundClipProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BackgroundClipProps<T>, Theme> = {},
+) =>
   style<BackgroundClipProps<T>, Theme, Media>({
     cssProp: BACKGROUNDCLIP,
     prop: BACKGROUNDCLIP,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBackgroundClipRule = <

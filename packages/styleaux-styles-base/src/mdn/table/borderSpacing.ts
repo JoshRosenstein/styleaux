@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BorderSpacingProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERSPACING = 'borderSpacing';
 
@@ -23,17 +23,13 @@ export const createBorderSpacing = <
   T = BorderSpacingProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BorderSpacingProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BorderSpacingProps<T>, Theme> = {},
+) =>
   style<BorderSpacingProps<T>, Theme, Media>({
     cssProp: BORDERSPACING,
     prop: BORDERSPACING,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBorderSpacingRule = <T = BorderSpacingProperty, P = unknown>(

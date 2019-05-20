@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { FilterProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const FILTER = 'filter';
 
@@ -20,17 +20,13 @@ export interface FilterProps<T = FilterProperty> {
   [FILTER]: T;
 }
 
-export const createFilter = <T = FilterProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<FilterProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createFilter = <T = FilterProperty, Media = never, Theme = never>(
+  config: Config<FilterProps<T>, Theme> = {},
+) =>
   style<FilterProps<T>, Theme, Media>({
     cssProp: FILTER,
     prop: FILTER,
-    key,
-    transform,
+    ...config,
   });
 
 export const createFilterRule = <T = FilterProperty, P = unknown>(

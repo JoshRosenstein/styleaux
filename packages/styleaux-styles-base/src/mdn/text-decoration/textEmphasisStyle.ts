@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { TextEmphasisStyleProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const TEXTEMPHASISSTYLE = 'textEmphasisStyle';
 
@@ -23,17 +23,13 @@ export const createTextEmphasisStyle = <
   T = TextEmphasisStyleProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<TextEmphasisStyleProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<TextEmphasisStyleProps<T>, Theme> = {},
+) =>
   style<TextEmphasisStyleProps<T>, Theme, Media>({
     cssProp: TEXTEMPHASISSTYLE,
     prop: TEXTEMPHASISSTYLE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTextEmphasisStyleRule = <

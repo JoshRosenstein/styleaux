@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { FontProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const FONT = 'font';
 
@@ -17,17 +17,13 @@ export interface FontProps<T = FontProperty> {
   [FONT]: T;
 }
 
-export const createFont = <T = FontProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<FontProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createFont = <T = FontProperty, Media = never, Theme = never>(
+  config: Config<FontProps<T>, Theme> = {},
+) =>
   style<FontProps<T>, Theme, Media>({
     cssProp: FONT,
     prop: FONT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createFontRule = <T = FontProperty, P = unknown>(

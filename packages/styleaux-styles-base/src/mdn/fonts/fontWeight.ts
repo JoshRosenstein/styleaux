@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { FontWeightProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const FONTWEIGHT = 'fontWeight';
 
@@ -23,17 +23,13 @@ export const createFontWeight = <
   T = FontWeightProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<FontWeightProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<FontWeightProps<T>, Theme> = {},
+) =>
   style<FontWeightProps<T>, Theme, Media>({
     cssProp: FONTWEIGHT,
     prop: FONTWEIGHT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createFontWeightRule = <T = FontWeightProperty, P = unknown>(

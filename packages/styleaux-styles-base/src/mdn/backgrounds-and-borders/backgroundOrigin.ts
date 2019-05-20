@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BackgroundOriginProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BACKGROUNDORIGIN = 'backgroundOrigin';
 
@@ -23,17 +23,13 @@ export const createBackgroundOrigin = <
   T = BackgroundOriginProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BackgroundOriginProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BackgroundOriginProps<T>, Theme> = {},
+) =>
   style<BackgroundOriginProps<T>, Theme, Media>({
     cssProp: BACKGROUNDORIGIN,
     prop: BACKGROUNDORIGIN,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBackgroundOriginRule = <

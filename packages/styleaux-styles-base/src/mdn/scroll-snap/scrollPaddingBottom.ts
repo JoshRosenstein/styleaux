@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { ScrollPaddingBottomProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const SCROLLPADDINGBOTTOM = 'scrollPaddingBottom';
 
@@ -23,20 +23,13 @@ export const createScrollPaddingBottom = <
   T = ScrollPaddingBottomProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<ScrollPaddingBottomProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<ScrollPaddingBottomProps<T>, Theme> = {},
+) =>
   style<ScrollPaddingBottomProps<T>, Theme, Media>({
     cssProp: SCROLLPADDINGBOTTOM,
     prop: SCROLLPADDINGBOTTOM,
-    key,
-    transform,
+    ...config,
   });
 
 export const createScrollPaddingBottomRule = <

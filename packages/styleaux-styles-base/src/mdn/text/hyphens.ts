@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { HyphensProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const HYPHENS = 'hyphens';
 
@@ -24,17 +24,13 @@ export const createHyphens = <
   T = HyphensProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<HyphensProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<HyphensProps<T>, Theme> = {},
+) =>
   style<HyphensProps<T>, Theme, Media>({
     cssProp: HYPHENS,
     prop: HYPHENS,
-    key,
-    transform,
+    ...config,
   });
 
 export const createHyphensRule = <T = HyphensProperty, P = unknown>(

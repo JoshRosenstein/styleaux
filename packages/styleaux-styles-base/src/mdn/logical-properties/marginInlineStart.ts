@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { MarginInlineStartProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const MARGININLINESTART = 'marginInlineStart';
 
@@ -24,17 +24,13 @@ export const createMarginInlineStart = <
   T = MarginInlineStartProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<MarginInlineStartProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<MarginInlineStartProps<T>, Theme> = {},
+) =>
   style<MarginInlineStartProps<T>, Theme, Media>({
     cssProp: MARGININLINESTART,
     prop: MARGININLINESTART,
-    key,
-    transform,
+    ...config,
   });
 
 export const createMarginInlineStartRule = <

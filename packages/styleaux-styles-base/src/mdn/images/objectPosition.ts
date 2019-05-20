@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { ObjectPositionProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const OBJECTPOSITION = 'objectPosition';
 
@@ -23,17 +23,13 @@ export const createObjectPosition = <
   T = ObjectPositionProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ObjectPositionProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<ObjectPositionProps<T>, Theme> = {},
+) =>
   style<ObjectPositionProps<T>, Theme, Media>({
     cssProp: OBJECTPOSITION,
     prop: OBJECTPOSITION,
-    key,
-    transform,
+    ...config,
   });
 
 export const createObjectPositionRule = <

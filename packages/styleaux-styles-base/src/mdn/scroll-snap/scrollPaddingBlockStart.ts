@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { ScrollPaddingBlockStartProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const SCROLLPADDINGBLOCKSTART = 'scrollPaddingBlockStart';
 
@@ -25,20 +25,13 @@ export const createScrollPaddingBlockStart = <
   T = ScrollPaddingBlockStartProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<ScrollPaddingBlockStartProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<ScrollPaddingBlockStartProps<T>, Theme> = {},
+) =>
   style<ScrollPaddingBlockStartProps<T>, Theme, Media>({
     cssProp: SCROLLPADDINGBLOCKSTART,
     prop: SCROLLPADDINGBLOCKSTART,
-    key,
-    transform,
+    ...config,
   });
 
 export const createScrollPaddingBlockStartRule = <

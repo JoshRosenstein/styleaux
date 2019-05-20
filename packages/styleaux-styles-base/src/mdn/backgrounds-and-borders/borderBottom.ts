@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { BorderBottomProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const BORDERBOTTOM = 'borderBottom';
 
@@ -21,17 +21,13 @@ export const createBorderBottom = <
   T = BorderBottomProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BorderBottomProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BorderBottomProps<T>, Theme> = {},
+) =>
   style<BorderBottomProps<T>, Theme, Media>({
     cssProp: BORDERBOTTOM,
     prop: BORDERBOTTOM,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBorderBottomRule = <T = BorderBottomProperty, P = unknown>(

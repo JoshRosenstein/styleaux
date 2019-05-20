@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { BreakInsideProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const BREAKINSIDE = 'breakInside';
 
@@ -45,17 +45,13 @@ export const createBreakInside = <
   T = BreakInsideProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BreakInsideProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BreakInsideProps<T>, Theme> = {},
+) =>
   style<BreakInsideProps<T>, Theme, Media>({
     cssProp: BREAKINSIDE,
     prop: BREAKINSIDE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBreakInsideRule = <T = BreakInsideProperty, P = unknown>(

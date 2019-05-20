@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { ScrollMarginLeftProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const SCROLLMARGINLEFT = 'scrollMarginLeft';
 
@@ -23,17 +23,13 @@ export const createScrollMarginLeft = <
   T = ScrollMarginLeftProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ScrollMarginLeftProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<ScrollMarginLeftProps<T>, Theme> = {},
+) =>
   style<ScrollMarginLeftProps<T>, Theme, Media>({
     cssProp: SCROLLMARGINLEFT,
     prop: SCROLLMARGINLEFT,
-    key,
-    transform,
+    ...config,
   });
 
 export const createScrollMarginLeftRule = <

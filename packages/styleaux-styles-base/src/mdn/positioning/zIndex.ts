@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { ZIndexProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const ZINDEX = 'zIndex';
 
@@ -19,17 +19,13 @@ export interface ZIndexProps<T = ZIndexProperty> {
   [ZINDEX]: T;
 }
 
-export const createZIndex = <T = ZIndexProperty, Media = never, Theme = never>({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<ZIndexProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+export const createZIndex = <T = ZIndexProperty, Media = never, Theme = never>(
+  config: Config<ZIndexProps<T>, Theme> = {},
+) =>
   style<ZIndexProps<T>, Theme, Media>({
     cssProp: ZINDEX,
     prop: ZINDEX,
-    key,
-    transform,
+    ...config,
   });
 
 export const createZIndexRule = <T = ZIndexProperty, P = unknown>(

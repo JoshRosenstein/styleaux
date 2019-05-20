@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { DirectionProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const DIRECTION = 'direction';
 
@@ -23,17 +23,13 @@ export const createDirection = <
   T = DirectionProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<DirectionProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<DirectionProps<T>, Theme> = {},
+) =>
   style<DirectionProps<T>, Theme, Media>({
     cssProp: DIRECTION,
     prop: DIRECTION,
-    key,
-    transform,
+    ...config,
   });
 
 export const createDirectionRule = <T = DirectionProperty, P = unknown>(

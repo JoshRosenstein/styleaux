@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { MinWidthProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const MINWIDTH = 'minWidth';
 
@@ -23,17 +23,13 @@ export const createMinWidth = <
   T = MinWidthProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<MinWidthProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<MinWidthProps<T>, Theme> = {},
+) =>
   style<MinWidthProps<T>, Theme, Media>({
     cssProp: MINWIDTH,
     prop: MINWIDTH,
-    key,
-    transform,
+    ...config,
   });
 
 export const createMinWidthRule = <T = MinWidthProperty, P = unknown>(

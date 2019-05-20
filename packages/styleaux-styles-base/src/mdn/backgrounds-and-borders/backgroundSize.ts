@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BackgroundSizeProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BACKGROUNDSIZE = 'backgroundSize';
 
@@ -24,17 +24,13 @@ export const createBackgroundSize = <
   T = BackgroundSizeProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BackgroundSizeProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BackgroundSizeProps<T>, Theme> = {},
+) =>
   style<BackgroundSizeProps<T>, Theme, Media>({
     cssProp: BACKGROUNDSIZE,
     prop: BACKGROUNDSIZE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBackgroundSizeRule = <

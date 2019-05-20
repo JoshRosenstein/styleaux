@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { FontVariationSettingsProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const FONTVARIATIONSETTINGS = 'fontVariationSettings';
 
@@ -23,20 +23,13 @@ export const createFontVariationSettings = <
   T = FontVariationSettingsProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<FontVariationSettingsProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<FontVariationSettingsProps<T>, Theme> = {},
+) =>
   style<FontVariationSettingsProps<T>, Theme, Media>({
     cssProp: FONTVARIATIONSETTINGS,
     prop: FONTVARIATIONSETTINGS,
-    key,
-    transform,
+    ...config,
   });
 
 export const createFontVariationSettingsRule = <

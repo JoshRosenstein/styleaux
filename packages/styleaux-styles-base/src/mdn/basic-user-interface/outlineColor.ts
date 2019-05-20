@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { OutlineColorProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const OUTLINECOLOR = 'outlineColor';
 
@@ -23,17 +23,13 @@ export const createOutlineColor = <
   T = OutlineColorProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<OutlineColorProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<OutlineColorProps<T>, Theme> = {},
+) =>
   style<OutlineColorProps<T>, Theme, Media>({
     cssProp: OUTLINECOLOR,
     prop: OUTLINECOLOR,
-    key,
-    transform,
+    ...config,
   });
 
 export const createOutlineColorRule = <T = OutlineColorProperty, P = unknown>(

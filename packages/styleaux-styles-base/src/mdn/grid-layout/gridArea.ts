@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { GridAreaProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const GRIDAREA = 'gridArea';
 
@@ -21,17 +21,13 @@ export const createGridArea = <
   T = GridAreaProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<GridAreaProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<GridAreaProps<T>, Theme> = {},
+) =>
   style<GridAreaProps<T>, Theme, Media>({
     cssProp: GRIDAREA,
     prop: GRIDAREA,
-    key,
-    transform,
+    ...config,
   });
 
 export const createGridAreaRule = <T = GridAreaProperty, P = unknown>(

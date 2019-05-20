@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { MaskClipProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const MASKCLIP = 'maskClip';
 
@@ -23,17 +23,13 @@ export const createMaskClip = <
   T = MaskClipProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<MaskClipProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<MaskClipProps<T>, Theme> = {},
+) =>
   style<MaskClipProps<T>, Theme, Media>({
     cssProp: MASKCLIP,
     prop: MASKCLIP,
-    key,
-    transform,
+    ...config,
   });
 
 export const createMaskClipRule = <T = MaskClipProperty, P = unknown>(

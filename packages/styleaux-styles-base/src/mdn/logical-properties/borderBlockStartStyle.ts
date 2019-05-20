@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { BorderBlockStartStyleProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const BORDERBLOCKSTARTSTYLE = 'borderBlockStartStyle';
 
@@ -23,20 +23,13 @@ export const createBorderBlockStartStyle = <
   T = BorderBlockStartStyleProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<
-    StyleOptions<BorderBlockStartStyleProps<T>, Theme>,
-    'key' | 'transform'
-  >
-> = {}) =>
+>(
+  config: Config<BorderBlockStartStyleProps<T>, Theme> = {},
+) =>
   style<BorderBlockStartStyleProps<T>, Theme, Media>({
     cssProp: BORDERBLOCKSTARTSTYLE,
     prop: BORDERBLOCKSTARTSTYLE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBorderBlockStartStyleRule = <

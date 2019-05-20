@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { GridTemplateAreasProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const GRIDTEMPLATEAREAS = 'gridTemplateAreas';
 
@@ -23,17 +23,13 @@ export const createGridTemplateAreas = <
   T = GridTemplateAreasProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<GridTemplateAreasProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<GridTemplateAreasProps<T>, Theme> = {},
+) =>
   style<GridTemplateAreasProps<T>, Theme, Media>({
     cssProp: GRIDTEMPLATEAREAS,
     prop: GRIDTEMPLATEAREAS,
-    key,
-    transform,
+    ...config,
   });
 
 export const createGridTemplateAreasRule = <

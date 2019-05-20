@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { TextOverflowProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const TEXTOVERFLOW = 'textOverflow';
 
@@ -23,17 +23,13 @@ export const createTextOverflow = <
   T = TextOverflowProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<TextOverflowProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<TextOverflowProps<T>, Theme> = {},
+) =>
   style<TextOverflowProps<T>, Theme, Media>({
     cssProp: TEXTOVERFLOW,
     prop: TEXTOVERFLOW,
-    key,
-    transform,
+    ...config,
   });
 
 export const createTextOverflowRule = <T = TextOverflowProperty, P = unknown>(

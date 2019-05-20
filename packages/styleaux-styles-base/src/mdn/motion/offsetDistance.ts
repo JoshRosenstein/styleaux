@@ -1,6 +1,6 @@
+import { Config } from '../../types';
+import { style, styler, GetValue } from '@styleaux/core';
 import { OffsetDistanceProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
 
 const OFFSETDISTANCE = 'offsetDistance';
 
@@ -24,17 +24,13 @@ export const createOffsetDistance = <
   T = OffsetDistanceProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<OffsetDistanceProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<OffsetDistanceProps<T>, Theme> = {},
+) =>
   style<OffsetDistanceProps<T>, Theme, Media>({
     cssProp: OFFSETDISTANCE,
     prop: OFFSETDISTANCE,
-    key,
-    transform,
+    ...config,
   });
 
 export const createOffsetDistanceRule = <

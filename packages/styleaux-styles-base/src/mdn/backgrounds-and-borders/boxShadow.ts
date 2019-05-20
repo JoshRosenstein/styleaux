@@ -1,6 +1,6 @@
+import { Config } from '../../types';
 import { BoxShadowProperty } from '@styleaux/csstype';
-
-import { style, StyleOptions, styler, GetValue } from '@styleaux/core';
+import { style, styler, GetValue } from '@styleaux/core';
 
 const BOXSHADOW = 'boxShadow';
 
@@ -24,17 +24,13 @@ export const createBoxShadow = <
   T = BoxShadowProperty,
   Media = never,
   Theme = never
->({
-  key,
-  transform,
-}: Partial<
-  Pick<StyleOptions<BoxShadowProps<T>, Theme>, 'key' | 'transform'>
-> = {}) =>
+>(
+  config: Config<BoxShadowProps<T>, Theme> = {},
+) =>
   style<BoxShadowProps<T>, Theme, Media>({
     cssProp: BOXSHADOW,
     prop: BOXSHADOW,
-    key,
-    transform,
+    ...config,
   });
 
 export const createBoxShadowRule = <T = BoxShadowProperty, P = unknown>(
