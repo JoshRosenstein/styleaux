@@ -1,7 +1,7 @@
 import { isString } from 'typed-is';
 import { px } from '@styleaux/tools';
 import { WIDTH_KEY } from '../constants';
-import { AnyFunc } from '@styleaux/core/';
+import { AnyFunc } from '@styleaux/types';
 import { themeValue } from './theme-value';
 
 export const getWidth = (n: string | number) =>

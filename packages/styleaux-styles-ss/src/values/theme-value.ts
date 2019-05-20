@@ -1,4 +1,4 @@
-import { getThemeValue } from '@styleaux/core';
+import { getThemeValue, Props } from '@styleaux/core';
 
 export function themeValue<T>({
   themeKey,
@@ -7,6 +7,6 @@ export function themeValue<T>({
   themeKey: string;
   transform?: any;
 }) {
-  return (input: T, props?: {}, mediaKey?: string) =>
+  return (input: T, props: Props, mediaKey?: string) =>
     getThemeValue(themeKey, transform)(input, input, mediaKey)(props);
 }
