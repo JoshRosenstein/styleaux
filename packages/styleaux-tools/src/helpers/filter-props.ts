@@ -1,4 +1,4 @@
-import { Omit } from 'simplytyped';
+import { Omit } from '@styleaux/types';
 
 /**
  * `inList` accepts a list of `values` and returns a function that accepts

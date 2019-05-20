@@ -1,6 +1,13 @@
 import { px } from '../utils/px';
 import { combineStyles } from '@styleaux/core';
 import {
+  COLOR_KEY,
+  BORDER_KEY,
+  BORDERWIDTHS_KEY,
+  BORDER_STYLES_KEY,
+  RADIUS_KEY,
+} from '../constants';
+import {
   createBorder,
   createBorderWidth,
   createBorderStyle,
@@ -12,27 +19,27 @@ import {
   createBorderRadius,
 } from '@styleaux/styles-base';
 
-export const border = createBorder({ key: 'borders' });
+export const border = createBorder({ key: BORDER_KEY });
 
 export const borderWidth = createBorderWidth({
-  key: 'borderWidths',
+  key: BORDERWIDTHS_KEY,
   transform: px,
 });
 
-export const borderStyle = createBorderStyle({ key: 'borderStyles' });
+export const borderStyle = createBorderStyle({ key: BORDER_STYLES_KEY });
 
-export const borderColor = createBorderColor({ key: 'colors' });
+export const borderColor = createBorderColor({ key: COLOR_KEY });
 
-export const borderTop = createBorderTop({ key: 'borders' });
+export const borderTop = createBorderTop({ key: BORDER_KEY });
 
-export const borderRight = createBorderRight({ key: 'borders' });
+export const borderRight = createBorderRight({ key: BORDER_KEY });
 
-export const borderBottom = createBorderBottom({ key: 'borders' });
+export const borderBottom = createBorderBottom({ key: BORDER_KEY });
 
-export const borderLeft = createBorderLeft({ key: 'borders' });
+export const borderLeft = createBorderLeft({ key: BORDER_KEY });
 
 export const borderRadius = createBorderRadius({
-  key: 'radii',
+  key: RADIUS_KEY,
   transform: px,
 });
 

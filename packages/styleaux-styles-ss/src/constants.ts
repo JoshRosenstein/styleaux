@@ -25,7 +25,7 @@ export const MAXHEIGHT_KEY = 'maxHeights';
 export const MINHEIGHTS_KEY = 'minHeights';
 
 export const BORDERWIDTHS_KEY = 'borderWidths';
-
+export const BORDER_STYLES_KEY = 'borderStyles';
 export const BORDER_KEY = 'borders';
 
 export const RADIUS_KEY = 'radii' as 'radii';

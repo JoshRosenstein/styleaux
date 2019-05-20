@@ -30,7 +30,7 @@ test('returns raw color values', () => {
   expect(a).toEqual([{ color: 'inherit' }, { backgroundColor: 'tomato' }]);
 });
 
-test.skip('backgroundColor prop overrides bg prop', () => {
+test('backgroundColor prop overrides bg prop', () => {
   const a = color({
     backgroundColor: 'tomato',
     bg: 'blue',
@@ -58,17 +58,17 @@ test('returns a string font-size', () => {
 });
 
 test('returns a percentage based width', () => {
-  const a = width({ w: 1 / 2 });
+  const a = width({ width: 1 / 2 });
   expect(a).toMatchSnapshot();
 });
 
 test('returns a pixel based width', () => {
-  const a = width({ w: 256 });
+  const a = width({ width: 256 });
   expect(a).toMatchSnapshot();
 });
 
 test('returns a string width', () => {
-  const a = width({ w: 'auto' });
+  const a = width({ width: 'auto' });
   expect(a).toMatchSnapshot();
 });
 
@@ -180,16 +180,16 @@ test('pl prop sets paddingLeft 0', () => {
   expect(styles).toMatchSnapshot();
 });
 
-test.skip('px prop overrides pl prop', (t) => {
-  const styles = space({
-    pl: 1,
-    px: 2,
-  });
+// test.skip('px prop overrides pl prop', (t) => {
+//   const styles = space({
+//     pl: 1,
+//     px: 2,
+//   });
 
-  // [ { paddingLeft: '2px', paddingRight: '2px' },
-  // { paddingLeft: '4px' } ]
-  expect(styles).toMatchSnapshot();
-});
+//   // [ { paddingLeft: '2px', paddingRight: '2px' },
+//   // { paddingLeft: '4px' } ]
+//   expect(styles).toMatchSnapshot();
+// });
 
 test('size returns width and height', () => {
   const styles = size({

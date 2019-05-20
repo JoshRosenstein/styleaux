@@ -1,45 +1,48 @@
 import { px } from '../utils/px';
-import { WidthProperty } from '@styleaux/csstype';
-import { widthValue } from '../values/width-value';
+import { getWidth } from '../values/width-value';
 import { style, StyleOptions } from '@styleaux/core';
+import {
+  WIDTH_KEY,
+  MAXHEIGHT_KEY,
+  MINWIDTH_KEY,
+  HEIGHT_KEY,
+  MINHEIGHTS_KEY,
+} from '../constants';
 import {
   createMaxWidth,
   createMinWidth,
   createHeight,
   createMaxHeight,
   createMinHeight,
+  createWidth,
 } from '@styleaux/styles-base';
-export { display } from '@styleaux/styles-base';
-
-export const width = style<{ w: WidthProperty }>({
-  cssProp: 'width',
-  prop: 'w',
-  key: 'widths',
-  transform: widthValue,
+export const width = createWidth({
+  key: WIDTH_KEY,
+  transform: getWidth,
 });
 
 export const minWidth = createMinWidth({
-  key: 'minWidths',
+  key: MINWIDTH_KEY,
   transform: px,
 });
 
 export const maxWidth = createMaxWidth({
-  key: 'maxWidth',
+  key: MAXHEIGHT_KEY,
   transform: px,
 });
 
 export const height = createHeight({
-  key: 'heights',
+  key: HEIGHT_KEY,
   transform: px,
 });
 
 export const maxHeight = createMaxHeight({
-  key: 'maxHeights',
+  key: MAXHEIGHT_KEY,
   transform: px,
 });
 
 export const minHeight = createMinHeight({
-  key: 'minHeights',
+  key: MINHEIGHTS_KEY,
   transform: px,
 });
 

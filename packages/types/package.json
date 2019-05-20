@@ -5,9 +5,12 @@
   "license": "MIT",
   "main": "",
   "files": [
-    "index.d.ts"
+    "index.d.ts",
+    "style.d.ts",
+    "utils.d.ts"
   ],
   "dependencies": {
-    "@styleaux/csstype": "^0.0.0-beta.0"
+    "@styleaux/csstype": "^0.0.0-beta.0",
+    "simplytyped": "^3.1.0"
   }
 }
